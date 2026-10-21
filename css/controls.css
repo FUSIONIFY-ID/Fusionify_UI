@@ -1,0 +1,461 @@
+/* FUSIONIFY UI · controls.css
+   Komponen kontrol yang dipakai di web publik, web produk, aplikasi, dan aplikasi HP (web/PWA/WebView):
+   menu, modal, tab, badge, button group, split button, FAB, app bar HP, navigation bar bawah,
+   navigation rail, bottom/side sheet, carousel, slider, tooltip, list, chip interaktif, loading,
+   snackbar, search bar, date/time picker, floating toolbar.
+   Interaksinya di js/controls.js (dipanggil otomatis oleh initFusionify() dan initApp()).
+   Aturan: hanya token tema (aman untuk mode gelap), target sentuh minimal 44px,
+   area aman notch lewat env(safe-area-inset-*), gerak hanya transform dan opacity. */
+
+/* =========================================================
+   DROPDOWN · <div class="dropdown"><button aria-expanded="false" aria-haspopup="menu" data-dropdown>..</button><div class="menu" role="menu" hidden>..</div></div>
+   ========================================================= */
+.dropdown { position: relative; }
+.menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 50; min-width: 220px; padding: 6px; border-radius: var(--r-m); background: var(--card); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); display: grid; gap: 2px; }
+.menu[hidden] { display: none; }
+.menu.up { top: auto; bottom: calc(100% + 8px); }
+.menu.start { right: auto; left: 0; }
+.menu a, .menu button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 12px; border: 0; border-radius: 10px; background: none; text-align: left; text-decoration: none; font: inherit; font-size: 15px; font-weight: 700; color: var(--ink-2); cursor: pointer; }
+.menu a:hover, .menu button:hover, .menu a:focus-visible, .menu button:focus-visible { background: var(--surface); color: var(--ink); outline: none; }
+.menu svg { width: 18px; height: 18px; }
+.menu hr { border: 0; border-top: 1px solid var(--line); margin: 4px 6px; }
+.menu .danger { color: var(--danger); }
+.menu .head { padding: 10px 12px 8px; font-size: 14px; color: var(--ink-3); }
+.menu .head b { display: block; color: var(--ink); font-size: 15px; }
+
+/* =========================================================
+   MODAL · <dialog class="modal" id="..."> dibuka lewat [data-open-modal="id"]
+   ========================================================= */
+.modal { width: min(520px, calc(100vw - 32px)); padding: 0; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 10px 0 var(--edge-shadow); }
+.modal::backdrop { background: rgba(2, 6, 15, 0.55); }
+.modal[open] { animation: fy-modal 0.35s var(--spring); }
+@keyframes fy-modal { from { opacity: 0; transform: translateY(16px) scale(0.96); } }
+.modal .m-body { position: relative; display: grid; gap: 12px; padding: 28px 26px 22px; }
+.modal .m-body > img { width: 96px; height: auto; justify-self: center; }
+.modal h2 { font-size: 28px; }
+.modal p { color: var(--ink-2); }
+.modal .m-foot { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; padding: 16px 26px 22px; }
+.modal .m-close { position: absolute; top: 12px; right: 12px; }
+.btn.danger { --bg: #c4323a; --fg: #fff; }
+
+/* =========================================================
+   TAB · <div class="tabs" data-tabs><div role="tablist">..</div><div role="tabpanel">..</div></div>
+   ========================================================= */
+.tabs [role="tablist"] { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--surface); width: max-content; max-width: 100%; overflow-x: auto; }
+.tabs [role="tab"] { flex: none; padding: 9px 16px; border: 0; border-radius: 999px; background: none; font: inherit; font-weight: 700; font-size: 14.5px; color: var(--ink-2); cursor: pointer; transition: background 0.2s, color 0.2s; }
+.tabs [role="tab"][aria-selected="true"] { background: var(--card); color: var(--ink); box-shadow: 0 0 0 2px var(--edge), 0 3px 0 2px var(--edge-shadow); }
+.tabs [role="tabpanel"] { padding-top: 18px; }
+.tabs [role="tabpanel"][hidden] { display: none; }
+
+
+/* PROGRES (garis) */
+.progress { height: 12px; border-radius: 999px; background: var(--surface-2); overflow: hidden; border: 1.5px solid var(--line); }
+.progress span { display: block; height: 100%; width: calc(var(--v, 0) * 100%); border-radius: inherit; background: linear-gradient(90deg, var(--blue-light), var(--blue)); }
+.progress.go span { background: var(--go); } .progress.warn span { background: #e8a33d; }
+
+/* =========================================================
+   BADGE · angka atau titik di ikon / item navigasi
+   <span class="has-badge"><svg/><span class="badge">3</span></span>
+   ========================================================= */
+.badge { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #c4323a; color: #fff; font-family: var(--f-num); font-size: 11.5px; font-weight: 800; line-height: 1; box-shadow: 0 0 0 2px var(--card); }
+.badge.dot { min-width: 10px; width: 10px; height: 10px; padding: 0; }
+.badge.blue { background: var(--blue); }
+.has-badge { position: relative; display: inline-grid; place-items: center; }
+.has-badge > .badge { position: absolute; top: -6px; right: -8px; }
+.has-badge > .badge.dot { top: -2px; right: -2px; }
+
+/* =========================================================
+   BUTTON GROUP · tombol tersambung, bisa pilih satu atau banyak
+   <div class="btn-group" role="group" aria-label=".." data-btn-group="single|multi">
+     <button type="button" aria-pressed="true">Hari</button> ...
+   ========================================================= */
+.btn-group { display: inline-flex; max-width: 100%; overflow-x: auto; border: 2px solid var(--edge); border-radius: 999px; background: var(--card); box-shadow: var(--shadow-pop); scrollbar-width: none; }
+.btn-group::-webkit-scrollbar { display: none; }
+.btn-group > button, .btn-group > a { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 0; border-left: 2px solid var(--edge); background: none; font: inherit; font-weight: 700; font-size: 15px; color: var(--ink-2); text-decoration: none; white-space: nowrap; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.btn-group > :first-child { border-left: 0; }
+.btn-group > :hover { background: var(--surface); color: var(--ink); }
+.btn-group > [aria-pressed="true"] { background: var(--blue); color: #fff; }
+.btn-group > [aria-pressed="true"]::before { content: ""; width: 11px; height: 6px; border-left: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: translateY(-2px) rotate(-45deg); }
+.btn-group > :focus-visible { outline: 3px solid var(--blue-light); outline-offset: -5px; border-radius: 999px; }
+.btn-group svg { width: 18px; height: 18px; }
+.btn-group.block { display: flex; } .btn-group.block > * { flex: 1; }
+
+/* =========================================================
+   SPLIT BUTTON · aksi utama + panah menu
+   <div class="split-btn"><button class="btn">Simpan</button><button class="btn caret" data-dropdown aria-haspopup="menu" aria-expanded="false" aria-label="Pilihan lain"><svg/></button><div class="menu" role="menu" hidden>..</div></div>
+   ========================================================= */
+.split-btn { position: relative; display: inline-flex; gap: 3px; }
+.split-btn > .btn:first-child { border-radius: 999px 8px 8px 999px; }
+.split-btn > .btn.caret { border-radius: 8px 999px 999px 8px; padding: 0 14px 0 12px; }
+.split-btn > .btn.caret svg { width: 20px; height: 20px; transition: transform 0.35s var(--spring); }
+.split-btn > .btn.caret[aria-expanded="true"] svg { transform: rotate(180deg); }
+.split-btn > .btn.sm.caret { padding: 0 10px; }
+
+/* =========================================================
+   FAB · tombol aksi utama yang melayang
+   <div class="fab-dock"><button class="fab" aria-label="Buat"><svg/></button></div>
+   .fab.ext = dengan label, .sm / .lg ukuran, .soft = versi biru muda
+   [data-fab-shrink] = label disembunyikan saat scroll turun
+   ========================================================= */
+.fab { --bg: var(--blue); --fg: #fff; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 60px; height: 60px; padding: 0; border-radius: 22px; border: 2px solid var(--edge); background: var(--bg); color: var(--fg); box-shadow: 0 4px 0 var(--edge-shadow); font: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
+.fab:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--edge-shadow); }
+.fab:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
+.fab svg { width: 24px; height: 24px; flex: none; }
+.fab.sm { width: 46px; height: 46px; border-radius: 16px; } .fab.sm svg { width: 20px; height: 20px; }
+.fab.lg { width: 88px; height: 88px; border-radius: 30px; } .fab.lg svg { width: 34px; height: 34px; }
+.fab.soft { --bg: var(--surface-2); --fg: var(--text-blue-deep); }
+.fab.ext { width: auto; padding: 0 24px 0 18px; border-radius: 20px; }
+.fab.ext.shrink { width: 60px; padding: 0; }
+.fab.ext.shrink .label { display: none; }
+.fab.ext.shrink svg { animation: fy-pop 0.35s var(--spring); }
+.fab-dock { position: fixed; z-index: 70; right: max(16px, env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); display: grid; justify-items: end; gap: 12px; }
+
+/* FAB menu: <div class="fab-menu" data-fab-menu><ul class="fab-actions" id="x" hidden>..</ul><button class="fab" aria-expanded="false" aria-controls="x">..</button></div> */
+.fab-menu { display: grid; justify-items: end; gap: 12px; }
+.fab-actions { list-style: none; margin: 0; padding: 0; display: grid; justify-items: end; gap: 10px; }
+.fab-actions[hidden] { display: none; }
+.fab-action { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px 0 18px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-pop); font: inherit; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap; cursor: pointer; animation: fy-rise 0.35s var(--spring) both; animation-delay: calc(var(--i, 0) * 45ms); }
+.fab-action:hover { background: var(--surface); }
+.fab-action svg { width: 20px; height: 20px; color: var(--text-blue); }
+.fab-menu > .fab svg { transition: transform 0.35s var(--spring); }
+.fab-menu > .fab[aria-expanded="true"] svg { transform: rotate(45deg); }
+.fab-scrim { position: fixed; inset: 0; z-index: 69; background: rgba(2, 6, 15, 0.35); opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+.fab-scrim.on { opacity: 1; pointer-events: auto; }
+@keyframes fy-rise { from { opacity: 0; transform: translateY(14px) scale(0.92); } }
+
+/* =========================================================
+   APP BAR HP · bilah atas aplikasi mobile
+   <header class="appbar" data-appbar><button class="icon-btn">←</button><h1 class="title">Judul</h1><div class="actions">..</div></header>
+   .appbar.collapse + <h1 class="appbar-title"> besar di bawahnya: judul kecil baru muncul setelah scroll
+   ========================================================= */
+.appbar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 4px; min-height: 64px; padding: env(safe-area-inset-top) max(8px, env(safe-area-inset-right)) 0 max(8px, env(safe-area-inset-left)); background: var(--paper); transition: background 0.25s, box-shadow 0.25s; }
+.appbar.scrolled { background: var(--card); box-shadow: 0 2px 0 var(--edge); }
+.appbar .title { flex: 1; min-width: 0; padding: 0 8px; font-family: var(--f-head); font-weight: 800; font-size: 22px; line-height: 1.1; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.appbar .actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.appbar .icon-btn { background: none; width: 44px; height: 44px; }
+.appbar .icon-btn:hover { background: var(--surface); }
+.appbar.collapse .title { opacity: 0; transform: translateY(6px); transition: opacity 0.2s, transform 0.3s var(--ease); }
+.appbar.collapse.scrolled .title { opacity: 1; transform: none; }
+.appbar-title { padding: 6px max(16px, env(safe-area-inset-left)) 14px; font-size: clamp(34px, 9vw, 48px); }
+
+/* =========================================================
+   NAVIGATION BAR · menu bawah untuk HP (3 sampai 5 item)
+   <nav class="navbar" aria-label="Menu utama"><a href="#" aria-current="page"><span class="ico"><svg/></span>Beranda</a>..</nav>
+   Tambahkan .with-navbar di <body> supaya isi tidak tertutup.
+   ========================================================= */
+.with-navbar { --navbar-h: 76px; padding-bottom: calc(var(--navbar-h) + env(safe-area-inset-bottom)); }
+.navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); padding: 6px max(6px, env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-left)); background: var(--card); border-top: 2px solid var(--edge); }
+.navbar a, .navbar button, .rail-nav a, .rail-nav button { display: grid; justify-items: center; align-content: center; gap: 4px; min-height: 60px; min-width: 0; padding: 4px 2px; border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 700; line-height: 1.2; color: var(--ink-3); text-align: center; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.navbar .ico, .rail-nav .ico { position: relative; display: grid; place-items: center; width: 60px; height: 32px; border-radius: 999px; transition: background 0.25s, transform 0.35s var(--spring); }
+.navbar svg, .rail-nav svg { width: 22px; height: 22px; }
+.navbar a:hover .ico, .rail-nav a:hover .ico { background: var(--surface); }
+.navbar [aria-current="page"], .rail-nav [aria-current="page"] { color: var(--ink); }
+.navbar [aria-current="page"] .ico, .rail-nav [aria-current="page"] .ico { background: var(--blue); color: #fff; box-shadow: 0 0 0 2px var(--edge), 0 3px 0 2px var(--edge-shadow); }
+.navbar a:active .ico, .rail-nav a:active .ico { transform: scale(0.9); }
+.navbar .badge, .rail-nav .badge { position: absolute; top: -5px; right: 8px; }
+.navbar .badge.dot, .rail-nav .badge.dot { top: 2px; right: 16px; }
+.navbar .lbl, .rail-nav .lbl { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* =========================================================
+   NAVIGATION RAIL · menu samping ramping untuk tablet
+   <nav class="rail" aria-label="Menu utama"><div class="rail-top">(FAB)</div><div class="rail-nav"><a ..><span class="ico">..</span>Beranda</a></div></nav>
+   Tambahkan .with-rail di <body>. Pola responsif: .m-app (navbar di HP, rail mulai 700px)
+   ========================================================= */
+.with-rail { padding-left: calc(92px + env(safe-area-inset-left)); }
+.rail { position: fixed; left: 0; top: 0; bottom: 0; z-index: 60; width: calc(92px + env(safe-area-inset-left)); display: flex; flex-direction: column; align-items: center; gap: 18px; padding: max(18px, env(safe-area-inset-top)) 0 max(18px, env(safe-area-inset-bottom)) env(safe-area-inset-left); background: var(--card); border-right: 2px solid var(--edge); overflow-y: auto; }
+.rail-top { display: grid; justify-items: center; gap: 14px; }
+.rail-top .brand-mark { width: 40px; height: 40px; }
+.rail-nav { display: grid; gap: 6px; width: 100%; }
+.rail-nav a, .rail-nav button { min-height: 64px; }
+.rail .rail-foot { margin-top: auto; }
+.m-app .rail { display: none; }
+@media (min-width: 700px) {
+  .m-app { --navbar-h: 0px; padding-bottom: env(safe-area-inset-bottom); padding-left: calc(92px + env(safe-area-inset-left)); }
+  .m-app .navbar { display: none; }
+  .m-app .rail { display: flex; }
+}
+
+/* =========================================================
+   SHEET · panel bawah (bottom sheet) dan panel samping (side sheet)
+   <dialog class="sheet" id="s1" aria-labelledby="s1-t"><button class="sheet-handle" data-close aria-label="Tutup"></button><div class="sheet-head"><h2 id="s1-t">..</h2></div><div class="sheet-body">..</div><div class="sheet-foot">..</div></dialog>
+   Buka: [data-open-sheet="s1"]. Tutup: [data-close], klik di luar, Esc, atau tarik pegangannya ke bawah.
+   ========================================================= */
+.sheet, .side-sheet { padding: 0; border: 2px solid var(--edge); background: var(--card); color: var(--ink); overflow: hidden; }
+.sheet::backdrop, .side-sheet::backdrop { background: rgba(2, 6, 15, 0.5); animation: fy-fade 0.3s; }
+.sheet { position: fixed; inset: auto 0 0 0; margin: 0 auto; width: 100%; max-width: min(640px, 100%); max-height: calc(100dvh - 40px); border-bottom: 0; border-radius: var(--r-l) var(--r-l) 0 0; box-shadow: 0 -4px 0 var(--edge-shadow); }
+.sheet[open], .side-sheet[open] { display: flex; flex-direction: column; }
+.sheet[open] { animation: fy-sheet-up 0.42s var(--ease); }
+.sheet.closing { transform: translateY(105%) !important; transition: transform 0.26s cubic-bezier(0.4, 0, 1, 1); }
+.sheet.dragging { transition: none; }
+.sheet-handle { flex: none; display: grid; place-items: center; width: 100%; height: 30px; padding: 0; border: 0; background: none; cursor: grab; touch-action: none; }
+.sheet-handle::before { content: ""; width: 44px; height: 5px; border-radius: 999px; background: var(--ink-3); opacity: 0.55; }
+.sheet-head { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 22px 12px; }
+.sheet-head h2 { font-size: 26px; }
+.sheet-head p { color: var(--ink-3); font-size: 14.5px; }
+.sheet-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px 22px 18px; }
+.sheet-foot { flex: none; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; padding: 14px 22px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); }
+.sheet-foot .btn { justify-content: center; }
+@media (max-width: 520px) { .sheet-foot .btn { flex: 1; } }
+.side-sheet { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(420px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; border-right: 0; border-radius: var(--r-l) 0 0 var(--r-l); box-shadow: -6px 0 0 var(--edge-shadow); }
+.side-sheet[open] { animation: fy-side-in 0.42s var(--ease); }
+.side-sheet.closing { transform: translateX(105%) !important; transition: transform 0.26s cubic-bezier(0.4, 0, 1, 1); }
+.side-sheet .sheet-head { padding: max(18px, env(safe-area-inset-top)) 16px 12px 22px; border-bottom: 1px solid var(--line); }
+.side-sheet .sheet-body { padding-top: 18px; }
+@keyframes fy-sheet-up { from { transform: translateY(100%); } }
+@keyframes fy-side-in { from { transform: translateX(100%); } }
+@keyframes fy-fade { from { opacity: 0; } }
+html.sheet-open { overflow: hidden; }
+
+/* Modal layar penuh di HP: <dialog class="modal full"> */
+@media (max-width: 600px) {
+  .modal.full { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; border: 0; border-radius: 0; box-shadow: none; }
+  .modal.full .m-body { padding-top: max(28px, env(safe-area-inset-top)); }
+}
+
+/* =========================================================
+   CAROUSEL · geser horizontal dengan snap, tanpa putar otomatis
+   <section class="carousel" data-carousel aria-roledescription="carousel" aria-label="..">
+     <div class="carousel-track" tabindex="0"><article class="slide" role="group" aria-roledescription="slide" aria-label="1 dari 4">..</article>..</div>
+     <div class="carousel-nav"><button class="icon-btn" data-prev aria-label="Sebelumnya">..</button><button class="icon-btn" data-next aria-label="Berikutnya">..</button></div>
+   </section>
+   .carousel.full = satu slide selebar layar
+   ========================================================= */
+.carousel { position: relative; min-width: 0; display: grid; gap: 8px; }
+.carousel-track { --slide: min(78%, 320px); display: grid; grid-auto-flow: column; grid-auto-columns: var(--slide); gap: 16px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 4px 14px; margin: -4px -4px 0; scrollbar-width: none; border-radius: var(--r-l); }
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
+.carousel.full .carousel-track { --slide: 100%; padding-inline: 4px; }
+.carousel.wide .carousel-track { --slide: min(86%, 520px); }
+.slide { position: relative; min-width: 0; scroll-snap-align: start; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); overflow: hidden; }
+.slide > img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: var(--surface); }
+.slide .slide-body { display: grid; gap: 4px; padding: 14px 16px 16px; }
+.slide .slide-body b { font-size: 17px; }
+.slide .slide-body span { font-size: 14px; color: var(--ink-3); }
+.carousel-nav { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.carousel-nav .icon-btn[disabled] { opacity: 0.4; cursor: default; transform: none; }
+.carousel-dots { display: flex; gap: 2px; margin-right: auto; }
+.carousel-dots button { width: 28px; height: 28px; padding: 0; border: 0; background: none; display: grid; place-items: center; cursor: pointer; }
+.carousel-dots button::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--line); transition: background 0.2s, transform 0.3s var(--spring); }
+.carousel-dots button[aria-current="true"]::before { background: var(--blue); transform: scale(1.35); }
+@media (prefers-reduced-motion: reduce) { .carousel-track { scroll-behavior: auto; } }
+
+/* =========================================================
+   SLIDER · <input type="range" class="slider" data-slider>
+   Dua ujung: <div class="range2" data-range2><input type="range" class="slider" aria-label="Minimum"><input type="range" class="slider" aria-label="Maksimum"></div>
+   ========================================================= */
+.slider { --p: 50%; -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 44px; margin: 0; background: transparent; cursor: pointer; touch-action: pan-y; }
+.slider:focus-visible { outline: none; }
+.slider::-webkit-slider-runnable-track { height: 10px; border-radius: 999px; border: 2px solid var(--edge); background: linear-gradient(90deg, var(--blue) var(--p), var(--surface-2) var(--p)); }
+.slider::-moz-range-track { height: 10px; border-radius: 999px; border: 2px solid var(--edge); background: linear-gradient(90deg, var(--blue) var(--p), var(--surface-2) var(--p)); }
+.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; margin-top: -10px; border-radius: 50%; background: var(--card); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.25s var(--spring); }
+.slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--card); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.25s var(--spring); }
+.slider:active::-webkit-slider-thumb { transform: scale(1.15); }
+.slider:active::-moz-range-thumb { transform: scale(1.15); }
+.slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 5px rgba(83, 157, 233, 0.45), 0 3px 0 var(--edge-shadow); }
+.slider:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 5px rgba(83, 157, 233, 0.45), 0 3px 0 var(--edge-shadow); }
+.slider:disabled { opacity: 0.45; cursor: not-allowed; }
+.slider-field { display: grid; gap: 2px; }
+.slider-field .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-weight: 700; }
+.slider-field output { font-family: var(--f-num); font-weight: 800; color: var(--text-blue-deep); font-variant-numeric: tabular-nums; }
+.slider-field .ends { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-3); font-family: var(--f-num); }
+.range2 { --a: 20%; --b: 80%; position: relative; height: 44px; }
+.range2::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 14px; transform: translateY(-50%); border-radius: 999px; border: 2px solid var(--edge); background: linear-gradient(90deg, var(--surface-2) var(--a), var(--blue) var(--a), var(--blue) var(--b), var(--surface-2) var(--b)); }
+.range2 .slider { position: absolute; inset: 0; pointer-events: none; }
+.range2 .slider::-webkit-slider-runnable-track { background: none; border-color: transparent; }
+.range2 .slider::-moz-range-track { background: none; border-color: transparent; }
+.range2 .slider::-webkit-slider-thumb { pointer-events: auto; }
+.range2 .slider::-moz-range-thumb { pointer-events: auto; }
+
+/* =========================================================
+   TOOLTIP · label singkat saat disorot, difokus keyboard, atau ditekan lama di HP
+   <span class="tip-wrap"><button class="icon-btn" aria-label="Unduh" aria-describedby="t1">..</button><span class="tip" role="tooltip" id="t1">Unduh laporan</span></span>
+   .tip.below = muncul di bawah
+   ========================================================= */
+.tip-wrap { position: relative; display: inline-flex; }
+.tip { --dx: 0px; position: absolute; left: 50%; bottom: calc(100% + 10px); z-index: 80; width: max-content; max-width: min(240px, 70vw); padding: 7px 12px; border-radius: 10px; background: var(--inverse-bg); color: var(--inverse-fg); font-size: 13.5px; font-weight: 700; line-height: 1.35; text-align: center; pointer-events: none; opacity: 0; visibility: hidden; transform: translate(calc(-50% + var(--dx)), 6px); transition: opacity 0.15s, transform 0.25s var(--spring), visibility 0s 0.25s; }
+.tip::after { content: ""; position: absolute; left: calc(50% - var(--dx)); top: 100%; width: 10px; height: 10px; background: inherit; transform: translate(-50%, -6px) rotate(45deg); border-radius: 2px; }
+.tip.below { bottom: auto; top: calc(100% + 10px); transform: translate(calc(-50% + var(--dx)), -6px); }
+.tip.below::after { top: auto; bottom: 100%; transform: translate(-50%, 6px) rotate(45deg); }
+@media (hover: hover) { .tip-wrap:hover .tip { opacity: 1; visibility: visible; transform: translate(calc(-50% + var(--dx)), 0); transition-delay: 0.35s, 0.35s, 0s; } }
+.tip-wrap:has(:focus-visible) .tip, .tip-wrap.tip-on .tip { opacity: 1; visibility: visible; transform: translate(calc(-50% + var(--dx)), 0); transition-delay: 0s; }
+.tip-wrap.tip-off .tip { opacity: 0 !important; visibility: hidden !important; }
+
+/* =========================================================
+   LIST · daftar umum (pengaturan, kontak, notifikasi, hasil pencarian)
+   <ul class="list divided"><li><a class="li" href="#"><span class="li-lead avatar">AR</span><span class="li-txt"><b>Judul</b><span>Keterangan</span></span><span class="li-trail">2 j</span></a></li></ul>
+   ========================================================= */
+.list { list-style: none; margin: 0; padding: 4px 0; display: grid; min-width: 0; }
+.list > li { min-width: 0; }
+.list .sub { padding: 16px 16px 6px; font-family: var(--f-num); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.list.divided > li + li:not(.sub) { border-top: 1px solid var(--line); }
+.li { display: flex; align-items: center; gap: 14px; min-height: 60px; width: 100%; padding: 10px 16px; border: 0; border-radius: var(--r-m); background: none; color: var(--ink); font: inherit; text-align: left; text-decoration: none; }
+a.li, button.li, label.li { cursor: pointer; transition: background 0.2s; }
+a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
+.list.divided .li { border-radius: 0; }
+.li-lead { flex: none; }
+.li-ico { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; background: var(--surface-2); color: var(--text-blue-deep); }
+.li-ico svg { width: 21px; height: 21px; }
+.li-txt { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.li-txt b { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.li-txt span { font-size: 14px; line-height: 1.45; color: var(--ink-3); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.li-trail { flex: none; margin-left: auto; display: flex; align-items: center; gap: 8px; color: var(--ink-3); font-family: var(--f-num); font-size: 13px; }
+.li-trail > svg { width: 20px; height: 20px; }
+.li .unread { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+
+/* =========================================================
+   CHIP INTERAKTIF · .chip tetap khusus status produk
+   Filter: <button class="chip-btn" aria-pressed="false">Gratis</button>
+   Aksi:   <button class="chip-btn"><svg/>Bagikan</button>
+   Input:  <span class="chip-input">Bogor<button class="x" aria-label="Hapus Bogor">×</button></span>
+   Pembungkus: <div class="chip-set" role="group" aria-label=".."> (.scroll = satu baris geser)
+   ========================================================= */
+.chip-set { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.chip-set.scroll { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 2px 2px 6px; margin: -2px -2px 0; }
+.chip-set.scroll::-webkit-scrollbar { display: none; }
+.chip-btn { flex: none; display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 0 15px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); color: var(--ink-2); font: inherit; font-size: 14.5px; font-weight: 700; white-space: nowrap; text-decoration: none; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.3s var(--spring); }
+.chip-btn:hover { border-color: var(--blue-light); color: var(--ink); }
+.chip-btn:active { transform: scale(0.96); }
+.chip-btn svg { width: 18px; height: 18px; }
+.chip-btn[aria-pressed="true"] { background: var(--blue); border-color: var(--edge); color: #fff; box-shadow: 0 2px 0 var(--edge-shadow); }
+.chip-btn[aria-pressed="true"]::before { content: ""; width: 10px; height: 6px; border-left: 2.4px solid currentColor; border-bottom: 2.4px solid currentColor; transform: translateY(-2px) rotate(-45deg); }
+.chip-input { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 3px 0 13px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font-size: 14.5px; font-weight: 700; white-space: nowrap; }
+.chip-input.with-av { padding-left: 4px; }
+.chip-input .avatar { --s: 26px; border-width: 1.5px; }
+.chip-input .x { display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 9px; background: none; color: var(--ink-3); font: inherit; font-size: 20px; line-height: 1; cursor: pointer; }
+.chip-input .x:hover { background: var(--surface-2); color: var(--ink); }
+.chip-input .x svg { width: 16px; height: 16px; }
+
+/* =========================================================
+   LOADING · spinner segel, skeleton, progres lingkaran, progres tanpa angka
+   <span class="spinner" role="status" aria-label="Memuat"></span>
+   <span class="skel text" style="width:60%"></span>
+   ========================================================= */
+.spinner { --s: 30px; --spin: var(--blue); display: inline-block; flex: none; width: var(--s); height: var(--s); vertical-align: middle; animation: fy-breathe 1.6s var(--ease) infinite; }
+.spinner::before { content: ""; display: block; width: 100%; height: 100%; background: var(--spin); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; animation: fy-spin 1.6s linear infinite; }
+.spinner.sm { --s: 18px; } .spinner.lg { --s: 52px; }
+.spinner.contained { --s: 44px; padding: 8px; border-radius: 50%; background: var(--surface-2); }
+.btn .spinner { --s: 18px; --spin: currentColor; }
+.btn[aria-busy="true"] { cursor: progress; pointer-events: none; }
+@keyframes fy-breathe { 50% { transform: scale(0.8); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none !important; } .spinner::before { animation: fy-spin 3s linear infinite !important; } }
+.loading-block { display: grid; justify-items: center; gap: 10px; padding: 28px 16px; color: var(--ink-3); font-size: 14.5px; text-align: center; }
+
+.skel { position: relative; display: block; overflow: hidden; border-radius: 10px; background: var(--surface-2); color: transparent !important; }
+.skel::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent); animation: fy-shimmer 1.4s ease-in-out infinite; }
+:root[data-theme="dark"] .skel::after { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .skel::after { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent); } }
+.skel.text { height: 0.9em; margin: 0.35em 0; border-radius: 6px; }
+.skel.title { height: 1.4em; width: 60%; border-radius: 8px; }
+.skel.circle { border-radius: 50%; }
+.skel.block { aspect-ratio: 16 / 9; border-radius: var(--r-m); }
+@keyframes fy-shimmer { to { transform: translateX(100%); } }
+
+.ring { --v: 0; --s: 64px; position: relative; display: inline-grid; place-items: center; flex: none; width: var(--s); height: var(--s); border-radius: 50%; background: conic-gradient(var(--blue) calc(var(--v) * 1turn), var(--surface-2) 0); font-family: var(--f-num); font-weight: 800; font-size: calc(var(--s) * 0.24); color: var(--ink); }
+.ring::before { content: ""; position: absolute; inset: calc(var(--s) * 0.14); border-radius: 50%; background: var(--card); }
+.ring > * { position: relative; }
+.progress.indeterminate span { width: 40%; animation: fy-indet 1.3s var(--ease) infinite; }
+@keyframes fy-indet { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+
+/* =========================================================
+   SNACKBAR · kabar singkat dengan tombol aksi (mis. Batalkan)
+   JS: snackbar("Pesan diarsipkan", { action: "Batalkan", onAction() {} })
+   Deklaratif: <button data-snackbar="Tersimpan" data-snackbar-action="Lihat">
+   ========================================================= */
+.snackbar { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); z-index: 330; display: flex; align-items: center; gap: 4px 10px; width: max-content; max-width: min(560px, calc(100vw - 32px)); min-height: 52px; padding: 6px 6px 6px 18px; border-radius: 16px; border: 2px solid var(--edge); background: var(--inverse-bg); color: var(--inverse-fg); box-shadow: 0 4px 0 var(--edge-shadow); font-size: 15px; font-weight: 700; opacity: 0; visibility: hidden; transform: translate(-50%, 24px); transition: transform 0.45s var(--spring), opacity 0.2s, visibility 0s 0.45s; }
+.snackbar.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
+.snackbar .sb-text { flex: 1; min-width: 0; padding: 8px 0; }
+.snackbar .sb-act { flex: none; min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: none; color: var(--inverse-accent); font: inherit; font-weight: 800; cursor: pointer; }
+.snackbar .sb-act:hover { background: rgba(127, 127, 127, 0.18); }
+.snackbar .sb-x { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 10px; background: none; color: inherit; cursor: pointer; }
+.snackbar .sb-x:hover { background: rgba(127, 127, 127, 0.18); }
+.snackbar .sb-x svg { width: 18px; height: 18px; }
+.snackbar :focus-visible { outline-color: var(--inverse-accent); outline-offset: 1px; }
+@media (max-width: 520px) { .snackbar { left: 16px; right: 16px; width: auto; max-width: none; transform: translateY(24px); } .snackbar.show { transform: none; } }
+
+/* =========================================================
+   SEARCH BAR + SARAN
+   <div class="search-bar" data-suggest><svg/><input type="search" role="combobox" aria-expanded="false" aria-controls="sg" aria-autocomplete="list" aria-label=".."><ul class="suggest" id="sg" role="listbox" hidden><li role="option">..</li></ul></div>
+   ========================================================= */
+.search-bar { position: relative; display: flex; align-items: center; gap: 4px; min-height: 54px; padding: 0 6px 0 16px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-pop); }
+.search-bar > svg { flex: none; width: 20px; height: 20px; color: var(--ink-3); }
+.search-bar input { flex: 1; min-width: 0; height: 50px; padding: 0 8px; border: 0; background: none; color: var(--ink); font: inherit; font-size: 16px; }
+.search-bar input::placeholder { color: var(--placeholder); }
+.search-bar input:focus { outline: none; }
+.search-bar:focus-within { box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.3), var(--shadow-pop); }
+.search-bar input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.search-bar .icon-btn { flex: none; background: none; }
+.search-bar .avatar { --s: 38px; }
+.suggest { position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 55; list-style: none; margin: 0; padding: 6px; max-height: min(320px, 60vh); overflow-y: auto; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); }
+.suggest[hidden] { display: none; }
+.suggest [role="option"] { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 12px; border-radius: 10px; color: var(--ink-2); font-weight: 700; cursor: pointer; }
+.suggest [role="option"] svg { width: 18px; height: 18px; color: var(--ink-3); flex: none; }
+.suggest [role="option"]:hover, .suggest [role="option"][aria-selected="true"] { background: var(--surface); color: var(--ink); }
+.suggest .none { padding: 12px; color: var(--ink-3); font-size: 14.5px; }
+
+/* =========================================================
+   DATE & TIME PICKER
+   <div class="picker" data-datepicker [data-range] [data-min="2026-10-01"] [data-max]>
+     <input class="input" id="tgl" readonly placeholder="Pilih tanggal">
+     <button type="button" class="picker-btn" aria-label="Buka kalender">..</button>
+     <input type="hidden" name="tanggal">
+   </div>
+   Jam: data-timepicker [data-step="5"]. Popup dibuat oleh controls.js.
+   ========================================================= */
+.picker { position: relative; }
+.picker .input { padding-right: 52px; cursor: pointer; }
+.picker-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 42px; height: 42px; border: 0; border-radius: 12px; background: none; color: var(--text-blue-deep); cursor: pointer; }
+.picker-btn:hover { background: var(--surface); }
+.picker-btn svg { width: 21px; height: 21px; }
+.pop { position: absolute; left: 0; top: calc(100% + 8px); z-index: 90; width: max-content; max-width: min(340px, calc(100vw - 24px)); padding: 14px; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); animation: fy-rise 0.3s var(--spring); }
+.pop.end { left: auto; right: 0; }
+.pop-scrim { display: none; }
+@media (max-width: 600px) {
+  .pop { position: fixed; left: 12px !important; right: 12px !important; top: auto; bottom: calc(12px + env(safe-area-inset-bottom)); width: auto; max-width: none; margin-inline: auto; max-height: calc(100dvh - 24px); overflow-y: auto; }
+  .pop-scrim { display: block; position: fixed; inset: 0; z-index: 89; background: rgba(2, 6, 15, 0.45); animation: fy-fade 0.25s; }
+}
+.dp-head { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
+.dp-title { flex: 1; text-align: center; font-family: var(--f-head); font-weight: 800; font-size: 20px; }
+.dp-head button, .tp-foot button.icon { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 12px; background: none; color: var(--ink-2); cursor: pointer; }
+.dp-head button:hover { background: var(--surface); }
+.dp-head svg { width: 20px; height: 20px; }
+.dp-grid { display: grid; grid-template-columns: repeat(7, 44px); gap: 2px; justify-content: center; }
+@media (max-width: 600px) { .dp-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); } }
+.dp-wd { display: grid; place-items: center; height: 30px; font-family: var(--f-num); font-size: 12px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; }
+.dp-day { position: relative; height: 44px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--ink); font: inherit; font-family: var(--f-num); font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; cursor: pointer; }
+.dp-day:hover { background: var(--surface); }
+.dp-day.out { color: var(--ink-3); font-weight: 400; }
+.dp-day[aria-current="date"] { box-shadow: inset 0 0 0 2px var(--blue-light); }
+.dp-day.in-range { border-radius: 0; background: var(--surface-2); }
+.dp-day[aria-pressed="true"] { background: var(--blue); color: #fff; box-shadow: inset 0 0 0 2px var(--edge); }
+.dp-day:disabled { color: var(--ink-3); opacity: 0.35; cursor: not-allowed; background: none; text-decoration: line-through; }
+.dp-day:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 1px; }
+.dp-foot, .tp-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+.dp-foot .hint { font-size: 13px; color: var(--ink-3); }
+.pop .txt-btn { min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: none; color: var(--text-blue-deep); font: inherit; font-weight: 800; cursor: pointer; }
+.pop .txt-btn:hover { background: var(--surface); }
+.tp-cols { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.tp-sep { font-family: var(--f-head); font-weight: 800; font-size: 34px; color: var(--ink-3); }
+.tp-col { display: grid; gap: 4px; justify-items: stretch; }
+.tp-col > span { text-align: center; font-family: var(--f-num); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.tp-list { list-style: none; margin: 0; padding: 4px; width: 96px; height: 212px; overflow-y: auto; overscroll-behavior: contain; scroll-snap-type: y proximity; border-radius: var(--r-m); background: var(--surface); scrollbar-width: none; }
+.tp-list::-webkit-scrollbar { display: none; }
+.tp-list:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
+.tp-list li { display: grid; place-items: center; height: 44px; scroll-snap-align: center; border-radius: 12px; font-family: var(--f-num); font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--ink-2); cursor: pointer; }
+.tp-list li:hover { background: var(--surface-2); }
+.tp-list li[aria-selected="true"] { background: var(--blue); color: #fff; box-shadow: inset 0 0 0 2px var(--edge); }
+.tp-list li.active:not([aria-selected="true"]) { outline: 2px solid var(--blue-light); outline-offset: -2px; }
+@media (max-width: 600px) { .tp-list { width: 100%; } }
+
+/* =========================================================
+   FLOATING TOOLBAR · bilah aksi melayang (mis. saat memilih item)
+   <div class="float-bar" role="toolbar" aria-label=".."><span class="fb-count">3 dipilih</span><button class="icon-btn">..</button></div>
+   ========================================================= */
+.float-bar { display: inline-flex; align-items: center; gap: 4px; max-width: calc(100vw - 32px); padding: 6px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); overflow-x: auto; scrollbar-width: none; }
+.float-bar .icon-btn { flex: none; background: none; width: 44px; height: 44px; }
+.float-bar .icon-btn:hover { background: var(--surface); }
+.float-bar .fb-count { flex: none; padding: 0 12px 0 10px; font-family: var(--f-num); font-weight: 800; font-size: 14.5px; white-space: nowrap; }
+.float-bar .sep { flex: none; width: 2px; height: 24px; margin: 0 4px; background: var(--line); }
+.float-bar.dock { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); z-index: 65; transform: translateX(-50%); }
+
+/* Label kolom yang memakai <label for> (mis. picker), selaras dengan .field > span */
+.field > label:not(.check):first-child { font-weight: 700; font-size: 15px; }

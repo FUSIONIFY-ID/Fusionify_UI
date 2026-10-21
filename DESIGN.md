@@ -9,7 +9,7 @@ Identitasnya dibangun dari aset FUSIONIFY sendiri: segel bergelombang di logo, t
 1. **Maskot adalah pemandu.** Dia bereaksi (malu saat didekati, mengedip saat dicolek, ngambek kalau dicolek terus, ngantuk kalau ditinggal), dan ekspresinya mengikuti status produk.
 2. **Jujur itu bagian dari desain.** Status produk selalu terlihat sebagai chip berwarna. Tidak ada angka atau testimoni karangan.
 3. **Hidup tapi ringan.** Hanya `transform` dan `opacity` yang dianimasikan. Animasi berhenti saat tidak terlihat dan mati total untuk `prefers-reduced-motion`.
-4. **Tegas seperti stiker.** Garis tepi 2px warna tinta, bayangan pejal ke bawah, sudut bulat besar.
+4. **Tegas seperti stiker.** Garis tepi 2px (`--edge`), bayangan pejal (`--edge-shadow`) ke bawah, sudut bulat besar.
 
 ## Web company vs web produk
 
@@ -39,6 +39,12 @@ Chip status: hijau `go` (aktif/live), kuning `beta`, oranye `wip` (dalam pengemb
 
 Jangan menulis warna hex baru di proyek. Kalau butuh warna baru, tambahkan dulu ke `css/tokens.css` di kit ini.
 
+## Mode gelap
+
+Latar malam FUSIONIFY (`#071022`), kartu biru tua (`#10203F`), teks terang (`#EAF3FF`), garis stiker biru redup (`#2E5592`) dengan bayangan pejal hampir hitam. Biru FUSIONIFY sebagai warna isi (tombol, seksi biru, KPI biru) **tidak berubah**; teks biru dibuat lebih terang (`#8CC0FF`) supaya terbaca. Chip status punya pasangan warna gelapnya sendiri. Gaya stiker tetap: garis 2px dan bayangan pejal ke bawah.
+
+Bawaan mengikuti sistem; tombol bulan/matahari menyimpan pilihan pengguna.
+
 ## Huruf
 
 Semua berlisensi SIL OFL, di-host sendiri dari `fonts/` (subset latin, `font-display: swap`).
@@ -64,7 +70,7 @@ Semua berlisensi SIL OFL, di-host sendiri dari `fonts/` (subset latin, `font-dis
 - **Titik i**: bulatan `--blue-light` di akhir judul hero (`<span class="dot">.</span>`) dan sebagai titik kursor.
 - **Kicker**: label kecil kapital Exo 2 dengan titik biru muda di depannya, di atas setiap judul seksi.
 - **Gelombang**: pembatas antar seksi yang warnanya berbeda.
-- **Gaya stiker**: `.card`, `.stat`, `.btn`, `.toast` semuanya bergaris 2px tinta dengan bayangan pejal ke bawah.
+- **Gaya stiker**: `.card`, `.stat`, `.btn`, `.toast` semuanya bergaris 2px `--edge` dengan bayangan pejal `--edge-shadow` ke bawah.
 
 ## Maskot
 
@@ -97,6 +103,23 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Tombol salin (`data-copy`) dengan notifikasi maskot (toast, hilang setelah 2,6 detik).
 - Transisi halaman: segel biru membesar menutup layar, kepala mengedip, lalu menyusut di halaman baru.
 - Suara disintesis Web Audio, **mati secara bawaan**, dinyalakan lewat tombol speaker.
+
+## Aplikasi (dashboard, admin, masuk)
+
+- Sidebar putih/biru tua bergaris stiker; menu aktif berupa kapsul biru dengan bayangan pejal. Di HP sidebar menjadi laci yang meluncur dari kiri.
+- Kartu KPI bergaya stiker; satu KPI utama boleh biru penuh. Grafik sederhana dengan gradasi biru muda ke biru.
+- Halaman masuk/daftar: panel biru dengan segel besar dan maskot di kiri (wink untuk masuk, happy untuk daftar, confused untuk lupa password, glasses untuk atur ulang), form di kanan. Di HP panel biru menyusut jadi kepala kecil.
+- Modal konfirmasi berbahaya memakai maskot confused dan tombol `.btn.danger`.
+- Gerak di aplikasi tenang: tanpa smooth scroll, kursor segel, atau reveal. Interaksi cukup transisi pendek.
+
+## Aplikasi HP
+
+- App bar di atas dengan judul besar (Afacad Flux) yang mengecil saat digulir. Navigation bar bawah bergaris stiker di atasnya; tujuan aktif berupa kapsul biru. Mulai 700px berganti jadi rail di kiri.
+- FAB biru bergaya stiker (sudut 22px, bayangan pejal), satu per layar, melayang di atas navigation bar dan mengecil jadi ikon saat digulir.
+- Bottom sheet dengan pegangan di atas, bisa ditarik ke bawah untuk menutup. Picker tanggal/jam muncul dari bawah di HP dan sebagai popover di layar lebar.
+- Loading memakai segel FUSIONIFY yang berputar (`.spinner`), skeleton biru muda untuk isi yang sedang dimuat.
+- Snackbar berlatar gelap (terang di mode gelap) dengan tombol aksi seperti "Batalkan".
+- Aplikasi native memakai token dari `tokens/` dengan tampilan yang sama: garis 2px, bayangan pejal tanpa blur, huruf yang sama.
 
 ## Layout
 

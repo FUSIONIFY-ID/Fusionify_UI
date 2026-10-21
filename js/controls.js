@@ -1,0 +1,700 @@
+// FUSIONIFY UI · controls.js
+// Interaksi komponen kontrol (css/controls.css). Tanpa dependensi.
+// Dipanggil otomatis oleh initFusionify() (motion.js) dan initApp() (app.js). Aman dipanggil berkali-kali.
+//
+//   import { initControls, snackbar } from "./fusionify-ui/js/controls.js";
+//   initControls();
+//   snackbar("Acara diarsipkan", { action: "Batalkan", onAction: () => pulihkan() });
+//
+// Yang ditangani:
+// - Dropdown / split button ([data-dropdown] + .menu berikutnya): klik luar, Esc, panah atas/bawah
+// - Modal (<dialog class="modal">): [data-open-modal="id"], [data-close], klik di luar
+// - Sheet (<dialog class="sheet|side-sheet">): [data-open-sheet="id"], [data-close], klik di luar, Esc, tarik ke bawah
+// - Tab ([data-tabs])
+// - Button group ([data-btn-group="single|multi"]), chip filter (.chip-btn[aria-pressed]), chip input (.chip-input .x)
+// - FAB menu ([data-fab-menu]), FAB mengecil saat scroll ([data-fab-shrink]), app bar ([data-appbar])
+// - Carousel ([data-carousel]), slider (.slider), slider dua ujung ([data-range2])
+// - Tooltip (.tip-wrap): Esc menyembunyikan, tekan lama di layar sentuh, tidak keluar layar
+// - Search dengan saran ([data-suggest])
+// - Date picker ([data-datepicker]) dan time picker ([data-timepicker])
+// - Snackbar (snackbar() dan [data-snackbar])
+//
+// Setiap komponen mengirim event: fy:change (button group, chip, slider, picker), fy:remove (chip input),
+// fy:select (saran pencarian). Contoh: el.addEventListener("fy:change", (e) => console.log(e.detail)).
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+const emit = (el, name, detail) => el.dispatchEvent(new CustomEvent(name, { bubbles: true, detail }));
+const once = (el, key) => { if (el[key]) return false; el[key] = true; return true; };
+let uid = 0;
+const id = (p) => `${p}-${++uid}`;
+
+const ICON = {
+  left: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>',
+  right: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',
+  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+};
+
+/* =========================================================
+   SNACKBAR
+   ========================================================= */
+let sbEl = null;
+const sbQueue = [];
+let sbBusy = false;
+let sbLabels = { close: "Tutup" };
+
+function ensureSnackbar() {
+  if (sbEl) return sbEl;
+  sbEl = document.createElement("div");
+  sbEl.className = "snackbar";
+  sbEl.setAttribute("role", "status");
+  sbEl.setAttribute("aria-live", "polite");
+  sbEl.innerHTML = `<span class="sb-text"></span>`;
+  document.body.appendChild(sbEl);
+  return sbEl;
+}
+
+export function snackbar(text, opts = {}) {
+  ensureSnackbar();
+  sbQueue.push({ text, ...opts });
+  if (!sbBusy) nextSnack();
+}
+
+function nextSnack() {
+  const item = sbQueue.shift();
+  if (!item) { sbBusy = false; return; }
+  sbBusy = true;
+  const el = ensureSnackbar();
+  el.querySelectorAll(".sb-act, .sb-x").forEach((b) => b.remove());
+  $(".sb-text", el).textContent = item.text;
+  let done = false;
+  const finish = (byAction) => {
+    if (done) return; done = true;
+    clearTimeout(t);
+    el.classList.remove("show");
+    if (byAction) item.onAction?.();
+    item.onClose?.(byAction);
+    setTimeout(nextSnack, reduce() ? 0 : 300);
+  };
+  if (item.action) {
+    const a = document.createElement("button");
+    a.type = "button"; a.className = "sb-act"; a.textContent = item.action;
+    a.addEventListener("click", () => finish(true));
+    el.appendChild(a);
+  }
+  if (item.close !== false && (item.action || item.close)) {
+    const x = document.createElement("button");
+    x.type = "button"; x.className = "sb-x"; x.setAttribute("aria-label", sbLabels.close); x.innerHTML = ICON.x;
+    x.addEventListener("click", () => finish(false));
+    el.appendChild(x);
+  }
+  requestAnimationFrame(() => el.classList.add("show"));
+  // Ada tombol aksi: beri waktu lebih lama (minimal 6 detik) supaya sempat ditekan.
+  const ms = item.duration ?? (item.action ? 6500 : 3500);
+  let t = ms === Infinity ? 0 : setTimeout(() => finish(false), ms);
+  // Jeda saat disorot / difokus supaya tidak hilang ketika mau diklik
+  el.onpointerenter = el.onfocusin = () => clearTimeout(t);
+  el.onpointerleave = el.onfocusout = () => { if (!done && ms !== Infinity) { clearTimeout(t); t = setTimeout(() => finish(false), 2500); } };
+}
+
+/* =========================================================
+   POPUP (dipakai date & time picker)
+   ========================================================= */
+let openPop = null;
+function closePop(returnFocus = true) {
+  if (!openPop) return;
+  const { pop, scrim, btn, host } = openPop;
+  pop.remove(); scrim.remove();
+  btn.setAttribute("aria-expanded", "false");
+  host.classList.remove("open");
+  openPop = null;
+  if (returnFocus) btn.focus();
+}
+function showPop(host, btn, pop, label) {
+  closePop(false);
+  pop.classList.add("pop");
+  pop.setAttribute("role", "dialog");
+  pop.setAttribute("aria-label", label);
+  const scrim = document.createElement("div");
+  scrim.className = "pop-scrim";
+  scrim.addEventListener("click", () => closePop());
+  host.append(scrim, pop);
+  host.classList.add("open");
+  btn.setAttribute("aria-expanded", "true");
+  // Jangan sampai keluar layar di kanan
+  const r = pop.getBoundingClientRect();
+  if (r.right > innerWidth - 8) pop.classList.add("end");
+  pop.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); closePop(); }
+    if (e.key === "Tab") { // fokus tetap di dalam popup
+      const f = $$("button:not([disabled]), [tabindex='0']", pop).filter((x) => x.offsetParent !== null);
+      if (!f.length) return;
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+  openPop = { pop, scrim, btn, host };
+}
+document.addEventListener("pointerdown", (e) => {
+  if (openPop && !openPop.host.contains(e.target)) closePop(false);
+});
+
+/* =========================================================
+   DATE PICKER
+   ========================================================= */
+const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const parse = (s) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || ""); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; };
+const sameDay = (a, b) => a && b && a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+
+function initDatepicker(host) {
+  if (!once(host, "_fyDp")) return;
+  const input = $("input:not([type='hidden'])", host);
+  const hidden = $("input[type='hidden']", host);
+  const btn = $(".picker-btn", host);
+  const loc = host.dataset.locale || document.documentElement.lang || "id-ID";
+  const range = host.hasAttribute("data-range");
+  const weekStart = +(host.dataset.weekStart ?? 0); // 0 = Minggu, 1 = Senin
+  const min = parse(host.dataset.min), max = parse(host.dataset.max);
+  const L = {
+    prev: host.dataset.labelPrev || "Bulan sebelumnya",
+    next: host.dataset.labelNext || "Bulan berikutnya",
+    clear: host.dataset.labelClear || "Hapus",
+    today: host.dataset.labelToday || "Hari ini",
+    start: host.dataset.labelStart || "Pilih tanggal mulai",
+    end: host.dataset.labelEnd || "Pilih tanggal selesai",
+    title: host.dataset.labelTitle || (range ? "Pilih rentang tanggal" : "Pilih tanggal"),
+    to: host.dataset.labelTo || "s.d.",
+  };
+  const fmt = new Intl.DateTimeFormat(loc, { day: "numeric", month: "short", year: "numeric" });
+  const fmtLong = new Intl.DateTimeFormat(loc, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+  const fmtMonth = new Intl.DateTimeFormat(loc, { month: "long", year: "numeric" });
+  const wdName = new Intl.DateTimeFormat(loc, { weekday: "short" });
+
+  let [a, b] = (hidden?.value || "").split("/").map(parse);
+  let view, focusDay, pickingEnd = false;
+
+  const disabled = (d) => (min && d < min) || (max && d > max);
+  const write = () => {
+    input.value = a ? (range ? `${fmt.format(a)}${b ? ` ${L.to} ${fmt.format(b)}` : ""}` : fmt.format(a)) : "";
+    if (hidden) hidden.value = a ? (range ? `${iso(a)}${b ? "/" + iso(b) : ""}` : iso(a)) : "";
+    emit(host, "fy:change", { start: a ? iso(a) : null, end: b ? iso(b) : null, value: hidden?.value ?? null });
+  };
+  if (a) input.value = range ? `${fmt.format(a)}${b ? ` ${L.to} ${fmt.format(b)}` : ""}` : fmt.format(a);
+
+  const render = (pop) => {
+    const y = view.getFullYear(), m = view.getMonth();
+    const first = new Date(y, m, 1);
+    const offset = (first.getDay() - weekStart + 7) % 7;
+    const start = new Date(y, m, 1 - offset);
+    const today = new Date();
+    let html = `<div class="dp-head"><button type="button" data-nav="-1" aria-label="${L.prev}">${ICON.left}</button><div class="dp-title" aria-live="polite">${fmtMonth.format(first)}</div><button type="button" data-nav="1" aria-label="${L.next}">${ICON.right}</button></div><div class="dp-grid" role="group" aria-label="${fmtMonth.format(first)}">`;
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(2023, 0, 1 + ((weekStart + i) % 7)); // 1 Jan 2023 = Minggu
+      html += `<span class="dp-wd" aria-hidden="true">${wdName.format(d).replace(".", "").slice(0, 3)}</span>`;
+    }
+    for (let i = 0; i < 42; i++) {
+      const d = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i);
+      const sel = sameDay(d, a) || sameDay(d, b);
+      const inR = range && a && b && d > a && d < b;
+      const cls = ["dp-day", d.getMonth() !== m ? "out" : "", inR ? "in-range" : ""].filter(Boolean).join(" ");
+      html += `<button type="button" class="${cls}" data-d="${iso(d)}" tabindex="${sameDay(d, focusDay) ? 0 : -1}" aria-label="${fmtLong.format(d)}" aria-pressed="${sel}"${sameDay(d, today) ? ' aria-current="date"' : ""}${disabled(d) ? " disabled" : ""}>${d.getDate()}</button>`;
+    }
+    html += `</div><div class="dp-foot"><button type="button" class="txt-btn" data-act="clear">${L.clear}</button><span class="hint">${range ? (pickingEnd ? L.end : L.start) : ""}</span><button type="button" class="txt-btn" data-act="today">${L.today}</button></div>`;
+    pop.innerHTML = html;
+  };
+
+  const focusOn = (pop) => $(`[data-d="${iso(focusDay)}"]`, pop)?.focus();
+
+  const open = () => {
+    if (openPop?.host === host) { closePop(); return; }
+    focusDay = a ? new Date(a) : (min && new Date() < min ? new Date(min) : new Date());
+    view = new Date(focusDay.getFullYear(), focusDay.getMonth(), 1);
+    pickingEnd = false;
+    const pop = document.createElement("div");
+    pop.className = "dp";
+    render(pop);
+    showPop(host, btn, pop, L.title);
+    focusOn(pop);
+
+    pop.addEventListener("click", (e) => {
+      const nav = e.target.closest("[data-nav]");
+      if (nav) { view = new Date(view.getFullYear(), view.getMonth() + +nav.dataset.nav, 1); focusDay = new Date(view); render(pop); $(`[data-nav="${nav.dataset.nav}"]`, pop).focus(); return; }
+      const act = e.target.closest("[data-act]")?.dataset.act;
+      if (act === "clear") { a = b = null; pickingEnd = false; write(); render(pop); focusOn(pop); return; }
+      if (act === "today") { focusDay = new Date(); view = new Date(focusDay.getFullYear(), focusDay.getMonth(), 1); render(pop); focusOn(pop); return; }
+      const day = e.target.closest("[data-d]");
+      if (!day || day.disabled) return;
+      const d = parse(day.dataset.d);
+      focusDay = d;
+      if (!range) { a = d; write(); closePop(); return; }
+      if (!pickingEnd || d < a) { a = d; b = null; pickingEnd = true; render(pop); focusOn(pop); write(); return; }
+      b = d; pickingEnd = false; write(); closePop();
+    });
+    pop.addEventListener("keydown", (e) => {
+      if (!e.target.matches("[data-d]")) return;
+      const step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[e.key];
+      let nd = null;
+      if (step) nd = new Date(focusDay.getFullYear(), focusDay.getMonth(), focusDay.getDate() + step);
+      if (e.key === "Home") nd = new Date(focusDay.getFullYear(), focusDay.getMonth(), focusDay.getDate() - ((focusDay.getDay() - weekStart + 7) % 7));
+      if (e.key === "End") nd = new Date(focusDay.getFullYear(), focusDay.getMonth(), focusDay.getDate() + 6 - ((focusDay.getDay() - weekStart + 7) % 7));
+      if (e.key === "PageUp" || e.key === "PageDown") nd = new Date(focusDay.getFullYear(), focusDay.getMonth() + (e.key === "PageUp" ? -1 : 1), Math.min(focusDay.getDate(), 28));
+      if (!nd) return;
+      e.preventDefault();
+      focusDay = nd;
+      if (nd.getMonth() !== view.getMonth() || nd.getFullYear() !== view.getFullYear()) { view = new Date(nd.getFullYear(), nd.getMonth(), 1); render(pop); }
+      else $$("[data-d]", pop).forEach((x) => (x.tabIndex = x.dataset.d === iso(nd) ? 0 : -1));
+      focusOn(pop);
+    });
+  };
+  btn.setAttribute("aria-haspopup", "dialog");
+  btn.setAttribute("aria-expanded", "false");
+  btn.addEventListener("click", open);
+  input.addEventListener("click", open);
+  input.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") { e.preventDefault(); open(); } });
+}
+
+/* =========================================================
+   TIME PICKER (24 jam)
+   ========================================================= */
+function initTimepicker(host) {
+  if (!once(host, "_fyTp")) return;
+  const input = $("input:not([type='hidden'])", host);
+  const hidden = $("input[type='hidden']", host);
+  const btn = $(".picker-btn", host);
+  const step = Math.max(1, +(host.dataset.step || 5));
+  const sep = host.dataset.sep ?? ".";
+  const L = {
+    title: host.dataset.labelTitle || "Pilih jam",
+    hour: host.dataset.labelHour || "Jam",
+    minute: host.dataset.labelMinute || "Menit",
+    cancel: host.dataset.labelCancel || "Batal",
+    ok: host.dataset.labelOk || "Pilih",
+  };
+  const pad = (n) => String(n).padStart(2, "0");
+  let [h, m] = (hidden?.value || "").split(":").map(Number);
+  if (hidden?.value) input.value = `${pad(h)}${sep}${pad(m)}`;
+
+  const open = () => {
+    if (openPop?.host === host) { closePop(); return; }
+    const now = new Date();
+    let ch = Number.isFinite(h) ? h : now.getHours();
+    let cm = Number.isFinite(m) ? m : Math.ceil(now.getMinutes() / step) * step % 60;
+    const pop = document.createElement("div");
+    pop.className = "tp";
+    const list = (name, max, inc, cur, lab) => {
+      let li = "";
+      for (let v = 0; v < max; v += inc) li += `<li role="option" id="${name}-${v}" data-v="${v}" aria-selected="${v === cur}">${pad(v)}</li>`;
+      return `<div class="tp-col"><span id="${name}-l">${lab}</span><ul class="tp-list" role="listbox" tabindex="0" aria-labelledby="${name}-l" data-k="${name}">${li}</ul></div>`;
+    };
+    const hid = id("tph"), mid = id("tpm");
+    pop.innerHTML = `<div class="tp-cols">${list(hid, 24, 1, ch, L.hour)}<span class="tp-sep" aria-hidden="true">${sep === "." ? "." : ":"}</span>${list(mid, 60, step, cm, L.minute)}</div><div class="tp-foot"><button type="button" class="txt-btn" data-act="cancel">${L.cancel}</button><button type="button" class="btn sm" data-act="ok">${L.ok}</button></div>`;
+    showPop(host, btn, pop, L.title);
+    const lists = $$(".tp-list", pop);
+    const sync = (ul, v) => {
+      $$("li", ul).forEach((li) => { const on = +li.dataset.v === v; li.setAttribute("aria-selected", String(on)); li.classList.toggle("active", on); });
+      const sel = $(`li[data-v="${v}"]`, ul);
+      ul.setAttribute("aria-activedescendant", sel.id);
+      sel.scrollIntoView({ block: "center", behavior: "auto" });
+      if (ul.dataset.k === hid) ch = v; else cm = v;
+    };
+    sync(lists[0], ch); sync(lists[1], cm);
+    lists.forEach((ul) => {
+      ul.addEventListener("click", (e) => { const li = e.target.closest("li"); if (li) { sync(ul, +li.dataset.v); ul.focus(); } });
+      ul.addEventListener("keydown", (e) => {
+        const items = $$("li", ul);
+        const i = items.findIndex((x) => x.getAttribute("aria-selected") === "true");
+        let n = { ArrowDown: i + 1, ArrowUp: i - 1, Home: 0, End: items.length - 1, PageDown: i + 5, PageUp: i - 5 }[e.key];
+        if (e.key === "Enter") { e.preventDefault(); $("[data-act='ok']", pop).click(); return; }
+        if (e.key === "ArrowRight" && ul === lists[0]) { e.preventDefault(); lists[1].focus(); return; }
+        if (e.key === "ArrowLeft" && ul === lists[1]) { e.preventDefault(); lists[0].focus(); return; }
+        if (n === undefined) return;
+        e.preventDefault();
+        n = (n + items.length) % items.length;
+        sync(ul, +items[n].dataset.v);
+      });
+    });
+    pop.addEventListener("click", (e) => {
+      const act = e.target.closest("[data-act]")?.dataset.act;
+      if (act === "cancel") closePop();
+      if (act === "ok") {
+        h = ch; m = cm;
+        input.value = `${pad(h)}${sep}${pad(m)}`;
+        if (hidden) hidden.value = `${pad(h)}:${pad(m)}`;
+        emit(host, "fy:change", { value: `${pad(h)}:${pad(m)}`, hour: h, minute: m });
+        closePop();
+      }
+    });
+    lists[0].focus();
+  };
+  btn.setAttribute("aria-haspopup", "dialog");
+  btn.setAttribute("aria-expanded", "false");
+  btn.addEventListener("click", open);
+  input.addEventListener("click", open);
+  input.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") { e.preventDefault(); open(); } });
+}
+
+/* =========================================================
+   SHEET (bottom / side) dan MODAL
+   ========================================================= */
+function closeDialog(d, value = "") {
+  if (!d.open || d.classList.contains("closing")) return;
+  const isSheet = d.matches(".sheet, .side-sheet");
+  if (!isSheet || reduce()) { d.close(value); return; }
+  d.classList.add("closing");
+  let done = false;
+  const end = () => { if (done) return; done = true; d.classList.remove("closing"); d.style.transform = ""; d.close(value); };
+  d.addEventListener("transitionend", end, { once: true });
+  setTimeout(end, 350);
+}
+
+function initDialog(d) {
+  if (!once(d, "_fyDlg")) return;
+  d.setAttribute("data-lenis-prevent", "");
+  d.addEventListener("click", (e) => { if (e.target === d) closeDialog(d); });
+  d.addEventListener("cancel", (e) => { e.preventDefault(); closeDialog(d); });
+  d.addEventListener("close", () => {
+    document.documentElement.classList.toggle("sheet-open", !!$("dialog.sheet[open], dialog.side-sheet[open]"));
+    d._opener?.focus();
+  });
+  $$("[data-close]", d).forEach((b) => b.addEventListener("click", () => closeDialog(d, b.value || "")));
+
+  // Tarik pegangan ke bawah untuk menutup (bottom sheet)
+  const handle = $(".sheet-handle", d);
+  if (handle && d.classList.contains("sheet")) {
+    let y0 = 0, t0 = 0, dy = 0, drag = false, moved = false;
+    handle.addEventListener("pointerdown", (e) => { drag = true; moved = false; y0 = e.clientY; t0 = performance.now(); dy = 0; handle.setPointerCapture(e.pointerId); d.classList.add("dragging"); });
+    handle.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      dy = Math.max(0, e.clientY - y0);
+      if (dy > 4) moved = true;
+      d.style.transform = `translateY(${dy}px)`;
+    });
+    const up = () => {
+      if (!drag) return;
+      drag = false;
+      d.classList.remove("dragging");
+      const v = dy / Math.max(1, performance.now() - t0);
+      if (dy > 90 || v > 0.6) closeDialog(d);
+      else { d.style.transition = "transform .3s cubic-bezier(.22,1,.36,1)"; d.style.transform = ""; setTimeout(() => (d.style.transition = ""), 320); }
+    };
+    handle.addEventListener("pointerup", up);
+    handle.addEventListener("pointercancel", up);
+    // Klik biasa (tanpa geser) pada pegangan tetap menutup lewat [data-close]; geser tidak dihitung klik
+    handle.addEventListener("click", (e) => { if (moved) e.stopImmediatePropagation(); }, true);
+  }
+}
+
+function openDialog(d, opener) {
+  if (!d?.showModal) return;
+  initDialog(d);
+  d.showModal();
+  d._opener = opener;
+  if (d.matches(".sheet, .side-sheet")) document.documentElement.classList.add("sheet-open");
+}
+
+/* =========================================================
+   INIT
+   ========================================================= */
+export function initControls(root = document) {
+  if (root === document && !once(document, "_fyControls")) return api;
+
+  /* ---------- Dropdown / split button ---------- */
+  const closeMenus = (except) => $$("[data-dropdown][aria-expanded='true']").forEach((b) => {
+    if (b === except) return;
+    b.setAttribute("aria-expanded", "false");
+    b.nextElementSibling?.setAttribute("hidden", "");
+  });
+  $$("[data-dropdown]", root).forEach((btn) => {
+    if (!once(btn, "_fyDd")) return;
+    const menu = btn.nextElementSibling;
+    if (!menu) return;
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const open = btn.getAttribute("aria-expanded") !== "true";
+      closeMenus(btn);
+      btn.setAttribute("aria-expanded", String(open));
+      menu.toggleAttribute("hidden", !open);
+      if (open) {
+        // Buka ke atas kalau tidak muat di bawah
+        menu.classList.remove("up");
+        const r = menu.getBoundingClientRect();
+        if (r.bottom > innerHeight - 8 && btn.getBoundingClientRect().top > r.height + 16) menu.classList.add("up");
+        $("a, button", menu)?.focus();
+      }
+    });
+    menu.addEventListener("keydown", (e) => {
+      const items = $$("a, button", menu);
+      const i = items.indexOf(document.activeElement);
+      if (e.key === "ArrowDown") { e.preventDefault(); items[(i + 1) % items.length].focus(); }
+      if (e.key === "ArrowUp") { e.preventDefault(); items[(i - 1 + items.length) % items.length].focus(); }
+      if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); closeMenus(); btn.focus(); }
+      if (e.key === "Tab") closeMenus();
+    });
+    menu.addEventListener("click", (e) => { if (e.target.closest("a, button")) closeMenus(); });
+  });
+
+  /* ---------- Modal & sheet ---------- */
+  $$("dialog.modal, dialog.sheet, dialog.side-sheet", root).forEach(initDialog);
+  $$("[data-open-modal], [data-open-sheet]", root).forEach((b) => {
+    if (!once(b, "_fyOpen")) return;
+    b.addEventListener("click", () => openDialog(document.getElementById(b.dataset.openModal || b.dataset.openSheet), b));
+  });
+
+  /* ---------- Tab ---------- */
+  $$("[data-tabs]", root).forEach((wrap) => {
+    if (!once(wrap, "_fyTabs")) return;
+    const tabs = $$("[role='tab']", wrap);
+    const select = (t) => tabs.forEach((x) => {
+      const on = x === t;
+      x.setAttribute("aria-selected", String(on));
+      x.tabIndex = on ? 0 : -1;
+      document.getElementById(x.getAttribute("aria-controls"))?.toggleAttribute("hidden", !on);
+    });
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => select(t));
+      t.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+          e.preventDefault();
+          const n = tabs[(i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length];
+          select(n); n.focus();
+        }
+      });
+    });
+  });
+
+  /* ---------- Button group ---------- */
+  $$("[data-btn-group]", root).forEach((g) => {
+    if (!once(g, "_fyBg")) return;
+    const multi = g.dataset.btnGroup === "multi";
+    g.addEventListener("click", (e) => {
+      const b = e.target.closest("button[aria-pressed]");
+      if (!b || !g.contains(b)) return;
+      if (multi) b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true"));
+      else $$("button[aria-pressed]", g).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      emit(g, "fy:change", { value: $$("button[aria-pressed='true']", g).map((x) => x.value || x.textContent.trim()) });
+    });
+  });
+
+  /* ---------- Chip filter & chip input ---------- */
+  $$(".chip-btn[aria-pressed]", root).forEach((c) => {
+    if (!once(c, "_fyChip")) return;
+    c.addEventListener("click", () => {
+      const single = c.closest("[data-single]");
+      const on = c.getAttribute("aria-pressed") !== "true";
+      if (single) $$(".chip-btn[aria-pressed]", single).forEach((x) => x.setAttribute("aria-pressed", "false"));
+      c.setAttribute("aria-pressed", String(single ? true : on));
+      emit(c, "fy:change", { value: c.value || c.textContent.trim(), pressed: c.getAttribute("aria-pressed") === "true" });
+    });
+  });
+  $$(".chip-input .x", root).forEach((x) => {
+    if (!once(x, "_fyX")) return;
+    x.addEventListener("click", () => {
+      const chip = x.closest(".chip-input");
+      const set = chip.parentElement;
+      const sib = chip.nextElementSibling?.querySelector?.(".x") || chip.previousElementSibling?.querySelector?.(".x");
+      emit(chip, "fy:remove", { value: chip.dataset.value || chip.textContent.replace(x.textContent, "").trim() });
+      chip.remove();
+      (sib || set.closest("[data-chip-focus]")?.querySelector("input") || set.querySelector("input"))?.focus();
+    });
+  });
+
+  /* ---------- FAB menu ---------- */
+  $$("[data-fab-menu]", root).forEach((wrap) => {
+    if (!once(wrap, "_fyFab")) return;
+    const btn = wrap.querySelector(":scope > .fab");
+    const list = document.getElementById(btn.getAttribute("aria-controls"));
+    let scrim = null;
+    const set = (open) => {
+      btn.setAttribute("aria-expanded", String(open));
+      list.hidden = !open;
+      const items = $$(".fab-action", list);
+      items.forEach((it, i) => it.style.setProperty("--i", items.length - 1 - i));
+      if (open && !scrim) { scrim = document.createElement("div"); scrim.className = "fab-scrim"; scrim.addEventListener("click", () => set(false)); wrap.parentElement.before(scrim); }
+      scrim?.classList.toggle("on", open);
+      if (open) items[items.length - 1]?.focus();
+    };
+    btn.addEventListener("click", () => set(btn.getAttribute("aria-expanded") !== "true"));
+    wrap.addEventListener("keydown", (e) => { if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") { e.preventDefault(); e.stopPropagation(); set(false); btn.focus(); } });
+    list.addEventListener("click", (e) => { if (e.target.closest(".fab-action")) set(false); });
+  });
+
+  /* ---------- Scroll: FAB mengecil, app bar ---------- */
+  const shrinkers = $$("[data-fab-shrink]", root);
+  const appbars = $$("[data-appbar]", root);
+  if (shrinkers.length || appbars.length) {
+    let last = scrollY, ticking = false;
+    const onScroll = () => {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(() => {
+        const y = scrollY;
+        if (Math.abs(y - last) > 6) { shrinkers.forEach((f) => f.classList.toggle("shrink", y > last && y > 80)); last = y; }
+        appbars.forEach((a) => a.classList.toggle("scrolled", y > 4));
+        ticking = false;
+      });
+    };
+    addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ---------- Carousel ---------- */
+  $$("[data-carousel]", root).forEach((c) => {
+    if (!once(c, "_fyCar")) return;
+    const track = $(".carousel-track", c);
+    const slides = $$(".slide", track);
+    const prev = $("[data-prev]", c), next = $("[data-next]", c);
+    const dotsWrap = $(".carousel-dots", c);
+    const total = slides.length;
+    slides.forEach((s, i) => {
+      s.setAttribute("role", "group");
+      s.setAttribute("aria-roledescription", s.getAttribute("aria-roledescription") || "slide");
+      if (!s.hasAttribute("aria-label")) s.setAttribute("aria-label", `${i + 1} / ${total}`);
+    });
+    let dots = [];
+    if (dotsWrap) {
+      dotsWrap.innerHTML = slides.map((s, i) => `<button type="button" aria-label="${s.getAttribute("aria-label")}"></button>`).join("");
+      dots = $$("button", dotsWrap);
+      dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
+    }
+    const step = () => (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : track.clientWidth);
+    const index = () => Math.round(track.scrollLeft / Math.max(1, step()));
+    const go = (i) => track.scrollTo({ left: Math.max(0, Math.min(total - 1, i)) * step(), behavior: reduce() ? "auto" : "smooth" });
+    const sync = () => {
+      const max = track.scrollWidth - track.clientWidth - 2;
+      if (prev) prev.disabled = track.scrollLeft <= 2;
+      if (next) next.disabled = track.scrollLeft >= max;
+      const i = track.scrollLeft >= max ? total - 1 : index();
+      dots.forEach((d, k) => d.setAttribute("aria-current", String(k === i)));
+    };
+    prev?.addEventListener("click", () => go(index() - 1));
+    next?.addEventListener("click", () => go(index() + 1));
+    track.addEventListener("scroll", () => requestAnimationFrame(sync), { passive: true });
+    track.addEventListener("keydown", (e) => {
+      if (e.target !== track) return;
+      if (e.key === "ArrowRight") { e.preventDefault(); go(index() + 1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(index() - 1); }
+    });
+    addEventListener("resize", sync);
+    sync();
+  });
+
+  /* ---------- Slider ---------- */
+  const pct = (inp) => {
+    const min = +inp.min || 0, max = inp.max === "" ? 100 : +inp.max;
+    return (inp.value - min) / ((max - min) || 1);
+  };
+  // Posisi isian mengikuti tengah kenop (kenop 26px), bukan tepi kotak
+  const pos = (f) => `calc(13px + (100% - 26px) * ${f.toFixed(4)})`;
+  const output = (inp) => {
+    const out = inp.id && document.querySelector(`output[for~="${inp.id}"]`);
+    if (!out) return;
+    const fmt = inp.dataset.format;
+    const v = (x) => (fmt ? fmt.replace("{v}", Number(x).toLocaleString(document.documentElement.lang || "id-ID")) : x);
+    const r2 = inp.closest("[data-range2]");
+    if (r2 && out.htmlFor.length > 1) { const [a, b] = $$(".slider", r2); out.textContent = `${v(a.value)} – ${v(b.value)}`.replace(" – ", " s.d. "); }
+    else out.textContent = v(inp.value);
+  };
+  $$(".slider", root).forEach((inp) => {
+    if (!once(inp, "_fySl") || inp.closest("[data-range2]")) return;
+    const upd = () => { inp.style.setProperty("--p", pos(pct(inp))); output(inp); };
+    inp.addEventListener("input", () => { upd(); emit(inp, "fy:change", { value: +inp.value }); });
+    upd();
+  });
+  $$("[data-range2]", root).forEach((w) => {
+    if (!once(w, "_fyR2")) return;
+    const [a, b] = $$(".slider", w);
+    const gap = +(w.dataset.gap || 0);
+    const upd = (src) => {
+      if (+a.value > +b.value - gap) { if (src === a) a.value = +b.value - gap; else b.value = +a.value + gap; }
+      w.style.setProperty("--a", pos(pct(a)));
+      w.style.setProperty("--b", pos(pct(b)));
+      output(a);
+    };
+    [a, b].forEach((x) => x.addEventListener("input", () => { upd(x); emit(w, "fy:change", { min: +a.value, max: +b.value }); }));
+    upd(a);
+  });
+
+  /* ---------- Tooltip ---------- */
+  $$(".tip-wrap", root).forEach((w) => {
+    if (!once(w, "_fyTip")) return;
+    const tip = $(".tip", w);
+    if (!tip) return;
+    const place = () => {
+      tip.style.setProperty("--dx", "0px");
+      const r = tip.getBoundingClientRect();
+      let dx = 0;
+      if (r.left < 8) dx = 8 - r.left;
+      else if (r.right > innerWidth - 8) dx = innerWidth - 8 - r.right;
+      tip.style.setProperty("--dx", `${Math.round(dx)}px`);
+    };
+    w.addEventListener("pointerenter", place);
+    w.addEventListener("focusin", place);
+    w.addEventListener("pointerleave", () => w.classList.remove("tip-off"));
+    w.addEventListener("focusout", () => w.classList.remove("tip-off", "tip-on"));
+    w.addEventListener("keydown", (e) => { if (e.key === "Escape" && !w.classList.contains("tip-off")) { w.classList.add("tip-off"); if (w.closest("dialog")) e.preventDefault(); } });
+    // Tekan lama di layar sentuh
+    let t;
+    w.addEventListener("touchstart", () => { t = setTimeout(() => { place(); w.classList.add("tip-on"); }, 450); }, { passive: true });
+    const end = () => { clearTimeout(t); setTimeout(() => w.classList.remove("tip-on"), 1500); };
+    w.addEventListener("touchend", end); w.addEventListener("touchcancel", end);
+  });
+
+  /* ---------- Search dengan saran ---------- */
+  $$("[data-suggest]", root).forEach((w) => {
+    if (!once(w, "_fySg")) return;
+    const input = $("input", w);
+    const list = $(".suggest", w);
+    const opts = $$("[role='option']", list);
+    opts.forEach((o) => { if (!o.id) o.id = id("opt"); });
+    let none = $(".none", list);
+    if (!none) { none = document.createElement("li"); none.className = "none"; none.setAttribute("role", "presentation"); none.textContent = w.dataset.empty || "Tidak ada hasil"; none.hidden = true; list.appendChild(none); }
+    let active = -1;
+    const visible = () => opts.filter((o) => !o.hidden);
+    const setActive = (i) => {
+      const v = visible();
+      active = v.length ? (i + v.length) % v.length : -1;
+      opts.forEach((o) => o.setAttribute("aria-selected", "false"));
+      if (active >= 0) { v[active].setAttribute("aria-selected", "true"); input.setAttribute("aria-activedescendant", v[active].id); v[active].scrollIntoView({ block: "nearest" }); }
+      else input.removeAttribute("aria-activedescendant");
+    };
+    const show = (on) => { list.hidden = !on; input.setAttribute("aria-expanded", String(on)); if (!on) setActive(-1); };
+    const filter = () => {
+      const q = input.value.trim().toLowerCase();
+      opts.forEach((o) => (o.hidden = q && !o.textContent.toLowerCase().includes(q)));
+      none.hidden = visible().length > 0;
+      show(true); active = -1; setActive(-1);
+    };
+    const choose = (o) => { input.value = o.dataset.value || o.textContent.trim(); show(false); emit(w, "fy:select", { value: input.value }); };
+    input.addEventListener("input", filter);
+    input.addEventListener("focus", filter);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") { e.preventDefault(); if (list.hidden) filter(); setActive(active + 1); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); setActive(active - 1); }
+      else if (e.key === "Enter" && active >= 0) { e.preventDefault(); choose(visible()[active]); }
+      else if (e.key === "Escape") { if (!list.hidden) { e.preventDefault(); e.stopPropagation(); show(false); } }
+    });
+    list.addEventListener("pointerdown", (e) => e.preventDefault()); // fokus tetap di input
+    list.addEventListener("click", (e) => { const o = e.target.closest("[role='option']"); if (o) choose(o); });
+    document.addEventListener("pointerdown", (e) => { if (!w.contains(e.target)) show(false); });
+  });
+
+  /* ---------- Date & time picker ---------- */
+  $$("[data-datepicker]", root).forEach(initDatepicker);
+  $$("[data-timepicker]", root).forEach(initTimepicker);
+
+  /* ---------- Snackbar deklaratif ---------- */
+  $$("[data-snackbar]", root).forEach((b) => {
+    if (!once(b, "_fySb")) return;
+    b.addEventListener("click", () => snackbar(b.dataset.snackbar, { action: b.dataset.snackbarAction, onAction: () => b.dispatchEvent(new CustomEvent("fy:snackbar-action", { bubbles: true })) }));
+  });
+
+  /* ---------- Global: klik luar dan Esc ---------- */
+  if (root === document) {
+    document.addEventListener("click", (e) => { if (!e.target.closest(".menu")) closeMenus(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenus(); });
+  }
+  return api;
+}
+
+const api = { snackbar, openDialog, closeDialog, closePopup: closePop, init: initControls };
+export { openDialog, closeDialog };

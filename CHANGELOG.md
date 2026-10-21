@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.3.0 · 22 Oktober 2026
+
+- **Komponen kontrol lengkap** (`css/controls.css`, `js/controls.js`): button group, split button, FAB, extended FAB, FAB menu, app bar HP, navigation bar bawah, navigation rail, bottom sheet (bisa ditarik), side sheet, modal layar penuh di HP, carousel (tidak berputar sendiri), slider dan slider dua ujung, tooltip, list, chip filter/aksi/input, spinner segel, progress lingkaran dan tanpa angka, skeleton, snackbar dengan tombol aksi, search bar dengan saran, date picker (tunggal dan rentang), time picker, floating toolbar, badge. Dropdown, modal, dan tab dipindah dari `app.css` ke sini supaya bisa dipakai juga di web publik.
+- **Siap aplikasi HP**: semua input 16px di layar sentuh (iOS tidak lagi memperbesar halaman), tanpa jeda ketuk ganda, area aman notch, `snippets/pwa-head.html` + `manifest.webmanifest`, ikon aplikasi di `brand/app-icons/`.
+- **Token untuk aplikasi native** (`tokens/`): JSON, Flutter, SwiftUI, Jetpack Compose, React Native, plus huruf TTF statis. Dibuat otomatis dengan `node scripts/build-tokens.mjs`.
+- Template baru: `templates/komponen.html` (katalog) dan `templates/app-mobile.html` (aplikasi HP).
+
+## 1.2.0 · 21 Oktober 2026
+
+- **Mode gelap** untuk semua komponen: token tema baru (`--card`, `--field`, `--edge`, `--edge-shadow`, `--text-blue`, dll.), ikut sistem secara bawaan, tombol `[data-theme-toggle]` menyimpan pilihan, tanpa kedip putih saat halaman dimuat. Kelas `.only-light` / `.only-dark`.
+- **Komponen aplikasi** (`css/app.css`, `js/app.js`): sidebar + topbar, KPI, grafik batang/garis/donat, panel, tabel dengan filter dan aksi, pagination, avatar, switch, dropdown, modal, tab, progress, feed, toast.
+- **Halaman masuk, daftar, lupa password, atur ulang password** dengan validasi, meter kekuatan password, dan keadaan berhasil.
+- **Template dashboard pengguna dan dashboard admin** (data contoh berlabel).
+- Perbaikan: teks pembaca layar di dalam tabel yang bisa digeser tidak lagi membuat halaman melebar di HP; pesan error form tidak lagi membuat tombol "loncat" saat diklik.
+- Perubahan: kartu harga kini selalu `.plans > .plan` (sebelumnya `.plan` bentrok dengan chip status `.chip.plan`).
+
 ## 1.1.1 · 21 Oktober 2026
 
 - Perbaikan penting: dengan "kurangi gerakan" aktif, konten `data-reveal` dan judul `data-split` dulu tidak tampil. Sekarang langsung tampil.

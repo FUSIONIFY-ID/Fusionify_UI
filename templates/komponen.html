@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="id" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Komponen · FUSIONIFY UI</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f7fbff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#071022" media="(prefers-color-scheme: dark)">
+<script>
+  (function () {
+    var d = document.documentElement;
+    d.classList.remove("no-js");
+    d.classList.add("js");
+    try {
+      var t = localStorage.getItem("fy-theme");
+      if ((t === "dark" || t === "light") && !d.hasAttribute("data-theme-lock")) d.setAttribute("data-theme", t);
+      if (sessionStorage.getItem("fx-nav") === "1") d.classList.add("arriving");
+    } catch (e) {}
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.remove("arriving");
+    setTimeout(function () { if (!window.__fx) { d.classList.add("fx-off"); d.classList.remove("arriving"); } }, 4000);
+  })();
+</script>
+
+<link rel="preload" href="../fonts/afacad-flux-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/sansation-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/fusionify.css">
+<link rel="stylesheet" href="../css/app.css">
+<link rel="icon" href="../brand/mark-128.webp">
+<style>
+
+.kat-top { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; gap: 12px; padding: 12px var(--gut); background: var(--nav-glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.kat-top .side-brand { padding: 0; font-size: 19px; }
+.kat-top .spacer { flex: 1; }
+.kat-hero { padding: clamp(36px, 6vw, 72px) 0 18px; display: grid; gap: 12px; }
+.kat-hero p { max-width: 62ch; color: var(--ink-2); }
+.kat-toc { margin: 8px 0 18px; }
+.kat { display: grid; gap: 26px; padding-bottom: 80px; }
+.kat .panel h2 { font-size: 26px; }
+.kat .panel > p.lead2 { color: var(--ink-3); font-size: 14.5px; margin: -8px 0 18px; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.row + .row { margin-top: 18px; }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px; }
+.label-sm { display: block; margin-bottom: 8px; font-family: var(--f-num); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.device { position: relative; transform: translateZ(0); overflow: hidden; border: 2px solid var(--edge); border-radius: 30px; background: var(--paper); box-shadow: var(--shadow-sticker); }
+.device.phone { width: 100%; max-width: 360px; height: 560px; margin-inline: auto; }
+.device.tablet { width: 100%; height: 360px; }
+.device .scroll { position: absolute; inset: 0; overflow-y: auto; }
+.device .navbar, .device .rail, .device .fab-dock { position: absolute; }
+.device .fab-dock { bottom: 92px; }
+.fab-stage { position: relative; display: flex; justify-content: flex-end; align-items: flex-end; min-height: 260px; padding: 16px; border-radius: var(--r-m); background: var(--surface); }
+.skel-card { display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: center; }
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="seal-clip" clipPathUnits="objectBoundingBox"><path d="M0.960 0.500L0.972 0.519L0.981 0.538L0.984 0.557L0.981 0.576L0.971 0.594L0.956 0.609L0.939 0.624L0.922 0.637L0.908 0.651L0.899 0.665L0.895 0.682L0.895 0.701L0.898 0.723L0.900 0.745L0.899 0.767L0.894 0.786L0.883 0.802L0.867 0.813L0.847 0.821L0.825 0.825L0.804 0.828L0.784 0.833L0.768 0.840L0.755 0.851L0.745 0.866L0.736 0.885L0.727 0.905L0.716 0.925L0.703 0.940L0.687 0.951L0.668 0.955L0.647 0.953L0.626 0.947L0.605 0.939L0.586 0.932L0.568 0.928L0.551 0.929L0.534 0.936L0.518 0.947L0.500 0.960L0.481 0.972L0.462 0.981L0.443 0.984L0.424 0.981L0.406 0.971L0.391 0.956L0.376 0.939L0.363 0.922L0.349 0.908L0.335 0.899L0.318 0.895L0.299 0.895L0.277 0.898L0.255 0.900L0.233 0.899L0.214 0.894L0.198 0.883L0.187 0.867L0.179 0.847L0.175 0.825L0.172 0.804L0.167 0.784L0.160 0.768L0.149 0.755L0.134 0.745L0.115 0.736L0.095 0.727L0.075 0.716L0.060 0.703L0.049 0.687L0.045 0.668L0.047 0.647L0.053 0.626L0.061 0.605L0.068 0.586L0.072 0.568L0.071 0.551L0.064 0.534L0.053 0.518L0.040 0.500L0.028 0.481L0.019 0.462L0.016 0.443L0.019 0.424L0.029 0.406L0.044 0.391L0.061 0.376L0.078 0.363L0.092 0.349L0.101 0.335L0.105 0.318L0.105 0.299L0.102 0.277L0.100 0.255L0.101 0.233L0.106 0.214L0.117 0.198L0.133 0.187L0.153 0.179L0.175 0.175L0.196 0.172L0.216 0.167L0.232 0.160L0.245 0.149L0.255 0.134L0.264 0.115L0.273 0.095L0.284 0.075L0.297 0.060L0.313 0.049L0.332 0.045L0.353 0.047L0.374 0.053L0.395 0.061L0.414 0.068L0.432 0.072L0.449 0.071L0.466 0.064L0.482 0.053L0.500 0.040L0.519 0.028L0.538 0.019L0.557 0.016L0.576 0.019L0.594 0.029L0.609 0.044L0.624 0.061L0.637 0.078L0.651 0.092L0.665 0.101L0.682 0.105L0.701 0.105L0.723 0.102L0.745 0.100L0.767 0.101L0.786 0.106L0.802 0.117L0.813 0.133L0.821 0.153L0.825 0.175L0.828 0.196L0.833 0.216L0.840 0.232L0.851 0.245L0.866 0.255L0.885 0.264L0.905 0.273L0.925 0.284L0.940 0.297L0.951 0.313L0.955 0.332L0.953 0.353L0.947 0.374L0.939 0.395L0.932 0.414L0.928 0.432L0.929 0.449L0.936 0.466L0.947 0.482L0.960 0.500Z" /></clipPath>
+    <symbol id="seal" viewBox="0 0 100 100"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" fill="currentColor" /></symbol>
+    <symbol id="seal-line" viewBox="0 0 100 100"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" fill="none" stroke="currentColor" stroke-width="1.2" /></symbol>
+  </defs>
+</svg>
+<a class="skip" href="#main">Lewati ke konten</a>
+<header class="kat-top">
+  <a class="side-brand" href="#"><img src="../brand/mark-128.webp" alt="" width="30" height="30">Komponen FUSIONIFY UI</a>
+  <span class="spacer"></span>
+  <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Ganti tema terang atau gelap"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+</header>
+<main id="main" class="wrap">
+  <div class="kat-hero">
+    <p class="kicker">Katalog komponen</p>
+    <h1 class="h-sec">Semua kontrol, satu gaya<span class="dot">.</span></h1>
+    <p>Komponen untuk web, dashboard, dan aplikasi HP (web, PWA, atau WebView). Semuanya bergaya stiker FUSIONIFY, aman di mode gelap, target sentuhnya minimal 44px, dan menghormati area aman notch.</p>
+    <nav class="chip-set scroll kat-toc" aria-label="Lompat ke bagian">
+      <a class="chip-btn" href="#tombol">Tombol</a><a class="chip-btn" href="#fab">FAB</a><a class="chip-btn" href="#chip">Chip</a><a class="chip-btn" href="#pilih">Tanggal & jam</a><a class="chip-btn" href="#slider">Slider</a><a class="chip-btn" href="#loading">Loading</a><a class="chip-btn" href="#list">List</a><a class="chip-btn" href="#nav">Navigasi HP</a><a class="chip-btn" href="#sheet">Sheet & dialog</a><a class="chip-btn" href="#carousel">Carousel</a><a class="chip-btn" href="#cari">Pencarian</a><a class="chip-btn" href="#lain">Tooltip, badge, snackbar</a>
+    </nav>
+  </div>
+
+  <div class="kat">
+    <section class="panel" id="tombol" aria-labelledby="h-tombol">
+      <div class="panel-head"><h2 id="h-tombol">Tombol</h2></div>
+      <p class="lead2">Tombol biasa, ikon, sedang memuat, button group, dan split button.</p>
+      <div class="row">
+        <button class="btn" type="button">Simpan</button>
+        <button class="btn ghost" type="button">Batal</button>
+        <button class="btn sm" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Kecil</button>
+        <button class="btn" type="button" aria-busy="true"><span class="spinner" aria-hidden="true"></span>Menyimpan</button>
+        <span class="tip-wrap"><button class="icon-btn" type="button" aria-label="Bagikan" aria-describedby="tip-share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></svg></button><span class="tip" role="tooltip" id="tip-share">Bagikan tautan</span></span>
+      </div>
+      <div class="row">
+        <div><span class="label-sm">Pilih satu</span>
+          <div class="btn-group" role="group" aria-label="Rentang waktu" data-btn-group="single">
+            <button type="button" aria-pressed="true">Hari</button><button type="button" aria-pressed="false">Minggu</button><button type="button" aria-pressed="false">Bulan</button>
+          </div></div>
+        <div><span class="label-sm">Pilih banyak</span>
+          <div class="btn-group" role="group" aria-label="Format teks" data-btn-group="multi">
+            <button type="button" aria-pressed="true"><b>B</b></button><button type="button" aria-pressed="false"><i>I</i></button><button type="button" aria-pressed="false"><u>U</u></button>
+          </div></div>
+        <div><span class="label-sm">Split button</span>
+          <div class="split-btn">
+            <button class="btn" type="button" data-toast-msg="Draf tersimpan">Simpan draf</button><button class="btn caret" type="button" data-dropdown aria-haspopup="menu" aria-expanded="false" aria-label="Pilihan simpan lainnya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="menu" role="menu" hidden><button role="menuitem" type="button" data-toast-msg="Dijadwalkan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Jadwalkan</button><button role="menuitem" type="button" data-toast-msg="Diterbitkan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4 18-7z"/></svg>Terbitkan sekarang</button><hr><button role="menuitem" type="button" class="danger"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg>Buang draf</button></div>
+          </div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="fab" aria-labelledby="h-fab">
+      <div class="panel-head"><h2 id="h-fab">Floating action button</h2></div>
+      <p class="lead2">Satu aksi utama per layar. Di aplikasi taruh di <code>.fab-dock</code> (melayang di atas navigation bar).</p>
+      <div class="cols">
+        <div class="row">
+          <button class="fab sm" type="button" aria-label="Tambah"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button class="fab" type="button" aria-label="Tambah"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button class="fab lg" type="button" aria-label="Tambah"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          <button class="fab soft" type="button" aria-label="Edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M14 6l4 4"/></svg></button>
+          <button class="fab ext" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="label">Buat acara</span></button>
+        </div>
+        <div class="fab-stage">
+          <div class="fab-menu" data-fab-menu>
+            <ul class="fab-actions" id="fm-demo" hidden>
+              <li><button class="fab-action" type="button" data-snackbar="Pilih foto dulu ya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>Foto</button></li>
+              <li><button class="fab-action" type="button" data-snackbar="Acara baru dibuat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Acara</button></li>
+              <li><button class="fab-action" type="button" data-snackbar="Pesan baru dibuat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"/></svg>Pesan</button></li>
+            </ul>
+            <button class="fab" type="button" aria-expanded="false" aria-controls="fm-demo" aria-label="Buat baru"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="chip" aria-labelledby="h-chip">
+      <div class="panel-head"><h2 id="h-chip">Chip</h2></div>
+      <p class="lead2"><code>.chip</code> tetap khusus status produk. Untuk filter, aksi, dan input pakai <code>.chip-btn</code> dan <code>.chip-input</code>.</p>
+      <span class="label-sm">Filter (banyak)</span>
+      <div class="chip-set" role="group" aria-label="Filter acara">
+        <button class="chip-btn" type="button" aria-pressed="true">Gratis</button><button class="chip-btn" type="button" aria-pressed="false">Online</button><button class="chip-btn" type="button" aria-pressed="false">Akhir pekan</button><button class="chip-btn" type="button" aria-pressed="false">Dekat kampus</button>
+      </div>
+      <div class="row"><div><span class="label-sm">Filter (satu)</span>
+        <div class="chip-set" role="group" aria-label="Urutkan" data-single>
+          <button class="chip-btn" type="button" aria-pressed="true">Terbaru</button><button class="chip-btn" type="button" aria-pressed="false">Terdekat</button><button class="chip-btn" type="button" aria-pressed="false">Terpopuler</button>
+        </div></div></div>
+      <div class="row"><div><span class="label-sm">Aksi</span>
+        <div class="chip-set"><button class="chip-btn" type="button" data-snackbar="Tautan disalin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Salin tautan</button><button class="chip-btn" type="button" data-snackbar="Disimpan ke kalender"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Tambah ke kalender</button></div></div></div>
+      <div class="row"><div><span class="label-sm">Input</span>
+        <div class="chip-set" aria-label="Kota terpilih">
+          <span class="chip-input">Bogor<button class="x" type="button" aria-label="Hapus Bogor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span>
+          <span class="chip-input">Surabaya<button class="x" type="button" aria-label="Hapus Surabaya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span>
+          <span class="chip-input with-av"><span class="avatar">AR</span>Arya<button class="x" type="button" aria-label="Hapus Arya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></span>
+        </div></div></div>
+    </section>
+
+    <section class="panel" id="pilih" aria-labelledby="h-pilih">
+      <div class="panel-head"><h2 id="h-pilih">Tanggal & jam</h2></div>
+      <p class="lead2">Kalender dan pilihan jam 24 jam. Di HP keduanya muncul dari bawah layar. Bisa dipakai dengan keyboard: panah, Page Up/Down, Home/End, Enter, Esc.</p>
+      <div class="cols">
+        <div class="field"><label for="k-tgl">Tanggal acara</label>
+            <div class="picker" data-datepicker><input class="input" id="k-tgl" readonly placeholder="Pilih tanggal"><button type="button" class="picker-btn" aria-label="Buka kalender untuk tanggal acara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><input type="hidden" name="tanggal"></div></div>
+        <div class="field"><label for="k-range">Rentang menginap</label>
+            <div class="picker" data-datepicker data-range><input class="input" id="k-range" readonly placeholder="Pilih rentang"><button type="button" class="picker-btn" aria-label="Buka kalender untuk rentang menginap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><input type="hidden" name="rentang"></div></div>
+        <div class="field"><label for="k-jam">Jam mulai</label>
+            <div class="picker" data-timepicker data-step="5"><input class="input" id="k-jam" readonly placeholder="Pilih jam"><button type="button" class="picker-btn" aria-label="Buka pilihan jam untuk jam mulai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button><input type="hidden" name="jam"></div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="slider" aria-labelledby="h-slider">
+      <div class="panel-head"><h2 id="h-slider">Slider</h2></div>
+      <div class="cols">
+        <div class="slider-field"><div class="top"><label for="k-kuota">Kuota peserta</label><output for="k-kuota">40</output></div>
+          <input class="slider" id="k-kuota" type="range" min="10" max="200" step="10" value="40">
+          <div class="ends" aria-hidden="true"><span>10</span><span>200</span></div></div>
+        <div class="slider-field"><div class="top"><span id="k-harga-l">Rentang harga</span><output for="k-hmin k-hmax">Rp20.000 s.d. Rp150.000</output></div>
+          <div class="range2" data-range2 role="group" aria-labelledby="k-harga-l"><input class="slider" id="k-hmin" type="range" min="0" max="300000" step="10000" value="20000" data-format="Rp{v}" aria-label="Harga minimum"><input class="slider" id="k-hmax" type="range" min="0" max="300000" step="10000" value="150000" data-format="Rp{v}" aria-label="Harga maksimum"></div>
+          <div class="ends" aria-hidden="true"><span>Rp0</span><span>Rp300.000</span></div></div>
+        <div class="slider-field"><div class="top"><label for="k-off">Nonaktif</label><output for="k-off">50</output></div><input class="slider" id="k-off" type="range" value="50" disabled></div>
+      </div>
+    </section>
+
+    <section class="panel" id="loading" aria-labelledby="h-loading">
+      <div class="panel-head"><h2 id="h-loading">Loading & progres</h2></div>
+      <p class="lead2">Spinner berbentuk segel FUSIONIFY. Skeleton untuk isi yang sedang dimuat.</p>
+      <div class="row">
+        <span class="spinner sm" role="status" aria-label="Memuat"></span>
+        <span class="spinner" role="status" aria-label="Memuat"></span>
+        <span class="spinner lg" role="status" aria-label="Memuat"></span>
+        <span class="spinner contained" role="status" aria-label="Memuat"></span>
+        <span class="ring" style="--v:.62" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" aria-label="Unggahan"><span>62%</span></span>
+      </div>
+      <div class="cols" style="margin-top:20px">
+        <div><span class="label-sm">Progres tanpa angka</span><div class="progress indeterminate" role="progressbar" aria-label="Sedang menyinkronkan"><span></span></div>
+          <span class="label-sm" style="margin-top:16px">Progres</span><div class="progress" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" aria-label="Kelengkapan"><span style="--v:.45"></span></div></div>
+        <div role="status" aria-busy="true" aria-label="Memuat kartu">
+          <div class="skel-card"><span class="skel circle" style="width:52px;height:52px"></span><div><span class="skel title"></span><span class="skel text" style="width:80%"></span></div></div>
+          <span class="skel block" style="margin-top:12px"></span>
+        </div>
+        <div class="loading-block"><span class="spinner lg" aria-hidden="true"></span><span>Sebentar, lagi ambil data</span></div>
+      </div>
+    </section>
+
+    <section class="panel flush" id="list" aria-labelledby="h-list">
+      <div class="panel-head"><h2 id="h-list">List</h2></div>
+      <div class="cols" style="padding:8px 8px 14px">
+        <ul class="list divided" aria-label="Pesan">
+          <li class="sub">Pesan</li>
+          <li><a class="li" href="#"><span class="li-lead avatar">AR</span><span class="li-txt"><b>Arya</b><span>Besok rapat jam 9 ya, jangan telat lagi.</span></span><span class="li-trail">09.12<span class="unread" aria-label="Belum dibaca"></span></span></a></li>
+          <li><a class="li" href="#"><span class="li-lead avatar">NS</span><span class="li-txt"><b>Nadia S.</b><span>Fotonya sudah aku kirim ke grup.</span></span><span class="li-trail">Kemarin</span></a></li>
+          <li><a class="li" href="#"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span><span class="li-txt"><b>Pengingat acara</b><span>Workshop UI dimulai 1 jam lagi.</span></span><span class="li-trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></a></li>
+        </ul>
+        <ul class="list" aria-label="Pengaturan">
+          <li class="sub">Pengaturan</li>
+          <li><label class="li"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></span><span class="li-txt"><b>Notifikasi</b><span>Kabar acara dan pesan baru</span></span><span class="li-trail"><span class="switch"><input type="checkbox" role="switch" checked><span></span></span></span></label></li>
+          <li><label class="li"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg></span><span class="li-txt"><b>Hemat data</b><span>Gambar dimuat lebih kecil</span></span><span class="li-trail"><span class="switch"><input type="checkbox" role="switch"><span></span></span></span></label></li>
+          <li><button class="li" type="button" data-open-sheet="sh-bahasa"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"/></svg></span><span class="li-txt"><b>Bahasa</b><span>Bahasa Indonesia</span></span><span class="li-trail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></button></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel" id="nav" aria-labelledby="h-nav">
+      <div class="panel-head"><h2 id="h-nav">Navigasi aplikasi HP</h2></div>
+      <p class="lead2">App bar di atas, navigation bar di bawah untuk HP, navigation rail untuk tablet. Contoh hidup ada di <a href="app-mobile.html">app-mobile.html</a>.</p>
+      <div class="cols">
+        <div class="device phone" aria-hidden="true" inert>
+          <div class="scroll">
+            <header class="appbar"><button class="icon-btn" type="button" aria-label="Kembali" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 6l-6 6 6 6"/></svg></button><span class="title">Acara</span><div class="actions"><button class="icon-btn" type="button" aria-label="Cari" tabindex="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button></div></header>
+            <ul class="list divided" style="padding:0 6px">
+              <li><span class="li"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span class="li-txt"><b>Workshop UI</b><span>Sabtu, 09.00</span></span></span></li>
+              <li><span class="li"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 0 0 4v0a2 2 0 0 1 0 4v2h18v-2a2 2 0 0 1 0-4 2 2 0 0 0 0-4V6H3v2z"/><path d="M14 6v12" stroke-dasharray="2 2"/></svg></span><span class="li-txt"><b>Nonton bareng</b><span>Minggu, 19.30</span></span></span></li>
+              <li><span class="li"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="li-txt"><b>Main ke Kebun Raya</b><span>Senin, 08.00</span></span></span></li>
+            </ul>
+          </div>
+          <div class="fab-dock"><span class="fab ext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span class="label">Buat</span></span></div>
+          <nav class="navbar" aria-hidden="true">
+            <a href="#" aria-current="page" tabindex="-1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span><span class="lbl">Beranda</span></a>
+            <a href="#" tabindex="-1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"/></svg></span><span class="lbl">Jelajah</span></a>
+            <a href="#" tabindex="-1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"/></svg><span class="badge">2</span></span><span class="lbl">Pesan</span></a>
+            <a href="#" tabindex="-1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></svg></span><span class="lbl">Profil</span></a>
+          </nav>
+        </div>
+        <div class="device tablet" aria-hidden="true" inert>
+          <nav class="rail" aria-hidden="true">
+            <div class="rail-top"><span class="fab sm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></div>
+            <div class="rail-nav">
+              <a href="#" aria-current="page" tabindex="-1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span><span class="lbl">Beranda</span></a>
+              <a href="#" tabindex="-1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z"/></svg></span><span class="lbl">Jelajah</span></a>
+              <a href="#" tabindex="-1"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"/></svg><span class="badge dot"></span></span><span class="lbl">Pesan</span></a>
+            </div>
+          </nav>
+          <div class="scroll" style="left:92px;padding:18px"><p class="kicker">Tablet</p><h3 style="font-size:28px">Rail di kiri, isi lebih lega.</h3><p style="color:var(--ink-2);margin-top:8px">Mulai 700px navigation bar bawah otomatis berganti jadi rail kalau pakai kelas <code>.m-app</code>.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="sheet" aria-labelledby="h-sheet">
+      <div class="panel-head"><h2 id="h-sheet">Sheet & dialog</h2></div>
+      <p class="lead2">Bottom sheet bisa ditarik ke bawah untuk ditutup. Side sheet untuk filter atau detail di layar lebar. Modal <code>.full</code> jadi layar penuh di HP.</p>
+      <div class="row">
+        <button class="btn" type="button" data-open-sheet="sh-aksi">Buka bottom sheet</button>
+        <button class="btn ghost" type="button" data-open-sheet="sh-filter">Buka side sheet</button>
+        <button class="btn ghost" type="button" data-open-modal="md-full">Modal layar penuh</button>
+      </div>
+    </section>
+
+    <section class="panel" id="carousel" aria-labelledby="h-carousel">
+      <div class="panel-head"><h2 id="h-carousel">Carousel</h2></div>
+      <p class="lead2">Digeser dengan jari, tombol, atau panah keyboard. Tidak berputar sendiri, jadi tidak ada yang kabur sebelum sempat dibaca.</p>
+      <section class="carousel" data-carousel aria-roledescription="carousel" aria-label="Kategori acara">
+        <div class="carousel-track" tabindex="0">
+          <article class="slide" aria-label="1 dari 5"><div class="slide-body"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3z"/></svg></span><b>Workshop</b><span>Belajar bareng, pulang bawa skill.</span></div></article>
+          <article class="slide" aria-label="2 dari 5"><div class="slide-body"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8a2 2 0 0 0 0 4v0a2 2 0 0 1 0 4v2h18v-2a2 2 0 0 1 0-4 2 2 0 0 0 0-4V6H3v2z"/><path d="M14 6v12" stroke-dasharray="2 2"/></svg></span><b>Nonton bareng</b><span>Tiket patungan, ramai lebih seru.</span></div></article>
+          <article class="slide" aria-label="3 dari 5"><div class="slide-body"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><b>Jalan-jalan</b><span>Taman, kebun raya, kuliner.</span></div></article>
+          <article class="slide" aria-label="4 dari 5"><div class="slide-body"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"/></svg></span><b>Diskusi</b><span>Ngobrol santai topik kuliah.</span></div></article>
+          <article class="slide" aria-label="5 dari 5"><div class="slide-body"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span><b>Relawan</b><span>Kegiatan sosial di sekitar kampus.</span></div></article>
+        </div>
+        <div class="carousel-nav"><div class="carousel-dots"></div><button class="icon-btn" type="button" data-prev aria-label="Sebelumnya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button class="icon-btn" type="button" data-next aria-label="Berikutnya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div>
+      </section>
+    </section>
+
+    <section class="panel" id="cari" aria-labelledby="h-cari">
+      <div class="panel-head"><h2 id="h-cari">Search bar dengan saran</h2></div>
+      <div class="search-bar" data-suggest data-empty="Belum ada yang cocok">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+        <input type="search" role="combobox" aria-expanded="false" aria-controls="sg-kota" aria-autocomplete="list" aria-label="Cari kota" placeholder="Cari kota, misalnya Bogor">
+        <ul class="suggest" id="sg-kota" role="listbox" aria-label="Saran kota" hidden>
+          <li role="option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Bogor</li><li role="option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Bandung</li><li role="option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Jakarta</li><li role="option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Surabaya</li><li role="option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Yogyakarta</li><li role="option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Malang</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel" id="lain" aria-labelledby="h-lain">
+      <div class="panel-head"><h2 id="h-lain">Tooltip, badge, snackbar, toolbar</h2></div>
+      <div class="row">
+        <span class="tip-wrap"><button class="icon-btn" type="button" aria-label="Unduh" aria-describedby="tip-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M4 20h16"/></svg></button><span class="tip" role="tooltip" id="tip-dl">Unduh laporan</span></span>
+        <span class="tip-wrap"><button class="icon-btn" type="button" aria-label="Simpan" aria-describedby="tip-bm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg></button><span class="tip below" role="tooltip" id="tip-bm">Simpan untuk nanti</span></span>
+        <span class="icon-btn has-badge" role="img" aria-label="Notifikasi, 3 baru"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="badge">3</span></span>
+        <span class="icon-btn has-badge" role="img" aria-label="Pesan, ada yang baru"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"/></svg><span class="badge dot"></span></span>
+        <span class="badge blue">Baru</span>
+      </div>
+      <div class="row">
+        <button class="btn" type="button" data-snackbar="Acara diarsipkan" data-snackbar-action="Batalkan">Arsipkan (dengan aksi)</button>
+        <button class="btn ghost" type="button" data-snackbar="Tersimpan">Snackbar singkat</button>
+      </div>
+      <div class="row">
+        <div class="float-bar" role="toolbar" aria-label="Aksi item terpilih">
+          <span class="fb-count">3 dipilih</span><span class="sep" aria-hidden="true"></span>
+          <span class="tip-wrap"><button class="icon-btn" type="button" aria-label="Arsipkan" aria-describedby="tip-ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1.5"/><path d="M5 9v10h14V9"/><path d="M10 13h4"/></svg></button><span class="tip" role="tooltip" id="tip-ar">Arsipkan</span></span>
+          <span class="tip-wrap"><button class="icon-btn" type="button" aria-label="Bagikan" aria-describedby="tip-sh2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="M8.2 10.8l7.6-4.4M8.2 13.2l7.6 4.4"/></svg></button><span class="tip" role="tooltip" id="tip-sh2">Bagikan</span></span>
+          <span class="tip-wrap"><button class="icon-btn" type="button" aria-label="Hapus" aria-describedby="tip-del"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></svg></button><span class="tip" role="tooltip" id="tip-del">Hapus</span></span>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<dialog class="sheet" id="sh-aksi" aria-labelledby="sh-aksi-t">
+  <button class="sheet-handle" type="button" data-close aria-label="Tutup"></button>
+  <div class="sheet-head"><h2 id="sh-aksi-t">Bagikan acara</h2></div>
+  <div class="sheet-body">
+    <ul class="list">
+      <li><button class="li" type="button" data-close data-snackbar="Tautan disalin"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span><span class="li-txt"><b>Salin tautan</b></span></button></li>
+      <li><button class="li" type="button" data-close data-snackbar="Dikirim ke chat"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5z"/></svg></span><span class="li-txt"><b>Kirim ke chat</b><span>Teman di aplikasi</span></span></button></li>
+      <li><button class="li" type="button" data-close data-snackbar="Disimpan"><span class="li-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg></span><span class="li-txt"><b>Simpan</b></span></button></li>
+    </ul>
+  </div>
+</dialog>
+
+<dialog class="sheet" id="sh-bahasa" aria-labelledby="sh-bahasa-t">
+  <button class="sheet-handle" type="button" data-close aria-label="Tutup"></button>
+  <div class="sheet-head"><h2 id="sh-bahasa-t">Bahasa</h2></div>
+  <div class="sheet-body"><div class="btn-group block" role="group" aria-label="Bahasa" data-btn-group="single"><button type="button" aria-pressed="true">Indonesia</button><button type="button" aria-pressed="false">English</button></div></div>
+  <div class="sheet-foot"><button class="btn" type="button" data-close>Selesai</button></div>
+</dialog>
+
+<dialog class="side-sheet" id="sh-filter" aria-labelledby="sh-filter-t">
+  <div class="sheet-head"><h2 id="sh-filter-t">Filter</h2><button class="icon-btn" type="button" data-close aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="sheet-body" style="display:grid;gap:22px">
+    <div><span class="label-sm">Kategori</span><div class="chip-set"><button class="chip-btn" type="button" aria-pressed="true">Workshop</button><button class="chip-btn" type="button" aria-pressed="false">Nonton</button><button class="chip-btn" type="button" aria-pressed="false">Olahraga</button></div></div>
+    <div class="field"><label for="f-tgl">Tanggal</label>
+            <div class="picker" data-datepicker><input class="input" id="f-tgl" readonly placeholder="Pilih tanggal"><button type="button" class="picker-btn" aria-label="Buka kalender untuk tanggal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><input type="hidden" name="f_tanggal"></div></div>
+    <div class="slider-field"><div class="top"><label for="f-jarak">Jarak maksimal</label><output for="f-jarak">5 km</output></div><input class="slider" id="f-jarak" type="range" min="1" max="30" value="5" data-format="{v} km"></div>
+  </div>
+  <div class="sheet-foot"><button class="btn ghost" type="button" data-close>Atur ulang</button><button class="btn" type="button" data-close data-snackbar="Filter dipakai">Terapkan</button></div>
+</dialog>
+
+<dialog class="modal full" id="md-full" aria-labelledby="md-full-t">
+  <div class="m-body">
+    <button class="icon-btn m-close" type="button" data-close aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <img src="../mascot/happy-420.webp" alt="" width="337" height="420">
+    <h2 id="md-full-t">Selamat datang!</h2>
+    <p>Di HP modal ini memenuhi layar, di layar lebar tetap jadi kotak di tengah.</p>
+  </div>
+  <div class="m-foot"><button class="btn" type="button" data-close>Mulai</button></div>
+</dialog>
+
+<div class="toast" role="status" aria-live="polite" data-toast>
+  <img src="../mascot/head-happy-120.webp" alt="" width="40" height="39" />
+  <span data-toast-text></span>
+</div>
+
+
+<script type="module">
+  import { initApp } from "../js/app.js";
+  window.fy = initApp();
+</script>
+</body>
+</html>

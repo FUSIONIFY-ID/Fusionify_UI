@@ -49,10 +49,77 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
+  /* ---- Token tema (berubah di mode gelap). Komponen WAJIB memakai ini, bukan #fff / var(--ink) langsung ---- */
+  --card: #ffffff;               /* permukaan kartu, input, gelembung */
+  --field: #ffffff;              /* latar input form */
+  --surface-2: #dcecff;          /* hover tombol ikon, baris aktif */
+  --edge: var(--ink);            /* garis tepi stiker 2px */
+  --edge-shadow: var(--ink);     /* bayangan pejal stiker */
+  --text-blue: #0d6cd7;          /* teks biru (kicker, angka besar) */
+  --text-blue-deep: #0261cd;     /* teks tautan */
+  --inverse-bg: #0b0f1a;         /* label gelap di atas halaman terang (kursor, skip link) */
+  --inverse-fg: #ffffff;
+  --inverse-accent: #8cc0ff;    /* tombol aksi di atas label gelap (snackbar) */
+  --nav-glass: rgba(255, 255, 255, 0.82);
+  --hero-glow: #dcedff;          /* cahaya radial di hero */
+  --seal-tint: #d8eaff;          /* segel di belakang maskot */
+  --danger: #b4232c; --danger-bg: #fde8ea;
+  --placeholder: #707a8c;
+
   /* Bayangan */
   --shadow: 0 1px 0 rgba(13, 108, 215, 0.06), 0 12px 32px -14px rgba(11, 15, 26, 0.18);
-  --shadow-pop: 0 3px 0 var(--ink);      /* tombol */
-  --shadow-sticker: 0 6px 0 var(--ink);  /* kartu bergaya stiker */
+  --shadow-pop: 0 3px 0 var(--edge-shadow);      /* tombol */
+  --shadow-sticker: 0 6px 0 var(--edge-shadow);  /* kartu bergaya stiker */
 
   color-scheme: light;
+}
+
+/* =========================================================
+   MODE GELAP
+   - Otomatis mengikuti sistem, kecuali pengguna memilih sendiri (html[data-theme]).
+   - Web yang ingin tetap terang: <html data-theme="light"> dan jangan pasang tombol tema.
+   - Biru FUSIONIFY (--blue, --blue-deep, --blue-light) TIDAK berubah sebagai warna isi;
+     teks biru memakai --text-blue / --text-blue-deep yang dibuat lebih terang.
+   ========================================================= */
+:root[data-theme="dark"] {
+  --ink: #eaf3ff; --ink-2: #c3d4ea; --ink-3: #9db2cf;
+  --paper: #071022; --surface: #0c1a33; --line: #1f3459; --white: #0f2040;
+  --card: #10203f; --field: #0b1830; --surface-2: #17305a;
+  --edge: #2e5592; --edge-shadow: #02060f;
+  --text-blue: #8cc0ff; --text-blue-deep: #a9d0ff;
+  --inverse-bg: #eaf3ff; --inverse-fg: #071022; --inverse-accent: #0261cd;
+  --nav-glass: rgba(10, 22, 44, 0.82);
+  --hero-glow: #0f2a55; --seal-tint: #15315c;
+  --go: #7fe0a6; --go-bg: #0f3324; --beta: #ffd27a; --beta-bg: #3a2a08;
+  --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
+  --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
+  --placeholder: #8597b3; --footer-top: #1f3459;
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #eaf3ff; --ink-2: #c3d4ea; --ink-3: #9db2cf;
+    --paper: #071022; --surface: #0c1a33; --line: #1f3459; --white: #0f2040;
+    --card: #10203f; --field: #0b1830; --surface-2: #17305a;
+    --edge: #2e5592; --edge-shadow: #02060f;
+    --text-blue: #8cc0ff; --text-blue-deep: #a9d0ff;
+    --inverse-bg: #eaf3ff; --inverse-fg: #071022; --inverse-accent: #0261cd;
+    --nav-glass: rgba(10, 22, 44, 0.82);
+    --hero-glow: #0f2a55; --seal-tint: #15315c;
+    --go: #7fe0a6; --go-bg: #0f3324; --beta: #ffd27a; --beta-bg: #3a2a08;
+    --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
+    --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
+    --placeholder: #8597b3; --footer-top: #1f3459;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
+    color-scheme: dark;
+  }
+}
+
+/* Tampilkan elemen hanya di tema tertentu (mis. logo terang vs logo putih) */
+:root[data-theme="dark"] .only-light { display: none !important; }
+:root[data-theme="light"] .only-dark, :root:not([data-theme]) .only-dark { display: none !important; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .only-light { display: none !important; }
+  :root:not([data-theme]) .only-dark { display: revert !important; }
 }

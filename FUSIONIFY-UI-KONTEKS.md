@@ -25,14 +25,21 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Lihat **`demo/index.html
 | `css/base.css` | Reset, tipografi, `.wrap`, `.kicker`, `.h-hero`, `.h-sec`, `.lead`, `.prose` |
 | `css/components.css` | Tombol, chip status, nav, menu HP, seksi, kartu stiker, statistik, kartu karya, foto bersegel, gelembung maskot, panggung maskot, marquee partner, FAQ, gelombang, footer, toast, kursor, transisi halaman, status reveal, jeda `.idle` |
 | `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment` |
-| `css/fusionify.css` | Satu file yang mengimpor semuanya |
+| `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.progress`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, `.btn.danger`, `.sample-note` |
+| `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar) |
+| `css/fusionify.css` | Satu file yang mengimpor tokens, base, components, product, controls (tanpa app.css) |
 | `js/motion.js` | `initFusionify()`: smooth scroll, nav, menu HP, kursor, reveal, angka, magnet, salin + toast, transisi halaman, suara, jeda di luar layar |
+| `js/app.js` | `initApp()` untuk halaman aplikasi: tema, sidebar HP, dropdown, modal, tab, tampil/sembunyi password, meter kekuatan password, validasi form (`data-validate`), pilih semua baris, toast. Tanpa GSAP |
+| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. Event: `fy:change`, `fy:remove`, `fy:select` |
+| `js/theme.js` | Mode terang/gelap (`initTheme`, `setTheme`). Dipanggil otomatis oleh `motion.js` dan `app.js` |
 | `js/seal.js` | `seal()` dan `SEAL_PATH`: bentuk segel 12 lekukan |
 | `snippets/head-script.html` | Skrip kecil wajib di `<head>` |
 | `snippets/sprite.html` | Sprite SVG (clip-path segel, simbol segel) setelah `<body>` |
 | `snippets/body-parts.html` | Kursor, toast, tirai transisi sebelum `</body>` |
+| `snippets/pwa-head.html`, `snippets/manifest.webmanifest` | Tambahan `<head>` dan manifest untuk web HP, PWA, dan aplikasi WebView/Capacitor |
+| `tokens/` | Token untuk **aplikasi native**: `tokens.json`, Flutter, SwiftUI, Jetpack Compose, React Native, plus huruf TTF statis. Dibuat dari `css/tokens.css` dengan `node scripts/build-tokens.mjs`. Panduan di `tokens/README.md` |
 | `fonts/` | Afacad Flux, Sansation, Caveat, Exo 2 (woff2, OFL) |
-| `brand/` | Segel Fi, wordmark (SVG), emblem; `brand/kit/` logo horizontal, vertikal, legacy |
+| `brand/` | Segel Fi, wordmark (SVG), emblem; `brand/kit/` logo horizontal, vertikal, legacy; `brand/app-icons/` ikon aplikasi (192, 512, maskable, apple-touch-icon) |
 | `mascot/` | Maskot badan penuh, kepala, papan, stiker bot |
 | `badge/` | Badge "Sebuah produk dari FUSIONIFY" (ID/EN, terang/gelap) |
 | `demo/index.html` | Halaman contoh semua komponen |
@@ -40,6 +47,11 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Lihat **`demo/index.html
 | `CLAUDE.md`, `GEMINI.md`, `QWEN.md`, `.gemini/`, `.qwen/`, `.cursor/rules/`, `.github/copilot-instructions.md`, `.aider.conf.yml` | Penunjuk ke file ini untuk masing-masing AI agent |
 | `templates/landing-produk.html` | Template landing web produk lengkap. Ganti bagian bertanda `GANTI` |
 | `templates/404.html` | Template halaman tidak ditemukan dengan maskot confused |
+| `templates/auth/masuk.html`, `daftar.html`, `lupa-password.html`, `atur-ulang-password.html` | Halaman masuk, daftar, lupa password, atur ulang password. Validasi dan keadaan berhasil sudah jalan; sambungkan ke backend sendiri |
+| `templates/dashboard.html` | Dashboard pengguna (ringkasan, grafik, pesanan, aktivitas) |
+| `templates/komponen.html` | Katalog semua komponen kontrol dengan contoh hidup |
+| `templates/app-mobile.html` | Template aplikasi HP: app bar, pencarian, chip filter, carousel, list, FAB, navigation bar bawah (jadi rail di tablet), bottom sheet |
+| `templates/admin.html` | Dashboard admin (KPI, grafik, tabel pengguna + filter + pilih semua + hapus dengan konfirmasi, pengaturan bertab, log) |
 
 ## Cara memakai di proyek baru atau lama
 
@@ -66,8 +78,34 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - **Logo**: pakai file di `brand/`. Jangan mengetik "FUSIONIFY" dengan font sebagai pengganti logo. Web produk memakai logonya sendiri, sistem desainnya tetap kit ini.
 - **Maskot**: ganti ekspresi dengan menukar gambar badan penuh. Jangan menempel kepala di badan lain.
 - Hiasan SVG yang sengaja lebih besar dari wadahnya wajib kelas `.fx-oversize` (atau `max-width: none`).
-- Gaya stiker: garis 2px `--ink`, bayangan pejal ke bawah, sudut besar.
+- Gaya stiker: garis 2px `--edge`, bayangan pejal ke bawah (`--edge-shadow`), sudut besar.
 - Jangan menyalin momen khas fusionify.id (segel menutup hero, footer malam Bogor) apa adanya ke web produk. Rakit momen sendiri dari bagian yang sama.
+
+## Mode gelap (wajib dijaga)
+
+- Semua warna komponen memakai token tema: `--card`, `--field`, `--surface`, `--surface-2`, `--edge` (garis stiker), `--edge-shadow` (bayangan pejal), `--ink`/`--ink-2`/`--ink-3` (teks), `--text-blue`/`--text-blue-deep` (teks biru), `--inverse-bg`/`--inverse-fg`, `--danger`. **Jangan menulis `#fff` atau `var(--ink)` untuk latar, garis, atau bayangan.** `#fff` hanya untuk teks/ikon di atas biru.
+- Bawaan: ikut pengaturan sistem. Pilihan pengguna disimpan (`fy-theme`) lewat tombol `[data-theme-toggle]`. Web yang ingin selalu terang: `<html data-theme="light" data-theme-lock>`.
+- Gambar yang beda per tema (mis. wordmark biru vs putih): kelas `.only-light` dan `.only-dark`.
+- Cek kontras dan tampilan di **kedua** tema sebelum selesai.
+
+## Halaman aplikasi (dashboard, admin, masuk)
+
+- Muat `css/app.css` setelah `fusionify.css`, dan panggil `initApp()` dari `js/app.js` (bukan `initFusionify`). Aplikasi tidak memakai smooth scroll, kursor segel, atau reveal: harus terasa cepat dan tenang.
+- Data di template dashboard adalah **contoh** dan diberi label `.sample-note` "Data contoh". Ganti dengan data asli dari sistem, lalu hapus labelnya. Jangan pernah menampilkan angka contoh di aplikasi yang sudah dipakai orang.
+- Tabel lebar wajib di `.table-wrap` (sudah `position: relative`, `tabindex="0" role="region" aria-label`). Teks `.sr-only` di dalam elemen yang bisa digeser butuh pembungkus `position: relative`, kalau tidak halaman ikut melebar di HP.
+- Form: pesan error muncul saat kirim atau saat meninggalkan kolom, dan hilang saat pengguna mengetik perbaikannya. Jangan menghapus pesan error saat blur (tata letak bergeser tepat saat pengguna mengklik).
+- Form masuk/daftar diletakkan di bagian atas, bukan di tengah vertikal, supaya tidak loncat saat pesan error berubah.
+- Login dengan Google hanya dipasang kalau OAuth-nya benar-benar tersedia.
+
+## Aplikasi HP (web HP, PWA, iOS, Android)
+
+- Aplikasi yang isinya HTML (PWA, Capacitor, WebView): mulai dari `templates/app-mobile.html`, tempel `snippets/pwa-head.html`, pakai `initApp()` (bukan `initFusionify`).
+- Aplikasi native (Flutter, SwiftUI, Compose, React Native): CSS tidak dipakai. Ambil token dari `tokens/` dan bangun ulang komponennya dengan aturan yang sama. Jangan menulis hex sendiri di kode native.
+- Target sentuh minimal 44px. Elemen yang menempel di tepi layar wajib memakai `env(safe-area-inset-*)` (komponen kit sudah).
+- Di layar sentuh semua input minimal 16px (sudah di `base.css`) supaya iOS tidak memperbesar halaman saat mengetik.
+- Satu FAB per layar. Navigation bar bawah 3 sampai 5 tujuan; lebih dari itu pakai drawer.
+- Carousel tidak boleh berputar sendiri. Bottom sheet harus bisa ditutup dengan tarik ke bawah, tombol, dan Esc/tombol kembali.
+- Bayangan stiker di native: offset ke bawah tanpa blur, bukan `elevation`.
 
 ## Aturan isi (wajib)
 
@@ -94,7 +132,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 
 ## QA (wajib sebelum selesai)
 
-Cek di **HP** 375×667 dan 390×844, **tablet** 768×1024, 820×1180, 1024×768, **desktop** 1366×768, 1440×900, 1920×1080.
+Cek di **HP** 375×667 dan 390×844 (juga dengan emulasi layar sentuh), **tablet** 768×1024, 820×1180, 1024×768, **desktop** 1366×768, 1440×900, 1920×1080.
 
 - Tidak ada scroll horizontal atau elemen keluar layar.
 - Tidak ada teks bertabrakan atau terpotong.
@@ -133,7 +171,7 @@ Identitasnya dibangun dari aset FUSIONIFY sendiri: segel bergelombang di logo, t
 1. **Maskot adalah pemandu.** Dia bereaksi (malu saat didekati, mengedip saat dicolek, ngambek kalau dicolek terus, ngantuk kalau ditinggal), dan ekspresinya mengikuti status produk.
 2. **Jujur itu bagian dari desain.** Status produk selalu terlihat sebagai chip berwarna. Tidak ada angka atau testimoni karangan.
 3. **Hidup tapi ringan.** Hanya `transform` dan `opacity` yang dianimasikan. Animasi berhenti saat tidak terlihat dan mati total untuk `prefers-reduced-motion`.
-4. **Tegas seperti stiker.** Garis tepi 2px warna tinta, bayangan pejal ke bawah, sudut bulat besar.
+4. **Tegas seperti stiker.** Garis tepi 2px (`--edge`), bayangan pejal (`--edge-shadow`) ke bawah, sudut bulat besar.
 
 ## Web company vs web produk
 
@@ -163,6 +201,12 @@ Chip status: hijau `go` (aktif/live), kuning `beta`, oranye `wip` (dalam pengemb
 
 Jangan menulis warna hex baru di proyek. Kalau butuh warna baru, tambahkan dulu ke `css/tokens.css` di kit ini.
 
+## Mode gelap
+
+Latar malam FUSIONIFY (`#071022`), kartu biru tua (`#10203F`), teks terang (`#EAF3FF`), garis stiker biru redup (`#2E5592`) dengan bayangan pejal hampir hitam. Biru FUSIONIFY sebagai warna isi (tombol, seksi biru, KPI biru) **tidak berubah**; teks biru dibuat lebih terang (`#8CC0FF`) supaya terbaca. Chip status punya pasangan warna gelapnya sendiri. Gaya stiker tetap: garis 2px dan bayangan pejal ke bawah.
+
+Bawaan mengikuti sistem; tombol bulan/matahari menyimpan pilihan pengguna.
+
 ## Huruf
 
 Semua berlisensi SIL OFL, di-host sendiri dari `fonts/` (subset latin, `font-display: swap`).
@@ -188,7 +232,7 @@ Semua berlisensi SIL OFL, di-host sendiri dari `fonts/` (subset latin, `font-dis
 - **Titik i**: bulatan `--blue-light` di akhir judul hero (`<span class="dot">.</span>`) dan sebagai titik kursor.
 - **Kicker**: label kecil kapital Exo 2 dengan titik biru muda di depannya, di atas setiap judul seksi.
 - **Gelombang**: pembatas antar seksi yang warnanya berbeda.
-- **Gaya stiker**: `.card`, `.stat`, `.btn`, `.toast` semuanya bergaris 2px tinta dengan bayangan pejal ke bawah.
+- **Gaya stiker**: `.card`, `.stat`, `.btn`, `.toast` semuanya bergaris 2px `--edge` dengan bayangan pejal `--edge-shadow` ke bawah.
 
 ## Maskot
 
@@ -221,6 +265,23 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Tombol salin (`data-copy`) dengan notifikasi maskot (toast, hilang setelah 2,6 detik).
 - Transisi halaman: segel biru membesar menutup layar, kepala mengedip, lalu menyusut di halaman baru.
 - Suara disintesis Web Audio, **mati secara bawaan**, dinyalakan lewat tombol speaker.
+
+## Aplikasi (dashboard, admin, masuk)
+
+- Sidebar putih/biru tua bergaris stiker; menu aktif berupa kapsul biru dengan bayangan pejal. Di HP sidebar menjadi laci yang meluncur dari kiri.
+- Kartu KPI bergaya stiker; satu KPI utama boleh biru penuh. Grafik sederhana dengan gradasi biru muda ke biru.
+- Halaman masuk/daftar: panel biru dengan segel besar dan maskot di kiri (wink untuk masuk, happy untuk daftar, confused untuk lupa password, glasses untuk atur ulang), form di kanan. Di HP panel biru menyusut jadi kepala kecil.
+- Modal konfirmasi berbahaya memakai maskot confused dan tombol `.btn.danger`.
+- Gerak di aplikasi tenang: tanpa smooth scroll, kursor segel, atau reveal. Interaksi cukup transisi pendek.
+
+## Aplikasi HP
+
+- App bar di atas dengan judul besar (Afacad Flux) yang mengecil saat digulir. Navigation bar bawah bergaris stiker di atasnya; tujuan aktif berupa kapsul biru. Mulai 700px berganti jadi rail di kiri.
+- FAB biru bergaya stiker (sudut 22px, bayangan pejal), satu per layar, melayang di atas navigation bar dan mengecil jadi ikon saat digulir.
+- Bottom sheet dengan pegangan di atas, bisa ditarik ke bawah untuk menutup. Picker tanggal/jam muncul dari bawah di HP dan sebagai popover di layar lebar.
+- Loading memakai segel FUSIONIFY yang berputar (`.spinner`), skeleton biru muda untuk isi yang sedang dimuat.
+- Snackbar berlatar gelap (terang di mode gelap) dengan tombol aksi seperti "Batalkan".
+- Aplikasi native memakai token dari `tokens/` dengan tampilan yang sama: garis 2px, bayangan pejal tanpa blur, huruf yang sama.
 
 ## Layout
 
@@ -292,12 +353,79 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
+  /* ---- Token tema (berubah di mode gelap). Komponen WAJIB memakai ini, bukan #fff / var(--ink) langsung ---- */
+  --card: #ffffff;               /* permukaan kartu, input, gelembung */
+  --field: #ffffff;              /* latar input form */
+  --surface-2: #dcecff;          /* hover tombol ikon, baris aktif */
+  --edge: var(--ink);            /* garis tepi stiker 2px */
+  --edge-shadow: var(--ink);     /* bayangan pejal stiker */
+  --text-blue: #0d6cd7;          /* teks biru (kicker, angka besar) */
+  --text-blue-deep: #0261cd;     /* teks tautan */
+  --inverse-bg: #0b0f1a;         /* label gelap di atas halaman terang (kursor, skip link) */
+  --inverse-fg: #ffffff;
+  --inverse-accent: #8cc0ff;    /* tombol aksi di atas label gelap (snackbar) */
+  --nav-glass: rgba(255, 255, 255, 0.82);
+  --hero-glow: #dcedff;          /* cahaya radial di hero */
+  --seal-tint: #d8eaff;          /* segel di belakang maskot */
+  --danger: #b4232c; --danger-bg: #fde8ea;
+  --placeholder: #707a8c;
+
   /* Bayangan */
   --shadow: 0 1px 0 rgba(13, 108, 215, 0.06), 0 12px 32px -14px rgba(11, 15, 26, 0.18);
-  --shadow-pop: 0 3px 0 var(--ink);      /* tombol */
-  --shadow-sticker: 0 6px 0 var(--ink);  /* kartu bergaya stiker */
+  --shadow-pop: 0 3px 0 var(--edge-shadow);      /* tombol */
+  --shadow-sticker: 0 6px 0 var(--edge-shadow);  /* kartu bergaya stiker */
 
   color-scheme: light;
+}
+
+/* =========================================================
+   MODE GELAP
+   - Otomatis mengikuti sistem, kecuali pengguna memilih sendiri (html[data-theme]).
+   - Web yang ingin tetap terang: <html data-theme="light"> dan jangan pasang tombol tema.
+   - Biru FUSIONIFY (--blue, --blue-deep, --blue-light) TIDAK berubah sebagai warna isi;
+     teks biru memakai --text-blue / --text-blue-deep yang dibuat lebih terang.
+   ========================================================= */
+:root[data-theme="dark"] {
+  --ink: #eaf3ff; --ink-2: #c3d4ea; --ink-3: #9db2cf;
+  --paper: #071022; --surface: #0c1a33; --line: #1f3459; --white: #0f2040;
+  --card: #10203f; --field: #0b1830; --surface-2: #17305a;
+  --edge: #2e5592; --edge-shadow: #02060f;
+  --text-blue: #8cc0ff; --text-blue-deep: #a9d0ff;
+  --inverse-bg: #eaf3ff; --inverse-fg: #071022; --inverse-accent: #0261cd;
+  --nav-glass: rgba(10, 22, 44, 0.82);
+  --hero-glow: #0f2a55; --seal-tint: #15315c;
+  --go: #7fe0a6; --go-bg: #0f3324; --beta: #ffd27a; --beta-bg: #3a2a08;
+  --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
+  --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
+  --placeholder: #8597b3; --footer-top: #1f3459;
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #eaf3ff; --ink-2: #c3d4ea; --ink-3: #9db2cf;
+    --paper: #071022; --surface: #0c1a33; --line: #1f3459; --white: #0f2040;
+    --card: #10203f; --field: #0b1830; --surface-2: #17305a;
+    --edge: #2e5592; --edge-shadow: #02060f;
+    --text-blue: #8cc0ff; --text-blue-deep: #a9d0ff;
+    --inverse-bg: #eaf3ff; --inverse-fg: #071022; --inverse-accent: #0261cd;
+    --nav-glass: rgba(10, 22, 44, 0.82);
+    --hero-glow: #0f2a55; --seal-tint: #15315c;
+    --go: #7fe0a6; --go-bg: #0f3324; --beta: #ffd27a; --beta-bg: #3a2a08;
+    --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
+    --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
+    --placeholder: #8597b3; --footer-top: #1f3459;
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
+    color-scheme: dark;
+  }
+}
+
+/* Tampilkan elemen hanya di tema tertentu (mis. logo terang vs logo putih) */
+:root[data-theme="dark"] .only-light { display: none !important; }
+:root[data-theme="light"] .only-dark, :root:not([data-theme]) .only-dark { display: none !important; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .only-light { display: none !important; }
+  :root:not([data-theme]) .only-dark { display: revert !important; }
 }
 
 ```
@@ -340,7 +468,7 @@ p { margin: 0; }
 
 .wrap { width: min(100% - var(--gut) * 2, var(--max)); margin-inline: auto; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: fixed; left: 12px; top: -60px; z-index: 200; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 10px; text-decoration: none; }
+.skip { position: fixed; left: 12px; top: -60px; z-index: 200; background: var(--inverse-bg); color: var(--inverse-fg); padding: 10px 14px; border-radius: 10px; text-decoration: none; }
 .skip:focus { top: 12px; }
 .nowrap { white-space: nowrap; }
 
@@ -351,7 +479,7 @@ p { margin: 0; }
 .kicker {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--f-num); font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--blue);
+  color: var(--text-blue);
 }
 .kicker::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.22); }
 
@@ -367,7 +495,10 @@ p { margin: 0; }
 .prose h3 { font-size: 26px; color: var(--ink); margin: 28px 0 10px; }
 .prose p, .prose ul, .prose ol { margin: 0 0 16px; }
 .prose ul { padding-left: 1.2em; } .prose li { margin-bottom: 8px; }
-.prose a { color: var(--blue-deep); overflow-wrap: anywhere; }
+.prose a { color: var(--text-blue-deep); overflow-wrap: anywhere; }
+
+/* Pergantian tema: warna berpindah halus sebentar, hanya saat tombol ditekan */
+.theme-switching, .theme-switching *, .theme-switching *::before, .theme-switching *::after { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important; }
 
 /* Gerak dimatikan: hormati pilihan pengguna. Konten yang biasanya muncul lewat animasi WAJIB langsung tampil. */
 @media (prefers-reduced-motion: reduce) {
@@ -397,6 +528,14 @@ p { margin: 0; }
   html { scrollbar-color: var(--blue) var(--surface); scrollbar-width: thin; }
 }
 
+/* Layar sentuh (HP, tablet, aplikasi WebView)
+   - iOS memperbesar halaman kalau teks input di bawah 16px, jadi di layar sentuh semua input minimal 16px
+   - touch-action: manipulation menghapus jeda ketuk ganda di tombol dan tautan */
+a, button, [role="button"], label, summary { touch-action: manipulation; }
+@media (hover: none) and (pointer: coarse) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea { font-size: 16px !important; }
+}
+
 ```
 
 ---
@@ -415,21 +554,33 @@ p { margin: 0; }
 .btn {
   --bg: var(--blue); --fg: #fff;
   position: relative; display: inline-flex; align-items: center; gap: 10px;
-  padding: 14px 22px; border-radius: 999px; border: 2px solid var(--ink);
+  padding: 14px 22px; border-radius: 999px; border: 2px solid var(--edge);
   background: var(--bg); color: var(--fg); text-decoration: none; font-weight: 700; font-size: 16px;
   box-shadow: var(--shadow-pop); cursor: pointer;
   transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), background 0.2s;
 }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--ink); }
-.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
-.btn.ghost { --bg: #fff; --fg: var(--ink); }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--edge-shadow); }
+.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
+.btn.ghost { --bg: var(--card); --fg: var(--ink); }
 .btn.sm { padding: 10px 18px; font-size: 15px; }
 .btn svg { width: 18px; height: 18px; }
 
 /* Tombol ikon bulat (suara, menu) */
 .icon-btn { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 0; cursor: pointer; transition: transform 0.3s var(--spring), background 0.2s; }
-.icon-btn:hover { transform: scale(1.08); background: #dcecff; }
+.icon-btn:hover { transform: scale(1.08); background: var(--surface-2); }
 .icon-btn svg { width: 20px; height: 20px; }
+
+/* =========================================================
+   TOMBOL TEMA (dipakai di web publik dan aplikasi)
+   ========================================================= */
+.theme-btn { color: var(--ink-2); }
+.theme-btn .sun { display: none; }
+:root[data-theme="dark"] .theme-btn .sun { display: block; }
+:root[data-theme="dark"] .theme-btn .moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .theme-btn .sun { display: block; }
+  :root:not([data-theme]) .theme-btn .moon { display: none; }
+}
 
 /* =========================================================
    CHIP STATUS · status produk WAJIB jujur
@@ -457,7 +608,7 @@ p { margin: 0; }
 }
 .nav.scrolled, html:not(.js) .nav, .fx-off .nav {
   top: 14px; padding: 8px 8px 8px 14px;
-  background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  background: var(--nav-glass); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
   border-color: rgba(13, 108, 215, 0.14);
   box-shadow: 0 10px 30px -18px rgba(11, 15, 26, 0.35);
 }
@@ -468,15 +619,15 @@ p { margin: 0; }
 .brand-word { width: auto; height: 19px; }
 .nav-links { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
 .nav-links a { display: block; padding: 8px 14px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 15px; color: var(--ink-2); transition: background 0.2s, color 0.2s; }
-.nav-links a:hover, .nav-links a[aria-current="true"], .nav-links a[aria-current="page"] { background: var(--surface); color: var(--blue-deep); }
+.nav-links a:hover, .nav-links a[aria-current="true"], .nav-links a[aria-current="page"] { background: var(--surface); color: var(--text-blue-deep); }
 .nav-tools { display: flex; align-items: center; gap: 6px; }
 .nav .btn { padding: 10px 18px; font-size: 15px; }
 .lang { display: inline-flex; align-items: center; gap: 4px; height: 42px; font-family: var(--f-num); font-size: 13px; text-decoration: none; padding: 0 14px; border-radius: 999px; background: var(--surface); color: var(--ink-3); transition: background 0.2s; }
-.lang:hover { background: #dcecff; }
-.lang b { font-weight: 600; } .lang b.on { color: var(--blue-deep); font-weight: 800; } .lang i { font-style: normal; opacity: 0.4; }
+.lang:hover { background: var(--surface-2); }
+.lang b { font-weight: 600; } .lang b.on { color: var(--text-blue-deep); font-weight: 800; } .lang i { font-style: normal; opacity: 0.4; }
 .sound-btn { color: var(--ink-3); }
 .sound-btn .w1, .sound-btn .w2 { opacity: 0; transition: opacity 0.2s; }
-.sound-btn[aria-pressed="true"] { color: var(--blue); }
+.sound-btn[aria-pressed="true"] { color: var(--text-blue); }
 .sound-btn[aria-pressed="true"] .x { opacity: 0; }
 .sound-btn[aria-pressed="true"] .w1 { opacity: 1; animation: fy-wave 1.2s ease-in-out infinite; }
 .sound-btn[aria-pressed="true"] .w2 { opacity: 1; animation: fy-wave 1.2s ease-in-out -0.4s infinite; }
@@ -508,22 +659,22 @@ p { margin: 0; }
 .sec.blue { background: var(--blue); color: #fff; }
 .sec.blue .kicker { color: #fff; }
 .sec.blue .lead { color: #f2f8ff; }
-.page-hero { padding: 150px 0 60px; background: radial-gradient(120% 80% at 80% 0%, #dcedff 0%, var(--paper) 60%); }
+.page-hero { padding: 150px 0 60px; background: radial-gradient(120% 80% at 80% 0%, var(--hero-glow) 0%, var(--paper) 60%); }
 .page-hero h1 { font-size: clamp(48px, 8vw, 110px); margin: 16px 0 20px; }
 .crumbs { display: flex; gap: 8px; font-size: 14px; color: var(--ink-3); }
-.crumbs a { color: var(--blue-deep); }
+.crumbs a { color: var(--text-blue-deep); }
 
 /* =========================================================
    KARTU STIKER · garis 2px tinta, bayangan pejal, sudut besar
    ========================================================= */
-.card { position: relative; padding: 26px; border-radius: var(--r-l); background: #fff; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-sticker); }
+.card { position: relative; padding: 26px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); }
 .card.blue { background: var(--blue); color: #fff; }
 .card.tint { background: var(--surface); }
 .card h3 { font-size: 26px; margin-bottom: 6px; }
 .card p { font-size: 15px; color: var(--ink-2); }
 .card.blue p { color: #f2f8ff; }
 a.card { text-decoration: none; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
-a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
+a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shadow); }
 .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 @media (max-width: 1000px) { .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .grid-3 > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
@@ -531,7 +682,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 
 /* Angka besar (hanya angka yang bisa dibuktikan) */
 .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.stat { position: relative; padding: 26px; border-radius: var(--r-l); background: #fff; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-sticker); min-height: 230px; display: grid; align-content: space-between; gap: 18px; overflow: hidden; }
+.stat { position: relative; padding: 26px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); min-height: 230px; display: grid; align-content: space-between; gap: 18px; overflow: hidden; }
 .stat:first-child { grid-column: span 2; }
 .stat:nth-child(3n+2) { background: var(--blue); color: #fff; }
 /* Teks terang di atas biru wajib kontras >= 4.5:1, jadi tanpa opacity */
@@ -545,14 +696,14 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 /* Kartu karya / produk dengan cover 1600:848 (screenshot asli; ilustrasi wajib diberi label) */
 .works { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 24px; }
 .work { text-decoration: none; display: grid; gap: 14px; align-content: start; }
-.work .cover { position: relative; border-radius: var(--r-l); overflow: hidden; border: 2px solid var(--ink); aspect-ratio: 1600 / 848; background: var(--surface); }
+.work .cover { position: relative; border-radius: var(--r-l); overflow: hidden; border: 2px solid var(--edge); aspect-ratio: 1600 / 848; background: var(--surface); }
 .work .cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
 .work:hover .cover img { transform: scale(1.06); }
 .work .meta { display: flex; justify-content: space-between; gap: 12px; align-items: flex-end; }
 .work .meta .chip { margin-bottom: 8px; }
 .work h3 { font-size: clamp(26px, 2.4vw, 34px); margin-bottom: 4px; }
 .work .cat { color: var(--ink-3); font-size: 14.5px; }
-.work .arrow { width: 40px; height: 40px; flex: none; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; transition: transform 0.4s var(--spring), background 0.2s; }
+.work .arrow { width: 40px; height: 40px; flex: none; border-radius: 50%; border: 2px solid var(--edge); display: grid; place-items: center; transition: transform 0.4s var(--spring), background 0.2s; }
 .work:hover .arrow { transform: rotate(-45deg); background: var(--blue); color: #fff; }
 .cover-note { position: absolute; right: 12px; bottom: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(11, 15, 26, 0.72); color: #fff; font-family: var(--f-num); font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 @media (max-width: 1000px) { .works { grid-template-columns: repeat(2, minmax(0, 1fr)); } .work:last-child:nth-child(odd) { grid-column: 1 / -1; } }
@@ -574,16 +725,16 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
    ========================================================= */
 .bubble {
   position: relative; display: inline-block; white-space: nowrap;
-  background: #fff; border: 2px solid var(--ink); border-radius: 22px; padding: 10px 16px 12px;
+  background: var(--card); border: 2px solid var(--edge); border-radius: 22px; padding: 10px 16px 12px;
   font-family: var(--f-hand); font-weight: 600; font-size: 25px; line-height: 1.05; color: var(--ink); box-shadow: var(--shadow-pop);
   transform-origin: 90% 100%;
 }
-.bubble::after { content: ""; position: absolute; right: 26px; bottom: -11px; width: 18px; height: 18px; background: #fff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(45deg) skew(8deg, 8deg); }
+.bubble::after { content: ""; position: absolute; right: 26px; bottom: -11px; width: 18px; height: 18px; background: var(--card); border-right: 2px solid var(--edge); border-bottom: 2px solid var(--edge); transform: rotate(45deg) skew(8deg, 8deg); }
 .bubble.left::after { right: auto; left: 22px; }
 .bubble.pop { animation: fy-pop 0.45s var(--spring); }
 @keyframes fy-pop { 0% { transform: scale(0.6) rotate(-6deg); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 .mascot-stage { position: relative; width: min(100%, 420px); aspect-ratio: 1; display: grid; place-items: end center; }
-.mascot-stage .seal-bg { position: absolute; inset: 4% -4% 8%; color: #d8eaff; animation: fy-spin 40s linear infinite; max-width: none; }
+.mascot-stage .seal-bg { position: absolute; inset: 4% -4% 8%; color: var(--seal-tint); animation: fy-spin 40s linear infinite; max-width: none; }
 .mascot-stage .seal-ring { position: absolute; inset: -2% -10% 2%; color: transparent; stroke: var(--blue-light); opacity: 0.5; animation: fy-spin 60s linear infinite reverse; max-width: none; }
 .mascot-stage .body { position: relative; width: 78%; animation: fy-bob 4.2s ease-in-out infinite; transform-origin: 50% 100%; }
 @keyframes fy-spin { to { transform: rotate(360deg); } }
@@ -592,7 +743,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 /* =========================================================
    PARTNER BERJALAN, FAQ
    ========================================================= */
-.marquee { overflow: hidden; border-block: 2px solid var(--ink); background: #fff; padding: 22px 0; }
+.marquee { overflow: hidden; border-block: 2px solid var(--edge); background: var(--card); padding: 22px 0; }
 .marquee .row { display: flex; width: max-content; gap: 56px; animation: fy-slide 30s linear infinite; }
 .marquee:hover .row { animation-play-state: paused; }
 .marquee .item { display: flex; align-items: center; gap: 14px; font-family: var(--f-head); font-weight: 800; font-size: clamp(28px, 4vw, 48px); white-space: nowrap; }
@@ -604,7 +755,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 22px 0; font-family: var(--f-head); font-weight: 800; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary .pm { flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--surface); position: relative; transition: transform 0.4s var(--spring), background 0.2s; }
-.faq summary .pm::before, .faq summary .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2.5px; margin: -1.25px 0 0 -7px; background: var(--blue-deep); border-radius: 2px; }
+.faq summary .pm::before, .faq summary .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2.5px; margin: -1.25px 0 0 -7px; background: var(--text-blue-deep); border-radius: 2px; }
 .faq summary .pm::after { transform: rotate(90deg); transition: transform 0.3s var(--ease); }
 .faq details[open] summary .pm { background: var(--blue); transform: rotate(180deg); }
 .faq details[open] summary .pm::before, .faq details[open] summary .pm::after { background: #fff; }
@@ -614,13 +765,13 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 /* =========================================================
    PEMBATAS GELOMBANG · antar seksi berwarna beda
    ========================================================= */
-.wave { position: relative; z-index: 2; height: 90px; margin: -1px 0; color: var(--blue); overflow-x: clip; }
+.wave { position: relative; z-index: 2; height: 90px; margin: -1px 0; color: var(--text-blue); overflow-x: clip; }
 .wave svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 /* =========================================================
    FOOTER SEDERHANA (untuk web produk). Footer adegan malam Bogor khusus fusionify.id.
    ========================================================= */
-.footer { background: var(--night); color: #dbe9fb; padding: 56px 0 28px; }
+.footer { background: var(--night); color: #dbe9fb; padding: 56px 0 28px; box-shadow: inset 0 1px 0 var(--footer-top, transparent); }
 .fcols { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 30px; margin-bottom: 40px; }
 .fcols .fh { font-family: var(--f-num); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 14px; }
 .fcols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
@@ -631,7 +782,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 .fbar a { color: #b9cbe3; }
 .to-top { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid #2a3b5c; text-decoration: none; font-weight: 700; transition: background 0.2s, color 0.2s, transform 0.3s var(--spring); }
 .to-top svg { width: 16px; height: 16px; transition: transform 0.3s var(--spring); }
-.to-top:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+.to-top:hover { background: var(--blue); border-color: var(--text-blue); color: #fff; }
 .to-top:hover svg { transform: translateY(-3px); }
 /* Badge "Sebuah produk dari FUSIONIFY" di footer web produk */
 .fy-badge { display: inline-block; line-height: 0; transition: transform 0.3s var(--spring); }
@@ -644,7 +795,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
    ========================================================= */
 .toast {
   position: fixed; left: 50%; bottom: 24px; z-index: 320; display: flex; align-items: center; gap: 10px;
-  padding: 8px 18px 8px 8px; border-radius: 999px; background: #fff; border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink);
+  padding: 8px 18px 8px 8px; border-radius: 999px; background: var(--card); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow);
   font-weight: 700; font-size: 15px; transform: translate(-50%, 160%); opacity: 0; pointer-events: none;
   transition: transform 0.5s var(--spring), opacity 0.25s;
 }
@@ -661,12 +812,12 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 .has-cursor input, .has-cursor textarea { cursor: text; }
 .cursor .dot { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 0 2px #fff; }
 .cursor .ring { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; transition: width 0.35s var(--spring), height 0.35s var(--spring), margin 0.35s var(--spring); }
-.cursor .ring svg { width: 100%; height: 100%; overflow: visible; color: var(--blue); }
+.cursor .ring svg { width: 100%; height: 100%; overflow: visible; color: var(--text-blue); }
 .cursor .ring svg path { fill: none; stroke: currentColor; stroke-width: 1.6; vector-effect: non-scaling-stroke; transition: fill 0.3s; }
 .cursor.link .ring { width: 70px; height: 70px; margin: -35px 0 0 -35px; }
 .cursor.link .ring svg { animation: fy-spin 4s linear infinite; }
 .cursor.link .ring svg path { fill: rgba(83, 157, 233, 0.18); }
-.cursor .label { position: absolute; left: 0; top: 0; will-change: translate; padding: 4px 10px; border-radius: 999px; background: var(--ink); color: #fff; font-family: var(--f-hand); font-size: 20px; line-height: 1; white-space: nowrap; transform: scale(0); transform-origin: 0 0; transition: transform 0.3s var(--spring); }
+.cursor .label { position: absolute; left: 0; top: 0; will-change: translate; padding: 4px 10px; border-radius: 999px; background: var(--inverse-bg); color: var(--inverse-fg); font-family: var(--f-hand); font-size: 20px; line-height: 1; white-space: nowrap; transform: scale(0); transform-origin: 0 0; transition: transform 0.3s var(--spring); }
 .cursor.labelled .label { transform: scale(1); }
 .cursor.down .ring { transform: scale(0.8); }
 .cursor.dark .ring svg { color: #fff; }
@@ -713,20 +864,20 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 .field { display: grid; gap: 8px; }
 .field > span { font-weight: 700; font-size: 15px; }
 .field small { font-size: 13.5px; color: var(--ink-3); }
-.field .err { color: #b4232c; font-weight: 700; }
+.field .err { color: var(--danger); font-weight: 700; }
 .input, .select, .textarea {
   width: 100%; font: inherit; font-size: 16px; color: var(--ink);
-  padding: 13px 16px; border-radius: var(--r-m); border: 2px solid var(--ink); background: #fff;
-  box-shadow: 0 3px 0 var(--ink); transition: box-shadow 0.25s var(--spring), transform 0.25s var(--spring), border-color 0.2s;
+  padding: 13px 16px; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card);
+  box-shadow: 0 3px 0 var(--edge-shadow); transition: box-shadow 0.25s var(--spring), transform 0.25s var(--spring), border-color 0.2s;
 }
 .textarea { min-height: 130px; resize: vertical; }
-.select { appearance: none; padding-right: 44px; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b0f1a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 14px center / 18px no-repeat; }
-.input::placeholder, .textarea::placeholder { color: #8a94a6; }
-.input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 3px 0 var(--blue), 0 0 0 4px rgba(83, 157, 233, 0.25); }
-.input[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: #b4232c; box-shadow: 0 3px 0 #b4232c; }
+.select { appearance: none; padding-right: 44px; background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b0f1a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 14px center / 18px no-repeat; }
+.input::placeholder, .textarea::placeholder { color: var(--placeholder); }
+.input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--text-blue); box-shadow: 0 3px 0 var(--blue), 0 0 0 4px rgba(83, 157, 233, 0.25); }
+.input[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: var(--danger); box-shadow: 0 3px 0 var(--danger); }
 .input:disabled, .select:disabled, .textarea:disabled { background: var(--surface); color: var(--ink-3); box-shadow: none; }
 .check { display: inline-flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 15.5px; }
-.check input { appearance: none; flex: none; width: 22px; height: 22px; margin: 1px 0 0; border: 2px solid var(--ink); border-radius: 7px; background: #fff; display: grid; place-items: center; cursor: pointer; transition: background 0.2s; }
+.check input { appearance: none; flex: none; width: 22px; height: 22px; margin: 1px 0 0; border: 2px solid var(--edge); border-radius: 7px; background: var(--card); display: grid; place-items: center; cursor: pointer; transition: background 0.2s; }
 .check input[type="radio"] { border-radius: 50%; }
 .check input:checked { background: var(--blue); }
 .check input:checked::after { content: ""; width: 10px; height: 6px; border: solid #fff; border-width: 0 0 2.5px 2.5px; transform: translateY(-1px) rotate(-45deg); }
@@ -740,18 +891,18 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
    KARTU LAYANAN · ikon di dalam segel kecil
    <article class="svc"><span class="svc-ico"><svg>...</svg></span><h3>..</h3><p>..</p></article>
    ========================================================= */
-.svc { position: relative; display: grid; gap: 12px; align-content: start; padding: 26px; border-radius: var(--r-l); background: #fff; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-sticker); }
+.svc { position: relative; display: grid; gap: 12px; align-content: start; padding: 26px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); }
 .svc h3 { font-size: 26px; }
 .svc p { font-size: 15.5px; color: var(--ink-2); }
-.svc .more { margin-top: 6px; font-weight: 700; color: var(--blue-deep); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+.svc .more { margin-top: 6px; font-weight: 700; color: var(--text-blue-deep); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
 .svc .more:hover { text-decoration: underline; text-underline-offset: 4px; }
 .svc-ico { position: relative; width: 58px; height: 58px; display: grid; place-items: center; color: #fff; }
 .svc-ico::before { content: ""; position: absolute; inset: 0; background: var(--blue); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; }
 .svc-ico svg { position: relative; width: 26px; height: 26px; }
 .svc:nth-child(3n+2) .svc-ico::before { background: var(--blue-light); }
-.svc:nth-child(3n+3) .svc-ico::before { background: var(--ink); }
+.svc:nth-child(3n+3) .svc-ico::before { background: var(--blue-deep); }
 a.svc { text-decoration: none; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
-a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
+a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shadow); }
 /* Segel sebagai mask (12 lekukan, sama dengan seal.js) */
 :root { --seal-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M94.0 50.0L95.8 52.4L96.8 54.9L96.5 57.4L94.9 59.5L92.5 61.4L90.1 63.0L88.2 64.7L87.4 66.7L87.5 69.1L88.1 72.0L88.5 75.0L88.1 77.7L86.6 79.6L84.1 80.7L81.1 81.1L78.2 81.3L75.8 81.8L74.1 83.1L72.9 85.3L72.0 88.1L70.8 90.9L69.1 93.0L66.9 93.9L64.2 93.6L61.4 92.5L58.8 91.2L56.4 90.5L54.3 90.7L52.2 92.1L50.0 94.0L47.6 95.8L45.1 96.8L42.6 96.5L40.5 94.9L38.6 92.5L37.0 90.1L35.3 88.2L33.3 87.4L30.9 87.5L28.0 88.1L25.0 88.5L22.3 88.1L20.4 86.6L19.3 84.1L18.9 81.1L18.7 78.2L18.2 75.8L16.9 74.1L14.7 72.9L11.9 72.0L9.1 70.8L7.0 69.1L6.1 66.9L6.4 64.2L7.5 61.4L8.8 58.8L9.5 56.4L9.3 54.3L7.9 52.2L6.0 50.0L4.2 47.6L3.2 45.1L3.5 42.6L5.1 40.5L7.5 38.6L9.9 37.0L11.8 35.3L12.6 33.3L12.5 30.9L11.9 28.0L11.5 25.0L11.9 22.3L13.4 20.4L15.9 19.3L18.9 18.9L21.8 18.7L24.2 18.2L25.9 16.9L27.1 14.7L28.0 11.9L29.2 9.1L30.9 7.0L33.1 6.1L35.8 6.4L38.6 7.5L41.2 8.8L43.6 9.5L45.7 9.3L47.8 7.9L50.0 6.0L52.4 4.2L54.9 3.2L57.4 3.5L59.5 5.1L61.4 7.5L63.0 9.9L64.7 11.8L66.7 12.6L69.1 12.5L72.0 11.9L75.0 11.5L77.7 11.9L79.6 13.4L80.7 15.9L81.1 18.9L81.3 21.8L81.8 24.2L83.1 25.9L85.3 27.1L88.1 28.0L90.9 29.2L93.0 30.9L93.9 33.1L93.6 35.8L92.5 38.6L91.2 41.2L90.5 43.6L90.7 45.7L92.1 47.8Z'/%3E%3C/svg%3E"); }
 
@@ -777,36 +928,37 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 .steps li:not(:last-child)::after { content: ""; position: absolute; left: 66px; right: -12px; top: 27px; border-top: 2px dashed var(--blue-light); }
 .steps h3 { font-size: 24px; }
 .steps p { color: var(--ink-2); font-size: 15.5px; }
-.sec.blue .steps li::before { background: #fff; } .sec.blue .steps .n { color: var(--blue); }
+.sec.blue .steps li::before { background: #fff; } .sec.blue .steps .n { color: #0d6cd7; }
 .sec.blue .steps li:not(:last-child)::after { border-color: rgba(255, 255, 255, 0.5); }
 .sec.blue .steps p { color: #f2f8ff; }
 @media (max-width: 720px) { .steps li:not(:last-child)::after { display: none; } }
 
 /* =========================================================
    TABEL HARGA · paket unggulan diberi .featured
+   Selalu di dalam .plans (kelas .plan sendirian dipakai juga oleh .chip.plan)
    Harga wajib harga asli. Kalau belum pasti, tulis "Hubungi kami".
    ========================================================= */
 .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
-.plan { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 18px; padding: 30px 26px 26px; border-radius: var(--r-l); background: #fff; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-sticker); }
-.plan h3 { font-size: 26px; }
-.plan .desc { font-size: 15px; color: var(--ink-2); margin-top: 4px; }
-.plan .price { font-family: var(--f-num); font-weight: 800; font-size: clamp(36px, 4vw, 48px); line-height: 1; letter-spacing: -0.02em; }
-.plan .price small { font-family: var(--f-body); font-weight: 400; font-size: 15px; color: var(--ink-3); letter-spacing: 0; }
-.plan .btn { justify-content: center; }
-.plan.featured { background: var(--blue); color: #fff; transform: translateY(-10px); box-shadow: 0 16px 0 var(--ink); }
-.plan.featured .desc, .plan.featured .price small, .plan.featured .ticks li { color: #f2f8ff; }
-.plan.featured .ticks li::before { background: #fff; }
-.plan.featured .ticks li::after { border-color: var(--blue); }
-.plan.featured .btn { --bg: #fff; --fg: var(--ink); }
-.plan .ribbon { position: absolute; top: -16px; right: 22px; padding: 6px 14px; border-radius: 999px; border: 2px solid var(--ink); background: #fff; color: var(--ink); font-family: var(--f-hand); font-weight: 700; font-size: 20px; line-height: 1; transform: rotate(4deg); }
-@media (max-width: 1000px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } .plans > :last-child:nth-child(odd) { grid-column: 1 / -1; } .plan.featured { transform: none; box-shadow: var(--shadow-sticker); } }
+.plans > .plan { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 18px; padding: 30px 26px 26px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); }
+.plans > .plan h3 { font-size: 26px; }
+.plans > .plan .desc { font-size: 15px; color: var(--ink-2); margin-top: 4px; }
+.plans > .plan .price { font-family: var(--f-num); font-weight: 800; font-size: clamp(36px, 4vw, 48px); line-height: 1; letter-spacing: -0.02em; }
+.plans > .plan .price small { font-family: var(--f-body); font-weight: 400; font-size: 15px; color: var(--ink-3); letter-spacing: 0; }
+.plans > .plan .btn { justify-content: center; }
+.plans > .plan.featured { background: var(--blue); color: #fff; transform: translateY(-10px); box-shadow: 0 16px 0 var(--edge-shadow); }
+.plans > .plan.featured .desc, .plans > .plan.featured .price small, .plans > .plan.featured .ticks li { color: #f2f8ff; }
+.plans > .plan.featured .ticks li::before { background: #fff; }
+.plans > .plan.featured .ticks li::after { border-color: var(--text-blue); }
+.plans > .plan.featured .btn { --bg: #fff; --fg: #0b0f1a; }
+.plans > .plan .ribbon { position: absolute; top: -16px; right: 22px; padding: 6px 14px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); font-family: var(--f-hand); font-weight: 700; font-size: 20px; line-height: 1; transform: rotate(4deg); }
+@media (max-width: 1000px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } .plans > :last-child:nth-child(odd) { grid-column: 1 / -1; } .plans > .plan.featured { transform: none; box-shadow: var(--shadow-sticker); } }
 @media (max-width: 620px) { .plans { grid-template-columns: 1fr; } }
 
 /* =========================================================
    TESTIMONI · HANYA dengan izin tertulis dan tanggalnya
    ========================================================= */
-.quote { position: relative; display: grid; gap: 18px; padding: 30px 26px 24px; border-radius: var(--r-l); background: #fff; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-sticker); }
-.quote::before { content: "\201C"; position: absolute; top: -26px; left: 20px; font-family: var(--f-head); font-weight: 800; font-size: 96px; line-height: 1; color: var(--blue); }
+.quote { position: relative; display: grid; gap: 18px; padding: 30px 26px 24px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); }
+.quote::before { content: "\201C"; position: absolute; top: -26px; left: 20px; font-family: var(--f-head); font-weight: 800; font-size: 96px; line-height: 1; color: var(--text-blue); }
 .quote blockquote { margin: 0; font-size: 18px; line-height: 1.55; }
 .quote figcaption { display: flex; align-items: center; gap: 12px; }
 .quote figcaption img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; background: var(--surface); }
@@ -816,11 +968,11 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 /* =========================================================
    CTA BAND · ajakan besar di akhir halaman, maskot di samping
    ========================================================= */
-.cta-band { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; padding: clamp(28px, 5vw, 56px); border-radius: var(--r-l); background: var(--blue); color: #fff; border: 2px solid var(--ink); box-shadow: 0 10px 0 var(--ink); overflow: hidden; }
+.cta-band { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; padding: clamp(28px, 5vw, 56px); border-radius: var(--r-l); background: var(--blue); color: #fff; border: 2px solid var(--edge); box-shadow: 0 10px 0 var(--edge-shadow); overflow: hidden; }
 .cta-band h2 { font-size: clamp(34px, 4.6vw, 60px); max-width: 16ch; }
 .cta-band p { color: #f2f8ff; margin-top: 12px; max-width: 46ch; }
 .cta-band .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-.cta-band .btn { --bg: #fff; --fg: var(--ink); }
+.cta-band .btn { --bg: #fff; --fg: #0b0f1a; }
 .cta-band .btn.ghost { --bg: var(--blue); --fg: #fff; border-color: #fff; box-shadow: 0 3px 0 rgba(255, 255, 255, 0.6); }
 .cta-band .mascot { width: clamp(130px, 18vw, 220px); align-self: end; margin-bottom: calc(clamp(28px, 5vw, 56px) * -1); }
 .cta-band .seal-deco { position: absolute; right: -60px; top: -60px; width: 260px; color: rgba(255, 255, 255, 0.08); max-width: none; pointer-events: none; }
@@ -836,13 +988,13 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 .note p { color: var(--ink-2); font-size: 15.5px; }
 .note.ok { --nc: var(--go); background: var(--go-bg); } .note.ok::before { content: "✓"; }
 .note.warn { --nc: var(--beta); background: var(--beta-bg); } .note.warn::before { content: "!"; }
-.note.danger { --nc: #b4232c; background: #fde8ea; } .note.danger::before { content: "!"; }
+.note.danger { --nc: var(--danger); background: var(--danger-bg); } .note.danger::before { content: "!"; }
 
 /* =========================================================
    TABEL DATA · dibungkus .table-wrap supaya bisa digeser di HP.
    Wajib: <div class="table-wrap" tabindex="0" role="region" aria-label="..."> supaya bisa digeser pakai keyboard
    ========================================================= */
-.table-wrap { overflow-x: auto; border: 2px solid var(--ink); border-radius: var(--r-l); background: #fff; box-shadow: var(--shadow-sticker); }
+.table-wrap { position: relative; overflow-x: auto; border: 2px solid var(--edge); border-radius: var(--r-l); background: var(--card); box-shadow: var(--shadow-sticker); }
 .table { width: 100%; border-collapse: collapse; font-size: 15.5px; min-width: 520px; }
 .table th, .table td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); }
 .table thead th { font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); background: var(--surface); }
@@ -854,7 +1006,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
    TAG kecil (kategori, teknologi) · beda dari chip status
    ========================================================= */
 .tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
-.tag { display: inline-block; padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; font-size: 13.5px; font-weight: 700; color: var(--ink-2); }
+.tag { display: inline-block; padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card); font-size: 13.5px; font-weight: 700; color: var(--ink-2); }
 .sec.blue .tag { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); color: #fff; }
 
 /* =========================================================
@@ -864,7 +1016,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 .empty img { width: clamp(150px, 22vw, 230px); height: auto; }
 .empty h2, .empty h1 { font-size: clamp(34px, 5vw, 60px); }
 .empty p { color: var(--ink-2); max-width: 44ch; }
-.empty .code { font-family: var(--f-num); font-weight: 800; font-size: clamp(64px, 12vw, 140px); line-height: 0.9; color: var(--blue); letter-spacing: -0.04em; }
+.empty .code { font-family: var(--f-num); font-weight: 800; font-size: clamp(64px, 12vw, 140px); line-height: 0.9; color: var(--text-blue); letter-spacing: -0.04em; }
 
 /* =========================================================
    KEPALA HALAMAN PRODUK · slot logo produk + chip status
@@ -875,12 +1027,728 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
 /* =========================================================
    TAB SEGMEN · pilihan bulanan/tahunan, dsb. (tanpa JS: pakai radio)
    ========================================================= */
-.segment { display: inline-flex; padding: 4px; gap: 4px; border-radius: 999px; border: 2px solid var(--ink); background: #fff; box-shadow: 0 3px 0 var(--ink); }
+.segment { display: inline-flex; padding: 4px; gap: 4px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); box-shadow: 0 3px 0 var(--edge-shadow); }
 .segment label { position: relative; cursor: pointer; }
 .segment input { position: absolute; opacity: 0; pointer-events: none; }
-.segment span { display: block; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 14.5px; color: var(--ink-2); transition: background 0.25s var(--ease), color 0.25s; }
+.segment span { display: block; white-space: nowrap; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 14.5px; color: var(--ink-2); transition: background 0.25s var(--ease), color 0.25s; }
 .segment input:checked + span { background: var(--blue); color: #fff; }
 .segment input:focus-visible + span { outline: 3px solid var(--blue-light); outline-offset: 2px; }
+
+```
+
+---
+
+## Kode: `css/controls.css`
+
+```css
+/* FUSIONIFY UI · controls.css
+   Komponen kontrol yang dipakai di web publik, web produk, aplikasi, dan aplikasi HP (web/PWA/WebView):
+   menu, modal, tab, badge, button group, split button, FAB, app bar HP, navigation bar bawah,
+   navigation rail, bottom/side sheet, carousel, slider, tooltip, list, chip interaktif, loading,
+   snackbar, search bar, date/time picker, floating toolbar.
+   Interaksinya di js/controls.js (dipanggil otomatis oleh initFusionify() dan initApp()).
+   Aturan: hanya token tema (aman untuk mode gelap), target sentuh minimal 44px,
+   area aman notch lewat env(safe-area-inset-*), gerak hanya transform dan opacity. */
+
+/* =========================================================
+   DROPDOWN · <div class="dropdown"><button aria-expanded="false" aria-haspopup="menu" data-dropdown>..</button><div class="menu" role="menu" hidden>..</div></div>
+   ========================================================= */
+.dropdown { position: relative; }
+.menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 50; min-width: 220px; padding: 6px; border-radius: var(--r-m); background: var(--card); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); display: grid; gap: 2px; }
+.menu[hidden] { display: none; }
+.menu.up { top: auto; bottom: calc(100% + 8px); }
+.menu.start { right: auto; left: 0; }
+.menu a, .menu button { display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 12px; border: 0; border-radius: 10px; background: none; text-align: left; text-decoration: none; font: inherit; font-size: 15px; font-weight: 700; color: var(--ink-2); cursor: pointer; }
+.menu a:hover, .menu button:hover, .menu a:focus-visible, .menu button:focus-visible { background: var(--surface); color: var(--ink); outline: none; }
+.menu svg { width: 18px; height: 18px; }
+.menu hr { border: 0; border-top: 1px solid var(--line); margin: 4px 6px; }
+.menu .danger { color: var(--danger); }
+.menu .head { padding: 10px 12px 8px; font-size: 14px; color: var(--ink-3); }
+.menu .head b { display: block; color: var(--ink); font-size: 15px; }
+
+/* =========================================================
+   MODAL · <dialog class="modal" id="..."> dibuka lewat [data-open-modal="id"]
+   ========================================================= */
+.modal { width: min(520px, calc(100vw - 32px)); padding: 0; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 10px 0 var(--edge-shadow); }
+.modal::backdrop { background: rgba(2, 6, 15, 0.55); }
+.modal[open] { animation: fy-modal 0.35s var(--spring); }
+@keyframes fy-modal { from { opacity: 0; transform: translateY(16px) scale(0.96); } }
+.modal .m-body { position: relative; display: grid; gap: 12px; padding: 28px 26px 22px; }
+.modal .m-body > img { width: 96px; height: auto; justify-self: center; }
+.modal h2 { font-size: 28px; }
+.modal p { color: var(--ink-2); }
+.modal .m-foot { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; padding: 16px 26px 22px; }
+.modal .m-close { position: absolute; top: 12px; right: 12px; }
+.btn.danger { --bg: #c4323a; --fg: #fff; }
+
+/* =========================================================
+   TAB · <div class="tabs" data-tabs><div role="tablist">..</div><div role="tabpanel">..</div></div>
+   ========================================================= */
+.tabs [role="tablist"] { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--surface); width: max-content; max-width: 100%; overflow-x: auto; }
+.tabs [role="tab"] { flex: none; padding: 9px 16px; border: 0; border-radius: 999px; background: none; font: inherit; font-weight: 700; font-size: 14.5px; color: var(--ink-2); cursor: pointer; transition: background 0.2s, color 0.2s; }
+.tabs [role="tab"][aria-selected="true"] { background: var(--card); color: var(--ink); box-shadow: 0 0 0 2px var(--edge), 0 3px 0 2px var(--edge-shadow); }
+.tabs [role="tabpanel"] { padding-top: 18px; }
+.tabs [role="tabpanel"][hidden] { display: none; }
+
+
+/* PROGRES (garis) */
+.progress { height: 12px; border-radius: 999px; background: var(--surface-2); overflow: hidden; border: 1.5px solid var(--line); }
+.progress span { display: block; height: 100%; width: calc(var(--v, 0) * 100%); border-radius: inherit; background: linear-gradient(90deg, var(--blue-light), var(--blue)); }
+.progress.go span { background: var(--go); } .progress.warn span { background: #e8a33d; }
+
+/* =========================================================
+   BADGE · angka atau titik di ikon / item navigasi
+   <span class="has-badge"><svg/><span class="badge">3</span></span>
+   ========================================================= */
+.badge { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #c4323a; color: #fff; font-family: var(--f-num); font-size: 11.5px; font-weight: 800; line-height: 1; box-shadow: 0 0 0 2px var(--card); }
+.badge.dot { min-width: 10px; width: 10px; height: 10px; padding: 0; }
+.badge.blue { background: var(--blue); }
+.has-badge { position: relative; display: inline-grid; place-items: center; }
+.has-badge > .badge { position: absolute; top: -6px; right: -8px; }
+.has-badge > .badge.dot { top: -2px; right: -2px; }
+
+/* =========================================================
+   BUTTON GROUP · tombol tersambung, bisa pilih satu atau banyak
+   <div class="btn-group" role="group" aria-label=".." data-btn-group="single|multi">
+     <button type="button" aria-pressed="true">Hari</button> ...
+   ========================================================= */
+.btn-group { display: inline-flex; max-width: 100%; overflow-x: auto; border: 2px solid var(--edge); border-radius: 999px; background: var(--card); box-shadow: var(--shadow-pop); scrollbar-width: none; }
+.btn-group::-webkit-scrollbar { display: none; }
+.btn-group > button, .btn-group > a { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 0; border-left: 2px solid var(--edge); background: none; font: inherit; font-weight: 700; font-size: 15px; color: var(--ink-2); text-decoration: none; white-space: nowrap; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.btn-group > :first-child { border-left: 0; }
+.btn-group > :hover { background: var(--surface); color: var(--ink); }
+.btn-group > [aria-pressed="true"] { background: var(--blue); color: #fff; }
+.btn-group > [aria-pressed="true"]::before { content: ""; width: 11px; height: 6px; border-left: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: translateY(-2px) rotate(-45deg); }
+.btn-group > :focus-visible { outline: 3px solid var(--blue-light); outline-offset: -5px; border-radius: 999px; }
+.btn-group svg { width: 18px; height: 18px; }
+.btn-group.block { display: flex; } .btn-group.block > * { flex: 1; }
+
+/* =========================================================
+   SPLIT BUTTON · aksi utama + panah menu
+   <div class="split-btn"><button class="btn">Simpan</button><button class="btn caret" data-dropdown aria-haspopup="menu" aria-expanded="false" aria-label="Pilihan lain"><svg/></button><div class="menu" role="menu" hidden>..</div></div>
+   ========================================================= */
+.split-btn { position: relative; display: inline-flex; gap: 3px; }
+.split-btn > .btn:first-child { border-radius: 999px 8px 8px 999px; }
+.split-btn > .btn.caret { border-radius: 8px 999px 999px 8px; padding: 0 14px 0 12px; }
+.split-btn > .btn.caret svg { width: 20px; height: 20px; transition: transform 0.35s var(--spring); }
+.split-btn > .btn.caret[aria-expanded="true"] svg { transform: rotate(180deg); }
+.split-btn > .btn.sm.caret { padding: 0 10px; }
+
+/* =========================================================
+   FAB · tombol aksi utama yang melayang
+   <div class="fab-dock"><button class="fab" aria-label="Buat"><svg/></button></div>
+   .fab.ext = dengan label, .sm / .lg ukuran, .soft = versi biru muda
+   [data-fab-shrink] = label disembunyikan saat scroll turun
+   ========================================================= */
+.fab { --bg: var(--blue); --fg: #fff; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 60px; height: 60px; padding: 0; border-radius: 22px; border: 2px solid var(--edge); background: var(--bg); color: var(--fg); box-shadow: 0 4px 0 var(--edge-shadow); font: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
+.fab:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--edge-shadow); }
+.fab:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
+.fab svg { width: 24px; height: 24px; flex: none; }
+.fab.sm { width: 46px; height: 46px; border-radius: 16px; } .fab.sm svg { width: 20px; height: 20px; }
+.fab.lg { width: 88px; height: 88px; border-radius: 30px; } .fab.lg svg { width: 34px; height: 34px; }
+.fab.soft { --bg: var(--surface-2); --fg: var(--text-blue-deep); }
+.fab.ext { width: auto; padding: 0 24px 0 18px; border-radius: 20px; }
+.fab.ext.shrink { width: 60px; padding: 0; }
+.fab.ext.shrink .label { display: none; }
+.fab.ext.shrink svg { animation: fy-pop 0.35s var(--spring); }
+.fab-dock { position: fixed; z-index: 70; right: max(16px, env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); display: grid; justify-items: end; gap: 12px; }
+
+/* FAB menu: <div class="fab-menu" data-fab-menu><ul class="fab-actions" id="x" hidden>..</ul><button class="fab" aria-expanded="false" aria-controls="x">..</button></div> */
+.fab-menu { display: grid; justify-items: end; gap: 12px; }
+.fab-actions { list-style: none; margin: 0; padding: 0; display: grid; justify-items: end; gap: 10px; }
+.fab-actions[hidden] { display: none; }
+.fab-action { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px 0 18px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-pop); font: inherit; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap; cursor: pointer; animation: fy-rise 0.35s var(--spring) both; animation-delay: calc(var(--i, 0) * 45ms); }
+.fab-action:hover { background: var(--surface); }
+.fab-action svg { width: 20px; height: 20px; color: var(--text-blue); }
+.fab-menu > .fab svg { transition: transform 0.35s var(--spring); }
+.fab-menu > .fab[aria-expanded="true"] svg { transform: rotate(45deg); }
+.fab-scrim { position: fixed; inset: 0; z-index: 69; background: rgba(2, 6, 15, 0.35); opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+.fab-scrim.on { opacity: 1; pointer-events: auto; }
+@keyframes fy-rise { from { opacity: 0; transform: translateY(14px) scale(0.92); } }
+
+/* =========================================================
+   APP BAR HP · bilah atas aplikasi mobile
+   <header class="appbar" data-appbar><button class="icon-btn">←</button><h1 class="title">Judul</h1><div class="actions">..</div></header>
+   .appbar.collapse + <h1 class="appbar-title"> besar di bawahnya: judul kecil baru muncul setelah scroll
+   ========================================================= */
+.appbar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 4px; min-height: 64px; padding: env(safe-area-inset-top) max(8px, env(safe-area-inset-right)) 0 max(8px, env(safe-area-inset-left)); background: var(--paper); transition: background 0.25s, box-shadow 0.25s; }
+.appbar.scrolled { background: var(--card); box-shadow: 0 2px 0 var(--edge); }
+.appbar .title { flex: 1; min-width: 0; padding: 0 8px; font-family: var(--f-head); font-weight: 800; font-size: 22px; line-height: 1.1; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.appbar .actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.appbar .icon-btn { background: none; width: 44px; height: 44px; }
+.appbar .icon-btn:hover { background: var(--surface); }
+.appbar.collapse .title { opacity: 0; transform: translateY(6px); transition: opacity 0.2s, transform 0.3s var(--ease); }
+.appbar.collapse.scrolled .title { opacity: 1; transform: none; }
+.appbar-title { padding: 6px max(16px, env(safe-area-inset-left)) 14px; font-size: clamp(34px, 9vw, 48px); }
+
+/* =========================================================
+   NAVIGATION BAR · menu bawah untuk HP (3 sampai 5 item)
+   <nav class="navbar" aria-label="Menu utama"><a href="#" aria-current="page"><span class="ico"><svg/></span>Beranda</a>..</nav>
+   Tambahkan .with-navbar di <body> supaya isi tidak tertutup.
+   ========================================================= */
+.with-navbar { --navbar-h: 76px; padding-bottom: calc(var(--navbar-h) + env(safe-area-inset-bottom)); }
+.navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); padding: 6px max(6px, env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-left)); background: var(--card); border-top: 2px solid var(--edge); }
+.navbar a, .navbar button, .rail-nav a, .rail-nav button { display: grid; justify-items: center; align-content: center; gap: 4px; min-height: 60px; min-width: 0; padding: 4px 2px; border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 700; line-height: 1.2; color: var(--ink-3); text-align: center; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.navbar .ico, .rail-nav .ico { position: relative; display: grid; place-items: center; width: 60px; height: 32px; border-radius: 999px; transition: background 0.25s, transform 0.35s var(--spring); }
+.navbar svg, .rail-nav svg { width: 22px; height: 22px; }
+.navbar a:hover .ico, .rail-nav a:hover .ico { background: var(--surface); }
+.navbar [aria-current="page"], .rail-nav [aria-current="page"] { color: var(--ink); }
+.navbar [aria-current="page"] .ico, .rail-nav [aria-current="page"] .ico { background: var(--blue); color: #fff; box-shadow: 0 0 0 2px var(--edge), 0 3px 0 2px var(--edge-shadow); }
+.navbar a:active .ico, .rail-nav a:active .ico { transform: scale(0.9); }
+.navbar .badge, .rail-nav .badge { position: absolute; top: -5px; right: 8px; }
+.navbar .badge.dot, .rail-nav .badge.dot { top: 2px; right: 16px; }
+.navbar .lbl, .rail-nav .lbl { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* =========================================================
+   NAVIGATION RAIL · menu samping ramping untuk tablet
+   <nav class="rail" aria-label="Menu utama"><div class="rail-top">(FAB)</div><div class="rail-nav"><a ..><span class="ico">..</span>Beranda</a></div></nav>
+   Tambahkan .with-rail di <body>. Pola responsif: .m-app (navbar di HP, rail mulai 700px)
+   ========================================================= */
+.with-rail { padding-left: calc(92px + env(safe-area-inset-left)); }
+.rail { position: fixed; left: 0; top: 0; bottom: 0; z-index: 60; width: calc(92px + env(safe-area-inset-left)); display: flex; flex-direction: column; align-items: center; gap: 18px; padding: max(18px, env(safe-area-inset-top)) 0 max(18px, env(safe-area-inset-bottom)) env(safe-area-inset-left); background: var(--card); border-right: 2px solid var(--edge); overflow-y: auto; }
+.rail-top { display: grid; justify-items: center; gap: 14px; }
+.rail-top .brand-mark { width: 40px; height: 40px; }
+.rail-nav { display: grid; gap: 6px; width: 100%; }
+.rail-nav a, .rail-nav button { min-height: 64px; }
+.rail .rail-foot { margin-top: auto; }
+.m-app .rail { display: none; }
+@media (min-width: 700px) {
+  .m-app { --navbar-h: 0px; padding-bottom: env(safe-area-inset-bottom); padding-left: calc(92px + env(safe-area-inset-left)); }
+  .m-app .navbar { display: none; }
+  .m-app .rail { display: flex; }
+}
+
+/* =========================================================
+   SHEET · panel bawah (bottom sheet) dan panel samping (side sheet)
+   <dialog class="sheet" id="s1" aria-labelledby="s1-t"><button class="sheet-handle" data-close aria-label="Tutup"></button><div class="sheet-head"><h2 id="s1-t">..</h2></div><div class="sheet-body">..</div><div class="sheet-foot">..</div></dialog>
+   Buka: [data-open-sheet="s1"]. Tutup: [data-close], klik di luar, Esc, atau tarik pegangannya ke bawah.
+   ========================================================= */
+.sheet, .side-sheet { padding: 0; border: 2px solid var(--edge); background: var(--card); color: var(--ink); overflow: hidden; }
+.sheet::backdrop, .side-sheet::backdrop { background: rgba(2, 6, 15, 0.5); animation: fy-fade 0.3s; }
+.sheet { position: fixed; inset: auto 0 0 0; margin: 0 auto; width: 100%; max-width: min(640px, 100%); max-height: calc(100dvh - 40px); border-bottom: 0; border-radius: var(--r-l) var(--r-l) 0 0; box-shadow: 0 -4px 0 var(--edge-shadow); }
+.sheet[open], .side-sheet[open] { display: flex; flex-direction: column; }
+.sheet[open] { animation: fy-sheet-up 0.42s var(--ease); }
+.sheet.closing { transform: translateY(105%) !important; transition: transform 0.26s cubic-bezier(0.4, 0, 1, 1); }
+.sheet.dragging { transition: none; }
+.sheet-handle { flex: none; display: grid; place-items: center; width: 100%; height: 30px; padding: 0; border: 0; background: none; cursor: grab; touch-action: none; }
+.sheet-handle::before { content: ""; width: 44px; height: 5px; border-radius: 999px; background: var(--ink-3); opacity: 0.55; }
+.sheet-head { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 4px 22px 12px; }
+.sheet-head h2 { font-size: 26px; }
+.sheet-head p { color: var(--ink-3); font-size: 14.5px; }
+.sheet-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px 22px 18px; }
+.sheet-foot { flex: none; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; padding: 14px 22px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); }
+.sheet-foot .btn { justify-content: center; }
+@media (max-width: 520px) { .sheet-foot .btn { flex: 1; } }
+.side-sheet { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(420px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; border-right: 0; border-radius: var(--r-l) 0 0 var(--r-l); box-shadow: -6px 0 0 var(--edge-shadow); }
+.side-sheet[open] { animation: fy-side-in 0.42s var(--ease); }
+.side-sheet.closing { transform: translateX(105%) !important; transition: transform 0.26s cubic-bezier(0.4, 0, 1, 1); }
+.side-sheet .sheet-head { padding: max(18px, env(safe-area-inset-top)) 16px 12px 22px; border-bottom: 1px solid var(--line); }
+.side-sheet .sheet-body { padding-top: 18px; }
+@keyframes fy-sheet-up { from { transform: translateY(100%); } }
+@keyframes fy-side-in { from { transform: translateX(100%); } }
+@keyframes fy-fade { from { opacity: 0; } }
+html.sheet-open { overflow: hidden; }
+
+/* Modal layar penuh di HP: <dialog class="modal full"> */
+@media (max-width: 600px) {
+  .modal.full { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; border: 0; border-radius: 0; box-shadow: none; }
+  .modal.full .m-body { padding-top: max(28px, env(safe-area-inset-top)); }
+}
+
+/* =========================================================
+   CAROUSEL · geser horizontal dengan snap, tanpa putar otomatis
+   <section class="carousel" data-carousel aria-roledescription="carousel" aria-label="..">
+     <div class="carousel-track" tabindex="0"><article class="slide" role="group" aria-roledescription="slide" aria-label="1 dari 4">..</article>..</div>
+     <div class="carousel-nav"><button class="icon-btn" data-prev aria-label="Sebelumnya">..</button><button class="icon-btn" data-next aria-label="Berikutnya">..</button></div>
+   </section>
+   .carousel.full = satu slide selebar layar
+   ========================================================= */
+.carousel { position: relative; min-width: 0; display: grid; gap: 8px; }
+.carousel-track { --slide: min(78%, 320px); display: grid; grid-auto-flow: column; grid-auto-columns: var(--slide); gap: 16px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 4px 14px; margin: -4px -4px 0; scrollbar-width: none; border-radius: var(--r-l); }
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-track:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
+.carousel.full .carousel-track { --slide: 100%; padding-inline: 4px; }
+.carousel.wide .carousel-track { --slide: min(86%, 520px); }
+.slide { position: relative; min-width: 0; scroll-snap-align: start; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); overflow: hidden; }
+.slide > img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: var(--surface); }
+.slide .slide-body { display: grid; gap: 4px; padding: 14px 16px 16px; }
+.slide .slide-body b { font-size: 17px; }
+.slide .slide-body span { font-size: 14px; color: var(--ink-3); }
+.carousel-nav { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.carousel-nav .icon-btn[disabled] { opacity: 0.4; cursor: default; transform: none; }
+.carousel-dots { display: flex; gap: 2px; margin-right: auto; }
+.carousel-dots button { width: 28px; height: 28px; padding: 0; border: 0; background: none; display: grid; place-items: center; cursor: pointer; }
+.carousel-dots button::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--line); transition: background 0.2s, transform 0.3s var(--spring); }
+.carousel-dots button[aria-current="true"]::before { background: var(--blue); transform: scale(1.35); }
+@media (prefers-reduced-motion: reduce) { .carousel-track { scroll-behavior: auto; } }
+
+/* =========================================================
+   SLIDER · <input type="range" class="slider" data-slider>
+   Dua ujung: <div class="range2" data-range2><input type="range" class="slider" aria-label="Minimum"><input type="range" class="slider" aria-label="Maksimum"></div>
+   ========================================================= */
+.slider { --p: 50%; -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 44px; margin: 0; background: transparent; cursor: pointer; touch-action: pan-y; }
+.slider:focus-visible { outline: none; }
+.slider::-webkit-slider-runnable-track { height: 10px; border-radius: 999px; border: 2px solid var(--edge); background: linear-gradient(90deg, var(--blue) var(--p), var(--surface-2) var(--p)); }
+.slider::-moz-range-track { height: 10px; border-radius: 999px; border: 2px solid var(--edge); background: linear-gradient(90deg, var(--blue) var(--p), var(--surface-2) var(--p)); }
+.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; margin-top: -10px; border-radius: 50%; background: var(--card); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.25s var(--spring); }
+.slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--card); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.25s var(--spring); }
+.slider:active::-webkit-slider-thumb { transform: scale(1.15); }
+.slider:active::-moz-range-thumb { transform: scale(1.15); }
+.slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 5px rgba(83, 157, 233, 0.45), 0 3px 0 var(--edge-shadow); }
+.slider:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 5px rgba(83, 157, 233, 0.45), 0 3px 0 var(--edge-shadow); }
+.slider:disabled { opacity: 0.45; cursor: not-allowed; }
+.slider-field { display: grid; gap: 2px; }
+.slider-field .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-weight: 700; }
+.slider-field output { font-family: var(--f-num); font-weight: 800; color: var(--text-blue-deep); font-variant-numeric: tabular-nums; }
+.slider-field .ends { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-3); font-family: var(--f-num); }
+.range2 { --a: 20%; --b: 80%; position: relative; height: 44px; }
+.range2::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 14px; transform: translateY(-50%); border-radius: 999px; border: 2px solid var(--edge); background: linear-gradient(90deg, var(--surface-2) var(--a), var(--blue) var(--a), var(--blue) var(--b), var(--surface-2) var(--b)); }
+.range2 .slider { position: absolute; inset: 0; pointer-events: none; }
+.range2 .slider::-webkit-slider-runnable-track { background: none; border-color: transparent; }
+.range2 .slider::-moz-range-track { background: none; border-color: transparent; }
+.range2 .slider::-webkit-slider-thumb { pointer-events: auto; }
+.range2 .slider::-moz-range-thumb { pointer-events: auto; }
+
+/* =========================================================
+   TOOLTIP · label singkat saat disorot, difokus keyboard, atau ditekan lama di HP
+   <span class="tip-wrap"><button class="icon-btn" aria-label="Unduh" aria-describedby="t1">..</button><span class="tip" role="tooltip" id="t1">Unduh laporan</span></span>
+   .tip.below = muncul di bawah
+   ========================================================= */
+.tip-wrap { position: relative; display: inline-flex; }
+.tip { --dx: 0px; position: absolute; left: 50%; bottom: calc(100% + 10px); z-index: 80; width: max-content; max-width: min(240px, 70vw); padding: 7px 12px; border-radius: 10px; background: var(--inverse-bg); color: var(--inverse-fg); font-size: 13.5px; font-weight: 700; line-height: 1.35; text-align: center; pointer-events: none; opacity: 0; visibility: hidden; transform: translate(calc(-50% + var(--dx)), 6px); transition: opacity 0.15s, transform 0.25s var(--spring), visibility 0s 0.25s; }
+.tip::after { content: ""; position: absolute; left: calc(50% - var(--dx)); top: 100%; width: 10px; height: 10px; background: inherit; transform: translate(-50%, -6px) rotate(45deg); border-radius: 2px; }
+.tip.below { bottom: auto; top: calc(100% + 10px); transform: translate(calc(-50% + var(--dx)), -6px); }
+.tip.below::after { top: auto; bottom: 100%; transform: translate(-50%, 6px) rotate(45deg); }
+@media (hover: hover) { .tip-wrap:hover .tip { opacity: 1; visibility: visible; transform: translate(calc(-50% + var(--dx)), 0); transition-delay: 0.35s, 0.35s, 0s; } }
+.tip-wrap:has(:focus-visible) .tip, .tip-wrap.tip-on .tip { opacity: 1; visibility: visible; transform: translate(calc(-50% + var(--dx)), 0); transition-delay: 0s; }
+.tip-wrap.tip-off .tip { opacity: 0 !important; visibility: hidden !important; }
+
+/* =========================================================
+   LIST · daftar umum (pengaturan, kontak, notifikasi, hasil pencarian)
+   <ul class="list divided"><li><a class="li" href="#"><span class="li-lead avatar">AR</span><span class="li-txt"><b>Judul</b><span>Keterangan</span></span><span class="li-trail">2 j</span></a></li></ul>
+   ========================================================= */
+.list { list-style: none; margin: 0; padding: 4px 0; display: grid; min-width: 0; }
+.list > li { min-width: 0; }
+.list .sub { padding: 16px 16px 6px; font-family: var(--f-num); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.list.divided > li + li:not(.sub) { border-top: 1px solid var(--line); }
+.li { display: flex; align-items: center; gap: 14px; min-height: 60px; width: 100%; padding: 10px 16px; border: 0; border-radius: var(--r-m); background: none; color: var(--ink); font: inherit; text-align: left; text-decoration: none; }
+a.li, button.li, label.li { cursor: pointer; transition: background 0.2s; }
+a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
+.list.divided .li { border-radius: 0; }
+.li-lead { flex: none; }
+.li-ico { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; background: var(--surface-2); color: var(--text-blue-deep); }
+.li-ico svg { width: 21px; height: 21px; }
+.li-txt { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.li-txt b { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.li-txt span { font-size: 14px; line-height: 1.45; color: var(--ink-3); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.li-trail { flex: none; margin-left: auto; display: flex; align-items: center; gap: 8px; color: var(--ink-3); font-family: var(--f-num); font-size: 13px; }
+.li-trail > svg { width: 20px; height: 20px; }
+.li .unread { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); }
+
+/* =========================================================
+   CHIP INTERAKTIF · .chip tetap khusus status produk
+   Filter: <button class="chip-btn" aria-pressed="false">Gratis</button>
+   Aksi:   <button class="chip-btn"><svg/>Bagikan</button>
+   Input:  <span class="chip-input">Bogor<button class="x" aria-label="Hapus Bogor">×</button></span>
+   Pembungkus: <div class="chip-set" role="group" aria-label=".."> (.scroll = satu baris geser)
+   ========================================================= */
+.chip-set { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.chip-set.scroll { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 2px 2px 6px; margin: -2px -2px 0; }
+.chip-set.scroll::-webkit-scrollbar { display: none; }
+.chip-btn { flex: none; display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 0 15px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); color: var(--ink-2); font: inherit; font-size: 14.5px; font-weight: 700; white-space: nowrap; text-decoration: none; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.3s var(--spring); }
+.chip-btn:hover { border-color: var(--blue-light); color: var(--ink); }
+.chip-btn:active { transform: scale(0.96); }
+.chip-btn svg { width: 18px; height: 18px; }
+.chip-btn[aria-pressed="true"] { background: var(--blue); border-color: var(--edge); color: #fff; box-shadow: 0 2px 0 var(--edge-shadow); }
+.chip-btn[aria-pressed="true"]::before { content: ""; width: 10px; height: 6px; border-left: 2.4px solid currentColor; border-bottom: 2.4px solid currentColor; transform: translateY(-2px) rotate(-45deg); }
+.chip-input { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 3px 0 13px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font-size: 14.5px; font-weight: 700; white-space: nowrap; }
+.chip-input.with-av { padding-left: 4px; }
+.chip-input .avatar { --s: 26px; border-width: 1.5px; }
+.chip-input .x { display: grid; place-items: center; width: 30px; height: 30px; padding: 0; border: 0; border-radius: 9px; background: none; color: var(--ink-3); font: inherit; font-size: 20px; line-height: 1; cursor: pointer; }
+.chip-input .x:hover { background: var(--surface-2); color: var(--ink); }
+.chip-input .x svg { width: 16px; height: 16px; }
+
+/* =========================================================
+   LOADING · spinner segel, skeleton, progres lingkaran, progres tanpa angka
+   <span class="spinner" role="status" aria-label="Memuat"></span>
+   <span class="skel text" style="width:60%"></span>
+   ========================================================= */
+.spinner { --s: 30px; --spin: var(--blue); display: inline-block; flex: none; width: var(--s); height: var(--s); vertical-align: middle; animation: fy-breathe 1.6s var(--ease) infinite; }
+.spinner::before { content: ""; display: block; width: 100%; height: 100%; background: var(--spin); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; animation: fy-spin 1.6s linear infinite; }
+.spinner.sm { --s: 18px; } .spinner.lg { --s: 52px; }
+.spinner.contained { --s: 44px; padding: 8px; border-radius: 50%; background: var(--surface-2); }
+.btn .spinner { --s: 18px; --spin: currentColor; }
+.btn[aria-busy="true"] { cursor: progress; pointer-events: none; }
+@keyframes fy-breathe { 50% { transform: scale(0.8); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation: none !important; } .spinner::before { animation: fy-spin 3s linear infinite !important; } }
+.loading-block { display: grid; justify-items: center; gap: 10px; padding: 28px 16px; color: var(--ink-3); font-size: 14.5px; text-align: center; }
+
+.skel { position: relative; display: block; overflow: hidden; border-radius: 10px; background: var(--surface-2); color: transparent !important; }
+.skel::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent); animation: fy-shimmer 1.4s ease-in-out infinite; }
+:root[data-theme="dark"] .skel::after { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .skel::after { background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.07), transparent); } }
+.skel.text { height: 0.9em; margin: 0.35em 0; border-radius: 6px; }
+.skel.title { height: 1.4em; width: 60%; border-radius: 8px; }
+.skel.circle { border-radius: 50%; }
+.skel.block { aspect-ratio: 16 / 9; border-radius: var(--r-m); }
+@keyframes fy-shimmer { to { transform: translateX(100%); } }
+
+.ring { --v: 0; --s: 64px; position: relative; display: inline-grid; place-items: center; flex: none; width: var(--s); height: var(--s); border-radius: 50%; background: conic-gradient(var(--blue) calc(var(--v) * 1turn), var(--surface-2) 0); font-family: var(--f-num); font-weight: 800; font-size: calc(var(--s) * 0.24); color: var(--ink); }
+.ring::before { content: ""; position: absolute; inset: calc(var(--s) * 0.14); border-radius: 50%; background: var(--card); }
+.ring > * { position: relative; }
+.progress.indeterminate span { width: 40%; animation: fy-indet 1.3s var(--ease) infinite; }
+@keyframes fy-indet { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+
+/* =========================================================
+   SNACKBAR · kabar singkat dengan tombol aksi (mis. Batalkan)
+   JS: snackbar("Pesan diarsipkan", { action: "Batalkan", onAction() {} })
+   Deklaratif: <button data-snackbar="Tersimpan" data-snackbar-action="Lihat">
+   ========================================================= */
+.snackbar { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); z-index: 330; display: flex; align-items: center; gap: 4px 10px; width: max-content; max-width: min(560px, calc(100vw - 32px)); min-height: 52px; padding: 6px 6px 6px 18px; border-radius: 16px; border: 2px solid var(--edge); background: var(--inverse-bg); color: var(--inverse-fg); box-shadow: 0 4px 0 var(--edge-shadow); font-size: 15px; font-weight: 700; opacity: 0; visibility: hidden; transform: translate(-50%, 24px); transition: transform 0.45s var(--spring), opacity 0.2s, visibility 0s 0.45s; }
+.snackbar.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
+.snackbar .sb-text { flex: 1; min-width: 0; padding: 8px 0; }
+.snackbar .sb-act { flex: none; min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: none; color: var(--inverse-accent); font: inherit; font-weight: 800; cursor: pointer; }
+.snackbar .sb-act:hover { background: rgba(127, 127, 127, 0.18); }
+.snackbar .sb-x { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 10px; background: none; color: inherit; cursor: pointer; }
+.snackbar .sb-x:hover { background: rgba(127, 127, 127, 0.18); }
+.snackbar .sb-x svg { width: 18px; height: 18px; }
+.snackbar :focus-visible { outline-color: var(--inverse-accent); outline-offset: 1px; }
+@media (max-width: 520px) { .snackbar { left: 16px; right: 16px; width: auto; max-width: none; transform: translateY(24px); } .snackbar.show { transform: none; } }
+
+/* =========================================================
+   SEARCH BAR + SARAN
+   <div class="search-bar" data-suggest><svg/><input type="search" role="combobox" aria-expanded="false" aria-controls="sg" aria-autocomplete="list" aria-label=".."><ul class="suggest" id="sg" role="listbox" hidden><li role="option">..</li></ul></div>
+   ========================================================= */
+.search-bar { position: relative; display: flex; align-items: center; gap: 4px; min-height: 54px; padding: 0 6px 0 16px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-pop); }
+.search-bar > svg { flex: none; width: 20px; height: 20px; color: var(--ink-3); }
+.search-bar input { flex: 1; min-width: 0; height: 50px; padding: 0 8px; border: 0; background: none; color: var(--ink); font: inherit; font-size: 16px; }
+.search-bar input::placeholder { color: var(--placeholder); }
+.search-bar input:focus { outline: none; }
+.search-bar:focus-within { box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.3), var(--shadow-pop); }
+.search-bar input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.search-bar .icon-btn { flex: none; background: none; }
+.search-bar .avatar { --s: 38px; }
+.suggest { position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 55; list-style: none; margin: 0; padding: 6px; max-height: min(320px, 60vh); overflow-y: auto; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); }
+.suggest[hidden] { display: none; }
+.suggest [role="option"] { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 12px; border-radius: 10px; color: var(--ink-2); font-weight: 700; cursor: pointer; }
+.suggest [role="option"] svg { width: 18px; height: 18px; color: var(--ink-3); flex: none; }
+.suggest [role="option"]:hover, .suggest [role="option"][aria-selected="true"] { background: var(--surface); color: var(--ink); }
+.suggest .none { padding: 12px; color: var(--ink-3); font-size: 14.5px; }
+
+/* =========================================================
+   DATE & TIME PICKER
+   <div class="picker" data-datepicker [data-range] [data-min="2026-10-01"] [data-max]>
+     <input class="input" id="tgl" readonly placeholder="Pilih tanggal">
+     <button type="button" class="picker-btn" aria-label="Buka kalender">..</button>
+     <input type="hidden" name="tanggal">
+   </div>
+   Jam: data-timepicker [data-step="5"]. Popup dibuat oleh controls.js.
+   ========================================================= */
+.picker { position: relative; }
+.picker .input { padding-right: 52px; cursor: pointer; }
+.picker-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 42px; height: 42px; border: 0; border-radius: 12px; background: none; color: var(--text-blue-deep); cursor: pointer; }
+.picker-btn:hover { background: var(--surface); }
+.picker-btn svg { width: 21px; height: 21px; }
+.pop { position: absolute; left: 0; top: calc(100% + 8px); z-index: 90; width: max-content; max-width: min(340px, calc(100vw - 24px)); padding: 14px; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); animation: fy-rise 0.3s var(--spring); }
+.pop.end { left: auto; right: 0; }
+.pop-scrim { display: none; }
+@media (max-width: 600px) {
+  .pop { position: fixed; left: 12px !important; right: 12px !important; top: auto; bottom: calc(12px + env(safe-area-inset-bottom)); width: auto; max-width: none; margin-inline: auto; max-height: calc(100dvh - 24px); overflow-y: auto; }
+  .pop-scrim { display: block; position: fixed; inset: 0; z-index: 89; background: rgba(2, 6, 15, 0.45); animation: fy-fade 0.25s; }
+}
+.dp-head { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
+.dp-title { flex: 1; text-align: center; font-family: var(--f-head); font-weight: 800; font-size: 20px; }
+.dp-head button, .tp-foot button.icon { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 12px; background: none; color: var(--ink-2); cursor: pointer; }
+.dp-head button:hover { background: var(--surface); }
+.dp-head svg { width: 20px; height: 20px; }
+.dp-grid { display: grid; grid-template-columns: repeat(7, 44px); gap: 2px; justify-content: center; }
+@media (max-width: 600px) { .dp-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); } }
+.dp-wd { display: grid; place-items: center; height: 30px; font-family: var(--f-num); font-size: 12px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; }
+.dp-day { position: relative; height: 44px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--ink); font: inherit; font-family: var(--f-num); font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; cursor: pointer; }
+.dp-day:hover { background: var(--surface); }
+.dp-day.out { color: var(--ink-3); font-weight: 400; }
+.dp-day[aria-current="date"] { box-shadow: inset 0 0 0 2px var(--blue-light); }
+.dp-day.in-range { border-radius: 0; background: var(--surface-2); }
+.dp-day[aria-pressed="true"] { background: var(--blue); color: #fff; box-shadow: inset 0 0 0 2px var(--edge); }
+.dp-day:disabled { color: var(--ink-3); opacity: 0.35; cursor: not-allowed; background: none; text-decoration: line-through; }
+.dp-day:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 1px; }
+.dp-foot, .tp-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+.dp-foot .hint { font-size: 13px; color: var(--ink-3); }
+.pop .txt-btn { min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: none; color: var(--text-blue-deep); font: inherit; font-weight: 800; cursor: pointer; }
+.pop .txt-btn:hover { background: var(--surface); }
+.tp-cols { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.tp-sep { font-family: var(--f-head); font-weight: 800; font-size: 34px; color: var(--ink-3); }
+.tp-col { display: grid; gap: 4px; justify-items: stretch; }
+.tp-col > span { text-align: center; font-family: var(--f-num); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.tp-list { list-style: none; margin: 0; padding: 4px; width: 96px; height: 212px; overflow-y: auto; overscroll-behavior: contain; scroll-snap-type: y proximity; border-radius: var(--r-m); background: var(--surface); scrollbar-width: none; }
+.tp-list::-webkit-scrollbar { display: none; }
+.tp-list:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
+.tp-list li { display: grid; place-items: center; height: 44px; scroll-snap-align: center; border-radius: 12px; font-family: var(--f-num); font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--ink-2); cursor: pointer; }
+.tp-list li:hover { background: var(--surface-2); }
+.tp-list li[aria-selected="true"] { background: var(--blue); color: #fff; box-shadow: inset 0 0 0 2px var(--edge); }
+.tp-list li.active:not([aria-selected="true"]) { outline: 2px solid var(--blue-light); outline-offset: -2px; }
+@media (max-width: 600px) { .tp-list { width: 100%; } }
+
+/* =========================================================
+   FLOATING TOOLBAR · bilah aksi melayang (mis. saat memilih item)
+   <div class="float-bar" role="toolbar" aria-label=".."><span class="fb-count">3 dipilih</span><button class="icon-btn">..</button></div>
+   ========================================================= */
+.float-bar { display: inline-flex; align-items: center; gap: 4px; max-width: calc(100vw - 32px); padding: 6px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); overflow-x: auto; scrollbar-width: none; }
+.float-bar .icon-btn { flex: none; background: none; width: 44px; height: 44px; }
+.float-bar .icon-btn:hover { background: var(--surface); }
+.float-bar .fb-count { flex: none; padding: 0 12px 0 10px; font-family: var(--f-num); font-weight: 800; font-size: 14.5px; white-space: nowrap; }
+.float-bar .sep { flex: none; width: 2px; height: 24px; margin: 0 4px; background: var(--line); }
+.float-bar.dock { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); z-index: 65; transform: translateX(-50%); }
+
+/* Label kolom yang memakai <label for> (mis. picker), selaras dengan .field > span */
+.field > label:not(.check):first-child { font-weight: 700; font-size: 15px; }
+
+```
+
+---
+
+## Kode: `css/app.css`
+
+```css
+/* FUSIONIFY UI · app.css
+   Komponen aplikasi: dashboard pengguna, dashboard admin, halaman masuk/daftar.
+   Butuh tokens.css + base.css + components.css (+ product.css untuk form).
+   Interaksi (sidebar HP, dropdown, modal, tab, tampil password, validasi) ada di js/app.js.
+   Prinsip sama: gaya stiker, segel, maskot, jujur. Di aplikasi gerak dibuat lebih tenang: tanpa smooth scroll dan tanpa reveal. */
+
+/* =========================================================
+   KERANGKA APLIKASI · sidebar + topbar + isi
+   <div class="app" data-app> <aside class="side" data-side>..</aside> <div class="app-main">..</div> </div>
+   ========================================================= */
+.app { display: grid; grid-template-columns: 264px minmax(0, 1fr); min-height: 100vh; min-height: 100dvh; background: var(--paper); }
+.side { position: sticky; top: 0; height: 100vh; height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; gap: 18px; padding: 18px 14px; background: var(--card); border-right: 2px solid var(--edge); overflow-y: auto; z-index: 40; }
+.side-brand { display: flex; align-items: center; gap: 10px; padding: 6px 8px; text-decoration: none; font-family: var(--f-head); font-weight: 800; font-size: 21px; }
+.side-brand img { width: 34px; height: 34px; }
+.side-nav { display: grid; gap: 4px; align-content: start; }
+.side-nav .group { margin: 14px 10px 4px; font-family: var(--f-num); font-size: 11.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.side-nav a { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 15px; color: var(--ink-2); transition: background 0.2s, color 0.2s; }
+.side-nav a svg { width: 20px; height: 20px; flex: none; }
+.side-nav a:hover { background: var(--surface); color: var(--ink); }
+.side-nav a[aria-current="page"] { background: var(--blue); color: #fff; box-shadow: var(--shadow-pop); border: 2px solid var(--edge); padding: 8px 10px; }
+.side-nav .count { margin-left: auto; min-width: 22px; padding: 1px 7px; border-radius: 999px; background: var(--surface-2); color: var(--text-blue-deep); font-family: var(--f-num); font-size: 12px; font-weight: 800; text-align: center; }
+.side-nav a[aria-current="page"] .count { background: #fff; color: #0261cd; }
+.side-foot { display: grid; gap: 10px; }
+.side-help { position: relative; padding: 16px 16px 16px 84px; border-radius: var(--r-m); background: var(--surface); font-size: 14px; color: var(--ink-2); min-height: 92px; }
+.side-help img { position: absolute; left: 8px; bottom: 0; width: 70px; height: auto; }
+.side-help b { display: block; color: var(--ink); font-size: 15px; }
+.side-help a { display: inline-block; padding-block: 6px; }
+.side-help a { color: var(--text-blue-deep); font-weight: 700; }
+
+.app-main { display: grid; grid-template-rows: auto 1fr; min-width: 0; }
+.topbar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 10px; padding: 12px clamp(16px, 3vw, 32px); background: var(--nav-glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.topbar .spacer { flex: 1; }
+.side-toggle { display: none; }
+.app-body { padding: clamp(18px, 3vw, 34px) clamp(16px, 3vw, 32px) 60px; display: grid; gap: 24px; align-content: start; min-width: 0; }
+.page-head { display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: flex-end; justify-content: space-between; }
+.page-head h1 { font-size: clamp(32px, 4vw, 46px); }
+.page-head p { color: var(--ink-2); margin-top: 6px; }
+.page-head .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.scrim { position: fixed; inset: 0; z-index: 39; background: rgba(2, 6, 15, 0.5); opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+@media (max-width: 960px) {
+  .app { grid-template-columns: 1fr; }
+  .side { position: fixed; left: 0; top: 0; bottom: 0; width: min(300px, 86vw); transform: translateX(-105%); transition: transform 0.4s var(--ease); box-shadow: 6px 0 0 var(--edge-shadow); }
+  .app.side-open .side { transform: none; }
+  .app.side-open .scrim { opacity: 1; pointer-events: auto; }
+  .side-toggle { display: grid; }
+}
+
+/* Kolom pencarian di topbar */
+.search { position: relative; flex: 1 1 260px; max-width: 420px; }
+.search svg { position: absolute; left: 14px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--ink-3); pointer-events: none; }
+.search input { width: 100%; font: inherit; font-size: 15px; color: var(--ink); padding: 10px 14px 10px 42px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--field); transition: border-color 0.2s, box-shadow 0.2s; }
+.search input::placeholder { color: var(--placeholder); }
+.search input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.25); }
+@media (max-width: 620px) { .topbar .search { display: none; } }
+
+/* Tombol ikon dengan titik notifikasi */
+.icon-btn { position: relative; color: var(--ink-2); }
+.icon-btn .dot-badge { position: absolute; top: 8px; right: 9px; width: 9px; height: 9px; border-radius: 50%; background: #e5484d; box-shadow: 0 0 0 2px var(--card); }
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+.avatar { --s: 40px; flex: none; width: var(--s); height: var(--s); border-radius: 50%; display: inline-grid; place-items: center; overflow: hidden; background: var(--surface-2); color: var(--text-blue-deep); font-family: var(--f-num); font-weight: 800; font-size: calc(var(--s) * 0.38); border: 2px solid var(--edge); }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar.sm { --s: 32px; } .avatar.lg { --s: 56px; }
+.avatar-stack { display: flex; } .avatar-stack .avatar { margin-left: -10px; } .avatar-stack .avatar:first-child { margin-left: 0; }
+.user-chip { display: flex; align-items: center; gap: 10px; padding: 4px 10px 4px 4px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card); font-weight: 700; font-size: 14.5px; color: var(--ink); cursor: pointer; }
+.user-chip small { display: block; font-weight: 400; color: var(--ink-3); font-size: 12.5px; line-height: 1.1; }
+.user-chip svg { width: 16px; height: 16px; color: var(--ink-3); }
+@media (max-width: 620px) { .user-chip .who { display: none; } .user-chip { padding: 3px; } .user-chip > svg { display: none; } }
+
+/* =========================================================
+   PANEL · kartu aplikasi dengan kepala
+   ========================================================= */
+.panel { position: relative; min-width: 0; padding: 22px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); }
+.panel-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.panel-head h2 { font-size: 22px; }
+.panel-head p { font-size: 14px; color: var(--ink-3); }
+.panel.flush { padding: 0; overflow: hidden; }
+.panel.flush .panel-head { padding: 20px 22px 0; }
+.dash-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 22px; }
+.span-12 { grid-column: span 12; } .span-8 { grid-column: span 8; } .span-7 { grid-column: span 7; } .span-6 { grid-column: span 6; } .span-5 { grid-column: span 5; } .span-4 { grid-column: span 4; }
+@media (max-width: 1100px) { .span-8, .span-7, .span-6, .span-5, .span-4 { grid-column: span 12; } }
+
+/* Label data contoh: WAJIB di template selama datanya belum dari sistem asli */
+.sample-note { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--beta-bg); color: var(--beta); font-family: var(--f-num); font-size: 12px; font-weight: 700; }
+
+/* =========================================================
+   KPI · angka ringkas dengan perubahan
+   ========================================================= */
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.kpi { position: relative; display: grid; gap: 10px; padding: 20px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); overflow: hidden; }
+.kpi .lab { display: flex; align-items: center; gap: 8px; font-family: var(--f-num); font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
+.kpi .lab svg { width: 18px; height: 18px; color: var(--text-blue); }
+.kpi .v { font-family: var(--f-num); font-weight: 800; font-size: clamp(30px, 3vw, 40px); line-height: 1; letter-spacing: -0.02em; }
+.kpi .delta { justify-self: start; display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 999px; font-family: var(--f-num); font-size: 12.5px; font-weight: 800; }
+.kpi .delta.up { color: var(--go); background: var(--go-bg); }
+.kpi .delta.down { color: var(--danger); background: var(--danger-bg); }
+.kpi .delta.flat { color: var(--eos); background: var(--eos-bg); }
+.kpi .spark { position: absolute; right: 14px; bottom: 14px; width: 96px; height: 34px; color: var(--blue-light); }
+.kpi.blue { background: var(--blue); color: #fff; }
+.kpi.blue .lab, .kpi.blue .lab svg { color: #f2f8ff; }
+.kpi.blue .spark { color: #fff; }
+@media (max-width: 1100px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .kpis { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   GRAFIK SEDERHANA (tanpa library)
+   Batang: <div class="bars" role="img" aria-label="..."><span style="--v:.6" data-l="Sen"></span>...</div>
+   Garis: SVG polyline di dalam .linechart. Donat: .donut style="--p:72".
+   Selalu sertakan ringkasan teks atau tabel untuk pembaca layar.
+   ========================================================= */
+.bars { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); align-items: end; gap: 10px; height: 200px; padding-bottom: 24px; position: relative; }
+.bars::before { content: ""; position: absolute; left: 0; right: 0; bottom: 24px; border-top: 2px solid var(--line); }
+.bars span { position: relative; height: calc(var(--v) * 100%); min-height: 4px; border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, var(--blue-light), var(--blue)); transform-origin: bottom; }
+.bars span.hl { background: linear-gradient(180deg, #7cc0ff, var(--blue-deep)); box-shadow: 0 0 0 2px var(--edge); }
+.bars span::after { content: attr(data-l); position: absolute; left: 50%; top: calc(100% + 6px); transform: translateX(-50%); font-family: var(--f-num); font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+.linechart { width: 100%; height: 220px; color: var(--blue); }
+.linechart .grid line { stroke: var(--line); stroke-width: 1; }
+.linechart .area { fill: url(#fyArea); }
+.linechart .ln { fill: none; stroke: currentColor; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.linechart .pt { fill: var(--card); stroke: currentColor; stroke-width: 3; vector-effect: non-scaling-stroke; }
+.chart-x { display: flex; justify-content: space-between; font-family: var(--f-num); font-size: 12px; color: var(--ink-3); margin-top: 6px; }
+.donut { --p: 50; --s: 150px; width: var(--s); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(var(--blue) calc(var(--p) * 1%), var(--surface-2) 0); }
+.donut::before { content: ""; grid-area: 1 / 1; width: 68%; aspect-ratio: 1; border-radius: 50%; background: var(--card); }
+.donut b { grid-area: 1 / 1; position: relative; font-family: var(--f-num); font-weight: 800; font-size: calc(var(--s) * 0.2); }
+.legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 14.5px; color: var(--ink-2); }
+.legend li { display: flex; align-items: center; gap: 8px; }
+.legend li::before { content: ""; width: 12px; height: 12px; border-radius: 4px; background: var(--c, var(--blue)); }
+.legend b { margin-left: auto; color: var(--ink); font-family: var(--f-num); }
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
+/* =========================================================
+   DAFTAR AKTIVITAS / NOTIFIKASI
+   ========================================================= */
+.feed { list-style: none; margin: 0; padding: 0; display: grid; }
+.feed li { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.feed li:last-child { border-bottom: 0; }
+.feed p { font-size: 14.5px; color: var(--ink-2); line-height: 1.4; }
+.feed p b { color: var(--ink); }
+.feed time { font-family: var(--f-num); font-size: 12.5px; color: var(--ink-3); white-space: nowrap; }
+
+/* =========================================================
+   TABEL APLIKASI · tambahan untuk .table (product.css)
+   ========================================================= */
+.toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; padding: 16px 18px; border-bottom: 1px solid var(--line); }
+.toolbar .left, .toolbar .right { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.toolbar .left { flex: 1 1 260px; }
+.toolbar .left .search { max-width: 360px; }
+.toolbar .search { flex: 1 1 220px; }
+.select.sm, .input.sm { width: auto; padding: 8px 12px; font-size: 14.5px; border-radius: 12px; box-shadow: none; border-width: 1.5px; border-color: var(--line); }
+.select.sm { padding-right: 38px; background-position: right 10px center; }
+.panel.flush .table-wrap { border: 0; border-radius: 0; box-shadow: none; }
+.table .who { display: flex; align-items: center; gap: 10px; min-width: 180px; }
+.table .who small { display: block; color: var(--ink-3); font-size: 13px; }
+.table td .chip { font-size: 12px; }
+.row-actions { display: flex; gap: 4px; justify-content: flex-end; }
+.row-actions .icon-btn { width: 36px; height: 36px; background: transparent; }
+.row-actions .icon-btn:hover { background: var(--surface-2); }
+.row-actions .icon-btn.danger:hover { background: var(--danger-bg); color: var(--danger); }
+.table tr[aria-selected="true"] td { background: var(--surface); }
+.table input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--blue); }
+@media (pointer: coarse) { .table input[type="checkbox"] { width: 24px; height: 24px; } }
+
+/* Pagination */
+.pager { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; padding: 14px 18px; border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-3); }
+.pager nav { display: flex; gap: 4px; }
+.pager a, .pager span.cur { min-width: 36px; height: 36px; padding: 0 8px; display: grid; place-items: center; border-radius: 10px; text-decoration: none; font-family: var(--f-num); font-weight: 700; color: var(--ink-2); }
+.pager a:hover { background: var(--surface); }
+.pager span.cur { background: var(--blue); color: #fff; }
+.pager a[aria-disabled="true"] { opacity: 0.4; pointer-events: none; }
+
+/* =========================================================
+   SWITCH (on/off) · <label class="switch"><input type="checkbox" role="switch"><span></span> Teks</label>
+   ========================================================= */
+.switch { display: inline-flex; align-items: center; gap: 12px; cursor: pointer; font-size: 15px; }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.switch input + span { position: relative; flex: none; width: 50px; height: 28px; border-radius: 999px; background: var(--surface-2); border: 2px solid var(--edge); transition: background 0.25s; }
+.switch input + span::after { content: ""; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--card); border: 2px solid var(--edge); transition: transform 0.3s var(--spring); }
+.switch input:checked + span { background: var(--blue); }
+.switch input:checked + span::after { transform: translateX(22px); background: #fff; }
+.switch input:focus-visible + span { outline: 3px solid var(--blue-light); outline-offset: 2px; }
+.settings-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.settings-row:last-child { border-bottom: 0; }
+.settings-row b { display: block; }
+.settings-row p { font-size: 14px; color: var(--ink-3); }
+
+/* Dropdown, menu, modal, dan tab pindah ke controls.css (dimuat lewat fusionify.css) supaya bisa dipakai di web publik juga. */
+
+/* =========================================================
+   HALAMAN MASUK / DAFTAR / LUPA PASSWORD
+   <div class="auth"><aside class="auth-art">..</aside><main class="auth-main"><div class="auth-card">..</div></main></div>
+   ========================================================= */
+.auth { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); min-height: 100vh; min-height: 100dvh; background: var(--paper); }
+.auth-art { position: relative; overflow: hidden; display: grid; align-content: space-between; gap: 30px; padding: clamp(28px, 4vw, 48px); background: var(--blue); color: #fff; }
+.auth-art .brand { color: #fff; }
+.auth-art .seal-deco { position: absolute; right: -18%; bottom: -14%; width: 80%; color: rgba(255, 255, 255, 0.1); max-width: none; pointer-events: none; }
+.auth-art .copy { position: relative; display: grid; gap: 14px; max-width: 30ch; }
+.auth-art h2 { font-size: clamp(36px, 4vw, 54px); }
+.auth-art p { color: #f2f8ff; }
+.auth-art .mascot { position: relative; width: min(62%, 300px); height: auto; justify-self: end; margin: 0 -10px calc(clamp(28px, 4vw, 48px) * -1) 0; }
+.auth-art .bubble { position: absolute; right: min(48%, 250px); bottom: min(34%, 260px); z-index: 2; }
+.auth-main { display: grid; justify-items: center; align-items: start; padding: clamp(24px, 8vh, 96px) clamp(16px, 4vw, 48px) clamp(24px, 4vw, 56px); } /* atas, bukan tengah: form tidak loncat saat pesan error muncul/hilang */
+.auth-card { width: min(100%, 440px); display: grid; gap: 22px; }
+.auth-card h1 { font-size: clamp(36px, 4vw, 48px); }
+.auth-card .sub { color: var(--ink-2); margin-top: -10px; }
+.auth-card form { display: grid; gap: 16px; }
+.auth-card .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; font-size: 15px; }
+.auth-card .row a, .auth-card .alt a { color: var(--text-blue-deep); font-weight: 700; }
+.auth-card .alt { text-align: center; color: var(--ink-2); font-size: 15px; }
+.auth-top { display: flex; justify-content: flex-end; gap: 8px; }
+.btn.block { width: 100%; justify-content: center; }
+.btn.social { --bg: var(--card); --fg: var(--ink); }
+.btn.social svg { width: 20px; height: 20px; }
+.divider { display: flex; align-items: center; gap: 12px; color: var(--ink-3); font-size: 14px; }
+.divider::before, .divider::after { content: ""; flex: 1; border-top: 1.5px solid var(--line); }
+.pw-field { position: relative; }
+.pw-field .input { padding-right: 52px; }
+.pw-field .pw-toggle { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: transparent; }
+.pw-meter { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.pw-meter i { height: 6px; border-radius: 3px; background: var(--line); transition: background 0.25s; }
+.pw-meter[data-level="1"] i:nth-child(-n+1) { background: var(--danger); }
+.pw-meter[data-level="2"] i:nth-child(-n+2) { background: #e8a33d; }
+.pw-meter[data-level="3"] i:nth-child(-n+3) { background: var(--blue-light); }
+.pw-meter[data-level="4"] i { background: var(--go); }
+.auth-done { display: grid; justify-items: center; text-align: center; gap: 14px; }
+.auth-done img { width: 150px; height: auto; }
+.auth-done[hidden] { display: none; }
+@media (max-width: 900px) {
+  .auth { grid-template-columns: 1fr; }
+  .auth-art { min-height: 0; grid-template-columns: 1fr auto; align-items: end; padding: 22px 20px 0; }
+  .auth-art .copy { display: none; }
+  .auth-art .bubble { display: none; }
+  .auth-art .mascot { width: 110px; margin: 0; }
+  .auth-art .seal-deco { width: 60%; right: -10%; bottom: -40%; }
+}
 
 ```
 
@@ -914,11 +1782,211 @@ export const SEAL_PATH = seal(50, 50, 44, 3.2, 12);
 
 ```
 
+## Kode: `js/theme.js`
+
+```js
+// FUSIONIFY UI · theme.js
+// Mode terang / gelap. Bawaan: ikut sistem. Pilihan pengguna disimpan di localStorage ("fy-theme").
+// Pasang skrip head (snippets/head-script.html) supaya tema sudah benar sebelum halaman tampil (tanpa kedip).
+//
+// Tombol: <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Ganti tema">...</button>
+// Web yang ingin selalu terang: <html data-theme="light" data-theme-lock> dan jangan pasang tombolnya.
+
+const KEY = "fy-theme";
+const root = document.documentElement;
+const media = matchMedia("(prefers-color-scheme: dark)");
+
+export const currentTheme = () => root.dataset.theme || (media.matches ? "dark" : "light");
+
+export function setTheme(t) {
+  if (root.hasAttribute("data-theme-lock")) return;
+  root.dataset.theme = t;
+  try { localStorage.setItem(KEY, t); } catch {}
+  syncButtons();
+  root.dispatchEvent(new CustomEvent("fy:theme", { detail: t }));
+}
+
+function syncButtons() {
+  const t = currentTheme();
+  document.querySelectorAll("[data-theme-toggle]").forEach((b) => {
+    b.setAttribute("aria-pressed", String(t === "dark"));
+    const id = b.dataset.labelDark && b.dataset.labelLight ? (t === "dark" ? b.dataset.labelLight : b.dataset.labelDark) : null;
+    if (id) b.setAttribute("aria-label", id);
+  });
+}
+
+export function initTheme() {
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest?.("[data-theme-toggle]");
+    if (!b) return;
+    // Transisi warna singkat hanya saat ditekan (bukan saat halaman dimuat)
+    root.classList.add("theme-switching");
+    setTheme(currentTheme() === "dark" ? "light" : "dark");
+    setTimeout(() => root.classList.remove("theme-switching"), 350);
+  });
+  media.addEventListener?.("change", syncButtons);
+  syncButtons();
+}
+
+```
+
+## Kode: `js/app.js`
+
+```js
+// FUSIONIFY UI · app.js
+// Interaksi halaman aplikasi (dashboard, admin, masuk/daftar). Tanpa dependensi, tanpa GSAP.
+//
+//   import { initApp } from "./fusionify-ui/js/app.js";
+//   const app = initApp();
+//   app.toast("Tersimpan!");
+//
+// Yang ditangani:
+// - Tema terang/gelap ([data-theme-toggle])
+// - Sidebar di HP ([data-side-toggle], .app.side-open, Esc, klik scrim)
+// - Semua komponen kontrol lewat initControls() (js/controls.js): dropdown, modal, sheet, tab,
+//   button group, chip, FAB, carousel, slider, tooltip, search, date/time picker, snackbar
+// - Tampil/sembunyi password ([data-pw-toggle]) dan meter kekuatan ([data-pw-meter])
+// - Validasi form ([data-validate]): required, email, minlength, [data-match="#id"], tampil pesan .err
+// - Pilih semua baris tabel ([data-check-all])
+// - Toast (pakai markup .toast dari snippets/body-parts.html)
+
+import { initTheme } from "./theme.js";
+import { initControls, snackbar } from "./controls.js";
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+export function initApp() {
+  window.__fx = true; // supaya fallback .fx-off di <head> tidak aktif
+  initTheme();
+  initControls(); // dropdown, modal, sheet, tab, chip, picker, snackbar, dll. (js/controls.js)
+
+  /* ---------- Sidebar HP ---------- */
+  const app = $("[data-app]");
+  const side = $("[data-side]");
+  const sideBtns = $$("[data-side-toggle]");
+  const setSide = (open) => {
+    if (!app) return;
+    app.classList.toggle("side-open", open);
+    sideBtns.forEach((b) => b.setAttribute("aria-expanded", String(open)));
+    if (side && matchMedia("(max-width: 960px)").matches) side.inert = !open;
+    if (open) $("a", side)?.focus({ preventScroll: true });
+  };
+  const syncSide = () => { if (side) side.inert = matchMedia("(max-width: 960px)").matches && !app?.classList.contains("side-open"); };
+  sideBtns.forEach((b) => b.addEventListener("click", () => setSide(!app.classList.contains("side-open"))));
+  $(".scrim", app || document)?.addEventListener("click", () => setSide(false));
+  matchMedia("(max-width: 960px)").addEventListener("change", () => { setSide(false); syncSide(); });
+  syncSide();
+
+  /* ---------- Password ---------- */
+  $$("[data-pw-toggle]").forEach((b) => b.addEventListener("click", () => {
+    const input = b.parentElement.querySelector("input");
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    b.setAttribute("aria-pressed", String(show));
+    b.setAttribute("aria-label", show ? (b.dataset.hide || "Sembunyikan password") : (b.dataset.show || "Tampilkan password"));
+  }));
+  $$("[data-pw-meter]").forEach((meter) => {
+    const input = document.querySelector(meter.dataset.pwMeter);
+    const label = meter.nextElementSibling;
+    const words = (meter.dataset.words || "Terlalu pendek|Lemah|Lumayan|Kuat|Sangat kuat").split("|");
+    input?.addEventListener("input", () => {
+      const v = input.value;
+      let lvl = 0;
+      if (v.length >= 8) lvl++;
+      if (/[A-Z]/.test(v) && /[a-z]/.test(v)) lvl++;
+      if (/\d/.test(v)) lvl++;
+      if (/[^A-Za-z0-9]/.test(v) || v.length >= 14) lvl++;
+      if (v.length < 8) lvl = Math.min(lvl, 1);
+      meter.dataset.level = String(v ? Math.max(lvl, 1) : 0);
+      if (label) label.textContent = v ? words[Math.max(lvl, 1)] : "";
+    });
+  });
+
+  /* ---------- Validasi form ---------- */
+  $$("form[data-validate]").forEach((form) => {
+    form.noValidate = true;
+    const msg = (f) => {
+      const d = f.dataset;
+      if (f.validity.valueMissing) return d.msgRequired || "Wajib diisi.";
+      if (f.validity.typeMismatch) return d.msgType || "Formatnya belum benar.";
+      if (f.validity.tooShort) return d.msgShort || `Minimal ${f.minLength} karakter.`;
+      if (d.match && f.value !== document.querySelector(d.match)?.value) return d.msgMatch || "Belum sama.";
+      return "";
+    };
+    const check = (f) => {
+      const m = msg(f);
+      const field = f.closest(".field") || f.parentElement;
+      let err = field.querySelector(".err");
+      if (m) {
+        if (!err) { err = document.createElement("small"); err.className = "err"; err.id = (f.id || f.name) + "-err"; field.appendChild(err); }
+        err.textContent = m;
+        f.setAttribute("aria-invalid", "true");
+        f.setAttribute("aria-describedby", err.id);
+      } else {
+        err?.remove();
+        f.removeAttribute("aria-invalid");
+      }
+      return !m;
+    };
+    const fields = () => $$("input, select, textarea", form).filter((f) => f.willValidate && f.type !== "hidden");
+    // Pesan error hilang saat pengguna mengetik perbaikannya (bukan saat blur), supaya tata letak
+    // tidak bergeser tepat ketika pengguna mengklik tombol lain. Error baru hanya ditambah saat blur.
+    fields().forEach((f) => {
+      f.addEventListener("input", () => { if (f.getAttribute("aria-invalid") === "true") check(f); });
+      f.addEventListener("change", () => { if (f.getAttribute("aria-invalid") === "true") check(f); });
+      f.addEventListener("blur", (e) => {
+        if (!f.value || f.getAttribute("aria-invalid") === "true") return;
+        if (e.relatedTarget && f.closest(".pw-field")?.contains(e.relatedTarget)) return;
+        check(f);
+      });
+    });
+    form.addEventListener("submit", (e) => {
+      const bad = fields().filter((f) => !check(f));
+      if (bad.length) { e.preventDefault(); bad[0].focus(); return; }
+      // Template: tampilkan keadaan berhasil kalau ada [data-done]. Di proyek nyata, kirim ke server di sini.
+      const done = form.dataset.done && document.querySelector(form.dataset.done);
+      if (done) { e.preventDefault(); form.hidden = true; done.hidden = false; done.querySelector("h2, h1")?.focus?.(); }
+    });
+  });
+
+  /* ---------- Pilih semua baris ---------- */
+  $$("[data-check-all]").forEach((all) => {
+    const table = all.closest("table");
+    const boxes = () => $$("tbody input[type='checkbox']", table);
+    const sync = () => boxes().forEach((b) => b.closest("tr").setAttribute("aria-selected", String(b.checked)));
+    all.addEventListener("change", () => { boxes().forEach((b) => (b.checked = all.checked)); sync(); });
+    table.addEventListener("change", (e) => { if (e.target !== all) { const bs = boxes(); all.checked = bs.every((b) => b.checked); all.indeterminate = !all.checked && bs.some((b) => b.checked); sync(); } });
+  });
+
+  /* ---------- Esc menutup sidebar dan menu ---------- */
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (app?.classList.contains("side-open")) { setSide(false); sideBtns[0]?.focus(); }
+  });
+
+  /* ---------- Toast ---------- */
+  const toast = (text) => {
+    const el = $("[data-toast]");
+    if (!el) return;
+    $("[data-toast-text]", el).textContent = text;
+    el.classList.add("show");
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.remove("show"), 2600);
+  };
+  $$("[data-toast-msg]").forEach((b) => b.addEventListener("click", () => toast(b.dataset.toastMsg)));
+
+  return { toast, snackbar, setSide };
+}
+
+```
+
 ## Snippet: `snippets/head-script.html`
 
 ```html
 <!-- FUSIONIFY UI · skrip kecil di <head>, SEBELUM CSS dan skrip lain.
      - .js / .no-js: konten tetap terbaca tanpa JavaScript
+     - data-theme: pilihan terang/gelap yang tersimpan dipasang sebelum halaman tampil (tidak ada kedip putih)
      - .arriving: tirai transisi sudah menutup sejak HTML pertama tampil (tidak ada kedipan)
      - .fx-off: kalau motion.js gagal jalan dalam 4 detik, semua konten dipaksa tampil -->
 <script>
@@ -926,7 +1994,11 @@ export const SEAL_PATH = seal(50, 50, 44, 3.2, 12);
     var d = document.documentElement;
     d.classList.remove("no-js");
     d.classList.add("js");
-    try { if (sessionStorage.getItem("fx-nav") === "1") d.classList.add("arriving"); } catch (e) {}
+    try {
+      var t = localStorage.getItem("fy-theme");
+      if ((t === "dark" || t === "light") && !d.hasAttribute("data-theme-lock")) d.setAttribute("data-theme", t);
+      if (sessionStorage.getItem("fx-nav") === "1") d.classList.add("arriving");
+    } catch (e) {}
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.remove("arriving");
     setTimeout(function () { if (!window.__fx) { d.classList.add("fx-off"); d.classList.remove("arriving"); } }, 4000);
   })();
@@ -960,6 +2032,29 @@ export const SEAL_PATH = seal(50, 50, 44, 3.2, 12);
 
 ```
 
+## Snippet: `snippets/pwa-head.html`
+
+```html
+<!-- FUSIONIFY UI · tambahan <head> untuk web HP, PWA, dan aplikasi WebView (Capacitor/Cordova).
+     Tempel SETELAH snippets/head-script.html. Ganti path dan nama produk.
+     - viewport-fit=cover: isi boleh sampai ke bawah notch, komponen kit sudah memakai env(safe-area-inset-*)
+     - theme-color dua versi: warna bar status ikut tema terang/gelap
+     - apple-touch-icon wajib berlatar (iOS mengisi bagian transparan dengan hitam) -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7fbff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#071022" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Nama Produk"><!-- GANTI -->
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/fusionify-ui/brand/app-icons/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/fusionify-ui/brand/app-icons/apple-touch-icon.png"><!-- GANTI dengan ikon produk 180x180 -->
+
+```
+
 ## Catatan untuk `js/motion.js`
 
 `motion.js` (fungsi `initFusionify()`) ada di repo dan terlalu panjang untuk disalin di sini. Kalau tidak punya akses ke repo, cukup tulis HTML dengan atribut `data-*` yang benar (lihat README di AGENTS.md) dan panggil:
@@ -970,5 +2065,7 @@ export const SEAL_PATH = seal(50, 50, 44, 3.2, 12);
   initFusionify();
 </script>
 ```
+
+Begitu juga `js/controls.js` (`initControls()`, `snackbar()`): interaksi sheet, picker, carousel, slider, tooltip, chip, FAB. Sudah dipanggil otomatis oleh `initFusionify()` dan `initApp()`; contoh markup lengkap ada di `templates/komponen.html`.
 
 Jangan menulis ulang mesin geraknya sendiri. Kalau terpaksa, patuhi aturan performa di AGENTS.md.

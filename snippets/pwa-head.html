@@ -1,0 +1,17 @@
+<!-- FUSIONIFY UI · tambahan <head> untuk web HP, PWA, dan aplikasi WebView (Capacitor/Cordova).
+     Tempel SETELAH snippets/head-script.html. Ganti path dan nama produk.
+     - viewport-fit=cover: isi boleh sampai ke bawah notch, komponen kit sudah memakai env(safe-area-inset-*)
+     - theme-color dua versi: warna bar status ikut tema terang/gelap
+     - apple-touch-icon wajib berlatar (iOS mengisi bagian transparan dengan hitam) -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7fbff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#071022" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Nama Produk"><!-- GANTI -->
+<meta name="format-detection" content="telephone=no">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/fusionify-ui/brand/app-icons/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/fusionify-ui/brand/app-icons/apple-touch-icon.png"><!-- GANTI dengan ikon produk 180x180 -->

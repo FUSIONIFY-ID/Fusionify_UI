@@ -58,6 +58,27 @@ Buka **`demo/index.html`** (lewat server lokal, mis. `npx serve .`) untuk meliha
 
 Mau bikin web produk baru? Salin **`templates/landing-produk.html`**, ganti teks bertanda `GANTI`, logo produk, dan status chip-nya. Isinya sudah lengkap: hero dengan maskot, fitur, cara kerja, harga, testimoni (hapus kalau belum ada izin), FAQ, ajakan, form, dan footer dengan badge.
 
+## Halaman aplikasi dan mode gelap
+
+```html
+<link rel="stylesheet" href="/fusionify-ui/css/fusionify.css">
+<link rel="stylesheet" href="/fusionify-ui/css/app.css">   <!-- hanya di dashboard, admin, masuk -->
+...
+<script type="module">
+  import { initApp } from "/fusionify-ui/js/app.js";
+  const app = initApp();
+</script>
+```
+
+Template siap pakai: `templates/auth/masuk.html`, `daftar.html`, `lupa-password.html`, `atur-ulang-password.html`, `templates/dashboard.html`, `templates/admin.html`.
+
+Mode gelap otomatis mengikuti sistem. Tambahkan tombol `<button class="icon-btn theme-btn" data-theme-toggle ...>` (contoh di template) supaya pengguna bisa memilih sendiri. Web yang ingin selalu terang: `<html data-theme="light" data-theme-lock>`.
+
+## Aplikasi HP (web HP, PWA, iOS, Android)
+
+- **Isinya HTML** (PWA, Capacitor, WebView): mulai dari `templates/app-mobile.html` dan tempel `snippets/pwa-head.html`. Semua komponen HP ada: app bar, navigation bar bawah, rail tablet, FAB, bottom sheet, side sheet, carousel, slider, date/time picker, tooltip, snackbar, chip filter, list, skeleton. Katalognya di `templates/komponen.html`.
+- **Native** (Flutter, SwiftUI, Jetpack Compose, React Native): pakai token di `tokens/` beserta huruf TTF. Panduan lengkap di `tokens/README.md`.
+
 ## Dipakai di AI agent mana pun
 
 | Agent | Cara membaca aturan repo ini |
@@ -78,15 +99,16 @@ Mau bikin web produk baru? Salin **`templates/landing-produk.html`**, ganti teks
 
 | Folder | Isi |
 | --- | --- |
-| `css/` | `tokens.css`, `base.css`, `components.css`, `product.css` (komponen web produk), `fusionify.css` (semua sekaligus) |
-| `js/` | `motion.js` (`initFusionify`), `seal.js` (`seal`, `SEAL_PATH`) |
-| `snippets/` | Potongan HTML wajib: head, sprite SVG, kursor/toast/tirai |
+| `css/` | `tokens.css` (termasuk mode gelap), `base.css`, `components.css`, `product.css` (komponen web produk), `controls.css` (kontrol web dan aplikasi HP), `app.css` (dashboard, admin, masuk), `fusionify.css` (semua kecuali app.css) |
+| `js/` | `motion.js` (`initFusionify`, web publik), `app.js` (`initApp`, aplikasi), `controls.js` (`initControls`, `snackbar`), `theme.js` (terang/gelap), `seal.js` (`seal`, `SEAL_PATH`) |
+| `snippets/` | Potongan HTML wajib: head, sprite SVG, kursor/toast/tirai, plus `pwa-head.html` dan `manifest.webmanifest` untuk aplikasi HP |
+| `tokens/` | Token dan huruf untuk aplikasi native (Flutter, SwiftUI, Compose, React Native) |
 | `fonts/` | Afacad Flux, Sansation, Caveat, Exo 2 (woff2, OFL) |
 | `brand/` | Segel Fi, wordmark, emblem, logo horizontal/vertikal/legacy |
 | `mascot/` | Maskot badan penuh, kepala, papan, stiker bot |
 | `badge/` | "Sebuah produk dari FUSIONIFY" ID/EN, terang/gelap |
 | `demo/` | Halaman contoh semua komponen |
-| `templates/` | Halaman siap pakai: `landing-produk.html`, `404.html` |
+| `templates/` | Halaman siap pakai: `landing-produk.html`, `404.html`, `auth/` (masuk, daftar, lupa password, atur ulang), `dashboard.html`, `admin.html` |
 
 ## Atribut data yang dipahami `initFusionify()`
 

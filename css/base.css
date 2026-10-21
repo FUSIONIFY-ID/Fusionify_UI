@@ -31,7 +31,7 @@ p { margin: 0; }
 
 .wrap { width: min(100% - var(--gut) * 2, var(--max)); margin-inline: auto; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: fixed; left: 12px; top: -60px; z-index: 200; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 10px; text-decoration: none; }
+.skip { position: fixed; left: 12px; top: -60px; z-index: 200; background: var(--inverse-bg); color: var(--inverse-fg); padding: 10px 14px; border-radius: 10px; text-decoration: none; }
 .skip:focus { top: 12px; }
 .nowrap { white-space: nowrap; }
 
@@ -42,7 +42,7 @@ p { margin: 0; }
 .kicker {
   display: inline-flex; align-items: center; gap: 10px;
   font-family: var(--f-num); font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--blue);
+  color: var(--text-blue);
 }
 .kicker::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.22); }
 
@@ -58,7 +58,10 @@ p { margin: 0; }
 .prose h3 { font-size: 26px; color: var(--ink); margin: 28px 0 10px; }
 .prose p, .prose ul, .prose ol { margin: 0 0 16px; }
 .prose ul { padding-left: 1.2em; } .prose li { margin-bottom: 8px; }
-.prose a { color: var(--blue-deep); overflow-wrap: anywhere; }
+.prose a { color: var(--text-blue-deep); overflow-wrap: anywhere; }
+
+/* Pergantian tema: warna berpindah halus sebentar, hanya saat tombol ditekan */
+.theme-switching, .theme-switching *, .theme-switching *::before, .theme-switching *::after { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important; }
 
 /* Gerak dimatikan: hormati pilihan pengguna. Konten yang biasanya muncul lewat animasi WAJIB langsung tampil. */
 @media (prefers-reduced-motion: reduce) {
@@ -86,4 +89,12 @@ p { margin: 0; }
 /* Firefox (Chrome mengabaikan ::-webkit-scrollbar kalau scrollbar-color diisi, jadi dibatasi di sini) */
 @supports not selector(::-webkit-scrollbar) {
   html { scrollbar-color: var(--blue) var(--surface); scrollbar-width: thin; }
+}
+
+/* Layar sentuh (HP, tablet, aplikasi WebView)
+   - iOS memperbesar halaman kalau teks input di bawah 16px, jadi di layar sentuh semua input minimal 16px
+   - touch-action: manipulation menghapus jeda ketuk ganda di tombol dan tautan */
+a, button, [role="button"], label, summary { touch-action: manipulation; }
+@media (hover: none) and (pointer: coarse) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea { font-size: 16px !important; }
 }

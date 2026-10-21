@@ -14,14 +14,21 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Lihat **`demo/index.html
 | `css/base.css` | Reset, tipografi, `.wrap`, `.kicker`, `.h-hero`, `.h-sec`, `.lead`, `.prose` |
 | `css/components.css` | Tombol, chip status, nav, menu HP, seksi, kartu stiker, statistik, kartu karya, foto bersegel, gelembung maskot, panggung maskot, marquee partner, FAQ, gelombang, footer, toast, kursor, transisi halaman, status reveal, jeda `.idle` |
 | `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment` |
-| `css/fusionify.css` | Satu file yang mengimpor semuanya |
+| `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.progress`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, `.btn.danger`, `.sample-note` |
+| `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar) |
+| `css/fusionify.css` | Satu file yang mengimpor tokens, base, components, product, controls (tanpa app.css) |
 | `js/motion.js` | `initFusionify()`: smooth scroll, nav, menu HP, kursor, reveal, angka, magnet, salin + toast, transisi halaman, suara, jeda di luar layar |
+| `js/app.js` | `initApp()` untuk halaman aplikasi: tema, sidebar HP, dropdown, modal, tab, tampil/sembunyi password, meter kekuatan password, validasi form (`data-validate`), pilih semua baris, toast. Tanpa GSAP |
+| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. Event: `fy:change`, `fy:remove`, `fy:select` |
+| `js/theme.js` | Mode terang/gelap (`initTheme`, `setTheme`). Dipanggil otomatis oleh `motion.js` dan `app.js` |
 | `js/seal.js` | `seal()` dan `SEAL_PATH`: bentuk segel 12 lekukan |
 | `snippets/head-script.html` | Skrip kecil wajib di `<head>` |
 | `snippets/sprite.html` | Sprite SVG (clip-path segel, simbol segel) setelah `<body>` |
 | `snippets/body-parts.html` | Kursor, toast, tirai transisi sebelum `</body>` |
+| `snippets/pwa-head.html`, `snippets/manifest.webmanifest` | Tambahan `<head>` dan manifest untuk web HP, PWA, dan aplikasi WebView/Capacitor |
+| `tokens/` | Token untuk **aplikasi native**: `tokens.json`, Flutter, SwiftUI, Jetpack Compose, React Native, plus huruf TTF statis. Dibuat dari `css/tokens.css` dengan `node scripts/build-tokens.mjs`. Panduan di `tokens/README.md` |
 | `fonts/` | Afacad Flux, Sansation, Caveat, Exo 2 (woff2, OFL) |
-| `brand/` | Segel Fi, wordmark (SVG), emblem; `brand/kit/` logo horizontal, vertikal, legacy |
+| `brand/` | Segel Fi, wordmark (SVG), emblem; `brand/kit/` logo horizontal, vertikal, legacy; `brand/app-icons/` ikon aplikasi (192, 512, maskable, apple-touch-icon) |
 | `mascot/` | Maskot badan penuh, kepala, papan, stiker bot |
 | `badge/` | Badge "Sebuah produk dari FUSIONIFY" (ID/EN, terang/gelap) |
 | `demo/index.html` | Halaman contoh semua komponen |
@@ -29,6 +36,11 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Lihat **`demo/index.html
 | `CLAUDE.md`, `GEMINI.md`, `QWEN.md`, `.gemini/`, `.qwen/`, `.cursor/rules/`, `.github/copilot-instructions.md`, `.aider.conf.yml` | Penunjuk ke file ini untuk masing-masing AI agent |
 | `templates/landing-produk.html` | Template landing web produk lengkap. Ganti bagian bertanda `GANTI` |
 | `templates/404.html` | Template halaman tidak ditemukan dengan maskot confused |
+| `templates/auth/masuk.html`, `daftar.html`, `lupa-password.html`, `atur-ulang-password.html` | Halaman masuk, daftar, lupa password, atur ulang password. Validasi dan keadaan berhasil sudah jalan; sambungkan ke backend sendiri |
+| `templates/dashboard.html` | Dashboard pengguna (ringkasan, grafik, pesanan, aktivitas) |
+| `templates/komponen.html` | Katalog semua komponen kontrol dengan contoh hidup |
+| `templates/app-mobile.html` | Template aplikasi HP: app bar, pencarian, chip filter, carousel, list, FAB, navigation bar bawah (jadi rail di tablet), bottom sheet |
+| `templates/admin.html` | Dashboard admin (KPI, grafik, tabel pengguna + filter + pilih semua + hapus dengan konfirmasi, pengaturan bertab, log) |
 
 ## Cara memakai di proyek baru atau lama
 
@@ -55,8 +67,34 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - **Logo**: pakai file di `brand/`. Jangan mengetik "FUSIONIFY" dengan font sebagai pengganti logo. Web produk memakai logonya sendiri, sistem desainnya tetap kit ini.
 - **Maskot**: ganti ekspresi dengan menukar gambar badan penuh. Jangan menempel kepala di badan lain.
 - Hiasan SVG yang sengaja lebih besar dari wadahnya wajib kelas `.fx-oversize` (atau `max-width: none`).
-- Gaya stiker: garis 2px `--ink`, bayangan pejal ke bawah, sudut besar.
+- Gaya stiker: garis 2px `--edge`, bayangan pejal ke bawah (`--edge-shadow`), sudut besar.
 - Jangan menyalin momen khas fusionify.id (segel menutup hero, footer malam Bogor) apa adanya ke web produk. Rakit momen sendiri dari bagian yang sama.
+
+## Mode gelap (wajib dijaga)
+
+- Semua warna komponen memakai token tema: `--card`, `--field`, `--surface`, `--surface-2`, `--edge` (garis stiker), `--edge-shadow` (bayangan pejal), `--ink`/`--ink-2`/`--ink-3` (teks), `--text-blue`/`--text-blue-deep` (teks biru), `--inverse-bg`/`--inverse-fg`, `--danger`. **Jangan menulis `#fff` atau `var(--ink)` untuk latar, garis, atau bayangan.** `#fff` hanya untuk teks/ikon di atas biru.
+- Bawaan: ikut pengaturan sistem. Pilihan pengguna disimpan (`fy-theme`) lewat tombol `[data-theme-toggle]`. Web yang ingin selalu terang: `<html data-theme="light" data-theme-lock>`.
+- Gambar yang beda per tema (mis. wordmark biru vs putih): kelas `.only-light` dan `.only-dark`.
+- Cek kontras dan tampilan di **kedua** tema sebelum selesai.
+
+## Halaman aplikasi (dashboard, admin, masuk)
+
+- Muat `css/app.css` setelah `fusionify.css`, dan panggil `initApp()` dari `js/app.js` (bukan `initFusionify`). Aplikasi tidak memakai smooth scroll, kursor segel, atau reveal: harus terasa cepat dan tenang.
+- Data di template dashboard adalah **contoh** dan diberi label `.sample-note` "Data contoh". Ganti dengan data asli dari sistem, lalu hapus labelnya. Jangan pernah menampilkan angka contoh di aplikasi yang sudah dipakai orang.
+- Tabel lebar wajib di `.table-wrap` (sudah `position: relative`, `tabindex="0" role="region" aria-label`). Teks `.sr-only` di dalam elemen yang bisa digeser butuh pembungkus `position: relative`, kalau tidak halaman ikut melebar di HP.
+- Form: pesan error muncul saat kirim atau saat meninggalkan kolom, dan hilang saat pengguna mengetik perbaikannya. Jangan menghapus pesan error saat blur (tata letak bergeser tepat saat pengguna mengklik).
+- Form masuk/daftar diletakkan di bagian atas, bukan di tengah vertikal, supaya tidak loncat saat pesan error berubah.
+- Login dengan Google hanya dipasang kalau OAuth-nya benar-benar tersedia.
+
+## Aplikasi HP (web HP, PWA, iOS, Android)
+
+- Aplikasi yang isinya HTML (PWA, Capacitor, WebView): mulai dari `templates/app-mobile.html`, tempel `snippets/pwa-head.html`, pakai `initApp()` (bukan `initFusionify`).
+- Aplikasi native (Flutter, SwiftUI, Compose, React Native): CSS tidak dipakai. Ambil token dari `tokens/` dan bangun ulang komponennya dengan aturan yang sama. Jangan menulis hex sendiri di kode native.
+- Target sentuh minimal 44px. Elemen yang menempel di tepi layar wajib memakai `env(safe-area-inset-*)` (komponen kit sudah).
+- Di layar sentuh semua input minimal 16px (sudah di `base.css`) supaya iOS tidak memperbesar halaman saat mengetik.
+- Satu FAB per layar. Navigation bar bawah 3 sampai 5 tujuan; lebih dari itu pakai drawer.
+- Carousel tidak boleh berputar sendiri. Bottom sheet harus bisa ditutup dengan tarik ke bawah, tombol, dan Esc/tombol kembali.
+- Bayangan stiker di native: offset ke bawah tanpa blur, bukan `elevation`.
 
 ## Aturan isi (wajib)
 
@@ -83,7 +121,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 
 ## QA (wajib sebelum selesai)
 
-Cek di **HP** 375×667 dan 390×844, **tablet** 768×1024, 820×1180, 1024×768, **desktop** 1366×768, 1440×900, 1920×1080.
+Cek di **HP** 375×667 dan 390×844 (juga dengan emulasi layar sentuh), **tablet** 768×1024, 820×1180, 1024×768, **desktop** 1366×768, 1440×900, 1920×1080.
 
 - Tidak ada scroll horizontal atau elemen keluar layar.
 - Tidak ada teks bertabrakan atau terpotong.

@@ -1,5 +1,6 @@
 <!-- FUSIONIFY UI · skrip kecil di <head>, SEBELUM CSS dan skrip lain.
      - .js / .no-js: konten tetap terbaca tanpa JavaScript
+     - data-theme: pilihan terang/gelap yang tersimpan dipasang sebelum halaman tampil (tidak ada kedip putih)
      - .arriving: tirai transisi sudah menutup sejak HTML pertama tampil (tidak ada kedipan)
      - .fx-off: kalau motion.js gagal jalan dalam 4 detik, semua konten dipaksa tampil -->
 <script>
@@ -7,7 +8,11 @@
     var d = document.documentElement;
     d.classList.remove("no-js");
     d.classList.add("js");
-    try { if (sessionStorage.getItem("fx-nav") === "1") d.classList.add("arriving"); } catch (e) {}
+    try {
+      var t = localStorage.getItem("fy-theme");
+      if ((t === "dark" || t === "light") && !d.hasAttribute("data-theme-lock")) d.setAttribute("data-theme", t);
+      if (sessionStorage.getItem("fx-nav") === "1") d.classList.add("arriving");
+    } catch (e) {}
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.remove("arriving");
     setTimeout(function () { if (!window.__fx) { d.classList.add("fx-off"); d.classList.remove("arriving"); } }, 4000);
   })();

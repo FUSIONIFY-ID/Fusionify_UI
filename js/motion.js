@@ -17,6 +17,8 @@
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { initTheme } from "./theme.js";
+import { initControls, snackbar } from "./controls.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,6 +120,8 @@ export function initFusionify(opts = {}) {
     ...opts,
   };
   window.__fx = true; // menandai JS berjalan (dipakai fallback .fx-off di <head>)
+  initTheme();
+  initControls(); // komponen kontrol (js/controls.js)
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
   const sfx = createSfx();
@@ -343,5 +347,5 @@ export function initFusionify(opts = {}) {
   }
 
   addEventListener("load", () => ScrollTrigger.refresh());
-  return { sfx, toast, lenis, scrollTo: scrollToEl, gsap, ScrollTrigger };
+  return { sfx, toast, snackbar, lenis, scrollTo: scrollToEl, gsap, ScrollTrigger };
 }
