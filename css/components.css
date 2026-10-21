@@ -1,0 +1,289 @@
+/* FUSIONIFY UI · components.css
+   Komponen siap pakai, diambil dari fusionify.id. Butuh tokens.css + base.css.
+   Markup contoh untuk setiap komponen ada di demo/index.html. */
+
+/* =========================================================
+   TOMBOL · kapsul bergaris tinta dengan bayangan pejal
+   <a class="btn">Konsultasi</a>  <a class="btn ghost">Lihat karya</a>
+   ========================================================= */
+.btn {
+  --bg: var(--blue); --fg: #fff;
+  position: relative; display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 22px; border-radius: 999px; border: 2px solid var(--ink);
+  background: var(--bg); color: var(--fg); text-decoration: none; font-weight: 700; font-size: 16px;
+  box-shadow: var(--shadow-pop); cursor: pointer;
+  transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), background 0.2s;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--ink); }
+.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink); }
+.btn.ghost { --bg: #fff; --fg: var(--ink); }
+.btn.sm { padding: 10px 18px; font-size: 15px; }
+.btn svg { width: 18px; height: 18px; }
+
+/* Tombol ikon bulat (suara, menu) */
+.icon-btn { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 0; cursor: pointer; transition: transform 0.3s var(--spring), background 0.2s; }
+.icon-btn:hover { transform: scale(1.08); background: #dcecff; }
+.icon-btn svg { width: 20px; height: 20px; }
+
+/* =========================================================
+   CHIP STATUS · status produk WAJIB jujur
+   <span class="chip go">Aktif</span> beta | wip | plan | eos
+   ========================================================= */
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 999px; font-size: 12.5px; font-weight: 700; font-family: var(--f-num); letter-spacing: 0.02em; white-space: nowrap; }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.chip.go { color: var(--go); background: var(--go-bg); }
+.chip.beta { color: var(--beta); background: var(--beta-bg); }
+.chip.wip { color: var(--wip); background: var(--wip-bg); }
+.chip.plan { color: var(--plan); background: var(--plan-bg); }
+.chip.eos { color: var(--eos); background: var(--eos-bg); }
+
+/* =========================================================
+   NAVIGASI · transparan di atas, jadi kapsul putih setelah scroll
+   motion.js memasang .scrolled (>24px) dan .hide (scroll turun)
+   ========================================================= */
+.nav {
+  position: fixed; inset: 14px var(--gut) auto; z-index: 60;
+  display: flex; align-items: center; gap: 10px; justify-content: space-between;
+  padding: 10px 0; border-radius: 999px;
+  background: rgba(255, 255, 255, 0); border: 1px solid transparent; box-shadow: 0 10px 30px -18px rgba(11, 15, 26, 0);
+  transition: transform 0.5s var(--ease), background-color 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), padding 0.4s var(--ease), top 0.4s var(--ease);
+  max-width: var(--max); margin-inline: auto; top: 20px;
+}
+.nav.scrolled, html:not(.js) .nav, .fx-off .nav {
+  top: 14px; padding: 8px 8px 8px 14px;
+  background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-color: rgba(13, 108, 215, 0.14);
+  box-shadow: 0 10px 30px -18px rgba(11, 15, 26, 0.35);
+}
+.nav.hide { transform: translateY(-140%); }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand-mark { width: 34px; height: 34px; transition: transform 0.7s var(--spring); }
+.brand:hover .brand-mark { transform: rotate(-200deg) scale(1.06); }
+.brand-word { width: auto; height: 19px; }
+.nav-links { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.nav-links a { display: block; padding: 8px 14px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 15px; color: var(--ink-2); transition: background 0.2s, color 0.2s; }
+.nav-links a:hover, .nav-links a[aria-current="true"], .nav-links a[aria-current="page"] { background: var(--surface); color: var(--blue-deep); }
+.nav-tools { display: flex; align-items: center; gap: 6px; }
+.nav .btn { padding: 10px 18px; font-size: 15px; }
+.lang { display: inline-flex; align-items: center; gap: 4px; height: 42px; font-family: var(--f-num); font-size: 13px; text-decoration: none; padding: 0 14px; border-radius: 999px; background: var(--surface); color: var(--ink-3); transition: background 0.2s; }
+.lang:hover { background: #dcecff; }
+.lang b { font-weight: 600; } .lang b.on { color: var(--blue-deep); font-weight: 800; } .lang i { font-style: normal; opacity: 0.4; }
+.sound-btn { color: var(--ink-3); }
+.sound-btn .w1, .sound-btn .w2 { opacity: 0; transition: opacity 0.2s; }
+.sound-btn[aria-pressed="true"] { color: var(--blue); }
+.sound-btn[aria-pressed="true"] .x { opacity: 0; }
+.sound-btn[aria-pressed="true"] .w1 { opacity: 1; animation: fy-wave 1.2s ease-in-out infinite; }
+.sound-btn[aria-pressed="true"] .w2 { opacity: 1; animation: fy-wave 1.2s ease-in-out -0.4s infinite; }
+@keyframes fy-wave { 50% { opacity: 0.35; } }
+.menu-btn { display: none; }
+.menu-btn path { transition: transform 0.35s var(--ease), opacity 0.2s; transform-origin: 12px 12px; }
+.menu-btn[aria-expanded="true"] .l1 { transform: translateY(4px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] .l2 { transform: translate(-3px, -4px) rotate(-45deg) scaleX(1.6); }
+/* Menu layar penuh di HP: lingkaran biru membesar dari tombol menu */
+.drawer {
+  position: fixed; inset: 0; z-index: 55; background: var(--blue); color: #fff;
+  clip-path: circle(0% at calc(100% - 46px) 46px); transition: clip-path 0.7s var(--ease);
+  display: grid; align-content: center; padding: 90px var(--gut) 40px; visibility: hidden;
+}
+.drawer.open { clip-path: circle(150% at calc(100% - 46px) 46px); visibility: visible; }
+.drawer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.drawer a { font-family: var(--f-head); font-weight: 800; font-size: clamp(40px, 11vw, 64px); text-decoration: none; display: inline-block; }
+.drawer .drawer-mascot { position: absolute; right: 16px; bottom: 16px; width: 120px; }
+@media (max-width: 960px) { .nav-links, .nav .btn { display: none; } .menu-btn { display: grid; } }
+@media (max-width: 420px) { .nav { gap: 6px; padding-left: 10px; } .nav-tools { gap: 4px; } .lang { padding: 0 10px; } .icon-btn { width: 38px; height: 38px; } }
+@media (max-width: 350px) { .brand-word { display: none; } }
+
+/* =========================================================
+   SEKSI · putih (bawaan), .tint (biru sangat muda), .blue (biru penuh)
+   ========================================================= */
+.sec { position: relative; padding: clamp(80px, 11vw, 150px) 0; overflow-x: clip; }
+.sec-head { display: grid; gap: 18px; margin-bottom: clamp(40px, 6vw, 70px); }
+.sec.tint { background: var(--surface); }
+.sec.blue { background: var(--blue); color: #fff; }
+.sec.blue .kicker { color: #fff; }
+.sec.blue .lead { color: #f2f8ff; }
+.page-hero { padding: 150px 0 60px; background: radial-gradient(120% 80% at 80% 0%, #dcedff 0%, var(--paper) 60%); }
+.page-hero h1 { font-size: clamp(48px, 8vw, 110px); margin: 16px 0 20px; }
+.crumbs { display: flex; gap: 8px; font-size: 14px; color: var(--ink-3); }
+.crumbs a { color: var(--blue-deep); }
+
+/* =========================================================
+   KARTU STIKER · garis 2px tinta, bayangan pejal, sudut besar
+   ========================================================= */
+.card { position: relative; padding: 26px; border-radius: var(--r-l); background: #fff; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-sticker); }
+.card.blue { background: var(--blue); color: #fff; }
+.card.tint { background: var(--surface); }
+.card h3 { font-size: 26px; margin-bottom: 6px; }
+.card p { font-size: 15px; color: var(--ink-2); }
+.card.blue p { color: #f2f8ff; }
+a.card { text-decoration: none; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
+a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 1000px) { .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .grid-3 > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
+@media (max-width: 620px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+
+/* Angka besar (hanya angka yang bisa dibuktikan) */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.stat { position: relative; padding: 26px; border-radius: var(--r-l); background: #fff; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-sticker); min-height: 230px; display: grid; align-content: space-between; gap: 18px; overflow: hidden; }
+.stat:first-child { grid-column: span 2; }
+.stat:nth-child(3n+2) { background: var(--blue); color: #fff; }
+/* Teks terang di atas biru wajib kontras >= 4.5:1, jadi tanpa opacity */
+.stat:nth-child(3n+2) .lab, .stat:nth-child(3n+2) p { opacity: 1; color: #f2f8ff; }
+.stat:nth-child(3n+3) { background: var(--surface); }
+.stat .v { font-family: var(--f-num); font-weight: 800; font-size: clamp(54px, 6vw, 76px); line-height: 0.9; letter-spacing: -0.03em; }
+.stat .lab { font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; }
+@media (max-width: 1000px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .stats { grid-template-columns: 1fr; } .stat:first-child { grid-column: auto; } .stat { min-height: 0; } }
+
+/* Kartu karya / produk dengan cover 1600:848 (screenshot asli; ilustrasi wajib diberi label) */
+.works { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 24px; }
+.work { text-decoration: none; display: grid; gap: 14px; align-content: start; }
+.work .cover { position: relative; border-radius: var(--r-l); overflow: hidden; border: 2px solid var(--ink); aspect-ratio: 1600 / 848; background: var(--surface); }
+.work .cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
+.work:hover .cover img { transform: scale(1.06); }
+.work .meta { display: flex; justify-content: space-between; gap: 12px; align-items: flex-end; }
+.work .meta .chip { margin-bottom: 8px; }
+.work h3 { font-size: clamp(26px, 2.4vw, 34px); margin-bottom: 4px; }
+.work .cat { color: var(--ink-3); font-size: 14.5px; }
+.work .arrow { width: 40px; height: 40px; flex: none; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; transition: transform 0.4s var(--spring), background 0.2s; }
+.work:hover .arrow { transform: rotate(-45deg); background: var(--blue); color: #fff; }
+.cover-note { position: absolute; right: 12px; bottom: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(11, 15, 26, 0.72); color: #fff; font-family: var(--f-num); font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+@media (max-width: 1000px) { .works { grid-template-columns: repeat(2, minmax(0, 1fr)); } .work:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+@media (max-width: 620px) { .works { grid-template-columns: 1fr; } }
+
+/* Foto orang dalam bingkai segel. Butuh <clipPath id="seal-clip"> dari sprite (lihat demo). */
+.person { display: grid; gap: 12px; text-align: center; justify-items: center; }
+.person .ph { position: relative; width: 100%; max-width: 210px; aspect-ratio: 1; }
+.person .ph .ring { position: absolute; inset: -5%; color: var(--blue-light); transition: transform 1.2s var(--ease); }
+.person:hover .ph .ring { transform: rotate(90deg) scale(1.03); }
+.person .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; clip-path: url(#seal-clip); background: var(--surface); transition: transform 0.6s var(--spring); }
+.person:hover .ph img { transform: scale(1.04); }
+.person h3 { font-size: 22px; line-height: 1.1; }
+.person p { font-size: 14.5px; color: var(--ink-3); }
+
+/* =========================================================
+   MASKOT · gelembung bicara dan panggung segel
+   Ganti ekspresi dengan MENUKAR GAMBAR BADAN PENUH, jangan menempel kepala.
+   ========================================================= */
+.bubble {
+  position: relative; display: inline-block; white-space: nowrap;
+  background: #fff; border: 2px solid var(--ink); border-radius: 22px; padding: 10px 16px 12px;
+  font-family: var(--f-hand); font-weight: 600; font-size: 25px; line-height: 1.05; color: var(--ink); box-shadow: var(--shadow-pop);
+  transform-origin: 90% 100%;
+}
+.bubble::after { content: ""; position: absolute; right: 26px; bottom: -11px; width: 18px; height: 18px; background: #fff; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); transform: rotate(45deg) skew(8deg, 8deg); }
+.bubble.left::after { right: auto; left: 22px; }
+.bubble.pop { animation: fy-pop 0.45s var(--spring); }
+@keyframes fy-pop { 0% { transform: scale(0.6) rotate(-6deg); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.mascot-stage { position: relative; width: min(100%, 420px); aspect-ratio: 1; display: grid; place-items: end center; }
+.mascot-stage .seal-bg { position: absolute; inset: 4% -4% 8%; color: #d8eaff; animation: fy-spin 40s linear infinite; max-width: none; }
+.mascot-stage .seal-ring { position: absolute; inset: -2% -10% 2%; color: transparent; stroke: var(--blue-light); opacity: 0.5; animation: fy-spin 60s linear infinite reverse; max-width: none; }
+.mascot-stage .body { position: relative; width: 78%; animation: fy-bob 4.2s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes fy-spin { to { transform: rotate(360deg); } }
+@keyframes fy-bob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(-1deg); } }
+
+/* =========================================================
+   PARTNER BERJALAN, FAQ
+   ========================================================= */
+.marquee { overflow: hidden; border-block: 2px solid var(--ink); background: #fff; padding: 22px 0; }
+.marquee .row { display: flex; width: max-content; gap: 56px; animation: fy-slide 30s linear infinite; }
+.marquee:hover .row { animation-play-state: paused; }
+.marquee .item { display: flex; align-items: center; gap: 14px; font-family: var(--f-head); font-weight: 800; font-size: clamp(28px, 4vw, 48px); white-space: nowrap; }
+.marquee .item small { font-family: var(--f-body); font-weight: 400; font-size: 14px; color: var(--ink-3); }
+.marquee .item img { width: 34px; height: 34px; }
+@keyframes fy-slide { to { transform: translateX(-50%); } }
+
+.faq details { border-bottom: 2px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 22px 0; font-family: var(--f-head); font-weight: 800; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .pm { flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--surface); position: relative; transition: transform 0.4s var(--spring), background 0.2s; }
+.faq summary .pm::before, .faq summary .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2.5px; margin: -1.25px 0 0 -7px; background: var(--blue-deep); border-radius: 2px; }
+.faq summary .pm::after { transform: rotate(90deg); transition: transform 0.3s var(--ease); }
+.faq details[open] summary .pm { background: var(--blue); transform: rotate(180deg); }
+.faq details[open] summary .pm::before, .faq details[open] summary .pm::after { background: #fff; }
+.faq details[open] summary .pm::after { transform: rotate(0); }
+.faq .ans { padding: 0 0 24px; color: var(--ink-2); max-width: 70ch; }
+
+/* =========================================================
+   PEMBATAS GELOMBANG · antar seksi berwarna beda
+   ========================================================= */
+.wave { position: relative; z-index: 2; height: 90px; margin: -1px 0; color: var(--blue); overflow-x: clip; }
+.wave svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* =========================================================
+   FOOTER SEDERHANA (untuk web produk). Footer adegan malam Bogor khusus fusionify.id.
+   ========================================================= */
+.footer { background: var(--night); color: #dbe9fb; padding: 56px 0 28px; }
+.fcols { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 30px; margin-bottom: 40px; }
+.fcols .fh { font-family: var(--f-num); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 14px; }
+.fcols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.fcols a { text-decoration: none; color: #dbe9fb; overflow-wrap: anywhere; }
+.fcols a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+.fcols p { color: #9fb3cd; font-size: 15px; max-width: 34ch; }
+.fbar { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; border-top: 1px solid #1d2b45; padding-top: 22px; font-size: 14px; color: #8296b2; }
+.fbar a { color: #b9cbe3; }
+.to-top { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid #2a3b5c; text-decoration: none; font-weight: 700; transition: background 0.2s, color 0.2s, transform 0.3s var(--spring); }
+.to-top svg { width: 16px; height: 16px; transition: transform 0.3s var(--spring); }
+.to-top:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+.to-top:hover svg { transform: translateY(-3px); }
+/* Badge "Sebuah produk dari FUSIONIFY" di footer web produk */
+.fy-badge { display: inline-block; line-height: 0; transition: transform 0.3s var(--spring); }
+.fy-badge img { height: 44px; width: auto; }
+.fy-badge:hover { transform: translateY(-2px); }
+@media (max-width: 860px) { .fcols { grid-template-columns: 1fr 1fr; } .fcols > div:first-child { grid-column: 1 / -1; } }
+
+/* =========================================================
+   NOTIFIKASI (toast) · kapsul putih dengan kepala maskot
+   ========================================================= */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 320; display: flex; align-items: center; gap: 10px;
+  padding: 8px 18px 8px 8px; border-radius: 999px; background: #fff; border: 2px solid var(--ink); box-shadow: 0 4px 0 var(--ink);
+  font-weight: 700; font-size: 15px; transform: translate(-50%, 160%); opacity: 0; pointer-events: none;
+  transition: transform 0.5s var(--spring), opacity 0.25s;
+}
+.toast img { width: 40px; height: auto; border-radius: 50%; background: var(--surface); }
+.toast.show { transform: translate(-50%, 0); opacity: 1; }
+
+/* =========================================================
+   KURSOR SEGEL (hanya perangkat dengan mouse; motion.js memasang .has-cursor)
+   ========================================================= */
+.cursor { position: fixed; left: 0; top: 0; z-index: 300; pointer-events: none; display: none; opacity: 0; transition: opacity 0.25s; }
+.cursor.ready { opacity: 1; }
+.has-cursor .cursor { display: block; }
+.has-cursor, .has-cursor a, .has-cursor button, .has-cursor summary { cursor: none; }
+.has-cursor input, .has-cursor textarea { cursor: text; }
+.cursor .dot { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 0 2px #fff; }
+.cursor .ring { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; transition: width 0.35s var(--spring), height 0.35s var(--spring), margin 0.35s var(--spring); }
+.cursor .ring svg { width: 100%; height: 100%; overflow: visible; color: var(--blue); }
+.cursor .ring svg path { fill: none; stroke: currentColor; stroke-width: 1.6; vector-effect: non-scaling-stroke; transition: fill 0.3s; }
+.cursor.link .ring { width: 70px; height: 70px; margin: -35px 0 0 -35px; }
+.cursor.link .ring svg { animation: fy-spin 4s linear infinite; }
+.cursor.link .ring svg path { fill: rgba(83, 157, 233, 0.18); }
+.cursor .label { position: absolute; left: 0; top: 0; will-change: translate; padding: 4px 10px; border-radius: 999px; background: var(--ink); color: #fff; font-family: var(--f-hand); font-size: 20px; line-height: 1; white-space: nowrap; transform: scale(0); transform-origin: 0 0; transition: transform 0.3s var(--spring); }
+.cursor.labelled .label { transform: scale(1); }
+.cursor.down .ring { transform: scale(0.8); }
+.cursor.dark .ring svg { color: #fff; }
+
+/* =========================================================
+   TRANSISI HALAMAN · segel biru menutup layar
+   Elemen <svg> persegi 180vmax yang dianimasikan, supaya layar ultra-lebar tetap tertutup.
+   ========================================================= */
+.veil { position: fixed; inset: 0; z-index: 350; pointer-events: none; overflow: hidden; }
+.veil svg { position: absolute; left: 50%; top: 50%; width: 180vmax; height: 180vmax; margin: -90vmax 0 0 -90vmax; transform: scale(0); will-change: transform; }
+.veil .blob path { fill: var(--blue); }
+.veil img { position: absolute; left: 50%; top: 50%; width: 120px; margin: -60px 0 0 -60px; opacity: 0; }
+.arriving .veil svg { transform: scale(1); }
+.arriving .veil img { opacity: 1; }
+
+/* =========================================================
+   MUNCUL SAAT SCROLL · data-reveal, data-split, data-assemble
+   ========================================================= */
+.js [data-reveal] { opacity: 0; transform: translateY(40px); }
+.js .split .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.js .split .w > span { display: inline-block; transform: translateY(105%); }
+.fx-off [data-reveal] { opacity: 1 !important; transform: none !important; }
+.fx-off .split .w > span { transform: none !important; }
+
+/* Animasi tanpa henti dijeda saat seksinya di luar layar (motion.js memasang .idle) */
+.idle *, .idle *::before, .idle *::after { animation-play-state: paused !important; }

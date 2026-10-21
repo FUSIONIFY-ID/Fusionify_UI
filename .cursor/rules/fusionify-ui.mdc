@@ -1,0 +1,12 @@
+---
+description: Sistem desain FUSIONIFY untuk semua web FUSIONIFY
+globs: ["**/*"]
+alwaysApply: true
+---
+
+Ikuti AGENTS.md dan DESIGN.md di root repo. Ringkasnya:
+- Pakai token `css/tokens.css` dan komponen `css/components.css`. Jangan buat warna, font, atau radius baru.
+- Logo dari `brand/`, jangan diketik ulang. Maskot: tukar gambar badan penuh, jangan tempel kepala.
+- Gaya stiker: garis 2px tinta, bayangan pejal, sudut besar. Chip status wajib jujur.
+- Hanya animasikan transform/opacity; jeda animasi di luar layar; tidak ada blur/drop-shadow pada elemen bergerak.
+- QA di 375, 390, 768, 820, 1024, 1366, 1440, 1920 px. Tanpa em dash di teks pengunjung.

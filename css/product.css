@@ -1,0 +1,180 @@
+/* FUSIONIFY UI · product.css
+   Komponen tambahan untuk web produk dan halaman layanan. Butuh tokens.css + base.css + components.css.
+   Semua mengikuti gaya stiker: garis 2px tinta, bayangan pejal, sudut besar.
+   Contoh markup: demo/index.html dan templates/landing-produk.html. */
+
+/* =========================================================
+   FORM · input, textarea, select, checkbox, radio
+   <label class="field"><span>Nama</span><input class="input" ...></label>
+   ========================================================= */
+.field { display: grid; gap: 8px; }
+.field > span { font-weight: 700; font-size: 15px; }
+.field small { font-size: 13.5px; color: var(--ink-3); }
+.field .err { color: #b4232c; font-weight: 700; }
+.input, .select, .textarea {
+  width: 100%; font: inherit; font-size: 16px; color: var(--ink);
+  padding: 13px 16px; border-radius: var(--r-m); border: 2px solid var(--ink); background: #fff;
+  box-shadow: 0 3px 0 var(--ink); transition: box-shadow 0.25s var(--spring), transform 0.25s var(--spring), border-color 0.2s;
+}
+.textarea { min-height: 130px; resize: vertical; }
+.select { appearance: none; padding-right: 44px; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b0f1a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 14px center / 18px no-repeat; }
+.input::placeholder, .textarea::placeholder { color: #8a94a6; }
+.input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 3px 0 var(--blue), 0 0 0 4px rgba(83, 157, 233, 0.25); }
+.input[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: #b4232c; box-shadow: 0 3px 0 #b4232c; }
+.input:disabled, .select:disabled, .textarea:disabled { background: var(--surface); color: var(--ink-3); box-shadow: none; }
+.check { display: inline-flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 15.5px; }
+.check input { appearance: none; flex: none; width: 22px; height: 22px; margin: 1px 0 0; border: 2px solid var(--ink); border-radius: 7px; background: #fff; display: grid; place-items: center; cursor: pointer; transition: background 0.2s; }
+.check input[type="radio"] { border-radius: 50%; }
+.check input:checked { background: var(--blue); }
+.check input:checked::after { content: ""; width: 10px; height: 6px; border: solid #fff; border-width: 0 0 2.5px 2.5px; transform: translateY(-1px) rotate(-45deg); }
+.check input[type="radio"]:checked::after { width: 8px; height: 8px; border: 0; border-radius: 50%; background: #fff; transform: none; }
+.check input:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.form-grid .full { grid-column: 1 / -1; }
+@media (max-width: 620px) { .form-grid { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   KARTU LAYANAN · ikon di dalam segel kecil
+   <article class="svc"><span class="svc-ico"><svg>...</svg></span><h3>..</h3><p>..</p></article>
+   ========================================================= */
+.svc { position: relative; display: grid; gap: 12px; align-content: start; padding: 26px; border-radius: var(--r-l); background: #fff; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-sticker); }
+.svc h3 { font-size: 26px; }
+.svc p { font-size: 15.5px; color: var(--ink-2); }
+.svc .more { margin-top: 6px; font-weight: 700; color: var(--blue-deep); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+.svc .more:hover { text-decoration: underline; text-underline-offset: 4px; }
+.svc-ico { position: relative; width: 58px; height: 58px; display: grid; place-items: center; color: #fff; }
+.svc-ico::before { content: ""; position: absolute; inset: 0; background: var(--blue); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; }
+.svc-ico svg { position: relative; width: 26px; height: 26px; }
+.svc:nth-child(3n+2) .svc-ico::before { background: var(--blue-light); }
+.svc:nth-child(3n+3) .svc-ico::before { background: var(--ink); }
+a.svc { text-decoration: none; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
+a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--ink); }
+/* Segel sebagai mask (12 lekukan, sama dengan seal.js) */
+:root { --seal-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M94.0 50.0L95.8 52.4L96.8 54.9L96.5 57.4L94.9 59.5L92.5 61.4L90.1 63.0L88.2 64.7L87.4 66.7L87.5 69.1L88.1 72.0L88.5 75.0L88.1 77.7L86.6 79.6L84.1 80.7L81.1 81.1L78.2 81.3L75.8 81.8L74.1 83.1L72.9 85.3L72.0 88.1L70.8 90.9L69.1 93.0L66.9 93.9L64.2 93.6L61.4 92.5L58.8 91.2L56.4 90.5L54.3 90.7L52.2 92.1L50.0 94.0L47.6 95.8L45.1 96.8L42.6 96.5L40.5 94.9L38.6 92.5L37.0 90.1L35.3 88.2L33.3 87.4L30.9 87.5L28.0 88.1L25.0 88.5L22.3 88.1L20.4 86.6L19.3 84.1L18.9 81.1L18.7 78.2L18.2 75.8L16.9 74.1L14.7 72.9L11.9 72.0L9.1 70.8L7.0 69.1L6.1 66.9L6.4 64.2L7.5 61.4L8.8 58.8L9.5 56.4L9.3 54.3L7.9 52.2L6.0 50.0L4.2 47.6L3.2 45.1L3.5 42.6L5.1 40.5L7.5 38.6L9.9 37.0L11.8 35.3L12.6 33.3L12.5 30.9L11.9 28.0L11.5 25.0L11.9 22.3L13.4 20.4L15.9 19.3L18.9 18.9L21.8 18.7L24.2 18.2L25.9 16.9L27.1 14.7L28.0 11.9L29.2 9.1L30.9 7.0L33.1 6.1L35.8 6.4L38.6 7.5L41.2 8.8L43.6 9.5L45.7 9.3L47.8 7.9L50.0 6.0L52.4 4.2L54.9 3.2L57.4 3.5L59.5 5.1L61.4 7.5L63.0 9.9L64.7 11.8L66.7 12.6L69.1 12.5L72.0 11.9L75.0 11.5L77.7 11.9L79.6 13.4L80.7 15.9L81.1 18.9L81.3 21.8L81.8 24.2L83.1 25.9L85.3 27.1L88.1 28.0L90.9 29.2L93.0 30.9L93.9 33.1L93.6 35.8L92.5 38.6L91.2 41.2L90.5 43.6L90.7 45.7L92.1 47.8Z'/%3E%3C/svg%3E"); }
+
+/* =========================================================
+   DAFTAR FITUR · centang biru di dalam segel
+   ========================================================= */
+.ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.ticks li { position: relative; padding-left: 34px; color: var(--ink-2); }
+.ticks li::before { content: ""; position: absolute; left: 0; top: 1px; width: 24px; height: 24px; background: var(--blue); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; }
+.ticks li::after { content: ""; position: absolute; left: 8px; top: 8px; width: 8px; height: 5px; border: solid #fff; border-width: 0 0 2px 2px; transform: rotate(-45deg); }
+.ticks li.no { color: var(--ink-3); text-decoration: line-through; text-decoration-color: rgba(86, 97, 117, 0.5); }
+.ticks li.no::before { background: var(--line); }
+.ticks li.no::after { display: none; }
+
+/* =========================================================
+   LANGKAH / ALUR KERJA · nomor dalam segel
+   <ol class="steps"><li><span class="n">1</span><h3>..</h3><p>..</p></li></ol>
+   ========================================================= */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.steps li { position: relative; display: grid; gap: 8px; align-content: start; padding-top: 72px; }
+.steps li::before { content: ""; position: absolute; left: 0; top: 0; width: 56px; height: 56px; background: var(--blue); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; }
+.steps .n { position: absolute; left: 0; top: 0; width: 56px; height: 56px; display: grid; place-items: center; font-family: var(--f-num); font-weight: 800; font-size: 22px; color: #fff; }
+.steps li:not(:last-child)::after { content: ""; position: absolute; left: 66px; right: -12px; top: 27px; border-top: 2px dashed var(--blue-light); }
+.steps h3 { font-size: 24px; }
+.steps p { color: var(--ink-2); font-size: 15.5px; }
+.sec.blue .steps li::before { background: #fff; } .sec.blue .steps .n { color: var(--blue); }
+.sec.blue .steps li:not(:last-child)::after { border-color: rgba(255, 255, 255, 0.5); }
+.sec.blue .steps p { color: #f2f8ff; }
+@media (max-width: 720px) { .steps li:not(:last-child)::after { display: none; } }
+
+/* =========================================================
+   TABEL HARGA · paket unggulan diberi .featured
+   Harga wajib harga asli. Kalau belum pasti, tulis "Hubungi kami".
+   ========================================================= */
+.plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+.plan { position: relative; display: grid; grid-template-rows: auto auto 1fr auto; gap: 18px; padding: 30px 26px 26px; border-radius: var(--r-l); background: #fff; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-sticker); }
+.plan h3 { font-size: 26px; }
+.plan .desc { font-size: 15px; color: var(--ink-2); margin-top: 4px; }
+.plan .price { font-family: var(--f-num); font-weight: 800; font-size: clamp(36px, 4vw, 48px); line-height: 1; letter-spacing: -0.02em; }
+.plan .price small { font-family: var(--f-body); font-weight: 400; font-size: 15px; color: var(--ink-3); letter-spacing: 0; }
+.plan .btn { justify-content: center; }
+.plan.featured { background: var(--blue); color: #fff; transform: translateY(-10px); box-shadow: 0 16px 0 var(--ink); }
+.plan.featured .desc, .plan.featured .price small, .plan.featured .ticks li { color: #f2f8ff; }
+.plan.featured .ticks li::before { background: #fff; }
+.plan.featured .ticks li::after { border-color: var(--blue); }
+.plan.featured .btn { --bg: #fff; --fg: var(--ink); }
+.plan .ribbon { position: absolute; top: -16px; right: 22px; padding: 6px 14px; border-radius: 999px; border: 2px solid var(--ink); background: #fff; color: var(--ink); font-family: var(--f-hand); font-weight: 700; font-size: 20px; line-height: 1; transform: rotate(4deg); }
+@media (max-width: 1000px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } .plans > :last-child:nth-child(odd) { grid-column: 1 / -1; } .plan.featured { transform: none; box-shadow: var(--shadow-sticker); } }
+@media (max-width: 620px) { .plans { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   TESTIMONI · HANYA dengan izin tertulis dan tanggalnya
+   ========================================================= */
+.quote { position: relative; display: grid; gap: 18px; padding: 30px 26px 24px; border-radius: var(--r-l); background: #fff; color: var(--ink); border: 2px solid var(--ink); box-shadow: var(--shadow-sticker); }
+.quote::before { content: "\201C"; position: absolute; top: -26px; left: 20px; font-family: var(--f-head); font-weight: 800; font-size: 96px; line-height: 1; color: var(--blue); }
+.quote blockquote { margin: 0; font-size: 18px; line-height: 1.55; }
+.quote figcaption { display: flex; align-items: center; gap: 12px; }
+.quote figcaption img { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; background: var(--surface); }
+.quote figcaption b { display: block; line-height: 1.2; }
+.quote figcaption span { font-size: 14px; color: var(--ink-3); }
+
+/* =========================================================
+   CTA BAND · ajakan besar di akhir halaman, maskot di samping
+   ========================================================= */
+.cta-band { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; padding: clamp(28px, 5vw, 56px); border-radius: var(--r-l); background: var(--blue); color: #fff; border: 2px solid var(--ink); box-shadow: 0 10px 0 var(--ink); overflow: hidden; }
+.cta-band h2 { font-size: clamp(34px, 4.6vw, 60px); max-width: 16ch; }
+.cta-band p { color: #f2f8ff; margin-top: 12px; max-width: 46ch; }
+.cta-band .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.cta-band .btn { --bg: #fff; --fg: var(--ink); }
+.cta-band .btn.ghost { --bg: var(--blue); --fg: #fff; border-color: #fff; box-shadow: 0 3px 0 rgba(255, 255, 255, 0.6); }
+.cta-band .mascot { width: clamp(130px, 18vw, 220px); align-self: end; margin-bottom: calc(clamp(28px, 5vw, 56px) * -1); }
+.cta-band .seal-deco { position: absolute; right: -60px; top: -60px; width: 260px; color: rgba(255, 255, 255, 0.08); max-width: none; pointer-events: none; }
+@media (max-width: 700px) { .cta-band { grid-template-columns: 1fr; } .cta-band .mascot { justify-self: end; width: 140px; margin-top: -10px; } }
+
+/* =========================================================
+   CATATAN / PEMBERITAHUAN · info, sukses, peringatan, bahaya
+   <div class="note warn"><b>Judul</b><p>Isi</p></div>
+   ========================================================= */
+.note { --nc: var(--plan); display: grid; gap: 4px; padding: 16px 18px 16px 52px; position: relative; border-radius: var(--r-m); border: 2px solid var(--nc); background: var(--plan-bg); }
+.note::before { content: "i"; position: absolute; left: 16px; top: 15px; width: 24px; height: 24px; border-radius: 50%; background: var(--nc); color: #fff; display: grid; place-items: center; font-family: var(--f-num); font-weight: 800; font-size: 14px; }
+.note b { color: var(--ink); }
+.note p { color: var(--ink-2); font-size: 15.5px; }
+.note.ok { --nc: var(--go); background: var(--go-bg); } .note.ok::before { content: "✓"; }
+.note.warn { --nc: var(--beta); background: var(--beta-bg); } .note.warn::before { content: "!"; }
+.note.danger { --nc: #b4232c; background: #fde8ea; } .note.danger::before { content: "!"; }
+
+/* =========================================================
+   TABEL DATA · dibungkus .table-wrap supaya bisa digeser di HP.
+   Wajib: <div class="table-wrap" tabindex="0" role="region" aria-label="..."> supaya bisa digeser pakai keyboard
+   ========================================================= */
+.table-wrap { overflow-x: auto; border: 2px solid var(--ink); border-radius: var(--r-l); background: #fff; box-shadow: var(--shadow-sticker); }
+.table { width: 100%; border-collapse: collapse; font-size: 15.5px; min-width: 520px; }
+.table th, .table td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--line); }
+.table thead th { font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); background: var(--surface); }
+.table tbody tr:last-child td { border-bottom: 0; }
+.table tbody tr:hover { background: var(--paper); }
+.table .num { text-align: right; }
+
+/* =========================================================
+   TAG kecil (kategori, teknologi) · beda dari chip status
+   ========================================================= */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.tag { display: inline-block; padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; font-size: 13.5px; font-weight: 700; color: var(--ink-2); }
+.sec.blue .tag { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); color: #fff; }
+
+/* =========================================================
+   KEADAAN KOSONG / 404 · maskot + pesan + aksi
+   ========================================================= */
+.empty { display: grid; justify-items: center; text-align: center; gap: 16px; padding: 40px 0; }
+.empty img { width: clamp(150px, 22vw, 230px); height: auto; }
+.empty h2, .empty h1 { font-size: clamp(34px, 5vw, 60px); }
+.empty p { color: var(--ink-2); max-width: 44ch; }
+.empty .code { font-family: var(--f-num); font-weight: 800; font-size: clamp(64px, 12vw, 140px); line-height: 0.9; color: var(--blue); letter-spacing: -0.04em; }
+
+/* =========================================================
+   KEPALA HALAMAN PRODUK · slot logo produk + chip status
+   ========================================================= */
+.prod-head { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.prod-head .prod-logo { height: 48px; width: auto; }
+
+/* =========================================================
+   TAB SEGMEN · pilihan bulanan/tahunan, dsb. (tanpa JS: pakai radio)
+   ========================================================= */
+.segment { display: inline-flex; padding: 4px; gap: 4px; border-radius: 999px; border: 2px solid var(--ink); background: #fff; box-shadow: 0 3px 0 var(--ink); }
+.segment label { position: relative; cursor: pointer; }
+.segment input { position: absolute; opacity: 0; pointer-events: none; }
+.segment span { display: block; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 14.5px; color: var(--ink-2); transition: background 0.25s var(--ease), color 0.25s; }
+.segment input:checked + span { background: var(--blue); color: #fff; }
+.segment input:focus-visible + span { outline: 3px solid var(--blue-light); outline-offset: 2px; }

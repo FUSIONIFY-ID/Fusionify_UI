@@ -1,0 +1,29 @@
+FUSIONIFY · Brand kit
+=====================
+
+Nama        : FUSIONIFY (selalu huruf kapital)
+Badan hukum : PT FUSIONIFY DIGITAL STORE
+Tagline     : Fuse Ideas. Build Progress.
+Lokasi      : Bogor, Jawa Barat, Indonesia
+Situs       : https://fusionify.id
+Kontak      : hello@fusionify.id
+
+Warna
+  Biru FUSIONIFY  #0D6CD7
+  Biru tua        #0261CD
+  Biru muda       #539DE9
+  Tinta           #0B0F1A
+  Permukaan       #EAF4FF
+  Malam           #071022
+
+Huruf (semua OFL, gratis)
+  Judul   : Afacad Flux (800)
+  Teks    : Sansation
+  Tangan  : Caveat
+  Angka   : Exo 2
+
+Aturan singkat
+  - Beri ruang kosong di sekitar logo minimal setinggi titik huruf i.
+  - Jangan memutar, meregangkan, mengganti warna, atau memberi efek bayangan pada logo.
+  - Di latar gelap atau biru, pakai versi putih.
+  - Jangan mengetik ulang nama FUSIONIFY dengan font sebagai pengganti logo.

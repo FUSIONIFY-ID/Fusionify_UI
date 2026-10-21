@@ -1,0 +1,14 @@
+<!-- FUSIONIFY UI · skrip kecil di <head>, SEBELUM CSS dan skrip lain.
+     - .js / .no-js: konten tetap terbaca tanpa JavaScript
+     - .arriving: tirai transisi sudah menutup sejak HTML pertama tampil (tidak ada kedipan)
+     - .fx-off: kalau motion.js gagal jalan dalam 4 detik, semua konten dipaksa tampil -->
+<script>
+  (function () {
+    var d = document.documentElement;
+    d.classList.remove("no-js");
+    d.classList.add("js");
+    try { if (sessionStorage.getItem("fx-nav") === "1") d.classList.add("arriving"); } catch (e) {}
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.remove("arriving");
+    setTimeout(function () { if (!window.__fx) { d.classList.add("fx-off"); d.classList.remove("arriving"); } }, 4000);
+  })();
+</script>

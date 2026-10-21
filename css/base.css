@@ -1,0 +1,89 @@
+/* FUSIONIFY UI · base.css
+   Reset ringan, tipografi, dan utilitas dasar. Butuh tokens.css. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; background: var(--paper); overflow-x: clip; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+  overflow-x: hidden; /* cadangan Safari < 16 */
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+img { height: auto; }
+/* Hiasan yang SENGAJA lebih besar dari wadahnya (segel, cincin, bulan, gelombang) wajib pakai kelas ini.
+   Tanpa itu, aturan svg { max-width: 100% } membuatnya mengecil dan bergeser ke kiri atas. */
+.fx-oversize, .cursor svg, .veil svg, .loader svg, .wave svg, .person .ph .ring { max-width: none; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--blue); color: #fff; }
+:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 3px; border-radius: 6px; }
+
+h1, h2, h3, h4 { font-family: var(--f-head); font-weight: 800; line-height: 0.98; letter-spacing: -0.02em; margin: 0; }
+p { margin: 0; }
+
+.wrap { width: min(100% - var(--gut) * 2, var(--max)); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: fixed; left: 12px; top: -60px; z-index: 200; background: var(--ink); color: #fff; padding: 10px 14px; border-radius: 10px; text-decoration: none; }
+.skip:focus { top: 12px; }
+.nowrap { white-space: nowrap; }
+
+.num { font-family: var(--f-num); font-variant-numeric: tabular-nums; }
+.hand { font-family: var(--f-hand); font-weight: 600; }
+
+/* Label kecil di atas judul seksi, dengan titik biru muda */
+.kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--f-num); font-size: 13px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--blue);
+}
+.kicker::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.22); }
+
+/* Judul besar. Tambahkan <span class="dot">.</span> di akhir untuk titik biru muda khas FUSIONIFY. */
+.h-hero { font-size: clamp(54px, 9vw, 128px); letter-spacing: -0.035em; }
+.h-sec { font-size: clamp(40px, 6.4vw, 84px); margin-top: 14px; max-width: 18ch; text-wrap: balance; }
+.h-hero .dot, .h-sec .dot { color: var(--blue-light); }
+.lead { font-size: clamp(17px, 1.4vw, 20px); color: var(--ink-2); max-width: 56ch; }
+
+/* Teks panjang (artikel, legal) */
+.prose { max-width: 70ch; font-size: 18px; color: var(--ink-2); }
+.prose h2 { font-size: 36px; color: var(--ink); margin: 40px 0 12px; }
+.prose h3 { font-size: 26px; color: var(--ink); margin: 28px 0 10px; }
+.prose p, .prose ul, .prose ol { margin: 0 0 16px; }
+.prose ul { padding-left: 1.2em; } .prose li { margin-bottom: 8px; }
+.prose a { color: var(--blue-deep); overflow-wrap: anywhere; }
+
+/* Gerak dimatikan: hormati pilihan pengguna. Konten yang biasanya muncul lewat animasi WAJIB langsung tampil. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  .js [data-reveal] { opacity: 1 !important; transform: none !important; }
+  .js .split .w > span { transform: none !important; }
+}
+
+/* Layar sangat kecil: judul panjang boleh patah, tidak boleh meluber */
+.split .w { max-width: 100%; }
+.h-hero, .h-sec, .page-hero h1 { overflow-wrap: anywhere; }
+@media (max-width: 420px) {
+  .h-sec { font-size: clamp(30px, 9.2vw, 40px); }
+}
+
+/* Scrollbar FUSIONIFY: kapsul biru bergradasi di atas track surface, tanpa tombol panah */
+::-webkit-scrollbar { width: 14px; height: 14px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--blue-light) 0%, var(--blue) 55%, var(--blue-deep) 100%); border-radius: 999px; border: 3px solid var(--surface); min-height: 48px; }
+::-webkit-scrollbar-thumb:hover { background: var(--blue-deep); }
+::-webkit-scrollbar-thumb:active { background: var(--ink); }
+::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+::-webkit-scrollbar-corner { background: var(--surface); }
+.drawer::-webkit-scrollbar, .table-wrap::-webkit-scrollbar { width: 8px; height: 8px; }
+/* Firefox (Chrome mengabaikan ::-webkit-scrollbar kalau scrollbar-color diisi, jadi dibatasi di sini) */
+@supports not selector(::-webkit-scrollbar) {
+  html { scrollbar-color: var(--blue) var(--surface); scrollbar-width: thin; }
+}

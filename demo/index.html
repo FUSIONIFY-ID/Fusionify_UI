@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="id" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FUSIONIFY UI · demo komponen</title>
+<meta name="description" content="Contoh semua komponen sistem desain FUSIONIFY.">
+<script>
+  (function () {
+    var d = document.documentElement;
+    d.classList.remove("no-js");
+    d.classList.add("js");
+    try { if (sessionStorage.getItem("fx-nav") === "1") d.classList.add("arriving"); } catch (e) {}
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.remove("arriving");
+    setTimeout(function () { if (!window.__fx) { d.classList.add("fx-off"); d.classList.remove("arriving"); } }, 4000);
+  })();
+</script>
+
+<link rel="preload" href="../fonts/afacad-flux-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/sansation-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/fusionify.css">
+<link rel="icon" href="../brand/mark-128.webp">
+<style>
+  /* Gaya khusus halaman demo saja (bukan bagian kit) */
+  .hero-demo { overflow-x: hidden; overflow-x: clip; padding: 140px 0 80px; background: radial-gradient(120% 80% at 80% 10%, #dcedff 0%, var(--paper) 60%); }
+  .hero-demo .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  .hero-demo .grid > div:first-child { display: grid; gap: 22px; justify-items: start; }
+  .hero-demo .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero-demo .say { position: absolute; left: 0; top: 4%; z-index: 2; }
+  @media (max-width: 699px) { .hero-demo .grid { grid-template-columns: 1fr; } .hero-demo .mascot-stage { order: -1; margin-inline: auto; width: min(80%, 320px); } }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+  .sw { border: 2px solid var(--ink); border-radius: var(--r-m); overflow: hidden; background: #fff; box-shadow: 0 4px 0 var(--ink); }
+  .sw i { display: block; height: 70px; }
+  .sw div { padding: 10px 12px; font-size: 14px; } .sw code { font-family: var(--f-num); color: var(--ink-3); font-size: 13px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .type { display: grid; gap: 18px; }
+  .type div { display: grid; grid-template-columns: 180px 1fr; gap: 20px; align-items: baseline; border-bottom: 2px solid var(--line); padding-bottom: 14px; }
+  .type small { font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+  @media (max-width: 620px) { .type div { grid-template-columns: 1fr; gap: 4px; } }
+  .team { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px 22px; }
+  .team .person { flex: 0 1 200px; }
+  .demo-cover { position: absolute; inset: 0; display: grid; place-items: center; background: linear-gradient(135deg, var(--surface), #cfe5ff); }
+  .work .cover .demo-cover img { width: 30%; height: auto; object-fit: contain; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="seal-clip" clipPathUnits="objectBoundingBox"><path d="M0.960 0.500L0.972 0.519L0.981 0.538L0.984 0.557L0.981 0.576L0.971 0.594L0.956 0.609L0.939 0.624L0.922 0.637L0.908 0.651L0.899 0.665L0.895 0.682L0.895 0.701L0.898 0.723L0.900 0.745L0.899 0.767L0.894 0.786L0.883 0.802L0.867 0.813L0.847 0.821L0.825 0.825L0.804 0.828L0.784 0.833L0.768 0.840L0.755 0.851L0.745 0.866L0.736 0.885L0.727 0.905L0.716 0.925L0.703 0.940L0.687 0.951L0.668 0.955L0.647 0.953L0.626 0.947L0.605 0.939L0.586 0.932L0.568 0.928L0.551 0.929L0.534 0.936L0.518 0.947L0.500 0.960L0.481 0.972L0.462 0.981L0.443 0.984L0.424 0.981L0.406 0.971L0.391 0.956L0.376 0.939L0.363 0.922L0.349 0.908L0.335 0.899L0.318 0.895L0.299 0.895L0.277 0.898L0.255 0.900L0.233 0.899L0.214 0.894L0.198 0.883L0.187 0.867L0.179 0.847L0.175 0.825L0.172 0.804L0.167 0.784L0.160 0.768L0.149 0.755L0.134 0.745L0.115 0.736L0.095 0.727L0.075 0.716L0.060 0.703L0.049 0.687L0.045 0.668L0.047 0.647L0.053 0.626L0.061 0.605L0.068 0.586L0.072 0.568L0.071 0.551L0.064 0.534L0.053 0.518L0.040 0.500L0.028 0.481L0.019 0.462L0.016 0.443L0.019 0.424L0.029 0.406L0.044 0.391L0.061 0.376L0.078 0.363L0.092 0.349L0.101 0.335L0.105 0.318L0.105 0.299L0.102 0.277L0.100 0.255L0.101 0.233L0.106 0.214L0.117 0.198L0.133 0.187L0.153 0.179L0.175 0.175L0.196 0.172L0.216 0.167L0.232 0.160L0.245 0.149L0.255 0.134L0.264 0.115L0.273 0.095L0.284 0.075L0.297 0.060L0.313 0.049L0.332 0.045L0.353 0.047L0.374 0.053L0.395 0.061L0.414 0.068L0.432 0.072L0.449 0.071L0.466 0.064L0.482 0.053L0.500 0.040L0.519 0.028L0.538 0.019L0.557 0.016L0.576 0.019L0.594 0.029L0.609 0.044L0.624 0.061L0.637 0.078L0.651 0.092L0.665 0.101L0.682 0.105L0.701 0.105L0.723 0.102L0.745 0.100L0.767 0.101L0.786 0.106L0.802 0.117L0.813 0.133L0.821 0.153L0.825 0.175L0.828 0.196L0.833 0.216L0.840 0.232L0.851 0.245L0.866 0.255L0.885 0.264L0.905 0.273L0.925 0.284L0.940 0.297L0.951 0.313L0.955 0.332L0.953 0.353L0.947 0.374L0.939 0.395L0.932 0.414L0.928 0.432L0.929 0.449L0.936 0.466L0.947 0.482L0.960 0.500Z" /></clipPath>
+    <symbol id="seal" viewBox="0 0 100 100"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" fill="currentColor" /></symbol>
+    <symbol id="seal-line" viewBox="0 0 100 100"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" fill="none" stroke="currentColor" stroke-width="1.2" /></symbol>
+  </defs>
+</svg>
+<a class="skip" href="#main">Lewati ke konten</a>
+
+<nav class="nav" data-nav aria-label="Utama">
+  <a class="brand" href="#top" aria-label="FUSIONIFY">
+    <img class="brand-mark" src="../brand/mark-128.webp" alt="" width="34" height="34">
+    <img class="brand-word" src="../brand/wordmark.svg" alt="FUSIONIFY" width="160" height="19">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#warna">Warna</a></li>
+    <li><a href="#komponen">Komponen</a></li>
+    <li><a href="#kartu">Kartu</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-tools">
+    <button class="icon-btn sound-btn" type="button" data-sound aria-pressed="false" aria-label="Suara">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" /><path class="x" d="M17 9l4 6M21 9l-4 6" /><path class="w1" d="M16.5 9.5a3.5 3.5 0 0 1 0 5" /><path class="w2" d="M19 7a7 7 0 0 1 0 10" /></svg>
+    </button>
+    <a class="btn" href="#kontak" data-sfx="plop">Ngobrol yuk</a>
+    <button class="icon-btn menu-btn" type="button" data-menu aria-expanded="false" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="l1" d="M5 8h14" /><path class="l2" d="M9 16h10" /></svg>
+    </button>
+  </div>
+</nav>
+<div class="drawer" data-drawer aria-hidden="true">
+  <ul><li><a href="#warna">Warna</a></li><li><a href="#komponen">Komponen</a></li><li><a href="#kartu">Kartu</a></li><li><a href="#faq">FAQ</a></li></ul>
+  <img class="drawer-mascot" src="../mascot/wink-420.webp" alt="" width="325" height="420" loading="lazy">
+</div>
+
+<main id="main">
+  <section class="hero-demo" id="top">
+    <div class="wrap grid">
+      <div>
+        <span class="kicker">FUSIONIFY UI</span>
+        <h1 class="h-hero split" data-split>Satu keluarga<span class="dot">.</span></h1>
+        <p class="lead">Contoh semua komponen sistem desain FUSIONIFY. Semua web FUSIONIFY dirakit dari bagian-bagian ini, supaya terasa satu keluarga.</p>
+        <div class="ctas">
+          <a class="btn" href="#komponen" data-magnetic>Lihat komponen <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg></a>
+          <a class="btn ghost" href="https://fusionify.id" rel="noopener">fusionify.id</a>
+        </div>
+      </div>
+      <div class="mascot-stage">
+        <svg class="seal-bg" viewBox="0 0 100 100" aria-hidden="true"><use href="#seal" /></svg>
+        <svg class="seal-ring" viewBox="0 0 100 100" aria-hidden="true"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" fill="none" stroke-width="0.4" stroke-dasharray="1.5 2.5" /></svg>
+        <span class="bubble say">Halo, salam kenal!</span>
+        <img class="body" src="../mascot/happy-420.webp" alt="Maskot FUSIONIFY" width="337" height="420">
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tint" id="warna">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Token</span>
+        <h2 class="h-sec split" data-split>Warna dan huruf.</h2>
+      </div>
+      <div class="swatches" data-reveal>
+        <div class="sw"><i style="background:var(--blue)"></i><div><b>--blue</b><br><code>#0D6CD7</code></div></div>
+        <div class="sw"><i style="background:var(--blue-deep)"></i><div><b>--blue-deep</b><br><code>#0261CD</code></div></div>
+        <div class="sw"><i style="background:var(--blue-light)"></i><div><b>--blue-light</b><br><code>#539DE9</code></div></div>
+        <div class="sw"><i style="background:var(--ink)"></i><div><b>--ink</b><br><code>#0B0F1A</code></div></div>
+        <div class="sw"><i style="background:var(--surface)"></i><div><b>--surface</b><br><code>#EAF4FF</code></div></div>
+        <div class="sw"><i style="background:var(--paper)"></i><div><b>--paper</b><br><code>#F7FBFF</code></div></div>
+        <div class="sw"><i style="background:var(--night)"></i><div><b>--night</b><br><code>#071022</code></div></div>
+      </div>
+      <div class="type" style="margin-top:50px" data-reveal>
+        <div><small>Afacad Flux 800</small><p style="font-family:var(--f-head);font-weight:800;font-size:44px;line-height:1">Fuse ideas. Build progress.</p></div>
+        <div><small>Sansation</small><p>Teks dan antarmuka. Santai, jelas, manusiawi.</p></div>
+        <div><small>Caveat</small><p class="hand" style="font-size:30px;color:var(--blue-deep)">Suara maskot, catatan tangan</p></div>
+        <div><small>Exo 2</small><p class="num" style="font-size:30px;font-weight:700">2022 · <span data-count-to="7">7</span> brand · 24/7</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="komponen">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Komponen</span>
+        <h2 class="h-sec split" data-split>Tombol, chip, dan gelembung.</h2>
+      </div>
+      <div class="row" data-reveal>
+        <a class="btn" href="#komponen">Tombol utama</a>
+        <a class="btn ghost" href="#komponen">Tombol kedua</a>
+        <a class="btn sm" href="#komponen">Kecil</a>
+        <button class="btn ghost" type="button" data-copy="hello@fusionify.id" data-copied="Email disalin. Tinggal tempel ya!">Salin email</button>
+      </div>
+      <div class="row" style="margin-top:26px" data-reveal>
+        <span class="chip go">Aktif</span><span class="chip beta">Beta</span><span class="chip wip">Dalam pengembangan</span><span class="chip plan">Direncanakan</span><span class="chip eos">Layanan berakhir</span>
+      </div>
+      <div class="row" style="margin-top:40px" data-reveal>
+        <span class="bubble">Gelembung bicara</span>
+        <span class="bubble left">Ekor di kiri</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 60C120 30 240 30 360 60S600 90 720 60 960 30 1080 60 1320 90 1440 60V90H0Z" fill="currentColor" /></svg></div>
+
+  <section class="sec blue" id="kartu">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Kartu stiker</span>
+        <h2 class="h-sec split" data-split>Tegas seperti stiker.</h2>
+        <p class="lead">Garis 2px tinta, bayangan pejal ke bawah, sudut besar.</p>
+      </div>
+      <div class="grid-3" data-reveal>
+        <a class="card" href="#kartu"><h3>Kartu putih</h3><p>Bisa diklik, terangkat saat hover.</p></a>
+        <div class="card tint"><h3>Kartu tint</h3><p>Untuk variasi ritme.</p></div>
+        <div class="card"><h3>Kartu ketiga</h3><p>Grid 3, 2, 1 tanpa kartu yatim.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head"><span class="kicker">Angka</span><h2 class="h-sec">Hanya yang bisa dibuktikan.</h2></div>
+      <div class="stats" data-reveal>
+        <div class="stat"><span class="lab">Sejak</span><span class="v" data-count-to="2022">2022</span></div>
+        <div class="stat"><span class="lab">Brand</span><span class="v" data-count-to="7">7</span></div>
+        <div class="stat"><span class="lab">Partner</span><span class="v" data-count-to="6">6</span></div>
+      </div>
+      <div class="works" style="margin-top:70px">
+        <a class="work" href="#top" data-cursor-label="lihat" data-reveal>
+          <div class="cover"><div class="demo-cover"><img src="../mascot/glasses-420.webp" alt="" width="337" height="420"></div><span class="cover-note">Ilustrasi</span></div>
+          <div class="meta"><div><span class="chip go">Aktif</span><h3>Produk A</h3><p class="cat">Kategori produk</p></div><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="work" href="#top" data-cursor-label="lihat" data-reveal>
+          <div class="cover"><div class="demo-cover"><img src="../mascot/confused-420.webp" alt="" width="337" height="420"></div><span class="cover-note">Ilustrasi</span></div>
+          <div class="meta"><div><span class="chip wip">Dalam pengembangan</span><h3>Produk B</h3><p class="cat">Kategori produk</p></div><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+        <a class="work" href="#top" data-cursor-label="lihat" data-reveal>
+          <div class="cover"><div class="demo-cover"><img src="../mascot/cry-420.webp" alt="" width="337" height="420"></div><span class="cover-note">Ilustrasi</span></div>
+          <div class="meta"><div><span class="chip eos">Layanan berakhir</span><h3>Produk C</h3><p class="cat">Kategori produk</p></div><span class="arrow" aria-hidden="true">→</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tint">
+    <div class="wrap">
+      <div class="sec-head"><span class="kicker">Orang</span><h2 class="h-sec">Foto dalam bingkai segel.</h2></div>
+      <div class="team">
+        <div class="person" data-reveal><div class="ph"><svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><use href="#seal-line" /></svg><img src="../mascot/head-happy.webp" alt="" width="320" height="314" loading="lazy"></div><h3>Nama orang</h3><p>Jabatan</p></div>
+        <div class="person" data-reveal><div class="ph"><svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><use href="#seal-line" /></svg><img src="../mascot/head-glasses.webp" alt="" width="320" height="314" loading="lazy"></div><h3>Nama orang</h3><p>Jabatan</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-label="Partner">
+    <div class="row">
+      <span class="item"><img src="../brand/mark-128.webp" alt="" width="34" height="34">Partner satu <small>sejak 2024</small></span>
+      <span class="item"><img src="../brand/mark-128.webp" alt="" width="34" height="34">Partner dua <small>sejak 2025</small></span>
+      <span class="item"><img src="../brand/mark-128.webp" alt="" width="34" height="34">Partner tiga <small>sejak 2026</small></span>
+      <span class="item" aria-hidden="true"><img src="../brand/mark-128.webp" alt="" width="34" height="34">Partner satu <small>sejak 2024</small></span>
+      <span class="item" aria-hidden="true"><img src="../brand/mark-128.webp" alt="" width="34" height="34">Partner dua <small>sejak 2025</small></span>
+      <span class="item" aria-hidden="true"><img src="../brand/mark-128.webp" alt="" width="34" height="34">Partner tiga <small>sejak 2026</small></span>
+    </div>
+  </div>
+
+  <section class="sec tint" id="produk">
+    <div class="wrap" style="display:grid;gap:34px">
+      <div class="sec-head" style="margin-bottom:0"><span class="kicker">Komponen produk</span><h2 class="h-sec">Catatan, tag, tabel, form.</h2>
+        <p class="lead">Komponen dari <code>css/product.css</code>. Contoh halaman utuh: <a href="../templates/landing-produk.html" data-no-veil>landing produk</a> dan <a href="../templates/404.html" data-no-veil>404</a>.</p></div>
+      <div class="grid-2" data-reveal>
+        <div class="note"><b>Info</b><p>Catatan biasa untuk pengguna.</p></div>
+        <div class="note ok"><b>Berhasil</b><p>Pesanan sudah diterima.</p></div>
+        <div class="note warn"><b>Perhatian</b><p>Fitur ini masih beta.</p></div>
+        <div class="note danger"><b>Gagal</b><p>Coba lagi beberapa saat.</p></div>
+      </div>
+      <ul class="tags" data-reveal><li class="tag">Astro</li><li class="tag">Cloudflare</li><li class="tag">Telegram Bot</li><li class="tag">QRIS</li></ul>
+      <div class="table-wrap" data-reveal tabindex="0" role="region" aria-label="Perbandingan paket">
+        <table class="table"><thead><tr><th>Paket</th><th>Cocok untuk</th><th class="num">Harga</th></tr></thead>
+        <tbody><tr><td>Dasar</td><td>Coba-coba</td><td class="num">Rp0</td></tr><tr><td>Pro</td><td>Usaha kecil</td><td class="num">Rp99rb</td></tr><tr><td>Bisnis</td><td>Tim</td><td class="num">Hubungi kami</td></tr></tbody></table>
+      </div>
+      <div class="form-grid" data-reveal>
+        <label class="field"><span>Nama</span><input class="input" placeholder="Nama kamu"></label>
+        <label class="field"><span>Paket</span><select class="select"><option>Pro</option><option>Dasar</option></select></label>
+        <label class="check"><input type="checkbox" checked><span>Kotak centang</span></label>
+        <label class="check"><input type="radio" name="r" checked><span>Pilihan radio</span></label>
+      </div>
+      <ul class="ticks" data-reveal><li>Daftar fitur dengan centang segel</li><li>Item kedua</li><li class="no">Tidak termasuk</li></ul>
+    </div>
+  </section>
+
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sec-head"><span class="kicker">Tanya jawab</span><h2 class="h-sec">FAQ yang rapi.</h2></div>
+      <div class="faq" data-reveal>
+        <details><summary>Boleh pakai logo sendiri di web produk?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Boleh. Sistem desainnya tetap kit ini, logonya milik produk.</p></details>
+        <details><summary>Bagaimana mengganti ekspresi maskot?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Tukar gambar badan penuh. Jangan menempel kepala di atas badan lain.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tint" id="kontak">
+    <div class="wrap">
+      <div class="sec-head"><span class="kicker">Kontak</span><h2 class="h-sec">Halaman lengkap ada di fusionify.id.</h2></div>
+      <a class="btn" href="mailto:hello@fusionify.id" data-magnetic>hello@fusionify.id</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="fcols">
+      <div><img src="../brand/wordmark-white.svg" alt="FUSIONIFY" width="200" height="24" style="height:24px;width:auto;margin-bottom:14px"><p>Contoh footer sederhana untuk web produk.</p></div>
+      <div><h2 class="fh">Produk</h2><ul><li><a href="#top">Fitur</a></li><li><a href="#top">Harga</a></li></ul></div>
+      <div><h2 class="fh">Perusahaan</h2><ul><li><a href="https://fusionify.id">fusionify.id</a></li><li><a href="https://fusionify.id/privasi/">Kebijakan Privasi</a></li></ul></div>
+      <div><h2 class="fh">Kontak</h2><ul><li><a href="mailto:hello@fusionify.id">hello@fusionify.id</a></li></ul></div>
+    </div>
+    <div class="fbar">
+      <a class="fy-badge" href="https://fusionify.id" rel="noopener"><img src="../badge/produk-fusionify-id-dark.png" alt="Sebuah produk dari FUSIONIFY" width="340" height="100"></a>
+      <a class="to-top" href="#top">Naik ke atas <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" /></svg></a>
+    </div>
+  </div>
+</footer>
+
+<div class="cursor" aria-hidden="true" data-cursor-el>
+  <div class="ring"><svg viewBox="0 0 100 100"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" /></svg></div>
+  <div class="dot"></div>
+  <div class="label"></div>
+</div>
+
+<!-- Notifikasi kecil (dipanggil lewat fy.toast("...") atau tombol data-copy) -->
+<div class="toast" role="status" aria-live="polite" data-toast>
+  <img src="../mascot/head-happy-120.webp" alt="" width="40" height="39" />
+  <span data-toast-text></span>
+</div>
+
+<!-- Tirai transisi halaman -->
+<div class="veil" aria-hidden="true" data-veil>
+  <svg class="blob" viewBox="0 0 100 100"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" /></svg>
+  <img src="../mascot/head-wink-120.webp" alt="" width="114" height="120" />
+</div>
+
+<!-- Tanpa bundler: importmap ke CDN. Dengan bundler cukup: npm i gsap lenis -->
+<script type="importmap">
+{ "imports": {
+  "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js",
+  "gsap/ScrollTrigger": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger.js",
+  "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.mjs"
+} }
+</script>
+<script type="module">
+  import { initFusionify } from "../js/motion.js";
+  initFusionify();
+</script>
+</body>
+</html>

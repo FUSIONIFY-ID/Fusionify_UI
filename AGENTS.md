@@ -1,0 +1,110 @@
+# AGENTS.md · Fusionify_UI
+
+Panduan untuk semua AI agent dan developer (Claude, ChatGPT/Codex, Cursor, Copilot, Gemini, dan lainnya) yang membangun atau membenahi **web apa pun milik FUSIONIFY**: web company fusionify.id maupun web brand produk (Premiumify, FUSIONIFY BOT, StudyDate.id, Fusionify Solutions, dan produk berikutnya).
+
+Repo ini (**github.com/FUSIONIFY-ID/Fusionify_UI**) adalah **starter kit sistem desain FUSIONIFY**: token, CSS komponen, kode gerak, segel, font, logo, maskot, dan badge. Tujuannya satu: semua web FUSIONIFY terasa satu keluarga, siapa pun yang mengerjakannya.
+
+Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Lihat **`demo/index.html`** untuk contoh markup setiap komponen.
+
+## Isi repo
+
+| Path | Isi |
+| --- | --- |
+| `css/tokens.css` | Warna, huruf (@font-face), radius, kurva gerak, bayangan |
+| `css/base.css` | Reset, tipografi, `.wrap`, `.kicker`, `.h-hero`, `.h-sec`, `.lead`, `.prose` |
+| `css/components.css` | Tombol, chip status, nav, menu HP, seksi, kartu stiker, statistik, kartu karya, foto bersegel, gelembung maskot, panggung maskot, marquee partner, FAQ, gelombang, footer, toast, kursor, transisi halaman, status reveal, jeda `.idle` |
+| `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment` |
+| `css/fusionify.css` | Satu file yang mengimpor semuanya |
+| `js/motion.js` | `initFusionify()`: smooth scroll, nav, menu HP, kursor, reveal, angka, magnet, salin + toast, transisi halaman, suara, jeda di luar layar |
+| `js/seal.js` | `seal()` dan `SEAL_PATH`: bentuk segel 12 lekukan |
+| `snippets/head-script.html` | Skrip kecil wajib di `<head>` |
+| `snippets/sprite.html` | Sprite SVG (clip-path segel, simbol segel) setelah `<body>` |
+| `snippets/body-parts.html` | Kursor, toast, tirai transisi sebelum `</body>` |
+| `fonts/` | Afacad Flux, Sansation, Caveat, Exo 2 (woff2, OFL) |
+| `brand/` | Segel Fi, wordmark (SVG), emblem; `brand/kit/` logo horizontal, vertikal, legacy |
+| `mascot/` | Maskot badan penuh, kepala, papan, stiker bot |
+| `badge/` | Badge "Sebuah produk dari FUSIONIFY" (ID/EN, terang/gelap) |
+| `demo/index.html` | Halaman contoh semua komponen |
+| `FUSIONIFY-UI-KONTEKS.md` | Semua aturan + CSS dalam satu file, untuk di-upload ke AI versi chat web. Buat ulang dengan `node scripts/build-konteks.mjs` setiap ada perubahan |
+| `CLAUDE.md`, `GEMINI.md`, `QWEN.md`, `.gemini/`, `.qwen/`, `.cursor/rules/`, `.github/copilot-instructions.md`, `.aider.conf.yml` | Penunjuk ke file ini untuk masing-masing AI agent |
+| `templates/landing-produk.html` | Template landing web produk lengkap. Ganti bagian bertanda `GANTI` |
+| `templates/404.html` | Template halaman tidak ditemukan dengan maskot confused |
+
+## Cara memakai di proyek baru atau lama
+
+1. Salin folder kit ke proyek (mis. `public/fusionify-ui/` atau `src/fusionify-ui/`), atau jadikan git submodule.
+2. Pasang dependensi gerak: `npm i gsap lenis`.
+3. Muat CSS: `css/fusionify.css` (atau impor tiga file lewat bundler supaya bisa di-inline).
+4. Tempel `snippets/head-script.html` di `<head>`, `snippets/sprite.html` setelah `<body>`, `snippets/body-parts.html` sebelum `</body>`. Sesuaikan path gambar.
+5. Panggil `initFusionify()` dari `js/motion.js` sekali setelah DOM siap.
+6. Preload dua font utama:
+   ```html
+   <link rel="preload" href="/fusionify-ui/fonts/afacad-flux-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+   <link rel="preload" href="/fusionify-ui/fonts/sansation-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+   ```
+7. Web produk: pasang badge di footer:
+   ```html
+   <a class="fy-badge" href="https://fusionify.id" rel="noopener"><img src="/fusionify-ui/badge/produk-fusionify-id-dark.png" alt="Sebuah produk dari FUSIONIFY" width="340" height="100"></a>
+   ```
+
+Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: bisa dipakai di Astro, Next.js, Vite, Laravel Blade, atau HTML biasa. Jangan menambahkan Tailwind/Bootstrap di atasnya; kalau proyek lama sudah memakai framework CSS, pakai token kit ini sebagai variabel dan sesuaikan komponennya.
+
+## Aturan desain (wajib)
+
+- Pakai token di `css/tokens.css`. Jangan menulis warna hex, font, atau radius baru.
+- **Logo**: pakai file di `brand/`. Jangan mengetik "FUSIONIFY" dengan font sebagai pengganti logo. Web produk memakai logonya sendiri, sistem desainnya tetap kit ini.
+- **Maskot**: ganti ekspresi dengan menukar gambar badan penuh. Jangan menempel kepala di badan lain.
+- Hiasan SVG yang sengaja lebih besar dari wadahnya wajib kelas `.fx-oversize` (atau `max-width: none`).
+- Gaya stiker: garis 2px `--ink`, bayangan pejal ke bawah, sudut besar.
+- Jangan menyalin momen khas fusionify.id (segel menutup hero, footer malam Bogor) apa adanya ke web produk. Rakit momen sendiri dari bagian yang sama.
+
+## Aturan isi (wajib)
+
+- **Jujur.** Status produk ditulis apa adanya dengan chip (`go`, `beta`, `wip`, `plan`, `eos`). Jangan menaikkan status.
+- Harga di `.plan` wajib harga asli; kalau belum pasti tulis "Hubungi kami". Seksi testimoni dihapus kalau belum ada izin, jangan diisi contoh.
+- **Tidak ada angka, testimoni, logo klien, atau partner karangan.** Testimoni hanya dengan izin tertulis dan tanggalnya.
+- Cover produk harus screenshot asli; ilustrasi wajib diberi label "Ilustrasi".
+- Kontak publik FUSIONIFY hanya `hello@fusionify.id` dan WhatsApp `+62 831-1138-0628`.
+- Proyek rahasia klien pemerintah tidak boleh muncul di web publik.
+- Bilingual ID/EN bila memungkinkan; Bahasa Indonesia ditulis natural, bukan terjemahan kaku.
+- Gaya tulisan santai, jelas, manusiawi. **Tanpa em dash (—)** di teks yang dibaca pengunjung.
+
+## Performa (wajib, sudah diukur di fusionify.id)
+
+- Hanya animasikan `transform` dan `opacity`. Tidak boleh animasi `box-shadow`, `width`, `top`, `filter`.
+- Jangan menganimasikan elemen di dalam SVG satu per satu (memaksa gambar ulang seluruh SVG tiap frame). Kalau perlu kedip, kedipkan seluruh lapisan `<svg>` dengan `opacity`.
+- Cahaya dan glow pakai gradien statis, bukan `filter: blur`/`drop-shadow` pada elemen bergerak.
+- Animasi CSS `infinite` harus berada di dalam elemen yang diamati `initFusionify` (`main > section`, `main > div`, `footer`, `[data-pause]`) supaya dijeda saat tidak terlihat.
+- Jangan menulis `left`/`top`/`width` atau membaca ukuran elemen (`getBoundingClientRect`, `clientWidth`) di `gsap.ticker` atau handler scroll. Ukur sekali, perbarui saat resize.
+- Dengan Lenis, pakai `scrub` kecil (sekitar 0.3) dan jangan pakai `anticipatePin`.
+- Untuk efek membesar (segel menutup layar), perbesar SVG berukuran sedang (sekitar 400px) dengan `transform: scale`; jangan menggambar SVG raksasa.
+- Font di-host sendiri, gambar WebP dengan `width`/`height`, inisialisasi yang tidak perlu saat awal dijalankan saat browser senggang.
+- Target PageSpeed Insights mobile: Aksesibilitas, Praktik Terbaik, SEO = 100.
+
+## QA (wajib sebelum selesai)
+
+Cek di **HP** 375×667 dan 390×844, **tablet** 768×1024, 820×1180, 1024×768, **desktop** 1366×768, 1440×900, 1920×1080.
+
+- Tidak ada scroll horizontal atau elemen keluar layar.
+- Tidak ada teks bertabrakan atau terpotong.
+- Kontras teks minimal 4.5:1, termasuk teks terang di atas biru (`#f2f8ff` atau putih, jangan pakai `opacity` pada teks di atas biru). Periksa dengan axe **setelah** semua elemen `data-reveal` tampil; Lighthouse biasa melewatkan elemen yang masih transparan.
+- Mode "kurangi gerakan": semua konten harus langsung tampil.
+- Grid tanpa kartu yatim.
+- Cek mode reduced motion dan tanpa JavaScript (konten tetap terbaca).
+- Build proyek sukses tanpa error.
+
+## Aturan hukum dan orisinalitas
+
+- Semua kode ditulis sendiri. **Jangan menyalin kode, aset, atau musik dari situs lain**, khususnya andikadevs (izin penggunaannya ditolak pemiliknya). Inspirasi umum boleh; salinan tidak.
+- Jangan membuat momen khas situs tersebut: maskot terbang ke pojok nav, pintu di huruf wordmark, awan bertumpuk, laut dan kapal.
+- Dependensi baru wajib berlisensi bebas dipakai komersial dan dicatat di `THIRD_PARTY_NOTICES.md`.
+- Logo, maskot, dan badge adalah milik PT FUSIONIFY DIGITAL STORE. Hanya untuk web FUSIONIFY dan partner yang diizinkan.
+
+## Menjaga kit tetap sinkron
+
+fusionify.id (repo `FUSIONIFY-ID/FUSIONIFY`) adalah sumber kebenaran. Kalau token, komponen, atau aturan di sana berubah, perbarui kit ini di commit yang sama atau sesudahnya, lalu catat di `CHANGELOG.md`.
+
+## Git
+
+- Commit dan push atas nama akun GitHub **jundy779**.
+- Pesan commit singkat dan jelas, boleh bahasa Indonesia.

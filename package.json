@@ -1,0 +1,24 @@
+{
+  "name": "@fusionify/ui",
+  "version": "1.1.1",
+  "private": true,
+  "description": "Sistem desain FUSIONIFY: token, komponen CSS, gerak, segel, font, logo, dan maskot. Sumber: fusionify.id.",
+  "type": "module",
+  "exports": {
+    "./css/*": "./css/*",
+    "./js/motion": "./js/motion.js",
+    "./js/seal": "./js/seal.js",
+    "./fonts/*": "./fonts/*",
+    "./brand/*": "./brand/*",
+    "./mascot/*": "./mascot/*",
+    "./badge/*": "./badge/*",
+    "./templates/*": "./templates/*"
+  },
+  "peerDependencies": {
+    "gsap": "^3.12.0",
+    "lenis": "^1.1.0"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "author": "PT FUSIONIFY DIGITAL STORE <hello@fusionify.id>",
+  "homepage": "https://fusionify.id"
+}

@@ -1,0 +1,7 @@
+/* FUSIONIFY UI · satu file untuk semuanya.
+   <link rel="stylesheet" href="/fusionify-ui/css/fusionify.css">
+   Untuk performa terbaik di produksi, gabungkan/inline lewat bundler (Astro, Vite) daripada @import. */
+@import url("./tokens.css");
+@import url("./base.css");
+@import url("./components.css");
+@import url("./product.css");

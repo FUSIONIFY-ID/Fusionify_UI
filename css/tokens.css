@@ -1,0 +1,58 @@
+/* FUSIONIFY UI · tokens.css
+   Warna, huruf, radius, dan kurva gerak resmi. Sama persis dengan fusionify.id.
+   Jangan menambah warna hex baru di proyek; pakai variabel di bawah. */
+
+/* Font di-host sendiri, subset latin, lisensi SIL OFL. Path relatif ke file ini. */
+@font-face { font-family: "Afacad Flux Variable"; font-style: normal; font-display: swap; font-weight: 100 1000; src: url(../fonts/afacad-flux-latin-wght-normal.woff2) format("woff2-variations"); }
+@font-face { font-family: "Sansation"; font-style: normal; font-display: swap; font-weight: 400; src: url(../fonts/sansation-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Sansation"; font-style: normal; font-display: swap; font-weight: 700; src: url(../fonts/sansation-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Caveat Variable"; font-style: normal; font-display: swap; font-weight: 400 700; src: url(../fonts/caveat-latin-wght-normal.woff2) format("woff2-variations"); }
+@font-face { font-family: "Exo 2 Variable"; font-style: normal; font-display: swap; font-weight: 100 900; src: url(../fonts/exo-2-latin-wght-normal.woff2) format("woff2-variations"); }
+
+:root {
+  /* Biru FUSIONIFY */
+  --blue: #0d6cd7;        /* warna utama, tombol, seksi biru */
+  --blue-deep: #0261cd;   /* teks tautan, hover */
+  --blue-light: #539de9;  /* titik huruf i, aksen kecil, kursor */
+
+  /* Tinta dan latar */
+  --ink: #0b0f1a;         /* teks, garis tepi, bayangan pejal */
+  --ink-2: #3a4458;       /* teks sekunder */
+  --ink-3: #566175;       /* keterangan */
+  --surface: #eaf4ff;     /* latar seksi selang-seling */
+  --paper: #f7fbff;       /* latar halaman */
+  --white: #ffffff;
+  --line: #d3e4f7;
+  --night: #071022;       /* footer malam */
+
+  /* Chip status produk (wajib jujur) */
+  --go: #157f3b;   --go-bg: #e3f6e9;    /* aktif / live */
+  --beta: #9a5b00; --beta-bg: #fff2d8;  /* beta */
+  --wip: #8a4a00;  --wip-bg: #ffe9d6;   /* dalam pengembangan */
+  --plan: #0261cd; --plan-bg: #eef7ff;  /* direncanakan / eksperimen */
+  --eos: #5b6475;  --eos-bg: #eceff4;   /* layanan berakhir */
+
+  /* Huruf */
+  --f-head: "Afacad Flux Variable", "Afacad Flux", system-ui, sans-serif; /* judul, tebal 800 */
+  --f-body: "Sansation", system-ui, sans-serif;                          /* teks dan UI */
+  --f-hand: "Caveat Variable", "Caveat", cursive;                         /* suara maskot */
+  --f-num: "Exo 2 Variable", "Exo 2", system-ui, sans-serif;              /* angka dan label */
+
+  /* Bentuk dan ukuran */
+  --r-s: 10px;
+  --r-m: 18px;
+  --r-l: 28px;
+  --gut: clamp(16px, 4vw, 48px);
+  --max: 1240px;
+
+  /* Gerak */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Bayangan */
+  --shadow: 0 1px 0 rgba(13, 108, 215, 0.06), 0 12px 32px -14px rgba(11, 15, 26, 0.18);
+  --shadow-pop: 0 3px 0 var(--ink);      /* tombol */
+  --shadow-sticker: 0 6px 0 var(--ink);  /* kartu bergaya stiker */
+
+  color-scheme: light;
+}
