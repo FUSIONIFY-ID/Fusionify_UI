@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.3 · 22 Oktober 2026
+
+- Skill `skills/fusionify-brand-style/SKILL.md` disamakan dengan versi terbaru: folder Drive MASCOT, aturan Motion (Framer Motion), catatan neo-brutalism, dan daftar komponen Figma lengkap.
+
 ## 1.6.2 · 22 Oktober 2026
 
 - **Library Figma dilengkapi**: komponen `Langkah stepper` + `Stepper`, `Sel judul tabel` (Urut = Tidak/Naik/Turun) + `Baris tabel` + `Tabel`, `Gelembung pesan` (Saya/Lawan) + `Sedang mengetik` + `Kolom tulis` + `Contoh obrolan`, `Foto profil` (Inisial/Foto) + `Pemotong foto`. Semua terikat variabel warna, sehingga tampil benar di mode Terang dan Gelap. Pratinjau keduanya ada di frame "Pratinjau komponen tambahan".

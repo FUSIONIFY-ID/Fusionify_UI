@@ -10,34 +10,36 @@ Acuan visual dan front end untuk semua web FUSIONIFY.
 ## Sumber kebenaran (urutan prioritas)
 
 1. **Repo `FUSIONIFY-ID/FUSIONIFY`** (fusionify.id, live di https://fusionify.id): `DESIGN.md`, `AGENTS.md`, `src/styles/global.css`, `src/scripts/motion.ts`.
-2. **Repo `FUSIONIFY-ID/Fusionify_UI`** (starter kit, https://github.com/FUSIONIFY-ID/Fusionify_UI): `css/tokens.css`, `css/base.css`, `css/components.css`, `css/product.css`, `css/controls.css`, `css/app.css`, `js/motion.js` (`initFusionify()`), `js/app.js` (`initApp()`), `js/controls.js` (`initControls()`, `snackbar()`), `js/theme.js`, `js/seal.js`, `snippets/`, `templates/`, `tokens/` (token native), `fonts/`, `brand/`, `mascot/`, `badge/`, `demo/index.html`, plus `AGENTS.md`, `DESIGN.md`, dan `FUSIONIFY-UI-KONTEKS.md` (semua aturan + CSS dalam satu file untuk AI versi chat).
-3. **Library Figma** (https://www.figma.com/design/av0M9IuzYKJTiUWJsYTS3i): variabel warna Terang/Gelap, radius, jarak, gaya teks, bayangan stiker, dan komponen yang sama dengan kode. Variabelnya punya code syntax web/Android/iOS.
-4. Skill ini (ringkasan). Kalau berbeda dengan repo, repo yang benar.
+2. **Repo `FUSIONIFY-ID/Fusionify_UI`** (starter kit, https://github.com/FUSIONIFY-ID/Fusionify_UI): `css/tokens.css`, `css/base.css`, `css/components.css`, `css/product.css`, `css/controls.css`, `css/app.css`, `js/motion.js` (`initFusionify()`), `js/app.js` (`initApp()`), `js/controls.js` (`initControls()`, `snackbar()`), `js/lisensi.js` (kunci domain), `js/theme.js`, `js/seal.js`, `snippets/`, `templates/`, `tokens/` (token native), `tests/`, `fonts/`, `brand/`, `mascot/`, `badge/`, `skills/`, `demo/index.html`, plus `AGENTS.md`, `DESIGN.md`, `CHANGELOG.md`, dan `FUSIONIFY-UI-KONTEKS.md` (semua aturan + CSS dalam satu file untuk AI versi chat).
+3. **Library Figma** (https://www.figma.com/design/av0M9IuzYKJTiUWJsYTS3i): variabel warna Terang/Gelap, radius, jarak, gaya teks, bayangan stiker, dan komponen yang sama dengan kode (tombol, chip, input, kartu, saklar, avatar, navigasi bawah, notifikasi, stepper, tabel, chat, foto profil, pemotong foto). Variabelnya punya code syntax web/Android/iOS.
+4. **Folder Drive MASCOT** (https://drive.google.com/drive/folders/1zoWS_dWgVQsFwJL61kNutVVPi8ZImEDr): file maskot PNG asli dan WebP, plus dokumen "Panduan Maskot FUSIONIFY".
+5. Skill ini (ringkasan). Kalau berbeda dengan repo, repo yang benar.
 
 Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dulu. Kalau tidak ada, minta pengguna menambahkan repo `FUSIONIFY-ID/Fusionify_UI` atau melampirkan zip-nya (atau file `FUSIONIFY-UI-KONTEKS.md`), lalu tetap kerjakan dengan ringkasan di bawah.
 
 ## Langkah kerja untuk web produk
 
 1. Cek dulu: ini web company atau web produk? Produk boleh punya logo sendiri, tapi sistem desainnya sama. Jangan menciptakan palet baru.
-2. Pasang kit: salin isi repo `Fusionify_UI` ke proyek (mis. `public/fusionify-ui/`) atau `git submodule add https://github.com/FUSIONIFY-ID/Fusionify_UI public/fusionify-ui`, lalu `npm i gsap lenis`.
-3. Untuk halaman baru, mulai dari template: `templates/landing-produk.html` (hero maskot, fitur, cara kerja, harga, testimoni, FAQ, CTA, form, footer + badge), `templates/404.html`, `templates/auth/masuk.html` / `daftar.html` / `lupa-password.html` / `atur-ulang-password.html`, `templates/dashboard.html` (pengguna), `templates/admin.html` (admin), `templates/app-mobile.html` (aplikasi HP), `templates/chat.html` (pesan), `templates/acara.html` (detail acara ala Luma), `templates/auth/verifikasi.html` (kode OTP), `templates/komponen.html` (katalog kontrol). Ganti semua bagian bertanda `GANTI`.
-4. `<head>`: isi `snippets/head-script.html`, preload Afacad Flux dan Sansation 400 (jangan impor paket font penuh), muat `css/fusionify.css` (atau impor file CSS lewat bundler supaya bisa di-inline).
-5. Setelah `<body>`: `snippets/sprite.html`. Sebelum `</body>`: `snippets/body-parts.html` (kursor, toast, tirai transisi), lalu `import { initFusionify } from ".../js/motion.js"; initFusionify();`.
-6. Bangun halaman dari komponen kit (daftar di bawah, contoh markup di `demo/index.html`). Jangan menambahkan Tailwind/Bootstrap di atasnya.
-7. Pasang badge di footer web produk:
+2. Cek domainnya terdaftar di `js/lisensi.js` (`DOMAIN_RESMI`). Kalau belum, kit tidak menjalankan interaksi di sana; minta pemilik menambahkannya dan merilis versi baru.
+3. Pasang kit dan kunci versinya: `git submodule add https://github.com/FUSIONIFY-ID/Fusionify_UI public/fusionify-ui` lalu `git checkout vX.Y.Z` di dalamnya (atau `npm i github:FUSIONIFY-ID/Fusionify_UI#vX.Y.Z`), lalu `npm i gsap lenis`.
+4. Untuk halaman baru, mulai dari template: `templates/landing-produk.html` (hero maskot, fitur, cara kerja, harga, testimoni, FAQ, CTA, form, footer + badge), `templates/404.html`, `500.html`, `offline.html`, `maintenance.html`, `templates/auth/masuk.html` / `daftar.html` / `lupa-password.html` / `atur-ulang-password.html` / `verifikasi.html` (kode OTP), `templates/dashboard.html` (pengguna), `templates/admin.html` (admin), `templates/app-mobile.html` (aplikasi HP), `templates/chat.html` (pesan), `templates/acara.html` (detail acara ala Luma), `templates/komponen.html` (katalog kontrol). Ganti semua bagian bertanda `GANTI`.
+5. `<head>`: isi `snippets/head-script.html`, preload Afacad Flux dan Sansation 400 (jangan impor paket font penuh), muat `css/fusionify.css` (atau impor file CSS lewat bundler supaya bisa di-inline).
+6. Setelah `<body>`: `snippets/sprite.html`. Sebelum `</body>`: `snippets/body-parts.html` (kursor, toast, tirai transisi), lalu `import { initFusionify } from ".../js/motion.js"; initFusionify();`.
+7. Bangun halaman dari komponen kit (daftar di bawah, contoh markup di `demo/index.html` dan `templates/komponen.html`). Jangan menambahkan Tailwind/Bootstrap di atasnya. Untuk desain, pakai komponen dan variabel di library Figma.
+8. Pasang badge di footer web produk:
    `<a class="fy-badge" href="https://fusionify.id" rel="noopener"><img src=".../badge/produk-fusionify-id-dark.png" alt="Sebuah produk dari FUSIONIFY" width="340" height="100"></a>` (tersedia `{id,en}-{light,dark}`).
-8. Jangan menyalin momen khas fusionify.id (segel menutup hero, footer malam Bogor, orbit ekosistem) apa adanya. Rakit momen khas produk dari bagian yang sama: segel, maskot, gelombang.
-9. QA di **tema terang dan gelap**, ukuran 375, 390, 768, 820, 1024, 1366, 1440, 1920 px: tanpa scroll horizontal, tanpa teks bertabrakan, tanpa kartu yatim di grid. Cek reduced motion (semua konten harus langsung tampil) dan tanpa JavaScript. Periksa kontras dengan axe **setelah** semua elemen `data-reveal` tampil (Lighthouse biasa melewatkan elemen yang masih transparan).
-10. Ukur performa scroll sebelum dan sesudah menambah animasi.
-11. Di repo kit: jalankan `npm test` (uji tata letak, kontras, layar sentuh, tanpa JS, interaksi; juga jalan di GitHub Actions). Komponen atau template baru wajib ditambah ujinya di `tests/`.
-12. Web produk mengunci satu versi kit (submodule di tag `vX.Y.Z` atau `github:FUSIONIFY-ID/Fusionify_UI#vX.Y.Z`). Jangan mengubah file kit di dalam proyek produk; ubah di repo kit, catat di CHANGELOG, rilis dengan tag, lalu naikkan versinya di produk.
+9. Jangan menyalin momen khas fusionify.id (segel menutup hero, footer malam Bogor, orbit ekosistem) apa adanya. Rakit momen khas produk dari bagian yang sama: segel, maskot, gelombang.
+10. QA di **tema terang dan gelap**, ukuran 375, 390, 768, 820, 1024, 1366, 1440, 1920 px: tanpa scroll horizontal, tanpa teks bertabrakan, tanpa kartu yatim di grid. Cek reduced motion (semua konten harus langsung tampil) dan tanpa JavaScript. Periksa kontras dengan axe **setelah** semua elemen `data-reveal` tampil. Semua `<img>` wajib `width`/`height`; jangan ada `<img>` tanpa `src` di HTML.
+11. Ukur performa scroll sebelum dan sesudah menambah animasi.
+12. Di repo kit: jalankan `npm test` (tata letak, kontras, layar sentuh, tanpa JS, lisensi domain, semua interaksi; juga jalan di GitHub Actions). Komponen atau template baru wajib ditambah ujinya di `tests/`.
+13. Web produk mengunci satu versi kit. Jangan mengubah file kit di dalam proyek produk; ubah di repo kit, catat di CHANGELOG, samakan `version` di `package.json`, rilis dengan tag `vX.Y.Z` (`npm run release`), lalu naikkan versinya di produk. Nomor: Z perbaikan aman, Y komponen baru yang tidak merusak, X kalau kelas atau markup berubah.
 
 ## Komponen kit (kelas CSS)
 
 `components.css`:
 - Tata letak: `.wrap`, `.sec` (`.tint`, `.blue`), `.sec-head`, `.page-hero`, `.crumbs`, `.grid-2`, `.grid-3`
 - Teks: `.kicker`, `.h-hero`, `.h-sec` (+ `<span class="dot">.</span>`), `.lead`, `.prose`, `.num`, `.hand`
-- Aksi: `.btn` (`.ghost`, `.sm`), `.icon-btn`, `.chip` (`go`, `beta`, `wip`, `plan`, `eos`)
+- Aksi: `.btn` (`.ghost`, `.sm`), `.icon-btn`, `.theme-btn`, `.chip` (`go`, `beta`, `wip`, `plan`, `eos`)
 - Navigasi: `.nav` (+ `.brand`, `.brand-mark`, `.brand-word`, `.nav-links`, `.nav-tools`, `.lang`, `.sound-btn`, `.menu-btn`), `.drawer`
 - Kartu: `.card` (`.blue`, `.tint`), `.stats`/`.stat`, `.works`/`.work` (+ `.cover`, `.meta`, `.arrow`, `.cover-note`), `.person` (foto bingkai segel)
 - Maskot: `.bubble` (`.left`), `.mascot-stage` (+ `.seal-bg`, `.seal-ring`, `.body`)
@@ -49,13 +51,14 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 - Isi: `.svc` + `.svc-ico` (kartu layanan dengan ikon dalam segel), `.ticks` (+ `li.no`), `.steps` (+ `<span class="n">1</span>` di tiap `li`)
 - Harga: `.plans > .plan` (`.featured`, `.ribbon`, `.price`, `.desc`), `.segment` (tab radio). `.plan` selalu di dalam `.plans` karena `.chip.plan` juga ada
 - Lain: `.quote` (testimoni), `.cta-band` (+ `.actions`, `.mascot`, `.seal-deco`), `.note` (`ok`, `warn`, `danger`), `.table-wrap` (wajib `tabindex="0" role="region" aria-label`) + `.table`, `.tags`/`.tag`, `.empty` (+ `.code` untuk 404), `.prod-head`
+- Halaman acara: `.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`
 
 `app.css` (aplikasi, dimuat tambahan setelah fusionify.css; panggil `initApp()` dari `js/app.js`, bukan `initFusionify`):
 - Kerangka: `.app` (`data-app`) + `.side` (`data-side`) + `.scrim` + `.app-main` + `.topbar` (`.search`, `.side-toggle` `data-side-toggle`, `.user-chip`) + `.app-body`, `.side-nav` (`a[aria-current="page"]`, `.count`, `.group`), `.side-help`
 - Isi: `.page-head`, `.panel` (`.flush`, `.panel-head`), `.dash-grid` + `.span-4/5/6/7/8/12`, `.kpis`/`.kpi` (`.blue`, `.lab`, `.v`, `.delta.up/.down/.flat`, `.spark`), `.bars`, `.linechart`, `.donut` + `.legend`, `.progress`, `.feed`, `.sample-note` (label "Data contoh")
 - Tabel: `.toolbar`, `.pager`, `.row-actions`, `[data-check-all]`, `.avatar` (`.sm`, `.lg`), `.avatar-stack`
 - Kontrol: `.switch` (`input` + `span`), `.settings-row`, `.btn.block`, `.btn.social`, `.btn.danger`
-- Chat dan acara: `.chat`, `.chat-list`, `.convo`, `.thread`, `.msgs`, `.msg.me/.them`, `.typing`, `.composer`, `.ev-date` (halaman acara `.event`, `.poster`, `.reg`, `.agenda`, `.event-bar` ada di `product.css`)
+- Chat: `.chat`, `.chat-list`, `.convo`, `.thread`, `.msgs`, `.msg.me/.them`, `.typing`, `.composer`; tanggal acara `.ev-date`
 - Masuk/daftar: `.auth` + `.auth-art` + `.auth-main` + `.auth-card`, `.pw-field` + `[data-pw-toggle]`, `.pw-meter` (`data-pw-meter`), `.divider`, `.auth-done`, `form[data-validate]` (+ `data-done`, `data-match`, `data-msg-*`)
 
 `controls.css` (web, aplikasi, dan aplikasi HP; termasuk di `fusionify.css`; interaksi di `js/controls.js`, otomatis dipanggil `initFusionify()`/`initApp()`):
@@ -66,20 +69,20 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 - Input: `.slider`, `.range2` (`data-range2`), `.search-bar` + `[data-suggest]`, `.picker` (`data-datepicker`, `data-timepicker`)
 - Status: `.spinner` (segel), `.ring`, `.progress.indeterminate`, `.skel`, `.snackbar` (`snackbar(teks, { action, onAction })`), `.float-bar`
 - Verifikasi dan file: `.otp` (`[data-otp]`, `otpError()`), `[data-countdown]` (kirim ulang), `.upload` + `.drop` + `.upload-list` (`[data-upload]`, `data-max-mb`)
-- Lain: `[data-chat]` (obrolan, tombol back Android menutup isi obrolan di HP), `[data-ics]` (unduh .ics tambah ke kalender), `[data-share]`
+- Foto profil: `.avatar-crop[data-avatar-crop]` (+ `.ac-preview` > `.ac-initial`, input file `.sr-only`) membuka pemotong bulat (`.crop-modal`: geser, zoom slider/roda/cubit/+-, putar 90°); hasil 512px WebP menggantikan file di form; batal mengembalikan foto sebelumnya
 - Form bertahap: `form[data-wizard]` + `ol.stepper` (diisi otomatis) + `fieldset.wizard-step[data-title]` + `[data-wizard-prev]`/`[data-wizard-next]` (`data-last`, `data-done`)
 - Tabel urut: `table[data-sort]` + `th[data-sort-key]` (kosong = teks, `num`, `date`), nilai khusus `td[data-value]`
 - Notifikasi: `.notif[data-notif]` + tombol lonceng `aria-controls` + `.notif-panel` (`.notif-head`, `.notif-readall`, `.notif-filter` btn-group value all/unread, `.notif-list` > `.notif-item.unread`, `.notif-empty`, `.notif-all`)
-- Keadaan: `.state` (`.error`, `.offline`, `.sm`) dengan maskot + satu tombol; `.offline-bar[data-offline-bar]` muncul otomatis saat koneksi putus; halaman `templates/500.html`, `offline.html`, `maintenance.html`
-- Foto profil: `.avatar-crop[data-avatar-crop]` (+ `.ac-preview`, `.ac-initial`, input file) membuka pemotong bulat, hasil 512px WebP menggantikan file di form
-- Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:resend`, `fy:step`, `fy:sort`, `fy:read`, `fy:crop`, `fy:online`/`fy:offline`
+- Keadaan: `.state` (`.error`, `.offline`, `.sm`) dengan maskot, satu kalimat, satu tombol; `.offline-bar[data-offline-bar]` muncul otomatis saat koneksi putus; halaman `templates/500.html`, `offline.html`, `maintenance.html`
+- Lain: `[data-chat]` (obrolan; di HP tombol back Android menutup isi obrolan), `[data-ics]` (unduh .ics, tambah ke kalender), `[data-share]`
+- Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:resend`, `fy:step`, `fy:sort`, `fy:read`, `fy:crop`, dan `fy:online`/`fy:offline` di window
 
 Atribut `initFusionify()`: `data-split`, `data-reveal`, `data-assemble`, `data-count-to` + `data-suffix`, `data-magnetic`, `data-copy` + `data-copied`, `data-cursor-label`, `data-sfx`, `data-nav`, `data-menu`, `data-drawer`, `data-sound`, `data-no-veil`, `data-pause`.
 
 ## Domain resmi
 
-- `js/lisensi.js`: kit hanya berjalan di `fusionify.id`, `fusionify.biz.id`, partner `premiumify.my.id` dan `studydate.id`, serta subdomainnya (plus localhost, `*.local`, file lokal). Di domain lain interaksi dan animasi mati, konten tetap terbaca. Jangan dihapus atau diakali. Domain partner ditambah di `DOMAIN_RESMI` lalu rilis versi baru.
-- Kalau membangun web produk di domain lain (mis. premiumify.my.id, studydate.id), cek dulu domainnya sudah terdaftar; kalau belum, minta pemilik menambahkannya.
+- `js/lisensi.js`: kit hanya berjalan di `fusionify.id`, `fusionify.biz.id`, partner `premiumify.my.id` dan `studydate.id`, serta subdomainnya (plus localhost, `*.local`, file lokal). Di domain lain interaksi dan animasi mati, konten tetap terbaca, dan konsol memberi peringatan. Jangan dihapus atau diakali.
+- Domain partner baru ditambah di `DOMAIN_RESMI` atas izin pemilik, dicatat di CHANGELOG, lalu rilis versi baru dan naikkan versi kit di web produk tersebut.
 
 ## Token warna
 
@@ -87,7 +90,7 @@ Atribut `initFusionify()`: `data-split`, `data-reveal`, `data-assemble`, `data-c
 --blue: #0d6cd7;        /* utama, tombol, seksi biru */
 --blue-deep: #0261cd;   /* link, hover */
 --blue-light: #539de9;  /* titik i, aksen kecil, kursor */
---ink: #0b0f1a;         /* teks, garis tepi, bayangan pejal */
+--ink: #0b0f1a;         /* teks */
 --ink-2: #3a4458; --ink-3: #566175;
 --surface: #eaf4ff;     /* latar seksi selang-seling */
 --paper: #f7fbff;       /* latar halaman */
@@ -99,14 +102,16 @@ Atribut `initFusionify()`: `data-split`, `data-reveal`, `data-assemble`, `data-c
 --wip: #8a4a00; --wip-bg: #ffe9d6;    /* dalam pengembangan */
 --plan: #0261cd; --plan-bg: #eef7ff;  /* direncanakan */
 --eos: #5b6475; --eos-bg: #eceff4;    /* layanan berakhir */
---r-s: 10px; --r-m: 18px; --r-l: 28px;
+--r-s: 10px; --r-m: 18px; --r-l: 28px; --r-pill: 999px;
+--sp-xs: 4px; --sp-s: 8px; --sp-m: 12px; --sp-l: 16px; --sp-xl: 24px; --sp-2xl: 32px;
+--edge-width: 2px; --touch-min: 44px;
 --gut: clamp(16px, 4vw, 48px); --max: 1240px;
 --ease: cubic-bezier(0.22, 1, 0.36, 1);
 --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 --shadow-pop: 0 3px 0 var(--edge-shadow); --shadow-sticker: 0 6px 0 var(--edge-shadow);
---r-pill: 999px; --sp-xs: 4px; --sp-s: 8px; --sp-m: 12px; --sp-l: 16px; --sp-xl: 24px; --sp-2xl: 32px;
---edge-width: 2px; --touch-min: 44px;
 ```
+
+Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis/`, `bayangan/`, `status/`), ukuran di koleksi `Ukuran` (`radius/`, `jarak/`, `garis/stiker`, `sentuh/minimal`). Kalau token berubah, ubah di `tokens.css` dan Figma sekaligus.
 
 ## Mode gelap
 
@@ -120,17 +125,20 @@ Atribut `initFusionify()`: `data-split`, `data-reveal`, `data-assemble`, `data-c
 - Data dashboard di template adalah contoh berlabel `.sample-note`; ganti dengan data asli lalu hapus labelnya.
 - Elemen `.sr-only` di dalam area yang bisa digeser butuh pembungkus `position: relative` (sudah di `.table-wrap`), kalau tidak halaman melebar di HP.
 - Pesan error form hilang saat pengguna mengetik perbaikannya, bukan saat blur. Form masuk diletakkan di atas, bukan tengah vertikal, supaya tidak loncat.
+- Elemen dengan `display` sendiri (mis. `.empty`, `.state`) butuh aturan `[hidden] { display: none }` supaya atribut `hidden` benar-benar menyembunyikan.
+- Panel yang muncul dari dalam app bar sticky harus menaikkan z-index app bar saat terbuka.
+- Setiap daftar atau panel yang bisa kosong punya `.state` dengan maskot dan satu langkah berikutnya; error selalu ada tombol "Coba lagi".
 - Login Google hanya dipasang kalau OAuth benar-benar tersedia.
 - Aplikasi tanpa smooth scroll, kursor segel, atau reveal.
 
 ## Aplikasi HP
 
-- Isinya HTML (web HP, PWA, Capacitor, WebView): mulai dari `templates/app-mobile.html`, tempel `snippets/pwa-head.html` + `snippets/manifest.webmanifest`, ikon di `brand/app-icons/`, pakai `initApp()`.
-- Native (Flutter, SwiftUI, Jetpack Compose, React Native): CSS tidak dipakai. Ambil token dari `tokens/` (`tokens.json`, `flutter/fusionify_tokens.dart`, `swift/FusionifyTokens.swift`, `android/FusionifyTokens.kt`, `react-native/fusionify-tokens.ts`, plus `android/res/` untuk aplikasi Kotlin/Java ber-XML: `values/` dan `values-night/fy_colors.xml`, `fy_dimens.xml`, tema `Theme.Fusionify`, drawable stiker, `res/font/`) dan huruf TTF di `tokens/fonts-ttf/`. Buat ulang token dengan `node scripts/build-tokens.mjs` kalau `tokens.css` berubah. Panduan di `tokens/README.md`.
+- Isinya HTML (web HP, PWA, Capacitor, WebView): mulai dari `templates/app-mobile.html`, tempel `snippets/pwa-head.html` + `snippets/manifest.webmanifest`, ikon di `brand/app-icons/`, pakai `initApp()`, `templates/offline.html` sebagai halaman cadangan.
+- Native (Flutter, SwiftUI, Jetpack Compose, React Native, Android Kotlin/Java ber-XML): CSS tidak dipakai. Ambil token dari `tokens/`: `tokens.json`, `flutter/fusionify_tokens.dart`, `swift/FusionifyTokens.swift`, `android/FusionifyTokens.kt` (Compose), `react-native/fusionify-tokens.ts`, dan `android/res/` untuk aplikasi XML (`values/` + `values-night/fy_colors.xml`, `fy_dimens.xml`, tema `Theme.Fusionify`, drawable stiker, `res/font/`). Huruf TTF di `tokens/fonts-ttf/`. Buat ulang token dengan `node scripts/build-tokens.mjs` kalau `tokens.css` berubah. Panduan di `tokens/README.md`.
+- Pilihan stack FUSIONIFY: StudyDate pakai Flutter (satu kode untuk iOS dan Android); aplikasi VPN tetap Kotlin/Java karena butuh VpnService native. Keduanya memakai token yang sama.
 - Target sentuh minimal 44px, area aman notch lewat `env(safe-area-inset-*)`, input 16px di layar sentuh (anti zoom iOS, sudah di `base.css`).
 - Satu FAB per layar; navigation bar 3 sampai 5 tujuan; bottom sheet bisa ditutup dengan tarik, tombol, dan Esc/kembali.
 - Bayangan stiker di native: offset ke bawah tanpa blur, bukan `elevation`.
-- Pilihan stack FUSIONIFY: StudyDate pakai Flutter (satu kode iOS + Android); aplikasi VPN tetap Kotlin/Java karena butuh VpnService native. Keduanya memakai token yang sama dari `tokens/`.
 - QA HP pakai emulasi layar sentuh (360, 375, 390, 430 px) di kedua tema.
 
 ## Huruf (semua OFL, di-host sendiri, subset latin, `font-display: swap`)
@@ -142,25 +150,26 @@ Atribut `initFusionify()`: `data-split`, `data-reveal`, `data-assemble`, `data-c
 
 ## Elemen khas
 
-- **Segel bergelombang**: lingkaran 12 lekukan, `seal(50, 50, 44, 3.2, 12)` di viewBox 100 (`r = R + amp * sin(12a)`). Tersedia juga sebagai CSS mask `var(--seal-mask)` di `product.css`. Dipakai sebagai latar maskot, cincin kursor, bingkai foto, ikon layanan, nomor langkah, bulan, tirai transisi, loader.
+- **Segel bergelombang**: lingkaran 12 lekukan, `seal(50, 50, 44, 3.2, 12)` di viewBox 100 (`r = R + amp * sin(12a)`). Tersedia juga sebagai CSS mask `var(--seal-mask)` di `product.css`. Dipakai sebagai latar maskot, cincin kursor, bingkai foto, ikon layanan, nomor langkah, bulan, tirai transisi, loader, spinner.
 - **Titik i**: bulatan `--blue-light` di akhir judul hero.
-- **Gaya stiker**: garis tepi 2px `--edge`, bayangan pejal ke bawah (`--edge-shadow`), sudut bulat besar.
+- **Gaya stiker**: garis tepi 2px `--edge`, bayangan pejal ke bawah (`--edge-shadow`), sudut bulat besar. Ini memang meminjam rasa neo-brutalism (aliran, bukan karya siapa pun), tapi identitas FUSIONIFY datang dari segel, maskot, palet biru, dan sudut bulat besar. Jangan menempel komponen dari UI kit neo-brutalism lain.
 - **Logo company**: segel Fi + wordmark resmi (SVG). Jangan pernah mengetik "FUSIONIFY" dengan font sebagai pengganti logo. Versi putih untuk latar gelap, mono putih untuk latar biru.
 - **Logo produk**: produk boleh pakai logonya sendiri (mis. Premiumify memakai segel S biru), tetap dengan warna dan huruf di atas.
 
 ## Maskot
 
-- Karakter chibi rambut putih-biru, hoodie hitam. Ekspresi: smile (papan), shy, wink, happy, angry, tired, confused, cry, glasses, plus pose welcome (selamat datang), loading, empty (kosong), paid (sukses bayar), pay-failed (gagal bayar), offline.
+- Karakter chibi rambut putih ujung biru, jaket hitam. Ekspresi: smile (papan), shy, wink, happy, angry, tired, confused, cry, glasses, plus pose welcome (selamat datang), loading, empty (kosong), paid (sukses bayar), pay-failed (gagal bayar), offline.
 - Ganti ekspresi dengan **menukar gambar badan penuh**. Jangan menempel kepala di atas badan lain.
-- Pose baru boleh bebas dan hidup (berlari, melompat, lebay), jangan kaku. Wajib sama: wajah, mata abu tua, rambut putih ujung biru dengan helai mencuat, pipi merah, garis tebal merah tua. Baju bawaan jaket hitam terbuka (kerah dan lengan abu) dengan kaus putih; boleh ganti kalau situasi butuh. Saat membuat pose dengan AI, pakai beberapa pose asli sekaligus sebagai acuan dan bandingkan berdampingan sebelum dipasang. Cara memasang pose baru ada di `mascot/POSE-BARU.md`.
-- Ekspresi mengikuti status: confused untuk yang masih dikembangkan (juga FAQ, 404), cry untuk error dan layanan berakhir, glasses untuk layanan profesional dan perawatan, empty untuk keadaan kosong, loading untuk proses lama, paid/pay-failed untuk hasil pembayaran, offline untuk tanpa internet, welcome untuk sambutan dan selesai daftar.
+- Pose baru boleh bebas dan hidup (berlari, melompat, jinjit, lebay), jangan kaku. Wajib sama: wajah, mata abu tua, rambut putih ujung biru dengan helai mencuat, pipi merah, garis tebal merah tua. Baju bawaan jaket hitam terbuka (kerah dan lengan abu) dengan kaus putih; boleh ganti kalau situasi butuh. Saat membuat pose dengan AI, pakai beberapa pose asli sekaligus sebagai acuan dan bandingkan berdampingan sebelum dipasang. Cara memasang ada di `mascot/POSE-BARU.md`; file asli pose ada di desain Canva "Pose Maskot FUSIONIFY" dan folder Drive MASCOT.
+- Ekspresi mengikuti status: confused untuk yang masih dikembangkan (juga FAQ, 404), cry untuk error dan layanan berakhir (500), glasses untuk layanan profesional dan perawatan, empty untuk keadaan kosong, loading untuk proses lama, paid/pay-failed untuk hasil pembayaran, offline untuk tanpa internet, welcome untuk sambutan dan selesai daftar.
 - Gelembung bicara memakai Caveat dan tidak boleh menutupi wajah atau judul.
 - Pakai versi `-420.webp` (badan) dan `-120.webp` (kepala kecil) dengan `srcset`; semua `<img>` wajib `width`/`height`.
 
 ## Gerak
 
 - Stack acuan: Astro + vanilla CSS, Lenis (`lerp 0.1`) + GSAP ScrollTrigger. Suara disintesis Web Audio, mati secara bawaan.
-- Nav transparan di atas, berubah jadi kapsul putih blur setelah scroll >24px, sembunyi saat scroll turun.
+- Motion (dulu Framer Motion) tidak dipakai di kit. Boleh untuk animasi kecil di web produk React/Astro, dengan aturan yang sama (hanya `transform`/`opacity`, kurva `--ease`/`--spring`, hormati kurangi gerakan) dan tidak menganimasikan elemen yang sudah dipegang `initFusionify()`.
+- Nav transparan di atas, berubah jadi kapsul blur setelah scroll >24px, sembunyi saat scroll turun.
 - Judul naik per kata, kartu "dirakit" saat muncul, transisi halaman pakai segel biru yang membesar.
 - `data-assemble` jangan dipakai pada elemen yang punya transform saat hover (bentrok); pakai `data-reveal` pada pembungkusnya.
 - Hormati `prefers-reduced-motion`. Konten wajib tetap terbaca tanpa JavaScript.
@@ -192,4 +201,4 @@ Semua kode ditulis sendiri. Jangan meniru andikadevs: tidak ada maskot terbang k
 
 ## Menjaga sinkron
 
-Kalau token atau komponen di fusionify.id berubah, perbarui repo `Fusionify_UI` (lalu jalankan `node scripts/build-konteks.mjs`) samakan variabel di library Figma, dan perbarui skill ini juga.
+Kalau token atau komponen di fusionify.id berubah, perbarui repo `Fusionify_UI` (lalu jalankan `node scripts/build-konteks.mjs` dan `node scripts/build-tokens.mjs`, `npm test`, catat di CHANGELOG, rilis versi baru), samakan variabel dan komponen di library Figma, dan perbarui skill ini (juga salinannya di `skills/fusionify-brand-style/SKILL.md` di repo kit).
