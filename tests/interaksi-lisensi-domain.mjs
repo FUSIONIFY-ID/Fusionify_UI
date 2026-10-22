@@ -17,13 +17,13 @@ const visit = async (host, page) => {
   await p.goto(`https://${host}/templates/${page}`, { waitUntil: 'load' }); await p.waitForTimeout(400);
   return { c, p, warns };
 };
-for (const host of ['fusionify.id', 'studio.fusionify.id', 'fusionify.biz.id', 'app.fusionify.biz.id']) {
+for (const host of ['fusionify.id', 'studio.fusionify.id', 'fusionify.biz.id', 'app.fusionify.biz.id', 'premiumify.my.id', 'www.premiumify.my.id', 'studydate.id', 'app.studydate.id']) {
   const { c, p, warns } = await visit(host, 'komponen.html');
   await p.click('#tabel th:nth-child(3) .sort-btn');
   T(host + ' jalan', (await p.getAttribute('#tabel th:nth-child(3)', 'aria-sort')) === 'ascending' && warns.length === 0);
   await c.close();
 }
-for (const host of ['tirufusionify.id.evil.com', 'contoh.test', 'fusionify.id.contoh.com']) {
+for (const host of ['tirufusionify.id.evil.com', 'contoh.test', 'fusionify.id.contoh.com', 'palsustudydate.id', 'premiumify.my.id.contoh.com']) {
   const { c, p, warns } = await visit(host, 'komponen.html');
   T(host + ' dikunci (tidak ada tombol urut)', (await p.$$('.sort-btn')).length === 0);
   T(host + ' ada peringatan', warns.some((w) => w.includes('belum terdaftar')));

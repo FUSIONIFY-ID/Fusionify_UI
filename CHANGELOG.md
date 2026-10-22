@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.1 · 22 Oktober 2026
+
+- Domain partner `premiumify.my.id` dan `studydate.id` (beserta subdomainnya) ditambahkan ke `DOMAIN_RESMI`, sehingga kit berjalan penuh di sana. Lisensi dan uji ikut diperbarui.
+
 ## 1.6.0 · 22 Oktober 2026
 
 - **Kunci domain** (`js/lisensi.js`): kit hanya berjalan di `fusionify.id`, `fusionify.biz.id`, dan subdomainnya (plus localhost untuk pengembangan). Di domain lain interaksi dan animasi tidak dijalankan, konten tetap terbaca, dan konsol menampilkan peringatan. Lisensi diperbarui.

@@ -9,6 +9,9 @@
 const DOMAIN_RESMI = [
   "fusionify.id",
   "fusionify.biz.id",
+  // Partner yang diizinkan
+  "premiumify.my.id",
+  "studydate.id",
 ];
 
 // Untuk pengembangan dan uji otomatis

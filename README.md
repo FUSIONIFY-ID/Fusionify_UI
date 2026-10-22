@@ -87,7 +87,7 @@ Kalau token di `css/tokens.css` berubah, samakan juga variabel di Figma (dan seb
 
 ## Domain resmi
 
-Kit ini hanya berjalan di `fusionify.id`, `fusionify.biz.id`, dan subdomainnya (lihat `js/lisensi.js`). Untuk pengembangan, `localhost`, `127.0.0.1`, `*.local`, dan file yang dibuka langsung tetap jalan. Menambah domain partner: tulis di `DOMAIN_RESMI`, catat di CHANGELOG, lalu rilis versi baru.
+Kit ini hanya berjalan di `fusionify.id`, `fusionify.biz.id`, domain partner `premiumify.my.id` dan `studydate.id`, serta subdomain semuanya (lihat `js/lisensi.js`). Untuk pengembangan, `localhost`, `127.0.0.1`, `*.local`, dan file yang dibuka langsung tetap jalan. Menambah domain partner: tulis di `DOMAIN_RESMI`, catat di CHANGELOG, lalu rilis versi baru.
 
 ## Versi
 
