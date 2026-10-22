@@ -91,17 +91,17 @@ Kit ini hanya berjalan di `fusionify.id`, `fusionify.biz.id`, domain partner `pr
 
 ## Versi
 
-Kit ini dirilis bernomor versi (`1.5.0`, `1.6.0`, dst.). Web produk **mengunci** satu versi, jadi perubahan di kit tidak ikut merusak web yang sudah jalan. Update dilakukan sengaja.
+Kit ini dirilis bernomor versi (`1.5.0`, `1.6.1`, dst.). Web produk **mengunci** satu versi, jadi perubahan di kit tidak ikut merusak web yang sudah jalan. Update dilakukan sengaja.
 
 - **Git submodule** (disarankan):
   ```
   git submodule add https://github.com/FUSIONIFY-ID/Fusionify_UI public/fusionify-ui
   cd public/fusionify-ui
-  git checkout v1.5.0
+  git checkout v1.6.1
   ```
-  Naik versi nanti: `git fetch --tags` lalu `git checkout v1.6.0`, cek web-nya, commit.
-- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.5.0`. Karena repo privat, mesin build perlu akses ke repo (token GitHub).
-- **Zip**: unduh `Fusionify_UI-v1.5.0.zip` dari halaman Releases.
+  Naik versi nanti: `git fetch --tags` lalu `git checkout v1.7.0`, cek web-nya, commit.
+- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.6.1`. Karena repo privat, mesin build perlu akses ke repo (token GitHub).
+- **Zip**: unduh `Fusionify_UI-v1.6.1.zip` dari halaman Releases.
 
 Aturan nomor: angka terakhir (1.5.**1**) untuk perbaikan kecil yang aman, angka tengah (1.**6**.0) untuk komponen baru yang tidak merusak, angka depan (**2**.0.0) kalau ada kelas atau markup yang berubah dan web produk perlu disesuaikan. Semua perubahan dicatat di `CHANGELOG.md`.
 
@@ -129,6 +129,7 @@ Yang dicek: semua template di 8 ukuran layar (375 sampai 1920), tema terang dan 
 | Copilot di editor | `.github/copilot-instructions.md` |
 | Cursor (aturan lama) | `.cursor/rules/*.mdc` |
 | Aider | `.aider.conf.yml` membaca `AGENTS.md` dan `DESIGN.md` |
+| Agent yang mendukung skill (Claude Code, Codex, Cursor, Copilot, Gemini CLI, dan 70+ lainnya) | Pasang skill: `npx skills add FUSIONIFY-ID/Fusionify_UI` (repo privat, jadi perlu login GitHub atau `GITHUB_TOKEN`) |
 | **AI versi chat web** (ChatGPT, Gemini, Grok, Qwen, Claude di browser) | Tidak bisa membaca repo. **Upload `FUSIONIFY-UI-KONTEKS.md`** ke chat, lalu tulis permintaan |
 
 `FUSIONIFY-UI-KONTEKS.md` dibuat otomatis dari `AGENTS.md`, `DESIGN.md`, semua CSS, dan snippet. Setiap kali salah satunya berubah, jalankan `node scripts/build-konteks.mjs`.
@@ -138,15 +139,18 @@ Yang dicek: semua template di 8 ukuran layar (375 sampai 1920), tema terang dan 
 | Folder | Isi |
 | --- | --- |
 | `css/` | `tokens.css` (termasuk mode gelap), `base.css`, `components.css`, `product.css` (komponen web produk), `controls.css` (kontrol web dan aplikasi HP), `app.css` (dashboard, admin, masuk), `fusionify.css` (semua kecuali app.css) |
-| `js/` | `motion.js` (`initFusionify`, web publik), `app.js` (`initApp`, aplikasi), `controls.js` (`initControls`, `snackbar`), `theme.js` (terang/gelap), `seal.js` (`seal`, `SEAL_PATH`) |
+| `js/` | `motion.js` (`initFusionify`, web publik), `app.js` (`initApp`, aplikasi), `controls.js` (`initControls`, `snackbar`), `lisensi.js` (kunci domain), `theme.js` (terang/gelap), `seal.js` (`seal`, `SEAL_PATH`) |
 | `snippets/` | Potongan HTML wajib: head, sprite SVG, kursor/toast/tirai, plus `pwa-head.html` dan `manifest.webmanifest` untuk aplikasi HP |
-| `tokens/` | Token dan huruf untuk aplikasi native (Flutter, SwiftUI, Compose, React Native) |
+| `tokens/` | Token dan huruf untuk aplikasi native (Flutter, SwiftUI, Compose, React Native, Android XML untuk Kotlin/Java) |
 | `fonts/` | Afacad Flux, Sansation, Caveat, Exo 2 (woff2, OFL) |
-| `brand/` | Segel Fi, wordmark, emblem, logo horizontal/vertikal/legacy |
-| `mascot/` | Maskot badan penuh, kepala, papan, stiker bot |
+| `brand/` | Segel Fi, wordmark, emblem, logo horizontal/vertikal/legacy, ikon aplikasi (`app-icons/`) |
+| `mascot/` | Maskot badan penuh, kepala, papan, stiker bot; pose welcome, loading, empty, paid, pay-failed, offline; `POSE-BARU.md` untuk cara menambah pose |
 | `badge/` | "Sebuah produk dari FUSIONIFY" ID/EN, terang/gelap |
 | `demo/` | Halaman contoh semua komponen |
-| `templates/` | Halaman siap pakai: `landing-produk.html`, `404.html`, `auth/` (masuk, daftar, lupa password, atur ulang), `dashboard.html`, `admin.html` |
+| `templates/` | Halaman siap pakai: `landing-produk.html`, `404.html`, `500.html`, `offline.html`, `maintenance.html`, `auth/` (masuk, daftar, lupa password, atur ulang, verifikasi OTP), `dashboard.html`, `admin.html`, `app-mobile.html`, `chat.html`, `acara.html`, `komponen.html` (katalog kontrol) |
+| `skills/` | Skill AI agent `fusionify-brand-style` (bisa dipasang dengan `npx skills add`) |
+| `tests/` | Uji otomatis (`npm test`) |
+| `scripts/` | `build-tokens.mjs`, `build-konteks.mjs`, `release.mjs`, `mascot-import.py` |
 
 ## Atribut data yang dipahami `initFusionify()`
 

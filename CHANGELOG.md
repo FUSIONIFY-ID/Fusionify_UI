@@ -3,6 +3,9 @@
 ## 1.6.1 · 22 Oktober 2026
 
 - Domain partner `premiumify.my.id` dan `studydate.id` (beserta subdomainnya) ditambahkan ke `DOMAIN_RESMI`, sehingga kit berjalan penuh di sana. Lisensi dan uji ikut diperbarui.
+- **Skill AI agent** di `skills/fusionify-brand-style/SKILL.md`: pasang di Claude Code, Codex, Cursor, Copilot, Gemini CLI, dan agent lain dengan `npx skills add FUSIONIFY-ID/Fusionify_UI`.
+- **Enam pose maskot baru terpasang**: `welcome`, `loading`, `empty`, `paid`, `pay-failed`, `offline` (masing-masing `.webp` 720px dan `-420.webp`). Sudah dipakai di `offline.html`, contoh keadaan di `komponen.html` (kosong, memuat, pembayaran berhasil/gagal, offline), dan keadaan selesai daftar.
+- README: tabel isi diperbarui (lisensi, template baru, tests, scripts, skills).
 
 ## 1.6.0 · 22 Oktober 2026
 

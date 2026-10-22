@@ -41,7 +41,9 @@
 .row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 .row + .row { margin-top: 18px; }
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px; }
-.state-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; }
+.state-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .state-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .state-grid { grid-template-columns: 1fr; } }
 .label-sm { display: block; margin-bottom: 8px; font-family: var(--f-num); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
 .device { position: relative; transform: translateZ(0); overflow: hidden; border: 2px solid var(--edge); border-radius: 30px; background: var(--paper); box-shadow: var(--shadow-sticker); }
 .device.phone { width: 100%; max-width: 360px; height: 560px; margin-inline: auto; }
@@ -186,7 +188,7 @@
         </fieldset>
         <div class="wizard-foot"><button class="btn ghost" type="button" data-wizard-prev>Kembali</button><button class="btn" type="submit" data-wizard-next data-last="Daftar">Lanjut</button></div>
       </form>
-      <div class="empty" id="wz-done" hidden style="padding:10px 0"><img src="../mascot/happy-420.webp" alt="" width="337" height="420"><h2 style="font-size:30px">Pendaftaran selesai!</h2><p>Cek email kampusmu untuk verifikasi.</p></div>
+      <div class="empty" id="wz-done" hidden style="padding:10px 0"><img src="../mascot/welcome-420.webp" alt="" width="305" height="420"><h2 style="font-size:30px">Pendaftaran selesai!</h2><p>Cek email kampusmu untuk verifikasi.</p></div>
     </section>
 
     <section class="panel flush" id="tabel" aria-labelledby="h-tabel">
@@ -227,12 +229,15 @@
     </section>
 
     <section class="panel" id="keadaan" aria-labelledby="h-keadaan">
-      <div class="panel-head"><h2 id="h-keadaan">Keadaan kosong, error, dan offline</h2></div>
+      <div class="panel-head"><h2 id="h-keadaan">Keadaan kosong, memuat, pembayaran, error, dan offline</h2></div>
       <p class="lead2">Selalu pakai maskot dan satu langkah yang jelas. Untuk halaman penuh ada <a href="404.html">404</a>, <a href="500.html">500</a>, <a href="offline.html">offline</a>, dan <a href="maintenance.html">perawatan</a>. Bilah offline muncul sendiri saat koneksi putus.</p>
       <div class="state-grid">
-        <div class="state sm"><img src="../mascot/confused-420.webp" alt="" width="330" height="420" loading="lazy"><h3>Belum ada pesanan</h3><p>Pesanan pertamamu akan muncul di sini.</p><div class="actions"><a class="btn sm" href="#">Mulai belanja</a></div></div>
+        <div class="state sm"><img src="../mascot/empty-420.webp" alt="" width="349" height="420" loading="lazy"><h3>Belum ada pesanan</h3><p>Pesanan pertamamu akan muncul di sini.</p><div class="actions"><a class="btn sm" href="#">Mulai belanja</a></div></div>
         <div class="state sm error"><img src="../mascot/cry-420.webp" alt="" width="373" height="420" loading="lazy"><h3>Gagal memuat</h3><p>Datanya belum bisa diambil. Coba lagi ya.</p><div class="actions"><button class="btn sm" type="button" data-snackbar="Memuat ulang...">Coba lagi</button></div></div>
-        <div class="state sm offline"><img src="../mascot/tired-420.webp" alt="" width="327" height="420" loading="lazy"><h3>Kamu offline</h3><p>Sambungkan internet untuk melihat yang terbaru.</p></div>
+        <div class="state sm offline"><img src="../mascot/offline-420.webp" alt="" width="282" height="420" loading="lazy"><h3>Kamu offline</h3><p>Sambungkan internet untuk melihat yang terbaru.</p></div>
+        <div class="state sm" aria-busy="true"><img src="../mascot/loading-420.webp" alt="" width="336" height="420" loading="lazy"><h3>Sebentar ya</h3><p>Datanya sedang disiapkan. Biasanya tidak sampai semenit.</p></div>
+        <div class="state sm"><img src="../mascot/paid-420.webp" alt="" width="324" height="420" loading="lazy"><h3>Pembayaran berhasil</h3><p>Pesananmu sedang diproses. Bukti bayar sudah dikirim ke email.</p><div class="actions"><a class="btn sm" href="#">Lihat pesanan</a></div></div>
+        <div class="state sm error"><img src="../mascot/pay-failed-420.webp" alt="" width="327" height="420" loading="lazy"><h3>Pembayaran gagal</h3><p>Saldo atau kartu belum bisa dipakai. Tidak ada uang yang terpotong.</p><div class="actions"><button class="btn sm" type="button" data-snackbar="Membuka pilihan pembayaran...">Coba metode lain</button></div></div>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px"><button class="btn ghost sm" type="button" id="sim-off">Coba bilah offline</button><button class="btn ghost sm" type="button" id="sim-on">Kembali online</button></div>
       <div class="offline-bar" data-offline-bar hidden role="status"><img src="../mascot/head-tired-120.webp" alt="" width="120" height="117">Kamu sedang offline. Perubahan disimpan begitu tersambung lagi.</div>
