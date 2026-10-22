@@ -81,7 +81,7 @@ Mode gelap otomatis mengikuti sistem. Tambahkan tombol `<button class="icon-btn 
 
 ## Library Figma
 
-Untuk desainer: **[FUSIONIFY UI · Library di Figma](https://www.figma.com/design/av0M9IuzYKJTiUWJsYTS3i)**. Isinya variabel warna (mode Terang dan Gelap), radius, jarak, gaya teks, bayangan stiker, ikon, dan komponen yang sama dengan kode. Setiap variabel punya kode untuk web (`var(--blue)`), Android, dan iOS, jadi di Dev Mode programmer langsung melihat nama token yang benar.
+Untuk desainer: **[FUSIONIFY UI · Library di Figma](https://www.figma.com/design/av0M9IuzYKJTiUWJsYTS3i)**. Isinya variabel warna (mode Terang dan Gelap), radius, jarak, gaya teks, bayangan stiker, ikon, dan komponen yang sama dengan kode: tombol, chip, input, kartu, saklar, avatar, navigasi bawah, notifikasi, stepper, tabel (judul kolom bisa diurutkan), chat (gelembung, mengetik, kolom tulis), foto profil, dan pemotong foto, plus pratinjau tema terang dan gelap. Setiap variabel punya kode untuk web (`var(--blue)`), Android, dan iOS, jadi di Dev Mode programmer langsung melihat nama token yang benar.
 
 Kalau token di `css/tokens.css` berubah, samakan juga variabel di Figma (dan sebaliknya). Jangan membuat warna baru hanya di salah satu sisi.
 

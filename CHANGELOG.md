@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.6.2 · 22 Oktober 2026
+
+- **Library Figma dilengkapi**: komponen `Langkah stepper` + `Stepper`, `Sel judul tabel` (Urut = Tidak/Naik/Turun) + `Baris tabel` + `Tabel`, `Gelembung pesan` (Saya/Lawan) + `Sedang mengetik` + `Kolom tulis` + `Contoh obrolan`, `Foto profil` (Inisial/Foto) + `Pemotong foto`. Semua terikat variabel warna, sehingga tampil benar di mode Terang dan Gelap. Pratinjau keduanya ada di frame "Pratinjau komponen tambahan".
+- README: daftar komponen Figma diperbarui.
+
 ## 1.6.1 · 22 Oktober 2026
 
 - Domain partner `premiumify.my.id` dan `studydate.id` (beserta subdomainnya) ditambahkan ke `DOMAIN_RESMI`, sehingga kit berjalan penuh di sana. Lisensi dan uji ikut diperbarui.
