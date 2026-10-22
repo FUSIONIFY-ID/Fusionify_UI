@@ -4,7 +4,7 @@ Panduan untuk semua AI agent dan developer (Claude, ChatGPT/Codex, Cursor, Copil
 
 Repo ini (**github.com/FUSIONIFY-ID/Fusionify_UI**) adalah **starter kit sistem desain FUSIONIFY**: token, CSS komponen, kode gerak, segel, font, logo, maskot, dan badge. Tujuannya satu: semua web FUSIONIFY terasa satu keluarga, siapa pun yang mengerjakannya.
 
-Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Lihat **`demo/index.html`** untuk contoh markup setiap komponen.
+Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: https://www.figma.com/design/av0M9IuzYKJTiUWJsYTS3i (variabel dan komponennya sama dengan kit ini). Lihat **`demo/index.html`** untuk contoh markup setiap komponen.
 
 ## Isi repo
 
@@ -15,11 +15,12 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Lihat **`demo/index.html
 | `css/components.css` | Tombol, chip status, nav, menu HP, seksi, kartu stiker, statistik, kartu karya, foto bersegel, gelembung maskot, panggung maskot, marquee partner, FAQ, gelombang, footer, toast, kursor, transisi halaman, status reveal, jeda `.idle` |
 | `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment`, halaman acara (`.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`) |
 | `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.progress`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, `.btn.danger`, `.sample-note`, chat (`.chat`, `.chat-list`, `.convo`, `.thread`, `.msgs`, `.msg.me/.them`, `.typing`, `.composer`), `.ev-date` |
-| `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar), `.otp` (kode OTP) + `.resend`, `.upload` + `.drop` + `.upload-list` (upload file) |
+| `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar), `.otp` (kode OTP) + `.resend`, `.upload` + `.drop` + `.upload-list` (upload file), `.stepper` + `.wizard-step` (form bertahap), `.sort-btn` (tabel bisa diurutkan), `.notif` + `.notif-panel` (pusat notifikasi), `.state` (keadaan kosong/error/offline), `.offline-bar`, `.avatar-crop` + `.crop-modal` (foto profil dengan pemotong bulat) |
 | `css/fusionify.css` | Satu file yang mengimpor tokens, base, components, product, controls (tanpa app.css) |
 | `js/motion.js` | `initFusionify()`: smooth scroll, nav, menu HP, kursor, reveal, angka, magnet, salin + toast, transisi halaman, suara, jeda di luar layar |
 | `js/app.js` | `initApp()` untuk halaman aplikasi: tema, sidebar HP, dropdown, modal, tab, tampil/sembunyi password, meter kekuatan password, validasi form (`data-validate`), pilih semua baris, toast. Tanpa GSAP |
-| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. OTP (`[data-otp]`, `otpError()`), hitung mundur kirim ulang (`[data-countdown]`), upload (`[data-upload]`), chat (`[data-chat]`), tambah ke kalender (`[data-ics]`, unduh .ics), bagikan (`[data-share]`). Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:resend` |
+| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. OTP (`[data-otp]`, `otpError()`), hitung mundur kirim ulang (`[data-countdown]`), upload (`[data-upload]`), chat (`[data-chat]`), tambah ke kalender (`[data-ics]`, unduh .ics), bagikan (`[data-share]`). Stepper (`form[data-wizard]`), tabel urut (`table[data-sort]` + `th[data-sort-key]`), notifikasi (`[data-notif]`), bilah offline (`[data-offline-bar]`), pemotong foto profil (`[data-avatar-crop]`). Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:resend`, `fy:step`, `fy:sort`, `fy:read`, `fy:crop`, dan `fy:online`/`fy:offline` di window |
+| `js/lisensi.js` | Kunci domain: kit hanya berjalan di domain di `DOMAIN_RESMI` (fusionify.id, fusionify.biz.id, dan subdomainnya) plus localhost. Dipanggil di awal `initFusionify()`, `initApp()`, `initControls()`. Jangan dihapus atau diakali |
 | `js/theme.js` | Mode terang/gelap (`initTheme`, `setTheme`). Dipanggil otomatis oleh `motion.js` dan `app.js` |
 | `js/seal.js` | `seal()` dan `SEAL_PATH`: bentuk segel 12 lekukan |
 | `snippets/head-script.html` | Skrip kecil wajib di `<head>` |
@@ -29,13 +30,16 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Lihat **`demo/index.html
 | `tokens/` | Token untuk **aplikasi native**: `tokens.json`, Flutter, SwiftUI, Jetpack Compose, React Native, plus resource Android XML (`tokens/android/res/`: warna terang/gelap, ukuran, huruf, drawable stiker, tema) untuk aplikasi Kotlin/Java, dan huruf TTF statis. Dibuat dari `css/tokens.css` dengan `node scripts/build-tokens.mjs`. Panduan di `tokens/README.md` |
 | `fonts/` | Afacad Flux, Sansation, Caveat, Exo 2 (woff2, OFL) |
 | `brand/` | Segel Fi, wordmark (SVG), emblem; `brand/kit/` logo horizontal, vertikal, legacy; `brand/app-icons/` ikon aplikasi (192, 512, maskable, apple-touch-icon) |
-| `mascot/` | Maskot badan penuh, kepala, papan, stiker bot |
+| `mascot/` | Maskot badan penuh, kepala, papan, stiker bot. `mascot/POSE-BARU.md`: pose baru yang menunggu dipasang |
 | `badge/` | Badge "Sebuah produk dari FUSIONIFY" (ID/EN, terang/gelap) |
 | `demo/index.html` | Halaman contoh semua komponen |
+| `tests/` | Uji otomatis (`npm test`): tata letak dan kontras, layar sentuh, tanpa JS, dan semua interaksi. Jalan juga di GitHub Actions (`.github/workflows/uji.yml`) |
+| `.github/workflows/rilis.yml`, `scripts/release.mjs` | Rilis bernomor versi: push tag `vX.Y.Z` untuk menguji, membuat zip, dan menerbitkan GitHub Release |
 | `FUSIONIFY-UI-KONTEKS.md` | Semua aturan + CSS dalam satu file, untuk di-upload ke AI versi chat web. Buat ulang dengan `node scripts/build-konteks.mjs` setiap ada perubahan |
 | `CLAUDE.md`, `GEMINI.md`, `QWEN.md`, `.gemini/`, `.qwen/`, `.cursor/rules/`, `.github/copilot-instructions.md`, `.aider.conf.yml` | Penunjuk ke file ini untuk masing-masing AI agent |
 | `templates/landing-produk.html` | Template landing web produk lengkap. Ganti bagian bertanda `GANTI` |
 | `templates/404.html` | Template halaman tidak ditemukan dengan maskot confused |
+| `templates/500.html`, `offline.html`, `maintenance.html` | Halaman error server, offline (muat ulang sendiri saat tersambung), dan perawatan, semuanya dengan maskot |
 | `templates/auth/masuk.html`, `daftar.html`, `lupa-password.html`, `atur-ulang-password.html`, `verifikasi.html` | Halaman masuk, daftar, lupa password, atur ulang password, verifikasi kode OTP. Validasi dan keadaan berhasil sudah jalan; sambungkan ke backend sendiri |
 | `templates/dashboard.html` | Dashboard pengguna (ringkasan, grafik, pesanan, aktivitas) |
 | `templates/komponen.html` | Katalog semua komponen kontrol dengan contoh hidup |
@@ -67,7 +71,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 
 - Pakai token di `css/tokens.css`. Jangan menulis warna hex, font, atau radius baru.
 - **Logo**: pakai file di `brand/`. Jangan mengetik "FUSIONIFY" dengan font sebagai pengganti logo. Web produk memakai logonya sendiri, sistem desainnya tetap kit ini.
-- **Maskot**: ganti ekspresi dengan menukar gambar badan penuh. Jangan menempel kepala di badan lain.
+- **Maskot**: ganti ekspresi dengan menukar gambar badan penuh. Jangan menempel kepala di badan lain. Pose baru boleh bebas dan ekspresif, tapi wajah, mata abu tua, rambut putih ujung biru dengan helai mencuat, dan garis tebalnya wajib sama. Baju bawaan jaket hitam terbuka dengan kaus putih; boleh ganti kalau situasinya butuh.
 - Hiasan SVG yang sengaja lebih besar dari wadahnya wajib kelas `.fx-oversize` (atau `max-width: none`).
 - Gaya stiker: garis 2px `--edge`, bayangan pejal ke bawah (`--edge-shadow`), sudut besar.
 - Jangan menyalin momen khas fusionify.id (segel menutup hero, footer malam Bogor) apa adanya ke web produk. Rakit momen sendiri dari bagian yang sama.
@@ -98,6 +102,12 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - Carousel tidak boleh berputar sendiri. Bottom sheet harus bisa ditutup dengan tarik ke bawah, tombol, dan Esc/tombol kembali.
 - Bayangan stiker di native: offset ke bawah tanpa blur, bukan `elevation`.
 
+## Keadaan kosong, error, dan offline
+
+- Setiap daftar atau panel yang bisa kosong wajib punya `.state` dengan maskot, satu kalimat penjelasan, dan satu tombol langkah berikutnya. Jangan biarkan area kosong tanpa penjelasan.
+- Error memakai `.state.error` dan selalu ada tombol "Coba lagi". Halaman penuh: `templates/500.html`.
+- Aplikasi yang bisa dipakai saat sinyal lemah memasang `[data-offline-bar]` dan `templates/offline.html` sebagai halaman cadangan service worker.
+
 ## Aturan isi (wajib)
 
 - **Jujur.** Status produk ditulis apa adanya dengan chip (`go`, `beta`, `wip`, `plan`, `eos`). Jangan menaikkan status.
@@ -123,6 +133,9 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 
 ## QA (wajib sebelum selesai)
 
+Jalankan `npm test` sebelum commit. Kalau menambah komponen atau template baru, tambahkan juga ujinya di `tests/` (contoh: `tests/interaksi-stepper-tabel-notif.mjs`) dan daftarkan halamannya di `tests/tata-letak-dan-kontras.mjs`.
+
+
 Cek di **HP** 375×667 dan 390×844 (juga dengan emulasi layar sentuh), **tablet** 768×1024, 820×1180, 1024×768, **desktop** 1366×768, 1440×900, 1920×1080.
 
 - Tidak ada scroll horizontal atau elemen keluar layar.
@@ -139,6 +152,12 @@ Cek di **HP** 375×667 dan 390×844 (juga dengan emulasi layar sentuh), **tablet
 - Jangan membuat momen khas situs tersebut: maskot terbang ke pojok nav, pintu di huruf wordmark, awan bertumpuk, laut dan kapal.
 - Dependensi baru wajib berlisensi bebas dipakai komersial dan dicatat di `THIRD_PARTY_NOTICES.md`.
 - Logo, maskot, dan badge adalah milik PT FUSIONIFY DIGITAL STORE. Hanya untuk web FUSIONIFY dan partner yang diizinkan.
+
+## Versi dan rilis
+
+- Ikuti nomor versi `X.Y.Z`: Z untuk perbaikan aman, Y untuk komponen baru yang tidak merusak, X kalau kelas atau markup berubah.
+- Setiap perubahan dicatat di `CHANGELOG.md`, dan `version` di `package.json` harus sama dengan bagian teratas CHANGELOG (`npm run release` mengeceknya).
+- Web produk mengunci satu versi (submodule di tag, atau `#vX.Y.Z`). Jangan mengubah file kit langsung di dalam proyek produk; ubah di repo kit, rilis, lalu naikkan versinya di produk.
 
 ## Menjaga kit tetap sinkron
 

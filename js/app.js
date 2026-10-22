@@ -16,12 +16,14 @@
 // - Toast (pakai markup .toast dari snippets/body-parts.html)
 
 import { initTheme } from "./theme.js";
+import { cekLisensi } from "./lisensi.js";
 import { initControls, snackbar, otpError } from "./controls.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
 export function initApp() {
+  if (!cekLisensi()) return { toast() {}, snackbar() {}, otpError() {}, setSide() {} };
   window.__fx = true; // supaya fallback .fx-off di <head> tidak aktif
   initTheme();
   initControls(); // dropdown, modal, sheet, tab, chip, picker, snackbar, dll. (js/controls.js)

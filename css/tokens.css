@@ -42,6 +42,12 @@
   --r-s: 10px;
   --r-m: 18px;
   --r-l: 28px;
+  --r-pill: 999px;
+
+  /* Jarak (sama dengan library Figma: jarak/xs sampai jarak/2xl) */
+  --sp-xs: 4px; --sp-s: 8px; --sp-m: 12px; --sp-l: 16px; --sp-xl: 24px; --sp-2xl: 32px;
+  --edge-width: 2px;   /* tebal garis stiker */
+  --touch-min: 44px;   /* target sentuh minimal */
   --gut: clamp(16px, 4vw, 48px);
   --max: 1240px;
 

@@ -1,0 +1,83 @@
+// FUSIONIFY UI · uji otomatis (interaksi-stepper-tabel-notif). Dijalankan oleh tests/run.mjs
+import { chromium } from 'playwright';
+import { BASE, AXE, NM, FIX } from './_env.mjs';
+const b=await chromium.launch(); let ok=0,bad=0; const T=(n,c)=>{c?ok++:(bad++,console.log('FAIL',n))}; const errs=[];
+const U=BASE+'templates/';
+const ctx=async(w,h,mob=false,sc='light')=>{const c=await b.newContext({viewport:{width:w,height:h},hasTouch:mob,isMobile:mob,colorScheme:sc});const p=await c.newPage();p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});return [c,p];};
+let [c,p]=await ctx(1280,900);
+await p.goto(U+'komponen.html',{waitUntil:'networkidle'});
+// stepper
+T('stepper generated', (await p.$$('#stepper .stepper li')).length===3);
+T('step1 current', await p.getAttribute('#stepper .stepper li:nth-child(1)','aria-current')==='step');
+T('prev hidden first', await p.evaluate(()=>document.querySelector('#stepper [data-wizard-prev]').hidden));
+await p.click('#stepper [data-wizard-next]');
+T('blocked invalid', await p.isVisible('#stepper [name=nama]') && (await p.$$('#stepper [aria-invalid=true]')).length===2);
+T('focus first invalid', await p.evaluate(()=>document.activeElement.name==='nama'));
+await p.fill('#stepper [name=nama]','Rina');
+T('err cleared on input', await p.getAttribute('#stepper [name=nama]','aria-invalid')===null);
+await p.fill('#stepper [name=email]','rina@kampus.ac.id');
+await p.click('#stepper [data-wizard-next]');
+T('step2 shown', await p.isVisible('#stepper [name=kampus]') && !(await p.isVisible('#stepper [name=nama]')));
+T('step1 done', await p.evaluate(()=>document.querySelector('#stepper .stepper li').classList.contains('done')));
+T('legend focused', await p.evaluate(()=>document.activeElement.tagName==='LEGEND'));
+await p.click('#stepper [data-wizard-prev]'); T('back works', await p.isVisible('#stepper [name=nama]') && (await p.inputValue('#stepper [name=nama]'))==='Rina');
+await p.click('#stepper [data-wizard-next]');
+await p.fill('#stepper [name=kampus]','Univ'); await p.fill('#stepper [name=prodi]','Informatika');
+await p.click('#stepper [data-wizard-next]');
+T('last label', (await p.textContent('#stepper [data-wizard-next]')).trim()==='Daftar');
+await p.click('#stepper [data-wizard-next]'); T('checkbox required', await p.getAttribute('#stepper [name=setuju]','aria-invalid')==='true');
+await p.check('#stepper [name=setuju]'); await p.click('#stepper [data-wizard-next]');
+T('done shown', await p.isVisible('#wz-done') && await p.isHidden('#stepper form'));
+// sort
+const col=async(i)=>p.$$eval('#tabel tbody tr',rs=>rs.map(r=>r.cells[arguments[0]]?.textContent.trim()));
+const getCol=(i)=>p.$$eval('#tabel tbody tr',(rs,i)=>rs.map(r=>r.cells[i].textContent.trim()),i);
+await p.click('#tabel th:nth-child(3) .sort-btn');
+T('num asc', JSON.stringify(await getCol(2))==='["7","12","18","32","104"]');
+T('aria-sort asc', await p.getAttribute('#tabel th:nth-child(3)','aria-sort')==='ascending');
+await p.click('#tabel th:nth-child(3) .sort-btn');
+T('num desc', (await getCol(2))[0]==='104');
+await p.click('#tabel th:nth-child(4) .sort-btn');
+T('price asc gratis first', JSON.stringify(await getCol(3))==='["Gratis","Gratis","Rp10.000","Rp25.000","Rp150.000"]');
+T('other reset', await p.getAttribute('#tabel th:nth-child(3)','aria-sort')==='none');
+await p.click('#tabel th:nth-child(2) .sort-btn'); await p.click('#tabel th:nth-child(2) .sort-btn');
+T('date desc', (await getCol(1))[0]==='9 Nov 2026');
+await p.click('#tabel th:nth-child(1) .sort-btn');
+T('text asc', (await getCol(0))[0]==='Diskusi skripsi santai');
+// notif
+await p.click('#notif [aria-controls=nt-kat]');
+T('notif open', await p.isVisible('#nt-kat'));
+T('notif focus item', await p.evaluate(()=>!!document.activeElement.closest('.notif-item')));
+await p.keyboard.press('ArrowDown'); T('arrow nav', await p.evaluate(()=>document.activeElement.closest('.notif-item')===document.querySelectorAll('#nt-kat .notif-item')[1]));
+await p.click('#nt-kat .btn-group button[value=unread]');
+T('filter unread', (await p.$$eval('#nt-kat .notif-item',xs=>xs.filter(x=>!x.hidden).length))===3);
+await p.click('#nt-kat .notif-item.unread a');
+T('badge 2', (await p.textContent('#notif .badge'))==='2' && (await p.getAttribute('#notif [aria-controls=nt-kat]','aria-label')).includes('2 belum'));
+await p.click('#nt-kat .notif-readall');
+T('badge gone', !(await p.$('#notif .badge')));
+T('empty shown', await p.isVisible('#nt-kat .notif-empty'));
+T('readall disabled', await p.isDisabled('#nt-kat .notif-readall'));
+await p.keyboard.press('Escape'); T('esc closes', await p.isHidden('#nt-kat'));
+await c.close();
+// admin sortable + notif
+[c,p]=await ctx(1366,900); await p.goto(U+'admin.html',{waitUntil:'networkidle'});
+await p.click('th:has-text("Bergabung") .sort-btn');
+T('admin date asc', (await p.$$eval('tbody tr',rs=>rs.map(r=>r.cells[4].textContent.trim())))[0]==='28 Sep 2026');
+await p.click('[aria-controls=nt-admin]'); T('admin notif', await p.isVisible('#nt-admin'));
+const r=await p.$eval('#nt-admin',e=>{const b=e.getBoundingClientRect();return [b.left,b.right,innerWidth]}); T('admin panel in view', r[0]>=0&&r[1]<=r[2]);
+await p.mouse.click(400,600); T('outside closes', await p.isHidden('#nt-admin'));
+await c.close();
+// mobile app notif as sheet
+[c,p]=await ctx(390,844,true,'dark'); await p.goto(U+'app-mobile.html',{waitUntil:'networkidle'});
+await p.click('[aria-controls=nt-mob]'); await p.waitForTimeout(500);
+const rb=await p.$eval('#nt-mob',e=>{const b=e.getBoundingClientRect();return [b.left,b.right,b.bottom,innerWidth,innerHeight]});
+T('mobile sheet bottom full', rb[0]===0 && rb[1]===rb[3] && Math.abs(rb[2]-rb[4])<2);
+await p.click('.notif-scrim',{position:{x:20,y:20}}); T('scrim closes', await p.isHidden('#nt-mob'));
+T('no hscroll', await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+await c.close();
+// stepper mobile
+[c,p]=await ctx(375,667,true); await p.goto(U+'komponen.html#stepper',{waitUntil:'networkidle'});
+T('mobile count text', (await p.textContent('#stepper .wizard-count')).includes('Langkah 1 dari 3'));
+T('mobile no hscroll', await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+await c.close();
+T('no js errors', errs.length===0); if(errs.length) console.log(errs.slice(0,5));
+console.log(ok,'OK',bad,'FAIL'); await b.close();

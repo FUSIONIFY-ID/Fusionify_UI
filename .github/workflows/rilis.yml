@@ -1,0 +1,42 @@
+# FUSIONIFY UI · rilis bernomor versi.
+# Cara rilis: perbarui "version" di package.json dan tambah bagian baru di CHANGELOG.md, commit, lalu:
+#   git tag v1.5.0
+#   git push origin v1.5.0
+# Workflow ini menjalankan uji, membuat Fusionify_UI-v1.5.0.zip, dan menerbitkan GitHub Release berisi catatan dari CHANGELOG.
+name: Rilis
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  rilis:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Cek nomor versi cocok
+        run: node scripts/release.mjs --check "${GITHUB_REF_NAME}"
+      - name: Pasang dependensi uji
+        run: npm ci --no-audit --no-fund
+      - name: Pasang Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Jalankan semua uji
+        run: npm test
+      - name: Buat zip
+        run: |
+          mkdir -p dist/Fusionify_UI
+          git archive HEAD | tar -x -C dist/Fusionify_UI
+          cd dist && zip -qr "Fusionify_UI-${GITHUB_REF_NAME}.zip" Fusionify_UI
+      - name: Terbitkan rilis
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/release.mjs --notes "${GITHUB_REF_NAME}" > dist/catatan.md
+          gh release create "${GITHUB_REF_NAME}" "dist/Fusionify_UI-${GITHUB_REF_NAME}.zip" --title "Fusionify UI ${GITHUB_REF_NAME}" --notes-file dist/catatan.md

@@ -21,9 +21,13 @@
 // - Tambah ke kalender ([data-ics], unduh .ics) dan bagikan ([data-share])
 // - Chat ([data-chat]): buka/tutup obrolan di HP (ikut tombol back), kolom tulis yang tumbuh, event fy:send
 // - Snackbar (snackbar() dan [data-snackbar])
+// - Stepper / form bertahap ([data-wizard]), tabel bisa diurutkan (table[data-sort]), pusat notifikasi ([data-notif])
+// - Pemotong foto profil bulat ([data-avatar-crop]), bilah offline ([data-offline-bar])
 //
 // Setiap komponen mengirim event: fy:change (button group, chip, slider, picker), fy:remove (chip input),
-// fy:select (saran pencarian). Contoh: el.addEventListener("fy:change", (e) => console.log(e.detail)).
+// fy:select (saran pencarian), fy:step (stepper), fy:sort (tabel), fy:read (notifikasi). Contoh: el.addEventListener("fy:change", (e) => console.log(e.detail)).
+
+import { cekLisensi } from "./lisensi.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -752,9 +756,411 @@ function initShare(btn) {
 }
 
 /* =========================================================
+   STEPPER / FORM BERTAHAP ([data-wizard])
+   Langkah = fieldset.wizard-step[data-title]. Tombol [data-wizard-next] (type=submit) mengecek langkah aktif;
+   di langkah terakhir form dikirim seperti biasa (atau tampil [data-done] kalau ada).
+   API: el._fyWizard.go(i). Event: fy:step { index, total }
+   ========================================================= */
+const fieldMsg = (f) => {
+  const d = f.dataset;
+  if (f.validity.valueMissing) return d.msgRequired || "Wajib diisi.";
+  if (f.validity.typeMismatch) return d.msgType || "Formatnya belum benar.";
+  if (f.validity.tooShort) return d.msgShort || `Minimal ${f.minLength} karakter.`;
+  if (f.validity.patternMismatch) return d.msgPattern || "Formatnya belum benar.";
+  if (f.validity.rangeUnderflow || f.validity.rangeOverflow) return d.msgRange || "Di luar batas yang boleh.";
+  if (d.match && f.value !== document.querySelector(d.match)?.value) return d.msgMatch || "Belum sama.";
+  return "";
+};
+const markField = (f) => {
+  const m = fieldMsg(f);
+  const field = f.closest(".field, .check") || f.parentElement;
+  let err = field.querySelector(".err");
+  if (m) {
+    if (!err) { err = document.createElement("small"); err.className = "err"; err.id = (f.id || f.name || id("f")) + "-err"; field.appendChild(err); }
+    err.textContent = m;
+    f.setAttribute("aria-invalid", "true");
+    f.setAttribute("aria-describedby", err.id);
+  } else { err?.remove(); f.removeAttribute("aria-invalid"); }
+  return !m;
+};
+function initWizard(form) {
+  if (!once(form, "_fyWizard")) return;
+  form.noValidate = true;
+  const steps = $$(".wizard-step", form);
+  const total = steps.length;
+  if (!total) return;
+  const prev = $("[data-wizard-prev]", form);
+  const next = $("[data-wizard-next]", form);
+  const nextLabel = next?.textContent.trim() || "Lanjut";
+  const lastLabel = next?.dataset.last || "Kirim";
+  let list = $(".stepper", form);
+  if (list && !list.children.length) {
+    steps.forEach((s, i) => {
+      const li = document.createElement("li");
+      li.textContent = s.dataset.title || `Langkah ${i + 1}`;
+      list.appendChild(li);
+    });
+  }
+  const items = list ? $$("li", list) : [];
+  let count = $(".wizard-count", form);
+  if (!count && list) { count = document.createElement("p"); count.className = "wizard-count"; count.setAttribute("aria-live", "polite"); list.after(count); }
+  // Hapus pesan error begitu pengguna mengetik perbaikannya
+  form.addEventListener("input", (e) => { if (e.target.getAttribute?.("aria-invalid") === "true") markField(e.target); });
+  form.addEventListener("change", (e) => { if (e.target.getAttribute?.("aria-invalid") === "true") markField(e.target); });
+  let cur = Math.max(0, steps.findIndex((s) => !s.hidden));
+  const go = (i, focus = true) => {
+    cur = Math.min(Math.max(i, 0), total - 1);
+    steps.forEach((s, j) => (s.hidden = j !== cur));
+    items.forEach((li, j) => {
+      li.classList.toggle("done", j < cur);
+      if (j === cur) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current");
+      const label = steps[j].dataset.title || `Langkah ${j + 1}`;
+      li.setAttribute("aria-label", `Langkah ${j + 1} dari ${total}: ${label}${j < cur ? " (selesai)" : ""}`);
+    });
+    if (count) count.textContent = `Langkah ${cur + 1} dari ${total} · ${steps[cur].dataset.title || ""}`;
+    if (prev) prev.hidden = cur === 0;
+    if (next) next.textContent = cur === total - 1 ? lastLabel : nextLabel;
+    if (focus) {
+      const head = $("legend, h2, h3", steps[cur]);
+      if (head) { head.tabIndex = -1; head.focus({ preventScroll: true }); }
+      const top = form.getBoundingClientRect().top;
+      if (top < 0) form.scrollIntoView({ behavior: reduce() ? "auto" : "smooth", block: "start" });
+    }
+    emit(form, "fy:step", { index: cur, total });
+  };
+  const valid = () => {
+    const bad = $$("input, select, textarea", steps[cur]).filter((f) => f.willValidate && f.type !== "hidden" && !markField(f));
+    if (bad.length) bad[0].focus();
+    return !bad.length;
+  };
+  prev?.addEventListener("click", () => go(cur - 1));
+  form.addEventListener("submit", (e) => {
+    if (!valid()) { e.preventDefault(); e.stopImmediatePropagation(); return; }
+    if (cur < total - 1) { e.preventDefault(); e.stopImmediatePropagation(); go(cur + 1); return; }
+    const done = form.dataset.done && document.querySelector(form.dataset.done);
+    if (done) { e.preventDefault(); e.stopImmediatePropagation(); form.hidden = true; done.hidden = false; const h = $("h2, h1", done); if (h) { h.tabIndex = -1; h.focus(); } }
+  }, true);
+  go(cur, false);
+  form._fyWizard = { go, get index() { return cur; } };
+}
+
+/* =========================================================
+   TABEL BISA DIURUTKAN (table[data-sort] th[data-sort-key])
+   ========================================================= */
+const SORT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="sort-arrow" d="M12 19V5M6 11l6-6 6 6"/><path class="sort-both" d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>';
+const parseDateID = (s) => {
+  const bulan = { jan: 0, feb: 1, mar: 2, apr: 3, mei: 4, may: 4, jun: 5, jul: 6, agu: 7, agt: 7, aug: 7, sep: 8, okt: 9, oct: 9, nov: 10, des: 11, dec: 11 };
+  const m = s.trim().toLowerCase().match(/^(\d{1,2})\s+([a-z]+)\.?\s+(\d{4})/);
+  if (m && bulan[m[2].slice(0, 3)] !== undefined) return new Date(+m[3], bulan[m[2].slice(0, 3)], +m[1]).getTime();
+  const t = Date.parse(s);
+  return isNaN(t) ? 0 : t;
+};
+function initSort(table) {
+  if (!once(table, "_fySort")) return;
+  const heads = $$("thead th", table);
+  const tbody = table.tBodies[0];
+  if (!tbody) return;
+  const coll = new Intl.Collator("id", { numeric: true, sensitivity: "base" });
+  heads.forEach((th, col) => {
+    if (!th.hasAttribute("data-sort-key")) return;
+    const type = th.dataset.sortKey || "text";
+    th.setAttribute("aria-sort", th.getAttribute("aria-sort") || "none");
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "sort-btn";
+    btn.innerHTML = `<span>${th.innerHTML}</span>${SORT_ICON}`;
+    th.textContent = "";
+    th.appendChild(btn);
+    const val = (tr) => {
+      const td = tr.cells[col];
+      if (!td) return "";
+      const raw = td.dataset.value ?? td.textContent.trim();
+      if (type === "num") return parseFloat(String(raw).replace(/[^\d,.-]/g, "").replace(/\./g, "").replace(",", ".")) || 0;
+      if (type === "date") return td.dataset.value ? Date.parse(td.dataset.value) || 0 : parseDateID(raw);
+      return raw;
+    };
+    btn.addEventListener("click", () => {
+      const dir = th.getAttribute("aria-sort") === "ascending" ? "descending" : "ascending";
+      heads.forEach((h) => { if (h.hasAttribute("aria-sort")) h.setAttribute("aria-sort", "none"); });
+      th.setAttribute("aria-sort", dir);
+      const rows = Array.from(tbody.rows);
+      const sign = dir === "ascending" ? 1 : -1;
+      rows.sort((a, b) => {
+        const x = val(a), y = val(b);
+        return sign * (typeof x === "number" ? x - y : coll.compare(x, y));
+      });
+      tbody.append(...rows);
+      emit(table, "fy:sort", { column: col, dir });
+    });
+  });
+}
+
+/* =========================================================
+   PUSAT NOTIFIKASI ([data-notif])
+   Klik item = tandai dibaca. "Tandai semua dibaca". Filter Semua / Belum dibaca (btn-group, value all|unread).
+   Badge angka di tombol lonceng ikut berubah. API: el._fyNotif.add({ html, href, unread }), .count()
+   ========================================================= */
+function initNotif(wrap) {
+  if (!once(wrap, "_fyNotif")) return;
+  const btn = $("button[aria-controls]", wrap);
+  const panel = btn && document.getElementById(btn.getAttribute("aria-controls"));
+  if (!panel) return;
+  const list = $(".notif-list", panel);
+  panel.tabIndex = -1;
+  const empty = $(".notif-empty", panel);
+  const readAll = $(".notif-readall", panel);
+  const filter = $(".notif-filter [data-btn-group]", panel) || $("[data-btn-group]", panel);
+  const baseLabel = btn.dataset.label || "Notifikasi";
+  let mode = "all";
+  let scrim = $(".notif-scrim", wrap);
+  if (!scrim) { scrim = document.createElement("div"); scrim.className = "notif-scrim"; wrap.appendChild(scrim); }
+  const items = () => $$(".notif-item", list);
+  const sync = () => {
+    const n = items().filter((i) => i.classList.contains("unread")).length;
+    let badge = $(".badge", btn);
+    if (n) {
+      if (!badge) { badge = document.createElement("span"); badge.className = "badge"; btn.appendChild(badge); btn.classList.add("has-badge"); }
+      badge.textContent = n > 99 ? "99+" : String(n);
+      badge.setAttribute("aria-hidden", "true");
+    } else badge?.remove();
+    btn.setAttribute("aria-label", n ? `${baseLabel}, ${n} belum dibaca` : baseLabel);
+    if (readAll) readAll.disabled = !n;
+    let shown = 0;
+    items().forEach((i) => { const vis = mode === "all" || i.classList.contains("unread"); i.hidden = !vis; if (vis) shown++; });
+    if (empty) empty.hidden = shown > 0;
+    list.hidden = shown === 0;
+    return n;
+  };
+  const markRead = (item) => {
+    if (!item.classList.contains("unread")) return;
+    item.classList.remove("unread");
+    $(".sr-unread", item)?.remove();
+    emit(wrap, "fy:read", { item });
+  };
+  const open = (show) => {
+    panel.hidden = !show;
+    panel.classList.toggle("open", show);
+    wrap.classList.toggle("open", show);
+    btn.setAttribute("aria-expanded", String(show));
+    if (show) {
+      sync();
+      ($(".notif-item:not([hidden]) a, .notif-item:not([hidden]) button", panel) || readAll || panel).focus({ preventScroll: true });
+    }
+  };
+  btn.addEventListener("click", (e) => { e.stopPropagation(); open(panel.hidden); });
+  scrim.addEventListener("click", () => { open(false); btn.focus(); });
+  document.addEventListener("pointerdown", (e) => { if (!panel.hidden && !wrap.contains(e.target) && !panel.contains(e.target)) open(false); });
+  panel.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { e.stopPropagation(); open(false); btn.focus(); }
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      const links = $$(".notif-item:not([hidden]) > a, .notif-item:not([hidden]) > button", panel);
+      const i = links.indexOf(document.activeElement);
+      if (i === -1) return;
+      e.preventDefault();
+      links[(i + (e.key === "ArrowDown" ? 1 : -1) + links.length) % links.length].focus();
+    }
+  });
+  list.addEventListener("click", (e) => { const it = e.target.closest(".notif-item"); if (it) { markRead(it); sync(); } });
+  readAll?.addEventListener("click", () => { items().forEach(markRead); emit(wrap, "fy:read", { all: true }); sync(); panel.focus({ preventScroll: true }); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden && !panel.contains(document.activeElement)) { open(false); btn.focus(); } });
+  filter?.addEventListener("fy:change", (e) => { mode = (e.detail.value[0] || "all").toLowerCase().includes("belum") || e.detail.value[0] === "unread" ? "unread" : "all"; sync(); });
+  // Teks pembaca layar untuk item belum dibaca
+  items().forEach((i) => { if (i.classList.contains("unread") && !$(".sr-unread", i)) { const s = document.createElement("span"); s.className = "sr-only sr-unread"; s.textContent = "Belum dibaca. "; ($("a, button", i) || i).prepend(s); } });
+  const add = ({ html, href = "#", unread = true, icon = "" }) => {
+    const li = document.createElement("li");
+    li.className = "notif-item" + (unread ? " unread" : "");
+    li.innerHTML = `<a href="${href}">${unread ? '<span class="sr-only sr-unread">Belum dibaca. </span>' : ""}<span class="notif-ico">${icon}</span><span class="notif-txt">${html}</span><span class="notif-dot" aria-hidden="true"></span></a>`;
+    list.prepend(li);
+    sync();
+    return li;
+  };
+  sync();
+  wrap._fyNotif = { open: () => open(true), close: () => open(false), add, count: () => items().filter((i) => i.classList.contains("unread")).length };
+}
+
+
+/* =========================================================
+   BILAH OFFLINE ([data-offline-bar])
+   Muncul otomatis saat koneksi putus, hilang saat tersambung lagi (plus snackbar). Event: fy:online / fy:offline di window.
+   ========================================================= */
+function initOffline(bar) {
+  if (!once(bar, "_fyOff")) return;
+  const set = (off, announce) => {
+    bar.hidden = !off;
+    document.documentElement.classList.toggle("is-offline", off);
+    if (announce && !off) snackbar(bar.dataset.online || "Sudah tersambung lagi");
+    dispatchEvent(new CustomEvent(off ? "fy:offline" : "fy:online"));
+  };
+  addEventListener("offline", () => set(true, true));
+  addEventListener("online", () => set(false, true));
+  if (!navigator.onLine) set(true, false);
+}
+
+/* =========================================================
+   FOTO PROFIL + PEMOTONG BULAT ([data-avatar-crop])
+   Atribut: data-size (bawaan 512), data-max-mb (bawaan 10), data-type (bawaan image/webp).
+   Event: fy:crop { file, blob, url }. Dibatalkan: input dikembalikan ke file sebelumnya.
+   ========================================================= */
+const CROP_ICON = {
+  zoomOut: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M20 20l-4-4"/></svg>',
+  zoomIn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M11 8v6M20 20l-4-4"/></svg>',
+  rotate: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>',
+};
+function initAvatarCrop(wrap) {
+  if (!once(wrap, "_fyCrop")) return;
+  const input = $("input[type='file']", wrap);
+  if (!input) return;
+  // Gambar pratinjau dibuat saat foto pertama dipilih (supaya tidak ada <img> kosong di HTML)
+  let prevImg = $(".ac-preview img", wrap);
+  const initial = $(".ac-initial", wrap);
+  const N = +(wrap.dataset.size || 512);
+  const maxMb = +(wrap.dataset.maxMb || 10);
+  const type = wrap.dataset.type || "image/webp";
+  let lastFiles = null; // file hasil potong terakhir (untuk dikembalikan kalau batal)
+
+  const dlg = document.createElement("dialog");
+  dlg.className = "modal crop-modal";
+  const tid = id("crop");
+  dlg.setAttribute("aria-labelledby", tid);
+  dlg.innerHTML = `<div class="m-body">
+      <h2 id="${tid}">Atur foto profil</h2>
+      <div class="crop-stage" tabindex="0" role="application" aria-label="Area potong foto. Geser dengan panah, perbesar dengan plus dan minus."><img alt="" width="1" height="1" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><span class="crop-ring"></span></div>
+      <div class="crop-tools">
+        <button class="icon-btn" type="button" data-z="-1" aria-label="Perkecil">${CROP_ICON.zoomOut}</button>
+        <input class="slider" type="range" min="1" max="4" step="0.01" value="1" aria-label="Perbesar foto">
+        <button class="icon-btn" type="button" data-z="1" aria-label="Perbesar">${CROP_ICON.zoomIn}</button>
+        <button class="icon-btn" type="button" data-rot aria-label="Putar 90 derajat">${CROP_ICON.rotate}</button>
+      </div>
+      <p class="crop-hint">Geser foto supaya wajah ada di tengah lingkaran.</p>
+    </div>
+    <div class="m-foot"><button class="btn ghost" type="button" data-cancel>Batal</button><button class="btn" type="button" data-apply>Pakai foto</button></div>`;
+  document.body.appendChild(dlg);
+  const stage = $(".crop-stage", dlg);
+  const img = $("img", stage);
+  const zoomEl = $(".slider", dlg);
+  let st = { x: 0, y: 0, z: 1, r: 0, w: 1, h: 1, S: 300, url: "" };
+
+  const dims = () => (st.r % 180 ? [st.h, st.w] : [st.w, st.h]);
+  const base = () => { const [w, h] = dims(); return st.S / Math.min(w, h); };
+  const clamp = () => {
+    const [w, h] = dims();
+    const sc = base() * st.z;
+    const mx = Math.max(0, (w * sc - st.S) / 2), my = Math.max(0, (h * sc - st.S) / 2);
+    st.x = Math.min(mx, Math.max(-mx, st.x));
+    st.y = Math.min(my, Math.max(-my, st.y));
+  };
+  const draw = () => {
+    clamp();
+    const sc = base() * st.z;
+    img.style.transform = `translate(-50%, -50%) translate(${st.x}px, ${st.y}px) rotate(${st.r}deg) scale(${sc})`;
+    zoomEl.value = String(st.z);
+    zoomEl.style.setProperty("--p", ((st.z - 1) / 3) * 100 + "%");
+    zoomEl.setAttribute("aria-valuetext", Math.round(st.z * 100) + "%");
+  };
+  const setZoom = (z, cx = 0, cy = 0) => {
+    const nz = Math.min(4, Math.max(1, z));
+    // zoom ke arah titik (cx, cy) relatif pusat stage
+    st.x = cx - (cx - st.x) * (nz / st.z);
+    st.y = cy - (cy - st.y) * (nz / st.z);
+    st.z = nz; draw();
+  };
+
+  // Geser dan cubit
+  const pts = new Map();
+  let start = null;
+  stage.addEventListener("pointerdown", (e) => {
+    stage.setPointerCapture(e.pointerId);
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    start = { x: st.x, y: st.y, z: st.z, pts: new Map(pts) };
+  });
+  stage.addEventListener("pointermove", (e) => {
+    if (!pts.has(e.pointerId) || !start) return;
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const a = [...pts.values()], s0 = [...start.pts.values()];
+    if (a.length === 1 && s0.length >= 1) {
+      st.x = start.x + (a[0].x - s0[0].x); st.y = start.y + (a[0].y - s0[0].y); draw();
+    } else if (a.length >= 2 && s0.length >= 2) {
+      const d = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y), d0 = Math.hypot(s0[0].x - s0[1].x, s0[0].y - s0[1].y) || 1;
+      st.z = start.z; st.x = start.x; st.y = start.y;
+      setZoom(start.z * (d / d0));
+    }
+  });
+  const up = (e) => { pts.delete(e.pointerId); start = pts.size ? { x: st.x, y: st.y, z: st.z, pts: new Map(pts) } : null; };
+  stage.addEventListener("pointerup", up);
+  stage.addEventListener("pointercancel", up);
+  stage.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    const r = stage.getBoundingClientRect();
+    setZoom(st.z * (e.deltaY < 0 ? 1.08 : 1 / 1.08), e.clientX - r.left - r.width / 2, e.clientY - r.top - r.height / 2);
+  }, { passive: false });
+  stage.addEventListener("keydown", (e) => {
+    const step = e.shiftKey ? 40 : 10;
+    const k = { ArrowLeft: [step, 0], ArrowRight: [-step, 0], ArrowUp: [0, step], ArrowDown: [0, -step] }[e.key];
+    if (k) { e.preventDefault(); st.x += k[0]; st.y += k[1]; draw(); }
+    if (e.key === "+" || e.key === "=") { e.preventDefault(); setZoom(st.z + 0.1); }
+    if (e.key === "-" || e.key === "_") { e.preventDefault(); setZoom(st.z - 0.1); }
+  });
+  zoomEl.addEventListener("input", () => setZoom(+zoomEl.value));
+  $$("[data-z]", dlg).forEach((b) => b.addEventListener("click", () => setZoom(st.z + 0.25 * +b.dataset.z)));
+  $("[data-rot]", dlg).addEventListener("click", () => { st.r = (st.r + 90) % 360; draw(); });
+
+  const restore = () => {
+    if (lastFiles) input.files = lastFiles; else input.value = "";
+  };
+  const close = () => { dlg.close(); if (st.url) URL.revokeObjectURL(st.url); st.url = ""; };
+  $("[data-cancel]", dlg).addEventListener("click", () => { restore(); close(); input.focus?.(); });
+  dlg.addEventListener("cancel", () => { restore(); if (st.url) URL.revokeObjectURL(st.url); st.url = ""; });
+  $("[data-apply]", dlg).addEventListener("click", () => {
+    const c = document.createElement("canvas");
+    c.width = c.height = N;
+    const ctx = c.getContext("2d");
+    const k = N / st.S, sc = base() * st.z;
+    ctx.imageSmoothingQuality = "high";
+    ctx.translate(N / 2 + st.x * k, N / 2 + st.y * k);
+    ctx.rotate((st.r * Math.PI) / 180);
+    ctx.scale(sc * k, sc * k);
+    ctx.drawImage(img, -st.w / 2, -st.h / 2);
+    c.toBlob((blob) => {
+      if (!blob) { snackbar("Foto gagal diproses. Coba foto lain."); return; }
+      const ext = blob.type.split("/")[1] || "png";
+      const file = new File([blob], `foto-profil.${ext}`, { type: blob.type });
+      try { const dt = new DataTransfer(); dt.items.add(file); input.files = dt.files; lastFiles = input.files; } catch (_) { /* browser lama: pakai event fy:crop */ }
+      const url = URL.createObjectURL(blob);
+      const box = $(".ac-preview", wrap);
+      if (!prevImg && box) { prevImg = document.createElement("img"); prevImg.alt = wrap.dataset.alt || "Foto profil"; prevImg.width = prevImg.height = 88; box.prepend(prevImg); }
+      if (prevImg) { prevImg.src = url; prevImg.hidden = false; }
+      if (initial) initial.hidden = true;
+      close();
+      emit(wrap, "fy:crop", { file, blob, url });
+      snackbar(wrap.dataset.done || "Foto profil siap disimpan");
+    }, type, 0.9);
+  });
+
+  input.addEventListener("change", () => {
+    const f = input.files?.[0];
+    if (!f || f === lastFiles?.[0]) return;
+    if (!f.type.startsWith("image/")) { snackbar("Pilih file gambar ya (JPG, PNG, atau WebP)."); restore(); return; }
+    if (f.size > maxMb * 1024 * 1024) { snackbar(`Fotonya kebesaran. Maksimal ${maxMb} MB.`); restore(); return; }
+    st.url = URL.createObjectURL(f);
+    img.onload = () => {
+      st = { ...st, x: 0, y: 0, z: 1, r: 0, w: img.naturalWidth, h: img.naturalHeight };
+      img.style.width = st.w + "px"; img.style.height = st.h + "px";
+      dlg.showModal();
+      st.S = stage.clientWidth || 300;
+      draw();
+      stage.focus({ preventScroll: true });
+    };
+    img.onerror = () => { snackbar("Foto ini tidak bisa dibuka. Coba foto lain."); restore(); URL.revokeObjectURL(st.url); };
+    img.src = st.url;
+  });
+  wrap._fyCrop = { open: () => input.click() };
+}
+
+/* =========================================================
    INIT
    ========================================================= */
 export function initControls(root = document) {
+  if (!cekLisensi()) return api;
   if (root === document && !once(document, "_fyControls")) return api;
 
   /* ---------- Dropdown / split button ---------- */
@@ -1047,6 +1453,11 @@ export function initControls(root = document) {
   $$("[data-chat]", root).forEach(initChat);
   $$("[data-ics]", root).forEach(initIcs);
   $$("[data-share]", root).forEach(initShare);
+  $$("form[data-wizard]", root).forEach(initWizard);
+  $$("table[data-sort]", root).forEach(initSort);
+  $$("[data-notif]", root).forEach(initNotif);
+  $$("[data-offline-bar]", root).forEach(initOffline);
+  $$("[data-avatar-crop]", root).forEach(initAvatarCrop);
 
   /* ---------- Snackbar deklaratif ---------- */
   $$("[data-snackbar]", root).forEach((b) => {

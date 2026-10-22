@@ -88,6 +88,7 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 | glasses | layanan profesional, halaman kosong |
 
 - Ganti ekspresi dengan **menukar gambar badan penuh**. Jangan menempel kepala di atas badan lain karena wajah lama ikut terlihat.
+- **Pose baru**: bebas dan hidup (berlari, melompat, jinjit, lebay), jangan kaku. Yang wajib sama: wajah, mata abu tua, rambut putih ujung biru dengan helai mencuat, pipi merah, garis tebal merah tua. Baju bawaan jaket hitam terbuka (kerah dan ujung lengan abu) dengan kaus putih; boleh ganti kalau situasinya butuh. Pose yang menunggu dipasang ada di `mascot/POSE-BARU.md`.
 - Gelembung bicara (`.bubble`, Caveat) tidak boleh menutupi wajah, rambut, atau judul.
 - Stiker (order, proses, done, batal) hanya untuk obrolan bot.
 - Tampil kecil: pakai `-420.webp` / `-120.webp` dengan `srcset`. Semua `<img>` wajib `width` dan `height`.
@@ -126,6 +127,12 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Upload: area bergaris putus-putus biru muda dengan ikon biru; berubah biru saat file diseret di atasnya. Foto tampil sebagai pratinjau kecil.
 - Chat: gelembung stiker, pesan sendiri biru di kanan, pesan orang lain kartu di kiri. Di HP isi obrolan layar penuh dan tombol kembali menutupnya. Stiker maskot boleh dikirim sebagai pesan.
 - Detail acara: poster biru dengan maskot dan segel, tanggal di kotak `.ev-date`, pendaftaran lewat bottom sheet, tiket berkode setelah terdaftar. Di HP tombol daftar menempel di bawah.
+- Stepper: lingkaran bernomor dengan garis putus-putus; langkah aktif biru bergaya stiker, langkah selesai berisi centang dan garisnya jadi utuh.
+- Pusat notifikasi: panel stiker dari lonceng (di HP dari bawah), titik biru untuk yang belum dibaca, maskot happy saat semua sudah dibaca.
+- Tabel urut: panah kecil di judul kolom; kolom yang aktif berwarna biru.
+- Keadaan kosong/error/offline: maskot kecil, judul Afacad, satu kalimat, satu tombol. Error diberi garis putus-putus merah di atas latar merah muda; offline garis putus-putus biasa. Halaman penuh 500 (maskot cry), offline (tired), perawatan (glasses).
+- Bilah offline: kapsul kuning di atas layar dengan kepala maskot tired.
+- Pemotong foto profil: jendela dengan area kotak bermotif papan catur, lingkaran putus-putus putih sebagai batas potong, slider zoom, tombol putar. Pratinjau foto bulat bergaris stiker.
 - Aplikasi native memakai token dari `tokens/` dengan tampilan yang sama: garis 2px, bayangan pejal tanpa blur, huruf yang sama.
 
 ## Layout

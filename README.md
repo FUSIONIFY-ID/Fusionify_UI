@@ -79,6 +79,44 @@ Mode gelap otomatis mengikuti sistem. Tambahkan tombol `<button class="icon-btn 
 - **Isinya HTML** (PWA, Capacitor, WebView): mulai dari `templates/app-mobile.html` dan tempel `snippets/pwa-head.html`. Semua komponen HP ada: app bar, navigation bar bawah, rail tablet, FAB, bottom sheet, side sheet, carousel, slider, date/time picker, tooltip, snackbar, chip filter, list, skeleton. Katalognya di `templates/komponen.html`. Template siap pakai: `app-mobile.html` (beranda), `chat.html` (pesan), `acara.html` (detail acara), `auth/verifikasi.html` (kode OTP).
 - **Native** (Flutter, SwiftUI, Jetpack Compose, React Native, Android Kotlin/Java dengan XML): pakai token di `tokens/` beserta huruf TTF. File Flutter sudah dicek dengan `flutter analyze` dan `flutter build`. Panduan lengkap di `tokens/README.md`.
 
+## Library Figma
+
+Untuk desainer: **[FUSIONIFY UI · Library di Figma](https://www.figma.com/design/av0M9IuzYKJTiUWJsYTS3i)**. Isinya variabel warna (mode Terang dan Gelap), radius, jarak, gaya teks, bayangan stiker, ikon, dan komponen yang sama dengan kode. Setiap variabel punya kode untuk web (`var(--blue)`), Android, dan iOS, jadi di Dev Mode programmer langsung melihat nama token yang benar.
+
+Kalau token di `css/tokens.css` berubah, samakan juga variabel di Figma (dan sebaliknya). Jangan membuat warna baru hanya di salah satu sisi.
+
+## Domain resmi
+
+Kit ini hanya berjalan di `fusionify.id`, `fusionify.biz.id`, dan subdomainnya (lihat `js/lisensi.js`). Untuk pengembangan, `localhost`, `127.0.0.1`, `*.local`, dan file yang dibuka langsung tetap jalan. Menambah domain partner: tulis di `DOMAIN_RESMI`, catat di CHANGELOG, lalu rilis versi baru.
+
+## Versi
+
+Kit ini dirilis bernomor versi (`1.5.0`, `1.6.0`, dst.). Web produk **mengunci** satu versi, jadi perubahan di kit tidak ikut merusak web yang sudah jalan. Update dilakukan sengaja.
+
+- **Git submodule** (disarankan):
+  ```
+  git submodule add https://github.com/FUSIONIFY-ID/Fusionify_UI public/fusionify-ui
+  cd public/fusionify-ui
+  git checkout v1.5.0
+  ```
+  Naik versi nanti: `git fetch --tags` lalu `git checkout v1.6.0`, cek web-nya, commit.
+- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.5.0`. Karena repo privat, mesin build perlu akses ke repo (token GitHub).
+- **Zip**: unduh `Fusionify_UI-v1.5.0.zip` dari halaman Releases.
+
+Aturan nomor: angka terakhir (1.5.**1**) untuk perbaikan kecil yang aman, angka tengah (1.**6**.0) untuk komponen baru yang tidak merusak, angka depan (**2**.0.0) kalau ada kelas atau markup yang berubah dan web produk perlu disesuaikan. Semua perubahan dicatat di `CHANGELOG.md`.
+
+Cara merilis: ubah `version` di `package.json`, tambah bagian baru di `CHANGELOG.md`, lalu jalankan `npm run release` dan ikuti perintahnya. GitHub Actions akan menguji, membuat zip, dan menerbitkan rilisnya.
+
+## Uji otomatis
+
+```
+npm install
+npx playwright install chromium
+npm test
+```
+
+Yang dicek: semua template di 8 ukuran layar (375 sampai 1920), tema terang dan gelap, kontras dengan axe, layar sentuh (target sentuh dan scroll samping), tanpa JavaScript, kurangi gerakan, dan semua interaksi komponen. Uji yang sama jalan otomatis di GitHub setiap ada push (`.github/workflows/uji.yml`). Kalau tanda centang di commit jadi merah, buka tab Actions untuk melihat bagian yang rusak.
+
 ## Dipakai di AI agent mana pun
 
 | Agent | Cara membaca aturan repo ini |

@@ -1,0 +1,35 @@
+# FUSIONIFY UI · uji otomatis setiap push dan pull request.
+# Mengecek semua template di 8 ukuran layar, tema terang dan gelap, kontras (axe), layar sentuh,
+# tanpa JavaScript, kurangi gerakan, dan semua interaksi komponen. Kalau ada yang rusak, tanda centang jadi merah.
+name: Uji tampilan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: uji-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  uji:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Pasang dependensi uji
+        run: npm ci --no-audit --no-fund
+      - name: Pasang Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Cek token dan file konteks sudah dibuat ulang
+        run: |
+          node scripts/build-tokens.mjs
+          node scripts/build-konteks.mjs
+          git diff --exit-code -- tokens FUSIONIFY-UI-KONTEKS.md || (echo "::error::Jalankan npm run build:tokens dan npm run build:konteks lalu commit hasilnya" && exit 1)
+      - name: Jalankan semua uji
+        run: npm test

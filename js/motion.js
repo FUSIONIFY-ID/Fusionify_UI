@@ -19,6 +19,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initTheme } from "./theme.js";
 import { initControls, snackbar, otpError } from "./controls.js";
+import { cekLisensi } from "./lisensi.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -111,6 +112,7 @@ function splitWords(el) {
 }
 
 export function initFusionify(opts = {}) {
+  if (!cekLisensi()) return;
   const o = {
     smooth: true,          // Lenis smooth scroll
     cursor: true,          // kursor segel (hanya mouse)

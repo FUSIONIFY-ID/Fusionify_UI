@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.6.0 · 22 Oktober 2026
+
+- **Kunci domain** (`js/lisensi.js`): kit hanya berjalan di `fusionify.id`, `fusionify.biz.id`, dan subdomainnya (plus localhost untuk pengembangan). Di domain lain interaksi dan animasi tidak dijalankan, konten tetap terbaca, dan konsol menampilkan peringatan. Lisensi diperbarui.
+- **Halaman 500, offline, dan perawatan** dengan maskot (`templates/500.html`, `offline.html`, `maintenance.html`). Halaman offline memuat ulang sendiri begitu tersambung.
+- **Keadaan kosong, error, dan offline** di dalam panel (`.state`, `.state.error`, `.state.offline`, `.state.sm`) dan **bilah offline otomatis** (`[data-offline-bar]`) yang muncul saat koneksi putus. Sudah dipasang di dashboard, admin, aplikasi HP, dan chat.
+- **Foto profil dengan pemotong bulat** (`[data-avatar-crop]`): geser, perbesar (slider, roda mouse, cubit, tombol +/-), putar 90°, hasil persegi 512px WebP langsung menggantikan file di form. Batal mengembalikan foto sebelumnya.
+- **Library Figma** (https://www.figma.com/design/av0M9IuzYKJTiUWJsYTS3i): variabel warna dengan mode Terang dan Gelap (nama dan kode sama dengan `css/tokens.css`), radius dan jarak, 10 gaya teks, 3 gaya bayangan stiker, ikon, dan komponen (tombol, chip status, chip filter, input, kartu, saklar, lencana, avatar, navigation bar bawah, item notifikasi) plus halaman fondasi dan pratinjau terang/gelap.
+- Token baru di `tokens.css` supaya sama dengan Figma: `--r-pill`, `--sp-xs` sampai `--sp-2xl`, `--edge-width`, `--touch-min`.
+
+## 1.5.0 · 22 Oktober 2026
+
+- **Stepper / form bertahap** (`form[data-wizard]`, `.stepper`, `.wizard-step`): tombol Lanjut hanya mengecek kolom di langkah aktif, Kembali menyimpan isian, judul langkah difokus untuk pembaca layar, di HP hanya lingkaran plus teks "Langkah 2 dari 3".
+- **Tabel bisa diurutkan** (`table[data-sort]`, `th[data-sort-key]` = teks, `num`, `date`): klik judul kolom, klik lagi untuk membalik. Paham angka Rupiah dan tanggal Indonesia ("12 Okt 2026"). `aria-sort` terpasang. Tabel pengguna di `admin.html` sudah memakai ini.
+- **Pusat notifikasi** (`[data-notif]`, `.notif-panel`): lonceng dengan angka, filter Semua / Belum dibaca, tandai semua dibaca, panah atas/bawah, Esc, di HP muncul dari bawah. Sudah dipasang di `dashboard.html`, `admin.html`, dan `app-mobile.html`.
+- **Uji otomatis** (`tests/`, `npm test`) dan **GitHub Actions** (`.github/workflows/uji.yml`): setiap push dicek di 8 ukuran layar, terang dan gelap, kontras axe, layar sentuh, tanpa JavaScript, kurangi gerakan, dan semua interaksi.
+- **Rilis bernomor versi** (`.github/workflows/rilis.yml`, `npm run release`): push tag `v1.5.0` menguji ulang, membuat zip, dan menerbitkan GitHub Release. Cara mengunci versi di web produk ada di README.
+- **Pose maskot baru (draf)**: selamat datang, memuat, kosong, sukses bayar, gagal bayar, offline. Belum dipasang; daftar dan cara pasangnya di `mascot/POSE-BARU.md`, plus `scripts/mascot-import.py`.
+- Perbaikan: `.empty[hidden]` sekarang benar-benar tersembunyi; panel di dalam app bar yang sticky tidak lagi tertutup navigation bar dan FAB.
+
 ## 1.4.0 · 22 Oktober 2026
 
 - **Kode OTP** (`.otp`, `[data-otp]`, `otpError()`): kotak per digit, tempel dan isi otomatis dari SMS langsung terbagi, mode huruf+angka, keadaan salah, plus hitung mundur kirim ulang (`[data-countdown]`). Template baru `auth/verifikasi.html`.

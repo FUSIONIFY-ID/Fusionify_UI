@@ -41,6 +41,7 @@
 .row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 .row + .row { margin-top: 18px; }
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 20px; }
+.state-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 16px; }
 .label-sm { display: block; margin-bottom: 8px; font-family: var(--f-num); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
 .device { position: relative; transform: translateZ(0); overflow: hidden; border: 2px solid var(--edge); border-radius: 30px; background: var(--paper); box-shadow: var(--shadow-sticker); }
 .device.phone { width: 100%; max-width: 360px; height: 560px; margin-inline: auto; }
@@ -73,7 +74,7 @@
     <h1 class="h-sec">Semua kontrol, satu gaya<span class="dot">.</span></h1>
     <p>Komponen untuk web, dashboard, dan aplikasi HP (web, PWA, atau WebView). Semuanya bergaya stiker FUSIONIFY, aman di mode gelap, target sentuhnya minimal 44px, dan menghormati area aman notch.</p>
     <nav class="chip-set scroll kat-toc" aria-label="Lompat ke bagian">
-      <a class="chip-btn" href="#tombol">Tombol</a><a class="chip-btn" href="#fab">FAB</a><a class="chip-btn" href="#chip">Chip</a><a class="chip-btn" href="#pilih">Tanggal & jam</a><a class="chip-btn" href="#otp">OTP</a><a class="chip-btn" href="#upload">Upload</a><a class="chip-btn" href="#slider">Slider</a><a class="chip-btn" href="#loading">Loading</a><a class="chip-btn" href="#list">List</a><a class="chip-btn" href="#nav">Navigasi HP</a><a class="chip-btn" href="#sheet">Sheet & dialog</a><a class="chip-btn" href="#carousel">Carousel</a><a class="chip-btn" href="#cari">Pencarian</a><a class="chip-btn" href="#lain">Tooltip, badge, snackbar</a>
+      <a class="chip-btn" href="#tombol">Tombol</a><a class="chip-btn" href="#fab">FAB</a><a class="chip-btn" href="#chip">Chip</a><a class="chip-btn" href="#pilih">Tanggal & jam</a><a class="chip-btn" href="#stepper">Stepper</a><a class="chip-btn" href="#tabel">Tabel urut</a><a class="chip-btn" href="#notif">Notifikasi</a><a class="chip-btn" href="#keadaan">Kosong & error</a><a class="chip-btn" href="#crop">Foto profil</a><a class="chip-btn" href="#otp">OTP</a><a class="chip-btn" href="#upload">Upload</a><a class="chip-btn" href="#slider">Slider</a><a class="chip-btn" href="#loading">Loading</a><a class="chip-btn" href="#list">List</a><a class="chip-btn" href="#nav">Navigasi HP</a><a class="chip-btn" href="#sheet">Sheet & dialog</a><a class="chip-btn" href="#carousel">Carousel</a><a class="chip-btn" href="#cari">Pencarian</a><a class="chip-btn" href="#lain">Tooltip, badge, snackbar</a>
     </nav>
   </div>
 
@@ -160,6 +161,90 @@
             <div class="picker" data-datepicker data-range><input class="input" id="k-range" readonly placeholder="Pilih rentang"><button type="button" class="picker-btn" aria-label="Buka kalender untuk rentang menginap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><input type="hidden" name="rentang"></div></div>
         <div class="field"><label for="k-jam">Jam mulai</label>
             <div class="picker" data-timepicker data-step="5"><input class="input" id="k-jam" readonly placeholder="Pilih jam"><button type="button" class="picker-btn" aria-label="Buka pilihan jam untuk jam mulai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button><input type="hidden" name="jam"></div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="stepper" aria-labelledby="h-stepper">
+      <div class="panel-head"><h2 id="h-stepper">Stepper / form bertahap</h2></div>
+      <p class="lead2">Form panjang dipecah jadi beberapa langkah. Tombol Lanjut hanya mengecek kolom di langkah itu. Di HP judul langkah pindah ke bawah lingkaran supaya tidak sesak.</p>
+      <form class="wizard" data-wizard data-done="#wz-done" style="max-width:560px">
+        <ol class="stepper"></ol>
+        <fieldset class="wizard-step" data-title="Data diri">
+          <legend>Kenalan dulu</legend>
+          <label class="field"><span>Nama lengkap</span><input class="input" name="nama" autocomplete="name" required data-msg-required="Nama wajib diisi."></label>
+          <label class="field"><span>Email kampus</span><input class="input" type="email" name="email" autocomplete="email" required placeholder="nama@kampus.ac.id" data-msg-type="Format email belum benar."></label>
+        </fieldset>
+        <fieldset class="wizard-step" data-title="Kampus" hidden>
+          <legend>Kuliah di mana?</legend>
+          <label class="field"><span>Kampus</span><input class="input" name="kampus" autocomplete="organization" required placeholder="Universitas Contoh"></label>
+          <label class="field"><span>Program studi</span><input class="input" name="prodi" required></label>
+        </fieldset>
+        <fieldset class="wizard-step" data-title="Minat" hidden>
+          <legend>Suka acara apa?</legend>
+          <div class="chip-set" role="group" aria-label="Minat"><button class="chip-btn" type="button" aria-pressed="true">Belajar</button><button class="chip-btn" type="button" aria-pressed="false">Olahraga</button><button class="chip-btn" type="button" aria-pressed="false">Nonton</button><button class="chip-btn" type="button" aria-pressed="false">Musik</button></div>
+          <label class="check"><input type="checkbox" name="setuju" required data-msg-required="Centang dulu ya."><span>Aku setuju dengan syarat dan ketentuan</span></label>
+        </fieldset>
+        <div class="wizard-foot"><button class="btn ghost" type="button" data-wizard-prev>Kembali</button><button class="btn" type="submit" data-wizard-next data-last="Daftar">Lanjut</button></div>
+      </form>
+      <div class="empty" id="wz-done" hidden style="padding:10px 0"><img src="../mascot/happy-420.webp" alt="" width="337" height="420"><h2 style="font-size:30px">Pendaftaran selesai!</h2><p>Cek email kampusmu untuk verifikasi.</p></div>
+    </section>
+
+    <section class="panel flush" id="tabel" aria-labelledby="h-tabel">
+      <div class="panel-head"><h2 id="h-tabel">Tabel bisa diurutkan</h2></div>
+      <p class="lead2" style="padding:0 22px">Klik judul kolom untuk mengurutkan, klik lagi untuk membalik. Angka, tanggal, dan teks diurutkan dengan benar (bukan "10" sebelum "9").</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Daftar acara">
+        <table class="table" data-sort>
+          <thead><tr><th data-sort-key>Acara</th><th data-sort-key="date">Tanggal</th><th data-sort-key="num" class="num">Peserta</th><th data-sort-key="num" class="num">Harga</th></tr></thead>
+          <tbody>
+            <tr><td>Workshop desain UI</td><td>25 Okt 2026</td><td class="num">32</td><td class="num">Gratis</td></tr>
+            <tr><td>Nonton bareng final</td><td>25 Okt 2026</td><td class="num">18</td><td class="num" data-value="25000">Rp25.000</td></tr>
+            <tr><td>Jalan pagi ke Kebun Raya</td><td>27 Okt 2026</td><td class="num">12</td><td class="num">Gratis</td></tr>
+            <tr><td>Diskusi skripsi santai</td><td>2 Nov 2026</td><td class="num">7</td><td class="num" data-value="10000">Rp10.000</td></tr>
+            <tr><td>Kelas Figma lanjutan</td><td>9 Nov 2026</td><td class="num">104</td><td class="num" data-value="150000">Rp150.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="notif" aria-labelledby="h-notif">
+      <div class="panel-head"><h2 id="h-notif">Pusat notifikasi</h2></div>
+      <p class="lead2">Lonceng dengan angka, panel daftar kabar, filter belum dibaca, dan tandai semua dibaca. Di HP panel muncul dari bawah. Angka di lonceng ikut berkurang saat kabar dibuka.</p>
+      <div style="display:flex;align-items:center;gap:12px"><div class="notif" data-notif>
+      <button class="icon-btn has-badge" type="button" aria-expanded="false" aria-controls="nt-kat" aria-label="Notifikasi, 3 belum dibaca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4l2-2z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="badge" aria-hidden="true">3</span></button>
+      <section class="notif-panel start" id="nt-kat" role="dialog" aria-label="Notifikasi" hidden>
+        <header class="notif-head"><h2>Notifikasi</h2><button class="notif-readall" type="button">Tandai semua dibaca</button></header>
+        <div class="notif-filter"><div class="btn-group sm" data-btn-group="single" role="group" aria-label="Saring notifikasi"><button type="button" value="all" aria-pressed="true">Semua</button><button type="button" value="unread" aria-pressed="false">Belum dibaca</button></div></div>
+        <ul class="notif-list">
+          <li class="notif-item unread"><a href="#"><span class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></span><span class="notif-txt"><b>Workshop desain UI</b> dimulai besok jam 09.00. Jangan telat ya!<time>10 menit lalu</time></span><span class="notif-dot" aria-hidden="true"></span></a></li>
+          <li class="notif-item unread"><a href="#"><span class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18 14.8c1.9.7 3.1 2.4 3.5 5.2"/></svg></span><span class="notif-txt"><b>Nadia</b> dan 2 teman lain ikut acara yang kamu buat.<time>1 jam lalu</time></span><span class="notif-dot" aria-hidden="true"></span></a></li>
+          <li class="notif-item unread"><a href="#"><span class="notif-ico go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="notif-txt">Akunmu sudah <b>terverifikasi PDDikti</b>.<time>Kemarin</time></span><span class="notif-dot" aria-hidden="true"></span></a></li>
+          <li class="notif-item"><a href="#"><span class="notif-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg></span><span class="notif-txt">Pendaftaran <b>Nonton bareng final</b> dibuka.<time>2 hari lalu</time></span><span class="notif-dot" aria-hidden="true"></span></a></li>
+        </ul>
+        <div class="notif-empty" hidden><img src="../mascot/happy-420.webp" alt="" width="337" height="420" loading="lazy"><b>Semua sudah dibaca</b><span>Nanti kabar baru muncul di sini.</span></div>
+        <a class="notif-all" href="#">Lihat semua notifikasi</a>
+      </section>
+    </div><span style="color:var(--ink-2);font-size:15px">Klik lonceng di sebelah kiri</span></div>
+    </section>
+
+    <section class="panel" id="keadaan" aria-labelledby="h-keadaan">
+      <div class="panel-head"><h2 id="h-keadaan">Keadaan kosong, error, dan offline</h2></div>
+      <p class="lead2">Selalu pakai maskot dan satu langkah yang jelas. Untuk halaman penuh ada <a href="404.html">404</a>, <a href="500.html">500</a>, <a href="offline.html">offline</a>, dan <a href="maintenance.html">perawatan</a>. Bilah offline muncul sendiri saat koneksi putus.</p>
+      <div class="state-grid">
+        <div class="state sm"><img src="../mascot/confused-420.webp" alt="" width="330" height="420" loading="lazy"><h3>Belum ada pesanan</h3><p>Pesanan pertamamu akan muncul di sini.</p><div class="actions"><a class="btn sm" href="#">Mulai belanja</a></div></div>
+        <div class="state sm error"><img src="../mascot/cry-420.webp" alt="" width="373" height="420" loading="lazy"><h3>Gagal memuat</h3><p>Datanya belum bisa diambil. Coba lagi ya.</p><div class="actions"><button class="btn sm" type="button" data-snackbar="Memuat ulang...">Coba lagi</button></div></div>
+        <div class="state sm offline"><img src="../mascot/tired-420.webp" alt="" width="327" height="420" loading="lazy"><h3>Kamu offline</h3><p>Sambungkan internet untuk melihat yang terbaru.</p></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px"><button class="btn ghost sm" type="button" id="sim-off">Coba bilah offline</button><button class="btn ghost sm" type="button" id="sim-on">Kembali online</button></div>
+      <div class="offline-bar" data-offline-bar hidden role="status"><img src="../mascot/head-tired-120.webp" alt="" width="120" height="117">Kamu sedang offline. Perubahan disimpan begitu tersambung lagi.</div>
+    </section>
+
+    <section class="panel" id="crop" aria-labelledby="h-crop">
+      <div class="panel-head"><h2 id="h-crop">Foto profil dengan pemotong bulat</h2></div>
+      <p class="lead2">Pilih foto, lalu geser dan perbesar sampai wajah pas di lingkaran. Hasilnya persegi 512px (WebP) dan langsung menggantikan file di form, jadi server menerima foto yang sudah rapi.</p>
+      <div class="avatar-crop" data-avatar-crop data-size="512">
+        <span class="ac-preview"><span class="ac-initial" aria-hidden="true">RN</span></span>
+        <div><label class="btn ghost sm" for="k-avatar">Ganti foto</label><small>JPG, PNG, atau WebP · maks 10 MB</small></div>
+        <input class="sr-only" type="file" id="k-avatar" name="foto_profil" accept="image/*">
       </div>
     </section>
 
@@ -404,6 +489,9 @@
     if (e.detail.value === "123456") window.fy.otpError(e.currentTarget, "Kodenya belum cocok. Coba cek lagi SMS-nya.");
     else window.fy.snackbar("Kode benar, akun terverifikasi");
   });
+  // Simulasi putus koneksi untuk contoh bilah offline
+  document.getElementById("sim-off")?.addEventListener("click", () => dispatchEvent(new Event("offline")));
+  document.getElementById("sim-on")?.addEventListener("click", () => dispatchEvent(new Event("online")));
 </script>
 </body>
 </html>
