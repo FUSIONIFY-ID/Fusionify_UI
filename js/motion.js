@@ -18,7 +18,7 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initTheme } from "./theme.js";
-import { initControls, snackbar } from "./controls.js";
+import { initControls, snackbar, otpError } from "./controls.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -347,5 +347,5 @@ export function initFusionify(opts = {}) {
   }
 
   addEventListener("load", () => ScrollTrigger.refresh());
-  return { sfx, toast, snackbar, lenis, scrollTo: scrollToEl, gsap, ScrollTrigger };
+  return { sfx, toast, snackbar, otpError, lenis, scrollTo: scrollToEl, gsap, ScrollTrigger };
 }

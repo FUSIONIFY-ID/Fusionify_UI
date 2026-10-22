@@ -17,6 +17,9 @@
 // - Tooltip (.tip-wrap): Esc menyembunyikan, tekan lama di layar sentuh, tidak keluar layar
 // - Search dengan saran ([data-suggest])
 // - Date picker ([data-datepicker]) dan time picker ([data-timepicker])
+// - OTP ([data-otp]) + otpError(), hitung mundur kirim ulang ([data-countdown]), upload file ([data-upload])
+// - Tambah ke kalender ([data-ics], unduh .ics) dan bagikan ([data-share])
+// - Chat ([data-chat]): buka/tutup obrolan di HP (ikut tombol back), kolom tulis yang tumbuh, event fy:send
 // - Snackbar (snackbar() dan [data-snackbar])
 //
 // Setiap komponen mengirim event: fy:change (button group, chip, slider, picker), fy:remove (chip input),
@@ -394,6 +397,361 @@ function openDialog(d, opener) {
 }
 
 /* =========================================================
+   OTP
+   Input asli (name, maxlength) tetap ada dan menyimpan nilai lengkap untuk form.
+   Event: fy:change { value }, fy:complete { value }. Tandai salah: otpError(el, pesan?)
+   ========================================================= */
+function initOtp(wrap) {
+  if (!once(wrap, "_fyOtp")) return;
+  const store = $("input", wrap);
+  if (!store) return;
+  const n = +(store.maxLength > 0 ? store.maxLength : 6);
+  const digitsOnly = (store.inputMode || "numeric") === "numeric";
+  const clean = (s) => (digitsOnly ? s.replace(/\D/g, "") : s.replace(/\s/g, "").toUpperCase());
+  const label = store.getAttribute("aria-label") || "Kode";
+  store.classList.add("otp-store");
+  store.tabIndex = -1;
+  store.setAttribute("aria-hidden", "true");
+  wrap.setAttribute("role", "group");
+  if (!wrap.hasAttribute("aria-label") && !wrap.hasAttribute("aria-labelledby")) wrap.setAttribute("aria-label", label);
+  const split = +(wrap.dataset.split || (n === 6 ? 3 : 0));
+  const boxes = [];
+  for (let i = 0; i < n; i++) {
+    if (split && i === split) { const s = document.createElement("span"); s.className = "otp-sep"; s.setAttribute("aria-hidden", "true"); wrap.appendChild(s); }
+    const b = document.createElement("input");
+    b.className = "otp-box";
+    b.type = "text";
+    b.inputMode = digitsOnly ? "numeric" : "text";
+    b.autocomplete = i === 0 ? "one-time-code" : "off";
+    b.setAttribute("aria-label", `Digit ${i + 1} dari ${n}`);
+    b.maxLength = n; // supaya isi otomatis/tempel di kotak mana pun bisa dibagi
+    if (digitsOnly) b.pattern = "[0-9]*";
+    wrap.appendChild(b);
+    boxes.push(b);
+  }
+  const sync = () => {
+    const v = boxes.map((b) => b.value).join("");
+    store.value = v;
+    boxes.forEach((b) => b.classList.toggle("filled", !!b.value));
+    if (wrap.getAttribute("aria-invalid") === "true") {
+      wrap.removeAttribute("aria-invalid");
+      if (wrap._fyErr) { wrap._fyErr.remove(); wrap._fyErr = null; wrap.removeAttribute("aria-describedby"); }
+    }
+    wrap.classList.remove("done");
+    emit(wrap, "fy:change", { value: v });
+    if (v.length === n) { wrap.classList.add("done"); emit(wrap, "fy:complete", { value: v }); }
+  };
+  const fill = (from, text) => {
+    const chars = [...clean(text)];
+    let i = from;
+    for (const c of chars) { if (i >= n) break; boxes[i++].value = c; }
+    boxes[Math.min(i, n - 1)].focus();
+    sync();
+  };
+  boxes.forEach((b, i) => {
+    b.addEventListener("input", () => {
+      const v = clean(b.value);
+      if (v.length > 1) { b.value = ""; fill(i, v); return; }
+      b.value = v;
+      if (v && i < n - 1) boxes[i + 1].focus();
+      sync();
+    });
+    b.addEventListener("keydown", (e) => {
+      if (e.key === "Backspace" && !b.value && i > 0) { e.preventDefault(); boxes[i - 1].value = ""; boxes[i - 1].focus(); sync(); }
+      else if (e.key === "ArrowLeft" && i > 0) { e.preventDefault(); boxes[i - 1].focus(); }
+      else if (e.key === "ArrowRight" && i < n - 1) { e.preventDefault(); boxes[i + 1].focus(); }
+    });
+    b.addEventListener("focus", () => b.select());
+    b.addEventListener("paste", (e) => { e.preventDefault(); fill(i, (e.clipboardData || window.clipboardData).getData("text")); });
+  });
+  // Kalau input asli diisi dari luar (mis. Web OTP API), bagikan ke kotak
+  if (store.value) fill(0, store.value);
+  wrap._fyOtpClear = () => { boxes.forEach((b) => (b.value = "")); sync(); boxes[0].focus(); };
+}
+export function otpError(wrap, message) {
+  wrap.setAttribute("aria-invalid", "true");
+  wrap.classList.remove("shake"); void wrap.offsetWidth;
+  if (!reduce()) wrap.classList.add("shake");
+  const field = wrap.closest(".field") || wrap.parentElement;
+  let err = $(".err", field);
+  if (message) {
+    if (!err) { err = document.createElement("small"); err.className = "err"; err.id = id("otp-err"); err.setAttribute("role", "alert"); field.appendChild(err); }
+    err.textContent = message;
+    wrap.setAttribute("aria-describedby", err.id);
+    wrap._fyErr = err;
+  }
+  const first = $(".otp-box", wrap);
+  first?.focus();
+}
+
+/* =========================================================
+   HITUNG MUNDUR (kirim ulang kode)
+   <button type="button" data-countdown="60" data-label="Kirim ulang">Kirim ulang</button>
+   Tombol mati sampai waktu habis. Klik memulai lagi dan mengirim event fy:resend.
+   ========================================================= */
+function initCountdown(btn) {
+  if (!once(btn, "_fyCd")) return;
+  const secs = +btn.dataset.countdown || 60;
+  const base = btn.dataset.label || btn.textContent.trim();
+  let t;
+  const start = () => {
+    let left = secs;
+    btn.disabled = true;
+    const tick = () => {
+      const m = Math.floor(left / 60), s = String(left % 60).padStart(2, "0");
+      btn.textContent = `${base} (${m}:${s})`;
+      if (left-- <= 0) { clearInterval(t); btn.disabled = false; btn.textContent = base; }
+    };
+    tick();
+    clearInterval(t);
+    t = setInterval(tick, 1000);
+  };
+  btn.addEventListener("click", () => { emit(btn, "fy:resend", {}); start(); });
+  if (btn.dataset.start !== "false") start();
+}
+
+/* =========================================================
+   UPLOAD
+   Atribut: data-max-mb (bawaan 5), data-max-files (bawaan 1 kalau tanpa multiple, 10 kalau multiple),
+   data-round (pratinjau bulat untuk foto profil). File yang lolos tetap ada di <input type="file"> untuk form biasa.
+   Event: fy:files { files }. Progres unggah sendiri: el._fyUpload.progress(file, 0..1), .done(file), .fail(file, pesan)
+   ========================================================= */
+const fmtSize = (b) => (b < 1024 * 1024 ? `${Math.max(1, Math.round(b / 1024))} KB` : `${(b / 1024 / 1024).toFixed(1).replace(".", ",")} MB`);
+function initUpload(wrap) {
+  if (!once(wrap, "_fyUp")) return;
+  const input = $("input[type='file']", wrap);
+  const drop = $(".drop", wrap);
+  let list = $(".upload-list", wrap);
+  if (!input || !drop) return;
+  if (!list) { list = document.createElement("ul"); list.className = "upload-list"; wrap.appendChild(list); }
+  list.setAttribute("aria-live", "polite");
+  const maxMb = +(wrap.dataset.maxMb || 5);
+  const maxFiles = +(wrap.dataset.maxFiles || (input.multiple ? 10 : 1));
+  const round = wrap.hasAttribute("data-round");
+  const accept = (input.accept || "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
+  const okType = (f) => !accept.length || accept.some((a) => (a.startsWith(".") ? f.name.toLowerCase().endsWith(a) : a.endsWith("/*") ? f.type.startsWith(a.slice(0, -1)) : f.type === a));
+  let files = [];
+  const rows = new Map();
+  let errEl = null;
+  const say = (msg) => {
+    if (!msg) { errEl?.remove(); errEl = null; return; }
+    if (!errEl) { errEl = document.createElement("small"); errEl.className = "err"; errEl.setAttribute("role", "alert"); wrap.insertBefore(errEl, list); }
+    errEl.textContent = msg;
+  };
+  const writeInput = () => {
+    try { const dt = new DataTransfer(); files.forEach((f) => dt.items.add(f)); input.files = dt.files; } catch (e) { /* browser lama: nilai input tetap pilihan terakhir */ }
+    wrap.classList.toggle("full", input.multiple && files.length >= maxFiles);
+    drop.classList.toggle("has", files.length > 0);
+    wrap.classList.toggle("single", !input.multiple);
+    emit(wrap, "fy:files", { files: [...files] });
+  };
+  const remove = (f) => {
+    files = files.filter((x) => x !== f);
+    const li = rows.get(f);
+    const next = li?.nextElementSibling?.querySelector("button") || li?.previousElementSibling?.querySelector("button");
+    if (li?._url) URL.revokeObjectURL(li._url);
+    li?.remove(); rows.delete(f);
+    say("");
+    writeInput();
+    (next || input).focus();
+  };
+  const row = (f) => {
+    const li = document.createElement("li");
+    li.className = "up-item";
+    let thumb;
+    if (f.type.startsWith("image/")) {
+      thumb = document.createElement("img");
+      li._url = URL.createObjectURL(f);
+      thumb.src = li._url; thumb.alt = ""; thumb.width = 52; thumb.height = 52;
+    } else {
+      thumb = document.createElement("span");
+      thumb.textContent = (f.name.split(".").pop() || "file").slice(0, 4);
+      thumb.setAttribute("aria-hidden", "true");
+    }
+    thumb.className = "up-thumb" + (round ? " round" : "");
+    const meta = document.createElement("div");
+    meta.className = "up-meta";
+    const name = document.createElement("b"); name.textContent = f.name;
+    const info = document.createElement("small"); info.textContent = fmtSize(f.size);
+    meta.append(name, info);
+    const del = document.createElement("button");
+    del.type = "button"; del.className = "icon-btn";
+    del.setAttribute("aria-label", `Hapus ${f.name}`);
+    del.innerHTML = ICON.x;
+    del.addEventListener("click", () => remove(f));
+    li.append(thumb, meta, del);
+    li._info = info; li._meta = meta;
+    return li;
+  };
+  const add = (incoming) => {
+    const rejected = [];
+    for (const f of incoming) {
+      if (!okType(f)) { rejected.push(`${f.name}: jenis file tidak didukung`); continue; }
+      if (f.size > maxMb * 1024 * 1024) { rejected.push(`${f.name}: lebih dari ${maxMb} MB`); continue; }
+      if (!input.multiple) { files.forEach((x) => { rows.get(x)?.remove(); rows.delete(x); }); files = []; }
+      if (files.length >= maxFiles) { rejected.push(`Maksimal ${maxFiles} file`); break; }
+      if (files.some((x) => x.name === f.name && x.size === f.size)) continue;
+      files.push(f);
+      const li = row(f); rows.set(f, li); list.appendChild(li);
+    }
+    say(rejected.length ? rejected.join(". ") + "." : "");
+    writeInput();
+  };
+  input.addEventListener("change", () => { const picked = [...input.files]; add(picked.filter((f) => !files.includes(f))); });
+  ["dragenter", "dragover"].forEach((t) => wrap.addEventListener(t, (e) => { if (![...(e.dataTransfer?.types || [])].includes("Files")) return; e.preventDefault(); wrap.classList.add("over"); }));
+  ["dragleave", "dragend"].forEach((t) => wrap.addEventListener(t, (e) => { if (!wrap.contains(e.relatedTarget)) wrap.classList.remove("over"); }));
+  wrap.addEventListener("drop", (e) => { e.preventDefault(); wrap.classList.remove("over"); add([...e.dataTransfer.files]); });
+  const progressEl = (f) => {
+    const li = rows.get(f); if (!li) return null;
+    let p = $(".progress", li);
+    if (!p) { p = document.createElement("div"); p.className = "progress"; p.setAttribute("role", "progressbar"); p.setAttribute("aria-label", `Mengunggah ${f.name}`); p.innerHTML = "<span></span>"; li._meta.appendChild(p); }
+    return p;
+  };
+  wrap._fyUpload = {
+    files: () => [...files],
+    progress(f, v) { const p = progressEl(f); if (!p) return; p.style.setProperty("--v", v); p.setAttribute("aria-valuenow", String(Math.round(v * 100))); },
+    done(f) { const li = rows.get(f); if (!li) return; $(".progress", li)?.remove(); li._info.textContent = `${fmtSize(f.size)} · terunggah`; },
+    fail(f, msg = "Gagal diunggah") { const li = rows.get(f); if (!li) return; $(".progress", li)?.remove(); li.classList.add("error"); li._info.textContent = msg; },
+    clear() { [...files].forEach(remove); },
+  };
+}
+
+/* =========================================================
+   CHAT ([data-chat])
+   - .convo[data-thread="id"] membuka <section class="thread" id="id">. Di HP isi obrolan jadi layar penuh
+     dan masuk riwayat browser, jadi tombol back Android/gestur kembali menutupnya.
+   - form.composer: textarea tumbuh sendiri, Enter kirim (Shift+Enter baris baru, di layar sentuh Enter = baris baru),
+     event fy:send { text, thread }. Tambah pesan: el._fyChat.add(threadId, { text, me, time })
+   ========================================================= */
+const CHECKS = '<svg class="read" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 13l4 4 8-9"/><path d="M10 15l2 2 8-9"/></svg>';
+function initChat(chat) {
+  if (!once(chat, "_fyChat")) return;
+  const wide = matchMedia("(min-width: 900px)");
+  const convos = $$(".convo[data-thread]", chat);
+  const threads = $$(".thread", chat);
+  const scrollEnd = (t) => { const m = $(".msgs", t); if (m) m.scrollTop = m.scrollHeight; };
+  let current = null;
+  const show = (tid, push = true) => {
+    const t = document.getElementById(tid);
+    if (!t) return;
+    threads.forEach((x) => (x.hidden = x !== t));
+    convos.forEach((c) => {
+      const on = c.dataset.thread === tid;
+      c.setAttribute("aria-current", String(on));
+      if (on) { c.classList.remove("unread"); $(".badge", c)?.remove(); }
+    });
+    current = tid;
+    if (!wide.matches) {
+      chat.classList.add("thread-open");
+      if (push && history.state?.fyThread !== tid) history.pushState({ fyThread: tid }, "", "#" + tid);
+      $(".back", t)?.focus({ preventScroll: true });
+    }
+    scrollEnd(t);
+    emit(chat, "fy:thread", { thread: tid });
+  };
+  const close = () => {
+    chat.classList.remove("thread-open");
+    const c = convos.find((x) => x.dataset.thread === current);
+    c?.focus({ preventScroll: true });
+  };
+  convos.forEach((c) => c.addEventListener("click", () => show(c.dataset.thread)));
+  $$(".thread .back", chat).forEach((b) => b.addEventListener("click", () => { if (history.state?.fyThread) history.back(); else close(); }));
+  addEventListener("popstate", () => { if (chat.classList.contains("thread-open") && !history.state?.fyThread) close(); });
+  chat.addEventListener("keydown", (e) => { if (e.key === "Escape" && chat.classList.contains("thread-open") && !e.target.closest("dialog, .menu")) { e.preventDefault(); history.state?.fyThread ? history.back() : close(); } });
+  wide.addEventListener("change", () => { if (wide.matches) chat.classList.remove("thread-open"); });
+  // Awal: di layar lebar buka obrolan yang aria-current (atau pertama); di HP tampilkan daftar
+  const first = convos.find((c) => c.getAttribute("aria-current") === "true") || convos[0];
+  if (first) { threads.forEach((x) => (x.hidden = x.id !== first.dataset.thread)); current = first.dataset.thread; if (wide.matches) show(current, false); }
+  if (location.hash && document.getElementById(location.hash.slice(1))?.classList.contains("thread")) show(location.hash.slice(1), false);
+
+  const now = () => new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }).replace(":", ".");
+  const add = (tid, { text, me = true, time = now() }) => {
+    const t = document.getElementById(tid);
+    const msgs = t && $(".msgs", t);
+    if (!msgs) return;
+    const m = document.createElement("div");
+    m.className = "msg " + (me ? "me" : "them");
+    const p = document.createElement("p"); p.textContent = text;
+    const tm = document.createElement("time"); tm.textContent = time;
+    if (me) tm.insertAdjacentHTML("beforeend", CHECKS.replace('class="read"', 'class="sent"'));
+    m.append(p, tm);
+    const typing = $(".typing", msgs);
+    msgs.insertBefore(m, typing || null);
+    scrollEnd(t);
+    const c = convos.find((x) => x.dataset.thread === tid);
+    const prev = c && $(".convo-txt span", c);
+    if (prev) prev.textContent = (me ? "Kamu: " : "") + text;
+    const ct = c && $(".convo-meta time", c);
+    if (ct) ct.textContent = time;
+    return m;
+  };
+  $$("form.composer", chat).forEach((f) => {
+    const ta = $("textarea", f);
+    const send = $(".send", f);
+    const grow = () => { ta.style.height = "auto"; ta.style.height = Math.min(ta.scrollHeight + 4, 140) + "px"; if (send) send.disabled = !ta.value.trim(); };
+    ta.addEventListener("input", grow);
+    grow();
+    ta.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.shiftKey && !e.isComposing && !matchMedia("(pointer: coarse)").matches) { e.preventDefault(); f.requestSubmit(); }
+    });
+    f.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = ta.value.trim();
+      if (!text) return;
+      const tid = f.closest(".thread")?.id;
+      const ev = new CustomEvent("fy:send", { bubbles: true, cancelable: true, detail: { text, thread: tid } });
+      f.dispatchEvent(ev);
+      if (!ev.defaultPrevented) add(tid, { text }); // panggil e.preventDefault() kalau mau menambah pesan sendiri setelah server menjawab
+      ta.value = ""; grow(); ta.focus();
+    });
+  });
+  chat._fyChat = { open: show, close, add };
+}
+
+/* =========================================================
+   TAMBAH KE KALENDER ([data-ics]) dan BAGIKAN ([data-share])
+   <button data-ics data-title=".." data-start="2026-10-25T09:00:00+07:00" data-end="..." data-location=".." data-details="..">
+     → mengunduh file .ics (bisa dibuka Google Calendar, Kalender iPhone, Outlook)
+   <button data-share data-title=".." data-url="..">  → menu bagikan bawaan HP, atau salin tautan di laptop
+   ========================================================= */
+const icsDate = (s) => new Date(s).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+const icsText = (s = "") => s.replace(/\\/g, "\\\\").replace(/([,;])/g, "\\$1").replace(/\n/g, "\\n");
+function initIcs(btn) {
+  if (!once(btn, "_fyIcs")) return;
+  btn.addEventListener("click", () => {
+    const d = btn.dataset;
+    const ics = [
+      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//FUSIONIFY UI//ID", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
+      "BEGIN:VEVENT",
+      `UID:${Date.now()}-${Math.random().toString(36).slice(2)}@fusionify-ui`,
+      `DTSTAMP:${icsDate(new Date().toISOString())}`,
+      `DTSTART:${icsDate(d.start)}`, `DTEND:${icsDate(d.end || d.start)}`,
+      `SUMMARY:${icsText(d.title)}`, d.location ? `LOCATION:${icsText(d.location)}` : "", d.details ? `DESCRIPTION:${icsText(d.details)}` : "",
+      d.url ? `URL:${d.url}` : "",
+      "END:VEVENT", "END:VCALENDAR",
+    ].filter(Boolean).join("\r\n");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
+    a.download = (d.file || d.title || "acara").replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "-").toLowerCase() + ".ics";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    emit(btn, "fy:ics", {});
+  });
+}
+function initShare(btn) {
+  if (!once(btn, "_fyShare")) return;
+  btn.addEventListener("click", async () => {
+    const url = btn.dataset.url || location.href;
+    const title = btn.dataset.title || document.title;
+    if (navigator.share && matchMedia("(pointer: coarse)").matches) {
+      try { await navigator.share({ title, url }); return; } catch (e) { if (e.name === "AbortError") return; }
+    }
+    try { await navigator.clipboard.writeText(url); snackbar(btn.dataset.copied || "Tautan disalin"); }
+    catch (e) { snackbar("Salin tautan ini: " + url); }
+  });
+}
+
+/* =========================================================
    INIT
    ========================================================= */
 export function initControls(root = document) {
@@ -682,6 +1040,14 @@ export function initControls(root = document) {
   $$("[data-datepicker]", root).forEach(initDatepicker);
   $$("[data-timepicker]", root).forEach(initTimepicker);
 
+  /* ---------- OTP, upload, hitung mundur ---------- */
+  $$("[data-otp]", root).forEach(initOtp);
+  $$("[data-upload]", root).forEach(initUpload);
+  $$("[data-countdown]", root).forEach(initCountdown);
+  $$("[data-chat]", root).forEach(initChat);
+  $$("[data-ics]", root).forEach(initIcs);
+  $$("[data-share]", root).forEach(initShare);
+
   /* ---------- Snackbar deklaratif ---------- */
   $$("[data-snackbar]", root).forEach((b) => {
     if (!once(b, "_fySb")) return;
@@ -696,5 +1062,6 @@ export function initControls(root = document) {
   return api;
 }
 
-const api = { snackbar, openDialog, closeDialog, closePopup: closePop, init: initControls };
+const api = { snackbar, openDialog, closeDialog, otpError, closePopup: closePop, init: initControls };
 export { openDialog, closeDialog };
+// otpError(el, pesan) diekspor di atas

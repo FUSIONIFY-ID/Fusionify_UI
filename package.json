@@ -1,6 +1,6 @@
 {
   "name": "@fusionify/ui",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "private": true,
   "description": "Sistem desain FUSIONIFY: token, komponen CSS, gerak, segel, font, logo, dan maskot. Sumber: fusionify.id.",
   "type": "module",

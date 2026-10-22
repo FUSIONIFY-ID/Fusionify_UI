@@ -459,3 +459,56 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 
 /* Label kolom yang memakai <label for> (mis. picker), selaras dengan .field > span */
 .field > label:not(.check):first-child { font-weight: 700; font-size: 15px; }
+
+/* =========================================================
+   OTP · kode verifikasi per kotak
+   <div class="otp" data-otp><input name="kode" inputmode="numeric" maxlength="6" autocomplete="one-time-code" aria-label="Kode verifikasi 6 digit"></div>
+   Tanpa JS tetap satu kolom biasa. Dengan JS jadi 6 kotak; tempel kode atau isi otomatis dari SMS tetap jalan.
+   ========================================================= */
+.otp { position: relative; display: flex; gap: clamp(6px, 2vw, 10px); min-width: 0; max-width: 100%; }
+.otp > input:only-child { width: 100%; max-width: 260px; height: 56px; padding: 0 16px; border-radius: 14px; border: 2px solid var(--edge); background: var(--field); color: var(--ink); font: 700 24px var(--f-num); letter-spacing: 0.3em; }
+.otp-box { flex: 1 1 0; min-width: 0; max-width: 54px; height: 60px; padding: 0; text-align: center; border-radius: 14px; border: 2px solid var(--edge); background: var(--field); color: var(--ink); font: 700 26px var(--f-num); font-variant-numeric: tabular-nums; box-shadow: var(--shadow-pop); caret-color: var(--blue); transition: transform 0.2s var(--spring), border-color 0.2s; }
+.otp-box:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.3), var(--shadow-pop); }
+.otp-box.filled { background: var(--surface); }
+.otp .otp-sep { flex: none; align-self: center; width: 10px; height: 2px; border-radius: 2px; background: var(--line); }
+.otp[aria-invalid="true"] .otp-box { border-color: var(--danger); background: var(--danger-bg); }
+.otp.shake { animation: fy-shake 0.4s var(--ease); }
+@keyframes fy-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+.otp.done .otp-box { border-color: var(--go); }
+.otp-store { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.resend { font-size: 15px; color: var(--ink-2); }
+.resend button { padding: 8px 2px; border: 0; background: none; font: inherit; font-weight: 700; color: var(--text-blue-deep); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.resend button:disabled { color: var(--ink-3); text-decoration: none; cursor: default; }
+
+/* =========================================================
+   UPLOAD · seret-lepas file, pratinjau, hapus, progres
+   <div class="upload" data-upload data-max-mb="5" data-max-files="3">
+     <input type="file" id="up" name="berkas" accept="image/*,.pdf" multiple>
+     <label class="drop" for="up">..ikon.. <b>Pilih file</b> atau seret ke sini <small>JPG, PNG, PDF · maks 5 MB</small></label>
+     <ul class="upload-list"></ul>
+   </div>
+   ========================================================= */
+.upload { position: relative; display: grid; gap: 12px; }
+.upload > input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.drop { display: grid; justify-items: center; gap: 6px; padding: 26px 18px; border-radius: var(--r-l); border: 2px dashed var(--blue-light); background: var(--surface); color: var(--ink-2); text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.25s var(--spring); }
+.drop svg { width: 34px; height: 34px; color: var(--text-blue); }
+.drop b { color: var(--text-blue-deep); text-decoration: underline; text-underline-offset: 3px; }
+.drop small { font-size: 13.5px; color: var(--ink-3); }
+.drop:hover { background: var(--surface-2); }
+.upload > input:focus-visible + .drop { outline: 3px solid var(--blue-light); outline-offset: 3px; }
+.upload.over .drop { border-style: solid; border-color: var(--blue); background: var(--surface-2); transform: scale(1.01); }
+.upload.full .drop { display: none; }
+.upload.single .drop.has { display: none; }
+.upload-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.upload-list:empty { display: none; }
+.up-item { position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 8px 10px 10px; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-pop); }
+.up-thumb { width: 52px; height: 52px; border-radius: 12px; object-fit: cover; background: var(--surface); display: grid; place-items: center; color: var(--text-blue); font: 700 12px var(--f-num); letter-spacing: 0.06em; text-transform: uppercase; }
+.up-thumb.round { border-radius: 50%; }
+.up-meta { min-width: 0; display: grid; gap: 2px; }
+.up-meta b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 15px; }
+.up-meta small { font-size: 13px; color: var(--ink-3); }
+.up-meta .progress { height: 6px; margin-top: 4px; }
+.up-item.error { border-color: var(--danger); }
+.up-item.error .up-meta small { color: var(--danger); font-weight: 700; }
+.up-item .icon-btn { width: 44px; height: 44px; background: none; }
+.upload .err { color: var(--danger); font-weight: 700; font-size: 14px; }

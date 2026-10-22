@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FUSIONIFY UI · warna gelap. Dibuat otomatis dari css/tokens.css oleh scripts/build-tokens.mjs. Jangan diedit manual.
+     Android otomatis memakai values-night/ saat mode gelap. Kotlin: R.color.fy_blue · Java: R.color.fy_blue · XML: @color/fy_blue -->
+<resources>
+    <color name="fy_blue">#0D6CD7</color>
+    <color name="fy_blue_deep">#0261CD</color>
+    <color name="fy_blue_light">#539DE9</color>
+    <color name="fy_ink">#EAF3FF</color>
+    <color name="fy_ink_2">#C3D4EA</color>
+    <color name="fy_ink_3">#9DB2CF</color>
+    <color name="fy_surface">#0C1A33</color>
+    <color name="fy_paper">#071022</color>
+    <color name="fy_white">#0F2040</color>
+    <color name="fy_line">#1F3459</color>
+    <color name="fy_night">#071022</color>
+    <color name="fy_go">#7FE0A6</color>
+    <color name="fy_go_bg">#0F3324</color>
+    <color name="fy_beta">#FFD27A</color>
+    <color name="fy_beta_bg">#3A2A08</color>
+    <color name="fy_wip">#FFB98A</color>
+    <color name="fy_wip_bg">#3C220E</color>
+    <color name="fy_plan">#A9D0FF</color>
+    <color name="fy_plan_bg">#10264A</color>
+    <color name="fy_eos">#B5C0D0</color>
+    <color name="fy_eos_bg">#1C2638</color>
+    <color name="fy_card">#10203F</color>
+    <color name="fy_field">#0B1830</color>
+    <color name="fy_surface_2">#17305A</color>
+    <color name="fy_edge">#2E5592</color>
+    <color name="fy_edge_shadow">#02060F</color>
+    <color name="fy_text_blue">#8CC0FF</color>
+    <color name="fy_text_blue_deep">#A9D0FF</color>
+    <color name="fy_inverse_bg">#EAF3FF</color>
+    <color name="fy_inverse_fg">#071022</color>
+    <color name="fy_inverse_accent">#0261CD</color>
+    <color name="fy_nav_glass">#D10A162C</color>
+    <color name="fy_hero_glow">#0F2A55</color>
+    <color name="fy_seal_tint">#15315C</color>
+    <color name="fy_danger">#FF9BA1</color>
+    <color name="fy_danger_bg">#3D1418</color>
+    <color name="fy_placeholder">#8597B3</color>
+    <color name="fy_footer_top">#1F3459</color>
+</resources>

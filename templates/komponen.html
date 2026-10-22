@@ -73,7 +73,7 @@
     <h1 class="h-sec">Semua kontrol, satu gaya<span class="dot">.</span></h1>
     <p>Komponen untuk web, dashboard, dan aplikasi HP (web, PWA, atau WebView). Semuanya bergaya stiker FUSIONIFY, aman di mode gelap, target sentuhnya minimal 44px, dan menghormati area aman notch.</p>
     <nav class="chip-set scroll kat-toc" aria-label="Lompat ke bagian">
-      <a class="chip-btn" href="#tombol">Tombol</a><a class="chip-btn" href="#fab">FAB</a><a class="chip-btn" href="#chip">Chip</a><a class="chip-btn" href="#pilih">Tanggal & jam</a><a class="chip-btn" href="#slider">Slider</a><a class="chip-btn" href="#loading">Loading</a><a class="chip-btn" href="#list">List</a><a class="chip-btn" href="#nav">Navigasi HP</a><a class="chip-btn" href="#sheet">Sheet & dialog</a><a class="chip-btn" href="#carousel">Carousel</a><a class="chip-btn" href="#cari">Pencarian</a><a class="chip-btn" href="#lain">Tooltip, badge, snackbar</a>
+      <a class="chip-btn" href="#tombol">Tombol</a><a class="chip-btn" href="#fab">FAB</a><a class="chip-btn" href="#chip">Chip</a><a class="chip-btn" href="#pilih">Tanggal & jam</a><a class="chip-btn" href="#otp">OTP</a><a class="chip-btn" href="#upload">Upload</a><a class="chip-btn" href="#slider">Slider</a><a class="chip-btn" href="#loading">Loading</a><a class="chip-btn" href="#list">List</a><a class="chip-btn" href="#nav">Navigasi HP</a><a class="chip-btn" href="#sheet">Sheet & dialog</a><a class="chip-btn" href="#carousel">Carousel</a><a class="chip-btn" href="#cari">Pencarian</a><a class="chip-btn" href="#lain">Tooltip, badge, snackbar</a>
     </nav>
   </div>
 
@@ -160,6 +160,45 @@
             <div class="picker" data-datepicker data-range><input class="input" id="k-range" readonly placeholder="Pilih rentang"><button type="button" class="picker-btn" aria-label="Buka kalender untuk rentang menginap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></button><input type="hidden" name="rentang"></div></div>
         <div class="field"><label for="k-jam">Jam mulai</label>
             <div class="picker" data-timepicker data-step="5"><input class="input" id="k-jam" readonly placeholder="Pilih jam"><button type="button" class="picker-btn" aria-label="Buka pilihan jam untuk jam mulai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button><input type="hidden" name="jam"></div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="otp" aria-labelledby="h-otp">
+      <div class="panel-head"><h2 id="h-otp">Kode OTP</h2></div>
+      <p class="lead2">Enam kotak untuk kode verifikasi. Tempel kode atau isi otomatis dari SMS langsung terbagi ke semua kotak. Tanpa JavaScript tetap jadi satu kolom biasa. Coba ketik <code>123456</code> untuk melihat keadaan salah.</p>
+      <div class="cols">
+        <div class="field">
+          <span id="otp-l">Kode verifikasi</span>
+          <div class="otp" data-otp id="k-otp" aria-labelledby="otp-l"><input name="kode" inputmode="numeric" maxlength="6" autocomplete="one-time-code" aria-label="Kode verifikasi 6 digit"></div>
+          <p class="resend">Belum dapat kode? <button type="button" data-countdown="30" data-label="Kirim ulang">Kirim ulang</button></p>
+        </div>
+        <div class="field">
+          <span id="otp-l2">Kode undangan (huruf dan angka)</span>
+          <div class="otp" data-otp data-split="0" aria-labelledby="otp-l2"><input name="undangan" inputmode="text" maxlength="5" autocomplete="off" aria-label="Kode undangan 5 karakter"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="upload" aria-labelledby="h-upload">
+      <div class="panel-head"><h2 id="h-upload">Upload file</h2></div>
+      <p class="lead2">Pilih atau seret file. Jenis dan ukuran dicek sebelum dikirim, foto langsung ada pratinjaunya, dan file tetap masuk ke form biasa.</p>
+      <div class="cols">
+        <div class="field">
+          <span id="up-l1">Foto profil</span>
+          <div class="upload" data-upload data-max-mb="2" data-round>
+            <input type="file" id="k-foto" name="foto" accept="image/jpeg,image/png,image/webp" aria-labelledby="up-l1">
+            <label class="drop" for="k-foto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span><b>Pilih foto</b> atau seret ke sini</span><small>JPG, PNG, WebP · maks 2 MB</small></label>
+            <ul class="upload-list"></ul>
+          </div>
+        </div>
+        <div class="field">
+          <span id="up-l2">Dokumen verifikasi</span>
+          <div class="upload" data-upload data-max-mb="5" data-max-files="3" id="k-dok">
+            <input type="file" id="k-berkas" name="berkas" accept="image/*,.pdf" multiple aria-labelledby="up-l2">
+            <label class="drop" for="k-berkas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg><span><b>Pilih file</b> atau seret ke sini</span><small>Gambar atau PDF · maks 5 MB · sampai 3 file</small></label>
+            <ul class="upload-list"></ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -360,6 +399,11 @@
 <script type="module">
   import { initApp } from "../js/app.js";
   window.fy = initApp();
+  // Contoh: kode 123456 dianggap salah. Di proyek nyata, cek ke server.
+  document.getElementById("k-otp")?.addEventListener("fy:complete", (e) => {
+    if (e.detail.value === "123456") window.fy.otpError(e.currentTarget, "Kodenya belum cocok. Coba cek lagi SMS-nya.");
+    else window.fy.snackbar("Kode benar, akun terverifikasi");
+  });
 </script>
 </body>
 </html>

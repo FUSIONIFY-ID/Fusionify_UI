@@ -16,7 +16,7 @@
 // - Toast (pakai markup .toast dari snippets/body-parts.html)
 
 import { initTheme } from "./theme.js";
-import { initControls, snackbar } from "./controls.js";
+import { initControls, snackbar, otpError } from "./controls.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -141,5 +141,5 @@ export function initApp() {
   };
   $$("[data-toast-msg]").forEach((b) => b.addEventListener("click", () => toast(b.dataset.toastMsg)));
 
-  return { toast, snackbar, setSide };
+  return { toast, snackbar, otpError, setSide };
 }

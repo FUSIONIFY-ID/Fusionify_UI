@@ -32,7 +32,8 @@ CSS tidak bisa dipakai di sana. Yang dibawa adalah **tokennya**, lalu komponen d
 | `tokens.json` | Semua token dalam satu file (warna terang dan gelap, radius, huruf, gerak, ukuran sentuh) |
 | `flutter/fusionify_tokens.dart` | `FyColors` (ThemeExtension), `fyTheme(Brightness)`, `fySticker()`, `FyRadius`, `FyFonts` |
 | `swift/FusionifyTokens.swift` | `Fy.Color.*` (otomatis terang/gelap), `Fy.Font`, `.fySticker()` |
-| `android/FusionifyTokens.kt` | `FyTheme { }`, `FyTheme.colors`, `FyRadius`, `FySticker` |
+| `android/FusionifyTokens.kt` | Jetpack Compose: `FyTheme { }`, `FyTheme.colors`, `FyRadius`, `FySticker` |
+| `android/res/` | **Android Kotlin/Java dengan layout XML** (seperti aplikasi VPN): warna terang + `values-night` gelap, ukuran, huruf, drawable stiker, tema `Theme.Fusionify` |
 | `react-native/fusionify-tokens.ts` | `fy.color.light/dark`, `font`, `sticker()` |
 | `fonts-ttf/` | Huruf versi TTF statis untuk aplikasi (OFL) |
 
@@ -69,7 +70,21 @@ flutter:
 
 iOS: masukkan file TTF ke target, lalu daftarkan di `Info.plist` pada kunci `UIAppFonts` (Fonts provided by application).
 
-Android: salin ke `res/font/` dengan nama huruf kecil dan garis bawah (`afacadflux_extrabold.ttf`, `sansation_regular.ttf`, dst.).
+Android: salin isi `tokens/android/res/` ke `app/src/main/res/` (sudah termasuk huruf dengan nama huruf kecil dan font family `@font/fy_body`, `fy_head`, `fy_hand`, `fy_num`).
+
+### Android Kotlin/Java dengan XML (mis. aplikasi VPN)
+
+1. Salin `tokens/android/res/` ke `app/src/main/res/`. Kalau nama file bentrok, semua file kit berawalan `fy_`.
+2. Pastikan ada `implementation("com.google.android.material:material:1.12.0")`, lalu di `AndroidManifest.xml`: `android:theme="@style/Theme.Fusionify"`.
+3. Mode gelap otomatis lewat `values-night/`. Untuk memaksa: `AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)`.
+4. Pakai di layout:
+   ```xml
+   <TextView style="@style/Fy.Title" android:textSize="32sp" android:text="Halo" />
+   <Button style="@style/Fy.Button" android:text="Hubungkan" />
+   <LinearLayout style="@style/Fy.Card" ... />
+   ```
+   Di kode: Kotlin `ContextCompat.getColor(this, R.color.fy_blue)`, Java `ContextCompat.getColor(this, R.color.fy_blue)`.
+5. Kartu dan tombol stiker memakai drawable berlapis (`fy_sticker_card`, `fy_sticker_button`, `fy_sticker_button_ghost`, `fy_sticker_field`), tanpa `elevation`.
 
 ### Aturan yang tetap berlaku di native
 

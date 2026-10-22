@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FUSIONIFY UI · warna terang. Dibuat otomatis dari css/tokens.css oleh scripts/build-tokens.mjs. Jangan diedit manual.
+     Android otomatis memakai values-night/ saat mode gelap. Kotlin: R.color.fy_blue · Java: R.color.fy_blue · XML: @color/fy_blue -->
+<resources>
+    <color name="fy_blue">#0D6CD7</color>
+    <color name="fy_blue_deep">#0261CD</color>
+    <color name="fy_blue_light">#539DE9</color>
+    <color name="fy_ink">#0B0F1A</color>
+    <color name="fy_ink_2">#3A4458</color>
+    <color name="fy_ink_3">#566175</color>
+    <color name="fy_surface">#EAF4FF</color>
+    <color name="fy_paper">#F7FBFF</color>
+    <color name="fy_white">#FFFFFF</color>
+    <color name="fy_line">#D3E4F7</color>
+    <color name="fy_night">#071022</color>
+    <color name="fy_go">#157F3B</color>
+    <color name="fy_go_bg">#E3F6E9</color>
+    <color name="fy_beta">#9A5B00</color>
+    <color name="fy_beta_bg">#FFF2D8</color>
+    <color name="fy_wip">#8A4A00</color>
+    <color name="fy_wip_bg">#FFE9D6</color>
+    <color name="fy_plan">#0261CD</color>
+    <color name="fy_plan_bg">#EEF7FF</color>
+    <color name="fy_eos">#5B6475</color>
+    <color name="fy_eos_bg">#ECEFF4</color>
+    <color name="fy_card">#FFFFFF</color>
+    <color name="fy_field">#FFFFFF</color>
+    <color name="fy_surface_2">#DCECFF</color>
+    <color name="fy_edge">#0B0F1A</color>
+    <color name="fy_edge_shadow">#0B0F1A</color>
+    <color name="fy_text_blue">#0D6CD7</color>
+    <color name="fy_text_blue_deep">#0261CD</color>
+    <color name="fy_inverse_bg">#0B0F1A</color>
+    <color name="fy_inverse_fg">#FFFFFF</color>
+    <color name="fy_inverse_accent">#8CC0FF</color>
+    <color name="fy_nav_glass">#D1FFFFFF</color>
+    <color name="fy_hero_glow">#DCEDFF</color>
+    <color name="fy_seal_tint">#D8EAFF</color>
+    <color name="fy_danger">#B4232C</color>
+    <color name="fy_danger_bg">#FDE8EA</color>
+    <color name="fy_placeholder">#707A8C</color>
+    <color name="fy_footer_top">#00000000</color>
+</resources>

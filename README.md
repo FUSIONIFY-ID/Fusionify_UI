@@ -76,8 +76,8 @@ Mode gelap otomatis mengikuti sistem. Tambahkan tombol `<button class="icon-btn 
 
 ## Aplikasi HP (web HP, PWA, iOS, Android)
 
-- **Isinya HTML** (PWA, Capacitor, WebView): mulai dari `templates/app-mobile.html` dan tempel `snippets/pwa-head.html`. Semua komponen HP ada: app bar, navigation bar bawah, rail tablet, FAB, bottom sheet, side sheet, carousel, slider, date/time picker, tooltip, snackbar, chip filter, list, skeleton. Katalognya di `templates/komponen.html`.
-- **Native** (Flutter, SwiftUI, Jetpack Compose, React Native): pakai token di `tokens/` beserta huruf TTF. Panduan lengkap di `tokens/README.md`.
+- **Isinya HTML** (PWA, Capacitor, WebView): mulai dari `templates/app-mobile.html` dan tempel `snippets/pwa-head.html`. Semua komponen HP ada: app bar, navigation bar bawah, rail tablet, FAB, bottom sheet, side sheet, carousel, slider, date/time picker, tooltip, snackbar, chip filter, list, skeleton. Katalognya di `templates/komponen.html`. Template siap pakai: `app-mobile.html` (beranda), `chat.html` (pesan), `acara.html` (detail acara), `auth/verifikasi.html` (kode OTP).
+- **Native** (Flutter, SwiftUI, Jetpack Compose, React Native, Android Kotlin/Java dengan XML): pakai token di `tokens/` beserta huruf TTF. File Flutter sudah dicek dengan `flutter analyze` dan `flutter build`. Panduan lengkap di `tokens/README.md`.
 
 ## Dipakai di AI agent mana pun
 

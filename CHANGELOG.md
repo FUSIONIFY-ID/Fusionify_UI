@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.4.0 · 22 Oktober 2026
+
+- **Kode OTP** (`.otp`, `[data-otp]`, `otpError()`): kotak per digit, tempel dan isi otomatis dari SMS langsung terbagi, mode huruf+angka, keadaan salah, plus hitung mundur kirim ulang (`[data-countdown]`). Template baru `auth/verifikasi.html`.
+- **Upload file** (`.upload`, `[data-upload]`): pilih atau seret, cek jenis dan ukuran, pratinjau foto, hapus, progres unggah, file tetap masuk ke form biasa.
+- **Chat** (`templates/chat.html`, `[data-chat]`): daftar obrolan + isi obrolan, di HP layar penuh dan ikut tombol back Android, kolom tulis yang tumbuh sendiri, indikator mengetik, kartu acara di dalam pesan.
+- **Halaman detail acara** (`templates/acara.html`): poster, tambah ke kalender (`[data-ics]`, file .ics asli), buka di Maps, pendaftaran lewat bottom sheet, tiket, bagikan (`[data-share]`).
+- **Android Kotlin/Java dengan XML** (`tokens/android/res/`): warna terang/gelap, ukuran, huruf, drawable stiker, tema `Theme.Fusionify`.
+- Token Flutter sudah dicek dengan `flutter analyze` (tanpa masalah) dan `flutter build web`.
+- `.ev-date` dipindah ke `app.css` supaya bisa dipakai di semua halaman aplikasi.
+
 ## 1.3.0 · 22 Oktober 2026
 
 - **Komponen kontrol lengkap** (`css/controls.css`, `js/controls.js`): button group, split button, FAB, extended FAB, FAB menu, app bar HP, navigation bar bawah, navigation rail, bottom sheet (bisa ditarik), side sheet, modal layar penuh di HP, carousel (tidak berputar sendiri), slider dan slider dua ujung, tooltip, list, chip filter/aksi/input, spinner segel, progress lingkaran dan tanpa angka, skeleton, snackbar dengan tombol aksi, search bar dengan saran, date picker (tunggal dan rentang), time picker, floating toolbar, badge. Dropdown, modal, dan tab dipindah dari `app.css` ke sini supaya bisa dipakai juga di web publik.

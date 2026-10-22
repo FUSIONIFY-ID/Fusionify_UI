@@ -24,20 +24,20 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Lihat **`demo/index.html
 | `css/tokens.css` | Warna, huruf (@font-face), radius, kurva gerak, bayangan |
 | `css/base.css` | Reset, tipografi, `.wrap`, `.kicker`, `.h-hero`, `.h-sec`, `.lead`, `.prose` |
 | `css/components.css` | Tombol, chip status, nav, menu HP, seksi, kartu stiker, statistik, kartu karya, foto bersegel, gelembung maskot, panggung maskot, marquee partner, FAQ, gelombang, footer, toast, kursor, transisi halaman, status reveal, jeda `.idle` |
-| `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment` |
-| `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.progress`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, `.btn.danger`, `.sample-note` |
-| `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar) |
+| `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment`, halaman acara (`.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`) |
+| `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.progress`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, `.btn.danger`, `.sample-note`, chat (`.chat`, `.chat-list`, `.convo`, `.thread`, `.msgs`, `.msg.me/.them`, `.typing`, `.composer`), `.ev-date` |
+| `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar), `.otp` (kode OTP) + `.resend`, `.upload` + `.drop` + `.upload-list` (upload file) |
 | `css/fusionify.css` | Satu file yang mengimpor tokens, base, components, product, controls (tanpa app.css) |
 | `js/motion.js` | `initFusionify()`: smooth scroll, nav, menu HP, kursor, reveal, angka, magnet, salin + toast, transisi halaman, suara, jeda di luar layar |
 | `js/app.js` | `initApp()` untuk halaman aplikasi: tema, sidebar HP, dropdown, modal, tab, tampil/sembunyi password, meter kekuatan password, validasi form (`data-validate`), pilih semua baris, toast. Tanpa GSAP |
-| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. Event: `fy:change`, `fy:remove`, `fy:select` |
+| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. OTP (`[data-otp]`, `otpError()`), hitung mundur kirim ulang (`[data-countdown]`), upload (`[data-upload]`), chat (`[data-chat]`), tambah ke kalender (`[data-ics]`, unduh .ics), bagikan (`[data-share]`). Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:resend` |
 | `js/theme.js` | Mode terang/gelap (`initTheme`, `setTheme`). Dipanggil otomatis oleh `motion.js` dan `app.js` |
 | `js/seal.js` | `seal()` dan `SEAL_PATH`: bentuk segel 12 lekukan |
 | `snippets/head-script.html` | Skrip kecil wajib di `<head>` |
 | `snippets/sprite.html` | Sprite SVG (clip-path segel, simbol segel) setelah `<body>` |
 | `snippets/body-parts.html` | Kursor, toast, tirai transisi sebelum `</body>` |
 | `snippets/pwa-head.html`, `snippets/manifest.webmanifest` | Tambahan `<head>` dan manifest untuk web HP, PWA, dan aplikasi WebView/Capacitor |
-| `tokens/` | Token untuk **aplikasi native**: `tokens.json`, Flutter, SwiftUI, Jetpack Compose, React Native, plus huruf TTF statis. Dibuat dari `css/tokens.css` dengan `node scripts/build-tokens.mjs`. Panduan di `tokens/README.md` |
+| `tokens/` | Token untuk **aplikasi native**: `tokens.json`, Flutter, SwiftUI, Jetpack Compose, React Native, plus resource Android XML (`tokens/android/res/`: warna terang/gelap, ukuran, huruf, drawable stiker, tema) untuk aplikasi Kotlin/Java, dan huruf TTF statis. Dibuat dari `css/tokens.css` dengan `node scripts/build-tokens.mjs`. Panduan di `tokens/README.md` |
 | `fonts/` | Afacad Flux, Sansation, Caveat, Exo 2 (woff2, OFL) |
 | `brand/` | Segel Fi, wordmark (SVG), emblem; `brand/kit/` logo horizontal, vertikal, legacy; `brand/app-icons/` ikon aplikasi (192, 512, maskable, apple-touch-icon) |
 | `mascot/` | Maskot badan penuh, kepala, papan, stiker bot |
@@ -47,10 +47,12 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Lihat **`demo/index.html
 | `CLAUDE.md`, `GEMINI.md`, `QWEN.md`, `.gemini/`, `.qwen/`, `.cursor/rules/`, `.github/copilot-instructions.md`, `.aider.conf.yml` | Penunjuk ke file ini untuk masing-masing AI agent |
 | `templates/landing-produk.html` | Template landing web produk lengkap. Ganti bagian bertanda `GANTI` |
 | `templates/404.html` | Template halaman tidak ditemukan dengan maskot confused |
-| `templates/auth/masuk.html`, `daftar.html`, `lupa-password.html`, `atur-ulang-password.html` | Halaman masuk, daftar, lupa password, atur ulang password. Validasi dan keadaan berhasil sudah jalan; sambungkan ke backend sendiri |
+| `templates/auth/masuk.html`, `daftar.html`, `lupa-password.html`, `atur-ulang-password.html`, `verifikasi.html` | Halaman masuk, daftar, lupa password, atur ulang password, verifikasi kode OTP. Validasi dan keadaan berhasil sudah jalan; sambungkan ke backend sendiri |
 | `templates/dashboard.html` | Dashboard pengguna (ringkasan, grafik, pesanan, aktivitas) |
 | `templates/komponen.html` | Katalog semua komponen kontrol dengan contoh hidup |
 | `templates/app-mobile.html` | Template aplikasi HP: app bar, pencarian, chip filter, carousel, list, FAB, navigation bar bawah (jadi rail di tablet), bottom sheet |
+| `templates/chat.html` | Pesan: daftar obrolan + isi obrolan (HP: layar penuh dan ikut tombol back; layar lebar: berdampingan), kolom tulis, kartu acara di chat |
+| `templates/acara.html` | Halaman detail acara publik: poster, waktu (tambah ke kalender), lokasi (buka di Maps), pendaftaran lewat bottom sheet, tiket, susunan acara, bagikan |
 | `templates/admin.html` | Dashboard admin (KPI, grafik, tabel pengguna + filter + pilih semua + hapus dengan konfirmasi, pengaturan bertab, log) |
 
 ## Cara memakai di proyek baru atau lama
@@ -100,7 +102,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 ## Aplikasi HP (web HP, PWA, iOS, Android)
 
 - Aplikasi yang isinya HTML (PWA, Capacitor, WebView): mulai dari `templates/app-mobile.html`, tempel `snippets/pwa-head.html`, pakai `initApp()` (bukan `initFusionify`).
-- Aplikasi native (Flutter, SwiftUI, Compose, React Native): CSS tidak dipakai. Ambil token dari `tokens/` dan bangun ulang komponennya dengan aturan yang sama. Jangan menulis hex sendiri di kode native.
+- Aplikasi native (Flutter, SwiftUI, Compose, React Native, Android Kotlin/Java dengan XML): CSS tidak dipakai. Ambil token dari `tokens/` dan bangun ulang komponennya dengan aturan yang sama. Jangan menulis hex sendiri di kode native.
 - Target sentuh minimal 44px. Elemen yang menempel di tepi layar wajib memakai `env(safe-area-inset-*)` (komponen kit sudah).
 - Di layar sentuh semua input minimal 16px (sudah di `base.css`) supaya iOS tidak memperbesar halaman saat mengetik.
 - Satu FAB per layar. Navigation bar bawah 3 sampai 5 tujuan; lebih dari itu pakai drawer.
@@ -281,6 +283,13 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Bottom sheet dengan pegangan di atas, bisa ditarik ke bawah untuk menutup. Picker tanggal/jam muncul dari bawah di HP dan sebagai popover di layar lebar.
 - Loading memakai segel FUSIONIFY yang berputar (`.spinner`), skeleton biru muda untuk isi yang sedang dimuat.
 - Snackbar berlatar gelap (terang di mode gelap) dengan tombol aksi seperti "Batalkan".
+- Kode OTP: kotak-kotak bergaya stiker berhuruf Exo 2, terbagi 3-3, bergetar pelan kalau salah. Upload: area biru muda bergaris putus-putus, file tampil sebagai kartu stiker dengan pratinjau.
+- Chat: gelembung pesan bergaya stiker; pesan sendiri biru di kanan, pesan orang lain kartu di kiri. Indikator mengetik tiga titik.
+- Halaman acara: poster persegi bergaya stiker, tanggal dalam ubin kecil, kartu pendaftaran dengan kuota, bar daftar menempel di bawah layar HP.
+- Kode OTP: kotak per digit bergaya stiker, dibagi 3-3 dengan tanda pisah; salah = garis merah dan getar pendek (mati saat kurangi gerakan).
+- Upload: area bergaris putus-putus biru muda dengan ikon biru; berubah biru saat file diseret di atasnya. Foto tampil sebagai pratinjau kecil.
+- Chat: gelembung stiker, pesan sendiri biru di kanan, pesan orang lain kartu di kiri. Di HP isi obrolan layar penuh dan tombol kembali menutupnya. Stiker maskot boleh dikirim sebagai pesan.
+- Detail acara: poster biru dengan maskot dan segel, tanggal di kotak `.ev-date`, pendaftaran lewat bottom sheet, tiket berkode setelah terdaftar. Di HP tombol daftar menempel di bawah.
 - Aplikasi native memakai token dari `tokens/` dengan tampilan yang sama: garis 2px, bayangan pejal tanpa blur, huruf yang sama.
 
 ## Layout
@@ -1034,6 +1043,74 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .segment input:checked + span { background: var(--blue); color: #fff; }
 .segment input:focus-visible + span { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 
+/* =========================================================
+   HALAMAN ACARA (templates/acara.html) · ala halaman acara publik
+   HP: satu kolom + bar daftar menempel di bawah. Mulai 900px: poster dan penyelenggara di kiri, detail di kanan.
+   ========================================================= */
+.event-top { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 10px; min-height: 64px; padding: env(safe-area-inset-top) max(var(--gut), env(safe-area-inset-right)) 0 max(var(--gut), env(safe-area-inset-left)); background: var(--nav-glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+.event-top .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-family: var(--f-head); font-weight: 800; font-size: 20px; }
+.event-top .spacer { flex: 1; }
+.event-top .lnk { display: none; padding: 10px 6px; color: var(--ink-2); font-weight: 700; font-size: 15px; text-decoration: none; }
+.event-top .lnk:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+@media (min-width: 700px) { .event-top .lnk { display: inline-block; } }
+.event { display: grid; grid-template-areas: "cover" "main" "meta"; gap: 28px; padding-block: 24px 48px; }
+.event-cover { grid-area: cover; }
+.event-main { grid-area: main; }
+.event-meta { grid-area: meta; }
+.event-meta, .event-main { display: grid; align-content: start; gap: 22px; min-width: 0; }
+.event-cover { position: relative; overflow: hidden; aspect-ratio: 1; border-radius: var(--r-l); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); background: var(--blue); }
+.event-cover > img.photo { width: 100%; height: 100%; object-fit: cover; }
+.poster { position: absolute; inset: 0; display: grid; align-content: start; gap: 12px; padding: 22px; color: #fff; }
+.poster .seal-deco { position: absolute; right: -18%; top: -14%; width: 75%; height: auto; color: rgba(255, 255, 255, 0.14); }
+.poster .k { position: relative; font-family: var(--f-num); font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #f2f8ff; }
+.poster b { position: relative; max-width: 62%; font-family: var(--f-head); font-weight: 800; font-size: clamp(34px, 9vw, 52px); line-height: 0.95; letter-spacing: -0.03em; }
+.poster img { position: absolute; right: 2%; bottom: 0; width: 44%; height: auto; }
+.event-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.event h1 { font-size: clamp(36px, 7vw, 56px); line-height: 0.98; letter-spacing: -0.03em; }
+.event-facts { display: grid; gap: 16px; }
+.fact { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 14px; }
+.fact .ico-tile { display: grid; place-items: center; width: 52px; height: 56px; border-radius: 14px; border: 2px solid var(--edge); background: var(--card); color: var(--text-blue); box-shadow: 0 3px 0 var(--edge-shadow); }
+.fact .ico-tile svg { width: 24px; height: 24px; }
+.fact b { display: block; font-size: 17px; }
+.fact span, .fact a { font-size: 15px; color: var(--ink-2); }
+.fact a { color: var(--text-blue-deep); font-weight: 700; }
+.fact .actions { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 2px; }
+.fact .actions button { padding: 4px 0; border: 0; background: none; font: inherit; font-size: 15px; font-weight: 700; color: var(--text-blue-deep); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.reg { display: grid; gap: 14px; padding: 20px; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); }
+.reg-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.reg-head h2 { font-size: 22px; }
+.reg-head .price { font-family: var(--f-num); font-weight: 800; font-size: 20px; color: var(--text-blue); }
+.reg p { margin: 0; font-size: 15px; color: var(--ink-2); }
+.reg .quota { display: grid; gap: 6px; font-size: 14px; color: var(--ink-2); }
+.reg .quota b { color: var(--ink); }
+.reg-done { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 14px; }
+.reg-done[hidden] { display: none; }
+.reg-done img { width: 72px; height: auto; }
+.reg-done h3 { font-size: 22px; }
+.ticket { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; padding: 6px 12px; border-radius: 10px; border: 2px dashed var(--blue-light); background: var(--surface); font-family: var(--f-num); font-weight: 700; letter-spacing: 0.12em; color: var(--ink); }
+.event-sec { display: grid; gap: 12px; }
+.event-sec h2 { font-size: 15px; font-family: var(--f-num); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.agenda { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.agenda li { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; align-items: baseline; }
+.agenda time { font-family: var(--f-num); font-weight: 700; color: var(--text-blue-deep); }
+.hosts { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.hosts li { display: flex; align-items: center; gap: 12px; }
+.hosts b { flex: 1; min-width: 0; }
+.going { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.going .avatar { --s: 40px; font-size: 13px; }
+.going .avatar-stack .avatar { margin-left: -6px; }
+.going .avatar-stack .avatar:first-child { margin-left: 0; }
+.event-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: flex; align-items: center; gap: 12px; padding: 12px max(16px, env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background: var(--card); border-top: 2px solid var(--edge); }
+.event-bar .info { flex: 1; min-width: 0; display: grid; line-height: 1.25; }
+.event-bar .info b { font-size: 16px; }
+.event-bar .info span { font-size: 13.5px; color: var(--ink-3); }
+.has-event-bar { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
+@media (min-width: 900px) {
+  .event { grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); grid-template-areas: "cover main" "meta main"; grid-template-rows: auto 1fr; gap: 28px 48px; padding-top: 40px; }
+  .event-bar { display: none; }
+  .has-event-bar { padding-bottom: 0; }
+}
+
 ```
 
 ---
@@ -1503,6 +1580,59 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 /* Label kolom yang memakai <label for> (mis. picker), selaras dengan .field > span */
 .field > label:not(.check):first-child { font-weight: 700; font-size: 15px; }
 
+/* =========================================================
+   OTP · kode verifikasi per kotak
+   <div class="otp" data-otp><input name="kode" inputmode="numeric" maxlength="6" autocomplete="one-time-code" aria-label="Kode verifikasi 6 digit"></div>
+   Tanpa JS tetap satu kolom biasa. Dengan JS jadi 6 kotak; tempel kode atau isi otomatis dari SMS tetap jalan.
+   ========================================================= */
+.otp { position: relative; display: flex; gap: clamp(6px, 2vw, 10px); min-width: 0; max-width: 100%; }
+.otp > input:only-child { width: 100%; max-width: 260px; height: 56px; padding: 0 16px; border-radius: 14px; border: 2px solid var(--edge); background: var(--field); color: var(--ink); font: 700 24px var(--f-num); letter-spacing: 0.3em; }
+.otp-box { flex: 1 1 0; min-width: 0; max-width: 54px; height: 60px; padding: 0; text-align: center; border-radius: 14px; border: 2px solid var(--edge); background: var(--field); color: var(--ink); font: 700 26px var(--f-num); font-variant-numeric: tabular-nums; box-shadow: var(--shadow-pop); caret-color: var(--blue); transition: transform 0.2s var(--spring), border-color 0.2s; }
+.otp-box:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.3), var(--shadow-pop); }
+.otp-box.filled { background: var(--surface); }
+.otp .otp-sep { flex: none; align-self: center; width: 10px; height: 2px; border-radius: 2px; background: var(--line); }
+.otp[aria-invalid="true"] .otp-box { border-color: var(--danger); background: var(--danger-bg); }
+.otp.shake { animation: fy-shake 0.4s var(--ease); }
+@keyframes fy-shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+.otp.done .otp-box { border-color: var(--go); }
+.otp-store { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.resend { font-size: 15px; color: var(--ink-2); }
+.resend button { padding: 8px 2px; border: 0; background: none; font: inherit; font-weight: 700; color: var(--text-blue-deep); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.resend button:disabled { color: var(--ink-3); text-decoration: none; cursor: default; }
+
+/* =========================================================
+   UPLOAD · seret-lepas file, pratinjau, hapus, progres
+   <div class="upload" data-upload data-max-mb="5" data-max-files="3">
+     <input type="file" id="up" name="berkas" accept="image/*,.pdf" multiple>
+     <label class="drop" for="up">..ikon.. <b>Pilih file</b> atau seret ke sini <small>JPG, PNG, PDF · maks 5 MB</small></label>
+     <ul class="upload-list"></ul>
+   </div>
+   ========================================================= */
+.upload { position: relative; display: grid; gap: 12px; }
+.upload > input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.drop { display: grid; justify-items: center; gap: 6px; padding: 26px 18px; border-radius: var(--r-l); border: 2px dashed var(--blue-light); background: var(--surface); color: var(--ink-2); text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.25s var(--spring); }
+.drop svg { width: 34px; height: 34px; color: var(--text-blue); }
+.drop b { color: var(--text-blue-deep); text-decoration: underline; text-underline-offset: 3px; }
+.drop small { font-size: 13.5px; color: var(--ink-3); }
+.drop:hover { background: var(--surface-2); }
+.upload > input:focus-visible + .drop { outline: 3px solid var(--blue-light); outline-offset: 3px; }
+.upload.over .drop { border-style: solid; border-color: var(--blue); background: var(--surface-2); transform: scale(1.01); }
+.upload.full .drop { display: none; }
+.upload.single .drop.has { display: none; }
+.upload-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.upload-list:empty { display: none; }
+.up-item { position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 8px 10px 10px; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-pop); }
+.up-thumb { width: 52px; height: 52px; border-radius: 12px; object-fit: cover; background: var(--surface); display: grid; place-items: center; color: var(--text-blue); font: 700 12px var(--f-num); letter-spacing: 0.06em; text-transform: uppercase; }
+.up-thumb.round { border-radius: 50%; }
+.up-meta { min-width: 0; display: grid; gap: 2px; }
+.up-meta b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 15px; }
+.up-meta small { font-size: 13px; color: var(--ink-3); }
+.up-meta .progress { height: 6px; margin-top: 4px; }
+.up-item.error { border-color: var(--danger); }
+.up-item.error .up-meta small { color: var(--danger); font-weight: 700; }
+.up-item .icon-btn { width: 44px; height: 44px; background: none; }
+.upload .err { color: var(--danger); font-weight: 700; font-size: 14px; }
+
 ```
 
 ---
@@ -1750,6 +1880,95 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
   .auth-art .seal-deco { width: 60%; right: -10%; bottom: -40%; }
 }
 
+/* =========================================================
+   CHAT · daftar obrolan + isi obrolan (templates/chat.html)
+   <div class="chat" data-chat> <section class="chat-list">..</section> <section class="thread">..</section> </div>
+   HP: daftar dulu, ketuk obrolan → isi obrolan layar penuh (tombol kembali dan tombol back Android menutupnya).
+   Mulai 900px: daftar dan isi obrolan berdampingan.
+   ========================================================= */
+.chat { display: grid; min-height: 0; }
+.chat-list { display: grid; align-content: start; gap: 12px; padding: 0 max(16px, env(safe-area-inset-right)) 16px max(16px, env(safe-area-inset-left)); }
+.chat-list .chat-top { display: flex; align-items: center; gap: 8px; padding-top: max(14px, env(safe-area-inset-top)); }
+.chat-list .chat-top h1 { flex: 1; font-size: clamp(34px, 9vw, 44px); }
+.chat-list .search-bar { min-height: 48px; }
+.chat-list .search-bar input { height: 44px; }
+.convos { list-style: none; margin: 0 -8px; padding: 0; display: grid; gap: 2px; }
+.convo { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; width: 100%; min-height: 72px; padding: 10px 10px; border: 0; border-radius: var(--r-m); background: none; color: var(--ink); text-align: left; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.convo:hover { background: var(--surface); }
+.convo[aria-current="true"] { background: var(--surface-2); }
+.convo:focus-visible { outline: 3px solid var(--blue-light); outline-offset: -3px; }
+.convo .avatar { --s: 50px; }
+.convo-txt { min-width: 0; display: grid; gap: 2px; }
+.convo-txt b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 16px; }
+.convo-txt span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14.5px; color: var(--ink-2); }
+.convo.unread .convo-txt span { color: var(--ink); font-weight: 700; }
+.convo-meta { display: grid; justify-items: end; gap: 6px; font-family: var(--f-num); font-size: 12.5px; color: var(--ink-3); }
+.convo.unread .convo-meta time { color: var(--text-blue-deep); font-weight: 700; }
+.av-wrap { position: relative; flex: none; display: inline-grid; }
+.av-wrap .online { position: absolute; right: 0; bottom: 1px; width: 14px; height: 14px; border-radius: 50%; background: #2fbf63; border: 2.5px solid var(--paper); }
+
+.thread { display: none; flex-direction: column; min-width: 0; min-height: 0; background: var(--paper); }
+.chat.thread-open .thread { display: flex; position: fixed; inset: 0; z-index: 90; }
+.chat.thread-open ~ .navbar, .chat.thread-open ~ .fab-dock { display: none; }
+.thread-head { flex: none; display: flex; align-items: center; gap: 10px; min-height: 64px; padding: max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 8px max(6px, env(safe-area-inset-left)); background: var(--card); border-bottom: 2px solid var(--edge); }
+.thread-head .who { flex: 1; min-width: 0; display: grid; }
+.thread-head .who b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 17px; }
+.thread-head .who small { font-size: 13px; color: var(--ink-3); }
+.thread-head .who small.on { color: var(--go); font-weight: 700; }
+.thread-head .avatar { --s: 42px; }
+.msgs { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 6px; padding: 18px max(14px, env(safe-area-inset-right)) 12px max(14px, env(safe-area-inset-left)); }
+.msgs:focus-visible { outline: 3px solid var(--blue-light); outline-offset: -3px; }
+.msgs > :first-child { margin-top: auto; }
+.day { align-self: center; margin: 10px 0 6px; padding: 4px 12px; border-radius: 999px; background: var(--surface); font-family: var(--f-num); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.msg { position: relative; max-width: min(78%, 520px); display: grid; gap: 4px; padding: 10px 14px 8px; border-radius: 20px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 3px 0 var(--edge-shadow); overflow-wrap: anywhere; animation: fy-msg 0.3s var(--spring); }
+@keyframes fy-msg { from { opacity: 0; transform: translateY(8px) scale(0.97); } }
+.msg p { margin: 0; font-size: 16px; line-height: 1.45; white-space: pre-wrap; }
+.msg time { justify-self: end; display: inline-flex; align-items: center; gap: 4px; font-family: var(--f-num); font-size: 11.5px; color: var(--ink-3); }
+.msg time svg { width: 16px; height: 16px; }
+.msg.them { align-self: flex-start; border-bottom-left-radius: 6px; }
+.msg.me { align-self: flex-end; background: var(--blue); color: #fff; border-bottom-right-radius: 6px; }
+.msg.me time { color: #f2f8ff; }
+.msg.me time .read { color: #fff; }
+.msg + .msg.them, .msg.me + .msg.me { margin-top: -2px; }
+.msg.media { padding: 6px 6px 8px; }
+.msg.media img { width: 100%; max-width: 280px; height: auto; border-radius: 14px; }
+.msg.media time { padding-right: 8px; }
+.msg-card { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: center; padding: 10px; border-radius: 14px; background: var(--surface); color: var(--ink); text-decoration: none; }
+.msg.me .msg-card { background: #fff; color: #0b0f1a; }
+.msg-card b { display: block; font-size: 15px; }
+.msg-card small { font-size: 13px; color: var(--ink-2); }
+.msg.me .msg-card small { color: #3a4458; }
+.typing { align-self: flex-start; display: inline-flex; gap: 5px; padding: 14px 16px; border-radius: 20px 20px 20px 6px; border: 2px solid var(--edge); background: var(--card); box-shadow: 0 3px 0 var(--edge-shadow); }
+.typing[hidden] { display: none; }
+.typing i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); animation: fy-type 1.2s var(--ease) infinite; }
+.typing i:nth-child(2) { animation-delay: 0.15s; } .typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes fy-type { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-5px); opacity: 1; } }
+.composer { flex: none; display: flex; align-items: flex-end; gap: 8px; padding: 10px max(10px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); background: var(--card); border-top: 2px solid var(--edge); }
+.composer textarea { flex: 1; min-width: 0; min-height: 48px; max-height: 140px; resize: none; padding: 12px 16px; border-radius: 24px; border: 2px solid var(--line); background: var(--field); color: var(--ink); font: inherit; font-size: 16px; line-height: 1.35; }
+.composer textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.25); }
+.composer textarea::placeholder { color: var(--placeholder); }
+.composer .icon-btn { flex: none; width: 48px; height: 48px; }
+.composer .send { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--edge); background: var(--blue); color: #fff; box-shadow: 0 3px 0 var(--edge-shadow); cursor: pointer; transition: transform 0.25s var(--spring); }
+.composer .send svg { width: 22px; height: 22px; }
+.composer .send:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
+.composer .send:disabled { background: var(--surface-2); color: var(--ink-3); cursor: default; }
+.thread[hidden] { display: none !important; }
+.thread-empty { display: none; }
+@media (min-width: 700px) { .m-app .chat.thread-open .thread { left: calc(92px + env(safe-area-inset-left)); } .m-app .chat-top .theme-btn { display: none; } }
+@media (min-width: 900px) {
+  .chat { grid-template-columns: 360px minmax(0, 1fr); height: 100vh; height: 100dvh; }
+  .chat-list { overflow-y: auto; border-right: 2px solid var(--edge); background: var(--card); padding-bottom: 24px; }
+  .thread, .chat.thread-open .thread { display: flex; position: static; height: 100%; }
+  .thread .back { display: none; }
+  .with-navbar.chat-page { padding-bottom: 0; }
+  .chat-page .msg { max-width: min(70%, 560px); }
+}
+@media (prefers-reduced-motion: reduce) { .msg { animation: none; } .typing i { animation: none; opacity: 0.8; } }
+/* Tanggal kecil bergaya stiker (daftar acara, kartu acara di chat) */
+.ev-date { flex: none; display: grid; place-items: center; align-content: center; width: 52px; height: 56px; border-radius: 14px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 3px 0 var(--edge-shadow); font-family: var(--f-num); line-height: 1; }
+.ev-date b { font-size: 20px; font-weight: 800; }
+.ev-date small { margin-top: 3px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-blue-deep); }
+
 ```
 
 ---
@@ -1851,7 +2070,7 @@ export function initTheme() {
 // - Toast (pakai markup .toast dari snippets/body-parts.html)
 
 import { initTheme } from "./theme.js";
-import { initControls, snackbar } from "./controls.js";
+import { initControls, snackbar, otpError } from "./controls.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -1976,7 +2195,7 @@ export function initApp() {
   };
   $$("[data-toast-msg]").forEach((b) => b.addEventListener("click", () => toast(b.dataset.toastMsg)));
 
-  return { toast, snackbar, setSide };
+  return { toast, snackbar, otpError, setSide };
 }
 
 ```

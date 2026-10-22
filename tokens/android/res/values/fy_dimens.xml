@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FUSIONIFY UI · ukuran. Dibuat otomatis dari css/tokens.css oleh scripts/build-tokens.mjs. Jangan diedit manual. -->
+<resources>
+    <dimen name="fy_radius_s">10dp</dimen>
+    <dimen name="fy_radius_m">18dp</dimen>
+    <dimen name="fy_radius_l">28dp</dimen>
+    <dimen name="fy_border">2dp</dimen>
+    <dimen name="fy_drop_button">3dp</dimen>
+    <dimen name="fy_drop_card">6dp</dimen>
+    <dimen name="fy_touch_min">48dp</dimen>
+    <dimen name="fy_gutter">16dp</dimen>
+    <dimen name="fy_text_body">17sp</dimen>
+</resources>

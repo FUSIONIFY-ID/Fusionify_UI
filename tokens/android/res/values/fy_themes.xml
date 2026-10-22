@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FUSIONIFY UI · tema Material 3 DayNight (otomatis terang/gelap). Dibuat otomatis dari css/tokens.css oleh scripts/build-tokens.mjs. Jangan diedit manual.
+     Butuh: implementation("com.google.android.material:material:1.12.0")
+     Pakai di AndroidManifest.xml: android:theme="@style/Theme.Fusionify" -->
+<resources>
+    <style name="Theme.Fusionify" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/fy_blue</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">@color/fy_blue_light</item>
+        <item name="colorError">@color/fy_danger</item>
+        <item name="android:colorBackground">@color/fy_paper</item>
+        <item name="colorSurface">@color/fy_card</item>
+        <item name="colorOnSurface">@color/fy_ink</item>
+        <item name="colorOnSurfaceVariant">@color/fy_ink_2</item>
+        <item name="colorOutline">@color/fy_edge</item>
+        <item name="colorOutlineVariant">@color/fy_line</item>
+        <item name="android:textColorPrimary">@color/fy_ink</item>
+        <item name="android:textColorSecondary">@color/fy_ink_2</item>
+        <item name="android:textColorHint">@color/fy_placeholder</item>
+        <item name="android:windowBackground">@color/fy_paper</item>
+        <item name="android:statusBarColor">@color/fy_paper</item>
+        <item name="android:navigationBarColor">@color/fy_card</item>
+        <item name="android:fontFamily">@font/fy_body</item>
+        <item name="fontFamily">@font/fy_body</item>
+    </style>
+
+    <style name="Fy.Title" parent="">
+        <item name="android:fontFamily">@font/fy_head</item>
+        <item name="android:textColor">@color/fy_ink</item>
+        <item name="android:letterSpacing">-0.025</item>
+    </style>
+    <style name="Fy.Body" parent="">
+        <item name="android:fontFamily">@font/fy_body</item>
+        <item name="android:textSize">@dimen/fy_text_body</item>
+        <item name="android:textColor">@color/fy_ink</item>
+    </style>
+    <style name="Fy.Label" parent="">
+        <item name="android:fontFamily">@font/fy_num</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textColor">@color/fy_ink_3</item>
+    </style>
+    <style name="Fy.Button" parent="">
+        <item name="android:background">@drawable/fy_sticker_button</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/fy_body</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">@dimen/fy_touch_min</item>
+        <item name="android:paddingStart">22dp</item>
+        <item name="android:paddingEnd">22dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+    <style name="Fy.Card" parent="">
+        <item name="android:background">@drawable/fy_sticker_card</item>
+        <item name="android:padding">18dp</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+</resources>

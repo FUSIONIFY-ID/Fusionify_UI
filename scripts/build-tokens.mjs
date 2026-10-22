@@ -357,4 +357,128 @@ export const sticker = (c: FyPalette, drop = 6, radius = fy.radius.l) => ({
 });
 `);
 
+/* ---------- Android XML (aplikasi Kotlin/Java dengan View/XML, mis. aplikasi VPN) ---------- */
+const snake = (k) => "fy_" + k.replace(/-/g, "_");
+const androidHex = ([r, g, b, a]) =>
+  "#" + (a < 1 ? Math.round(a * 255).toString(16).padStart(2, "0").toUpperCase() : "") + [r, g, b].map((x) => x.toString(16).padStart(2, "0")).join("").toUpperCase();
+const resDir = path.join(root, "tokens/android/res");
+for (const d of ["values", "values-night", "font", "drawable"]) fs.mkdirSync(path.join(resDir, d), { recursive: true });
+const colorsXml = (t) => `<?xml version="1.0" encoding="utf-8"?>
+<!-- FUSIONIFY UI · warna ${t === "light" ? "terang" : "gelap"}. ${header}
+     Android otomatis memakai values-night/ saat mode gelap. Kotlin: R.color.fy_blue · Java: R.color.fy_blue · XML: @color/fy_blue -->
+<resources>
+${keys.map((k) => `    <color name="${snake(k)}">${androidHex(colors[t][k])}</color>`).join("\n")}
+</resources>
+`;
+fs.writeFileSync(path.join(resDir, "values/fy_colors.xml"), colorsXml("light"));
+fs.writeFileSync(path.join(resDir, "values-night/fy_colors.xml"), colorsXml("dark"));
+fs.writeFileSync(path.join(resDir, "values/fy_dimens.xml"), `<?xml version="1.0" encoding="utf-8"?>
+<!-- FUSIONIFY UI · ukuran. ${header} -->
+<resources>
+    <dimen name="fy_radius_s">${radius.s}dp</dimen>
+    <dimen name="fy_radius_m">${radius.m}dp</dimen>
+    <dimen name="fy_radius_l">${radius.l}dp</dimen>
+    <dimen name="fy_border">2dp</dimen>
+    <dimen name="fy_drop_button">3dp</dimen>
+    <dimen name="fy_drop_card">6dp</dimen>
+    <dimen name="fy_touch_min">48dp</dimen>
+    <dimen name="fy_gutter">${touch.gutter}dp</dimen>
+    <dimen name="fy_text_body">17sp</dimen>
+</resources>
+`);
+// Huruf: nama file Android wajib huruf kecil + garis bawah
+const fontMap = {
+  "AfacadFlux-ExtraBold.ttf": "afacadflux_extrabold.ttf", "Sansation-Regular.ttf": "sansation_regular.ttf", "Sansation-Bold.ttf": "sansation_bold.ttf",
+  "Caveat-Regular.ttf": "caveat_regular.ttf", "Caveat-Bold.ttf": "caveat_bold.ttf",
+  "Exo2-Regular.ttf": "exo2_regular.ttf", "Exo2-SemiBold.ttf": "exo2_semibold.ttf", "Exo2-Bold.ttf": "exo2_bold.ttf",
+};
+for (const [src, dst] of Object.entries(fontMap)) fs.copyFileSync(path.join(root, "tokens/fonts-ttf", src), path.join(resDir, "font", dst));
+const family = (name, items) => fs.writeFileSync(path.join(resDir, "font", name + ".xml"), `<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:app="http://schemas.android.com/apk/res-auto">
+${items.map(([w, f]) => `    <font app:fontStyle="normal" app:fontWeight="${w}" app:font="@font/${f}" />`).join("\n")}
+</font-family>
+`);
+family("fy_head", [[800, "afacadflux_extrabold"]]);
+family("fy_body", [[400, "sansation_regular"], [700, "sansation_bold"]]);
+family("fy_hand", [[400, "caveat_regular"], [700, "caveat_bold"]]);
+family("fy_num", [[400, "exo2_regular"], [600, "exo2_semibold"], [700, "exo2_bold"]]);
+// Kartu dan tombol bergaya stiker: dua lapis (bayangan pejal di bawah, kartu bergaris di atas). Tanpa elevation.
+const stickerDrawable = (name, fill, drop, r) => fs.writeFileSync(path.join(resDir, "drawable", name + ".xml"), `<?xml version="1.0" encoding="utf-8"?>
+<!-- FUSIONIFY UI · ${name}: garis 2dp + bayangan pejal ${drop}dp ke bawah tanpa blur. Pakai sebagai android:background. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="${drop}dp">
+        <shape android:shape="rectangle"><corners android:radius="${r}dp" /><solid android:color="@color/fy_edge_shadow" /></shape>
+    </item>
+    <item android:bottom="${drop}dp">
+        <shape android:shape="rectangle"><corners android:radius="${r}dp" /><solid android:color="@color/${fill}" /><stroke android:width="2dp" android:color="@color/fy_edge" /></shape>
+    </item>
+</layer-list>
+`);
+stickerDrawable("fy_sticker_card", "fy_card", 6, radius.l);
+stickerDrawable("fy_sticker_button", "fy_blue", 3, 999);
+stickerDrawable("fy_sticker_button_ghost", "fy_card", 3, 999);
+stickerDrawable("fy_sticker_field", "fy_field", 3, radius.m);
+fs.writeFileSync(path.join(resDir, "values/fy_themes.xml"), `<?xml version="1.0" encoding="utf-8"?>
+<!-- FUSIONIFY UI · tema Material 3 DayNight (otomatis terang/gelap). ${header}
+     Butuh: implementation("com.google.android.material:material:1.12.0")
+     Pakai di AndroidManifest.xml: android:theme="@style/Theme.Fusionify" -->
+<resources>
+    <style name="Theme.Fusionify" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/fy_blue</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">@color/fy_blue_light</item>
+        <item name="colorError">@color/fy_danger</item>
+        <item name="android:colorBackground">@color/fy_paper</item>
+        <item name="colorSurface">@color/fy_card</item>
+        <item name="colorOnSurface">@color/fy_ink</item>
+        <item name="colorOnSurfaceVariant">@color/fy_ink_2</item>
+        <item name="colorOutline">@color/fy_edge</item>
+        <item name="colorOutlineVariant">@color/fy_line</item>
+        <item name="android:textColorPrimary">@color/fy_ink</item>
+        <item name="android:textColorSecondary">@color/fy_ink_2</item>
+        <item name="android:textColorHint">@color/fy_placeholder</item>
+        <item name="android:windowBackground">@color/fy_paper</item>
+        <item name="android:statusBarColor">@color/fy_paper</item>
+        <item name="android:navigationBarColor">@color/fy_card</item>
+        <item name="android:fontFamily">@font/fy_body</item>
+        <item name="fontFamily">@font/fy_body</item>
+    </style>
+
+    <style name="Fy.Title" parent="">
+        <item name="android:fontFamily">@font/fy_head</item>
+        <item name="android:textColor">@color/fy_ink</item>
+        <item name="android:letterSpacing">-0.025</item>
+    </style>
+    <style name="Fy.Body" parent="">
+        <item name="android:fontFamily">@font/fy_body</item>
+        <item name="android:textSize">@dimen/fy_text_body</item>
+        <item name="android:textColor">@color/fy_ink</item>
+    </style>
+    <style name="Fy.Label" parent="">
+        <item name="android:fontFamily">@font/fy_num</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.12</item>
+        <item name="android:textColor">@color/fy_ink_3</item>
+    </style>
+    <style name="Fy.Button" parent="">
+        <item name="android:background">@drawable/fy_sticker_button</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">@font/fy_body</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">@dimen/fy_touch_min</item>
+        <item name="android:paddingStart">22dp</item>
+        <item name="android:paddingEnd">22dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+    <style name="Fy.Card" parent="">
+        <item name="android:background">@drawable/fy_sticker_card</item>
+        <item name="android:padding">18dp</item>
+        <item name="android:paddingBottom">24dp</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+</resources>
+`);
+
 console.log("Token dibuat:", keys.length, "warna x 2 tema");

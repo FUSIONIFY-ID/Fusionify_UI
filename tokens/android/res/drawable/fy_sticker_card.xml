@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FUSIONIFY UI · fy_sticker_card: garis 2dp + bayangan pejal 6dp ke bawah tanpa blur. Pakai sebagai android:background. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="6dp">
+        <shape android:shape="rectangle"><corners android:radius="28dp" /><solid android:color="@color/fy_edge_shadow" /></shape>
+    </item>
+    <item android:bottom="6dp">
+        <shape android:shape="rectangle"><corners android:radius="28dp" /><solid android:color="@color/fy_card" /><stroke android:width="2dp" android:color="@color/fy_edge" /></shape>
+    </item>
+</layer-list>
