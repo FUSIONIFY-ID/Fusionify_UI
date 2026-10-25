@@ -11,4 +11,20 @@ for (const sc of ['light','dark']) for (const pg of ['app-mobile','komponen','da
  if (r[0]>r[1]||errs.length||r[2].length) out.push(`${sc} ${pg}@${w}: sw=${r[0]} ${errs.join(';')} small=${r[2].join(', ')}`);
  await c.close();
 }
+// Lenis hanya untuk mouse/trackpad: di layar sentuh tidak dibuat, menu tetap mengunci scroll lewat html.scroll-lock.
+{
+ const c=await b.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true}); const p=await c.newPage();
+ await p.goto(BASE+'templates/landing-produk.html',{waitUntil:'networkidle'}); await p.waitForTimeout(300);
+ const touch=await p.evaluate(()=>document.documentElement.classList.contains('lenis'));
+ const menu=p.locator('[data-menu]');
+ let locked=true;
+ if (await menu.count() && await menu.isVisible()) { await menu.click(); await p.waitForTimeout(400); locked=await p.evaluate(()=>document.documentElement.classList.contains('scroll-lock')); }
+ if (touch) out.push('layar sentuh: Lenis masih dibuat');
+ if (!locked) out.push('layar sentuh: menu terbuka tapi scroll tidak terkunci');
+ await c.close();
+ const d=await b.newContext({viewport:{width:1366,height:768}}); const q=await d.newPage();
+ await q.goto(BASE+'templates/landing-produk.html',{waitUntil:'networkidle'}); await q.waitForTimeout(300);
+ if (!await q.evaluate(()=>document.documentElement.classList.contains('lenis'))) out.push('desktop: Lenis tidak dibuat');
+ await d.close();
+}
 console.log(out.length?out.join('\n'):'MOBILE OK'); await b.close();

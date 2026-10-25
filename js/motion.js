@@ -143,18 +143,28 @@ export function initFusionify(opts = {}) {
     if (el) sfx.play(el.dataset.sfx || "plop");
   });
 
-  /* Smooth scroll */
+  /* Smooth scroll: Lenis hanya untuk mouse/trackpad. Di layar sentuh (termasuk HP dalam mode
+     "Situs desktop") Lenis tidak menghaluskan apa pun, tapi tetap menambah kerja tiap event scroll
+     dan membuat ScrollTrigger di-update dua kali. Layar sentuh memakai scroll bawaan browser. */
+  const touchFirst = matchMedia("(pointer: coarse)").matches;
   let lenis = null;
-  if (o.smooth && !reduce) {
+  if (o.smooth && !reduce && !touchFirst) {
     lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1, smoothWheel: true });
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
   }
+  // Address bar HP muncul/hilang saat scroll: jangan hitung ulang semua trigger (dan pin) tiap kali.
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  // Kunci scroll halaman (menu terbuka, loader): lewat Lenis kalau ada, kalau tidak lewat kelas di <html>.
+  const lockScroll = (on) => {
+    if (lenis) { if (on) lenis.stop(); else lenis.start(); }
+    else document.documentElement.classList.toggle("scroll-lock", on);
+  };
   const scrollToEl = (target) => {
     if (lenis) lenis.scrollTo(target, { offset: -20, duration: 1.4 });
-    else if (typeof target === "number") window.scrollTo({ top: target });
-    else target.scrollIntoView();
+    else if (typeof target === "number") window.scrollTo({ top: target, behavior: reduce ? "auto" : "smooth" });
+    else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 20, behavior: reduce ? "auto" : "smooth" });
   };
 
   /* Nav: .scrolled setelah 24px, .hide saat scroll turun. <nav class="nav" data-nav> */
@@ -183,7 +193,7 @@ export function initFusionify(opts = {}) {
     menuBtn?.setAttribute("aria-expanded", String(open));
     if (open) setTimeout(() => $("a", drawer)?.focus({ preventScroll: true }), 350);
     else if (drawer.contains(document.activeElement)) menuBtn?.focus({ preventScroll: true });
-    if (open) lenis?.stop(); else lenis?.start();
+    lockScroll(open);
     sfx.play(open ? "bloop" : "plop");
     onScroll();
   };
@@ -349,5 +359,5 @@ export function initFusionify(opts = {}) {
   }
 
   addEventListener("load", () => ScrollTrigger.refresh());
-  return { sfx, toast, snackbar, otpError, lenis, scrollTo: scrollToEl, gsap, ScrollTrigger };
+  return { sfx, toast, snackbar, otpError, lenis, lockScroll, scrollTo: scrollToEl, gsap, ScrollTrigger };
 }

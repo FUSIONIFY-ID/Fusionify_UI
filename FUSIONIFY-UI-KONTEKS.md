@@ -138,6 +138,8 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - Cahaya dan glow pakai gradien statis, bukan `filter: blur`/`drop-shadow` pada elemen bergerak.
 - Animasi CSS `infinite` harus berada di dalam elemen yang diamati `initFusionify` (`main > section`, `main > div`, `footer`, `[data-pause]`) supaya dijeda saat tidak terlihat.
 - Jangan menulis `left`/`top`/`width` atau membaca ukuran elemen (`getBoundingClientRect`, `clientWidth`) di `gsap.ticker` atau handler scroll. Ukur sekali, perbarui saat resize.
+- Lenis hanya dibuat untuk mouse/trackpad (`initFusionify` melewatinya kalau `pointer: coarse`). Di layar sentuh Lenis tidak menghaluskan apa pun tapi menambah kerja tiap event scroll dan membuat ScrollTrigger di-update dua kali; di sana scroll bawaan browser yang dipakai. Kunci scroll (menu, loader) lewat `lockScroll()` yang dikembalikan `initFusionify()`, bukan `lenis.stop()` langsung. `ScrollTrigger.config({ ignoreMobileResize: true })` wajib tetap ada supaya address bar HP tidak memicu refresh semua trigger.
+- Jangan membuat puluhan elemen beranimasi sendiri-sendiri (mis. bintang): kelompokkan ke beberapa lapisan dan animasikan lapisannya.
 - Dengan Lenis, pakai `scrub` kecil (sekitar 0.3) dan jangan pakai `anticipatePin`.
 - Untuk efek membesar (segel menutup layar), perbesar SVG berukuran sedang (sekitar 400px) dengan `transform: scale`; jangan menggambar SVG raksasa.
 - Font di-host sendiri, gambar WebP dengan `width`/`height`, inisialisasi yang tidak perlu saat awal dijalankan saat browser senggang.
@@ -285,7 +287,7 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 
 ## Gerak (`js/motion.js`)
 
-- Smooth scroll Lenis (`lerp 0.1`).
+- Smooth scroll Lenis (`lerp 0.1`), khusus mouse/trackpad. Layar sentuh (termasuk HP dalam mode "Situs desktop") memakai scroll bawaan browser.
 - Nav transparan di atas, berubah jadi kapsul putih blur setelah scroll >24px, sembunyi saat scroll turun, muncul saat scroll naik.
 - Menu HP: lingkaran biru membesar dari tombol menu.
 - Muncul saat scroll: judul naik per kata (`data-split`), elemen naik dan memudar masuk (`data-reveal`), kartu "dirakit" dari posisi acak (`data-assemble`), angka naik (`data-count-to`).
@@ -490,6 +492,8 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; background: var(--paper); overflow-x: clip; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+/* Kunci scroll di layar sentuh (menu terbuka), dipasang lockScroll() dari motion.js */
+html.scroll-lock, html.scroll-lock body { overflow: hidden; }
 body {
   margin: 0;
   font-family: var(--f-body);

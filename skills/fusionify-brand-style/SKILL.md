@@ -181,6 +181,7 @@ Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis
 - Glow pakai gradien statis, bukan `filter: blur`/`drop-shadow` pada elemen bergerak.
 - Animasi `infinite` wajib dijeda di luar layar (kelas `.idle`, otomatis lewat `initFusionify` untuk `main > section`, `main > div`, `footer`, `[data-pause]`).
 - Jangan menulis `left`/`top`/`width` atau membaca ukuran elemen tiap frame. Ukur sekali, perbarui saat resize.
+- Lenis hanya untuk mouse/trackpad; layar sentuh pakai scroll bawaan. Kunci scroll lewat `lockScroll()`, dan `ScrollTrigger.config({ ignoreMobileResize: true })`.
 - Dengan Lenis: `scrub` sekitar 0.3, tanpa `anticipatePin`.
 - Efek membesar: SVG sekitar 400px diperbesar dengan `scale`, jangan SVG raksasa.
 - Untuk Safari lama: tulis `overflow-x: hidden` sebelum `overflow-x: clip`, dan `100vh` sebelum `100svh`.

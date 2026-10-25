@@ -5,6 +5,8 @@
 html { -webkit-text-size-adjust: 100%; scroll-behavior: auto; background: var(--paper); overflow-x: clip; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+/* Kunci scroll di layar sentuh (menu terbuka), dipasang lockScroll() dari motion.js */
+html.scroll-lock, html.scroll-lock body { overflow: hidden; }
 body {
   margin: 0;
   font-family: var(--f-body);

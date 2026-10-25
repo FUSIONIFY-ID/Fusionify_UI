@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.4 · 25 Oktober 2026
+
+- **Scroll HP lebih ringan** (disamakan dengan fusionify.id): Lenis hanya dibuat untuk mouse/trackpad. Di layar sentuh, termasuk HP dalam mode "Situs desktop", `initFusionify()` memakai scroll bawaan browser, jadi ScrollTrigger tidak lagi di-update dua kali per scroll.
+- `ScrollTrigger.config({ ignoreMobileResize: true })`: address bar HP yang muncul/hilang tidak lagi memicu refresh semua trigger.
+- `lockScroll(on)` baru (ikut dikembalikan `initFusionify()`): mengunci scroll lewat Lenis kalau ada, kalau tidak lewat kelas `html.scroll-lock`. Menu HP sekarang benar-benar mengunci halaman di layar sentuh.
+- `scrollTo()` tanpa Lenis memakai scroll halus bawaan (mati saat kurangi gerakan) dengan jarak 20px dari atas, sama seperti versi Lenis.
+- AGENTS, DESIGN, dan skill diperbarui dengan aturan ini.
+
 ## 1.6.3 · 22 Oktober 2026
 
 - Skill `skills/fusionify-brand-style/SKILL.md` disamakan dengan versi terbaru: folder Drive MASCOT, aturan Motion (Framer Motion), catatan neo-brutalism, dan daftar komponen Figma lengkap.
