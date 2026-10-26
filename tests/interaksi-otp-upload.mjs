@@ -23,7 +23,8 @@ T('error state', await p.getAttribute('#k-otp','aria-invalid')==='true' && (awai
 // autofill style: whole code into first box input event
 await boxes.nth(0).fill('654321');
 T('autofill split', await p.$eval('#k-otp input[name=kode]',x=>x.value)==='654321' && await p.getAttribute('#k-otp','aria-invalid')===null && !(await p.$('#otp .err')));
-T('done snackbar', await p.isVisible('.snackbar'));
+// Snackbar muncul sesaat setelah kode lengkap; di mesin CI yang lambat cek langsung bisa terlalu cepat
+T('done snackbar', await p.waitForSelector('.snackbar', { state: 'visible', timeout: 3000 }).then(() => true, () => false));
 const cd=p.locator('[data-countdown]'); T('countdown', await cd.isDisabled() && /\(0:\d\d\)/.test(await cd.textContent()));
 // alnum
 const ab=p.locator('[aria-labelledby=otp-l2] .otp-box'); T('alnum 5', await ab.count()===5);

@@ -12,6 +12,7 @@
 - Penomoran dokumen `{urut}/{SRT|INV|PNW|KWT|PRJ}/FDS/{bulan romawi}/{tahun}`.
 - `scripts/build-dokumen.mjs` (`npm run build:dokumen`): cetak template ke PDF; `--final` menolak teks yang belum diganti dan isi yang keluar halaman. `npm run build:office` membuat ulang template Office.
 - Pratinjau PDF di `dokumen/contoh/`. Uji baru `tests/dokumen.mjs`.
+- Uji `interaksi-otp-upload.mjs` menunggu snackbar sampai 3 detik (rilis 1.6.4 gagal di GitHub Actions karena cek terlalu cepat).
 - AGENTS, DESIGN, README, dan skill punya bagian Dokumen.
 
 ## 1.6.4 · 25 Oktober 2026
