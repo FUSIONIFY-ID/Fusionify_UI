@@ -1,0 +1,16 @@
+Subjek: Pembayaran INV-001 diterima
+
+Pembayaran diterima
+
+Halo Budi, pembayaranmu sudah kami terima. Terima kasih!
+
+Nomor: INV-001
+Jumlah: Rp100.000
+Metode: QRIS
+Waktu: 26 Oktober 2026, 14.05 WIB
+
+Lihat bukti pembayaran: https://contoh.fusionify.id/bukti/INV-001
+
+--
+PT FUSIONIFY DIGITAL STORE
+hello@fusionify.id · WhatsApp +62 831-1138-0628

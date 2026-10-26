@@ -48,10 +48,12 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 | `templates/chat.html` | Pesan: daftar obrolan + isi obrolan (HP: layar penuh dan ikut tombol back; layar lebar: berdampingan), kolom tulis, kartu acara di chat |
 | `templates/acara.html` | Halaman detail acara publik: poster, waktu (tambah ke kalender), lokasi (buka di Maps), pendaftaran lewat bottom sheet, tiket, susunan acara, bagikan |
 | `templates/admin.html` | Dashboard admin (KPI, grafik, tabel pengguna + filter + pilih semua + hapus dengan konfirmasi, pengaturan bertab, log) |
-| `dokumen/cetak/` | Template dokumen cetak HTML → PDF: `surat.html` (surat resmi), `invoice.html`, `penawaran.html`, `kuitansi.html` (A5), `dokumen.html` (proposal/laporan), `slide.html` (16:9). Gaya di `cetak.css` (memakai `css/tokens.css`), hitungan Rupiah, terbilang, tanggal, dan segel di `dokumen.js`. Panduan: `dokumen/README.md` |
-| `dokumen/office/` | Template Office: `FUSIONIFY-Surat.docx`, `FUSIONIFY-Dokumen.docx` (huruf tertanam), `FUSIONIFY-Slide.pptx` (tema + layout FY), `FUSIONIFY-Spreadsheet.xlsx` (Invoice berformula, Anggaran, Daftar). Aset PNG di `office/aset/` |
+| `dokumen/cetak/` | Template dokumen cetak HTML → PDF: `surat.html` (surat resmi), `invoice.html`, `penawaran.html`, `kuitansi.html` (A5), `dokumen.html` (proposal/laporan), `perjanjian.html` (PRJ, 3 halaman), `slide.html` (16:9). Gaya di `cetak.css` (memakai `css/tokens.css`), hitungan Rupiah, terbilang, tanggal, dan segel di `dokumen.js`. Panduan: `dokumen/README.md` |
+| `dokumen/office/` | Template Office: `FUSIONIFY-Surat.docx`, `FUSIONIFY-Dokumen.docx`, `FUSIONIFY-Perjanjian.docx` (huruf tertanam), `FUSIONIFY-Slide.pptx` (tema + layout FY), `FUSIONIFY-Spreadsheet.xlsx` (Invoice berformula, Anggaran, Daftar). Aset PNG di `office/aset/` |
 | `dokumen/contoh/` | Pratinjau PDF semua template cetak (`npm run build:dokumen`) |
 | `scripts/build-dokumen.mjs`, `scripts/dokumen/` | Pembuat PDF (`--final` menolak teks "ganti" dan isi yang keluar halaman) dan generator template Office (`npm run build:office`) |
+| `email/` | Template email transaksional: `fy-email.js` (`renderEmail`, tabel inline, aman di Gmail/Outlook), `templates.js` (kode verifikasi, atur ulang password, selamat datang, pengajuan disetujui/ditolak, pembayaran berhasil/gagal, status penarikan, pemberitahuan), `aset/` PNG maskot, `contoh/` pratinjau (`npm run build:email`). Panduan: `email/README.md` |
+| `react/` | Untuk produk React + Tailwind: `index.tsx` (komponen tipis di atas kelas kit: `Tombol`, `Chip`, `Kartu`, `Judul`, `Maskot`, `PanggungMaskot`, `Keadaan`, `BadgeProduk`, dll.), `tailwind-preset.js` (v3), `tailwind-v4.css`. Panduan: `react/README.md` |
 
 ## Cara memakai di proyek baru atau lama
 
@@ -118,11 +120,24 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - Semua dokumen resmi FUSIONIFY dibuat dari template di `dokumen/`. Jangan membuat kop surat, invoice, atau deck dari nol dengan warna dan huruf lain. Panduan lengkap: `dokumen/README.md`.
 - Format: dokumen final yang harus tampil persis (invoice, penawaran, surat PDF) dari `dokumen/cetak/*.html`; dokumen yang akan diedit orang lain dari `dokumen/office/`.
 - Teks bertanda kuning (`.ganti`, latar kuning muda di Word, sel kuning muda di Excel) wajib diganti sebelum dikirim. Cetak final dengan `node scripts/build-dokumen.mjs --final berkas.html --keluar hasil.pdf`.
-- Penomoran: `{urut}/{kode}/FDS/{bulan romawi}/{tahun}`, kode `SRT`, `INV`, `PNW`, `KWT`, `PRJ`.
+- Penomoran: `{urut}/{kode}/FDS/{bulan romawi}/{tahun}`, kode `SRT`, `INV`, `PNW`, `KWT`, `PRJ` (perjanjian: `cetak/perjanjian.html`, `office/FUSIONIFY-Perjanjian.docx`; kerangka umum, bukan nasihat hukum).
 - Kop surat memakai logo horizontal dari `brand/kit/`, nama PT FUSIONIFY DIGITAL STORE, dan kontak publik saja.
 - Harga, angka, dan status produk wajib asli. Pajak hanya kalau perusahaan sudah PKP. Angka contoh di grafik atau tabel diberi label "Data contoh" dan diganti sebelum dipakai.
 - Satu `<section class="halaman">` = satu lembar A4 (`.halaman.a5` untuk kuitansi, `.slide` untuk 16:9). Hiasan yang sengaja lebih besar dari halaman memakai `.segel` atau `.fx-oversize`.
 - Kalau token di `css/tokens.css` berubah, jalankan `npm run build:dokumen` dan `npm run build:office`, lalu catat di CHANGELOG.
+
+## Email
+
+- Semua email produk FUSIONIFY dibuat dengan `email/fy-email.js` atau `email/templates.js`. Jangan menulis HTML email sendiri dengan warna, gradien, atau emoji lain.
+- Salin file email ke backend produk tanpa diubah (ubah di kit, rilis, salin ulang) dan host `email/aset/*.png` di domain produk; isi `aset` dan `merek` dengan URL https asli.
+- Tanpa SVG/WebP, gambar ber-`width`/`height`/`alt`, kirim juga versi teks polos, di bawah 102 KB, satu tombol utama, tanpa emoji di subjek. Nomor rekening disamarkan; password dan API key tidak pernah dikirim lewat email.
+- Pengirim memakai domain sendiri yang sudah diverifikasi.
+
+## React + Tailwind
+
+- Produk React memakai `react/index.tsx` dan preset `react/tailwind-preset.js` (v3) atau `react/tailwind-v4.css` (v4), plus `css/fusionify.css` yang tetap wajib dimuat. Jangan menulis ulang komponen kit dengan kelas Tailwind dan hex sendiri.
+- Warna Tailwind dari preset berbasis variabel CSS kit, jadi mode gelap ikut. Kalau butuh warna baru, tambahkan ke `css/tokens.css`, bukan ke config Tailwind proyek.
+- Komponen baru di kit dibuat dulu sebagai kelas CSS, baru dibungkus React. Uji: `tests/react.mjs`.
 
 ## Aturan isi (wajib)
 

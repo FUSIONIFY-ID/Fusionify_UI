@@ -11,6 +11,8 @@ Template dokumen resmi dengan sistem desain yang sama dengan web FUSIONIFY: warn
 | Invoice / tagihan | PDF dari HTML (total dan terbilang otomatis) | `cetak/invoice.html` |
 | | Excel (berformula) | `office/FUSIONIFY-Spreadsheet.xlsx`, sheet Invoice |
 | Penawaran harga | PDF dari HTML | `cetak/penawaran.html` |
+| Perjanjian / MoU (`PRJ`) | Word | `office/FUSIONIFY-Perjanjian.docx` |
+| | PDF dari HTML | `cetak/perjanjian.html` |
 | Kuitansi (A5) | PDF dari HTML | `cetak/kuitansi.html` |
 | Proposal, laporan, company profile, panduan | Word | `office/FUSIONIFY-Dokumen.docx` |
 | | PDF dari HTML | `cetak/dokumen.html` |
@@ -30,6 +32,7 @@ Pratinjau semua template HTML ada di `contoh/*.pdf`.
 - **Logo** dari file di `brand/`, jangan mengetik "FUSIONIFY" dengan huruf biasa sebagai pengganti logo.
 - **Pajak:** baris pajak di invoice diisi hanya kalau perusahaan sudah PKP. Selain itu biarkan 0 atau hapus.
 - **Materai:** kuitansi dan perjanjian bernilai di atas Rp5.000.000 memakai materai Rp10.000.
+- **Perjanjian** adalah kerangka umum, bukan nasihat hukum. Sesuaikan pasal dengan kesepakatan, dan untuk nilai besar, kerja sama jangka panjang, atau pengolahan data pribadi dalam jumlah besar, minta notaris atau konsultan hukum memeriksa dulu. Setiap halaman diparaf kedua pihak.
 - **Tanpa em dash (—)** di teks dokumen. Pakai koma, titik dua, atau kalimat baru.
 - **Rahasia:** proyek rahasia klien pemerintah dan nama provider pembayaran tidak ditulis di dokumen yang keluar dari perusahaan.
 

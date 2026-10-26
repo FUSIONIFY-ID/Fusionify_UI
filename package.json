@@ -1,6 +1,6 @@
 {
   "name": "@fusionify/ui",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "private": true,
   "description": "Sistem desain FUSIONIFY: token, komponen CSS, gerak, segel, font, logo, dan maskot. Sumber: fusionify.id.",
   "type": "module",
@@ -18,7 +18,11 @@
     "./mascot/*": "./mascot/*",
     "./badge/*": "./badge/*",
     "./templates/*": "./templates/*",
-    "./js/lisensi": "./js/lisensi.js"
+    "./js/lisensi": "./js/lisensi.js",
+    "./react": "./react/index.tsx",
+    "./react/tailwind-preset": "./react/tailwind-preset.js",
+    "./email": "./email/fy-email.js",
+    "./email/templates": "./email/templates.js"
   },
   "peerDependencies": {
     "gsap": "^3.12.0",
@@ -33,14 +37,20 @@
     "build:tokens": "node scripts/build-tokens.mjs",
     "release": "node scripts/release.mjs",
     "build:dokumen": "node scripts/build-dokumen.mjs",
-    "build:office": "node scripts/dokumen/word.cjs && python3 scripts/dokumen/rapikan_docx.py dokumen/office/FUSIONIFY-Surat.docx dokumen/office/FUSIONIFY-Dokumen.docx && node scripts/dokumen/slide.cjs && python3 scripts/dokumen/sheet.py"
+    "build:office": "node scripts/dokumen/word.cjs && python3 scripts/dokumen/rapikan_docx.py dokumen/office/FUSIONIFY-Surat.docx dokumen/office/FUSIONIFY-Dokumen.docx dokumen/office/FUSIONIFY-Perjanjian.docx && node scripts/dokumen/slide.cjs && python3 scripts/dokumen/sheet.py",
+    "build:email": "node scripts/build-email.mjs"
   },
   "devDependencies": {
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
     "axe-core": "4.10.3",
     "docx": "9.7.1",
     "gsap": "3.12.5",
     "lenis": "1.1.13",
     "playwright": "1.56.0",
-    "pptxgenjs": "4.0.1"
+    "pptxgenjs": "4.0.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "typescript": "5.6.3"
   }
 }

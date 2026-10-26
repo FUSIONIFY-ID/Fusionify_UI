@@ -1,0 +1,56 @@
+/* FUSIONIFY UI · token kit untuk Tailwind CSS v4.
+     @import "tailwindcss";
+     @import "../fusionify-ui/css/fusionify.css";
+     @import "../fusionify-ui/react/tailwind-v4.css";
+   Kelas yang tersedia sama dengan preset v3: bg-blue, text-ink-2, border-edge, shadow-sticker,
+   font-head, rounded-l, bg-go-bg text-go, dan seterusnya. Warna ikut mode gelap kit. */
+@theme inline {
+  --color-blue: var(--blue);
+  --color-blue-deep: var(--blue-deep);
+  --color-blue-light: var(--blue-light);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-paper: var(--paper);
+  --color-line: var(--line);
+  --color-night: var(--night);
+  --color-card: var(--card);
+  --color-field: var(--field);
+  --color-edge: var(--edge);
+  --color-edge-shadow: var(--edge-shadow);
+  --color-text-blue: var(--text-blue);
+  --color-text-blue-deep: var(--text-blue-deep);
+  --color-inverse-bg: var(--inverse-bg);
+  --color-inverse-fg: var(--inverse-fg);
+  --color-danger: var(--danger);
+  --color-danger-bg: var(--danger-bg);
+  --color-go: var(--go);
+  --color-go-bg: var(--go-bg);
+  --color-beta: var(--beta);
+  --color-beta-bg: var(--beta-bg);
+  --color-wip: var(--wip);
+  --color-wip-bg: var(--wip-bg);
+  --color-plan: var(--plan);
+  --color-plan-bg: var(--plan-bg);
+  --color-eos: var(--eos);
+  --color-eos-bg: var(--eos-bg);
+
+  --font-head: var(--f-head);
+  --font-body: var(--f-body);
+  --font-num: var(--f-num);
+  --font-hand: var(--f-hand);
+
+  --radius-s: var(--r-s);
+  --radius-m: var(--r-m);
+  --radius-l: var(--r-l);
+  --radius-pill: var(--r-pill);
+
+  --shadow-pop: var(--shadow-pop);
+  --shadow-sticker: var(--shadow-sticker);
+  --shadow-soft: var(--shadow);
+
+  --ease-fy: var(--ease);
+  --ease-spring: var(--spring);
+}

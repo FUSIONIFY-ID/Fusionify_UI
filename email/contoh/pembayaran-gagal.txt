@@ -1,0 +1,18 @@
+Subjek: Pembayaran INV-001 belum berhasil
+
+Pembayaran belum berhasil
+
+Halo Budi, pembayaran untuk tagihan ini belum berhasil.
+
+Nomor: INV-001
+Jumlah: Rp100.000
+
+Waktu pembayaran habis.
+
+Coba bayar lagi: https://contoh.fusionify.id/bayar/INV-001
+
+Saldo atau uangmu terpotong tapi status belum berubah? Balas email ini dengan bukti transfer, kami bantu cek.
+
+--
+PT FUSIONIFY DIGITAL STORE
+hello@fusionify.id · WhatsApp +62 831-1138-0628

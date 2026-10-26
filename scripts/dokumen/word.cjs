@@ -1,5 +1,5 @@
 // FUSIONIFY UI · template Word (.docx).
-//   node scripts/dokumen/word.cjs   → dokumen/office/FUSIONIFY-Surat.docx dan FUSIONIFY-Dokumen.docx
+//   node scripts/dokumen/word.cjs   → dokumen/office/FUSIONIFY-Surat.docx, FUSIONIFY-Dokumen.docx, FUSIONIFY-Perjanjian.docx
 // Warna dan huruf mengikuti css/tokens.css. Huruf FUSIONIFY (OFL) ditanam di file .docx,
 // jadi tampil benar walau penerima belum memasang hurufnya.
 const fs = require("fs");
@@ -168,9 +168,75 @@ function dokumen() {
   });
 }
 
+
+// ---------- Perjanjian kerja sama (PRJ) ----------
+// Kerangka umum, bukan nasihat hukum. Untuk nilai besar atau jangka panjang, minta notaris/konsultan memeriksa.
+function perjanjian() {
+  const tengah = (children, o = {}) => P(children, { alignment: AlignmentType.CENTER, ...o });
+  const pihak = (rows) => new Table({ width: { size: LEBAR, type: WidthType.DXA }, columnWidths: [400, 1700, 250, LEBAR - 2350], borders: tanpaGarisTabel,
+    rows: rows.map(([no, l, isi]) => new TableRow({ children: [
+      new TableCell({ width: { size: 400, type: WidthType.DXA }, borders: tanpaGaris, children: [P(T(no), { spacing: { after: 0 } })] }),
+      new TableCell({ width: { size: 1700, type: WidthType.DXA }, borders: tanpaGaris, children: [P(T(l), { spacing: { after: 0 } })] }),
+      new TableCell({ width: { size: 250, type: WidthType.DXA }, borders: tanpaGaris, children: [P(T(":"), { spacing: { after: 0 } })] }),
+      new TableCell({ width: { size: LEBAR - 2350, type: WidthType.DXA }, borders: tanpaGaris, children: [P(isi, { spacing: { after: 0 } })] }),
+    ] })) });
+  const pasal = (n, judul, butir) => [
+    P(T(`Pasal ${n}`, { font: F.head, size: 24 }), { alignment: AlignmentType.CENTER, spacing: { before: 240, after: 0 }, keepNext: true, keepLines: true }),
+    P(T(judul, { bold: true, color: C.ink2 }), { alignment: AlignmentType.CENTER, spacing: { after: 80 }, keepNext: true }),
+    // keepNext + keepLines: satu pasal tidak terpotong di pergantian halaman
+    ...butir.map((b, i) => P(b, { numbering: { reference: `pasal-${n}`, level: 0 }, alignment: AlignmentType.JUSTIFIED, spacing: { after: 60 }, keepLines: true, keepNext: i < butir.length - 1 })),
+  ];
+  const PASAL = [
+    ["Ruang Lingkup", [[T("PIHAK PERTAMA mengerjakan "), G("pembuatan website company profile"), T(" untuk PIHAK KEDUA dengan rincian pada Lampiran 1.")], [T("Pekerjaan di luar Lampiran 1 dihitung terpisah setelah disetujui PARA PIHAK secara tertulis.")]]],
+    ["Jangka Waktu", [[T("Pekerjaan diselesaikan dalam "), G("21 (dua puluh satu) hari kerja"), T(" sejak pembayaran awal diterima dan bahan dari PIHAK KEDUA lengkap.")], [T("Keterlambatan karena bahan atau persetujuan dari PIHAK KEDUA tidak dihitung sebagai keterlambatan PIHAK PERTAMA.")]]],
+    ["Nilai dan Cara Pembayaran", [[T("Nilai pekerjaan sebesar "), G("Rp2.500.000 (dua juta lima ratus ribu rupiah)", { bold: true }), T(".")], [T("Pembayaran: "), G("50% di awal dan 50% setelah serah terima"), T(", ditransfer ke rekening PT FUSIONIFY DIGITAL STORE "), G("nama bank dan nomor rekening"), T(".")], [T("Setiap pembayaran disertai invoice dan kuitansi dari PIHAK PERTAMA.")]]],
+    ["Hak dan Kewajiban", [[T("PIHAK PERTAMA wajib mengerjakan pekerjaan sesuai ruang lingkup, memberi kabar kemajuan secara berkala, dan memperbaiki kesalahan yang ditemukan selama masa garansi "), G("30 (tiga puluh) hari"), T(" setelah serah terima.")], [T("PIHAK KEDUA wajib menyediakan bahan (teks, logo, foto, akses) tepat waktu, memberi masukan paling lambat "), G("3 (tiga) hari kerja"), T(" setelah diminta, dan membayar sesuai Pasal 3.")], [T("Revisi termasuk dalam nilai pekerjaan sebanyak "), G("2 (dua) kali"), T("; revisi berikutnya dihitung terpisah.")]]],
+    ["Kerahasiaan dan Data Pribadi", [[T("PARA PIHAK wajib merahasiakan informasi yang diterima dari pihak lain selama dan setelah perjanjian ini berakhir, kecuali diwajibkan oleh hukum.")], [T("Data pribadi yang diolah dalam pekerjaan ini hanya dipakai untuk keperluan pekerjaan dan dilindungi sesuai peraturan perundang-undangan tentang pelindungan data pribadi.")]]],
+    ["Hak Kekayaan Intelektual", [[T("Setelah pembayaran lunas, hak atas hasil akhir pekerjaan beralih kepada PIHAK KEDUA.")], [T("Pustaka, kerangka kerja, dan alat milik PIHAK PERTAMA atau pihak ketiga yang dipakai dalam pekerjaan tetap milik pemiliknya; PIHAK KEDUA mendapat hak pakai sesuai lisensinya.")], [T("PIHAK PERTAMA boleh mencantumkan pekerjaan ini di portofolio, kecuali PIHAK KEDUA menyatakan keberatan secara tertulis.")]]],
+    ["Keadaan Kahar", [[T("Keadaan kahar adalah kejadian di luar kendali PARA PIHAK, seperti bencana alam, kebakaran, gangguan listrik atau internet yang meluas, dan kebijakan pemerintah, yang membuat kewajiban tidak dapat dilaksanakan.")], [T("Pihak yang mengalaminya memberi tahu pihak lain paling lambat "), G("7 (tujuh) hari"), T(", dan jangka waktu disesuaikan bersama.")]]],
+    ["Pengakhiran", [[T("Perjanjian dapat diakhiri lebih awal atas kesepakatan tertulis PARA PIHAK.")], [T("Bila diakhiri oleh PIHAK KEDUA sebelum pekerjaan selesai, pembayaran yang sudah diterima tidak dikembalikan dan pekerjaan yang sudah selesai diserahkan sesuai keadaannya.")]]],
+    ["Penyelesaian Perselisihan", [[T("Perselisihan diselesaikan lebih dahulu secara musyawarah untuk mufakat.")], [T("Bila tidak tercapai dalam "), G("30 (tiga puluh) hari"), T(", PARA PIHAK sepakat memilih domisili hukum di Kepaniteraan "), G("Pengadilan Negeri Cibinong"), T(".")]]],
+    ["Penutup", [[T("Hal yang belum diatur akan dituangkan dalam addendum yang disepakati PARA PIHAK dan menjadi bagian tidak terpisahkan dari perjanjian ini.")], [T("Perjanjian ini dibuat rangkap 2 (dua), masing-masing bermaterai cukup dan mempunyai kekuatan hukum yang sama, serta berlaku sejak ditandatangani PARA PIHAK.")]]],
+  ];
+  const kolomTtd = (judul, inst, nama, jabatan) => new TableCell({ width: { size: LEBAR / 2, type: WidthType.DXA }, borders: tanpaGaris, children: [
+    tengah(T(judul, { bold: true }), { spacing: { after: 0 } }),
+    tengah(inst, { spacing: { after: 200 } }),
+    tengah(T("MATERAI Rp10.000", { font: F.num, size: 14, color: C.ink3 }), { spacing: { before: 200, after: 500 } }),
+    tengah(nama, { spacing: { after: 0 } }),
+    tengah(jabatan),
+  ] });
+  const isi = [
+    tengah(T("PERJANJIAN KERJA SAMA", { font: F.head, size: 34 }), { spacing: { before: 200, after: 0 } }),
+    tengah(G("Pembuatan Website Company Profile", { bold: true }), { spacing: { after: 0 } }),
+    tengah([T("Nomor: ", { color: C.ink2 }), G("001"), T("/PRJ/FDS/"), G("X"), T("/"), G("2026")], { spacing: { after: 300 } }),
+    P([T("Pada hari ini "), G("Senin"), T(", tanggal "), G("26 Oktober 2026"), T(", bertempat di "), G("Bogor"), T(", yang bertanda tangan di bawah ini:")], { alignment: AlignmentType.JUSTIFIED }),
+    pihak([["1.", "Nama", G("Muhammad Jundy Rabbani, S.Kom.", { bold: true })], ["", "Jabatan", G("Founder & CEO")], ["", "Alamat", G("Alamat kantor PT FUSIONIFY DIGITAL STORE")]]),
+    P([T("dalam hal ini bertindak untuk dan atas nama PT FUSIONIFY DIGITAL STORE, selanjutnya disebut "), T("PIHAK PERTAMA", { bold: true }), T(".")], { alignment: AlignmentType.JUSTIFIED, spacing: { before: 80 } }),
+    pihak([["2.", "Nama", G("Nama perwakilan klien", { bold: true })], ["", "Jabatan", G("Jabatan")], ["", "Instansi", G("Nama instansi atau usaha")], ["", "Alamat", G("Alamat instansi")]]),
+    P([T("dalam hal ini bertindak untuk dan atas nama "), G("nama instansi"), T(", selanjutnya disebut "), T("PIHAK KEDUA", { bold: true }), T(".")], { alignment: AlignmentType.JUSTIFIED, spacing: { before: 80 } }),
+    P([T("PIHAK PERTAMA dan PIHAK KEDUA, yang bersama-sama disebut "), T("PARA PIHAK", { bold: true }), T(", sepakat mengadakan perjanjian dengan ketentuan sebagai berikut.")], { alignment: AlignmentType.JUSTIFIED }),
+    ...PASAL.flatMap(([judul, butir], i) => pasal(i + 1, judul, butir)),
+    new Table({ width: { size: LEBAR, type: WidthType.DXA }, columnWidths: [LEBAR / 2, LEBAR / 2], borders: tanpaGarisTabel, rows: [new TableRow({ cantSplit: true, children: [
+      kolomTtd("PIHAK PERTAMA", T("PT FUSIONIFY DIGITAL STORE"), G("Muhammad Jundy Rabbani, S.Kom.", { bold: true, underline: {} }), G("Founder & CEO")),
+      kolomTtd("PIHAK KEDUA", G("Nama instansi"), G("Nama perwakilan klien", { bold: true, underline: {} }), G("Jabatan")),
+    ] })] }),
+    P(T("Lampiran 1 · Rincian pekerjaan", { font: F.num, bold: true, size: 16, color: C.deep, allCaps: true, characterSpacing: 30 }), { spacing: { before: 400, after: 60 }, keepNext: true }),
+    P(G("Desain dan pengembangan 5 halaman: Beranda, Tentang, Layanan, Portofolio, Kontak"), { numbering: { reference: "angka", level: 0 }, spacing: { after: 40 } }),
+    P(G("Tampilan responsif untuk HP, tablet, dan desktop"), { numbering: { reference: "angka", level: 0 }, spacing: { after: 40 } }),
+    P(G("Domain dan hosting 1 tahun"), { numbering: { reference: "angka", level: 0 } }),
+  ];
+  // Setiap pasal punya penomoran sendiri supaya butirnya mulai dari 1 lagi
+  const num = { config: [...numbering.config, ...PASAL.map((_, i) => ({ reference: `pasal-${i + 1}`, levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT, style: { paragraph: { indent: { left: 567, hanging: 284 } } } }] }))] };
+  return new Document({
+    creator: PERUSAHAAN, title: "Perjanjian kerja sama FUSIONIFY", description: "Template perjanjian. Kerangka umum, bukan nasihat hukum. Ganti semua teks berlatar kuning.",
+    styles, numbering: num, fonts,
+    sections: [{ properties: { page: PAGE }, headers: { default: kop() }, footers: { default: kaki("Perjanjian 001/PRJ/FDS  ·  Paraf: ______ / ______") }, children: isi }],
+  });
+}
+
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
-  for (const [nama, doc] of [["FUSIONIFY-Surat.docx", surat()], ["FUSIONIFY-Dokumen.docx", dokumen()]]) {
+  for (const [nama, doc] of [["FUSIONIFY-Surat.docx", surat()], ["FUSIONIFY-Dokumen.docx", dokumen()], ["FUSIONIFY-Perjanjian.docx", perjanjian()]]) {
     fs.writeFileSync(path.join(OUT, nama), await Packer.toBuffer(doc));
     console.log(`✓ dokumen/office/${nama}`);
   }

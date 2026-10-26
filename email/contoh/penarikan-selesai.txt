@@ -1,0 +1,20 @@
+Subjek: Penarikan saldo berhasil
+
+Penarikan berhasil
+
+Halo Toko Budi, dana penarikanmu sudah kami kirim ke rekening tujuan.
+
+Status: Selesai
+
+Jumlah: Rp1.500.000
+Diterima: Rp1.493.500
+Bank: BCA
+Rekening: •••• 1234
+Atas nama: Budi Santoso
+
+Waktu dana masuk mengikuti bank tujuan. Belum masuk dalam 1 x 24 jam? Balas email ini.
+
+--
+PT FUSIONIFY DIGITAL STORE
+hello@fusionify.id · WhatsApp +62 831-1138-0628
+Email ini dikirim karena kamu punya akun di layanan FUSIONIFY.

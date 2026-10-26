@@ -1,0 +1,20 @@
+Subjek: Pendaftaran merchant disetujui
+
+Pendaftaran merchant disetujui
+
+Halo Toko Budi, pendaftaran merchant kamu sudah kami tinjau dan disetujui.
+
+Status: Aktif
+
+LANGKAH BERIKUTNYA
+
+- Masuk ke dashboard
+- Ambil API key di menu Merchant & API key
+- Uji dengan kunci sandbox sebelum live
+
+Buka dashboard: https://contoh.fusionify.id/dashboard
+
+--
+PT FUSIONIFY DIGITAL STORE
+hello@fusionify.id · WhatsApp +62 831-1138-0628
+Email ini dikirim karena kamu punya akun di layanan FUSIONIFY.

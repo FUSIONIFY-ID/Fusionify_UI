@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.8.0 · 27 Oktober 2026
+
+- **Template email** (`email/`, panduan `email/README.md`): `renderEmail()` tanpa dependensi untuk Node, Deno, Bun, dan browser, tabel inline yang aman di Gmail/Outlook, teks polos otomatis, semua isian di-escape, tautan non-http jadi `#`. Sembilan template siap pakai: kode verifikasi, atur ulang password, selamat datang, pengajuan disetujui/ditolak, pembayaran berhasil/gagal, status penarikan (rekening otomatis disamarkan), pemberitahuan. PNG maskot ringan di `email/aset/`, pratinjau di `email/contoh/` (`npm run build:email`).
+- **React + Tailwind** (`react/`, panduan `react/README.md`): komponen TSX tipis di atas kelas kit (`Tombol`, `Chip`, `Kartu`, `Judul`, `Kicker`, `Lead`, `Seksi`, `Wrap`, `Segel`, `Maskot`, `KepalaMaskot`, `Gelembung`, `PanggungMaskot`, `Keadaan`, `BadgeProduk`, `FyAset`), preset Tailwind v3 dan token Tailwind v4, semuanya memakai variabel kit sehingga mode gelap ikut. `js/seal.d.ts` untuk TypeScript.
+- **Template perjanjian** (kode `PRJ`): `dokumen/cetak/perjanjian.html` (3 halaman, paraf, kotak materai dua pihak, lampiran) dan `dokumen/office/FUSIONIFY-Perjanjian.docx` (pasal tidak terpotong di pergantian halaman). Kerangka umum, bukan nasihat hukum.
+- Uji baru `tests/email.mjs` dan `tests/react.mjs`; `tests/dokumen.mjs` mencakup perjanjian.
+- AGENTS, DESIGN, README, dan skill punya bagian Email dan React.
+
 ## 1.7.0 · 26 Oktober 2026
 
 - **Template dokumen resmi** di folder baru `dokumen/` (panduan `dokumen/README.md`), semuanya memakai token, huruf, logo, segel, dan maskot kit:

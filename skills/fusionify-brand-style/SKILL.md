@@ -1,6 +1,6 @@
 ---
 name: fusionify-brand-style
-description: Use when building, redesigning, or fixing any FUSIONIFY website, product brand site, dashboard, admin panel, login page, mobile app (web/PWA/iOS/Android), or company document (surat resmi, invoice, penawaran, kuitansi, proposal, slide, PDF, Word, PowerPoint, Excel) for FUSIONIFY or its brands (Premiumify, FUSIONIFY BOT, StudyDate.id, Solutions, etc.) so it matches the fusionify.id design system.
+description: Use when building, redesigning, or fixing any FUSIONIFY website, product brand site, React/Tailwind app, dashboard, admin panel, login page, mobile app (web/PWA/iOS/Android), transactional email, or company document (surat resmi, invoice, penawaran, kuitansi, proposal, slide, PDF, Word, PowerPoint, Excel) for FUSIONIFY or its brands (Premiumify, FUSIONIFY BOT, StudyDate.id, Solutions, etc.) so it matches the fusionify.id design system.
 ---
 
 # FUSIONIFY brand style
@@ -194,6 +194,12 @@ Template ada di `dokumen/` (panduan `dokumen/README.md`):
 - Office di `dokumen/office/`: `FUSIONIFY-Surat.docx`, `FUSIONIFY-Dokumen.docx`, `FUSIONIFY-Slide.pptx` (layout FY Judul/Bagian/Isi/Judul saja/Angka/Penutup), `FUSIONIFY-Spreadsheet.xlsx` (Invoice, Anggaran, Daftar).
 - Isian wajib diganti berlatar kuning muda (`.ganti`). Cetak final: `node scripts/build-dokumen.mjs --final berkas.html --keluar hasil.pdf`.
 - Nomor dokumen `{urut}/{SRT|INV|PNW|KWT|PRJ}/FDS/{bulan romawi}/{tahun}`. Harga, angka, dan status wajib asli; pajak hanya bila PKP.
+
+## Email dan React
+
+- Email: `email/fy-email.js` (`renderEmail`) dan `email/templates.js` (kodeVerifikasi, aturUlangPassword, selamatDatang, pengajuanDisetujui/Ditolak, pembayaranBerhasil/Gagal, statusPenarikan, pemberitahuan). Tabel inline, tanpa SVG/WebP, PNG dari `email/aset/` di-host di domain produk, selalu kirim teks polos, tanpa emoji di subjek.
+- React: `react/index.tsx` (Tombol, Chip, Kartu, Judul, Kicker, Seksi, Maskot, KepalaMaskot, PanggungMaskot, Gelembung, Keadaan, BadgeProduk, Segel, FyAset) di atas `css/fusionify.css`. Tailwind: `react/tailwind-preset.js` (v3) atau `react/tailwind-v4.css` (v4); warna dari variabel kit, jangan hex sendiri.
+- Dokumen perjanjian: `dokumen/cetak/perjanjian.html`, `dokumen/office/FUSIONIFY-Perjanjian.docx` (kode PRJ; kerangka umum, bukan nasihat hukum).
 
 ## Isi dan bahasa
 

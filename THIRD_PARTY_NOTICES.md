@@ -12,3 +12,5 @@ Kode di repo ini ditulis oleh FUSIONIFY. Pihak ketiga yang dipakai:
 | docx (dev dependency, pembuat template Word di `scripts/dokumen/word.cjs`) | MIT |
 | pptxgenjs dan JSZip bawaannya (dev dependency, pembuat template PowerPoint di `scripts/dokumen/slide.cjs`) | MIT |
 | openpyxl (Python, pembuat template Excel di `scripts/dokumen/sheet.py`, tidak ikut dikirim) | MIT |
+| React, React DOM, @types/react, @types/react-dom (dev dependency, uji `react/`; produk memasang React sendiri) | MIT |
+| TypeScript (dev dependency, cek tipe `react/index.tsx`) | Apache License 2.0 |

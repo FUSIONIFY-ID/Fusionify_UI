@@ -162,6 +162,13 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
 - **Isian** yang wajib diganti selalu berlatar kuning muda (`--beta-bg`), di HTML, Word, dan Excel.
 - Ukuran: A4 tegak untuk surat dan dokumen, A5 mendatar untuk kuitansi, 16:9 untuk slide.
 
+## Email
+
+- Latar `--paper`, satu kartu putih bergaris tinta 2px dengan "bayangan" `border-bottom` 6px, sudut 24px.
+- Logo di atas kartu; kicker Exo 2 kapital bertitik; judul Afacad 800 dengan titik biru muda; maskot kecil (110×138) di kanan judul, disembunyikan di HP.
+- Rincian dalam tabel stiker; tombol kapsul biru bergaris tinta; catatan berlatar warna nada (`info`, `ok`, `warn`, `danger`); kode OTP dalam kotak stiker Exo 2.
+- Kaki: nama PT dan kontak publik, badge "Sebuah produk dari FUSIONIFY" untuk email produk.
+
 ## Batas
 
 - Semua kode ditulis sendiri. Jangan meniru situs lain, khususnya andikadevs: tidak ada maskot terbang ke pojok nav, pintu di huruf wordmark, tumpukan awan, atau laut dan kapal.

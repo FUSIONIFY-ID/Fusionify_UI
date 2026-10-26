@@ -149,6 +149,8 @@ Yang dicek: semua template di 8 ukuran layar (375 sampai 1920), tema terang dan 
 | `demo/` | Halaman contoh semua komponen |
 | `templates/` | Halaman siap pakai: `landing-produk.html`, `404.html`, `500.html`, `offline.html`, `maintenance.html`, `auth/` (masuk, daftar, lupa password, atur ulang, verifikasi OTP), `dashboard.html`, `admin.html`, `app-mobile.html`, `chat.html`, `acara.html`, `komponen.html` (katalog kontrol) |
 | `dokumen/` | Template dokumen resmi: surat, invoice, penawaran, kuitansi, proposal, slide (HTML → PDF di `cetak/`), Word, PowerPoint, Excel (`office/`), pratinjau PDF (`contoh/`). Panduan: `dokumen/README.md` |
+| `email/` | Template email transaksional (HTML aman Gmail/Outlook + teks polos), PNG maskot, pratinjau. Panduan: `email/README.md` |
+| `react/` | Komponen React (TSX) dan preset Tailwind v3/v4 dari token. Panduan: `react/README.md` |
 | `skills/` | Skill AI agent `fusionify-brand-style` (bisa dipasang dengan `npx skills add`) |
 | `tests/` | Uji otomatis (`npm test`) |
 | `scripts/` | `build-tokens.mjs`, `build-konteks.mjs`, `release.mjs`, `mascot-import.py` |

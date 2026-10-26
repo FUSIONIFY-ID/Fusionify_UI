@@ -23,7 +23,7 @@ for (const [n, harap] of kasus) cek(D.kalimatRupiah(n) === harap, `terbilang ${n
 cek(D.rupiah(1500000) === "Rp1.500.000", `rupiah: ${D.rupiah(1500000)}`);
 
 // 2. Template cetak
-const halaman = { "surat.html": 1, "invoice.html": 1, "penawaran.html": 1, "kuitansi.html": 1, "dokumen.html": 2, "slide.html": 5 };
+const halaman = { "surat.html": 1, "invoice.html": 1, "penawaran.html": 1, "kuitansi.html": 1, "dokumen.html": 2, "slide.html": 5, "perjanjian.html": 3 };
 const b = await chromium.launch();
 const p = await b.newPage();
 for (const [f, jumlah] of Object.entries(halaman)) {
@@ -62,6 +62,7 @@ for (const [f, jumlah] of Object.entries(halaman)) {
     cek(r.terbilang === "Empat juta tiga ratus ribu rupiah", `invoice terbilang ${r.terbilang}`);
   }
   if (f === "penawaran.html") cek(r.total === "Rp3.000.000", `penawaran total ${r.total}`);
+  if (f === "perjanjian.html") cek(r.terbilang === "Dua juta lima ratus ribu rupiah", `perjanjian terbilang ${r.terbilang}`);
   const pdf = await p.pdf({ preferCSSPageSize: true, printBackground: true });
   const nHal = (pdf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
   cek(nHal === jumlah, `${f}: PDF ${nHal} halaman, harusnya ${jumlah}`);
@@ -72,6 +73,7 @@ await b.close();
 const office = {
   "FUSIONIFY-Surat.docx": ["word/document.xml", "word/header1.xml", "word/fonts/"],
   "FUSIONIFY-Dokumen.docx": ["word/document.xml", "word/fonts/"],
+  "FUSIONIFY-Perjanjian.docx": ["word/document.xml", "word/header1.xml", "word/fonts/"],
   "FUSIONIFY-Slide.pptx": ["ppt/presentation.xml", "ppt/slideLayouts/", "ppt/theme/theme1.xml"],
   "FUSIONIFY-Spreadsheet.xlsx": ["xl/workbook.xml", "xl/worksheets/sheet2.xml"],
 };
