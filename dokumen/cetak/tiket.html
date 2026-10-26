@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E-tiket · FUSIONIFY</title>
+<link rel="stylesheet" href="cetak.css">
+<style>@page { size: 210mm 99mm; margin: 0; }</style>
+<!-- Template e-tiket acara, 210 x 99 mm (sepertiga A4, pas untuk dikirim sebagai PDF atau dicetak).
+     Pasangan halaman web: templates/acara.html. Gambar QR WAJIB dibuat dari kode tiket asli oleh sistem pendaftaran;
+     ../../templates/aset/qr-contoh.svg hanya contoh dan tidak bisa dipindai untuk masuk.
+     Web produk memakai logonya sendiri di kiri atas, plus badge "Sebuah produk dari FUSIONIFY". -->
+<script src="dokumen.js"></script>
+</head>
+<body>
+<section class="halaman tiket">
+  <div class="tiket-badan">
+    <div class="tiket-utama">
+      <div class="segel"></div>
+      <img class="maskot" src="../../mascot/welcome-420.webp" alt="" width="305" height="420">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:4mm">
+        <img src="../../brand/wordmark-white.svg" alt="FUSIONIFY" width="300" height="52" style="height:5mm;width:auto">
+        <span class="kicker">E-tiket</span>
+      </div>
+      <div style="align-self:center;display:grid;gap:2mm">
+        <h1><span class="ganti">Nama Acara yang Agak Panjang</span><span class="dot" style="color:#8cc0ff">.</span></h1>
+        <div style="font-size:9.5pt;color:#f2f8ff">Atas nama <b style="color:#fff"><span class="ganti">Nama Peserta</span></b></div>
+      </div>
+      <div class="fakta">
+        <div><span>Tanggal</span><b><span class="ganti">Sab, 14 Nov 2026</span></b></div>
+        <div><span>Jam</span><b><span class="ganti">09.00 WIB</span></b></div>
+        <div><span>Tempat</span><b><span class="ganti">Kota Bogor</span></b></div>
+      </div>
+    </div>
+    <div class="tiket-sobek">
+      <span class="kicker">Tiket masuk</span>
+      <img class="qr" src="../../templates/aset/qr-contoh.svg" alt="Kode QR tiket" width="330" height="330">
+      <div>
+        <div class="kode-tiket"><span class="ganti">TKT-7K2M-QX</span></div>
+        <div class="muted" style="font-size:7pt;line-height:1.4"><span class="ganti">1 orang</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

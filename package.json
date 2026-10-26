@@ -1,6 +1,6 @@
 {
   "name": "@fusionify/ui",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "private": true,
   "description": "Sistem desain FUSIONIFY: token, komponen CSS, gerak, segel, font, logo, dan maskot. Sumber: fusionify.id.",
   "type": "module",
@@ -22,7 +22,9 @@
     "./react": "./react/index.tsx",
     "./react/tailwind-preset": "./react/tailwind-preset.js",
     "./email": "./email/fy-email.js",
-    "./email/templates": "./email/templates.js"
+    "./email/templates": "./email/templates.js",
+    "./grafis/*": "./grafis/*",
+    "./dokumen/*": "./dokumen/*"
   },
   "peerDependencies": {
     "gsap": "^3.12.0",
@@ -38,7 +40,8 @@
     "release": "node scripts/release.mjs",
     "build:dokumen": "node scripts/build-dokumen.mjs",
     "build:office": "node scripts/dokumen/word.cjs && python3 scripts/dokumen/rapikan_docx.py dokumen/office/FUSIONIFY-Surat.docx dokumen/office/FUSIONIFY-Dokumen.docx dokumen/office/FUSIONIFY-Perjanjian.docx && node scripts/dokumen/slide.cjs && python3 scripts/dokumen/sheet.py",
-    "build:email": "node scripts/build-email.mjs"
+    "build:email": "node scripts/build-email.mjs",
+    "build:grafis": "node scripts/build-grafis.mjs"
   },
   "devDependencies": {
     "@types/react": "18.3.12",

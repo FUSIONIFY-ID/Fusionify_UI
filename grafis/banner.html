@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grafis · banner profil</title>
+<link rel="stylesheet" href="grafis.css">
+<script src="../dokumen/cetak/dokumen.js"></script>
+<script src="grafis.js"></script>
+</head>
+<body class="pratinjau">
+<!-- Banner profil. Foto profil menutup kiri bawah (X) atau kiri (LinkedIn), jadi isi diletakkan di tengah dan kanan. -->
+<h2>banner-x · biru (1500x500)</h2>
+<section class="kanvas banner-x biru" id="banner-x">
+  <span class="segel" style="width:900px;height:900px;left:-200px;top:-260px"></span>
+  <div style="position:absolute;left:470px;top:96px;display:grid;gap:20px;max-width:620px">
+    <img class="g-logo" src="../brand/wordmark-white.svg" alt="FUSIONIFY" width="300" height="52">
+    <h1 class="g-judul" style="font-size:64px"><span data-isi="judul">Fuse Ideas. Build Progress</span><span class="dot">.</span></h1>
+    <span class="g-url" style="font-size:26px" data-isi="url">fusionify.id</span>
+  </div>
+  <img class="g-maskot fx-oversize" data-isi-src="maskot" src="../mascot/wink.webp" alt="" width="557" height="720" style="height:440px;right:60px;bottom:-50px">
+</section>
+
+<h2>banner-in · kertas (1584x396)</h2>
+<section class="kanvas banner-in kertas" id="banner-in">
+  <span class="segel" style="width:700px;height:700px;right:180px;top:-150px"></span>
+  <div style="position:absolute;left:520px;top:64px;display:grid;gap:16px;max-width:560px">
+    <img class="g-logo" src="../brand/wordmark.svg" alt="FUSIONIFY" width="300" height="52">
+    <h1 class="g-judul" style="font-size:64px"><span data-isi="judul">Fuse Ideas. Build Progress</span><span class="dot">.</span></h1>
+    <span class="g-url" style="font-size:24px;color:var(--text-blue)" data-isi="url">fusionify.id</span>
+  </div>
+  <img class="g-maskot fx-oversize" data-isi-src="maskot" src="../mascot/happy.webp" alt="" width="577" height="720" style="height:360px;right:80px;bottom:-40px">
+</section>
+</body>
+</html>

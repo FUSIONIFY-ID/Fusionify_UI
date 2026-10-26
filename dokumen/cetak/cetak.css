@@ -5,6 +5,9 @@
    Ukuran halaman:
      .halaman        A4 tegak (210 × 297 mm)
      .halaman.a5     A5 mendatar (210 × 148 mm), untuk kuitansi
+     .halaman.a4-datar  A4 mendatar (297 × 210 mm), untuk sertifikat
+     .halaman.tiket  210 × 99 mm (sepertiga A4), untuk e-tiket acara
+     .halaman.kartu  90 × 55 mm, kartu nama (depan dan belakang)
      .slide          16:9 (1280 × 720 px)
    Teks yang wajib diganti ditandai <span class="ganti">…</span>: tampil kuning, dan
    `node scripts/build-dokumen.mjs --final` menolak mencetak selama masih ada (lihat dokumen/README.md). */
@@ -104,6 +107,54 @@ table.tabel { width: 100%; border-collapse: separate; border-spacing: 0; border:
 .bubble-cetak { position: absolute; background: var(--white); border: 2px solid var(--edge); border-radius: 22px; box-shadow: 0 3px 0 var(--edge-shadow); font-family: var(--f-hand); font-weight: 700; color: var(--ink); padding: 8px 18px 10px; white-space: nowrap; line-height: 1.05; }
 .bubble-cetak::after { content: ""; position: absolute; right: 26px; bottom: -11px; width: 16px; height: 16px; background: var(--white); border-right: 2px solid var(--edge); border-bottom: 2px solid var(--edge); transform: rotate(45deg); }
 .bubble-cetak.kiri::after { right: auto; left: 22px; }
+
+/* ---- Sertifikat (A4 mendatar) ---- */
+.halaman.a4-datar { width: 297mm; height: 210mm; padding: 14mm; }
+.sertifikat { position: relative; height: 100%; display: grid; grid-template-rows: auto 1fr auto; padding: 12mm 16mm 10mm; border: 2px solid var(--edge); border-radius: 26px; box-shadow: 0 5px 0 var(--edge-shadow); background: var(--white); overflow: hidden; isolation: isolate; }
+.sertifikat::before { content: ""; position: absolute; inset: 0; z-index: -2; background: radial-gradient(70% 70% at 100% 0%, var(--hero-glow), transparent 60%); }
+.sertifikat .segel { position: absolute; z-index: -1; color: var(--seal-tint); }
+.sertifikat .nama-penerima { font-size: 44pt; letter-spacing: -0.03em; line-height: 1; margin: 3mm 0 2mm; padding-bottom: 3mm; border-bottom: 2px solid var(--ink); display: inline-block; min-width: 140mm; }
+.sertifikat .sert-judul { font-size: 30pt; margin-top: 4mm; }
+.sertifikat .sert-isi { max-width: 165mm; font-size: 11.5pt; color: var(--ink-2); }
+.sertifikat .ttd-baris { display: flex; justify-content: space-between; align-items: flex-end; gap: 10mm; }
+.sertifikat .ttd-baris .ttd { margin: 0; width: 86mm; text-align: left; }
+.sertifikat .ttd-baris .ttd .ruang { height: 18mm; }
+.sertifikat .maskot { position: absolute; right: 12mm; bottom: 0; height: 74mm; width: auto; max-width: none; z-index: -1; }
+.sertifikat .kode { font-family: var(--f-num); font-size: 8pt; letter-spacing: 0.06em; color: var(--ink-3); }
+
+/* ---- E-tiket (210 × 99 mm) ---- */
+.halaman.tiket { width: 210mm; height: 99mm; padding: 6mm; }
+.tiket-badan { height: 100%; display: grid; grid-template-columns: 1fr 52mm; border: 2px solid var(--edge); border-radius: 18px; box-shadow: 0 4px 0 var(--edge-shadow); overflow: hidden; background: var(--white); }
+.tiket-utama { position: relative; display: grid; grid-template-rows: auto 1fr auto; gap: 3mm; padding: 6mm 7mm; background: var(--blue); color: #fff; overflow: hidden; isolation: isolate; }
+.tiket-utama .segel { position: absolute; right: -24mm; top: -26mm; width: 80mm; color: rgb(255 255 255 / 0.12); z-index: -1; }
+.tiket-utama .kicker { color: #f2f8ff; }
+.tiket-utama h1 { font-size: 23pt; color: #fff; max-width: 92mm; }
+.tiket-utama .fakta { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 2mm 7mm; font-size: 9pt; }
+.tiket-utama .fakta > div > span { display: block; font-family: var(--f-num); font-size: 6.8pt; letter-spacing: 0.14em; text-transform: uppercase; color: #f2f8ff; }
+.tiket-utama .fakta b { font-size: 10pt; }
+.tiket-utama .maskot { position: absolute; right: 2mm; bottom: -2mm; height: 46mm; width: auto; max-width: none; z-index: -1; }
+.tiket-sobek { position: relative; display: grid; align-content: space-between; justify-items: center; gap: 2mm; padding: 6mm 5mm 5mm; border-left: 2px dashed var(--edge); text-align: center; }
+.tiket-sobek::before, .tiket-sobek::after { content: ""; position: absolute; left: -7px; width: 12px; height: 12px; border-radius: 50%; background: #dfe8f3; border: 2px solid var(--edge); }
+.tiket-sobek::before { top: -8px; } .tiket-sobek::after { bottom: -8px; }
+.tiket-sobek img.qr { width: 38mm; height: 38mm; }
+.tiket-sobek .kode-tiket { font-family: var(--f-num); font-weight: 800; font-size: 11pt; letter-spacing: 0.08em; }
+@media print { .tiket-sobek::before, .tiket-sobek::after { background: #fff; } }
+
+/* ---- Kartu nama (90 × 55 mm) ---- */
+.halaman.kartu { width: 90mm; height: 55mm; padding: 5mm 6mm; font-size: 7.5pt; line-height: 1.45; }
+.halaman.kartu.biru { background: var(--blue); color: #fff; }
+.halaman.kartu .segel { position: absolute; color: rgb(255 255 255 / 0.12); }
+.kartu-depan { height: 100%; display: grid; place-content: center; justify-items: center; gap: 2.5mm; text-align: center; }
+.kartu-depan img { height: 11mm; width: auto; }
+.kartu-depan .tagline { font-family: var(--f-num); font-size: 6.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: #f2f8ff; }
+.kartu-belakang { height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
+.kartu-belakang h1 { font-size: 15pt; letter-spacing: -0.02em; }
+.kartu-belakang .jabatan { font-family: var(--f-num); font-size: 6.5pt; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-blue); }
+.kartu-belakang ul { list-style: none; align-self: end; display: grid; gap: 0.6mm; }
+.kartu-belakang li { display: flex; align-items: center; gap: 2mm; }
+.kartu-belakang li svg { width: 3mm; height: 3mm; flex: none; color: var(--blue); }
+.kartu-belakang .bawah { display: flex; justify-content: space-between; align-items: end; margin-top: 2mm; padding-top: 1.6mm; border-top: 1.5px solid var(--ink); font-family: var(--f-num); font-size: 6pt; letter-spacing: 0.08em; color: var(--ink-3); }
+.kartu-belakang .bawah img { height: 6mm; width: auto; }
 
 /* Paling akhir supaya menang atas margin layar di atas */
 @media print { body { background: none; } .halaman, .slide { margin: 0; box-shadow: none; } }

@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.9.0 · 27 Oktober 2026
+
+- **Halaman produk siap pakai** (kelas baru di `css/product.css`):
+  - `templates/bayar-qris.html`: halaman bayar QRIS dengan jumlah + salin, kode QR, batas waktu WIB dan hitung mundur, cek status otomatis tiap 5 detik, serta keadaan berhasil, kedaluwarsa, dan gagal bermaskot (`data-pay-state`). Pratinjau keadaan dengan `?status=`.
+  - `templates/status.html`: status layanan dengan banner kondisi, uptime 90 hari per layanan (30 hari di HP), dan riwayat gangguan. Data contoh berlabel.
+  - `templates/dokumentasi.html`: dokumentasi developer dengan menu samping (lipatan di HP), contoh kode bertab dan tombol salin, lencana metode, tabel parameter/error, daftar isi yang mengikuti bacaan.
+  - `templates/legal/privasi.html` dan `syarat.html`: kerangka Kebijakan Privasi (mengacu UU 27/2022 PDP) dan Syarat & Ketentuan. Bukan nasihat hukum.
+- `data-copy` kosong di dalam `.code-block` menyalin isi kodenya; `initApp()` sekarang juga mendukung `data-copy`. Daftar isi `[data-toc]` baru di `controls.js`.
+- `.sample-note` dipindah dari `app.css` ke `product.css` supaya bisa dipakai halaman web.
+- **Grafis media sosial dan OG image** (`grafis/`, panduan `grafis/README.md`): post 1080×1080, potret 1080×1350, story/sampul Reels-TikTok 1080×1920, OG 1200×630, banner X dan LinkedIn. Teks diganti lewat JSON atau parameter URL. `npm run build:grafis` membuat PNG dan menolak teks yang keluar kanvas atau tertutup maskot.
+- **Dokumen cetak baru**: sertifikat A4 mendatar (kode `SER`), e-tiket acara 210×99 mm dengan QR, dan kartu nama 90×55 mm depan-belakang.
+- **Tanda tangan email**: `tandaTangan()` di `email/fy-email.js`, pratinjau `email/contoh/tanda-tangan.html`, aset `email/aset/fusionify-mark-112.png`.
+- Uji baru `tests/grafis.mjs` dan `tests/interaksi-halaman-produk.mjs`; halaman baru masuk uji tata letak, kontras, tanpa JS, dan kurangi gerak.
+
 ## 1.8.0 · 27 Oktober 2026
 
 - **Template email** (`email/`, panduan `email/README.md`): `renderEmail()` tanpa dependensi untuk Node, Deno, Bun, dan browser, tabel inline yang aman di Gmail/Outlook, teks polos otomatis, semua isian di-escape, tautan non-http jadi `#`. Sembilan template siap pakai: kode verifikasi, atur ulang password, selamat datang, pengajuan disetujui/ditolak, pembayaran berhasil/gagal, status penarikan (rekening otomatis disamarkan), pemberitahuan. PNG maskot ringan di `email/aset/`, pratinjau di `email/contoh/` (`npm run build:email`).

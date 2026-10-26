@@ -52,6 +52,10 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 - Harga: `.plans > .plan` (`.featured`, `.ribbon`, `.price`, `.desc`), `.segment` (tab radio). `.plan` selalu di dalam `.plans` karena `.chip.plan` juga ada
 - Lain: `.quote` (testimoni), `.cta-band` (+ `.actions`, `.mascot`, `.seal-deco`), `.note` (`ok`, `warn`, `danger`), `.table-wrap` (wajib `tabindex="0" role="region" aria-label`) + `.table`, `.tags`/`.tag`, `.empty` (+ `.code` untuk 404), `.prod-head`
 - Halaman acara: `.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`
+- Bayar QRIS (`templates/bayar-qris.html`): `.pay[data-pay-state="menunggu|berhasil|kedaluwarsa|gagal"]` + panel `[data-show]`, `.pay-card`, `.pay-amount`, `.qr` + `.qr-box`, `.pay-timer` + `.pay-bar`, `.pay-meta`, `.pay-actions`, `.pay-result`. Jangan menulis nama penyedia pembayaran
+- Status layanan (`templates/status.html`): `.status-banner` (`.warn`, `.down`), `.uptime` + `.uptime-bars` (`span[data-s="warn|down|none"]`), `.incidents` > `.incident`, `.sample-note` untuk data contoh
+- Dokumentasi (`templates/dokumentasi.html`): `.docs` + `details.docs-nav` + `.docs-main` + `.docs-toc`, `.code-block` (+ `.code-head` tombol `data-copy=""`), `.endpoint` + `.method.get/.post/.put/.delete`, `.req`, `.docs-pager`, `.toc[data-toc]`
+- Legal (`templates/legal/privasi.html`, `syarat.html`): `.legal`, `.legal-head`, `.legal-switch`, `.toc`, `.prose` (judul bernomor otomatis)
 
 `app.css` (aplikasi, dimuat tambahan setelah fusionify.css; panggil `initApp()` dari `js/app.js`, bukan `initFusionify`):
 - Kerangka: `.app` (`data-app`) + `.side` (`data-side`) + `.scrim` + `.app-main` + `.topbar` (`.search`, `.side-toggle` `data-side-toggle`, `.user-chip`) + `.app-body`, `.side-nav` (`a[aria-current="page"]`, `.count`, `.group`), `.side-help`
@@ -190,14 +194,20 @@ Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis
 ## Dokumen
 
 Template ada di `dokumen/` (panduan `dokumen/README.md`):
-- HTML → PDF di `dokumen/cetak/`: `surat.html`, `invoice.html`, `penawaran.html`, `kuitansi.html`, `dokumen.html`, `slide.html`. Gaya `cetak.css` memakai `css/tokens.css`; `dokumen.js` menghitung Rupiah, total, terbilang, tanggal, dan menggambar `.segel`.
+- HTML → PDF di `dokumen/cetak/`: `surat.html`, `invoice.html`, `penawaran.html`, `kuitansi.html`, `dokumen.html`, `slide.html`, `perjanjian.html`, `sertifikat.html` (A4 mendatar), `tiket.html` (e-tiket 210×99 mm), `kartu-nama.html` (90×55 mm). Gaya `cetak.css` memakai `css/tokens.css`; `dokumen.js` menghitung Rupiah, total, terbilang, tanggal, dan menggambar `.segel`.
 - Office di `dokumen/office/`: `FUSIONIFY-Surat.docx`, `FUSIONIFY-Dokumen.docx`, `FUSIONIFY-Slide.pptx` (layout FY Judul/Bagian/Isi/Judul saja/Angka/Penutup), `FUSIONIFY-Spreadsheet.xlsx` (Invoice, Anggaran, Daftar).
 - Isian wajib diganti berlatar kuning muda (`.ganti`). Cetak final: `node scripts/build-dokumen.mjs --final berkas.html --keluar hasil.pdf`.
-- Nomor dokumen `{urut}/{SRT|INV|PNW|KWT|PRJ}/FDS/{bulan romawi}/{tahun}`. Harga, angka, dan status wajib asli; pajak hanya bila PKP.
+- Nomor dokumen `{urut}/{SRT|INV|PNW|KWT|PRJ|SER}/FDS/{bulan romawi}/{tahun}`. Harga, angka, dan status wajib asli; pajak hanya bila PKP.
+
+## Grafis media sosial dan OG image
+
+- `grafis/post.html` (1080×1080), `potret.html` (1080×1350), `story.html` (1080×1920, juga sampul Reels/TikTok), `og.html` (1200×630), `banner.html` (X, LinkedIn). Satu `.kanvas[id]` = satu PNG.
+- Ganti teks lewat JSON: `node scripts/build-grafis.mjs grafis/og.html --kanvas og-produk --isi isi.json --keluar hasil/` (kunci `judul`, `kicker`, `teks`, `status`, `url`, `maskot`, `logo`, dll.). Perintah menolak teks yang keluar kanvas atau tertutup maskot.
+- Setiap halaman publik produk punya `og:image` 1200×630.
 
 ## Email dan React
 
-- Email: `email/fy-email.js` (`renderEmail`) dan `email/templates.js` (kodeVerifikasi, aturUlangPassword, selamatDatang, pengajuanDisetujui/Ditolak, pembayaranBerhasil/Gagal, statusPenarikan, pemberitahuan). Tabel inline, tanpa SVG/WebP, PNG dari `email/aset/` di-host di domain produk, selalu kirim teks polos, tanpa emoji di subjek.
+- Email: `email/fy-email.js` (`renderEmail`) dan `email/templates.js` (kodeVerifikasi, aturUlangPassword, selamatDatang, pengajuanDisetujui/Ditolak, pembayaranBerhasil/Gagal, statusPenarikan, pemberitahuan), tanda tangan email `tandaTangan({ nama, jabatan, aset })`. Tabel inline, tanpa SVG/WebP, PNG dari `email/aset/` di-host di domain produk, selalu kirim teks polos, tanpa emoji di subjek.
 - React: `react/index.tsx` (Tombol, Chip, Kartu, Judul, Kicker, Seksi, Maskot, KepalaMaskot, PanggungMaskot, Gelembung, Keadaan, BadgeProduk, Segel, FyAset) di atas `css/fusionify.css`. Tailwind: `react/tailwind-preset.js` (v3) atau `react/tailwind-v4.css` (v4); warna dari variabel kit, jangan hex sendiri.
 - Dokumen perjanjian: `dokumen/cetak/perjanjian.html`, `dokumen/office/FUSIONIFY-Perjanjian.docx` (kode PRJ; kerangka umum, bukan nasihat hukum).
 

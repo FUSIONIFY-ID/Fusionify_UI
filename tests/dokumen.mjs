@@ -23,7 +23,7 @@ for (const [n, harap] of kasus) cek(D.kalimatRupiah(n) === harap, `terbilang ${n
 cek(D.rupiah(1500000) === "Rp1.500.000", `rupiah: ${D.rupiah(1500000)}`);
 
 // 2. Template cetak
-const halaman = { "surat.html": 1, "invoice.html": 1, "penawaran.html": 1, "kuitansi.html": 1, "dokumen.html": 2, "slide.html": 5, "perjanjian.html": 3 };
+const halaman = { "sertifikat.html": 1, "tiket.html": 1, "kartu-nama.html": 2, "surat.html": 1, "invoice.html": 1, "penawaran.html": 1, "kuitansi.html": 1, "dokumen.html": 2, "slide.html": 5, "perjanjian.html": 3 };
 const b = await chromium.launch();
 const p = await b.newPage();
 for (const [f, jumlah] of Object.entries(halaman)) {

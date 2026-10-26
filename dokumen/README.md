@@ -19,6 +19,9 @@ Template dokumen resmi dengan sistem desain yang sama dengan web FUSIONIFY: warn
 | Presentasi, pitch deck | PowerPoint | `office/FUSIONIFY-Slide.pptx` |
 | | PDF dari HTML | `cetak/slide.html` |
 | Anggaran, daftar, pelacak | Excel | `office/FUSIONIFY-Spreadsheet.xlsx` |
+| Sertifikat (penghargaan, keikutsertaan) | PDF dari HTML, A4 mendatar | `cetak/sertifikat.html` |
+| E-tiket acara | PDF dari HTML, 210 × 99 mm | `cetak/tiket.html` |
+| Kartu nama | PDF dari HTML, 90 × 55 mm (depan + belakang) | `cetak/kartu-nama.html` |
 
 Pratinjau semua template HTML ada di `contoh/*.pdf`.
 
@@ -34,6 +37,9 @@ Pratinjau semua template HTML ada di `contoh/*.pdf`.
 - **Materai:** kuitansi dan perjanjian bernilai di atas Rp5.000.000 memakai materai Rp10.000.
 - **Perjanjian** adalah kerangka umum, bukan nasihat hukum. Sesuaikan pasal dengan kesepakatan, dan untuk nilai besar, kerja sama jangka panjang, atau pengolahan data pribadi dalam jumlah besar, minta notaris atau konsultan hukum memeriksa dulu. Setiap halaman diparaf kedua pihak.
 - **Tanpa em dash (—)** di teks dokumen. Pakai koma, titik dua, atau kalimat baru.
+- **E-tiket:** gambar QR dibuat sistem pendaftaran dari kode tiket asli. `templates/aset/qr-contoh.svg` hanya contoh.
+- **Kartu nama** memakai kontak publik perusahaan. Untuk percetakan, minta tambahan bleed 3 mm di sisi depan yang berlatar biru.
+- **Sertifikat:** tulis "Cek keaslian" hanya kalau kodenya memang bisa dicek di web; kalau belum, hapus barisnya.
 - **Rahasia:** proyek rahasia klien pemerintah dan nama provider pembayaran tidak ditulis di dokumen yang keluar dari perusahaan.
 
 ### Penomoran
@@ -47,6 +53,7 @@ Pratinjau semua template HTML ada di `contoh/*.pdf`.
 | `PNW` | Penawaran harga |
 | `KWT` | Kuitansi |
 | `PRJ` | Perjanjian / MoU |
+| `SER` | Sertifikat |
 
 ## Memakai template HTML → PDF
 

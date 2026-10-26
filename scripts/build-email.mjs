@@ -6,6 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import * as T from "../email/templates.js";
+import { tandaTangan } from "../email/fy-email.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const out = path.join(root, "email", "contoh");
@@ -38,3 +39,9 @@ for (const [nama, m] of Object.entries(contoh)) {
   fs.writeFileSync(path.join(out, `${nama}.txt`), `Subjek: ${m.subject}\n\n${m.text}`);
   console.log(`✓ email/contoh/${nama}.html (${(Buffer.byteLength(m.html) / 1024).toFixed(1)} KB)`);
 }
+
+// Tanda tangan: dibungkus halaman kecil supaya bisa dibuka, diblok, lalu disalin ke Gmail/Outlook
+const tt = tandaTangan({ nama: "Nama Lengkap", jabatan: "Jabatan", aset: "../aset/" });
+fs.writeFileSync(path.join(out, "tanda-tangan.html"), `<!doctype html><html lang="id"><head><meta charset="utf-8"><title>Tanda tangan email FUSIONIFY</title></head><body style="margin:32px;background:#fff">\n<!-- Ganti nama dan jabatan lewat tandaTangan() di email/fy-email.js, atau edit teksnya di sini. Saat dipakai sungguhan, gambar harus URL https. -->\n${tt.html}\n</body></html>`);
+fs.writeFileSync(path.join(out, "tanda-tangan.txt"), tt.text);
+console.log("✓ email/contoh/tanda-tangan.html");

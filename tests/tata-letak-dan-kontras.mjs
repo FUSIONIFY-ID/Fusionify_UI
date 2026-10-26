@@ -2,7 +2,7 @@
 import { chromium } from 'playwright';
 import { BASE, AXE, NM, FIX } from './_env.mjs';
 import fs from 'fs';
-const pages=['demo/index.html','templates/landing-produk.html','templates/404.html','templates/auth/masuk.html','templates/auth/daftar.html','templates/auth/lupa-password.html','templates/auth/atur-ulang-password.html','templates/dashboard.html','templates/admin.html','templates/komponen.html','templates/app-mobile.html','templates/chat.html','templates/acara.html','templates/auth/verifikasi.html','templates/500.html','templates/offline.html','templates/maintenance.html'];
+const pages=['demo/index.html','templates/landing-produk.html','templates/404.html','templates/auth/masuk.html','templates/auth/daftar.html','templates/auth/lupa-password.html','templates/auth/atur-ulang-password.html','templates/dashboard.html','templates/admin.html','templates/komponen.html','templates/app-mobile.html','templates/chat.html','templates/acara.html','templates/auth/verifikasi.html','templates/500.html','templates/offline.html','templates/maintenance.html','templates/bayar-qris.html','templates/status.html','templates/dokumentasi.html','templates/legal/privasi.html','templates/legal/syarat.html'];
 const sizes=[[375,667],[390,844],[768,1024],[820,1180],[1024,768],[1366,768],[1440,900],[1920,1080]];
 const b = await chromium.launch(); const issues=[];
 const route = (p)=>p.route(/cdn\.jsdelivr\.net\/npm\/(gsap|lenis)@[^/]+\/(.*)$/, r=>{ const m=r.request().url().match(/npm\/(gsap|lenis)@[^/]+\/(.*)$/); r.fulfill({path: NM+m[1]+'/'+m[2], contentType:'text/javascript'}); });

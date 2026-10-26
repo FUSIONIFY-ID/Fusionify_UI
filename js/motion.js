@@ -311,10 +311,11 @@ export function initFusionify(opts = {}) {
     clearTimeout(el._t);
     el._t = setTimeout(() => el.classList.remove("show"), 2600);
   };
-  /* Tombol salin: <button data-copy="hello@fusionify.id" data-copied="Email disalin!"> */
+  /* Tombol salin: <button data-copy="hello@fusionify.id" data-copied="Email disalin!">
+     data-copy kosong di dalam .code-block = salin isi <pre> di blok itu. */
   $$("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
     try {
-      await navigator.clipboard.writeText(b.dataset.copy);
+      await navigator.clipboard.writeText(b.dataset.copy || b.closest(".code-block")?.querySelector("pre")?.innerText || "");
       toast(b.dataset.copied || "OK"); sfx.play("ting");
       b.classList.add("done"); setTimeout(() => b.classList.remove("done"), 2000);
     } catch {}

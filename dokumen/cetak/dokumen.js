@@ -83,7 +83,7 @@ function hitung(root = document) {
   return { subtotal, diskon, pajak, total };
 }
 
-if (typeof window !== "undefined") window.FYDokumen = { terbilang, kalimatRupiah, rupiah, tanggalIndonesia, hitung };
+if (typeof window !== "undefined") window.FYDokumen = { terbilang, kalimatRupiah, rupiah, tanggalIndonesia, hitung, pasangSegel };
 if (typeof document !== "undefined") {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => hitung());
   else hitung();

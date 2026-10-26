@@ -5,6 +5,7 @@ Template email transaksional dengan gaya FUSIONIFY: kartu stiker, judul Afacad d
 | File | Isi |
 | --- | --- |
 | `fy-email.js` | `renderEmail(opsi)` → `{ subject, html, text }`, `esc()`, `FUSIONIFY` (merek bawaan) |
+| `fy-email.js` → `tandaTangan()` | Tanda tangan email karyawan atau produk (`{ html, text }`). Pratinjau: `contoh/tanda-tangan.html` |
 | `templates.js` | Template siap pakai: `kodeVerifikasi`, `aturUlangPassword`, `selamatDatang`, `pengajuanDisetujui`, `pengajuanDitolak`, `pembayaranBerhasil`, `pembayaranGagal`, `statusPenarikan`, `pemberitahuan` |
 | `aset/` | PNG maskot (220×276, tampil 110×138) dan badge produk. Host di domain produk |
 | `contoh/` | Pratinjau HTML dan teks polos setiap template (`npm run build:email`) |
@@ -64,3 +65,13 @@ Semua teks di-escape. Tautan hanya menerima `https:`, `http:`, `mailto:`, `tel:`
 - Satu email, satu tujuan: satu tombol utama. Jangan memakai emoji di subjek atau judul.
 - Data sensitif disamarkan: nomor rekening hanya 4 digit terakhir (otomatis di `statusPenarikan`). Jangan pernah mengirim password atau API key lewat email.
 - Pengirim memakai domain sendiri yang sudah diverifikasi (SPF/DKIM), bukan domain milik orang lain.
+
+## Tanda tangan email
+
+```js
+import { tandaTangan } from "./fy-email.js";
+const { html, text } = tandaTangan({ nama: "Nama Lengkap", jabatan: "Jabatan", aset: "https://fusionify.id/fy/email/" });
+// produk: tandaTangan({ …, merek: { nama: "Premiumify", logo: "https://…/logo-112.png", url: "https://premiumify.my.id" }, produkFusionify: true })
+```
+
+Pasang di Gmail: buka `contoh/tanda-tangan.html` (atau HTML hasil fungsi di atas) di browser, blok semuanya, salin, lalu tempel di **Setelan → Lihat semua setelan → Tanda tangan**. Gambar harus URL https yang benar-benar di-host (`aset/fusionify-mark-112.png`). Kontak memakai kontak publik; email kerja pribadi boleh lewat opsi `email`, nomor HP pribadi jangan.

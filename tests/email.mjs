@@ -6,7 +6,7 @@ import { chromium } from "playwright";
 import fs from "node:fs";
 import path from "node:path";
 import { BASE, ROOT } from "./_env.mjs";
-import { renderEmail } from "../email/fy-email.js";
+import { renderEmail, tandaTangan } from "../email/fy-email.js";
 import * as T from "../email/templates.js";
 
 let lulus = 0, gagal = 0;
@@ -46,6 +46,19 @@ try { renderEmail({ judul: "x", maskot: "happy" }); } catch (e) { galat = e.mess
 cek(galat.includes("aset"), "maskot tanpa aset harus ditolak");
 try { renderEmail({ judul: "x", maskot: "naga", aset: "https://x/" }); galat = ""; } catch (e) { galat = e.message; }
 cek(galat.includes("tidak ada"), "maskot tidak dikenal harus ditolak");
+
+// Tanda tangan email
+{
+  const tt = tandaTangan({ nama: "Budi <b>", jabatan: "Desainer", aset: "https://contoh.id/fy/email/" });
+  cek(tt.html.includes("Budi &lt;b&gt;") && !tt.html.includes("<b>"), "tanda tangan: nama tidak di-escape");
+  cek(tt.html.includes("hello@fusionify.id") && tt.html.includes("+62 831-1138-0628"), "tanda tangan: kontak publik hilang");
+  cek(tt.html.includes("https://contoh.id/fy/email/fusionify-mark-112.png") && /width="56" height="56" alt="FUSIONIFY"/.test(tt.html), "tanda tangan: logo");
+  cek(!/<svg|\.webp|<style/i.test(tt.html), "tanda tangan: SVG/WebP/style tidak boleh");
+  cek(tt.text.startsWith("-- \nBudi <b>") && tt.text.includes("PT FUSIONIFY DIGITAL STORE"), "tanda tangan: teks polos");
+  const tp = tandaTangan({ nama: "A", jabatan: "B", merek: { nama: "Premiumify", logo: "javascript:alert(1)", url: "https://premiumify.my.id" }, produkFusionify: true });
+  cek(tp.html.includes("Premiumify") && tp.html.includes("Sebuah produk dari FUSIONIFY") && !tp.html.includes("javascript:"), "tanda tangan produk");
+  cek(fs.existsSync(path.join(ROOT, "email/aset/fusionify-mark-112.png")), "aset fusionify-mark-112.png tidak ada");
+}
 
 // Tampilan di HP (390px) dan desktop: tanpa scroll samping, gambar contoh termuat
 const b = await chromium.launch();

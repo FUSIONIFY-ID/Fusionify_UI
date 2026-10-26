@@ -198,3 +198,39 @@ export function renderEmail(o) {
 
   return { subject: o.subject || o.judul || m.nama, html, text };
 }
+
+// ---------------------------------------------------------------------------
+// Tanda tangan email karyawan / produk.
+//   import { tandaTangan } from "./fy-email.js";
+//   const { html, text } = tandaTangan({ nama: "Nama Lengkap", jabatan: "Jabatan", aset: "https://fusionify.id/fy/email/" });
+// Opsi: nama, jabatan (wajib), email (bawaan hello@fusionify.id; email kerja pribadi boleh),
+//   aset (folder https tempat fusionify-mark-112.png di-host), merek ({ nama, logo, url } untuk produk; logo PNG 112x112),
+//   produkFusionify (true = baris "Sebuah produk dari FUSIONIFY").
+// Cara pasang di Gmail: buka email/contoh/tanda-tangan.html di browser, blok semua, salin, tempel di
+//   Setelan → Tanda tangan. Jangan memakai gambar tanda tangan tangan (scan) atau nomor pribadi di sini.
+export function tandaTangan(o = {}) {
+  const m = Object.assign({ nama: "FUSIONIFY", url: "https://fusionify.id" }, o.merek || {});
+  const email = o.email || "hello@fusionify.id";
+  const logo = m.logo || (o.aset || "https://fusionify.id/fy/email/") + "fusionify-mark-112.png";
+  const web = String(m.url).replace(/^https?:\/\//, "").replace(/\/$/, "");
+  const baris = (isi) => `<tr><td style="padding:1px 0;font-family:${F.body};font-size:13px;line-height:1.5;color:${T.ink2}">${isi}</td></tr>`;
+  const tautan = (url, teks) => `<a href="${amanUrl(url)}" style="color:${T.blueDeep};text-decoration:none">${esc(teks)}</a>`;
+  const html = `<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">
+<tr>
+<td valign="top" style="padding:2px 14px 0 0"><a href="${amanUrl(m.url)}" style="text-decoration:none"><img src="${amanUrl(logo)}" width="56" height="56" alt="${esc(m.nama)}" style="display:block;border:0;width:56px;height:56px"></a></td>
+<td valign="top" style="padding:0 0 0 14px;border-left:2px solid ${T.blueLight}">
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">
+<tr><td style="font-family:${F.head};font-size:18px;font-weight:800;line-height:1.2;color:${T.ink}">${esc(o.nama)}<span style="color:${T.blueLight}">.</span></td></tr>
+<tr><td style="padding:0 0 6px;font-family:${F.num};font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${T.blue}">${esc(o.jabatan)}${m.nama !== "FUSIONIFY" ? " · " + esc(m.nama) : ""}</td></tr>
+${baris(tautan("mailto:" + email, email))}
+${baris(`WhatsApp ${tautan("https://wa.me/6283111380628", "+62 831-1138-0628")}`)}
+${baris(tautan(m.url, web))}
+<tr><td style="padding:6px 0 0;font-family:${F.num};font-size:11px;color:${T.ink3}">${o.produkFusionify ? "Sebuah produk dari FUSIONIFY · " : ""}${esc(FUSIONIFY.perusahaan)}</td></tr>
+</table>
+</td>
+</tr>
+</table>`;
+  const text = ["-- ", `${o.nama}`, `${o.jabatan}${m.nama !== "FUSIONIFY" ? " · " + m.nama : ""}`, email, "WhatsApp +62 831-1138-0628", web,
+    (o.produkFusionify ? "Sebuah produk dari FUSIONIFY · " : "") + FUSIONIFY.perusahaan].join("\n");
+  return { html, text };
+}

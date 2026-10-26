@@ -142,6 +142,14 @@ export function initApp() {
     el._t = setTimeout(() => el.classList.remove("show"), 2600);
   };
   $$("[data-toast-msg]").forEach((b) => b.addEventListener("click", () => toast(b.dataset.toastMsg)));
+  /* Tombol salin, sama seperti di motion.js: data-copy="teks" data-copied="Disalin!" */
+  $$("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(b.dataset.copy || b.closest(".code-block")?.querySelector("pre")?.innerText || "");
+      toast(b.dataset.copied || "Disalin");
+      b.classList.add("done"); setTimeout(() => b.classList.remove("done"), 2000);
+    } catch { toast("Gagal menyalin. Salin manual, ya."); }
+  }));
 
   return { toast, snackbar, otpError, setSide };
 }

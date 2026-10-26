@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sertifikat · FUSIONIFY</title>
+<link rel="stylesheet" href="cetak.css">
+<style>@page { size: 297mm 210mm; margin: 0; }</style>
+<!-- Template sertifikat FUSIONIFY, A4 mendatar. Untuk penghargaan, keikutsertaan acara, atau penyelesaian kelas.
+     Satu sertifikat = satu <section class="halaman a4-datar">. Untuk banyak penerima, salin section-nya.
+     Nomor: {urut}/SER/FDS/{bulan romawi}/{tahun}. Kode verifikasi hanya ditulis kalau memang bisa dicek di web. -->
+<script src="dokumen.js"></script>
+</head>
+<body>
+<section class="halaman a4-datar">
+  <div class="sertifikat">
+    <div class="segel" style="width:150mm;right:-46mm;top:-58mm"></div>
+    <div class="segel" style="width:70mm;left:-26mm;bottom:-30mm"></div>
+    <img class="maskot" src="../../mascot/happy-420.webp" alt="" width="337" height="420">
+
+    <header style="display:flex;justify-content:space-between;align-items:center">
+      <img src="../../brand/kit/fusionify-logo-horizontal.png" alt="FUSIONIFY" width="1087" height="340" style="height:12mm;width:auto">
+      <span class="num muted" style="font-size:8.5pt">No. <b style="color:var(--ink)"><span class="ganti">001</span>/SER/FDS/<span class="ganti">X</span>/<span class="ganti">2026</span></b></span>
+    </header>
+
+    <div style="align-self:center;display:grid;justify-items:start;gap:1mm">
+      <span class="kicker" style="font-size:9pt">Sertifikat</span>
+      <h1 class="sert-judul"><span class="ganti">Penghargaan</span><span class="dot">.</span></h1>
+      <p style="margin-top:6mm;font-size:11pt;color:var(--ink-2)">Diberikan kepada</p>
+      <h2 class="nama-penerima"><span class="ganti">Nama Penerima</span></h2>
+      <p class="sert-isi">Atas <span class="ganti">kontribusi dan kerja kerasnya sebagai pembicara di acara Nama Acara, Bogor, 14 November 2026</span>.</p>
+    </div>
+
+    <div class="ttd-baris" style="padding-right:62mm">
+      <div class="ttd">
+        Bogor, <span data-tanggal></span>
+        <div class="ruang"></div>
+        <div class="nama"><span class="ganti">Nama Penanda Tangan</span></div>
+        <div><span class="ganti">Jabatan</span>, PT FUSIONIFY DIGITAL STORE</div>
+      </div>
+      <p class="kode">Cek keaslian: <span class="ganti">fusionify.id/sertifikat/KODE</span></p>
+    </div>
+  </div>
+</section>
+</body>
+</html>

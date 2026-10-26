@@ -147,13 +147,14 @@ Yang dicek: semua template di 8 ukuran layar (375 sampai 1920), tema terang dan 
 | `mascot/` | Maskot badan penuh, kepala, papan, stiker bot; pose welcome, loading, empty, paid, pay-failed, offline; `POSE-BARU.md` untuk cara menambah pose |
 | `badge/` | "Sebuah produk dari FUSIONIFY" ID/EN, terang/gelap |
 | `demo/` | Halaman contoh semua komponen |
-| `templates/` | Halaman siap pakai: `landing-produk.html`, `404.html`, `500.html`, `offline.html`, `maintenance.html`, `auth/` (masuk, daftar, lupa password, atur ulang, verifikasi OTP), `dashboard.html`, `admin.html`, `app-mobile.html`, `chat.html`, `acara.html`, `komponen.html` (katalog kontrol) |
-| `dokumen/` | Template dokumen resmi: surat, invoice, penawaran, kuitansi, proposal, slide (HTML → PDF di `cetak/`), Word, PowerPoint, Excel (`office/`), pratinjau PDF (`contoh/`). Panduan: `dokumen/README.md` |
-| `email/` | Template email transaksional (HTML aman Gmail/Outlook + teks polos), PNG maskot, pratinjau. Panduan: `email/README.md` |
+| `templates/` | Halaman siap pakai: `landing-produk.html`, `404.html`, `500.html`, `offline.html`, `maintenance.html`, `auth/` (masuk, daftar, lupa password, atur ulang, verifikasi OTP), `dashboard.html`, `admin.html`, `app-mobile.html`, `chat.html`, `acara.html`, `komponen.html` (katalog kontrol), `bayar-qris.html`, `status.html`, `dokumentasi.html`, `legal/` (privasi, syarat) |
+| `dokumen/` | Template dokumen resmi: surat, invoice, penawaran, kuitansi, perjanjian, proposal, slide, sertifikat, e-tiket, kartu nama (HTML → PDF di `cetak/`), Word, PowerPoint, Excel (`office/`), pratinjau PDF (`contoh/`). Panduan: `dokumen/README.md` |
+| `email/` | Template email transaksional (HTML aman Gmail/Outlook + teks polos), tanda tangan email, PNG maskot, pratinjau. Panduan: `email/README.md` |
+| `grafis/` | Template grafis media sosial (post, potret, story/sampul Reels-TikTok, banner) dan OG image, dirender jadi PNG dengan `npm run build:grafis`. Panduan: `grafis/README.md` |
 | `react/` | Komponen React (TSX) dan preset Tailwind v3/v4 dari token. Panduan: `react/README.md` |
 | `skills/` | Skill AI agent `fusionify-brand-style` (bisa dipasang dengan `npx skills add`) |
 | `tests/` | Uji otomatis (`npm test`) |
-| `scripts/` | `build-tokens.mjs`, `build-konteks.mjs`, `release.mjs`, `mascot-import.py` |
+| `scripts/` | `build-tokens.mjs`, `build-konteks.mjs`, `release.mjs`, `build-dokumen.mjs`, `build-email.mjs`, `build-grafis.mjs`, `mascot-import.py` |
 
 ## Atribut data yang dipahami `initFusionify()`
 

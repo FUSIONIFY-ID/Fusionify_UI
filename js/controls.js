@@ -10,7 +10,7 @@
 // - Dropdown / split button ([data-dropdown] + .menu berikutnya): klik luar, Esc, panah atas/bawah
 // - Modal (<dialog class="modal">): [data-open-modal="id"], [data-close], klik di luar
 // - Sheet (<dialog class="sheet|side-sheet">): [data-open-sheet="id"], [data-close], klik di luar, Esc, tarik ke bawah
-// - Tab ([data-tabs])
+// - Tab ([data-tabs]), daftar isi yang mengikuti bacaan ([data-toc])
 // - Button group ([data-btn-group="single|multi"]), chip filter (.chip-btn[aria-pressed]), chip input (.chip-input .x)
 // - FAB menu ([data-fab-menu]), FAB mengecil saat scroll ([data-fab-shrink]), app bar ([data-appbar])
 // - Carousel ([data-carousel]), slider (.slider), slider dua ujung ([data-range2])
@@ -486,6 +486,29 @@ export function otpError(wrap, message) {
   }
   const first = $(".otp-box", wrap);
   first?.focus();
+}
+
+/* =========================================================
+   DAFTAR ISI ([data-toc]) · tautan ke bagian yang sedang dibaca diberi aria-current="true".
+   <nav class="toc" data-toc><a href="#bagian">…</a></nav>
+   ========================================================= */
+function initToc(nav) {
+  if (!once(nav, "_fyToc") || !("IntersectionObserver" in window)) return;
+  const links = $$("a[href^='#']", nav);
+  const map = new Map();
+  links.forEach((a) => { const t = document.getElementById(decodeURIComponent(a.hash.slice(1))); if (t) map.set(t, a); });
+  if (!map.size) return;
+  const seen = new Set();
+  const heads = [...map.keys()];
+  const mark = () => {
+    // Judul teratas yang terlihat; kalau tidak ada (di tengah bagian panjang), judul terakhir yang sudah lewat di atas.
+    let top = heads.filter((t) => seen.has(t)).sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top)[0];
+    if (!top) top = heads.filter((t) => t.getBoundingClientRect().top < 90).pop() || heads[0];
+    links.forEach((a) => a.toggleAttribute("aria-current", false));
+    map.get(top).setAttribute("aria-current", "true");
+  };
+  const io = new IntersectionObserver((es) => { es.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target))); mark(); }, { rootMargin: "-90px 0px -55% 0px" });
+  map.forEach((_, t) => io.observe(t));
 }
 
 /* =========================================================
@@ -1458,6 +1481,7 @@ export function initControls(root = document) {
   $$("[data-notif]", root).forEach(initNotif);
   $$("[data-offline-bar]", root).forEach(initOffline);
   $$("[data-avatar-crop]", root).forEach(initAvatarCrop);
+  $$("[data-toc]", root).forEach(initToc);
 
   /* ---------- Snackbar deklaratif ---------- */
   $$("[data-snackbar]", root).forEach((b) => {

@@ -160,7 +160,24 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
 - **Total**: kapsul biru FUSIONIFY bergaya stiker dengan bayangan pejal.
 - **Sampul dan slide pembuka/penutup**: latar biru, segel besar biru muda yang terpotong tepi, wordmark putih, maskot badan penuh. Slide bagian dan angka: latar malam.
 - **Isian** yang wajib diganti selalu berlatar kuning muda (`--beta-bg`), di HTML, Word, dan Excel.
-- Ukuran: A4 tegak untuk surat dan dokumen, A5 mendatar untuk kuitansi, 16:9 untuk slide.
+- Ukuran: A4 tegak untuk surat dan dokumen, A5 mendatar untuk kuitansi, 16:9 untuk slide, A4 mendatar untuk sertifikat, 210×99 mm untuk e-tiket, 90×55 mm untuk kartu nama.
+- **Sertifikat**: bingkai stiker bersudut bulat, segel biru muda di pojok, nama penerima besar dengan garis tinta di bawahnya, maskot happy di kanan bawah.
+- **E-tiket**: bagian utama biru (judul acara, nama peserta, tanggal, jam, tempat, maskot welcome) dan sobekan putih bergaris putus-putus dengan kode QR dan kode tiket.
+- **Kartu nama**: depan biru dengan logo horizontal putih dan tagline, belakang putih dengan nama, jabatan, dan kontak publik.
+
+## Halaman produk yang sering dipakai
+
+- **Bayar QRIS**: satu kolom tenang (maks 480px), kartu stiker berisi jumlah besar Exo 2, kode QR di kotak putih berlabel "QRIS", bilah sisa waktu biru (merah saat sisa <20%), dua tombol. Keadaan berhasil (paid), kedaluwarsa (tired), gagal (pay-failed) menukar isi kartu. Tanpa nama penyedia pembayaran.
+- **Status layanan**: banner hijau/kuning/merah bergaya stiker dengan kepala maskot, daftar layanan dengan batang uptime per hari (hijau/kuning/merah), riwayat gangguan berupa garis waktu putus-putus.
+- **Dokumentasi**: menu samping dengan item aktif kapsul biru, blok kode berlatar malam bergaris stiker dengan tombol Salin, lencana metode (`GET` hijau, `POST` biru, `PUT/PATCH` kuning, `DELETE` merah), daftar isi kanan yang mengikuti bacaan.
+- **Legal**: judul besar, tombol pindah Privasi/Syarat, daftar isi bernomor di kotak `--surface`, bagian bernomor otomatis.
+
+## Grafis media sosial
+
+- Latar biru, kertas (`--paper` dengan cahaya biru muda), atau malam; segel besar terpotong tepi sebagai hiasan.
+- Wordmark di kiri atas, kicker bertitik, judul Afacad 800 yang sangat besar dengan titik biru muda, chip status besar bergaris, maskot badan penuh yang boleh terpotong tepi bawah atau kanan.
+- Daftar bernomor berupa kartu stiker dengan lingkaran biru; gelembung bicara Caveat.
+- Tidak ada teks di bawah maskot, foto stok, gradien ungu, atau emoji sebagai hiasan.
 
 ## Email
 
@@ -168,6 +185,7 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
 - Logo di atas kartu; kicker Exo 2 kapital bertitik; judul Afacad 800 dengan titik biru muda; maskot kecil (110×138) di kanan judul, disembunyikan di HP.
 - Rincian dalam tabel stiker; tombol kapsul biru bergaris tinta; catatan berlatar warna nada (`info`, `ok`, `warn`, `danger`); kode OTP dalam kotak stiker Exo 2.
 - Kaki: nama PT dan kontak publik, badge "Sebuah produk dari FUSIONIFY" untuk email produk.
+- Tanda tangan email: segel Fi 56px, garis biru muda, nama Afacad dengan titik, jabatan Exo 2 kapital biru, kontak publik, nama PT. Tanpa gambar besar, kutipan, atau banner promosi.
 
 ## Batas
 

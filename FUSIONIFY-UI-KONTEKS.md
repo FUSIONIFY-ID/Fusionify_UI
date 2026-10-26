@@ -24,13 +24,13 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 | `css/tokens.css` | Warna, huruf (@font-face), radius, kurva gerak, bayangan |
 | `css/base.css` | Reset, tipografi, `.wrap`, `.kicker`, `.h-hero`, `.h-sec`, `.lead`, `.prose` |
 | `css/components.css` | Tombol, chip status, nav, menu HP, seksi, kartu stiker, statistik, kartu karya, foto bersegel, gelembung maskot, panggung maskot, marquee partner, FAQ, gelombang, footer, toast, kursor, transisi halaman, status reveal, jeda `.idle` |
-| `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment`, halaman acara (`.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`) |
-| `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.progress`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, `.btn.danger`, `.sample-note`, chat (`.chat`, `.chat-list`, `.convo`, `.thread`, `.msgs`, `.msg.me/.them`, `.typing`, `.composer`), `.ev-date` |
+| `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment`, halaman acara (`.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`), label `.sample-note`, halaman bayar `.pay` (`data-pay-state`, `.qr`, `.pay-timer`, `.pay-result`), status layanan (`.status-banner`, `.uptime`, `.uptime-bars`, `.incidents`), dokumentasi (`.docs`, `.docs-nav`, `.code-block`, `.endpoint`, `.method`, `.docs-pager`), daftar isi `.toc`, halaman legal (`.legal`, `.legal-switch`) |
+| `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.progress`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, `.btn.danger`, chat (`.chat`, `.chat-list`, `.convo`, `.thread`, `.msgs`, `.msg.me/.them`, `.typing`, `.composer`), `.ev-date` |
 | `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar), `.otp` (kode OTP) + `.resend`, `.upload` + `.drop` + `.upload-list` (upload file), `.stepper` + `.wizard-step` (form bertahap), `.sort-btn` (tabel bisa diurutkan), `.notif` + `.notif-panel` (pusat notifikasi), `.state` (keadaan kosong/error/offline), `.offline-bar`, `.avatar-crop` + `.crop-modal` (foto profil dengan pemotong bulat) |
 | `css/fusionify.css` | Satu file yang mengimpor tokens, base, components, product, controls (tanpa app.css) |
-| `js/motion.js` | `initFusionify()`: smooth scroll, nav, menu HP, kursor, reveal, angka, magnet, salin + toast, transisi halaman, suara, jeda di luar layar |
-| `js/app.js` | `initApp()` untuk halaman aplikasi: tema, sidebar HP, dropdown, modal, tab, tampil/sembunyi password, meter kekuatan password, validasi form (`data-validate`), pilih semua baris, toast. Tanpa GSAP |
-| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. OTP (`[data-otp]`, `otpError()`), hitung mundur kirim ulang (`[data-countdown]`), upload (`[data-upload]`), chat (`[data-chat]`), tambah ke kalender (`[data-ics]`, unduh .ics), bagikan (`[data-share]`). Stepper (`form[data-wizard]`), tabel urut (`table[data-sort]` + `th[data-sort-key]`), notifikasi (`[data-notif]`), bilah offline (`[data-offline-bar]`), pemotong foto profil (`[data-avatar-crop]`). Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:resend`, `fy:step`, `fy:sort`, `fy:read`, `fy:crop`, dan `fy:online`/`fy:offline` di window |
+| `js/motion.js` | `initFusionify()`: smooth scroll, nav, menu HP, kursor, reveal, angka, magnet, salin + toast (`data-copy`; kosong di dalam `.code-block` = salin isi kodenya), transisi halaman, suara, jeda di luar layar |
+| `js/app.js` | `initApp()` untuk halaman aplikasi: tema, sidebar HP, dropdown, modal, tab, tampil/sembunyi password, meter kekuatan password, validasi form (`data-validate`), pilih semua baris, toast, tombol salin `data-copy`. Tanpa GSAP |
+| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. OTP (`[data-otp]`, `otpError()`), hitung mundur kirim ulang (`[data-countdown]`), upload (`[data-upload]`), chat (`[data-chat]`), tambah ke kalender (`[data-ics]`, unduh .ics), bagikan (`[data-share]`). Stepper (`form[data-wizard]`), tabel urut (`table[data-sort]` + `th[data-sort-key]`), notifikasi (`[data-notif]`), bilah offline (`[data-offline-bar]`), pemotong foto profil (`[data-avatar-crop]`), daftar isi yang mengikuti bacaan (`[data-toc]`). Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:resend`, `fy:step`, `fy:sort`, `fy:read`, `fy:crop`, dan `fy:online`/`fy:offline` di window |
 | `js/lisensi.js` | Kunci domain: kit hanya berjalan di domain di `DOMAIN_RESMI` (fusionify.id, fusionify.biz.id, partner premiumify.my.id dan studydate.id, serta subdomainnya) plus localhost. Dipanggil di awal `initFusionify()`, `initApp()`, `initControls()`. Jangan dihapus atau diakali |
 | `js/theme.js` | Mode terang/gelap (`initTheme`, `setTheme`). Dipanggil otomatis oleh `motion.js` dan `app.js` |
 | `js/seal.js` | `seal()` dan `SEAL_PATH`: bentuk segel 12 lekukan |
@@ -59,11 +59,16 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 | `templates/chat.html` | Pesan: daftar obrolan + isi obrolan (HP: layar penuh dan ikut tombol back; layar lebar: berdampingan), kolom tulis, kartu acara di chat |
 | `templates/acara.html` | Halaman detail acara publik: poster, waktu (tambah ke kalender), lokasi (buka di Maps), pendaftaran lewat bottom sheet, tiket, susunan acara, bagikan |
 | `templates/admin.html` | Dashboard admin (KPI, grafik, tabel pengguna + filter + pilih semua + hapus dengan konfirmasi, pengaturan bertab, log) |
-| `dokumen/cetak/` | Template dokumen cetak HTML → PDF: `surat.html` (surat resmi), `invoice.html`, `penawaran.html`, `kuitansi.html` (A5), `dokumen.html` (proposal/laporan), `perjanjian.html` (PRJ, 3 halaman), `slide.html` (16:9). Gaya di `cetak.css` (memakai `css/tokens.css`), hitungan Rupiah, terbilang, tanggal, dan segel di `dokumen.js`. Panduan: `dokumen/README.md` |
+| `templates/bayar-qris.html` | Halaman bayar QRIS: jumlah + salin, kode QR, batas waktu dan hitung mundur, cek status (otomatis tiap 5 detik), keadaan berhasil/kedaluwarsa/gagal dengan maskot. Sambungkan `cekStatus()` ke backend sendiri. QR di `templates/aset/qr-contoh.svg` hanya contoh |
+| `templates/status.html` | Status layanan: banner kondisi, uptime 90 hari per layanan (30 hari di HP), riwayat gangguan. Datanya contoh dan berlabel |
+| `templates/dokumentasi.html` | Dokumentasi developer: menu samping (jadi lipatan di HP), contoh kode bertab dengan tombol salin, endpoint, tabel parameter dan error, daftar isi yang mengikuti bacaan |
+| `templates/legal/privasi.html`, `syarat.html` | Kerangka Kebijakan Privasi (mengacu UU 27/2022 PDP) dan Syarat & Ketentuan, dengan daftar isi bernomor. Bukan nasihat hukum; bagian `GANTI` wajib disesuaikan |
+| `grafis/` | Template grafis media sosial dan OG image: `post.html` (1080×1080), `potret.html` (1080×1350), `story.html` (1080×1920, juga sampul Reels/TikTok), `og.html` (1200×630), `banner.html` (X 1500×500, LinkedIn 1584×396). Isi lewat JSON (`grafis.js`), PNG lewat `npm run build:grafis` (`scripts/build-grafis.mjs` menolak teks yang keluar kanvas atau tertutup maskot). Contoh di `grafis/contoh/`. Panduan: `grafis/README.md` |
+| `dokumen/cetak/` | Template dokumen cetak HTML → PDF: `surat.html` (surat resmi), `invoice.html`, `penawaran.html`, `kuitansi.html` (A5), `dokumen.html` (proposal/laporan), `perjanjian.html` (PRJ, 3 halaman), `slide.html` (16:9), `sertifikat.html` (A4 mendatar, SER), `tiket.html` (e-tiket acara 210×99 mm), `kartu-nama.html` (90×55 mm, depan-belakang). Gaya di `cetak.css` (memakai `css/tokens.css`), hitungan Rupiah, terbilang, tanggal, dan segel di `dokumen.js`. Panduan: `dokumen/README.md` |
 | `dokumen/office/` | Template Office: `FUSIONIFY-Surat.docx`, `FUSIONIFY-Dokumen.docx`, `FUSIONIFY-Perjanjian.docx` (huruf tertanam), `FUSIONIFY-Slide.pptx` (tema + layout FY), `FUSIONIFY-Spreadsheet.xlsx` (Invoice berformula, Anggaran, Daftar). Aset PNG di `office/aset/` |
 | `dokumen/contoh/` | Pratinjau PDF semua template cetak (`npm run build:dokumen`) |
 | `scripts/build-dokumen.mjs`, `scripts/dokumen/` | Pembuat PDF (`--final` menolak teks "ganti" dan isi yang keluar halaman) dan generator template Office (`npm run build:office`) |
-| `email/` | Template email transaksional: `fy-email.js` (`renderEmail`, tabel inline, aman di Gmail/Outlook), `templates.js` (kode verifikasi, atur ulang password, selamat datang, pengajuan disetujui/ditolak, pembayaran berhasil/gagal, status penarikan, pemberitahuan), `aset/` PNG maskot, `contoh/` pratinjau (`npm run build:email`). Panduan: `email/README.md` |
+| `email/` | Template email transaksional: `fy-email.js` (`renderEmail`, tabel inline, aman di Gmail/Outlook), `templates.js` (kode verifikasi, atur ulang password, selamat datang, pengajuan disetujui/ditolak, pembayaran berhasil/gagal, status penarikan, pemberitahuan), `tandaTangan()` untuk tanda tangan email karyawan/produk, `aset/` PNG maskot, `contoh/` pratinjau (`npm run build:email`). Panduan: `email/README.md` |
 | `react/` | Untuk produk React + Tailwind: `index.tsx` (komponen tipis di atas kelas kit: `Tombol`, `Chip`, `Kartu`, `Judul`, `Maskot`, `PanggungMaskot`, `Keadaan`, `BadgeProduk`, dll.), `tailwind-preset.js` (v3), `tailwind-v4.css`. Panduan: `react/README.md` |
 
 ## Cara memakai di proyek baru atau lama
@@ -131,11 +136,19 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - Semua dokumen resmi FUSIONIFY dibuat dari template di `dokumen/`. Jangan membuat kop surat, invoice, atau deck dari nol dengan warna dan huruf lain. Panduan lengkap: `dokumen/README.md`.
 - Format: dokumen final yang harus tampil persis (invoice, penawaran, surat PDF) dari `dokumen/cetak/*.html`; dokumen yang akan diedit orang lain dari `dokumen/office/`.
 - Teks bertanda kuning (`.ganti`, latar kuning muda di Word, sel kuning muda di Excel) wajib diganti sebelum dikirim. Cetak final dengan `node scripts/build-dokumen.mjs --final berkas.html --keluar hasil.pdf`.
-- Penomoran: `{urut}/{kode}/FDS/{bulan romawi}/{tahun}`, kode `SRT`, `INV`, `PNW`, `KWT`, `PRJ` (perjanjian: `cetak/perjanjian.html`, `office/FUSIONIFY-Perjanjian.docx`; kerangka umum, bukan nasihat hukum).
+- Penomoran: `{urut}/{kode}/FDS/{bulan romawi}/{tahun}`, kode `SRT`, `INV`, `PNW`, `KWT`, `PRJ`, `SER` (sertifikat: `cetak/sertifikat.html`; perjanjian: `cetak/perjanjian.html`, `office/FUSIONIFY-Perjanjian.docx`; kerangka umum, bukan nasihat hukum).
 - Kop surat memakai logo horizontal dari `brand/kit/`, nama PT FUSIONIFY DIGITAL STORE, dan kontak publik saja.
 - Harga, angka, dan status produk wajib asli. Pajak hanya kalau perusahaan sudah PKP. Angka contoh di grafik atau tabel diberi label "Data contoh" dan diganti sebelum dipakai.
 - Satu `<section class="halaman">` = satu lembar A4 (`.halaman.a5` untuk kuitansi, `.slide` untuk 16:9). Hiasan yang sengaja lebih besar dari halaman memakai `.segel` atau `.fx-oversize`.
 - Kalau token di `css/tokens.css` berubah, jalankan `npm run build:dokumen` dan `npm run build:office`, lalu catat di CHANGELOG.
+
+## Grafis media sosial dan OG image
+
+- Semua grafis untuk akun FUSIONIFY dan produknya dibuat dari `grafis/*.html`, bukan dari template Canva acak. Teks diganti lewat JSON (`--isi`), bukan dengan mengubah gaya.
+- Teks penting di dalam zona aman (pratinjau dengan `?panduan`): story bagian atas, bawah, dan kanan tertutup tombol aplikasi; banner profil kiri tertutup foto profil.
+- `build-grafis.mjs` wajib lolos (tanpa teks keluar kanvas atau tertutup maskot). Kalau judul terlalu panjang, pendekkan kalimatnya.
+- Isi tetap jujur: status produk dengan chip yang benar, tanpa angka atau testimoni karangan. Contoh acara memakai teks dalam kurung siku dan wajib diganti.
+- Setiap halaman publik produk punya `og:image` 1200×630 dari `grafis/og.html`.
 
 ## Email
 
@@ -376,7 +389,24 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
 - **Total**: kapsul biru FUSIONIFY bergaya stiker dengan bayangan pejal.
 - **Sampul dan slide pembuka/penutup**: latar biru, segel besar biru muda yang terpotong tepi, wordmark putih, maskot badan penuh. Slide bagian dan angka: latar malam.
 - **Isian** yang wajib diganti selalu berlatar kuning muda (`--beta-bg`), di HTML, Word, dan Excel.
-- Ukuran: A4 tegak untuk surat dan dokumen, A5 mendatar untuk kuitansi, 16:9 untuk slide.
+- Ukuran: A4 tegak untuk surat dan dokumen, A5 mendatar untuk kuitansi, 16:9 untuk slide, A4 mendatar untuk sertifikat, 210×99 mm untuk e-tiket, 90×55 mm untuk kartu nama.
+- **Sertifikat**: bingkai stiker bersudut bulat, segel biru muda di pojok, nama penerima besar dengan garis tinta di bawahnya, maskot happy di kanan bawah.
+- **E-tiket**: bagian utama biru (judul acara, nama peserta, tanggal, jam, tempat, maskot welcome) dan sobekan putih bergaris putus-putus dengan kode QR dan kode tiket.
+- **Kartu nama**: depan biru dengan logo horizontal putih dan tagline, belakang putih dengan nama, jabatan, dan kontak publik.
+
+## Halaman produk yang sering dipakai
+
+- **Bayar QRIS**: satu kolom tenang (maks 480px), kartu stiker berisi jumlah besar Exo 2, kode QR di kotak putih berlabel "QRIS", bilah sisa waktu biru (merah saat sisa <20%), dua tombol. Keadaan berhasil (paid), kedaluwarsa (tired), gagal (pay-failed) menukar isi kartu. Tanpa nama penyedia pembayaran.
+- **Status layanan**: banner hijau/kuning/merah bergaya stiker dengan kepala maskot, daftar layanan dengan batang uptime per hari (hijau/kuning/merah), riwayat gangguan berupa garis waktu putus-putus.
+- **Dokumentasi**: menu samping dengan item aktif kapsul biru, blok kode berlatar malam bergaris stiker dengan tombol Salin, lencana metode (`GET` hijau, `POST` biru, `PUT/PATCH` kuning, `DELETE` merah), daftar isi kanan yang mengikuti bacaan.
+- **Legal**: judul besar, tombol pindah Privasi/Syarat, daftar isi bernomor di kotak `--surface`, bagian bernomor otomatis.
+
+## Grafis media sosial
+
+- Latar biru, kertas (`--paper` dengan cahaya biru muda), atau malam; segel besar terpotong tepi sebagai hiasan.
+- Wordmark di kiri atas, kicker bertitik, judul Afacad 800 yang sangat besar dengan titik biru muda, chip status besar bergaris, maskot badan penuh yang boleh terpotong tepi bawah atau kanan.
+- Daftar bernomor berupa kartu stiker dengan lingkaran biru; gelembung bicara Caveat.
+- Tidak ada teks di bawah maskot, foto stok, gradien ungu, atau emoji sebagai hiasan.
 
 ## Email
 
@@ -384,6 +414,7 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
 - Logo di atas kartu; kicker Exo 2 kapital bertitik; judul Afacad 800 dengan titik biru muda; maskot kecil (110×138) di kanan judul, disembunyikan di HP.
 - Rincian dalam tabel stiker; tombol kapsul biru bergaris tinta; catatan berlatar warna nada (`info`, `ok`, `warn`, `danger`); kode OTP dalam kotak stiker Exo 2.
 - Kaki: nama PT dan kontak publik, badge "Sebuah produk dari FUSIONIFY" untuk email produk.
+- Tanda tangan email: segel Fi 56px, garis biru muda, nama Afacad dengan titik, jabatan Exo 2 kapital biru, kontak publik, nama PT. Tanpa gambar besar, kutipan, atau banner promosi.
 
 ## Batas
 
@@ -1203,6 +1234,193 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
   .has-event-bar { padding-bottom: 0; }
 }
 
+/* =========================================================
+   LABEL DATA CONTOH · wajib di setiap angka/grafik contoh, hapus setelah diganti data asli
+   ========================================================= */
+.sample-note { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--beta-bg); color: var(--beta); font-family: var(--f-num); font-size: 12px; font-weight: 700; }
+
+/* =========================================================
+   HALAMAN BAYAR QRIS (templates/bayar-qris.html)
+   Satu kolom tenang di tengah. Keadaan diatur atribut data-pay-state di .pay:
+   menunggu | berhasil | kedaluwarsa | gagal. Panel [data-show="..."] tampil sesuai keadaannya.
+   ========================================================= */
+.pay { width: min(100% - 2 * var(--gut), 480px); margin-inline: auto; padding-block: 28px 56px; display: grid; gap: 20px; }
+.pay-top { display: flex; align-items: center; gap: 12px; }
+.pay-top .avatar-l { flex: none; width: 48px; height: 48px; border-radius: 14px; border: 2px solid var(--edge); background: var(--surface); display: grid; place-items: center; font-family: var(--f-head); font-weight: 800; font-size: 20px; color: var(--text-blue); overflow: hidden; }
+.pay-top .avatar-l img { width: 100%; height: 100%; object-fit: cover; }
+.pay-top b { display: block; font-size: 17px; line-height: 1.25; overflow-wrap: anywhere; }
+.pay-top span { font-size: 14px; color: var(--ink-3); }
+.pay-card { display: grid; gap: 18px; padding: clamp(18px, 5vw, 26px); border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); }
+.pay-amount { display: grid; gap: 4px; }
+.pay-amount .kicker { margin: 0; }
+.pay-amount .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pay-amount strong { font-family: var(--f-num); font-weight: 800; font-size: clamp(32px, 9vw, 42px); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.pay-meta { display: grid; gap: 6px; margin: 0; padding: 12px 0 0; border-top: 1px dashed var(--line); font-size: 14.5px; }
+.pay-meta div { display: flex; justify-content: space-between; gap: 12px; }
+.pay-meta dt { color: var(--ink-3); }
+.pay-meta dd { margin: 0; font-weight: 700; text-align: right; overflow-wrap: anywhere; }
+.qr { justify-self: center; display: grid; gap: 10px; justify-items: center; }
+.qr-box { position: relative; width: min(100%, 280px); padding: 10px; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); box-shadow: 0 4px 0 var(--edge-shadow); }
+.qr-box img { display: block; width: 100%; height: auto; border-radius: 8px; }
+.qr-box .qr-label { position: absolute; left: 50%; top: -13px; transform: translateX(-50%); padding: 2px 12px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); font-family: var(--f-num); font-weight: 800; font-size: 13px; letter-spacing: 0.14em; }
+.qr small { font-size: 13.5px; color: var(--ink-3); text-align: center; }
+.pay-timer { display: grid; gap: 8px; }
+.pay-timer .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 14.5px; color: var(--ink-2); }
+.pay-timer time, .pay-timer [data-pay-left] { font-family: var(--f-num); font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+.pay-bar { height: 10px; border-radius: 999px; background: var(--surface); border: 1.5px solid var(--line); overflow: hidden; }
+.pay-bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--blue-light), var(--blue)); transform-origin: left; transform: scaleX(var(--left, 1)); transition: transform 1s linear; }
+.pay-bar.low i { background: var(--danger); }
+.pay-actions { display: grid; gap: 10px; }
+.pay-actions .btn { justify-content: center; }
+.pay-how { display: grid; gap: 10px; }
+.pay-how summary { cursor: pointer; font-weight: 700; padding: 6px 0; }
+.pay-how ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; color: var(--ink-2); font-size: 15px; }
+.pay-result { display: grid; justify-items: center; text-align: center; gap: 10px; }
+.pay-result img { width: 150px; height: auto; }
+.pay-result h1, .pay-result h2 { font-size: clamp(30px, 8vw, 40px); }
+.pay-result p { color: var(--ink-2); max-width: 36ch; }
+.pay [data-show] { display: none; }
+.pay[data-pay-state="menunggu"] [data-show~="menunggu"],
+.pay[data-pay-state="berhasil"] [data-show~="berhasil"],
+.pay[data-pay-state="kedaluwarsa"] [data-show~="kedaluwarsa"],
+.pay[data-pay-state="gagal"] [data-show~="gagal"] { display: grid; }
+.pay-foot { display: grid; justify-items: center; gap: 12px; text-align: center; font-size: 14px; color: var(--ink-3); }
+.pay-foot a { color: var(--text-blue-deep); font-weight: 700; }
+.pay-foot .fy-badge img { width: 200px; height: auto; }
+
+/* =========================================================
+   HALAMAN STATUS LAYANAN (templates/status.html)
+   ========================================================= */
+.status-banner { --sc: var(--go); --sb: var(--go-bg); display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px; padding: 18px 20px; border-radius: var(--r-l); border: 2px solid var(--sc); background: var(--sb); box-shadow: 0 5px 0 var(--sc); }
+.status-banner img { width: 64px; height: auto; }
+.status-banner h1, .status-banner h2 { font-size: clamp(26px, 5vw, 36px); line-height: 1.05; }
+.status-banner p { margin: 4px 0 0; color: var(--ink-2); font-size: 15px; }
+.status-banner.warn { --sc: var(--beta); --sb: var(--beta-bg); }
+.status-banner.down { --sc: var(--danger); --sb: var(--danger-bg); }
+.uptime { list-style: none; margin: 0; padding: 0; border: 2px solid var(--edge); border-radius: var(--r-l); background: var(--card); box-shadow: var(--shadow-sticker); overflow: hidden; }
+.uptime > li { display: grid; gap: 10px; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+.uptime > li:last-child { border-bottom: 0; }
+.uptime .head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.uptime .head b { font-size: 17px; }
+.uptime .head small { display: block; font-size: 13.5px; color: var(--ink-3); font-weight: 400; }
+.uptime-bars { display: grid; grid-template-columns: repeat(90, minmax(0, 1fr)); gap: 2px; height: 34px; }
+.uptime-bars span { border-radius: 2px; background: var(--go); }
+.uptime-bars span[data-s="warn"] { background: var(--beta); }
+.uptime-bars span[data-s="down"] { background: var(--danger); }
+.uptime-bars span[data-s="none"] { background: var(--line); }
+.uptime .scale { display: flex; justify-content: space-between; gap: 10px; font-family: var(--f-num); font-size: 12.5px; color: var(--ink-3); }
+.uptime .scale b { color: var(--ink-2); }
+@media (max-width: 700px) {
+  .uptime-bars { grid-template-columns: repeat(30, minmax(0, 1fr)); gap: 3px; }
+  .uptime-bars span:nth-child(-n+60) { display: none; }
+  .uptime .scale .wide { display: none; }
+}
+@media (min-width: 701px) { .uptime .scale .narrow { display: none; } }
+.incidents { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.incident { display: grid; gap: 8px; padding: 18px 20px; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); }
+.incident .head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.incident h3 { font-size: 21px; }
+.incident ol { list-style: none; margin: 0; padding: 0 0 0 16px; border-left: 2px dashed var(--line); display: grid; gap: 10px; }
+.incident ol li { position: relative; font-size: 15px; color: var(--ink-2); }
+.incident ol li::before { content: ""; position: absolute; left: -23px; top: 7px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--edge); background: var(--card); }
+.incident ol li b { color: var(--ink); }
+.incident time { display: block; font-family: var(--f-num); font-size: 13px; color: var(--ink-3); }
+.day-ok { padding: 14px 18px; border-radius: var(--r-m); background: var(--surface); color: var(--ink-2); font-size: 15px; }
+
+/* =========================================================
+   DOKUMENTASI DEVELOPER (templates/dokumentasi.html)
+   Kolom: menu | isi | "di halaman ini". Di bawah 960px menu jadi <details>, daftar isi kanan hilang.
+   ========================================================= */
+.docs { width: min(100% - 2 * var(--gut), var(--max)); margin-inline: auto; padding-block: 104px 64px; display: grid; gap: 28px; }
+.docs-nav { align-self: start; }
+.docs-nav > summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); box-shadow: 0 3px 0 var(--edge-shadow); font-weight: 700; cursor: pointer; list-style: none; }
+.docs-nav > summary::-webkit-details-marker { display: none; }
+.docs-nav > summary::after { content: ""; width: 10px; height: 10px; border-right: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: rotate(45deg) translateY(-3px); transition: transform 0.2s var(--ease); }
+.docs-nav[open] > summary::after { transform: rotate(-135deg) translateY(-1px); }
+.docs-nav nav { display: grid; gap: 18px; padding: 16px 4px 4px; }
+.docs-nav h2 { margin: 0 0 6px; font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.docs-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.docs-nav a { display: block; padding: 7px 12px; border-radius: 10px; color: var(--ink-2); text-decoration: none; font-size: 15px; font-weight: 700; }
+.docs-nav a:hover { background: var(--surface); color: var(--ink); }
+.docs-nav a[aria-current="page"] { background: var(--blue); color: #fff; box-shadow: 0 3px 0 var(--edge-shadow); }
+.docs-main { min-width: 0; }
+.docs-main .prose { max-width: 74ch; }
+.docs-main .prose h1 { font-size: clamp(38px, 6vw, 58px); color: var(--ink); margin-bottom: 12px; }
+.docs-main .prose h2 { scroll-margin-top: 96px; }
+.docs-main .prose h3 { scroll-margin-top: 96px; }
+.docs-main .prose :not(pre) > code, .legal .prose :not(pre) > code { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.88em; padding: 2px 6px; border-radius: 6px; background: var(--surface); color: var(--ink); overflow-wrap: anywhere; }
+.docs-main .prose > * + .code-block, .docs-main .prose > * + .tabs, .docs-main .prose > * + .table-wrap, .docs-main .prose > * + .note, .docs-main .prose > * + .endpoint { margin-top: 16px; }
+.docs-main .prose .code-block, .docs-main .prose .tabs, .docs-main .prose .table-wrap, .docs-main .prose .note, .docs-main .prose .endpoint { margin-bottom: 20px; }
+.docs-main .prose .table { font-size: 15px; }
+.docs-main .prose .table code { white-space: nowrap; overflow-wrap: normal; }
+.docs-toc { display: none; }
+.code-block { border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--night); box-shadow: 0 4px 0 var(--edge-shadow); overflow: hidden; }
+.code-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px 8px 16px; border-bottom: 1px solid #1f3459; font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #9db2cf; }
+.code-head button { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 12px; border-radius: 999px; border: 1.5px solid #2e5592; background: #10203f; color: #eaf3ff; font: inherit; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; }
+.code-head button:hover { background: #17305a; }
+.code-head button.done { border-color: #7fe0a6; color: #7fe0a6; }
+.code-block pre { margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 14px; line-height: 1.65; color: #eaf3ff; tab-size: 2; }
+.code-block pre:focus-visible { outline: 3px solid var(--blue-light); outline-offset: -3px; }
+.code-block .c { color: #9db2cf; }
+.code-block .s { color: #7fe0a6; }
+.code-block .k { color: #8cc0ff; }
+.code-block .n { color: #ffd27a; }
+.endpoint { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 14px; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 15px; overflow-wrap: anywhere; }
+.method { flex: none; padding: 3px 10px; border-radius: 8px; font-family: var(--f-num); font-weight: 800; font-size: 12.5px; letter-spacing: 0.08em; }
+.method.get { background: var(--go-bg); color: var(--go); }
+.method.post { background: var(--plan-bg); color: var(--plan); }
+.method.put, .method.patch { background: var(--beta-bg); color: var(--beta); }
+.method.delete { background: var(--danger-bg); color: var(--danger); }
+.req { font-family: var(--f-num); font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--danger); }
+.docs-pager { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 40px; }
+.docs-pager a { display: grid; gap: 2px; padding: 14px 18px; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); box-shadow: 0 3px 0 var(--edge-shadow); text-decoration: none; transition: transform 0.2s var(--ease); }
+.docs-pager a:hover { transform: translateY(-2px); }
+.docs-pager small { font-family: var(--f-num); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+.docs-pager b { color: var(--text-blue-deep); }
+.docs-pager .next { text-align: right; }
+@media (min-width: 960px) {
+  .docs { grid-template-columns: 240px minmax(0, 1fr); gap: 48px; }
+  .docs-nav { position: sticky; top: 96px; max-height: calc(100dvh - 120px); overflow-y: auto; }
+  .docs-nav > summary { display: none; }
+  .docs-nav nav { padding-top: 0; }
+}
+@media (min-width: 1280px) {
+  .docs { grid-template-columns: 220px minmax(0, 1fr) 200px; }
+  .docs-toc { display: block; position: sticky; top: 96px; align-self: start; }
+}
+
+/* Daftar isi kecil di kanan (dokumentasi) dan di atas (halaman legal) */
+.toc h2 { margin: 0 0 8px; font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.toc ol, .toc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; border-left: 2px solid var(--line); }
+.toc a { display: block; padding: 4px 0 4px 14px; margin-left: -2px; border-left: 2px solid transparent; color: var(--ink-2); text-decoration: none; font-size: 14.5px; }
+.toc a:hover, .toc a[aria-current="true"] { color: var(--text-blue-deep); border-left-color: var(--blue); }
+
+/* =========================================================
+   HALAMAN LEGAL (templates/legal/privasi.html, syarat.html)
+   ========================================================= */
+.legal { width: min(100% - 2 * var(--gut), 1080px); margin-inline: auto; padding-block: 104px 64px; display: grid; gap: 28px; }
+.legal-head { display: grid; gap: 12px; padding-bottom: 20px; border-bottom: 2px solid var(--line); }
+.legal-head h1 { font-size: clamp(40px, 7vw, 68px); }
+.legal-head p { margin: 0; color: var(--ink-2); }
+.legal-switch { display: flex; flex-wrap: wrap; gap: 8px; }
+.legal-switch a { padding: 8px 16px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); font-weight: 700; font-size: 14.5px; text-decoration: none; color: var(--ink-2); }
+.legal-switch a[aria-current="page"] { background: var(--blue); color: #fff; box-shadow: 0 3px 0 var(--edge-shadow); }
+.legal .toc { padding: 16px 18px; border-radius: var(--r-m); background: var(--surface); }
+.legal .toc ol { counter-reset: toc; border-left: 0; }
+.legal .toc li { counter-increment: toc; }
+.legal .toc a { padding-left: 0; border-left: 0; margin-left: 0; }
+.legal .toc a::before { content: counter(toc) ". "; font-family: var(--f-num); font-weight: 700; color: var(--text-blue); }
+.legal .prose { counter-reset: pasal; max-width: 72ch; }
+.legal .prose h2 { counter-increment: pasal; font-size: clamp(26px, 4vw, 32px); scroll-margin-top: 96px; }
+.legal .prose h2::before { content: counter(pasal) ". "; color: var(--text-blue); }
+.legal .prose h3 { font-size: 21px; }
+@media (min-width: 900px) {
+  .legal { grid-template-columns: 240px minmax(0, 1fr); column-gap: 56px; }
+  .legal-head { grid-column: 1 / -1; }
+  .legal .toc { position: sticky; top: 96px; align-self: start; max-height: calc(100dvh - 120px); overflow-y: auto; }
+}
+.pay-result h2:focus { outline: none; }
+
 ```
 
 ---
@@ -1977,7 +2195,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 @media (max-width: 1100px) { .span-8, .span-7, .span-6, .span-5, .span-4 { grid-column: span 12; } }
 
 /* Label data contoh: WAJIB di template selama datanya belum dari sistem asli */
-.sample-note { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--beta-bg); color: var(--beta); font-family: var(--f-num); font-size: 12px; font-weight: 700; }
+/* .sample-note dipindah ke product.css (dipakai juga di halaman status) */
 
 /* =========================================================
    KPI · angka ringkas dengan perubahan
@@ -2448,6 +2666,14 @@ export function initApp() {
     el._t = setTimeout(() => el.classList.remove("show"), 2600);
   };
   $$("[data-toast-msg]").forEach((b) => b.addEventListener("click", () => toast(b.dataset.toastMsg)));
+  /* Tombol salin, sama seperti di motion.js: data-copy="teks" data-copied="Disalin!" */
+  $$("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(b.dataset.copy || b.closest(".code-block")?.querySelector("pre")?.innerText || "");
+      toast(b.dataset.copied || "Disalin");
+      b.classList.add("done"); setTimeout(() => b.classList.remove("done"), 2000);
+    } catch { toast("Gagal menyalin. Salin manual, ya."); }
+  }));
 
   return { toast, snackbar, otpError, setSide };
 }

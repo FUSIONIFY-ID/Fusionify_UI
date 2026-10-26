@@ -83,7 +83,7 @@
 @media (max-width: 1100px) { .span-8, .span-7, .span-6, .span-5, .span-4 { grid-column: span 12; } }
 
 /* Label data contoh: WAJIB di template selama datanya belum dari sistem asli */
-.sample-note { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--beta-bg); color: var(--beta); font-family: var(--f-num); font-size: 12px; font-weight: 700; }
+/* .sample-note dipindah ke product.css (dipakai juga di halaman status) */
 
 /* =========================================================
    KPI · angka ringkas dengan perubahan
