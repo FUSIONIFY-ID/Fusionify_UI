@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slide · FUSIONIFY</title>
+<link rel="stylesheet" href="cetak.css">
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+  .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 52px; }
+  .kartu { padding: 30px; }
+  .kartu h3 { font-size: 30px; margin: 14px 0 10px; }
+  .kartu p { font-size: 19px; color: var(--ink-2); line-height: 1.5; }
+  .angka { padding: 30px 26px; background: #0f2040; border: 2px solid #2e5592; border-radius: var(--r-m); box-shadow: 0 4px 0 #02060f; }
+  .angka b { font-family: var(--f-num); font-weight: 800; font-size: 72px; line-height: 1; color: #8cc0ff; }
+  .angka h3 { color: #fff; font-size: 25px; margin: 16px 0 8px; }
+  .angka p { font-size: 17px; line-height: 1.5; }
+  .bulat { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--blue); color: #fff; border: 2px solid var(--edge); font-family: var(--f-num); font-weight: 700; font-size: 20px; }
+  .dua { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; margin-top: 40px; }
+  .dua ul { list-style: none; display: grid; gap: 18px; font-size: 21px; }
+  .dua li { display: flex; gap: 14px; align-items: flex-start; }
+  .dua li::before { content: ""; flex: none; width: 14px; height: 14px; margin-top: 9px; border-radius: 50%; background: var(--blue-light); border: 2px solid var(--edge); }
+</style>
+<!-- Template slide FUSIONIFY 16:9. Setiap <section class="slide"> satu slide.
+     Layout: Judul (biru), Isi tiga kartu, Dua kolom + gambar, Angka (malam), Penutup (biru).
+     Salin section yang dibutuhkan. Cetak PDF dengan npm run build:dokumen.
+     Butuh file PowerPoint yang bisa diedit? Pakai dokumen/office/FUSIONIFY-Slide.pptx. -->
+</head>
+<body>
+<section class="slide biru">
+  <div class="segel" style="position:absolute;right:-180px;top:-160px;width:760px;color:#2a82e4"></div>
+  <img src="../../brand/wordmark-mono-white.svg" alt="FUSIONIFY" width="800" height="139" style="position:absolute;left:80px;top:64px;height:50px;width:auto">
+  <div style="position:absolute;left:80px;top:220px;max-width:650px">
+    <p style="font-family:var(--f-num);font-weight:700;letter-spacing:.2em;font-size:15px;color:#f2f8ff"><span class="ganti">JENIS PRESENTASI · 2026</span></p>
+    <h1 style="font-size:80px;margin-top:14px;color:#fff"><span class="ganti">Judul presentasi</span><span style="color:#bfe0ff">.</span></h1>
+    <p style="font-size:21px;margin-top:20px;color:#f2f8ff"><span class="ganti">Satu kalimat yang menjelaskan isinya.</span></p>
+  </div>
+  <img src="../../mascot/happy.webp" alt="" width="577" height="720" style="position:absolute;right:110px;bottom:0;height:540px;width:auto">
+  <div class="bubble-cetak" style="right:330px;top:120px;font-size:30px"><span class="ganti">Yuk, mulai!</span></div>
+  <p style="position:absolute;left:80px;bottom:56px;color:#f2f8ff;font-size:15px"><b style="font-family:var(--f-head);font-size:20px;color:#fff">PT FUSIONIFY DIGITAL STORE</b> · <span data-tanggal></span></p>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="ganti">Bagian</span></p>
+  <h2><span class="ganti">Satu pesan per slide</span><span class="dot">.</span></h2>
+  <div class="g3">
+    <div class="stiker kartu"><span class="bulat">1</span><h3><span class="ganti">Poin pertama</span></h3><p><span class="ganti">Penjelasan singkat, satu atau dua kalimat.</span></p></div>
+    <div class="stiker kartu"><span class="bulat">2</span><h3><span class="ganti">Poin kedua</span></h3><p><span class="ganti">Penjelasan singkat.</span></p></div>
+    <div class="stiker kartu"><span class="bulat">3</span><h3><span class="ganti">Poin ketiga</span></h3><p><span class="ganti">Penjelasan singkat.</span></p></div>
+  </div>
+  <div class="kaki-slide"><span><span class="ganti">Judul presentasi</span> · FUSIONIFY</span><span>2</span></div>
+</section>
+
+<section class="slide">
+  <p class="kicker"><span class="ganti">Bagian</span></p>
+  <h2><span class="ganti">Dua kolom dengan gambar</span><span class="dot">.</span></h2>
+  <div class="dua">
+    <ul>
+      <li><span class="ganti">Poin penting pertama</span></li>
+      <li><span class="ganti">Poin penting kedua</span></li>
+      <li><span class="ganti">Poin penting ketiga</span></li>
+    </ul>
+    <div class="stiker" style="overflow:hidden;aspect-ratio:1600/848;background:var(--surface);display:grid;place-items:center">
+      <span class="muted" style="font-size:18px"><span class="ganti">Screenshot asli 1600 × 848</span></span>
+    </div>
+  </div>
+  <div class="kaki-slide"><span><span class="ganti">Judul presentasi</span> · FUSIONIFY</span><span>3</span></div>
+</section>
+
+<section class="slide malam">
+  <p class="kicker"><span class="ganti">Bukti</span></p>
+  <h2><span class="ganti">Angka yang bisa dipertanggungjawabkan</span><span style="color:#bfe0ff">.</span></h2>
+  <div class="g4">
+    <div class="angka"><b><span class="ganti">10K+</span></b><h3><span class="ganti">Label</span></h3><p><span class="ganti">Sumber atau keterangan.</span></p></div>
+    <div class="angka"><b><span class="ganti">4</span></b><h3><span class="ganti">Label</span></h3><p><span class="ganti">Keterangan.</span></p></div>
+    <div class="angka"><b><span class="ganti">2</span></b><h3><span class="ganti">Label</span></h3><p><span class="ganti">Keterangan.</span></p></div>
+    <div class="angka"><b><span class="ganti">6</span></b><h3><span class="ganti">Label</span></h3><p><span class="ganti">Keterangan.</span></p></div>
+  </div>
+  <div class="kaki-slide"><span><span class="ganti">Judul presentasi</span> · FUSIONIFY</span><span>4</span></div>
+</section>
+
+<section class="slide biru">
+  <div class="segel" style="position:absolute;left:-200px;bottom:-260px;width:720px;color:#2a82e4"></div>
+  <div style="position:absolute;left:640px;top:170px;max-width:560px">
+    <h1 style="font-size:76px;color:#fff">Terima kasih<span style="color:#bfe0ff">.</span></h1>
+    <p style="margin-top:28px;font-size:19px;line-height:2;color:#f2f8ff">
+      <b style="font-family:var(--f-num);font-size:13px;letter-spacing:.12em;color:#bfe0ff;display:inline-block;width:120px">EMAIL</b>hello@fusionify.id<br>
+      <b style="font-family:var(--f-num);font-size:13px;letter-spacing:.12em;color:#bfe0ff;display:inline-block;width:120px">WHATSAPP</b>+62 831-1138-0628<br>
+      <b style="font-family:var(--f-num);font-size:13px;letter-spacing:.12em;color:#bfe0ff;display:inline-block;width:120px">WEBSITE</b>fusionify.id
+    </p>
+  </div>
+  <img src="../../mascot/wink.webp" alt="" width="557" height="720" style="position:absolute;left:150px;bottom:0;height:520px;width:auto">
+  <div class="bubble-cetak kiri" style="left:300px;top:150px;font-size:30px"><span class="ganti">Sampai jumpa!</span></div>
+</section>
+<script src="dokumen.js"></script>
+</body>
+</html>

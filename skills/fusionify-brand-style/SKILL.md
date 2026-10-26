@@ -1,6 +1,6 @@
 ---
 name: fusionify-brand-style
-description: Use when building, redesigning, or fixing any FUSIONIFY website, product brand site, dashboard, admin panel, login page, or mobile app (web/PWA/iOS/Android) (Premiumify, FUSIONIFY BOT, StudyDate.id, Solutions, etc.) so it matches the fusionify.id design system.
+description: Use when building, redesigning, or fixing any FUSIONIFY website, product brand site, dashboard, admin panel, login page, mobile app (web/PWA/iOS/Android), or company document (surat resmi, invoice, penawaran, kuitansi, proposal, slide, PDF, Word, PowerPoint, Excel) for FUSIONIFY or its brands (Premiumify, FUSIONIFY BOT, StudyDate.id, Solutions, etc.) so it matches the fusionify.id design system.
 ---
 
 # FUSIONIFY brand style
@@ -186,6 +186,14 @@ Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis
 - Efek membesar: SVG sekitar 400px diperbesar dengan `scale`, jangan SVG raksasa.
 - Untuk Safari lama: tulis `overflow-x: hidden` sebelum `overflow-x: clip`, dan `100vh` sebelum `100svh`.
 - Target PageSpeed mobile: Aksesibilitas, Praktik Terbaik, SEO = 100.
+
+## Dokumen
+
+Template ada di `dokumen/` (panduan `dokumen/README.md`):
+- HTML → PDF di `dokumen/cetak/`: `surat.html`, `invoice.html`, `penawaran.html`, `kuitansi.html`, `dokumen.html`, `slide.html`. Gaya `cetak.css` memakai `css/tokens.css`; `dokumen.js` menghitung Rupiah, total, terbilang, tanggal, dan menggambar `.segel`.
+- Office di `dokumen/office/`: `FUSIONIFY-Surat.docx`, `FUSIONIFY-Dokumen.docx`, `FUSIONIFY-Slide.pptx` (layout FY Judul/Bagian/Isi/Judul saja/Angka/Penutup), `FUSIONIFY-Spreadsheet.xlsx` (Invoice, Anggaran, Daftar).
+- Isian wajib diganti berlatar kuning muda (`.ganti`). Cetak final: `node scripts/build-dokumen.mjs --final berkas.html --keluar hasil.pdf`.
+- Nomor dokumen `{urut}/{SRT|INV|PNW|KWT|PRJ}/FDS/{bulan romawi}/{tahun}`. Harga, angka, dan status wajib asli; pajak hanya bila PKP.
 
 ## Isi dan bahasa
 

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Surat resmi · FUSIONIFY</title>
+<link rel="stylesheet" href="cetak.css">
+<!-- Template surat resmi FUSIONIFY.
+     Ganti semua <span class="ganti">…</span>, lalu hapus kelas "ganti" (atau hapus span-nya).
+     Cetak: buka di Chrome → Cetak → Simpan sebagai PDF, ukuran A4, margin "Tidak ada",
+     centang "Grafis latar belakang". Atau: npm run build:dokumen.
+     Nomor surat: {urut}/SRT/FDS/{bulan romawi}/{tahun}, contoh 007/SRT/FDS/X/2026. -->
+</head>
+<body>
+<section class="halaman">
+  <header class="kop">
+    <div class="logo"><img src="../../brand/kit/fusionify-logo-horizontal.png" alt="FUSIONIFY" width="1087" height="340" style="height:15mm;width:auto"></div>
+    <div class="info">
+      <b>PT FUSIONIFY DIGITAL STORE</b>
+      <span class="ganti">Alamat lengkap kantor</span>, Bogor, Jawa Barat<br>
+      hello@fusionify.id · +62 831-1138-0628 · fusionify.id
+    </div>
+  </header>
+  <div class="kop-tipis"></div>
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-top:9mm">
+    <div class="meta">
+      <span>Nomor</span><span>:</span><span><span class="ganti">007</span>/SRT/FDS/<span class="ganti">X</span>/<span class="ganti">2026</span></span>
+      <span>Lampiran</span><span>:</span><span><span class="ganti">1 (satu) berkas</span></span>
+      <span>Perihal</span><span>:</span><b><span class="ganti">Permohonan kerja sama</span></b>
+    </div>
+    <div style="text-align:right">Bogor, <span data-tanggal></span></div>
+  </div>
+
+  <div style="margin-top:8mm">
+    Kepada Yth.<br>
+    <b><span class="ganti">Nama penerima</span></b><br>
+    <span class="ganti">Jabatan, nama instansi</span><br>
+    di <span class="ganti">Tempat</span>
+  </div>
+
+  <div class="isi" style="margin-top:7mm;text-align:justify">
+    <p>Dengan hormat,</p>
+    <p><span class="ganti">Paragraf pembuka: perkenalan singkat dan maksud surat. Tulis dengan bahasa yang jelas dan sopan, tanpa basa-basi berlebihan.</span></p>
+    <p><span class="ganti">Paragraf isi: hal yang diminta atau disampaikan, beserta rincian penting.</span></p>
+    <ol>
+      <li><span class="ganti">Poin pertama, bila perlu dirinci.</span></li>
+      <li><span class="ganti">Poin kedua.</span></li>
+    </ol>
+    <p>Demikian surat ini kami sampaikan. Atas perhatian dan kerja samanya, kami ucapkan terima kasih.</p>
+  </div>
+
+  <div class="ttd">
+    Hormat kami,<br>
+    <b>PT FUSIONIFY DIGITAL STORE</b>
+    <div class="ruang"></div>
+    <div class="nama"><span class="ganti">Muhammad Jundy Rabbani, S.Kom.</span></div>
+    <div><span class="ganti">Founder &amp; CEO</span></div>
+  </div>
+
+  <div style="position:absolute;left:18mm;bottom:20mm;font-size:8.5pt;color:var(--ink-2)">
+    <b>Tembusan:</b><br>
+    1. <span class="ganti">Arsip</span>
+  </div>
+
+  <footer class="kaki"><span>PT FUSIONIFY DIGITAL STORE · Fuse Ideas. Build Progress.</span><span>fusionify.id</span></footer>
+</section>
+<script src="dokumen.js"></script>
+</body>
+</html>

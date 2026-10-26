@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.7.0 · 26 Oktober 2026
+
+- **Template dokumen resmi** di folder baru `dokumen/` (panduan `dokumen/README.md`), semuanya memakai token, huruf, logo, segel, dan maskot kit:
+  - **HTML → PDF** (`dokumen/cetak/`): surat resmi, invoice, penawaran harga, kuitansi A5, dokumen umum (proposal/laporan) dengan sampul, dan slide 16:9 lima layout. Gaya bersama `cetak.css` mengimpor `css/tokens.css`.
+  - `dokumen/cetak/dokumen.js`: jumlah, subtotal, diskon, pajak, total, terbilang Rupiah, format `Rp1.500.000`, tanggal Indonesia, dan gambar segel. Skrip biasa, jalan juga saat file dibuka langsung dari disk.
+  - **Word**: `FUSIONIFY-Surat.docx` (kop surat di header, nomor/lampiran/perihal, tanda tangan, tembusan) dan `FUSIONIFY-Dokumen.docx` (sampul, judul, daftar, tabel status, kotak catatan). Huruf FUSIONIFY ditanam di file.
+  - **PowerPoint**: `FUSIONIFY-Slide.pptx` terstruktur dengan warna tema FUSIONIFY dan layout `FY Judul`, `FY Bagian`, `FY Isi`, `FY Judul saja`, `FY Angka`, `FY Penutup`, termasuk kartu stiker dan grafik berwarna kit.
+  - **Excel**: `FUSIONIFY-Spreadsheet.xlsx` dengan sheet Panduan, Invoice berformula, Anggaran (rencana vs realisasi, merah bila lewat 100%), dan Daftar (status resmi kit dengan warnanya, filter, validasi).
+- Isian yang wajib diganti selalu berlatar kuning muda (`--beta-bg`) di semua format.
+- Penomoran dokumen `{urut}/{SRT|INV|PNW|KWT|PRJ}/FDS/{bulan romawi}/{tahun}`.
+- `scripts/build-dokumen.mjs` (`npm run build:dokumen`): cetak template ke PDF; `--final` menolak teks yang belum diganti dan isi yang keluar halaman. `npm run build:office` membuat ulang template Office.
+- Pratinjau PDF di `dokumen/contoh/`. Uji baru `tests/dokumen.mjs`.
+- AGENTS, DESIGN, README, dan skill punya bagian Dokumen.
+
 ## 1.6.4 · 25 Oktober 2026
 
 - **Scroll HP lebih ringan** (disamakan dengan fusionify.id): Lenis hanya dibuat untuk mouse/trackpad. Di layar sentuh, termasuk HP dalam mode "Situs desktop", `initFusionify()` memakai scroll bawaan browser, jadi ScrollTrigger tidak lagi di-update dua kali per scroll.

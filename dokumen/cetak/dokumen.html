@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dokumen · FUSIONIFY</title>
+<link rel="stylesheet" href="cetak.css">
+<style>
+  .sampul { background: var(--blue); color: #fff; padding: 0; }
+  .sampul .segel-a { position: absolute; right: -60mm; top: -40mm; width: 190mm; color: #2a82e4; }
+  .sampul .segel-b { position: absolute; left: -55mm; bottom: -65mm; width: 140mm; color: #0b5fc0; }
+  .bab h2 { font-size: 22pt; margin: 6px 0 10px; }
+  .bab h3 { font-size: 13pt; margin: 14px 0 4px; }
+  .bab p { text-align: justify; }
+  .bab p + p { margin-top: 7px; }
+  .catatan { display: grid; grid-template-columns: 22mm 1fr; gap: 10px; align-items: center; margin-top: 12px; }
+</style>
+<!-- Template dokumen umum FUSIONIFY: proposal, laporan, company profile, panduan.
+     Halaman 1 sampul, halaman berikutnya isi. Satu <section class="halaman"> = satu lembar A4;
+     isi yang terlalu panjang tidak pindah halaman sendiri, jadi pecah ke section baru.
+     build-dokumen.mjs menolak mencetak kalau ada isi yang keluar halaman. -->
+</head>
+<body>
+<section class="halaman sampul">
+  <div class="segel segel-a"></div>
+  <div class="segel segel-b"></div>
+  <img src="../../brand/wordmark-mono-white.svg" alt="FUSIONIFY" width="800" height="139" style="position:absolute;left:18mm;top:20mm;height:12mm;width:auto">
+  <div style="position:absolute;left:18mm;top:95mm;max-width:125mm">
+    <p style="font-family:var(--f-num);font-weight:700;letter-spacing:.2em;font-size:9.5pt;color:#f2f8ff"><span class="ganti">PROPOSAL · 2026</span></p>
+    <h1 style="font-size:44pt;margin-top:10px;color:#fff"><span class="ganti">Judul dokumen yang jelas</span><span style="color:#bfe0ff">.</span></h1>
+    <p style="margin-top:14px;font-size:12.5pt;color:#f2f8ff"><span class="ganti">Satu kalimat ringkasan isi dokumen.</span></p>
+  </div>
+  <img src="../../mascot/glasses.webp" alt="" width="551" height="720" style="position:absolute;right:12mm;bottom:20mm;width:78mm;height:auto">
+  <div class="bubble-cetak" style="right:30mm;bottom:128mm;font-size:19pt"><span class="ganti">Yuk, dibaca dulu!</span></div>
+  <div style="position:absolute;left:18mm;bottom:16mm;font-size:9.5pt;color:#f2f8ff">
+    <b style="font-family:var(--f-head);font-size:13pt;color:#fff">PT FUSIONIFY DIGITAL STORE</b><br>
+    Disiapkan untuk <span class="ganti">nama penerima</span> · <span data-tanggal></span>
+  </div>
+</section>
+
+<section class="halaman bab">
+  <p class="kicker"><span class="ganti">Bagian 1</span></p>
+  <h2><span class="ganti">Latar belakang</span><span class="dot">.</span></h2>
+  <p><span class="ganti">Paragraf isi. Tulis santai, jelas, dan manusiawi. Satu paragraf satu gagasan. Hindari em dash; pakai koma, titik dua, atau kalimat baru.</span></p>
+  <p><span class="ganti">Paragraf berikutnya.</span></p>
+
+  <h3><span class="ganti">Sub judul</span></h3>
+  <ul style="margin-left:18px">
+    <li><span class="ganti">Poin pertama</span></li>
+    <li><span class="ganti">Poin kedua</span></li>
+  </ul>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px">
+    <div class="stiker kotak"><b class="num" style="font-size:22pt;color:var(--text-blue)"><span class="ganti">10K+</span></b><br><span class="muted" style="font-size:9pt"><span class="ganti">Keterangan angka. Hanya angka yang bisa dipertanggungjawabkan.</span></span></div>
+    <div class="stiker kotak"><b class="num" style="font-size:22pt;color:var(--text-blue)"><span class="ganti">2022</span></b><br><span class="muted" style="font-size:9pt"><span class="ganti">Keterangan</span></span></div>
+    <div class="stiker kotak"><b class="num" style="font-size:22pt;color:var(--text-blue)"><span class="ganti">6</span></b><br><span class="muted" style="font-size:9pt"><span class="ganti">Keterangan</span></span></div>
+  </div>
+
+  <h3>Status produk</h3>
+  <table class="tabel" style="margin-top:4px">
+    <thead><tr><th>Produk</th><th>Keterangan</th><th style="width:38mm">Status</th></tr></thead>
+    <tbody>
+      <tr><td><b><span class="ganti">Nama produk</span></b></td><td><span class="ganti">Keterangan singkat</span></td><td><span class="chip go">Aktif</span></td></tr>
+      <tr><td><b><span class="ganti">Nama produk</span></b></td><td><span class="ganti">Keterangan singkat</span></td><td><span class="chip beta">Beta</span></td></tr>
+      <tr><td><b><span class="ganti">Nama produk</span></b></td><td><span class="ganti">Keterangan singkat</span></td><td><span class="chip wip">Dalam pengembangan</span></td></tr>
+      <tr><td><b><span class="ganti">Nama produk</span></b></td><td><span class="ganti">Keterangan singkat</span></td><td><span class="chip plan">Direncanakan</span></td></tr>
+      <tr><td><b><span class="ganti">Nama produk</span></b></td><td><span class="ganti">Keterangan singkat</span></td><td><span class="chip eos">Layanan berakhir</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="tinted catatan">
+    <img src="../../mascot/head-wink-120.webp" alt="" width="120" height="120" style="width:20mm;height:auto">
+    <p style="font-size:9.5pt"><b>Catatan.</b> <span class="ganti">Kotak catatan untuk hal penting yang tidak boleh terlewat.</span></p>
+  </div>
+
+  <footer class="kaki"><span><span class="ganti">Judul dokumen</span> · FUSIONIFY</span><span>2</span></footer>
+</section>
+<script src="dokumen.js"></script>
+</body>
+</html>

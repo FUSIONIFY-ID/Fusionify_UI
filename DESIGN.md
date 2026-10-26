@@ -150,6 +150,18 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Cover karya/produk rasio 1600:848, screenshot asli. Ilustrasi wajib diberi label `.cover-note` "Ilustrasi".
 - Di layar sentuh: magnet, kursor khusus, dan parallax dimatikan.
 
+## Dokumen
+
+Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai sistem yang sama dengan web (template di `dokumen/`).
+
+- **Kop surat**: logo horizontal di kiri, nama PT dan kontak publik rata kanan, garis tinta 2px di bawahnya.
+- **Judul** Afacad Flux 800 dengan titik biru muda di akhir; **kicker** Exo 2 kapital bertitik; **teks** Sansation; **angka** Exo 2 tabular; **suara maskot** Caveat dalam gelembung stiker.
+- **Tabel**: kepala tabel latar tinta dengan huruf putih Exo 2 kapital, baris selang-seling `--paper`, garis `--line`, bingkai stiker 2px bersudut bulat.
+- **Total**: kapsul biru FUSIONIFY bergaya stiker dengan bayangan pejal.
+- **Sampul dan slide pembuka/penutup**: latar biru, segel besar biru muda yang terpotong tepi, wordmark putih, maskot badan penuh. Slide bagian dan angka: latar malam.
+- **Isian** yang wajib diganti selalu berlatar kuning muda (`--beta-bg`), di HTML, Word, dan Excel.
+- Ukuran: A4 tegak untuk surat dan dokumen, A5 mendatar untuk kuitansi, 16:9 untuk slide.
+
 ## Batas
 
 - Semua kode ditulis sendiri. Jangan meniru situs lain, khususnya andikadevs: tidak ada maskot terbang ke pojok nav, pintu di huruf wordmark, tumpukan awan, atau laut dan kapal.

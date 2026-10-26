@@ -1,0 +1,109 @@
+/* FUSIONIFY UI · dokumen cetak (PDF).
+   Dipakai template di dokumen/cetak/. Warna dan huruf diambil langsung dari css/tokens.css,
+   jadi ikut berubah kalau token kit berubah. Selalu tema terang: <html data-theme="light">.
+
+   Ukuran halaman:
+     .halaman        A4 tegak (210 × 297 mm)
+     .halaman.a5     A5 mendatar (210 × 148 mm), untuk kuitansi
+     .slide          16:9 (1280 × 720 px)
+   Teks yang wajib diganti ditandai <span class="ganti">…</span>: tampil kuning, dan
+   `node scripts/build-dokumen.mjs --final` menolak mencetak selama masih ada (lihat dokumen/README.md). */
+@import url("../../css/tokens.css");
+
+@font-face { font-family: "Afacad Flux"; font-weight: 800; src: url(../../tokens/fonts-ttf/AfacadFlux-ExtraBold.ttf) format("truetype"); }
+@font-face { font-family: "Exo 2"; font-weight: 400; src: url(../../tokens/fonts-ttf/Exo2-Regular.ttf) format("truetype"); }
+@font-face { font-family: "Exo 2"; font-weight: 700; src: url(../../tokens/fonts-ttf/Exo2-Bold.ttf) format("truetype"); }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { color-scheme: light; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { font-family: var(--f-body); color: var(--ink); background: #dfe8f3; font-size: 10.5pt; line-height: 1.6; }
+img, svg { display: block; max-width: 100%; }
+h1, h2, h3, h4 { font-family: var(--f-head); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+b, strong { font-weight: 700; }
+a { color: var(--blue-deep); text-decoration: none; }
+.num { font-family: var(--f-num); font-variant-numeric: tabular-nums; }
+.hand { font-family: var(--f-hand); font-weight: 700; }
+.dot { color: var(--blue-light); }
+.muted { color: var(--ink-3); }
+
+/* ---- Halaman ---- */
+@page { size: A4; margin: 0; }
+.halaman { position: relative; width: 210mm; height: 297mm; margin: 10mm auto; padding: 16mm 18mm 22mm; background: var(--white); overflow: hidden; page-break-after: always; break-after: page; }
+.halaman.a5 { width: 210mm; height: 148mm; padding: 12mm 14mm 14mm; }
+.halaman:last-child { page-break-after: auto; break-after: auto; }
+@media screen { .halaman, .slide { box-shadow: 0 10px 30px -12px rgb(11 15 26 / 0.35); } }
+
+/* ---- Kop surat ---- */
+.kop { display: grid; grid-template-columns: auto 1fr; gap: 12px 18px; align-items: center; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
+.kop .logo { display: flex; align-items: center; gap: 10px; }
+.kop .logo img.mark { width: 15mm; height: 15mm; }
+.kop .logo img.wm { height: 7mm; width: auto; }
+.kop .info { text-align: right; font-size: 8.3pt; line-height: 1.5; color: var(--ink-2); }
+.kop .info b { display: block; font-family: var(--f-head); font-weight: 800; font-size: 11.5pt; letter-spacing: 0; color: var(--ink); }
+.kop-tipis { height: 1px; background: var(--line); margin-top: 3px; }
+
+/* ---- Kaki halaman ---- */
+.kaki { position: absolute; left: 18mm; right: 18mm; bottom: 9mm; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-family: var(--f-num); font-size: 7.5pt; letter-spacing: 0.06em; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 5px; }
+.halaman.a5 .kaki { left: 14mm; right: 14mm; bottom: 6mm; }
+
+/* ---- Elemen ---- */
+.kicker { display: inline-flex; align-items: center; gap: 7px; font-family: var(--f-num); font-weight: 700; font-size: 8pt; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-blue-deep); }
+.kicker::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--blue-light); }
+.judul-dok { font-size: 24pt; margin-top: 6px; }
+.stiker { background: var(--white); border: 2px solid var(--edge); border-radius: var(--r-m); box-shadow: 0 3px 0 var(--edge-shadow); }
+.kotak { padding: 10px 14px; }
+.tinted { background: var(--surface); border-radius: var(--r-m); padding: 10px 14px; }
+.chip { display: inline-flex; align-items: center; gap: 5px; font-family: var(--f-num); font-weight: 700; font-size: 7.5pt; padding: 2px 9px; border-radius: var(--r-pill); white-space: nowrap; }
+.chip::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.chip.go { color: var(--go); background: var(--go-bg); } .chip.beta { color: var(--beta); background: var(--beta-bg); }
+.chip.wip { color: var(--wip); background: var(--wip-bg); } .chip.plan { color: var(--plan); background: var(--plan-bg); }
+.chip.eos { color: var(--eos); background: var(--eos-bg); }
+.ganti { background: var(--beta-bg); color: var(--beta); border-bottom: 1.5px dashed var(--beta); padding: 0 2px; border-radius: 3px; }
+/* Segel 12 lekukan: dokumen.js mengisi .segel dengan SVG inline berwarna currentColor
+   (mask-image dari file lokal diblokir browser, jadi tidak dipakai). Tanpa JS: segel tidak tampil. */
+.segel { aspect-ratio: 1; }
+.segel svg { width: 100%; height: 100%; max-width: none; }
+
+/* Meta surat: Nomor / Lampiran / Perihal */
+.meta { display: grid; grid-template-columns: 22mm 4mm 1fr; row-gap: 1px; }
+.isi p + p { margin-top: 8px; }
+.isi ol, .isi ul { margin: 6px 0 6px 18px; }
+.isi li + li { margin-top: 3px; }
+
+/* Tabel */
+table.tabel { width: 100%; border-collapse: separate; border-spacing: 0; border: 2px solid var(--edge); border-radius: 14px; overflow: hidden; font-size: 9.5pt; }
+.tabel th { background: var(--ink); color: #fff; font-family: var(--f-num); font-weight: 700; font-size: 8pt; letter-spacing: 0.08em; text-transform: uppercase; text-align: left; padding: 7px 10px; }
+.tabel td { padding: 7px 10px; border-top: 1px solid var(--line); vertical-align: top; }
+.tabel tr:nth-child(even) td { background: var(--paper); }
+.tabel .r { text-align: right; } .tabel .c { text-align: center; }
+.tabel td.r, .tabel td.c { font-family: var(--f-num); font-variant-numeric: tabular-nums; }
+.ringkas { margin-left: auto; width: 82mm; margin-top: 8px; }
+.ringkas div { display: flex; justify-content: space-between; padding: 4px 10px; }
+.ringkas .total { margin-top: 4px; background: var(--blue); color: #fff; border: 2px solid var(--edge); border-radius: 12px; box-shadow: 0 3px 0 var(--edge-shadow); font-family: var(--f-head); font-weight: 800; font-size: 13pt; padding: 7px 12px; }
+.ringkas .total span:last-child { font-family: var(--f-num); }
+
+/* Tanda tangan */
+.ttd { width: 66mm; margin-left: auto; margin-top: 12mm; text-align: center; }
+.ttd .ruang { height: 22mm; }
+.ttd .nama { font-weight: 700; text-decoration: underline; }
+.ttd-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20mm; margin-top: 12mm; text-align: center; }
+.ttd-2 .ruang { height: 22mm; }
+
+/* ---- Slide 16:9 ---- */
+.slide { position: relative; width: 1280px; height: 720px; margin: 16px auto; overflow: hidden; background: var(--paper); page-break-after: always; break-after: page; padding: 72px 80px; }
+.slide:last-child { page-break-after: auto; break-after: auto; }
+.slide h2 { font-size: 60px; margin-top: 14px; max-width: 1050px; }
+.slide .kicker { font-size: 14px; }
+.slide .kaki-slide { position: absolute; left: 80px; right: 80px; bottom: 26px; display: flex; justify-content: space-between; font-family: var(--f-num); font-size: 12px; letter-spacing: 0.08em; color: var(--ink-3); }
+.slide.biru { background: var(--blue); color: #fff; }
+.slide.biru h1, .slide.biru h2 { color: #fff; }
+.slide.biru .kaki-slide, .slide.malam .kaki-slide { color: #bfe0ff; }
+.slide.malam { background: var(--night); color: #dbe9fb; }
+.slide.malam h2 { color: #fff; }
+.slide.biru .kicker, .slide.malam .kicker { color: #bfe0ff; }
+.bubble-cetak { position: absolute; background: var(--white); border: 2px solid var(--edge); border-radius: 22px; box-shadow: 0 3px 0 var(--edge-shadow); font-family: var(--f-hand); font-weight: 700; color: var(--ink); padding: 8px 18px 10px; white-space: nowrap; line-height: 1.05; }
+.bubble-cetak::after { content: ""; position: absolute; right: 26px; bottom: -11px; width: 16px; height: 16px; background: var(--white); border-right: 2px solid var(--edge); border-bottom: 2px solid var(--edge); transform: rotate(45deg); }
+.bubble-cetak.kiri::after { right: auto; left: 22px; }
+
+/* Paling akhir supaya menang atas margin layar di atas */
+@media print { body { background: none; } .halaman, .slide { margin: 0; box-shadow: none; } }

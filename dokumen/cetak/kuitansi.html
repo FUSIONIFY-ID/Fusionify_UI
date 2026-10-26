@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuitansi · FUSIONIFY</title>
+<link rel="stylesheet" href="cetak.css">
+<style>@page { size: 210mm 148mm; margin: 0; }</style>
+<!-- Template kuitansi (bukti terima uang) FUSIONIFY, A5 mendatar.
+     Isi data-rupiah dan data-terbilang dengan angka yang sama (tanpa titik).
+     Nomor: {urut}/KWT/FDS/{bulan romawi}/{tahun}. Materai Rp10.000 untuk nilai di atas Rp5.000.000. -->
+</head>
+<body>
+<section class="halaman a5">
+  <header class="kop" style="padding-bottom:7px">
+    <div class="logo"><img src="../../brand/kit/fusionify-logo-horizontal.png" alt="FUSIONIFY" width="1087" height="340" style="height:11mm;width:auto"></div>
+    <div class="info"><b>PT FUSIONIFY DIGITAL STORE</b>hello@fusionify.id · +62 831-1138-0628 · fusionify.id</div>
+  </header>
+
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:5mm">
+    <h1 style="font-size:24pt">Kuitansi<span class="dot">.</span></h1>
+    <span class="num">No. <b><span class="ganti">003</span>/KWT/FDS/<span class="ganti">X</span>/<span class="ganti">2026</span></b></span>
+  </div>
+
+  <div class="meta" style="grid-template-columns:36mm 4mm 1fr;row-gap:5px;margin-top:4mm">
+    <span class="muted">Sudah terima dari</span><span>:</span><b><span class="ganti">Nama pembayar</span></b>
+    <span class="muted">Uang sejumlah</span><span>:</span><i data-terbilang="4300000"></i>
+    <span class="muted">Untuk pembayaran</span><span>:</span><span><span class="ganti">Pelunasan invoice 012/INV/FDS/X/2026</span></span>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:6mm">
+    <div class="stiker" style="padding:8px 16px;background:var(--blue);color:#fff">
+      <span style="font-family:var(--f-num);font-size:8pt;letter-spacing:.12em;color:#f2f8ff">JUMLAH</span><br>
+      <b class="num" style="font-size:18pt" data-rupiah="4300000"></b>
+    </div>
+    <div style="text-align:center;width:60mm">
+      Bogor, <span data-tanggal></span>
+      <div style="height:16mm"></div>
+      <div style="font-weight:700;text-decoration:underline"><span class="ganti">Dini Mufidah</span></div>
+      <div><span class="ganti">CFO</span></div>
+    </div>
+  </div>
+</section>
+<script src="dokumen.js"></script>
+</body>
+</html>

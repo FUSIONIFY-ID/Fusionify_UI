@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invoice · FUSIONIFY</title>
+<link rel="stylesheet" href="cetak.css">
+<!-- Template invoice (tagihan) FUSIONIFY.
+     Isi baris barang di <tbody>: data-qty dan data-harga (angka tanpa titik). Jumlah, subtotal,
+     pajak, total, dan terbilang dihitung otomatis oleh dokumen.js.
+     Pajak: isi data-pajak-persen="11" hanya kalau perusahaan sudah PKP; selain itu biarkan 0
+     atau hapus barisnya. Nomor: {urut}/INV/FDS/{bulan romawi}/{tahun}. -->
+</head>
+<body>
+<section class="halaman">
+  <header class="kop">
+    <div class="logo"><img src="../../brand/kit/fusionify-logo-horizontal.png" alt="FUSIONIFY" width="1087" height="340" style="height:15mm;width:auto"></div>
+    <div class="info">
+      <b>PT FUSIONIFY DIGITAL STORE</b>
+      <span class="ganti">Alamat lengkap kantor</span>, Bogor, Jawa Barat<br>
+      hello@fusionify.id · +62 831-1138-0628 · fusionify.id
+    </div>
+  </header>
+
+  <div style="display:grid;grid-template-columns:1fr auto;align-items:end;margin-top:9mm">
+    <div>
+      <p class="kicker">Tagihan</p>
+      <h1 class="judul-dok" style="font-size:34pt">Invoice<span class="dot">.</span></h1>
+    </div>
+    <div class="meta" style="grid-template-columns:28mm 4mm auto;font-size:9.5pt">
+      <span class="muted">Nomor</span><span>:</span><b class="num"><span class="ganti">012</span>/INV/FDS/<span class="ganti">X</span>/<span class="ganti">2026</span></b>
+      <span class="muted">Tanggal</span><span>:</span><span data-tanggal></span>
+      <span class="muted">Jatuh tempo</span><span>:</span><span><span class="ganti">9 November 2026</span></span>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:7mm">
+    <div class="stiker kotak">
+      <p class="kicker" style="font-size:7pt">Ditagihkan kepada</p>
+      <p style="margin-top:4px"><b><span class="ganti">Nama klien / perusahaan</span></b><br>
+      <span class="ganti">Alamat klien</span><br>
+      <span class="ganti">Email atau nomor telepon</span></p>
+    </div>
+    <div class="tinted">
+      <p class="kicker" style="font-size:7pt">Proyek</p>
+      <p style="margin-top:4px"><b><span class="ganti">Nama proyek</span></b><br>
+      <span class="ganti">Nomor penawaran atau PO yang dirujuk (bila ada)</span></p>
+    </div>
+  </div>
+
+  <table class="tabel" style="margin-top:7mm">
+    <thead>
+      <tr><th style="width:8mm" class="c">No</th><th>Deskripsi</th><th class="r" style="width:16mm">Qty</th><th class="r" style="width:32mm">Harga</th><th class="r" style="width:34mm">Jumlah</th></tr>
+    </thead>
+    <tbody>
+      <tr data-item data-qty="1" data-harga="2500000"><td class="c">1</td><td><b><span class="ganti">Pembuatan website company profile</span></b><br><span class="muted"><span class="ganti">5 halaman, responsif, bilingual</span></span></td><td class="r" data-qty-teks></td><td class="r" data-harga-teks></td><td class="r" data-jumlah></td></tr>
+      <tr data-item data-qty="12" data-harga="150000"><td class="c">2</td><td><b><span class="ganti">Pemeliharaan bulanan</span></b><br><span class="muted"><span class="ganti">per bulan</span></span></td><td class="r" data-qty-teks></td><td class="r" data-harga-teks></td><td class="r" data-jumlah></td></tr>
+    </tbody>
+  </table>
+
+  <div class="ringkas">
+    <div><span>Subtotal</span><span class="num" data-subtotal></span></div>
+    <div><span>Diskon</span><span class="num" data-diskon="0"></span></div>
+    <div><span>Pajak</span><span class="num" data-pajak-persen="0"></span></div>
+    <div class="total"><span>Total</span><span data-total></span></div>
+  </div>
+  <p style="text-align:right;margin-top:6px;font-size:9pt" class="muted"><i>Terbilang: <span data-terbilang></span></i></p>
+
+  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-top:7mm;align-items:start">
+    <div class="tinted" style="font-size:9.5pt">
+      <p class="kicker" style="font-size:7pt">Pembayaran</p>
+      <p style="margin-top:4px">Transfer ke <b><span class="ganti">Nama bank</span></b><br>
+      No. rekening <b class="num"><span class="ganti">000 000 0000</span></b><br>
+      a.n. <b>PT FUSIONIFY DIGITAL STORE</b></p>
+      <p style="margin-top:6px" class="muted">Cantumkan nomor invoice di berita transfer, lalu kirim bukti ke hello@fusionify.id.</p>
+    </div>
+    <div class="ttd" style="margin:0;width:auto">
+      Bogor, <span data-tanggal></span>
+      <div class="ruang" style="height:18mm"></div>
+      <div class="nama"><span class="ganti">Dini Mufidah</span></div>
+      <div><span class="ganti">CFO</span></div>
+    </div>
+  </div>
+
+  <footer class="kaki"><span>Terima kasih atas kepercayaannya.</span><span>PT FUSIONIFY DIGITAL STORE · fusionify.id</span></footer>
+</section>
+<script src="dokumen.js"></script>
+</body>
+</html>

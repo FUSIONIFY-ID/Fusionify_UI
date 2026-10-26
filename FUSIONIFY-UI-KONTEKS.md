@@ -59,6 +59,10 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 | `templates/chat.html` | Pesan: daftar obrolan + isi obrolan (HP: layar penuh dan ikut tombol back; layar lebar: berdampingan), kolom tulis, kartu acara di chat |
 | `templates/acara.html` | Halaman detail acara publik: poster, waktu (tambah ke kalender), lokasi (buka di Maps), pendaftaran lewat bottom sheet, tiket, susunan acara, bagikan |
 | `templates/admin.html` | Dashboard admin (KPI, grafik, tabel pengguna + filter + pilih semua + hapus dengan konfirmasi, pengaturan bertab, log) |
+| `dokumen/cetak/` | Template dokumen cetak HTML → PDF: `surat.html` (surat resmi), `invoice.html`, `penawaran.html`, `kuitansi.html` (A5), `dokumen.html` (proposal/laporan), `slide.html` (16:9). Gaya di `cetak.css` (memakai `css/tokens.css`), hitungan Rupiah, terbilang, tanggal, dan segel di `dokumen.js`. Panduan: `dokumen/README.md` |
+| `dokumen/office/` | Template Office: `FUSIONIFY-Surat.docx`, `FUSIONIFY-Dokumen.docx` (huruf tertanam), `FUSIONIFY-Slide.pptx` (tema + layout FY), `FUSIONIFY-Spreadsheet.xlsx` (Invoice berformula, Anggaran, Daftar). Aset PNG di `office/aset/` |
+| `dokumen/contoh/` | Pratinjau PDF semua template cetak (`npm run build:dokumen`) |
+| `scripts/build-dokumen.mjs`, `scripts/dokumen/` | Pembuat PDF (`--final` menolak teks "ganti" dan isi yang keluar halaman) dan generator template Office (`npm run build:office`) |
 
 ## Cara memakai di proyek baru atau lama
 
@@ -119,6 +123,17 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - Setiap daftar atau panel yang bisa kosong wajib punya `.state` dengan maskot, satu kalimat penjelasan, dan satu tombol langkah berikutnya. Jangan biarkan area kosong tanpa penjelasan.
 - Error memakai `.state.error` dan selalu ada tombol "Coba lagi". Halaman penuh: `templates/500.html`.
 - Aplikasi yang bisa dipakai saat sinyal lemah memasang `[data-offline-bar]` dan `templates/offline.html` sebagai halaman cadangan service worker.
+
+## Dokumen (surat, invoice, PDF, Word, PowerPoint, Excel)
+
+- Semua dokumen resmi FUSIONIFY dibuat dari template di `dokumen/`. Jangan membuat kop surat, invoice, atau deck dari nol dengan warna dan huruf lain. Panduan lengkap: `dokumen/README.md`.
+- Format: dokumen final yang harus tampil persis (invoice, penawaran, surat PDF) dari `dokumen/cetak/*.html`; dokumen yang akan diedit orang lain dari `dokumen/office/`.
+- Teks bertanda kuning (`.ganti`, latar kuning muda di Word, sel kuning muda di Excel) wajib diganti sebelum dikirim. Cetak final dengan `node scripts/build-dokumen.mjs --final berkas.html --keluar hasil.pdf`.
+- Penomoran: `{urut}/{kode}/FDS/{bulan romawi}/{tahun}`, kode `SRT`, `INV`, `PNW`, `KWT`, `PRJ`.
+- Kop surat memakai logo horizontal dari `brand/kit/`, nama PT FUSIONIFY DIGITAL STORE, dan kontak publik saja.
+- Harga, angka, dan status produk wajib asli. Pajak hanya kalau perusahaan sudah PKP. Angka contoh di grafik atau tabel diberi label "Data contoh" dan diganti sebelum dipakai.
+- Satu `<section class="halaman">` = satu lembar A4 (`.halaman.a5` untuk kuitansi, `.slide` untuk 16:9). Hiasan yang sengaja lebih besar dari halaman memakai `.segel` atau `.fx-oversize`.
+- Kalau token di `css/tokens.css` berubah, jalankan `npm run build:dokumen` dan `npm run build:office`, lalu catat di CHANGELOG.
 
 ## Aturan isi (wajib)
 
@@ -335,6 +350,18 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Nav lengkap mulai 961px; di bawahnya tombol menu.
 - Cover karya/produk rasio 1600:848, screenshot asli. Ilustrasi wajib diberi label `.cover-note` "Ilustrasi".
 - Di layar sentuh: magnet, kursor khusus, dan parallax dimatikan.
+
+## Dokumen
+
+Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai sistem yang sama dengan web (template di `dokumen/`).
+
+- **Kop surat**: logo horizontal di kiri, nama PT dan kontak publik rata kanan, garis tinta 2px di bawahnya.
+- **Judul** Afacad Flux 800 dengan titik biru muda di akhir; **kicker** Exo 2 kapital bertitik; **teks** Sansation; **angka** Exo 2 tabular; **suara maskot** Caveat dalam gelembung stiker.
+- **Tabel**: kepala tabel latar tinta dengan huruf putih Exo 2 kapital, baris selang-seling `--paper`, garis `--line`, bingkai stiker 2px bersudut bulat.
+- **Total**: kapsul biru FUSIONIFY bergaya stiker dengan bayangan pejal.
+- **Sampul dan slide pembuka/penutup**: latar biru, segel besar biru muda yang terpotong tepi, wordmark putih, maskot badan penuh. Slide bagian dan angka: latar malam.
+- **Isian** yang wajib diganti selalu berlatar kuning muda (`--beta-bg`), di HTML, Word, dan Excel.
+- Ukuran: A4 tegak untuk surat dan dokumen, A5 mendatar untuk kuitansi, 16:9 untuk slide.
 
 ## Batas
 
