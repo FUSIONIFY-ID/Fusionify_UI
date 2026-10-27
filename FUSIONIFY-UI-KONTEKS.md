@@ -70,6 +70,7 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 | `scripts/build-dokumen.mjs`, `scripts/dokumen/` | Pembuat PDF (`--final` menolak teks "ganti" dan isi yang keluar halaman) dan generator template Office (`npm run build:office`) |
 | `email/` | Template email transaksional: `fy-email.js` (`renderEmail`, tabel inline, aman di Gmail/Outlook), `templates.js` (kode verifikasi, atur ulang password, selamat datang, pengajuan disetujui/ditolak, pembayaran berhasil/gagal, status penarikan, pemberitahuan), `tandaTangan()` untuk tanda tangan email karyawan/produk, `aset/` PNG maskot, `contoh/` pratinjau (`npm run build:email`). Panduan: `email/README.md` |
 | `react/` | Untuk produk React + Tailwind: `index.tsx` (komponen tipis di atas kelas kit: `Tombol`, `Chip`, `Kartu`, `Judul`, `Maskot`, `PanggungMaskot`, `Keadaan`, `BadgeProduk`, dll.), `tailwind-preset.js` (v3), `tailwind-v4.css`. Panduan: `react/README.md` |
+| `rencana/` | Rencana yang belum dikerjakan. `rencana/ui-fusionify-id.md`: situs dokumentasi ui.fusionify.id ala m3.material.io (dikunci login, watermark per orang) plus aplikasi desktop dan Android anti-screenshot. Baca dulu sebelum mengerjakannya |
 
 ## Cara memakai di proyek baru atau lama
 
