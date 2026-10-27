@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.11.0 · 27 Oktober 2026
+
+- **Template kit kini memakai Ikon FUSIONIFY.** 262 ikon SVG yang dulu ditulis manual di 22 template dan demo diganti `<svg class="ikon"><use href="#ikon-…"/></svg>`, jadi kit tidak lagi melanggar aturannya sendiri. Yang sengaja tetap inline: ikon menu dan speaker di nav (bagiannya dianimasikan) dan logo Google.
+- Ikon baru: `jelajah`, `arsip`, `dibaca` (centang dua untuk pesan terbaca), `lampiran`, `tautan`. Total 100 ikon. Semua lolos `npm run cek:ikon`.
+- `npm run build:ikon` sekarang juga mengisi **sprite per halaman** di setiap template dan demo (hanya simbol yang dipakai, di antara penanda `IKON-SPRITE`) dan menolak nama ikon yang tidak ada.
+- `js/ikon-inline.js` (dibuat otomatis): ikon lengkap untuk elemen yang dibuat JavaScript. `controls.js` memakainya untuk tombol carousel, tombol hapus chip, dan tanda pesan terbaca/terkirim.
+
 ## 1.10.2 · 27 Oktober 2026
 
 - Kode perusahaan di nomor dokumen diganti dari `FDS` menjadi `FI` (FUSIONIFY): `{urut}/{kode}/FI/{bulan romawi}/{tahun}`, contoh `007/SRT/FI/X/2026`. FI dipakai karena lebih umum daripada singkatan nama PT, jadi tetap berlaku kalau nama badan hukum berubah. Berlaku di template cetak, template Office, `dokumen/README.md`, AGENTS, dan skill.

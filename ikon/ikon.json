@@ -1,11 +1,17 @@
 {
-  "versi": "1.10.1",
+  "versi": "1.10.2",
   "ikon": [
     {
       "nama": "aktivitas",
       "kategori": "dasbor",
       "kata": "pulse detak monitor",
       "titik": false
+    },
+    {
+      "nama": "arsip",
+      "kategori": "aksi",
+      "kata": "archive simpan kotak",
+      "titik": true
     },
     {
       "nama": "atur",
@@ -102,6 +108,12 @@
       "kategori": "data",
       "kata": "basis data db penyimpanan",
       "titik": true
+    },
+    {
+      "nama": "dibaca",
+      "kategori": "status",
+      "kata": "read terbaca centang dua",
+      "titik": false
     },
     {
       "nama": "dokumen",
@@ -218,6 +230,12 @@
       "titik": false
     },
     {
+      "nama": "jelajah",
+      "kategori": "navigasi",
+      "kata": "explore kompas temukan",
+      "titik": true
+    },
+    {
       "nama": "kalender",
       "kategori": "status",
       "kata": "tanggal jadwal date",
@@ -294,6 +312,12 @@
       "kategori": "navigasi",
       "kata": "more opsi titik tiga",
       "titik": true
+    },
+    {
+      "nama": "lampiran",
+      "kategori": "komunikasi",
+      "kata": "attach klip lampirkan file",
+      "titik": false
     },
     {
       "nama": "laporan",
@@ -473,6 +497,12 @@
       "nama": "tanda-tangan",
       "kategori": "komunikasi",
       "kata": "signature paraf",
+      "titik": true
+    },
+    {
+      "nama": "tautan",
+      "kategori": "komunikasi",
+      "kata": "link url sambungan",
       "titik": true
     },
     {

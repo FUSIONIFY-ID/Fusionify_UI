@@ -121,4 +121,47 @@ if (fs.existsSync(katalog)) {
   h = h.replace(/data-jumlah-ikon>[^<]*</, `data-jumlah-ikon>${nama.length}<`).replace(/data-jumlah-sosmed>[^<]*</, `data-jumlah-sosmed>${sosmed.length}<`);
   fs.writeFileSync(katalog, h);
 }
-console.log(`✓ ${nama.length} ikon, ${sosmed.length} logo sosmed, sprite ${(Buffer.byteLength(sprite) / 1024).toFixed(1)} KB`);
+// 9. Sprite per halaman: setiap template dan demo hanya membawa simbol yang dipakainya
+//    (diisi ulang di antara penanda IKON-SPRITE tepat setelah <body>).
+const halaman = [];
+const jelajahi = (dir) => {
+  for (const f of fs.readdirSync(path.join(ROOT, dir), { withFileTypes: true })) {
+    const rel = path.join(dir, f.name);
+    if (f.isDirectory()) jelajahi(rel);
+    else if (f.name.endsWith(".html") && rel !== path.join("templates", "ikon.html")) halaman.push(rel);
+  }
+};
+jelajahi("templates");
+halaman.push(path.join("demo", "index.html"));
+const simbolDari = Object.fromEntries(simbol.map((x) => [x.match(/id="([^"]+)"/)[1], x]));
+let jumlahHalaman = 0;
+for (const rel of halaman) {
+  const file = path.join(ROOT, rel);
+  if (!fs.existsSync(file)) continue;
+  let h = fs.readFileSync(file, "utf8");
+  const blok = /\n?<!-- IKON-SPRITE:MULAI -->[\s\S]*?<!-- IKON-SPRITE:SELESAI -->/;
+  const tanpa = h.replace(blok, "");
+  const dipakai = [...new Set([...tanpa.matchAll(/href="#((?:ikon|sosmed)-[a-z0-9-]+)"/g)].map((m) => m[1]))].sort();
+  const hilang = dipakai.filter((id) => !simbolDari[id]);
+  if (hilang.length) throw new Error(`${rel} memakai ikon yang tidak ada: ${hilang.join(", ")}`);
+  if (!dipakai.length) { if (tanpa !== h) fs.writeFileSync(file, tanpa); continue; }
+  const isi = `<!-- IKON-SPRITE:MULAI -->\n<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">${dipakai.map((id) => simbolDari[id]).join("")}</svg>\n<!-- IKON-SPRITE:SELESAI -->`;
+  h = blok.test(h) ? h.replace(blok, "\n" + isi) : h.replace(/(<body[^>]*>)/, `$1\n${isi}`);
+  fs.writeFileSync(file, h);
+  jumlahHalaman++;
+}
+
+// 10. Ikon yang dibuat oleh JavaScript (js/controls.js) ditulis lengkap, tidak bergantung pada sprite halaman.
+const JS_IKON = ["chevron-kiri", "chevron-kanan", "tutup", "dibaca", "cari", "segarkan"];
+const inline = (n, kelas = "ikon") => {
+  const i = IKON[n], t = titikD(i);
+  return `<svg class="${kelas}" viewBox="0 0 24 24" ${ATR} aria-hidden="true">${i.d.map((d) => `<path d="${d}"/>`).join("")}${t ? `<path class="t" d="${t}" style="fill:var(--ikon-titik,${BIRU_MUDA});stroke:none"/>` : ""}</svg>`;
+};
+tulis("js/ikon-inline.js", `// Dibuat otomatis oleh scripts/build-ikon.mjs dari ikon/sumber.mjs. Jangan diedit langsung.
+// Ikon FUSIONIFY lengkap (tanpa sprite) untuk elemen yang dibuat JavaScript.
+export const IKON_INLINE = ${JSON.stringify(Object.fromEntries(JS_IKON.map((n) => [n, inline(n)])), null, 2)};
+/** Ikon sebagai string SVG. kelas tambahan opsional, mis. "read". */
+export const ikon = (nama, kelas = "") => kelas ? IKON_INLINE[nama].replace('class="ikon"', \`class="ikon \${kelas}"\`) : IKON_INLINE[nama];
+`);
+
+console.log(`✓ ${nama.length} ikon, ${sosmed.length} logo sosmed, sprite ${(Buffer.byteLength(sprite) / 1024).toFixed(1)} KB, sprite per halaman di ${jumlahHalaman} halaman`);

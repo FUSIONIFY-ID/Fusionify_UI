@@ -22,7 +22,7 @@ Set ikon resmi FUSIONIFY, digambar sendiri untuk web company, web produk, dasbor
 | `ikon.json` | Daftar nama, kategori, kata kunci |
 | `png/` | PNG 64px warna tinta untuk email (sosmed, email, telepon, web, lokasi) |
 
-Turunan lain: `react/ikon-data.ts` (dipakai `<Ikon>`), `tokens/android/res/drawable/fy_ikon_*.xml` dan `fy_sosmed_*.xml`.
+Turunan lain: `react/ikon-data.ts` (dipakai `<Ikon>`), `js/ikon-inline.js` (ikon lengkap untuk elemen yang dibuat `controls.js`), sprite per halaman di semua template dan demo (hanya simbol yang dipakai, di antara penanda `IKON-SPRITE`), `tokens/android/res/drawable/fy_ikon_*.xml` dan `fy_sosmed_*.xml`.
 
 ## Pakai di web
 
@@ -35,6 +35,7 @@ Tempel isi `ikon.svg` sekali di awal `<body>` (atau sisipkan lewat server/kompon
 <button class="icon-btn" aria-label="Hapus"><svg class="ikon" aria-hidden="true"><use href="#ikon-hapus"/></svg></button>
 ```
 
+- Template kit sudah memakai cara ini. Setelah menambah atau mengganti `#ikon-…` di template, jalankan `npm run build:ikon` supaya sprite halaman itu ikut diperbarui. Pengecualian yang sengaja dibiarkan inline: ikon menu dan speaker di nav (garisnya dianimasikan per bagian) dan logo Google di tombol masuk.
 - Ukuran ikut `font-size` (1.25em) atau kelas `.ikon-16/-20/-24/-32`. Warna garis ikut `color`, warna titik lewat `--ikon-titik`. `.ikon.polos` = satu warna.
 - `.ikon-stiker` (putih, `.biru`, `.tint`, `.kecil`) untuk kartu fitur, KPI, dan menu dasbor. `.ikon-segel` (`.biru`) untuk kartu layanan.
 - Tombol yang isinya hanya ikon wajib `aria-label`. Ikon di samping teks cukup `aria-hidden="true"`.

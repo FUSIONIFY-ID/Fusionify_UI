@@ -33,15 +33,13 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const emit = (el, name, detail) => el.dispatchEvent(new CustomEvent(name, { bubbles: true, detail }));
+import { ikon } from "./ikon-inline.js";
+
 const once = (el, key) => { if (el[key]) return false; el[key] = true; return true; };
 let uid = 0;
 const id = (p) => `${p}-${++uid}`;
 
-const ICON = {
-  left: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>',
-  right: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>',
-  x: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
-};
+const ICON = { left: ikon("chevron-kiri"), right: ikon("chevron-kanan"), x: ikon("tutup") };
 
 /* =========================================================
    SNACKBAR
@@ -650,7 +648,7 @@ function initUpload(wrap) {
    - form.composer: textarea tumbuh sendiri, Enter kirim (Shift+Enter baris baru, di layar sentuh Enter = baris baru),
      event fy:send { text, thread }. Tambah pesan: el._fyChat.add(threadId, { text, me, time })
    ========================================================= */
-const CHECKS = '<svg class="read" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 13l4 4 8-9"/><path d="M10 15l2 2 8-9"/></svg>';
+const CHECKS = ikon("dibaca", "read");
 function initChat(chat) {
   if (!once(chat, "_fyChat")) return;
   const wide = matchMedia("(min-width: 900px)");
@@ -700,7 +698,7 @@ function initChat(chat) {
     m.className = "msg " + (me ? "me" : "them");
     const p = document.createElement("p"); p.textContent = text;
     const tm = document.createElement("time"); tm.textContent = time;
-    if (me) tm.insertAdjacentHTML("beforeend", CHECKS.replace('class="read"', 'class="sent"'));
+    if (me) tm.insertAdjacentHTML("beforeend", ikon("dibaca", "sent"));
     m.append(p, tm);
     const typing = $(".typing", msgs);
     msgs.insertBefore(m, typing || null);

@@ -53,6 +53,7 @@ export const IKON = {
   "chevron-kiri": { kat: "navigasi", kata: "sebelumnya", d: ["M14.5 6 8.5 12l6 6"] },
   tutup: { kat: "navigasi", kata: "close silang x", d: ["M6 6l12 12", "M18 6 6 18"] },
   "tautan-luar": { kat: "navigasi", kata: "external buka tab baru", d: ["M14 3.5h6.5V10", "M20.5 3.5 11 13", "M18 14v4.5a2 2 0 0 1-2 2H5.5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2H10"], t: [7.6, 16.4, 1.5] },
+  jelajah: { kat: "navigasi", kata: "explore kompas temukan", d: [segel(12, 12, 8.8, 0.08), "M15.4 8.6 13.5 13.5 8.6 15.4 10.5 10.5z"], t: [12, 12, 1.1] },
   lainnya: { kat: "navigasi", kata: "more opsi titik tiga", d: [c(5, 12, 1), c(12, 12, 1)], t: [19, 12, 2] },
 
   // ---------- Aksi ----------
@@ -65,6 +66,7 @@ export const IKON = {
   unggah: { kat: "aksi", kata: "upload kirim berkas", d: ["M12 15V4", "M7 8.5C8.9 7.6 10.6 6.1 12 4c1.4 2.1 3.1 3.6 5 4.5", "M4 20h12"], t: [19.6, 20, 1.6] },
   bagikan: { kat: "aksi", kata: "share sebar", d: [c(18, 5.5, 2.5), c(6, 12, 2.5), "M8.2 10.8l7.6-4.1", "M8.2 13.2l7.6 4.1"], t: [18, 18.5, 2.5] },
   simpan: { kat: "aksi", kata: "bookmark tandai", d: ["M6.5 3.5h11a1 1 0 0 1 1 1V21l-6.5-4.5L5.5 21V4.5a1 1 0 0 1 1-1z"], t: [12, 9.5, 1.6] },
+  arsip: { kat: "aksi", kata: "archive simpan kotak", d: [k(3, 4, 18, 5, 1.5), "M5 9v9.5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9", "M9.5 13.5h3"], t: [15.2, 13.5, 1.3] },
   atur: { kat: "aksi", kata: "slider filter penyesuaian", d: ["M4 7h9.5", "M19.5 7H20", c(16.5, 7, 2.5), "M4 17h.5", "M10.5 17H20", c(7.5, 17, 2.5)], t: [16.5, 7, 1.2] },
   filter: { kat: "aksi", kata: "saring corong", d: ["M3.5 5h17l-6.5 7.5V19l-4 2v-8.5z"] },
   urut: { kat: "aksi", kata: "sort urutkan", d: ["M7 16.5V4.5", "M3.5 8C5 7.3 6.2 6.1 7 4.5 7.8 6.1 9 7.3 10.5 8", "M17 7.5v12", "M13.5 16c1.5.7 2.7 1.9 3.5 3.5.8-1.6 2-2.8 3.5-3.5"], t: [7, 20.2, 1.4] },
@@ -74,6 +76,7 @@ export const IKON = {
   masuk: { kat: "aksi", kata: "login sign in", d: ["M14.5 3.5H18A2.5 2.5 0 0 1 20.5 6v12a2.5 2.5 0 0 1-2.5 2.5h-3.5", "M10 16.5l4.5-4.5L10 7.5", "M14.5 12H4"] },
 
   // ---------- Status ----------
+  dibaca: { kat: "status", kata: "read terbaca centang dua", d: ["M2.5 12.8l3.6 3.7L13 8.5", "M11.5 15.6l1 .9L20 8"] },
   cek: { kat: "status", kata: "check centang berhasil", d: ["M5 12.5l4.5 4.5L19 7.5"] },
   berhasil: { kat: "status", kata: "sukses centang lingkaran ok", d: [segel(12, 12, 8.8, 0.08), "M8.2 12.4l2.6 2.6 5-5.4"] },
   info: { kat: "status", kata: "informasi i", d: [segel(12, 12, 8.8, 0.08), "M12 11v5.5"], t: [12, 7.7, 1.5] },
@@ -97,6 +100,8 @@ export const IKON = {
   kirim: { kat: "komunikasi", kata: "send pesawat kertas", d: ["M20.5 3.5 10 14", "M20.5 3.5 14 20.5l-4-6.5-6.5-4z"] },
   lokasi: { kat: "komunikasi", kata: "alamat pin peta map", d: ["M12 21s-7-6-7-11.5a7 7 0 0 1 14 0C19 15 12 21 12 21z"], t: [12, 9.5, 2.3] },
   web: { kat: "komunikasi", kata: "globe internet situs bahasa", d: [c(12, 12, 9), "M3 12h18", "M12 3a14 14 0 0 1 0 18", "M12 3a14 14 0 0 0 0 18"] },
+  lampiran: { kat: "komunikasi", kata: "attach klip lampirkan file", d: ["M16 8.5v8a4 4 0 0 1-8 0V6.5a2.5 2.5 0 0 1 5 0v9.5a1 1 0 0 1-2 0V8.5"] },
+  tautan: { kat: "komunikasi", kata: "link url sambungan", d: ["M9.5 8H7a4 4 0 0 0 0 8h2.5", "M14.5 8H17a4 4 0 0 1 0 8h-2.5"], t: [12, 12, 1.6] },
   "tanda-tangan": { kat: "komunikasi", kata: "signature paraf", d: ["M3.5 17c2.5 0 3.5-9 6-9 2 0 0 7 2.5 7 1.6 0 2-3 3.5-3 1 0 1.4 1.5 2.5 1.5", "M3.5 20.5h12"], t: [19.6, 20.5, 1.5] },
 
   // ---------- Dasbor ----------
