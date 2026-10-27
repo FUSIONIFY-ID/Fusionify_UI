@@ -197,7 +197,7 @@ Template ada di `dokumen/` (panduan `dokumen/README.md`):
 - HTML → PDF di `dokumen/cetak/`: `surat.html`, `invoice.html`, `penawaran.html`, `kuitansi.html`, `dokumen.html`, `slide.html`, `perjanjian.html`, `sertifikat.html` (A4 mendatar), `tiket.html` (e-tiket 210×99 mm), `kartu-nama.html` (90×55 mm). Gaya `cetak.css` memakai `css/tokens.css`; `dokumen.js` menghitung Rupiah, total, terbilang, tanggal, dan menggambar `.segel`.
 - Office di `dokumen/office/`: `FUSIONIFY-Surat.docx`, `FUSIONIFY-Dokumen.docx`, `FUSIONIFY-Slide.pptx` (layout FY Judul/Bagian/Isi/Judul saja/Angka/Penutup), `FUSIONIFY-Spreadsheet.xlsx` (Invoice, Anggaran, Daftar).
 - Isian wajib diganti berlatar kuning muda (`.ganti`). Cetak final: `node scripts/build-dokumen.mjs --final berkas.html --keluar hasil.pdf`.
-- Nomor dokumen `{urut}/{SRT|INV|PNW|KWT|PRJ|SER}/FDS/{bulan romawi}/{tahun}`. Harga, angka, dan status wajib asli; pajak hanya bila PKP.
+- Nomor dokumen `{urut}/{SRT|INV|PNW|KWT|PRJ|SER}/FI/{bulan romawi}/{tahun}`. Harga, angka, dan status wajib asli; pajak hanya bila PKP.
 
 ## Ikon
 

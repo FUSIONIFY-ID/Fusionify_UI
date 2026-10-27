@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.10.2 · 27 Oktober 2026
+
+- Kode perusahaan di nomor dokumen diganti dari `FDS` menjadi `FI` (FUSIONIFY): `{urut}/{kode}/FI/{bulan romawi}/{tahun}`, contoh `007/SRT/FI/X/2026`. FI dipakai karena lebih umum daripada singkatan nama PT, jadi tetap berlaku kalau nama badan hukum berubah. Berlaku di template cetak, template Office, `dokumen/README.md`, AGENTS, dan skill.
+
 ## 1.10.1 · 27 Oktober 2026
 
 - **Ikon makin khas FUSIONIFY**: ikon status (info, berhasil, galat, bantuan, jam) kini memakai lingkaran segel bergelombang; semua panah memakai mata panah melengkung; email, database, dokumen, dan matahari digambar ulang.

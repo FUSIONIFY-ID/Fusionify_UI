@@ -140,7 +140,7 @@ for col in "ABCDE":
 ws["A6"].value, ws["A6"].font = "TAGIHAN", f_kicker
 ws["A7"].value, ws["A7"].font = "Invoice", f_judul
 ws.row_dimensions[7].height = 34
-for i, (label, nilai, fmt) in enumerate([("Nomor", "012/INV/FDS/X/2026", None), ("Tanggal", date.today(), TANGGAL), ("Jatuh tempo", "=D7+14", TANGGAL)]):
+for i, (label, nilai, fmt) in enumerate([("Nomor", "012/INV/FI/X/2026", None), ("Tanggal", date.today(), TANGGAL), ("Jatuh tempo", "=D7+14", TANGGAL)]):
     r = 6 + i
     ws[f"C{r}"].value, ws[f"C{r}"].font, ws[f"C{r}"].alignment = label, f_muted, kanan
     c = ws[f"D{r}"]

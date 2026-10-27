@@ -89,7 +89,7 @@ function surat() {
   const body = [
     P([T("Bogor, "), G("26 Oktober 2026")], { alignment: AlignmentType.RIGHT, spacing: { before: 240 } }),
     new Table({ width: { size: 5750, type: WidthType.DXA }, columnWidths: [1300, 250, 4200], borders: tanpaGarisTabel, rows: [
-      meta("Nomor", [G("007"), T("/SRT/FDS/"), G("X"), T("/"), G("2026")]),
+      meta("Nomor", [G("007"), T("/SRT/FI/"), G("X"), T("/"), G("2026")]),
       meta("Lampiran", [G("1 (satu) berkas")]),
       meta("Perihal", [G("Permohonan kerja sama", { bold: true })]),
     ] }),
@@ -208,7 +208,7 @@ function perjanjian() {
   const isi = [
     tengah(T("PERJANJIAN KERJA SAMA", { font: F.head, size: 34 }), { spacing: { before: 200, after: 0 } }),
     tengah(G("Pembuatan Website Company Profile", { bold: true }), { spacing: { after: 0 } }),
-    tengah([T("Nomor: ", { color: C.ink2 }), G("001"), T("/PRJ/FDS/"), G("X"), T("/"), G("2026")], { spacing: { after: 300 } }),
+    tengah([T("Nomor: ", { color: C.ink2 }), G("001"), T("/PRJ/FI/"), G("X"), T("/"), G("2026")], { spacing: { after: 300 } }),
     P([T("Pada hari ini "), G("Senin"), T(", tanggal "), G("26 Oktober 2026"), T(", bertempat di "), G("Bogor"), T(", yang bertanda tangan di bawah ini:")], { alignment: AlignmentType.JUSTIFIED }),
     pihak([["1.", "Nama", G("Muhammad Jundy Rabbani, S.Kom.", { bold: true })], ["", "Jabatan", G("Founder & CEO")], ["", "Alamat", G("Alamat kantor PT FUSIONIFY DIGITAL STORE")]]),
     P([T("dalam hal ini bertindak untuk dan atas nama PT FUSIONIFY DIGITAL STORE, selanjutnya disebut "), T("PIHAK PERTAMA", { bold: true }), T(".")], { alignment: AlignmentType.JUSTIFIED, spacing: { before: 80 } }),
@@ -230,7 +230,7 @@ function perjanjian() {
   return new Document({
     creator: PERUSAHAAN, title: "Perjanjian kerja sama FUSIONIFY", description: "Template perjanjian. Kerangka umum, bukan nasihat hukum. Ganti semua teks berlatar kuning.",
     styles, numbering: num, fonts,
-    sections: [{ properties: { page: PAGE }, headers: { default: kop() }, footers: { default: kaki("Perjanjian 001/PRJ/FDS  ·  Paraf: ______ / ______") }, children: isi }],
+    sections: [{ properties: { page: PAGE }, headers: { default: kop() }, footers: { default: kaki("Perjanjian 001/PRJ/FI  ·  Paraf: ______ / ______") }, children: isi }],
   });
 }
 

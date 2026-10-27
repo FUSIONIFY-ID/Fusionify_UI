@@ -44,7 +44,7 @@ Pratinjau semua template HTML ada di `contoh/*.pdf`.
 
 ### Penomoran
 
-`{urut}/{kode}/FDS/{bulan romawi}/{tahun}`, contoh `007/SRT/FDS/X/2026`. FDS = Fusionify Digital Store. Nomor urut mulai dari 001 setiap tahun, per kode.
+`{urut}/{kode}/FI/{bulan romawi}/{tahun}`, contoh `007/SRT/FI/X/2026`. FI = FUSIONIFY (singkatan yang lebih umum daripada nama PT, jadi tetap dipakai kalau nama badan hukum berubah). Nomor urut mulai dari 001 setiap tahun, per kode.
 
 | Kode | Dokumen |
 | --- | --- |

@@ -145,7 +145,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - Semua dokumen resmi FUSIONIFY dibuat dari template di `dokumen/`. Jangan membuat kop surat, invoice, atau deck dari nol dengan warna dan huruf lain. Panduan lengkap: `dokumen/README.md`.
 - Format: dokumen final yang harus tampil persis (invoice, penawaran, surat PDF) dari `dokumen/cetak/*.html`; dokumen yang akan diedit orang lain dari `dokumen/office/`.
 - Teks bertanda kuning (`.ganti`, latar kuning muda di Word, sel kuning muda di Excel) wajib diganti sebelum dikirim. Cetak final dengan `node scripts/build-dokumen.mjs --final berkas.html --keluar hasil.pdf`.
-- Penomoran: `{urut}/{kode}/FDS/{bulan romawi}/{tahun}`, kode `SRT`, `INV`, `PNW`, `KWT`, `PRJ`, `SER` (sertifikat: `cetak/sertifikat.html`; perjanjian: `cetak/perjanjian.html`, `office/FUSIONIFY-Perjanjian.docx`; kerangka umum, bukan nasihat hukum).
+- Penomoran: `{urut}/{kode}/FI/{bulan romawi}/{tahun}`, kode `SRT`, `INV`, `PNW`, `KWT`, `PRJ`, `SER` (sertifikat: `cetak/sertifikat.html`; perjanjian: `cetak/perjanjian.html`, `office/FUSIONIFY-Perjanjian.docx`; kerangka umum, bukan nasihat hukum).
 - Kop surat memakai logo horizontal dari `brand/kit/`, nama PT FUSIONIFY DIGITAL STORE, dan kontak publik saja.
 - Harga, angka, dan status produk wajib asli. Pajak hanya kalau perusahaan sudah PKP. Angka contoh di grafik atau tabel diberi label "Data contoh" dan diganti sebelum dipakai.
 - Satu `<section class="halaman">` = satu lembar A4 (`.halaman.a5` untuk kuitansi, `.slide` untuk 16:9). Hiasan yang sengaja lebih besar dari halaman memakai `.segel` atau `.fx-oversize`.
