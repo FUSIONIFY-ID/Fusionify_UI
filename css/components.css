@@ -299,3 +299,38 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 
 /* Animasi tanpa henti dijeda saat seksinya di luar layar (motion.js memasang .idle) */
 .idle *, .idle *::before, .idle *::after { animation-play-state: paused !important; }
+
+/* =========================================================
+   IKON FUSIONIFY · garis 2px, ujung bulat, dengan "titik i" biru muda sebagai ciri khas.
+   Sprite: ikon/ikon.svg (tempel di <body> atau rujuk file) lalu:
+     <svg class="ikon" aria-hidden="true"><use href="#ikon-cari"/></svg>
+     <svg class="ikon" aria-hidden="true"><use href="#sosmed-instagram"/></svg>
+   Ukuran ikut font-size (1.25em). Warna garis = currentColor, warna titik = --ikon-titik.
+   ========================================================= */
+.ikon { display: inline-block; flex: none; width: 1.25em; height: 1.25em; vertical-align: -0.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; overflow: visible; --ikon-titik: var(--blue-light); }
+.ikon.polos { --ikon-titik: currentColor; }   /* satu warna, mis. di atas foto */
+.ikon-16 { width: 16px; height: 16px; } .ikon-20 { width: 20px; height: 20px; } .ikon-24 { width: 24px; height: 24px; } .ikon-32 { width: 32px; height: 32px; }
+
+/* Ikon dalam ubin stiker (kartu fitur, KPI dasbor) */
+.ikon-stiker { display: inline-grid; place-items: center; flex: none; width: 52px; height: 52px; border-radius: 16px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 4px 0 var(--edge-shadow); }
+.ikon-stiker .ikon { width: 26px; height: 26px; }
+.ikon-stiker.kecil { width: 40px; height: 40px; border-radius: 12px; box-shadow: 0 3px 0 var(--edge-shadow); }
+.ikon-stiker.kecil .ikon { width: 20px; height: 20px; }
+.ikon-stiker.biru { background: var(--blue); color: #fff; --ikon-titik: color-mix(in srgb, #fff 55%, var(--blue-light)); }
+.ikon-stiker.tint { background: var(--surface); color: var(--text-blue); }
+
+/* Ikon di atas segel 12 lekukan */
+.ikon-segel { position: relative; display: inline-grid; place-items: center; flex: none; width: 60px; height: 60px; color: var(--ink); isolation: isolate; }
+.ikon-segel::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--seal-tint); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; }
+.ikon-segel .ikon { width: 26px; height: 26px; }
+.ikon-segel.biru { color: #fff; --ikon-titik: color-mix(in srgb, #fff 55%, var(--blue-light)); }
+.ikon-segel.biru::before { background: var(--blue); }
+
+/* Daftar tautan sosmed: <ul class="sosmed"><li><a href="…" aria-label="Instagram FUSIONIFY"><svg class="ikon"><use href="#sosmed-instagram"/></svg></a></li></ul> */
+.sosmed { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; }
+.sosmed a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.2s var(--ease); }
+.sosmed a:hover { transform: translateY(-2px); background: var(--blue); color: #fff; }
+.sosmed a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 3px; }
+.sosmed .ikon { width: 20px; height: 20px; }
+.footer .sosmed a, .sec.blue .sosmed a { background: transparent; color: #f2f8ff; border-color: rgba(255, 255, 255, 0.35); box-shadow: none; }
+.footer .sosmed a:hover, .sec.blue .sosmed a:hover { background: #fff; color: #0b0f1a; }

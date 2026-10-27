@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.10.0 · 27 Oktober 2026
+
+- **Ikon FUSIONIFY** (`ikon/`, panduan `ikon/README.md`): 95 ikon digambar sendiri dengan ciri khas **titik i** biru muda, garis 2px bulat di kisi 24. Kategori navigasi, aksi, status, komunikasi, dasbor (dompet, kartu, QR, struk, keranjang, toko, paket, truk, gudang, tim, tiket, laporan, grafik), data dan teknis (server, database, bot, VPN, kunci API), tema dan media, serta ikon khas (segel, titik i, fusi, progres, maskot).
+- **Logo media sosial** satu warna dari simple-icons (CC0): Instagram, TikTok, WhatsApp, Telegram, X, YouTube, LinkedIn, Facebook, Threads, GitHub, Discord, Shopee, Google Play. Hanya untuk menautkan akun resmi.
+- CSS baru di `components.css`: `.ikon` (+ `.polos`, `.ikon-16/20/24/32`, `--ikon-titik`), `.ikon-stiker` (`.biru`, `.tint`, `.kecil`), `.ikon-segel` (`.biru`), `.sosmed`.
+- `npm run build:ikon` membuat SVG satuan, sprite `ikon/ikon.svg`, `ikon/ikon.json`, PNG email, `react/ikon-data.ts`, dan vector drawable Android (`fy_ikon_*`, `fy_sosmed_*`).
+- React: `Ikon`, `IkonSosmed`, `IkonStiker`, `IkonSegel`, `TautanSosmed`, tipe `NamaIkon` dan `NamaSosmed`.
+- Katalog `templates/ikon.html`: cari, ganti tampilan (garis, stiker, segel, biru), klik untuk menyalin kode.
+- Uji baru `tests/ikon.mjs` (sinkron dengan sumber, ikon di dalam kisi aman, katalog), `tests/react.mjs` mencakup ikon.
+
 ## 1.9.0 · 27 Oktober 2026
 
 - **Halaman produk siap pakai** (kelas baru di `css/product.css`):

@@ -199,6 +199,12 @@ Template ada di `dokumen/` (panduan `dokumen/README.md`):
 - Isian wajib diganti berlatar kuning muda (`.ganti`). Cetak final: `node scripts/build-dokumen.mjs --final berkas.html --keluar hasil.pdf`.
 - Nomor dokumen `{urut}/{SRT|INV|PNW|KWT|PRJ|SER}/FDS/{bulan romawi}/{tahun}`. Harga, angka, dan status wajib asli; pajak hanya bila PKP.
 
+## Ikon
+
+- Pakai Ikon FUSIONIFY: sprite `ikon/ikon.svg` lalu `<svg class="ikon" aria-hidden="true"><use href="#ikon-NAMA"/></svg>`; React `<Ikon nama="…" />`, `<IkonStiker>`, `<IkonSegel>`, `<TautanSosmed>`; Android `@drawable/fy_ikon_nama`.
+- Ciri khas: garis 2px bulat + titik i biru muda (`--ikon-titik`). Wadah `.ikon-stiker` (`.biru`, `.tint`, `.kecil`) dan `.ikon-segel` (`.biru`). Sosmed: `.sosmed` + `#sosmed-instagram|tiktok|whatsapp|telegram|x|youtube|linkedin|facebook|threads|github|discord|shopee|google-play`.
+- Nama ikon: lihat `ikon/ikon.json` atau `templates/ikon.html`. Jangan memakai set ikon lain atau emoji; ikon baru digambar di `ikon/sumber.mjs` lalu `npm run build:ikon`.
+
 ## Grafis media sosial dan OG image
 
 - `grafis/post.html` (1080×1080), `potret.html` (1080×1350), `story.html` (1080×1920, juga sampul Reels/TikTok), `og.html` (1200×630), `banner.html` (X, LinkedIn). Satu `.kanvas[id]` = satu PNG.

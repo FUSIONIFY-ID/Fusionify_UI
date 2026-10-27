@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FUSIONIFY UI · dibuat dari ikon/sumber.mjs (npm run build:ikon). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
+    <path android:pathData="M7 5v14a1 1 0 0 0 1.5.9l11-7a1 1 0 0 0 0-1.8l-11-7A1 1 0 0 0 7 5z" android:strokeColor="@color/fy_ink" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" />
+</vector>

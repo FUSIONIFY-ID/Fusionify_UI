@@ -58,3 +58,17 @@ Kelas Tailwind dari preset: `bg-blue`, `text-ink-2`, `border-edge`, `shadow-stic
 - Jangan mengubah file kit di dalam proyek produk. Ubah di repo Fusionify_UI, rilis, lalu naikkan versinya di produk.
 - Interaksi (reveal, kursor, sheet, OTP, upload, dll.) tetap dari `js/motion.js`, `js/app.js`, dan `js/controls.js`. Di aplikasi React, panggil `initApp()` sekali setelah mount, atau buat ulang interaksinya dengan aturan yang sama (hanya `transform` dan `opacity`, hormati `prefers-reduced-motion`).
 - `Tombol` dengan `penuh` memakai `.btn.block` dari `css/app.css`.
+
+## Ikon
+
+```tsx
+import { Ikon, IkonStiker, IkonSegel, IkonSosmed, TautanSosmed } from "./fusionify-ui/react";
+
+<Ikon nama="cari" />                              // dekoratif
+<Ikon nama="hapus" label="Hapus pesanan" />       // berdiri sendiri, dibacakan pembaca layar
+<IkonStiker nama="dompet" nada="biru" />           // putih | biru | tint, kecil
+<IkonSegel nama="bot" biru />
+<TautanSosmed akun={[{ nama: "instagram", url: "https://instagram.com/…", label: "Instagram FUSIONIFY" }]} />
+```
+
+Path ikon ada di `react/ikon-data.ts` (dibuat `npm run build:ikon`), jadi tidak perlu memuat sprite. Daftar nama: `ikon/ikon.json`.

@@ -14,3 +14,5 @@ Kode di repo ini ditulis oleh FUSIONIFY. Pihak ketiga yang dipakai:
 | openpyxl (Python, pembuat template Excel di `scripts/dokumen/sheet.py`, tidak ikut dikirim) | MIT |
 | React, React DOM, @types/react, @types/react-dom (dev dependency, uji `react/`; produk memasang React sendiri) | MIT |
 | TypeScript (dev dependency, cek tipe `react/index.tsx`) | Apache License 2.0 |
+| simple-icons 13.21.0 (dev dependency): path logo media sosial di `ikon/sosmed/`, `ikon/ikon.svg` (`sosmed-*`), `ikon/png/sosmed-*.png`, `react/ikon-data.ts`, dan `fy_sosmed_*.xml`. Logonya merek dagang milik pemilik masing-masing (Meta, ByteDance, Telegram, X Corp., Google, Microsoft/LinkedIn, GitHub, Discord, Shopee); dipakai hanya untuk menautkan akun resmi, sesuai panduan merek mereka | CC0 1.0 (data ikon); hak merek tetap pada pemiliknya |
+| Ikon FUSIONIFY (`ikon/sumber.mjs` dan semua turunannya) | Digambar sendiri oleh FUSIONIFY |

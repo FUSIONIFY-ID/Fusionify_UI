@@ -9,6 +9,9 @@
 import { createContext, useContext } from "react";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, HTMLAttributes, ImgHTMLAttributes, ReactNode, SVGProps } from "react";
 import { SEAL_PATH } from "../js/seal.js";
+import { IKON_DATA, SOSMED_DATA } from "./ikon-data";
+import type { NamaIkon, NamaSosmed } from "./ikon-data";
+export type { NamaIkon, NamaSosmed } from "./ikon-data";
 
 const cx = (...c: Array<string | false | null | undefined>) => c.filter(Boolean).join(" ");
 
@@ -170,5 +173,62 @@ export function BadgeProduk({ bahasa = "id", tema = "dark" }: { bahasa?: "id" | 
     <a className="fy-badge" href="https://fusionify.id" rel="noopener">
       <img src={`${base}/badge/produk-fusionify-${bahasa}-${tema}.png`} alt={alt} width={340} height={100} loading="lazy" />
     </a>
+  );
+}
+
+/* ---------- Ikon FUSIONIFY ----------
+   <Ikon nama="cari" />                       dekoratif (aria-hidden)
+   <Ikon nama="hapus" label="Hapus pesanan" />  berdiri sendiri, dibacakan pembaca layar
+   <IkonStiker nama="dompet" nada="biru" />     ubin stiker (kartu fitur, KPI)
+   <IkonSosmed nama="instagram" />              logo sosmed satu warna
+   Path digambar langsung (tanpa sprite), jadi tidak perlu memuat ikon/ikon.svg. */
+type PropsIkon = Omit<SVGProps<SVGSVGElement>, "children"> & { label?: string; polos?: boolean };
+
+export function Ikon({ nama, label, polos = false, className, ...p }: PropsIkon & { nama: NamaIkon }) {
+  const i = IKON_DATA[nama] as { d: readonly string[]; t?: string };
+  return (
+    <svg viewBox="0 0 24 24" className={cx("ikon", polos && "polos", className)} role={label ? "img" : undefined}
+      aria-label={label} aria-hidden={label ? undefined : true} focusable="false" {...p}>
+      {i.d.map((d) => <path key={d} d={d} />)}
+      {i.t ? <path className="t" d={i.t} style={{ fill: "var(--ikon-titik)", stroke: "none" }} /> : null}
+    </svg>
+  );
+}
+
+export function IkonSosmed({ nama, label, className, ...p }: PropsIkon & { nama: NamaSosmed }) {
+  const s = SOSMED_DATA[nama];
+  return (
+    <svg viewBox="0 0 24 24" className={cx("ikon", className)} role={label ? "img" : undefined}
+      aria-label={label} aria-hidden={label ? undefined : true} focusable="false" {...p}>
+      <path d={s.d} style={{ fill: "currentColor", stroke: "none" }} />
+    </svg>
+  );
+}
+
+export function IkonStiker({ nama, nada = "putih", kecil = false, label, className }:
+  { nama: NamaIkon; nada?: "putih" | "biru" | "tint"; kecil?: boolean; label?: string; className?: string }) {
+  return (
+    <span className={cx("ikon-stiker", nada !== "putih" && nada, kecil && "kecil", className)}>
+      <Ikon nama={nama} label={label} />
+    </span>
+  );
+}
+
+export function IkonSegel({ nama, biru = false, label, className }: { nama: NamaIkon; biru?: boolean; label?: string; className?: string }) {
+  return (
+    <span className={cx("ikon-segel", biru && "biru", className)}>
+      <Ikon nama={nama} label={label} />
+    </span>
+  );
+}
+
+/** Daftar tautan sosmed resmi. Isi hanya akun yang benar-benar ada. */
+export function TautanSosmed({ akun }: { akun: Array<{ nama: NamaSosmed; url: string; label: string }> }) {
+  return (
+    <ul className="sosmed">
+      {akun.map((a) => (
+        <li key={a.nama}><a href={a.url} target="_blank" rel="noopener" aria-label={a.label}><IkonSosmed nama={a.nama} /></a></li>
+      ))}
+    </ul>
   );
 }

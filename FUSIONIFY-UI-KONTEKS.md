@@ -23,8 +23,8 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 | --- | --- |
 | `css/tokens.css` | Warna, huruf (@font-face), radius, kurva gerak, bayangan |
 | `css/base.css` | Reset, tipografi, `.wrap`, `.kicker`, `.h-hero`, `.h-sec`, `.lead`, `.prose` |
-| `css/components.css` | Tombol, chip status, nav, menu HP, seksi, kartu stiker, statistik, kartu karya, foto bersegel, gelembung maskot, panggung maskot, marquee partner, FAQ, gelombang, footer, toast, kursor, transisi halaman, status reveal, jeda `.idle` |
-| `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment`, halaman acara (`.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`), label `.sample-note`, halaman bayar `.pay` (`data-pay-state`, `.qr`, `.pay-timer`, `.pay-result`), status layanan (`.status-banner`, `.uptime`, `.uptime-bars`, `.incidents`), dokumentasi (`.docs`, `.docs-nav`, `.code-block`, `.endpoint`, `.method`, `.docs-pager`), daftar isi `.toc`, halaman legal (`.legal`, `.legal-switch`) |
+| `css/components.css` | Tombol, chip status, nav, menu HP, seksi, kartu stiker, statistik, kartu karya, foto bersegel, gelembung maskot, panggung maskot, marquee partner, FAQ, gelombang, footer, toast, kursor, transisi halaman, status reveal, jeda `.idle`, ikon (`.ikon`, `.ikon-stiker`, `.ikon-segel`, `.sosmed`) |
+| `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment`, halaman acara (`.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`), label `.sample-note`, halaman bayar `.pay` (`data-pay-state`, `.qr`, `.pay-timer`, `.pay-result`), status layanan (`.status-banner`, `.uptime`, `.uptime-bars`, `.incidents`), dokumentasi (`.docs`, `.docs-nav`, `.code-block`, `.endpoint`, `.method`, `.docs-pager`), daftar isi `.toc`, halaman legal (`.legal`, `.legal-switch`), katalog ikon (`.ikon-grid`, `.ikon-kartu`) |
 | `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.progress`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, `.btn.danger`, chat (`.chat`, `.chat-list`, `.convo`, `.thread`, `.msgs`, `.msg.me/.them`, `.typing`, `.composer`), `.ev-date` |
 | `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar), `.otp` (kode OTP) + `.resend`, `.upload` + `.drop` + `.upload-list` (upload file), `.stepper` + `.wizard-step` (form bertahap), `.sort-btn` (tabel bisa diurutkan), `.notif` + `.notif-panel` (pusat notifikasi), `.state` (keadaan kosong/error/offline), `.offline-bar`, `.avatar-crop` + `.crop-modal` (foto profil dengan pemotong bulat) |
 | `css/fusionify.css` | Satu file yang mengimpor tokens, base, components, product, controls (tanpa app.css) |
@@ -69,7 +69,8 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 | `dokumen/contoh/` | Pratinjau PDF semua template cetak (`npm run build:dokumen`) |
 | `scripts/build-dokumen.mjs`, `scripts/dokumen/` | Pembuat PDF (`--final` menolak teks "ganti" dan isi yang keluar halaman) dan generator template Office (`npm run build:office`) |
 | `email/` | Template email transaksional: `fy-email.js` (`renderEmail`, tabel inline, aman di Gmail/Outlook), `templates.js` (kode verifikasi, atur ulang password, selamat datang, pengajuan disetujui/ditolak, pembayaran berhasil/gagal, status penarikan, pemberitahuan), `tandaTangan()` untuk tanda tangan email karyawan/produk, `aset/` PNG maskot, `contoh/` pratinjau (`npm run build:email`). Panduan: `email/README.md` |
-| `react/` | Untuk produk React + Tailwind: `index.tsx` (komponen tipis di atas kelas kit: `Tombol`, `Chip`, `Kartu`, `Judul`, `Maskot`, `PanggungMaskot`, `Keadaan`, `BadgeProduk`, dll.), `tailwind-preset.js` (v3), `tailwind-v4.css`. Panduan: `react/README.md` |
+| `react/` | Untuk produk React + Tailwind: `index.tsx` (komponen tipis di atas kelas kit: `Tombol`, `Chip`, `Kartu`, `Judul`, `Maskot`, `PanggungMaskot`, `Keadaan`, `BadgeProduk`, `Ikon`, `IkonStiker`, `IkonSegel`, `IkonSosmed`, `TautanSosmed`, dll.), `ikon-data.ts` (dibuat otomatis), `tailwind-preset.js` (v3), `tailwind-v4.css`. Panduan: `react/README.md` |
+| `ikon/` | **Ikon FUSIONIFY**: 95 ikon garis 2px dengan ciri khas titik i biru muda (navigasi, aksi, status, komunikasi, dasbor, data, tema, khas) plus 13 logo sosmed satu warna (dari simple-icons). Sumber satu-satunya `ikon/sumber.mjs`; `npm run build:ikon` membuat `svg/`, `sosmed/`, sprite `ikon.svg`, `ikon.json`, PNG email, `react/ikon-data.ts`, dan drawable Android `fy_ikon_*`/`fy_sosmed_*`. Katalog: `templates/ikon.html`. Panduan: `ikon/README.md` |
 | `rencana/` | Rencana yang belum dikerjakan. `rencana/ui-fusionify-id.md`: situs dokumentasi ui.fusionify.id ala m3.material.io (dikunci login, watermark per orang) plus aplikasi desktop dan Android anti-screenshot. Baca dulu sebelum mengerjakannya |
 
 ## Cara memakai di proyek baru atau lama
@@ -99,6 +100,13 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - Hiasan SVG yang sengaja lebih besar dari wadahnya wajib kelas `.fx-oversize` (atau `max-width: none`).
 - Gaya stiker: garis 2px `--edge`, bayangan pejal ke bawah (`--edge-shadow`), sudut besar.
 - Jangan menyalin momen khas fusionify.id (segel menutup hero, footer malam Bogor) apa adanya ke web produk. Rakit momen sendiri dari bagian yang sama.
+
+## Ikon (wajib)
+
+- Pakai Ikon FUSIONIFY dari `ikon/` (sprite `#ikon-<nama>`, React `<Ikon>`, Android `fy_ikon_*`). Jangan menulis SVG ikon sendiri di halaman atau memakai set ikon lain (Material, Lucide, Font Awesome, emoji).
+- Ikon belum ada? Gambar di `ikon/sumber.mjs` mengikuti aturan di `ikon/README.md` (kisi 24, garis 2px bulat, titik i bila bermakna), lalu `npm run build:ikon`.
+- Logo sosmed hanya untuk menautkan akun resmi yang benar-benar ada, satu warna, bentuk tidak diubah.
+- Tombol yang isinya hanya ikon wajib `aria-label`; ikon di samping teks `aria-hidden="true"`.
 
 ## Mode gelap (wajib dijaga)
 
@@ -301,6 +309,15 @@ Semua berlisensi SIL OFL, di-host sendiri dari `fonts/` (subset latin, `font-dis
 - **Kicker**: label kecil kapital Exo 2 dengan titik biru muda di depannya, di atas setiap judul seksi.
 - **Gelombang**: pembatas antar seksi yang warnanya berbeda.
 - **Gaya stiker**: `.card`, `.stat`, `.btn`, `.toast` semuanya bergaris 2px `--edge` dengan bayangan pejal `--edge-shadow` ke bawah.
+
+## Ikon
+
+- **Garis 2px**, ujung dan sambungan bulat, kisi 24 × 24, tanpa isi. Tebalnya sama dengan garis stiker.
+- **Titik i**: satu bulatan `--blue-light` di tempat yang bermakna (titik huruf i, ujung garis unduh dan grafik, lampu server, notifikasi, lubang label, antena bot). Ikon utilitas kecil (tutup, tambah, chevron, cek) tanpa titik.
+- Garis ikut warna teks; titik tetap biru muda, kecuali `.ikon.polos` (satu warna, mis. di atas foto).
+- Wadah: `.ikon-stiker` (ubin bergaris 2px dengan bayangan pejal; putih, biru, atau tint) untuk kartu fitur dan dasbor, `.ikon-segel` untuk kartu layanan.
+- Ikon khas: segel (juga ikon setelan), titik i, fusi (dua lingkaran bertemu, "Fuse Ideas"), progres (tangga naik, "Build Progress"), kepala maskot.
+- Logo sosmed: satu warna dalam ubin stiker 44px, berubah biru saat disorot. Di footer malam dan seksi biru: garis putih tipis tanpa bayangan.
 
 ## Maskot
 
@@ -978,6 +995,41 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 /* Animasi tanpa henti dijeda saat seksinya di luar layar (motion.js memasang .idle) */
 .idle *, .idle *::before, .idle *::after { animation-play-state: paused !important; }
 
+/* =========================================================
+   IKON FUSIONIFY · garis 2px, ujung bulat, dengan "titik i" biru muda sebagai ciri khas.
+   Sprite: ikon/ikon.svg (tempel di <body> atau rujuk file) lalu:
+     <svg class="ikon" aria-hidden="true"><use href="#ikon-cari"/></svg>
+     <svg class="ikon" aria-hidden="true"><use href="#sosmed-instagram"/></svg>
+   Ukuran ikut font-size (1.25em). Warna garis = currentColor, warna titik = --ikon-titik.
+   ========================================================= */
+.ikon { display: inline-block; flex: none; width: 1.25em; height: 1.25em; vertical-align: -0.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; overflow: visible; --ikon-titik: var(--blue-light); }
+.ikon.polos { --ikon-titik: currentColor; }   /* satu warna, mis. di atas foto */
+.ikon-16 { width: 16px; height: 16px; } .ikon-20 { width: 20px; height: 20px; } .ikon-24 { width: 24px; height: 24px; } .ikon-32 { width: 32px; height: 32px; }
+
+/* Ikon dalam ubin stiker (kartu fitur, KPI dasbor) */
+.ikon-stiker { display: inline-grid; place-items: center; flex: none; width: 52px; height: 52px; border-radius: 16px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 4px 0 var(--edge-shadow); }
+.ikon-stiker .ikon { width: 26px; height: 26px; }
+.ikon-stiker.kecil { width: 40px; height: 40px; border-radius: 12px; box-shadow: 0 3px 0 var(--edge-shadow); }
+.ikon-stiker.kecil .ikon { width: 20px; height: 20px; }
+.ikon-stiker.biru { background: var(--blue); color: #fff; --ikon-titik: color-mix(in srgb, #fff 55%, var(--blue-light)); }
+.ikon-stiker.tint { background: var(--surface); color: var(--text-blue); }
+
+/* Ikon di atas segel 12 lekukan */
+.ikon-segel { position: relative; display: inline-grid; place-items: center; flex: none; width: 60px; height: 60px; color: var(--ink); isolation: isolate; }
+.ikon-segel::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--seal-tint); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; }
+.ikon-segel .ikon { width: 26px; height: 26px; }
+.ikon-segel.biru { color: #fff; --ikon-titik: color-mix(in srgb, #fff 55%, var(--blue-light)); }
+.ikon-segel.biru::before { background: var(--blue); }
+
+/* Daftar tautan sosmed: <ul class="sosmed"><li><a href="…" aria-label="Instagram FUSIONIFY"><svg class="ikon"><use href="#sosmed-instagram"/></svg></a></li></ul> */
+.sosmed { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; }
+.sosmed a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.2s var(--ease); }
+.sosmed a:hover { transform: translateY(-2px); background: var(--blue); color: #fff; }
+.sosmed a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 3px; }
+.sosmed .ikon { width: 20px; height: 20px; }
+.footer .sosmed a, .sec.blue .sosmed a { background: transparent; color: #f2f8ff; border-color: rgba(255, 255, 255, 0.35); box-shadow: none; }
+.footer .sosmed a:hover, .sec.blue .sosmed a:hover { background: #fff; color: #0b0f1a; }
+
 ```
 
 ---
@@ -1421,6 +1473,30 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
   .legal .toc { position: sticky; top: 96px; align-self: start; max-height: calc(100dvh - 120px); overflow-y: auto; }
 }
 .pay-result h2:focus { outline: none; }
+
+/* =========================================================
+   KATALOG IKON (templates/ikon.html)
+   ========================================================= */
+.ikon-katalog { display: grid; gap: 28px; }
+.ikon-katalog > * { min-width: 0; }
+.ikon-alat { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.ikon-daftar { display: grid; gap: 32px; }
+.ikon-grup h2 { margin: 0 0 12px; font-family: var(--f-num); font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.ikon-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 12px; }
+.ikon-kartu { width: 100%; display: grid; justify-items: center; gap: 10px; padding: 16px 8px 12px; border-radius: var(--r-m); border: 2px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; transition: transform 0.2s var(--ease); }
+.ikon-kartu:hover { transform: translateY(-2px); border-color: var(--edge); }
+.ikon-kartu:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
+.ikon-kartu > span:last-child { max-width: 100%; overflow-wrap: anywhere; color: var(--ink-2); }
+.ikon-wadah { display: grid; place-items: center; width: 52px; height: 52px; }
+.ikon-wadah .ikon { width: 28px; height: 28px; }
+.ikon-wadah.ikon-stiker .ikon, .ikon-wadah.ikon-segel .ikon { width: 26px; height: 26px; }
+.ikon-kosong { color: var(--ink-2); }
+.ikon-contoh { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 8px 0 24px; }
+.ikon-contoh .card { display: grid; gap: 10px; align-content: start; }
+.ikon-contoh .card p { margin: 0; font-size: 15px; }
+.ikon-panduan .code-block { margin-bottom: 16px; }
+.ikon-panduan :not(pre) > code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; padding: 2px 6px; border-radius: 6px; background: var(--surface); color: var(--ink); }
+@media (max-width: 420px) { .ikon-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .ikon-kartu { padding: 12px 4px 10px; font-size: 12px; } }
 
 ```
 

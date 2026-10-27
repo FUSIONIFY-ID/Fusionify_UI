@@ -434,3 +434,27 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
   .legal .toc { position: sticky; top: 96px; align-self: start; max-height: calc(100dvh - 120px); overflow-y: auto; }
 }
 .pay-result h2:focus { outline: none; }
+
+/* =========================================================
+   KATALOG IKON (templates/ikon.html)
+   ========================================================= */
+.ikon-katalog { display: grid; gap: 28px; }
+.ikon-katalog > * { min-width: 0; }
+.ikon-alat { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.ikon-daftar { display: grid; gap: 32px; }
+.ikon-grup h2 { margin: 0 0 12px; font-family: var(--f-num); font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
+.ikon-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 12px; }
+.ikon-kartu { width: 100%; display: grid; justify-items: center; gap: 10px; padding: 16px 8px 12px; border-radius: var(--r-m); border: 2px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; transition: transform 0.2s var(--ease); }
+.ikon-kartu:hover { transform: translateY(-2px); border-color: var(--edge); }
+.ikon-kartu:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
+.ikon-kartu > span:last-child { max-width: 100%; overflow-wrap: anywhere; color: var(--ink-2); }
+.ikon-wadah { display: grid; place-items: center; width: 52px; height: 52px; }
+.ikon-wadah .ikon { width: 28px; height: 28px; }
+.ikon-wadah.ikon-stiker .ikon, .ikon-wadah.ikon-segel .ikon { width: 26px; height: 26px; }
+.ikon-kosong { color: var(--ink-2); }
+.ikon-contoh { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 8px 0 24px; }
+.ikon-contoh .card { display: grid; gap: 10px; align-content: start; }
+.ikon-contoh .card p { margin: 0; font-size: 15px; }
+.ikon-panduan .code-block { margin-bottom: 16px; }
+.ikon-panduan :not(pre) > code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; padding: 2px 6px; border-radius: 6px; background: var(--surface); color: var(--ink); }
+@media (max-width: 420px) { .ikon-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .ikon-kartu { padding: 12px 4px 10px; font-size: 12px; } }

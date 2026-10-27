@@ -24,7 +24,9 @@ fs.mkdirSync(path.join(tmp, "js"));
 fs.copyFileSync(path.join(ROOT, "js/seal.js"), path.join(tmp, "js/seal.js"));
 const src = fs.readFileSync(path.join(ROOT, "react/index.tsx"), "utf8");
 const out = ts.transpileModule(src, { compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 } }).outputText;
-fs.writeFileSync(path.join(tmp, "react/index.mjs"), out.replace('"../js/seal.js"', '"../js/seal.js"'));
+fs.writeFileSync(path.join(tmp, "react/index.mjs"), out.replace(/"\.\/ikon-data"/g, '"./ikon-data.mjs"'));
+const dataIkon = ts.transpileModule(fs.readFileSync(path.join(ROOT, "react/ikon-data.ts"), "utf8"), { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2020 } }).outputText;
+fs.writeFileSync(path.join(tmp, "react/ikon-data.mjs"), dataIkon);
 fs.writeFileSync(path.join(tmp, "package.json"), '{"type":"module"}');
 // Pakai react dari node_modules kit
 fs.symlinkSync(path.join(ROOT, "node_modules"), path.join(tmp, "node_modules"), "dir");
@@ -33,6 +35,16 @@ const React = require("react");
 const { renderToStaticMarkup } = require("react-dom/server");
 const h = React.createElement;
 const html = (el) => renderToStaticMarkup(h(K.FyAset, { base: "/kit/" }, el));
+
+// Ikon
+const i1 = html(h(K.Ikon, { nama: "cari" }));
+cek(i1.startsWith('<svg viewBox="0 0 24 24" class="ikon" aria-hidden="true" focusable="false">') && (i1.match(/<path /g) || []).length === 3 && i1.includes('class="t"'), "Ikon dekoratif: " + i1.slice(0, 160));
+const i2 = html(h(K.Ikon, { nama: "hapus", label: "Hapus pesanan" }));
+cek(i2.includes('role="img"') && i2.includes('aria-label="Hapus pesanan"') && !i2.includes("aria-hidden") && !i2.includes('class="t"'), "Ikon berlabel tanpa titik");
+cek(html(h(K.IkonStiker, { nama: "dompet", nada: "biru", kecil: true })).startsWith('<span class="ikon-stiker biru kecil"><svg'), "IkonStiker");
+cek(html(h(K.IkonSegel, { nama: "bot", biru: true })).startsWith('<span class="ikon-segel biru"><svg'), "IkonSegel");
+const so = html(h(K.TautanSosmed, { akun: [{ nama: "instagram", url: "https://instagram.com/x", label: "Instagram X" }] }));
+cek(so.startsWith('<ul class="sosmed"><li><a href="https://instagram.com/x" target="_blank" rel="noopener" aria-label="Instagram X"><svg') && so.includes("fill:currentColor"), "TautanSosmed: " + so.slice(0, 200));
 
 const t1 = html(h(K.Tombol, { href: "/daftar" }, "Daftar"));
 cek(/^<a class="btn" href="\/daftar">Daftar<\/a>$/.test(t1), "Tombol tautan: " + t1);

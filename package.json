@@ -1,6 +1,6 @@
 {
   "name": "@fusionify/ui",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "private": true,
   "description": "Sistem desain FUSIONIFY: token, komponen CSS, gerak, segel, font, logo, dan maskot. Sumber: fusionify.id.",
   "type": "module",
@@ -24,7 +24,8 @@
     "./email": "./email/fy-email.js",
     "./email/templates": "./email/templates.js",
     "./grafis/*": "./grafis/*",
-    "./dokumen/*": "./dokumen/*"
+    "./dokumen/*": "./dokumen/*",
+    "./ikon/*": "./ikon/*"
   },
   "peerDependencies": {
     "gsap": "^3.12.0",
@@ -41,7 +42,8 @@
     "build:dokumen": "node scripts/build-dokumen.mjs",
     "build:office": "node scripts/dokumen/word.cjs && python3 scripts/dokumen/rapikan_docx.py dokumen/office/FUSIONIFY-Surat.docx dokumen/office/FUSIONIFY-Dokumen.docx dokumen/office/FUSIONIFY-Perjanjian.docx && node scripts/dokumen/slide.cjs && python3 scripts/dokumen/sheet.py",
     "build:email": "node scripts/build-email.mjs",
-    "build:grafis": "node scripts/build-grafis.mjs"
+    "build:grafis": "node scripts/build-grafis.mjs",
+    "build:ikon": "node scripts/build-ikon.mjs"
   },
   "devDependencies": {
     "@types/react": "18.3.12",
@@ -54,6 +56,7 @@
     "pptxgenjs": "4.0.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
+    "simple-icons": "13.21.0",
     "typescript": "5.6.3"
   }
 }

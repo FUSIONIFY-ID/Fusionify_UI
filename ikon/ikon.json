@@ -1,0 +1,655 @@
+{
+  "versi": "1.10.0",
+  "ikon": [
+    {
+      "nama": "aktivitas",
+      "kategori": "dasbor",
+      "kata": "pulse detak monitor",
+      "titik": false
+    },
+    {
+      "nama": "atur",
+      "kategori": "aksi",
+      "kata": "slider filter penyesuaian",
+      "titik": true
+    },
+    {
+      "nama": "awan",
+      "kategori": "data",
+      "kata": "cloud hosting",
+      "titik": false
+    },
+    {
+      "nama": "bagikan",
+      "kategori": "aksi",
+      "kata": "share sebar",
+      "titik": true
+    },
+    {
+      "nama": "bantuan",
+      "kategori": "status",
+      "kata": "help tanya faq",
+      "titik": true
+    },
+    {
+      "nama": "beranda",
+      "kategori": "navigasi",
+      "kata": "home rumah awal",
+      "titik": true
+    },
+    {
+      "nama": "berhasil",
+      "kategori": "status",
+      "kata": "sukses centang lingkaran ok",
+      "titik": false
+    },
+    {
+      "nama": "bintang",
+      "kategori": "status",
+      "kata": "favorit star rating",
+      "titik": false
+    },
+    {
+      "nama": "bot",
+      "kategori": "data",
+      "kata": "robot otomatis telegram ai",
+      "titik": true
+    },
+    {
+      "nama": "buka-kunci",
+      "kategori": "status",
+      "kata": "unlock terbuka",
+      "titik": true
+    },
+    {
+      "nama": "cari",
+      "kategori": "navigasi",
+      "kata": "search temukan",
+      "titik": true
+    },
+    {
+      "nama": "cek",
+      "kategori": "status",
+      "kata": "check centang berhasil",
+      "titik": false
+    },
+    {
+      "nama": "chevron-bawah",
+      "kategori": "navigasi",
+      "kata": "buka dropdown",
+      "titik": false
+    },
+    {
+      "nama": "chevron-kanan",
+      "kategori": "navigasi",
+      "kata": "lanjut detail",
+      "titik": false
+    },
+    {
+      "nama": "chevron-kiri",
+      "kategori": "navigasi",
+      "kata": "sebelumnya",
+      "titik": false
+    },
+    {
+      "nama": "dasbor",
+      "kategori": "dasbor",
+      "kata": "dashboard ringkasan grid",
+      "titik": false
+    },
+    {
+      "nama": "database",
+      "kategori": "data",
+      "kata": "basis data db penyimpanan",
+      "titik": false
+    },
+    {
+      "nama": "dokumen",
+      "kategori": "data",
+      "kata": "file berkas halaman",
+      "titik": true
+    },
+    {
+      "nama": "dompet",
+      "kategori": "dasbor",
+      "kata": "wallet saldo",
+      "titik": true
+    },
+    {
+      "nama": "edit",
+      "kategori": "aksi",
+      "kata": "ubah pensil tulis",
+      "titik": true
+    },
+    {
+      "nama": "email",
+      "kategori": "komunikasi",
+      "kata": "surel mail amplop",
+      "titik": false
+    },
+    {
+      "nama": "filter",
+      "kategori": "aksi",
+      "kata": "saring corong",
+      "titik": false
+    },
+    {
+      "nama": "folder",
+      "kategori": "data",
+      "kata": "map direktori",
+      "titik": false
+    },
+    {
+      "nama": "fusi",
+      "kategori": "khas",
+      "kata": "fuse ideas gabung kolaborasi",
+      "titik": true
+    },
+    {
+      "nama": "galat",
+      "kategori": "status",
+      "kata": "error gagal silang",
+      "titik": false
+    },
+    {
+      "nama": "gambar",
+      "kategori": "data",
+      "kata": "foto image galeri",
+      "titik": true
+    },
+    {
+      "nama": "gelap",
+      "kategori": "tema",
+      "kata": "bulan dark malam",
+      "titik": true
+    },
+    {
+      "nama": "grafik-batang",
+      "kategori": "dasbor",
+      "kata": "chart bar statistik",
+      "titik": true
+    },
+    {
+      "nama": "grafik-donat",
+      "kategori": "dasbor",
+      "kata": "pie porsi persen",
+      "titik": false
+    },
+    {
+      "nama": "grafik-tren",
+      "kategori": "dasbor",
+      "kata": "chart line naik pertumbuhan",
+      "titik": true
+    },
+    {
+      "nama": "gudang",
+      "kategori": "dasbor",
+      "kata": "warehouse stok inventaris",
+      "titik": false
+    },
+    {
+      "nama": "hapus",
+      "kategori": "aksi",
+      "kata": "delete buang sampah",
+      "titik": false
+    },
+    {
+      "nama": "ide",
+      "kategori": "data",
+      "kata": "lampu bohlam inspirasi",
+      "titik": true
+    },
+    {
+      "nama": "info",
+      "kategori": "status",
+      "kata": "informasi i",
+      "titik": true
+    },
+    {
+      "nama": "jam",
+      "kategori": "status",
+      "kata": "waktu clock riwayat",
+      "titik": true
+    },
+    {
+      "nama": "jeda",
+      "kategori": "tema",
+      "kata": "pause berhenti",
+      "titik": false
+    },
+    {
+      "nama": "kalender",
+      "kategori": "status",
+      "kata": "tanggal jadwal date",
+      "titik": true
+    },
+    {
+      "nama": "kamera",
+      "kategori": "tema",
+      "kata": "foto camera",
+      "titik": true
+    },
+    {
+      "nama": "kartu",
+      "kategori": "dasbor",
+      "kata": "card pembayaran debit kredit",
+      "titik": true
+    },
+    {
+      "nama": "keluar",
+      "kategori": "aksi",
+      "kata": "logout sign out",
+      "titik": false
+    },
+    {
+      "nama": "kembali",
+      "kategori": "navigasi",
+      "kata": "back panah kiri",
+      "titik": true
+    },
+    {
+      "nama": "keranjang",
+      "kategori": "dasbor",
+      "kata": "cart belanja pesanan",
+      "titik": true
+    },
+    {
+      "nama": "kirim",
+      "kategori": "komunikasi",
+      "kata": "send pesawat kertas",
+      "titik": false
+    },
+    {
+      "nama": "kode",
+      "kategori": "data",
+      "kata": "code developer api",
+      "titik": false
+    },
+    {
+      "nama": "kunci",
+      "kategori": "status",
+      "kata": "lock aman privat",
+      "titik": true
+    },
+    {
+      "nama": "kunci-api",
+      "kategori": "data",
+      "kata": "key token akses",
+      "titik": true
+    },
+    {
+      "nama": "kurang",
+      "kategori": "aksi",
+      "kata": "minus",
+      "titik": false
+    },
+    {
+      "nama": "label",
+      "kategori": "dasbor",
+      "kata": "tag kategori harga",
+      "titik": true
+    },
+    {
+      "nama": "lainnya",
+      "kategori": "navigasi",
+      "kata": "more opsi titik tiga",
+      "titik": true
+    },
+    {
+      "nama": "laporan",
+      "kategori": "dasbor",
+      "kata": "report papan klip",
+      "titik": true
+    },
+    {
+      "nama": "lihat",
+      "kategori": "status",
+      "kata": "mata tampil eye",
+      "titik": true
+    },
+    {
+      "nama": "lokasi",
+      "kategori": "komunikasi",
+      "kata": "alamat pin peta map",
+      "titik": true
+    },
+    {
+      "nama": "lonceng",
+      "kategori": "status",
+      "kata": "notifikasi bell pemberitahuan",
+      "titik": true
+    },
+    {
+      "nama": "maju",
+      "kategori": "navigasi",
+      "kata": "next panah kanan lanjut",
+      "titik": true
+    },
+    {
+      "nama": "maskot",
+      "kategori": "khas",
+      "kata": "kepala karakter fusionify",
+      "titik": true
+    },
+    {
+      "nama": "masuk",
+      "kategori": "aksi",
+      "kata": "login sign in",
+      "titik": false
+    },
+    {
+      "nama": "menu",
+      "kategori": "navigasi",
+      "kata": "hamburger daftar",
+      "titik": true
+    },
+    {
+      "nama": "naik",
+      "kategori": "navigasi",
+      "kata": "up panah atas",
+      "titik": true
+    },
+    {
+      "nama": "paket",
+      "kategori": "dasbor",
+      "kata": "box produk kiriman",
+      "titik": false
+    },
+    {
+      "nama": "pengguna",
+      "kategori": "dasbor",
+      "kata": "user akun profil orang",
+      "titik": false
+    },
+    {
+      "nama": "peringatan",
+      "kategori": "status",
+      "kata": "warning awas segitiga",
+      "titik": true
+    },
+    {
+      "nama": "perisai",
+      "kategori": "data",
+      "kata": "keamanan shield proteksi",
+      "titik": false
+    },
+    {
+      "nama": "pesan",
+      "kategori": "komunikasi",
+      "kata": "chat obrolan balon",
+      "titik": true
+    },
+    {
+      "nama": "progres",
+      "kategori": "khas",
+      "kata": "build progress tangga naik tumbuh",
+      "titik": true
+    },
+    {
+      "nama": "putar",
+      "kategori": "tema",
+      "kata": "play mulai video",
+      "titik": false
+    },
+    {
+      "nama": "qr",
+      "kategori": "dasbor",
+      "kata": "qris scan pindai bayar",
+      "titik": true
+    },
+    {
+      "nama": "salin",
+      "kategori": "aksi",
+      "kata": "copy duplikat",
+      "titik": true
+    },
+    {
+      "nama": "segarkan",
+      "kategori": "aksi",
+      "kata": "refresh muat ulang sinkron",
+      "titik": true
+    },
+    {
+      "nama": "segel",
+      "kategori": "khas",
+      "kata": "fusionify logo lencana badge",
+      "titik": true
+    },
+    {
+      "nama": "sembunyi",
+      "kategori": "status",
+      "kata": "mata tutup hide",
+      "titik": false
+    },
+    {
+      "nama": "senyap",
+      "kategori": "tema",
+      "kata": "mute bisu",
+      "titik": false
+    },
+    {
+      "nama": "server",
+      "kategori": "data",
+      "kata": "hosting vps mesin",
+      "titik": true
+    },
+    {
+      "nama": "setelan",
+      "kategori": "aksi",
+      "kata": "settings pengaturan gear",
+      "titik": true
+    },
+    {
+      "nama": "simpan",
+      "kategori": "aksi",
+      "kata": "bookmark tandai",
+      "titik": true
+    },
+    {
+      "nama": "struk",
+      "kategori": "dasbor",
+      "kata": "invoice nota tagihan receipt",
+      "titik": true
+    },
+    {
+      "nama": "suara",
+      "kategori": "tema",
+      "kata": "volume speaker audio",
+      "titik": false
+    },
+    {
+      "nama": "suka",
+      "kategori": "status",
+      "kata": "hati like love",
+      "titik": false
+    },
+    {
+      "nama": "tambah",
+      "kategori": "aksi",
+      "kata": "plus baru add",
+      "titik": false
+    },
+    {
+      "nama": "tanda-tangan",
+      "kategori": "komunikasi",
+      "kata": "signature paraf",
+      "titik": true
+    },
+    {
+      "nama": "tautan-luar",
+      "kategori": "navigasi",
+      "kata": "external buka tab baru",
+      "titik": true
+    },
+    {
+      "nama": "telepon",
+      "kategori": "komunikasi",
+      "kata": "phone hp telpon",
+      "titik": true
+    },
+    {
+      "nama": "terang",
+      "kategori": "tema",
+      "kata": "matahari light siang",
+      "titik": false
+    },
+    {
+      "nama": "tiket",
+      "kategori": "dasbor",
+      "kata": "acara event ticket kupon",
+      "titik": true
+    },
+    {
+      "nama": "tim",
+      "kategori": "dasbor",
+      "kata": "grup pengguna users",
+      "titik": false
+    },
+    {
+      "nama": "titik-i",
+      "kategori": "khas",
+      "kata": "fusionify i huruf",
+      "titik": true
+    },
+    {
+      "nama": "toko",
+      "kategori": "dasbor",
+      "kata": "store merchant warung",
+      "titik": false
+    },
+    {
+      "nama": "truk",
+      "kategori": "dasbor",
+      "kata": "pengiriman kurir logistik",
+      "titik": false
+    },
+    {
+      "nama": "turun",
+      "kategori": "navigasi",
+      "kata": "down panah bawah",
+      "titik": true
+    },
+    {
+      "nama": "tutup",
+      "kategori": "navigasi",
+      "kata": "close silang x",
+      "titik": false
+    },
+    {
+      "nama": "uang",
+      "kategori": "dasbor",
+      "kata": "rupiah tunai cash",
+      "titik": true
+    },
+    {
+      "nama": "unduh",
+      "kategori": "aksi",
+      "kata": "download simpan",
+      "titik": true
+    },
+    {
+      "nama": "unggah",
+      "kategori": "aksi",
+      "kata": "upload kirim berkas",
+      "titik": true
+    },
+    {
+      "nama": "urut",
+      "kategori": "aksi",
+      "kata": "sort urutkan",
+      "titik": false
+    },
+    {
+      "nama": "vpn",
+      "kategori": "data",
+      "kata": "tunnel aman koneksi",
+      "titik": true
+    },
+    {
+      "nama": "web",
+      "kategori": "komunikasi",
+      "kata": "globe internet situs bahasa",
+      "titik": false
+    }
+  ],
+  "sosmed": [
+    {
+      "nama": "instagram",
+      "judul": "Instagram",
+      "warnaMerek": "#FF0069",
+      "panduanMerek": "https://about.meta.com/brand/resources/instagram"
+    },
+    {
+      "nama": "tiktok",
+      "judul": "TikTok",
+      "warnaMerek": "#000000",
+      "panduanMerek": null
+    },
+    {
+      "nama": "whatsapp",
+      "judul": "WhatsApp",
+      "warnaMerek": "#25D366",
+      "panduanMerek": "https://about.meta.com/brand/resources/whatsapp/whatsapp-brand"
+    },
+    {
+      "nama": "telegram",
+      "judul": "Telegram",
+      "warnaMerek": "#26A5E4",
+      "panduanMerek": null
+    },
+    {
+      "nama": "x",
+      "judul": "X",
+      "warnaMerek": "#000000",
+      "panduanMerek": "https://about.x.com/en/who-we-are/brand-toolkit"
+    },
+    {
+      "nama": "youtube",
+      "judul": "YouTube",
+      "warnaMerek": "#FF0000",
+      "panduanMerek": "https://www.youtube.com/howyoutubeworks/resources/brand-resources/#logos-icons-and-colors"
+    },
+    {
+      "nama": "linkedin",
+      "judul": "LinkedIn",
+      "warnaMerek": "#0A66C2",
+      "panduanMerek": "https://brand.linkedin.com/policies"
+    },
+    {
+      "nama": "facebook",
+      "judul": "Facebook",
+      "warnaMerek": "#0866FF",
+      "panduanMerek": "https://about.meta.com/brand/resources/facebook/logo"
+    },
+    {
+      "nama": "threads",
+      "judul": "Threads",
+      "warnaMerek": "#000000",
+      "panduanMerek": "https://about.meta.com/brand/resources/instagram/threads"
+    },
+    {
+      "nama": "github",
+      "judul": "GitHub",
+      "warnaMerek": "#181717",
+      "panduanMerek": "https://github.com/logos"
+    },
+    {
+      "nama": "discord",
+      "judul": "Discord",
+      "warnaMerek": "#5865F2",
+      "panduanMerek": "https://discord.com/branding"
+    },
+    {
+      "nama": "shopee",
+      "judul": "Shopee",
+      "warnaMerek": "#EE4D2D",
+      "panduanMerek": null
+    },
+    {
+      "nama": "google-play",
+      "judul": "Google Play",
+      "warnaMerek": "#414141",
+      "panduanMerek": "https://partnermarketinghub.withgoogle.com/brands/google-play/visual-identity/primary-logos/"
+    }
+  ]
+}
