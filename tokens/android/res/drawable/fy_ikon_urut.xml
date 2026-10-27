@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- FUSIONIFY UI · dibuat dari ikon/sumber.mjs (npm run build:ikon). -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="24dp" android:height="24dp" android:viewportWidth="24" android:viewportHeight="24">
-    <path android:pathData="M7 4v16" android:strokeColor="@color/fy_ink" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" />
-    <path android:pathData="M4 17l3 3 3-3" android:strokeColor="@color/fy_ink" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" />
-    <path android:pathData="M17 20V4" android:strokeColor="@color/fy_ink" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" />
-    <path android:pathData="M14 7l3-3 3 3" android:strokeColor="@color/fy_ink" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" />
+    <path android:pathData="M7 16.5V4.5" android:strokeColor="@color/fy_ink" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" />
+    <path android:pathData="M3.5 8C5 7.3 6.2 6.1 7 4.5 7.8 6.1 9 7.3 10.5 8" android:strokeColor="@color/fy_ink" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" />
+    <path android:pathData="M17 7.5v12" android:strokeColor="@color/fy_ink" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" />
+    <path android:pathData="M13.5 16c1.5.7 2.7 1.9 3.5 3.5.8-1.6 2-2.8 3.5-3.5" android:strokeColor="@color/fy_ink" android:strokeWidth="2" android:strokeLineCap="round" android:strokeLineJoin="round" android:fillColor="#00000000" />
+    <path android:pathData="M5.6 20.2a1.4 1.4 0 1 0 2.8 0a1.4 1.4 0 1 0 -2.8 0z" android:fillColor="@color/fy_blue_light" />
 </vector>

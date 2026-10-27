@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.10.1 · 27 Oktober 2026
+
+- **Ikon makin khas FUSIONIFY**: ikon status (info, berhasil, galat, bantuan, jam) kini memakai lingkaran segel bergelombang; semua panah memakai mata panah melengkung; email, database, dokumen, dan matahari digambar ulang.
+- `npm run cek:ikon` (`scripts/cek-orisinal-ikon.mjs`): membandingkan semua ikon dengan 7.036 ikon Lucide, Tabler, Heroicons, dan Feather. Hasil: tidak ada path identik, kemiripan tertinggi 84%. Set pembanding diunduh ke `.cache/` dan tidak ikut repo.
+
 ## 1.10.0 · 27 Oktober 2026
 
 - **Ikon FUSIONIFY** (`ikon/`, panduan `ikon/README.md`): 95 ikon digambar sendiri dengan ciri khas **titik i** biru muda, garis 2px bulat di kisi 24. Kategori navigasi, aksi, status, komunikasi, dasbor (dompet, kartu, QR, struk, keranjang, toko, paket, truk, gudang, tim, tiket, laporan, grafik), data dan teknis (server, database, bot, VPN, kunci API), tema dan media, serta ikon khas (segel, titik i, fusi, progres, maskot).

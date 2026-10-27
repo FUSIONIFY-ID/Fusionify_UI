@@ -93,7 +93,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 ## Ikon (wajib)
 
 - Pakai Ikon FUSIONIFY dari `ikon/` (sprite `#ikon-<nama>`, React `<Ikon>`, Android `fy_ikon_*`). Jangan menulis SVG ikon sendiri di halaman atau memakai set ikon lain (Material, Lucide, Font Awesome, emoji).
-- Ikon belum ada? Gambar di `ikon/sumber.mjs` mengikuti aturan di `ikon/README.md` (kisi 24, garis 2px bulat, titik i bila bermakna), lalu `npm run build:ikon`.
+- Ikon belum ada? Gambar di `ikon/sumber.mjs` mengikuti aturan di `ikon/README.md` (kisi 24, garis 2px bulat, titik i bila bermakna), lalu `npm run build:ikon` dan `npm run cek:ikon` (menolak ikon yang path-nya identik atau mirip 85% atau lebih dengan Lucide, Tabler, Heroicons, Feather).
 - Logo sosmed hanya untuk menautkan akun resmi yang benar-benar ada, satu warna, bentuk tidak diubah.
 - Tombol yang isinya hanya ikon wajib `aria-label`; ikon di samping teks `aria-hidden="true"`.
 

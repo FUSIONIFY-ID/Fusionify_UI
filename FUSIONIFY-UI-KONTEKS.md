@@ -104,7 +104,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 ## Ikon (wajib)
 
 - Pakai Ikon FUSIONIFY dari `ikon/` (sprite `#ikon-<nama>`, React `<Ikon>`, Android `fy_ikon_*`). Jangan menulis SVG ikon sendiri di halaman atau memakai set ikon lain (Material, Lucide, Font Awesome, emoji).
-- Ikon belum ada? Gambar di `ikon/sumber.mjs` mengikuti aturan di `ikon/README.md` (kisi 24, garis 2px bulat, titik i bila bermakna), lalu `npm run build:ikon`.
+- Ikon belum ada? Gambar di `ikon/sumber.mjs` mengikuti aturan di `ikon/README.md` (kisi 24, garis 2px bulat, titik i bila bermakna), lalu `npm run build:ikon` dan `npm run cek:ikon` (menolak ikon yang path-nya identik atau mirip 85% atau lebih dengan Lucide, Tabler, Heroicons, Feather).
 - Logo sosmed hanya untuk menautkan akun resmi yang benar-benar ada, satu warna, bentuk tidak diubah.
 - Tombol yang isinya hanya ikon wajib `aria-label`; ikon di samping teks `aria-hidden="true"`.
 
@@ -314,6 +314,7 @@ Semua berlisensi SIL OFL, di-host sendiri dari `fonts/` (subset latin, `font-dis
 
 - **Garis 2px**, ujung dan sambungan bulat, kisi 24 × 24, tanpa isi. Tebalnya sama dengan garis stiker.
 - **Titik i**: satu bulatan `--blue-light` di tempat yang bermakna (titik huruf i, ujung garis unduh dan grafik, lampu server, notifikasi, lubang label, antena bot). Ikon utilitas kecil (tutup, tambah, chevron, cek) tanpa titik.
+- **Lingkaran segel** untuk ikon status (info, berhasil, galat, bantuan, jam) dan matahari; **mata panah melengkung** dengan ekor berakhir di titik i untuk semua panah.
 - Garis ikut warna teks; titik tetap biru muda, kecuali `.ikon.polos` (satu warna, mis. di atas foto).
 - Wadah: `.ikon-stiker` (ubin bergaris 2px dengan bayangan pejal; putih, biru, atau tint) untuk kartu fitur dan dasbor, `.ikon-segel` untuk kartu layanan.
 - Ikon khas: segel (juga ikon setelan), titik i, fusi (dua lingkaran bertemu, "Fuse Ideas"), progres (tangga naik, "Build Progress"), kepala maskot.

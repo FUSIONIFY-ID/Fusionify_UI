@@ -76,6 +76,7 @@ Semua berlisensi SIL OFL, di-host sendiri dari `fonts/` (subset latin, `font-dis
 
 - **Garis 2px**, ujung dan sambungan bulat, kisi 24 × 24, tanpa isi. Tebalnya sama dengan garis stiker.
 - **Titik i**: satu bulatan `--blue-light` di tempat yang bermakna (titik huruf i, ujung garis unduh dan grafik, lampu server, notifikasi, lubang label, antena bot). Ikon utilitas kecil (tutup, tambah, chevron, cek) tanpa titik.
+- **Lingkaran segel** untuk ikon status (info, berhasil, galat, bantuan, jam) dan matahari; **mata panah melengkung** dengan ekor berakhir di titik i untuk semua panah.
 - Garis ikut warna teks; titik tetap biru muda, kecuali `.ikon.polos` (satu warna, mis. di atas foto).
 - Wadah: `.ikon-stiker` (ubin bergaris 2px dengan bayangan pejal; putih, biru, atau tint) untuk kartu fitur dan dasbor, `.ikon-segel` untuk kartu layanan.
 - Ikon khas: segel (juga ikon setelan), titik i, fusi (dua lingkaran bertemu, "Fuse Ideas"), progres (tangga naik, "Build Progress"), kepala maskot.

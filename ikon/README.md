@@ -6,6 +6,8 @@ Set ikon resmi FUSIONIFY, digambar sendiri untuk web company, web produk, dasbor
 
 - **Titik i.** Satu bulatan biru muda (`--blue-light`) di tempat yang punya arti: titik huruf i di ikon info, ujung garis di unduh dan grafik, lampu server, notifikasi lonceng, lubang label, ujung antena bot. Ini yang membuat ikon FUSIONIFY langsung dikenali, sama seperti titik di akhir judul.
 - **Garis 2px**, ujung dan sambungan bulat, kisi 24 × 24. Tebalnya sama dengan garis stiker kit.
+- **Lingkaran segel.** Ikon status (info, berhasil, galat, bantuan, jam) memakai garis segel bergelombang 12 lekukan, bukan lingkaran polos. Matahari (`terang`) juga segel kecil dengan sinar berupa titik.
+- **Kepala panah lengkung.** Panah (kembali, maju, naik, turun, urut, unduh, unggah) memakai mata panah yang melengkung lembut, bukan dua garis lurus, dan ekornya berakhir di titik i.
 - **Ikon khas**: `segel` (12 lekukan, juga dipakai sebagai `setelan`), `titik-i`, `fusi` (Fuse Ideas), `progres` (Build Progress), `maskot`.
 - Ikon utilitas kecil (tutup, tambah, kurang, chevron, cek) sengaja tanpa titik supaya tetap bersih.
 
@@ -65,10 +67,20 @@ Diambil dari paket [simple-icons](https://simpleicons.org) (data CC0), bukan dig
 - Satu warna (tinta, putih, atau biru FUSIONIFY), tanpa diubah bentuk, diputar, atau digabung dengan logo lain.
 - Baca panduan merek tiap platform (tautannya ada di `ikon.json`, kolom `panduanMerek`) sebelum memakai di materi iklan.
 
+## Keaslian
+
+Semua ikon digambar sendiri, koordinat demi koordinat, di `sumber.mjs`. Tidak ada file atau path yang diambil dari set ikon lain.
+
+`npm run cek:ikon` membandingkan setiap ikon dengan 7.036 ikon Lucide, Tabler, Heroicons, dan Feather (diunduh ke `.cache/` hanya sebagai pembanding):
+- tidak boleh ada path yang identik, dan
+- kemiripan gambar tanpa titik i harus di bawah 85%. Pengecualiannya hanya bentuk dasar `tambah`, `kurang`, dan `tutup`, karena tanda plus, minus, dan silang memang sama di mana pun.
+
+Hasil terakhir (27 Oktober 2026): tidak ada path identik, kemiripan tertinggi 84% (`database`). Jalankan lagi setiap kali menambah atau mengubah ikon.
+
 ## Menambah ikon baru
 
 1. Gambar di `sumber.mjs`: kisi 24, garis di dalam 2..22, hanya path (pakai helper `c()` untuk lingkaran, `k()` untuk kotak bulat).
 2. Beri titik i (`t: [x, y, r]`) kalau ada tempat yang bermakna. Jangan dipaksa.
 3. Isi `kat` dan `kata` (kata kunci pencarian, Indonesia dan Inggris).
-4. `npm run build:ikon`, cek di `templates/ikon.html` (terang dan gelap), lalu `npm test -- ikon`.
+4. `npm run build:ikon`, cek di `templates/ikon.html` (terang dan gelap), lalu `npm test -- ikon` dan `npm run cek:ikon`.
 5. Jangan menyalin ikon dari set lain (Material, Lucide, Feather, dll.). Boleh terinspirasi, gambar sendiri.

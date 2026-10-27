@@ -1,5 +1,5 @@
 {
-  "versi": "1.10.0",
+  "versi": "1.10.1",
   "ikon": [
     {
       "nama": "aktivitas",
@@ -101,7 +101,7 @@
       "nama": "database",
       "kategori": "data",
       "kata": "basis data db penyimpanan",
-      "titik": false
+      "titik": true
     },
     {
       "nama": "dokumen",
@@ -125,7 +125,7 @@
       "nama": "email",
       "kategori": "komunikasi",
       "kata": "surel mail amplop",
-      "titik": false
+      "titik": true
     },
     {
       "nama": "filter",
@@ -491,7 +491,7 @@
       "nama": "terang",
       "kategori": "tema",
       "kata": "matahari light siang",
-      "titik": false
+      "titik": true
     },
     {
       "nama": "tiket",
@@ -557,7 +557,7 @@
       "nama": "urut",
       "kategori": "aksi",
       "kata": "sort urutkan",
-      "titik": false
+      "titik": true
     },
     {
       "nama": "vpn",
