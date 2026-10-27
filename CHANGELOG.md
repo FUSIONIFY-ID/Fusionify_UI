@@ -10,7 +10,7 @@
 - `data-copy` kosong di dalam `.code-block` menyalin isi kodenya; `initApp()` sekarang juga mendukung `data-copy`. Daftar isi `[data-toc]` baru di `controls.js`.
 - `.sample-note` dipindah dari `app.css` ke `product.css` supaya bisa dipakai halaman web.
 - **Grafis media sosial dan OG image** (`grafis/`, panduan `grafis/README.md`): post 1080×1080, potret 1080×1350, story/sampul Reels-TikTok 1080×1920, OG 1200×630, banner X dan LinkedIn. Teks diganti lewat JSON atau parameter URL. `npm run build:grafis` membuat PNG dan menolak teks yang keluar kanvas atau tertutup maskot.
-- **Dokumen cetak baru**: sertifikat A4 mendatar (kode `SER`), e-tiket acara 210×99 mm dengan QR, dan kartu nama 90×55 mm depan-belakang.
+- **Dokumen cetak baru**: sertifikat A4 mendatar (kode `SER`, tanpa maskot secara bawaan karena dokumen resmi), e-tiket acara 210×99 mm dengan QR, dan kartu nama 90×55 mm depan-belakang.
 - **Tanda tangan email**: `tandaTangan()` di `email/fy-email.js`, pratinjau `email/contoh/tanda-tangan.html`, aset `email/aset/fusionify-mark-112.png`.
 - Uji baru `tests/grafis.mjs` dan `tests/interaksi-halaman-produk.mjs`; halaman baru masuk uji tata letak, kontras, tanpa JS, dan kurangi gerak.
 

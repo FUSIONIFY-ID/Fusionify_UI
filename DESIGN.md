@@ -161,7 +161,7 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
 - **Sampul dan slide pembuka/penutup**: latar biru, segel besar biru muda yang terpotong tepi, wordmark putih, maskot badan penuh. Slide bagian dan angka: latar malam.
 - **Isian** yang wajib diganti selalu berlatar kuning muda (`--beta-bg`), di HTML, Word, dan Excel.
 - Ukuran: A4 tegak untuk surat dan dokumen, A5 mendatar untuk kuitansi, 16:9 untuk slide, A4 mendatar untuk sertifikat, 210×99 mm untuk e-tiket, 90×55 mm untuk kartu nama.
-- **Sertifikat**: bingkai stiker bersudut bulat, segel biru muda di pojok, nama penerima besar dengan garis tinta di bawahnya, maskot happy di kanan bawah.
+- **Sertifikat**: bingkai stiker bersudut bulat, segel biru muda di pojok, nama penerima besar dengan garis tinta di bawahnya. Bawaan tanpa maskot karena dokumen resmi; maskot happy hanya untuk acara santai (komunitas, kelas internal).
 - **E-tiket**: bagian utama biru (judul acara, nama peserta, tanggal, jam, tempat, maskot welcome) dan sobekan putih bergaris putus-putus dengan kode QR dan kode tiket.
 - **Kartu nama**: depan biru dengan logo horizontal putih dan tagline, belakang putih dengan nama, jabatan, dan kontak publik.
 
