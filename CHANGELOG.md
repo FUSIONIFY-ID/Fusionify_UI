@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.12.0 · 28 Oktober 2026
+
+- **33 ikon baru** untuk kebutuhan web produk dan panel admin (total 136):
+  - status: `memuat`, `awas`, `larang`, `bulat`
+  - navigasi: `chevron-atas`, `layar-penuh`, `pegangan`
+  - aksi: `tukar`, `perbaiki`, `cetak`, `kilau`
+  - editor teks: `tebal`, `miring`, `coret`, `daftar`, `daftar-angka`
+  - media: `berhenti`
+  - dasbor: `tambah-pengguna`, `kerja`, `target`
+  - komunikasi: `pengumuman`, `kutipan`, `kotak-masuk`, `ponsel`
+  - data: `layar`, `terminal`, `prosesor`, `memori`, `penyimpanan`, `sinyal`, `sinyal-putus`, `petir`, `uji`
+- Semua digambar sendiri dan lolos `npm run cek:ikon` (tanpa path identik, kemiripan tertinggi tetap di bawah 85%).
+
 ## 1.11.1 · 28 Oktober 2026
 
 - Ikon terakhir yang masih digambar manual di `controls.js` ikut diganti Ikon FUSIONIFY: tombol perkecil, perbesar, dan putar di pemotong foto profil, serta panah urut di judul kolom tabel.

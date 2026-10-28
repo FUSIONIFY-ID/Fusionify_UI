@@ -1,5 +1,5 @@
 {
-  "versi": "1.11.0",
+  "versi": "1.11.1",
   "ikon": [
     {
       "nama": "aktivitas",
@@ -26,6 +26,12 @@
       "titik": false
     },
     {
+      "nama": "awas",
+      "kategori": "status",
+      "kata": "alert error tanda seru perhatian",
+      "titik": true
+    },
+    {
       "nama": "bagikan",
       "kategori": "aksi",
       "kata": "share sebar",
@@ -50,6 +56,12 @@
       "titik": false
     },
     {
+      "nama": "berhenti",
+      "kategori": "tema",
+      "kata": "stop hentikan",
+      "titik": false
+    },
+    {
       "nama": "bintang",
       "kategori": "status",
       "kata": "favorit star rating",
@@ -68,6 +80,12 @@
       "titik": true
     },
     {
+      "nama": "bulat",
+      "kategori": "status",
+      "kata": "circle radio titik pilihan",
+      "titik": false
+    },
+    {
       "nama": "cari",
       "kategori": "navigasi",
       "kata": "search temukan",
@@ -77,6 +95,18 @@
       "nama": "cek",
       "kategori": "status",
       "kata": "check centang berhasil",
+      "titik": false
+    },
+    {
+      "nama": "cetak",
+      "kategori": "aksi",
+      "kata": "print printer",
+      "titik": true
+    },
+    {
+      "nama": "chevron-atas",
+      "kategori": "navigasi",
+      "kata": "tutup lipat ke atas",
       "titik": false
     },
     {
@@ -95,6 +125,24 @@
       "nama": "chevron-kiri",
       "kategori": "navigasi",
       "kata": "sebelumnya",
+      "titik": false
+    },
+    {
+      "nama": "coret",
+      "kategori": "aksi",
+      "kata": "strikethrough coret editor",
+      "titik": false
+    },
+    {
+      "nama": "daftar",
+      "kategori": "aksi",
+      "kata": "list poin bullet editor",
+      "titik": true
+    },
+    {
+      "nama": "daftar-angka",
+      "kategori": "aksi",
+      "kata": "ordered list nomor urut editor",
       "titik": false
     },
     {
@@ -272,6 +320,18 @@
       "titik": true
     },
     {
+      "nama": "kerja",
+      "kategori": "dasbor",
+      "kata": "briefcase bisnis tas kantor",
+      "titik": true
+    },
+    {
+      "nama": "kilau",
+      "kategori": "aksi",
+      "kata": "sparkles ai otomatis ajaib",
+      "titik": true
+    },
+    {
       "nama": "kirim",
       "kategori": "komunikasi",
       "kata": "send pesawat kertas",
@@ -281,6 +341,12 @@
       "nama": "kode",
       "kategori": "data",
       "kata": "code developer api",
+      "titik": false
+    },
+    {
+      "nama": "kotak-masuk",
+      "kategori": "komunikasi",
+      "kata": "inbox pesan masuk",
       "titik": false
     },
     {
@@ -299,6 +365,12 @@
       "nama": "kurang",
       "kategori": "aksi",
       "kata": "minus",
+      "titik": false
+    },
+    {
+      "nama": "kutipan",
+      "kategori": "komunikasi",
+      "kata": "quote testimoni kutip",
       "titik": false
     },
     {
@@ -323,6 +395,24 @@
       "nama": "laporan",
       "kategori": "dasbor",
       "kata": "report papan klip",
+      "titik": true
+    },
+    {
+      "nama": "larang",
+      "kategori": "status",
+      "kata": "ban blokir dilarang nonaktif",
+      "titik": false
+    },
+    {
+      "nama": "layar",
+      "kategori": "data",
+      "kata": "monitor desktop komputer perangkat",
+      "titik": true
+    },
+    {
+      "nama": "layar-penuh",
+      "kategori": "navigasi",
+      "kata": "maximize perbesar penuh fullscreen",
       "titik": true
     },
     {
@@ -362,10 +452,28 @@
       "titik": false
     },
     {
+      "nama": "memori",
+      "kategori": "data",
+      "kata": "ram memory memori",
+      "titik": true
+    },
+    {
+      "nama": "memuat",
+      "kategori": "status",
+      "kata": "loading loader proses tunggu",
+      "titik": true
+    },
+    {
       "nama": "menu",
       "kategori": "navigasi",
       "kata": "hamburger daftar",
       "titik": true
+    },
+    {
+      "nama": "miring",
+      "kategori": "aksi",
+      "kata": "italic huruf miring editor",
+      "titik": false
     },
     {
       "nama": "naik",
@@ -380,9 +488,33 @@
       "titik": false
     },
     {
+      "nama": "pegangan",
+      "kategori": "navigasi",
+      "kata": "grip drag seret geser",
+      "titik": true
+    },
+    {
       "nama": "pengguna",
       "kategori": "dasbor",
       "kata": "user akun profil orang",
+      "titik": false
+    },
+    {
+      "nama": "pengumuman",
+      "kategori": "komunikasi",
+      "kata": "megaphone broadcast siaran promosi",
+      "titik": true
+    },
+    {
+      "nama": "penyimpanan",
+      "kategori": "data",
+      "kata": "disk hard drive storage ssd",
+      "titik": true
+    },
+    {
+      "nama": "perbaiki",
+      "kategori": "aksi",
+      "kata": "wrench servis perawatan alat",
       "titik": false
     },
     {
@@ -416,9 +548,27 @@
       "titik": true
     },
     {
+      "nama": "petir",
+      "kategori": "data",
+      "kata": "zap kilat cepat instan energi",
+      "titik": false
+    },
+    {
+      "nama": "ponsel",
+      "kategori": "komunikasi",
+      "kata": "hp smartphone tablet perangkat mobile",
+      "titik": true
+    },
+    {
       "nama": "progres",
       "kategori": "khas",
       "kata": "build progress tangga naik tumbuh",
+      "titik": true
+    },
+    {
+      "nama": "prosesor",
+      "kategori": "data",
+      "kata": "cpu chip processor",
       "titik": true
     },
     {
@@ -488,6 +638,18 @@
       "titik": true
     },
     {
+      "nama": "sinyal",
+      "kategori": "data",
+      "kata": "wifi online koneksi internet",
+      "titik": true
+    },
+    {
+      "nama": "sinyal-putus",
+      "kategori": "data",
+      "kata": "wifi off offline terputus",
+      "titik": true
+    },
+    {
       "nama": "struk",
       "kategori": "dasbor",
       "kata": "invoice nota tagihan receipt",
@@ -512,9 +674,21 @@
       "titik": false
     },
     {
+      "nama": "tambah-pengguna",
+      "kategori": "dasbor",
+      "kata": "user plus undang anggota",
+      "titik": false
+    },
+    {
       "nama": "tanda-tangan",
       "kategori": "komunikasi",
       "kata": "signature paraf",
+      "titik": true
+    },
+    {
+      "nama": "target",
+      "kategori": "dasbor",
+      "kata": "sasaran tujuan goal",
       "titik": true
     },
     {
@@ -530,6 +704,12 @@
       "titik": true
     },
     {
+      "nama": "tebal",
+      "kategori": "aksi",
+      "kata": "bold huruf tebal editor",
+      "titik": false
+    },
+    {
       "nama": "telepon",
       "kategori": "komunikasi",
       "kata": "phone hp telpon",
@@ -539,6 +719,12 @@
       "nama": "terang",
       "kategori": "tema",
       "kata": "matahari light siang",
+      "titik": true
+    },
+    {
+      "nama": "terminal",
+      "kategori": "data",
+      "kata": "console cli perintah shell",
       "titik": true
     },
     {
@@ -572,6 +758,12 @@
       "titik": false
     },
     {
+      "nama": "tukar",
+      "kategori": "aksi",
+      "kata": "swap pindah transfer bolak balik",
+      "titik": false
+    },
+    {
       "nama": "turun",
       "kategori": "navigasi",
       "kata": "down panah bawah",
@@ -587,6 +779,12 @@
       "nama": "uang",
       "kategori": "dasbor",
       "kata": "rupiah tunai cash",
+      "titik": true
+    },
+    {
+      "nama": "uji",
+      "kategori": "data",
+      "kata": "flask lab eksperimen percobaan",
       "titik": true
     },
     {
