@@ -43,6 +43,8 @@ export const IKON = {
   // ---------- Navigasi ----------
   beranda: { kat: "navigasi", kata: "home rumah awal", d: ["M3 11 12 3.5l9 7.5", "M5 9.5V20a1 1 0 0 0 1 1h3.5v-5.5h5V21H18a1 1 0 0 0 1-1V9.5"], t: [12, 10.6, 1.6] },
   menu: { kat: "navigasi", kata: "hamburger daftar", d: ["M4 6.5h16", "M4 12h16", "M4 17.5h10"], t: [19.2, 17.5, 1.6] },
+  perbesar: { kat: "navigasi", kata: "zoom in perbesar tambah", d: [c(10.5, 10.5, 6.5), "M15.4 15.4l2.6 2.6", "M10.5 8v5", "M8 10.5h5"], t: [20, 20, 1.5] },
+  perkecil: { kat: "navigasi", kata: "zoom out perkecil kurang", d: [c(10.5, 10.5, 6.5), "M15.4 15.4l2.6 2.6", "M8 10.5h5"], t: [20, 20, 1.5] },
   cari: { kat: "navigasi", kata: "search temukan", d: [c(10.5, 10.5, 6.5), "M15.4 15.4 20 20"], t: [8.4, 8.4, 1.4] },
   kembali: { kat: "navigasi", kata: "back panah kiri", d: ["M16.5 12H5", "M10.5 6C9.4 8.6 7.6 10.6 5 12c2.6 1.4 4.4 3.4 5.5 6"], t: [20.2, 12, 1.6] },
   maju: { kat: "navigasi", kata: "next panah kanan lanjut", d: ["M7.5 12H19", "M13.5 6c1.1 2.6 2.9 4.6 5.5 6-2.6 1.4-4.4 3.4-5.5 6"], t: [3.8, 12, 1.6] },
@@ -67,6 +69,7 @@ export const IKON = {
   bagikan: { kat: "aksi", kata: "share sebar", d: [c(18, 5.5, 2.5), c(6, 12, 2.5), "M8.2 10.8l7.6-4.1", "M8.2 13.2l7.6 4.1"], t: [18, 18.5, 2.5] },
   simpan: { kat: "aksi", kata: "bookmark tandai", d: ["M6.5 3.5h11a1 1 0 0 1 1 1V21l-6.5-4.5L5.5 21V4.5a1 1 0 0 1 1-1z"], t: [12, 9.5, 1.6] },
   arsip: { kat: "aksi", kata: "archive simpan kotak", d: [k(3, 4, 18, 5, 1.5), "M5 9v9.5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9", "M9.5 13.5h3"], t: [15.2, 13.5, 1.3] },
+  rotasi: { kat: "aksi", kata: "rotate putar gambar foto", d: ["M19.5 12a7.5 7.5 0 1 1-2.2-5.3", "M19.5 3.5v4h-4"], t: [12, 12, 1.5] },
   atur: { kat: "aksi", kata: "slider filter penyesuaian", d: ["M4 7h9.5", "M19.5 7H20", c(16.5, 7, 2.5), "M4 17h.5", "M10.5 17H20", c(7.5, 17, 2.5)], t: [16.5, 7, 1.2] },
   filter: { kat: "aksi", kata: "saring corong", d: ["M3.5 5h17l-6.5 7.5V19l-4 2v-8.5z"] },
   urut: { kat: "aksi", kata: "sort urutkan", d: ["M7 16.5V4.5", "M3.5 8C5 7.3 6.2 6.1 7 4.5 7.8 6.1 9 7.3 10.5 8", "M17 7.5v12", "M13.5 16c1.5.7 2.7 1.9 3.5 3.5.8-1.6 2-2.8 3.5-3.5"], t: [7, 20.2, 1.4] },

@@ -33,7 +33,7 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const emit = (el, name, detail) => el.dispatchEvent(new CustomEvent(name, { bubbles: true, detail }));
-import { ikon } from "./ikon-inline.js";
+import { ikon, isi, svgIkon } from "./ikon-inline.js";
 
 const once = (el, key) => { if (el[key]) return false; el[key] = true; return true; };
 let uid = 0;
@@ -868,7 +868,7 @@ function initWizard(form) {
 /* =========================================================
    TABEL BISA DIURUTKAN (table[data-sort] th[data-sort-key])
    ========================================================= */
-const SORT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="sort-arrow" d="M12 19V5M6 11l6-6 6 6"/><path class="sort-both" d="M8 9l4-4 4 4M8 15l4 4 4-4"/></svg>';
+const SORT_ICON = svgIkon(`<g class="sort-arrow">${isi("naik")}</g><g class="sort-both">${isi("urut")}</g>`);
 const parseDateID = (s) => {
   const bulan = { jan: 0, feb: 1, mar: 2, apr: 3, mei: 4, may: 4, jun: 5, jul: 6, agu: 7, agt: 7, aug: 7, sep: 8, okt: 9, oct: 9, nov: 10, des: 11, dec: 11 };
   const m = s.trim().toLowerCase().match(/^(\d{1,2})\s+([a-z]+)\.?\s+(\d{4})/);
@@ -1022,11 +1022,7 @@ function initOffline(bar) {
    Atribut: data-size (bawaan 512), data-max-mb (bawaan 10), data-type (bawaan image/webp).
    Event: fy:crop { file, blob, url }. Dibatalkan: input dikembalikan ke file sebelumnya.
    ========================================================= */
-const CROP_ICON = {
-  zoomOut: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M20 20l-4-4"/></svg>',
-  zoomIn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M8 11h6M11 8v6M20 20l-4-4"/></svg>',
-  rotate: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>',
-};
+const CROP_ICON = { zoomOut: ikon("perkecil"), zoomIn: ikon("perbesar"), rotate: ikon("rotasi") };
 function initAvatarCrop(wrap) {
   if (!once(wrap, "_fyCrop")) return;
   const input = $("input[type='file']", wrap);

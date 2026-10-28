@@ -150,7 +150,7 @@ Yang dicek: semua template di 8 ukuran layar (375 sampai 1920), tema terang dan 
 | `templates/` | Halaman siap pakai: `landing-produk.html`, `404.html`, `500.html`, `offline.html`, `maintenance.html`, `auth/` (masuk, daftar, lupa password, atur ulang, verifikasi OTP), `dashboard.html`, `admin.html`, `app-mobile.html`, `chat.html`, `acara.html`, `komponen.html` (katalog kontrol), `bayar-qris.html`, `status.html`, `dokumentasi.html`, `legal/` (privasi, syarat), `ikon.html` (katalog ikon) |
 | `dokumen/` | Template dokumen resmi: surat, invoice, penawaran, kuitansi, perjanjian, proposal, slide, sertifikat, e-tiket, kartu nama (HTML → PDF di `cetak/`), Word, PowerPoint, Excel (`office/`), pratinjau PDF (`contoh/`). Panduan: `dokumen/README.md` |
 | `email/` | Template email transaksional (HTML aman Gmail/Outlook + teks polos), tanda tangan email, PNG maskot, pratinjau. Panduan: `email/README.md` |
-| `ikon/` | Ikon FUSIONIFY (100 ikon garis dengan titik i biru muda) dan logo sosmed: SVG, sprite, PNG email, React, Android. Katalog `templates/ikon.html`, panduan `ikon/README.md` |
+| `ikon/` | Ikon FUSIONIFY (103 ikon garis dengan titik i biru muda) dan logo sosmed: SVG, sprite, PNG email, React, Android. Katalog `templates/ikon.html`, panduan `ikon/README.md` |
 | `grafis/` | Template grafis media sosial (post, potret, story/sampul Reels-TikTok, banner) dan OG image, dirender jadi PNG dengan `npm run build:grafis`. Panduan: `grafis/README.md` |
 | `react/` | Komponen React (TSX) dan preset Tailwind v3/v4 dari token. Panduan: `react/README.md` |
 | `skills/` | Skill AI agent `fusionify-brand-style` (bisa dipasang dengan `npx skills add`) |

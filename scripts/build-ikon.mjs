@@ -152,16 +152,21 @@ for (const rel of halaman) {
 }
 
 // 10. Ikon yang dibuat oleh JavaScript (js/controls.js) ditulis lengkap, tidak bergantung pada sprite halaman.
-const JS_IKON = ["chevron-kiri", "chevron-kanan", "tutup", "dibaca", "cari", "segarkan"];
-const inline = (n, kelas = "ikon") => {
+const JS_IKON = ["chevron-kiri", "chevron-kanan", "tutup", "dibaca", "cari", "segarkan", "perbesar", "perkecil", "rotasi", "naik", "urut"];
+const isiIkon = (n) => {
   const i = IKON[n], t = titikD(i);
-  return `<svg class="${kelas}" viewBox="0 0 24 24" ${ATR} aria-hidden="true">${i.d.map((d) => `<path d="${d}"/>`).join("")}${t ? `<path class="t" d="${t}" style="fill:var(--ikon-titik,${BIRU_MUDA});stroke:none"/>` : ""}</svg>`;
+  return `${i.d.map((d) => `<path d="${d}"/>`).join("")}${t ? `<path class="t" d="${t}" style="fill:var(--ikon-titik,${BIRU_MUDA});stroke:none"/>` : ""}`;
 };
+const inline = (n, kelas = "ikon") => `<svg class="${kelas}" viewBox="0 0 24 24" ${ATR} aria-hidden="true">${isiIkon(n)}</svg>`;
 tulis("js/ikon-inline.js", `// Dibuat otomatis oleh scripts/build-ikon.mjs dari ikon/sumber.mjs. Jangan diedit langsung.
 // Ikon FUSIONIFY lengkap (tanpa sprite) untuk elemen yang dibuat JavaScript.
 export const IKON_INLINE = ${JSON.stringify(Object.fromEntries(JS_IKON.map((n) => [n, inline(n)])), null, 2)};
 /** Ikon sebagai string SVG. kelas tambahan opsional, mis. "read". */
 export const ikon = (nama, kelas = "") => kelas ? IKON_INLINE[nama].replace('class="ikon"', \`class="ikon \${kelas}"\`) : IKON_INLINE[nama];
+/** Isi <svg> saja (path), untuk ikon gabungan, mis. dua ikon yang bergantian tampil. */
+export const isi = (nama) => IKON_INLINE[nama].replace(/^<svg[^>]*>|<\\/svg>$/g, "");
+/** Bungkus isi menjadi <svg class="ikon"> dengan gaya garis Ikon FUSIONIFY. */
+export const svgIkon = (dalam, kelas = "") => \`<svg class="ikon\${kelas ? " " + kelas : ""}" viewBox="0 0 24 24" ${ATR} aria-hidden="true">\${dalam}</svg>\`;
 `);
 
 console.log(`✓ ${nama.length} ikon, ${sosmed.length} logo sosmed, sprite ${(Buffer.byteLength(sprite) / 1024).toFixed(1)} KB, sprite per halaman di ${jumlahHalaman} halaman`);

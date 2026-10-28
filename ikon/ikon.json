@@ -1,5 +1,5 @@
 {
-  "versi": "1.10.2",
+  "versi": "1.11.0",
   "ikon": [
     {
       "nama": "aktivitas",
@@ -386,6 +386,12 @@
       "titik": false
     },
     {
+      "nama": "perbesar",
+      "kategori": "navigasi",
+      "kata": "zoom in perbesar tambah",
+      "titik": true
+    },
+    {
       "nama": "peringatan",
       "kategori": "status",
       "kata": "warning awas segitiga",
@@ -396,6 +402,12 @@
       "kategori": "data",
       "kata": "keamanan shield proteksi",
       "titik": false
+    },
+    {
+      "nama": "perkecil",
+      "kategori": "navigasi",
+      "kata": "zoom out perkecil kurang",
+      "titik": true
     },
     {
       "nama": "pesan",
@@ -419,6 +431,12 @@
       "nama": "qr",
       "kategori": "dasbor",
       "kata": "qris scan pindai bayar",
+      "titik": true
+    },
+    {
+      "nama": "rotasi",
+      "kategori": "aksi",
+      "kata": "rotate putar gambar foto",
       "titik": true
     },
     {

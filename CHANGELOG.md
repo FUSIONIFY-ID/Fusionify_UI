@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.11.1 · 28 Oktober 2026
+
+- Ikon terakhir yang masih digambar manual di `controls.js` ikut diganti Ikon FUSIONIFY: tombol perkecil, perbesar, dan putar di pemotong foto profil, serta panah urut di judul kolom tabel.
+- Ikon baru: `perbesar`, `perkecil`, `rotasi`. Total 103 ikon, semua lolos `npm run cek:ikon`.
+- `js/ikon-inline.js` menambah `isi(nama)` dan `svgIkon(isi, kelas)` untuk ikon gabungan (mis. dua ikon yang bergantian tampil seperti panah urut).
+
 ## 1.11.0 · 27 Oktober 2026
 
 - **Template kit kini memakai Ikon FUSIONIFY.** 262 ikon SVG yang dulu ditulis manual di 22 template dan demo diganti `<svg class="ikon"><use href="#ikon-…"/></svg>`, jadi kit tidak lagi melanggar aturannya sendiri. Yang sengaja tetap inline: ikon menu dan speaker di nav (bagiannya dianimasikan) dan logo Google.
