@@ -72,3 +72,29 @@ import { Ikon, IkonStiker, IkonSegel, IkonSosmed, TautanSosmed } from "./fusioni
 ```
 
 Path ikon ada di `react/ikon-data.ts` (dibuat `npm run build:ikon`), jadi tidak perlu memuat sprite. Daftar nama: `ikon/ikon.json`.
+
+## Komponen toko dan navigasi (1.13)
+
+```tsx
+import { Remah, KartuProduk, Rating, Harga, Linimasa, HitungMundur, Kbd, Tombol } from "./fusionify-ui/react";
+
+<Remah item={[{ teks: "Beranda", href: "/" }, { teks: "Produk", href: "/produk" }, { teks: "Netflix Premium" }]} />
+<KartuProduk judul="…" href="/produk/x" gambar={{ src: "/x.webp", width: 600, height: 600 }} harga={25000} coret={40000} nilai={4.8}>
+  <Tombol kecil>Beli</Tombol>
+</KartuProduk>
+<Linimasa langkah={[{ judul: "Dibayar", status: "done" }, { judul: "Diproses", status: "now" }, { judul: "Selesai" }]} />
+<HitungMundur tenggat="2026-11-11T00:00:00+07:00" />   {/* angka diisi initControls() */}
+```
+
+Harga, harga coret, rating, dan jumlah ulasan wajib data asli.
+
+## Pindah dari lucide-react
+
+Produk lama yang memakai `lucide-react` cukup mengganti sumber impornya; nama komponen tetap, gambarnya jadi Ikon FUSIONIFY:
+
+```tsx
+// sebelum: import { Send, Loader2, ShoppingCart } from "lucide-react";
+import { Send, Loader2, ShoppingCart } from "./fusionify-ui/react/lucide";
+```
+
+Nama lucide yang belum ada di `react/lucide.tsx` ditambahkan di sana (pemetaan ke nama Ikon FUSIONIFY). Kalau bentuknya belum ada sama sekali, gambar dulu di `ikon/sumber.mjs`. Kode baru langsung pakai `<Ikon nama="kirim" />`.

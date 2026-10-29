@@ -10,5 +10,5 @@
     "lib": ["ES2020", "DOM"],
     "types": ["react"]
   },
-  "include": ["index.tsx", "../js/seal.d.ts"]
+  "include": ["index.tsx", "lucide.tsx", "../js/seal.d.ts"]
 }

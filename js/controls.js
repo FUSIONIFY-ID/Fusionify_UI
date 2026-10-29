@@ -23,6 +23,8 @@
 // - Snackbar (snackbar() dan [data-snackbar])
 // - Stepper / form bertahap ([data-wizard]), tabel bisa diurutkan (table[data-sort]), pusat notifikasi ([data-notif])
 // - Pemotong foto profil bulat ([data-avatar-crop]), bilah offline ([data-offline-bar])
+// - Jumlah ([data-qty]), galeri + lightbox ([data-gallery]), pengumuman yang bisa ditutup ([data-announce]),
+//   persetujuan cookie ([data-consent], event fy:consent di window, pilihanCookie()), hitung mundur ke tanggal ([data-tenggat])
 //
 // Setiap komponen mengirim event: fy:change (button group, chip, slider, picker), fy:remove (chip input),
 // fy:select (saran pencarian), fy:step (stepper), fy:sort (tabel), fy:read (notifikasi). Contoh: el.addEventListener("fy:change", (e) => console.log(e.detail)).
@@ -1176,6 +1178,133 @@ function initAvatarCrop(wrap) {
 /* =========================================================
    INIT
    ========================================================= */
+
+/* =========================================================
+   KOMPONEN 1.13: jumlah, galeri, pengumuman, persetujuan cookie, hitung mundur
+   ========================================================= */
+const simpan = { get: (k) => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch { /* mode privat */ } } };
+
+/* Jumlah ([data-qty]): tombol [data-qty-step], batas min/max/step dari <input>. Event fy:change { value } */
+function initQty(wrap) {
+  if (!once(wrap, "_fyQty")) return;
+  const input = $("input", wrap);
+  if (!input) return;
+  const num = (v, d) => (v === "" || v == null || isNaN(+v) ? d : +v);
+  const min = () => num(input.min, -Infinity), max = () => num(input.max, Infinity), langkah = () => num(input.step, 1) || 1;
+  const sync = () => {
+    const v = num(input.value, min());
+    $$("[data-qty-step]", wrap).forEach((b) => { const d = +b.dataset.qtyStep; b.disabled = d < 0 ? v <= min() : v >= max(); });
+  };
+  const set = (v) => {
+    const baru = Math.min(max(), Math.max(min(), v));
+    if (String(baru) === input.value) return sync();
+    input.value = String(baru);
+    sync();
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+    emit(wrap, "fy:change", { value: baru });
+  };
+  $$("[data-qty-step]", wrap).forEach((b) => b.addEventListener("click", () => set(num(input.value, min() === -Infinity ? 0 : min()) + +b.dataset.qtyStep * langkah())));
+  input.addEventListener("change", (e) => { if (e.isTrusted) set(num(input.value, min() === -Infinity ? 0 : min())); });
+  input.addEventListener("keydown", (e) => { if (e.key === "ArrowUp" || e.key === "ArrowDown") { e.preventDefault(); set(num(input.value, 0) + (e.key === "ArrowUp" ? 1 : -1) * langkah()); } });
+  sync();
+}
+
+/* Galeri ([data-gallery]): <a href="besar"><img alt></a> → lightbox */
+let lbBox = null;
+function lightbox() {
+  if (lbBox) return lbBox;
+  const d = document.createElement("dialog");
+  d.className = "lightbox";
+  d.setAttribute("aria-label", "Galeri foto");
+  d.innerHTML = `<div class="lb-top"><span class="lb-count" aria-live="polite"></span><button class="icon-btn" type="button" data-lb="tutup" aria-label="Tutup galeri">${ICON.x}</button></div>
+    <div class="lb-stage"><img alt=""><button class="icon-btn lb-prev" type="button" data-lb="-1" aria-label="Foto sebelumnya">${ICON.left}</button><button class="icon-btn lb-next" type="button" data-lb="1" aria-label="Foto berikutnya">${ICON.right}</button></div>
+    <p class="lb-cap"></p>`;
+  document.body.append(d);
+  const img = $("img", d), cap = $(".lb-cap", d), count = $(".lb-count", d);
+  const st = { items: [], i: 0, opener: null };
+  const show = (i) => {
+    const n = st.items.length;
+    st.i = (i + n) % n;
+    const a = st.items[st.i], t = $("img", a);
+    img.src = a.getAttribute("href");
+    img.alt = t?.alt || "";
+    cap.textContent = a.dataset.caption || t?.alt || "";
+    count.textContent = `${st.i + 1} / ${n}`;
+    $$("[data-lb='-1'], [data-lb='1']", d).forEach((b) => (b.hidden = n < 2));
+  };
+  d.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-lb]");
+    if (b) return b.dataset.lb === "tutup" ? d.close() : show(st.i + +b.dataset.lb);
+    if (e.target === d || e.target.classList.contains("lb-stage")) d.close();
+  });
+  d.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") show(st.i + 1); if (e.key === "ArrowLeft") show(st.i - 1); });
+  let x0 = null;
+  const stage = $(".lb-stage", d);
+  stage.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") x0 = e.clientX; });
+  stage.addEventListener("pointerup", (e) => { if (x0 == null) return; const dx = e.clientX - x0; x0 = null; if (Math.abs(dx) > 50) show(st.i + (dx < 0 ? 1 : -1)); });
+  d.addEventListener("close", () => { document.documentElement.style.overflow = ""; st.opener?.focus(); });
+  lbBox = { open: (items, i, opener) => { st.items = items; st.opener = opener; show(i); document.documentElement.style.overflow = "hidden"; d.showModal(); $("[data-lb='tutup']", d).focus(); } };
+  return lbBox;
+}
+function initGallery(g) {
+  if (!once(g, "_fyGal")) return;
+  const items = () => $$("a[href]", g);
+  g.addEventListener("click", (e) => {
+    const a = e.target.closest("a[href]");
+    if (!a || !g.contains(a) || e.metaKey || e.ctrlKey || e.shiftKey || typeof HTMLDialogElement !== "function") return;
+    e.preventDefault();
+    const list = items();
+    lightbox().open(list, list.indexOf(a), a);
+  });
+}
+
+/* Pengumuman ([data-announce="id"]): tombol [data-close] menyembunyikan dan mengingatnya */
+function initAnnounce(bar) {
+  if (!once(bar, "_fyAnn")) return;
+  const key = "fy-tutup-" + (bar.dataset.announce || "pengumuman");
+  if (simpan.get(key)) { bar.hidden = true; return; }
+  $("[data-close]", bar)?.addEventListener("click", () => { bar.hidden = true; simpan.set(key, "1"); emit(bar, "fy:close", { id: bar.dataset.announce }); });
+}
+
+/* Persetujuan cookie ([data-consent]): tampil sampai dipilih; event fy:consent { pilihan } di window */
+function initConsent(box) {
+  if (!once(box, "_fyCons")) return;
+  const lama = simpan.get("fy-consent");
+  if (lama) { box.hidden = true; return; }
+  box.hidden = false;
+  $$("[data-consent-pilih]", box).forEach((b) => b.addEventListener("click", () => {
+    const pilihan = b.dataset.consentPilih;
+    simpan.set("fy-consent", JSON.stringify({ pilihan, waktu: new Date().toISOString() }));
+    box.hidden = true;
+    window.dispatchEvent(new CustomEvent("fy:consent", { detail: { pilihan } }));
+  }));
+}
+/** Pilihan cookie yang tersimpan: "semua", "penting", atau null kalau belum memilih. */
+export function pilihanCookie() { try { return JSON.parse(simpan.get("fy-consent"))?.pilihan ?? null; } catch { return null; } }
+
+/* Hitung mundur ([data-tenggat="ISO"]): isi [data-cd="hari|jam|menit|detik"], selesai = .selesai + fy:complete */
+function initTenggat(box) {
+  if (!once(box, "_fyTgt")) return;
+  const akhir = Date.parse(box.dataset.tenggat);
+  if (isNaN(akhir)) return;
+  const sr = document.createElement("span");
+  sr.className = "sr-only";
+  box.append(sr);
+  const pad = (n) => String(n).padStart(2, "0");
+  let menitLalu = -1, t;
+  const tick = () => {
+    const sisa = Math.max(0, Math.floor((akhir - Date.now()) / 1000));
+    const v = { hari: Math.floor(sisa / 86400), jam: Math.floor(sisa / 3600) % 24, menit: Math.floor(sisa / 60) % 60, detik: sisa % 60 };
+    $$("[data-cd]", box).forEach((el) => { const k = el.dataset.cd; el.textContent = k === "hari" ? String(v[k]) : pad(v[k]); });
+    const m = Math.floor(sisa / 60);
+    if (m !== menitLalu) { menitLalu = m; sr.textContent = sisa ? `Sisa ${v.hari} hari ${v.jam} jam ${v.menit} menit` : "Waktu habis"; }
+    if (!sisa) { clearInterval(t); box.classList.add("selesai"); emit(box, "fy:complete", {}); }
+  };
+  tick();
+  if (!box.classList.contains("selesai")) t = setInterval(tick, 1000);
+}
+
 export function initControls(root = document) {
   if (!cekLisensi()) return api;
   if (root === document && !once(document, "_fyControls")) return api;
@@ -1476,6 +1605,11 @@ export function initControls(root = document) {
   $$("[data-offline-bar]", root).forEach(initOffline);
   $$("[data-avatar-crop]", root).forEach(initAvatarCrop);
   $$("[data-toc]", root).forEach(initToc);
+  $$("[data-qty]", root).forEach(initQty);
+  $$("[data-gallery]", root).forEach(initGallery);
+  $$("[data-announce]", root).forEach(initAnnounce);
+  $$("[data-consent]", root).forEach(initConsent);
+  $$("[data-tenggat]", root).forEach(initTenggat);
 
   /* ---------- Snackbar deklaratif ---------- */
   $$("[data-snackbar]", root).forEach((b) => {

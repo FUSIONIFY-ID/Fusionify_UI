@@ -46,6 +46,7 @@ export const fy = {
       "danger": "#b4232c",
       "dangerBg": "#fde8ea",
       "placeholder": "#707a8c",
+      "bintang": "#f0a800",
       "footerTop": "#00000000"
     },
     "dark": {
@@ -86,6 +87,7 @@ export const fy = {
       "danger": "#ff9ba1",
       "dangerBg": "#3d1418",
       "placeholder": "#8597b3",
+      "bintang": "#ffc93d",
       "footerTop": "#1f3459"
     }
   },

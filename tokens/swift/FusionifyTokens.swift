@@ -49,6 +49,7 @@ public enum Fy {
         public static let danger = dyn(UIColor(red: 0.7059, green: 0.1373, blue: 0.1725, alpha: 1), UIColor(red: 1.0000, green: 0.6078, blue: 0.6314, alpha: 1))
         public static let dangerBg = dyn(UIColor(red: 0.9922, green: 0.9098, blue: 0.9176, alpha: 1), UIColor(red: 0.2392, green: 0.0784, blue: 0.0941, alpha: 1))
         public static let placeholder = dyn(UIColor(red: 0.4392, green: 0.4784, blue: 0.5490, alpha: 1), UIColor(red: 0.5216, green: 0.5922, blue: 0.7020, alpha: 1))
+        public static let bintang = dyn(UIColor(red: 0.9412, green: 0.6588, blue: 0.0000, alpha: 1), UIColor(red: 1.0000, green: 0.7882, blue: 0.2392, alpha: 1))
         public static let footerTop = dyn(UIColor(red: 0.0000, green: 0.0000, blue: 0.0000, alpha: 0), UIColor(red: 0.1216, green: 0.2039, blue: 0.3490, alpha: 1))
     }
 
@@ -90,6 +91,7 @@ public enum Fy {
         public static let danger = SwiftUI.Color(uiColor: UI.danger)
         public static let dangerBg = SwiftUI.Color(uiColor: UI.dangerBg)
         public static let placeholder = SwiftUI.Color(uiColor: UI.placeholder)
+        public static let bintang = SwiftUI.Color(uiColor: UI.bintang)
         public static let footerTop = SwiftUI.Color(uiColor: UI.footerTop)
     }
 

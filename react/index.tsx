@@ -232,3 +232,85 @@ export function TautanSosmed({ akun }: { akun: Array<{ nama: NamaSosmed; url: st
     </ul>
   );
 }
+
+/* ---------- Komponen 1.13 ---------- */
+const angkaId = (n: number, d = 1) => n.toLocaleString("id-ID", { minimumFractionDigits: d, maximumFractionDigits: d });
+export const rupiah = (n: number) => "Rp" + n.toLocaleString("id-ID");
+
+/** Breadcrumb. Item terakhir = halaman sekarang (tanpa href). */
+export function Remah({ item, label = "Lokasi halaman" }: { item: Array<{ teks: string; href?: string }>; label?: string }) {
+  return (
+    <nav className="breadcrumb" aria-label={label}>
+      <ol>{item.map((x, i) => <li key={i}>{x.href && i < item.length - 1 ? <a href={x.href}>{x.teks}</a> : <span aria-current="page">{x.teks}</span>}</li>)}</ol>
+    </nav>
+  );
+}
+
+/** Rating tampil (0 sampai 5). Jumlah ulasan wajib asli. */
+export function Rating({ nilai, ulasan, besar = false, className }: { nilai: number; ulasan?: number; besar?: boolean; className?: string }) {
+  const v = Math.max(0, Math.min(5, nilai));
+  return (
+    <span className={cx("rating", besar && "lg", className)} style={{ ["--nilai" as string]: v }} role="img" aria-label={`Rating ${angkaId(v)} dari 5${ulasan != null ? `, ${ulasan} ulasan` : ""}`}>
+      <span className="stars" aria-hidden="true" />{angkaId(v)}{ulasan != null ? <small>({ulasan.toLocaleString("id-ID")})</small> : null}
+    </span>
+  );
+}
+
+/** Harga dalam Rupiah, dengan harga coret opsional. Angka wajib asli. */
+export function Harga({ harga, coret, besar = false, className }: { harga: number; coret?: number; besar?: boolean; className?: string }) {
+  return (
+    <p className={cx("harga", besar && "lg", className)}>
+      {rupiah(harga)}{coret ? <s><span className="sr-only">Harga sebelumnya </span>{rupiah(coret)}</s> : null}
+    </p>
+  );
+}
+
+/** Kartu produk. Gambar wajib punya width/height; tombol aksi lewat children. */
+export function KartuProduk({ judul, href, gambar, kategori, harga, coret, nilai, habis = false, contain = false, children }:
+  { judul: string; href: string; gambar: { src: string; width: number; height: number; alt?: string }; kategori?: string; harga: number; coret?: number; nilai?: number; habis?: boolean; contain?: boolean; children?: ReactNode }) {
+  const diskon = coret && coret > harga ? Math.round((1 - harga / coret) * 100) : 0;
+  return (
+    <article className={cx("product-card", habis && "habis")}>
+      <div className={cx("pc-media", contain && "contain")}>
+        <img src={gambar.src} alt={gambar.alt ?? ""} width={gambar.width} height={gambar.height} loading="lazy" />
+        {diskon > 0 ? <span className="pc-diskon">-{diskon}%</span> : null}
+      </div>
+      <div className="pc-body">
+        {kategori ? <span className="pc-cat">{kategori}</span> : null}
+        <h3 className="pc-title"><a href={href}>{judul}</a></h3>
+        {nilai != null ? <Rating nilai={nilai} /> : null}
+        <Harga harga={harga} coret={coret} />
+        {children ? <div className="pc-actions">{children}</div> : null}
+      </div>
+    </article>
+  );
+}
+
+/** Linimasa. status: "done" (selesai), "now" (sedang), "fail" (gagal), atau kosong (belum). */
+export function Linimasa({ langkah }: { langkah: Array<{ judul: string; waktu?: string; teks?: string; status?: "done" | "now" | "fail" }> }) {
+  return (
+    <ol className="timeline">
+      {langkah.map((l, i) => (
+        <li key={i} className={l.status} aria-current={l.status === "now" ? "step" : undefined}>
+          {l.waktu ? <span className="tl-time">{l.waktu}</span> : null}<b className="tl-title">{l.judul}</b>{l.teks ? <p>{l.teks}</p> : null}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/** Hitung mundur. Angka diisi js/controls.js (initControls) dari atribut data-tenggat. */
+export function HitungMundur({ tenggat, label = "Sisa waktu" }: { tenggat: string | Date; label?: string }) {
+  const iso = typeof tenggat === "string" ? tenggat : tenggat.toISOString();
+  const unit: Array<[string, string]> = [["hari", "hari"], ["jam", "jam"], ["menit", "menit"], ["detik", "detik"]];
+  return (
+    <div className="countdown" data-tenggat={iso} role="timer" aria-label={label}>
+      {unit.map(([k, t]) => <span className="cd-unit" key={k}><b data-cd={k}>--</b><small>{t}</small></span>)}
+    </div>
+  );
+}
+
+/** Tombol keyboard, mis. <Kbd>Ctrl</Kbd> + <Kbd>K</Kbd> */
+export function Kbd({ className, ...p }: HTMLAttributes<HTMLElement>) {
+  return <kbd className={cx("kbd", className)} {...p} />;
+}

@@ -24,13 +24,13 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 | `css/tokens.css` | Warna, huruf (@font-face), radius, kurva gerak, bayangan |
 | `css/base.css` | Reset, tipografi, `.wrap`, `.kicker`, `.h-hero`, `.h-sec`, `.lead`, `.prose` |
 | `css/components.css` | Tombol, chip status, nav, menu HP, seksi, kartu stiker, statistik, kartu karya, foto bersegel, gelembung maskot, panggung maskot, marquee partner, FAQ, gelombang, footer, toast, kursor, transisi halaman, status reveal, jeda `.idle`, ikon (`.ikon`, `.ikon-stiker`, `.ikon-segel`, `.sosmed`) |
-| `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment`, halaman acara (`.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`), label `.sample-note`, halaman bayar `.pay` (`data-pay-state`, `.qr`, `.pay-timer`, `.pay-result`), status layanan (`.status-banner`, `.uptime`, `.uptime-bars`, `.incidents`), dokumentasi (`.docs`, `.docs-nav`, `.code-block`, `.endpoint`, `.method`, `.docs-pager`), daftar isi `.toc`, halaman legal (`.legal`, `.legal-switch`), katalog ikon (`.ikon-grid`, `.ikon-kartu`) |
+| `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment`, halaman acara (`.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`), label `.sample-note`, halaman bayar `.pay` (`data-pay-state`, `.qr`, `.pay-timer`, `.pay-result`), status layanan (`.status-banner`, `.uptime`, `.uptime-bars`, `.incidents`), dokumentasi (`.docs`, `.docs-nav`, `.code-block`, `.endpoint`, `.method`, `.docs-pager`), daftar isi `.toc`, halaman legal (`.legal`, `.legal-switch`), katalog ikon (`.ikon-grid`, `.ikon-kartu`), linimasa `.timeline` (`.done`, `.now`, `.fail`), tombol keyboard `.kbd`, harga `.harga` (+ `<s>` harga coret), kartu produk `.product-grid` + `.product-card` (`.pc-media`, `.pc-diskon`, `.pc-body`, `.pc-title`, `.pc-actions`, `.habis`), hitung mundur `.countdown` |
 | `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.progress`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, `.btn.danger`, chat (`.chat`, `.chat-list`, `.convo`, `.thread`, `.msgs`, `.msg.me/.them`, `.typing`, `.composer`), `.ev-date` |
-| `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar), `.otp` (kode OTP) + `.resend`, `.upload` + `.drop` + `.upload-list` (upload file), `.stepper` + `.wizard-step` (form bertahap), `.sort-btn` (tabel bisa diurutkan), `.notif` + `.notif-panel` (pusat notifikasi), `.state` (keadaan kosong/error/offline), `.offline-bar`, `.avatar-crop` + `.crop-modal` (foto profil dengan pemotong bulat) |
+| `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar), `.otp` (kode OTP) + `.resend`, `.upload` + `.drop` + `.upload-list` (upload file), `.stepper` + `.wizard-step` (form bertahap), `.sort-btn` (tabel bisa diurutkan), `.notif` + `.notif-panel` (pusat notifikasi), `.state` (keadaan kosong/error/offline), `.offline-bar`, `.avatar-crop` + `.crop-modal` (foto profil dengan pemotong bulat), `.breadcrumb`, `.pagination`, `.accordion`, `.input-group` + `.addon` (awalan/akhiran input), `.qty` (jumlah), `.rating` dan `.rating-input`, `.gallery` + `.lightbox`, `.announce` (pengumuman), `.consent` (persetujuan cookie) |
 | `css/fusionify.css` | Satu file yang mengimpor tokens, base, components, product, controls (tanpa app.css) |
 | `js/motion.js` | `initFusionify()`: smooth scroll, nav, menu HP, kursor, reveal, angka, magnet, salin + toast (`data-copy`; kosong di dalam `.code-block` = salin isi kodenya), transisi halaman, suara, jeda di luar layar |
 | `js/app.js` | `initApp()` untuk halaman aplikasi: tema, sidebar HP, dropdown, modal, tab, tampil/sembunyi password, meter kekuatan password, validasi form (`data-validate`), pilih semua baris, toast, tombol salin `data-copy`. Tanpa GSAP |
-| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. OTP (`[data-otp]`, `otpError()`), hitung mundur kirim ulang (`[data-countdown]`), upload (`[data-upload]`), chat (`[data-chat]`), tambah ke kalender (`[data-ics]`, unduh .ics), bagikan (`[data-share]`). Stepper (`form[data-wizard]`), tabel urut (`table[data-sort]` + `th[data-sort-key]`), notifikasi (`[data-notif]`), bilah offline (`[data-offline-bar]`), pemotong foto profil (`[data-avatar-crop]`), daftar isi yang mengikuti bacaan (`[data-toc]`). Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:resend`, `fy:step`, `fy:sort`, `fy:read`, `fy:crop`, dan `fy:online`/`fy:offline` di window |
+| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. OTP (`[data-otp]`, `otpError()`), hitung mundur kirim ulang (`[data-countdown]`), upload (`[data-upload]`), chat (`[data-chat]`), tambah ke kalender (`[data-ics]`, unduh .ics), bagikan (`[data-share]`). Stepper (`form[data-wizard]`), tabel urut (`table[data-sort]` + `th[data-sort-key]`), notifikasi (`[data-notif]`), bilah offline (`[data-offline-bar]`), pemotong foto profil (`[data-avatar-crop]`), daftar isi yang mengikuti bacaan (`[data-toc]`), jumlah (`[data-qty]`), galeri + lightbox (`[data-gallery]`), pengumuman (`[data-announce]`), persetujuan cookie (`[data-consent]`, `pilihanCookie()`), hitung mundur ke tanggal (`[data-tenggat]`). Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:resend`, `fy:step`, `fy:sort`, `fy:read`, `fy:crop`, `fy:close`, dan `fy:online`/`fy:offline`/`fy:consent` di window |
 | `js/ikon-inline.js` | Dibuat `npm run build:ikon`: Ikon FUSIONIFY lengkap (tanpa sprite) untuk elemen yang dibuat JavaScript, `ikon(nama, kelas)`, plus `isi()` dan `svgIkon()` untuk ikon gabungan. Dipakai `controls.js` |
 | `js/lisensi.js` | Kunci domain: kit hanya berjalan di domain di `DOMAIN_RESMI` (fusionify.id, fusionify.biz.id, partner premiumify.my.id dan studydate.id, serta subdomainnya) plus localhost. Dipanggil di awal `initFusionify()`, `initApp()`, `initControls()`. Jangan dihapus atau diakali |
 | `js/theme.js` | Mode terang/gelap (`initTheme`, `setTheme`). Dipanggil otomatis oleh `motion.js` dan `app.js` |
@@ -70,7 +70,7 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 | `dokumen/contoh/` | Pratinjau PDF semua template cetak (`npm run build:dokumen`) |
 | `scripts/build-dokumen.mjs`, `scripts/dokumen/` | Pembuat PDF (`--final` menolak teks "ganti" dan isi yang keluar halaman) dan generator template Office (`npm run build:office`) |
 | `email/` | Template email transaksional: `fy-email.js` (`renderEmail`, tabel inline, aman di Gmail/Outlook), `templates.js` (kode verifikasi, atur ulang password, selamat datang, pengajuan disetujui/ditolak, pembayaran berhasil/gagal, status penarikan, pemberitahuan), `tandaTangan()` untuk tanda tangan email karyawan/produk, `aset/` PNG maskot, `contoh/` pratinjau (`npm run build:email`). Panduan: `email/README.md` |
-| `react/` | Untuk produk React + Tailwind: `index.tsx` (komponen tipis di atas kelas kit: `Tombol`, `Chip`, `Kartu`, `Judul`, `Maskot`, `PanggungMaskot`, `Keadaan`, `BadgeProduk`, `Ikon`, `IkonStiker`, `IkonSegel`, `IkonSosmed`, `TautanSosmed`, dll.), `ikon-data.ts` (dibuat otomatis), `tailwind-preset.js` (v3), `tailwind-v4.css`. Panduan: `react/README.md` |
+| `react/` | Untuk produk React + Tailwind: `index.tsx` (komponen tipis di atas kelas kit: `Tombol`, `Chip`, `Kartu`, `Judul`, `Maskot`, `PanggungMaskot`, `Keadaan`, `BadgeProduk`, `Ikon`, `IkonStiker`, `IkonSegel`, `IkonSosmed`, `TautanSosmed`, `Remah`, `Rating`, `Harga`, `KartuProduk`, `Linimasa`, `HitungMundur`, `Kbd`, dll.), `lucide.tsx` (nama komponen ala lucide-react yang menggambar Ikon FUSIONIFY, untuk memindahkan produk lama), `ikon-data.ts` (dibuat otomatis), `tailwind-preset.js` (v3), `tailwind-v4.css`. Panduan: `react/README.md` |
 | `ikon/` | **Ikon FUSIONIFY**: 136 ikon garis 2px dengan ciri khas titik i biru muda (navigasi, aksi, status, komunikasi, dasbor, data, tema, khas) plus 13 logo sosmed satu warna (dari simple-icons). Sumber satu-satunya `ikon/sumber.mjs`; `npm run build:ikon` membuat `svg/`, `sosmed/`, sprite `ikon.svg`, `ikon.json`, PNG email, `react/ikon-data.ts`, dan drawable Android `fy_ikon_*`/`fy_sosmed_*`. Katalog: `templates/ikon.html`. Panduan: `ikon/README.md` |
 | `rencana/` | Rencana yang belum dikerjakan. `rencana/ui-fusionify-id.md`: situs dokumentasi ui.fusionify.id ala m3.material.io (dikunci login, watermark per orang) plus aplikasi desktop dan Android anti-screenshot. Baca dulu sebelum mengerjakannya |
 
@@ -135,6 +135,13 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - Satu FAB per layar. Navigation bar bawah 3 sampai 5 tujuan; lebih dari itu pakai drawer.
 - Carousel tidak boleh berputar sendiri. Bottom sheet harus bisa ditutup dengan tarik ke bawah, tombol, dan Esc/tombol kembali.
 - Bayangan stiker di native: offset ke bawah tanpa blur, bukan `elevation`.
+
+## Toko, promo, dan privasi
+
+- Harga di `.harga` dan kartu produk wajib harga asli; harga coret hanya kalau memang pernah dijual dengan harga itu. Rating dan jumlah ulasan hanya dari ulasan asli; kalau belum ada, jangan tampilkan `.rating`.
+- Hitung mundur promo (`[data-tenggat]`) harus sesuai tanggal promo yang benar. Jangan memasang hitung mundur palsu yang diulang setiap kunjungan.
+- Persetujuan cookie (`.consent`): tombol "Hanya yang penting" dan "Terima semua" sama menonjolnya. Muat skrip analitik/iklan hanya kalau `pilihanCookie() === "semua"` atau setelah event `fy:consent` dengan pilihan itu.
+- Produk lama yang masih memakai lucide-react: ganti impornya ke `react/lucide.tsx` (gambar tetap Ikon FUSIONIFY), lalu pelan-pelan pindah ke `<Ikon nama="…" />`.
 
 ## Keadaan kosong, error, dan offline
 
@@ -400,6 +407,21 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Cover karya/produk rasio 1600:848, screenshot asli. Ilustrasi wajib diberi label `.cover-note` "Ilustrasi".
 - Di layar sentuh: magnet, kursor khusus, dan parallax dimatikan.
 
+## Komponen toko dan navigasi web
+
+- **Breadcrumb**: tautan biru tebal dengan pemisah chevron kecil, halaman sekarang tebal warna tinta dan terpotong rapi kalau panjang. Di HP hanya dua tingkat terakhir, diawali "…".
+- **Pagination**: angka Exo 2 dalam kotak 44px; halaman aktif berupa kotak biru bergaya stiker. Di HP sempit hanya panah dan halaman aktif.
+- **Accordion**: satu kartu stiker berisi beberapa `<details>`, chevron berputar dengan pegas. FAQ halaman publik tetap `.faq`.
+- **Input dengan awalan/akhiran**: satu bingkai stiker; awalan (Rp, ikon) dan akhiran (@domain, tombol) berlatar `--surface`.
+- **Jumlah**: kapsul stiker dengan tombol − dan + bulat 44px, angka Exo 2 di tengah.
+- **Rating**: bintang dari bentuk ikon `bintang`, isi warna `--bintang`, kosong warna `--line`. Bisa pecahan (4,5).
+- **Kartu produk**: kartu stiker dengan gambar persegi, label diskon kapsul biru, kategori Exo 2 kapital, judul dua baris, rating, harga biru Exo 2 dengan harga coret abu. Di HP dua kolom. Stok habis: gambar dan tombol meredup.
+- **Linimasa**: titik bergaris tinta; langkah selesai biru dengan garis utuh, langkah sekarang biru muda bercahaya, langkah berikutnya garis putus-putus, gagal merah.
+- **Hitung mundur**: ubin stiker kecil per satuan (hari, jam, menit, detik), angka Exo 2 tabular.
+- **Galeri**: ubin persegi bergaris stiker; lightbox gelap layar penuh dengan tombol bulat tembus pandang, bisa digeser di HP.
+- **Pengumuman**: bilah biru penuh di atas halaman, teks putih tebal, tombol tutup bulat.
+- **Persetujuan cookie**: kartu stiker mengambang di bawah tengah dengan kepala maskot wink, dua tombol yang sama menonjolnya.
+
 ## Dokumen
 
 Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai sistem yang sama dengan web (template di `dokumen/`).
@@ -520,6 +542,7 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
   --seal-tint: #d8eaff;          /* segel di belakang maskot */
   --danger: #b4232c; --danger-bg: #fde8ea;
   --placeholder: #707a8c;
+  --bintang: #f0a800;            /* isi bintang rating */
 
   /* Bayangan */
   --shadow: 0 1px 0 rgba(13, 108, 215, 0.06), 0 12px 32px -14px rgba(11, 15, 26, 0.18);
@@ -548,7 +571,7 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
   --go: #7fe0a6; --go-bg: #0f3324; --beta: #ffd27a; --beta-bg: #3a2a08;
   --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
   --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
-  --placeholder: #8597b3; --footer-top: #1f3459;
+  --placeholder: #8597b3; --footer-top: #1f3459; --bintang: #ffc93d;
   --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
   color-scheme: dark;
 }
@@ -565,7 +588,7 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
     --go: #7fe0a6; --go-bg: #0f3324; --beta: #ffd27a; --beta-bg: #3a2a08;
     --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
     --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
-    --placeholder: #8597b3; --footer-top: #1f3459;
+    --placeholder: #8597b3; --footer-top: #1f3459; --bintang: #ffc93d;
     --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
     color-scheme: dark;
   }
@@ -1501,6 +1524,82 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .ikon-panduan :not(pre) > code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; padding: 2px 6px; border-radius: 6px; background: var(--surface); color: var(--ink); }
 @media (max-width: 420px) { .ikon-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .ikon-kartu { padding: 12px 4px 10px; font-size: 12px; } }
 
+/* =========================================================
+   KOMPONEN 1.13: tampilan
+   ========================================================= */
+
+/* ---------- Linimasa (timeline) ----------
+   <ol class="timeline">
+     <li class="done"><span class="tl-time">10.02</span><b class="tl-title">Pesanan dibuat</b><p>Menunggu pembayaran.</p></li>
+     <li class="now">…</li> <li>…</li>   (.fail untuk langkah gagal)
+   </ol> */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.timeline li { position: relative; padding: 0 0 22px 36px; }
+.timeline li::before { content: ""; position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--edge); background: var(--card); box-sizing: border-box; }
+.timeline li::after { content: ""; position: absolute; left: 10px; top: 24px; bottom: 2px; border-left: 2px dashed var(--line); }
+.timeline li:last-child { padding-bottom: 0; }
+.timeline li:last-child::after { display: none; }
+.timeline li.done::before { background: var(--blue); }
+.timeline li.done::after { border-left-style: solid; border-color: var(--blue); }
+.timeline li.now::before { background: var(--blue-light); box-shadow: 0 0 0 5px rgba(83, 157, 233, 0.28); }
+.timeline li.fail::before { background: var(--danger); border-color: var(--danger); }
+.timeline .tl-time { display: block; font: 700 12.5px var(--f-num); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); }
+.timeline .tl-title { display: block; font-weight: 700; color: var(--ink); }
+.timeline li.fail .tl-title { color: var(--danger); }
+.timeline p { margin-top: 2px; font-size: 14.5px; color: var(--ink-2); }
+
+/* ---------- Tombol keyboard ----------
+   Tekan <kbd class="kbd">Ctrl</kbd> + <kbd class="kbd">K</kbd> */
+.kbd { display: inline-grid; place-items: center; min-width: 1.9em; height: 1.9em; padding: 0 0.45em; border: 1.5px solid var(--edge); border-bottom-width: 3px; border-radius: 7px; background: var(--card); color: var(--ink); font: 700 0.8em var(--f-num); line-height: 1; vertical-align: 0.1em; white-space: nowrap; }
+
+/* ---------- Harga ----------
+   <p class="harga">Rp25.000 <s>Rp40.000</s></p>   (.harga.lg untuk halaman detail) */
+.harga { display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px; font: 800 18px var(--f-num); font-variant-numeric: tabular-nums; color: var(--text-blue); }
+.harga s { font-size: 13.5px; font-weight: 600; color: var(--ink-3); }
+.harga.lg { font-size: 30px; }
+.harga.lg s { font-size: 16px; }
+
+/* ---------- Kartu produk ----------
+   <ul class="product-grid"><li><article class="product-card">
+     <div class="pc-media"><img src="…" alt="" width="600" height="600"><span class="pc-diskon">-38%</span></div>
+     <div class="pc-body"><span class="pc-cat">Streaming</span><h3 class="pc-title"><a href="/produk/x">Nama produk</a></h3>
+       <span class="rating" style="--nilai:4.8" role="img" aria-label="Rating 4,8 dari 5"><span class="stars" aria-hidden="true"></span>4,8</span>
+       <p class="harga">Rp25.000 <s>Rp40.000</s></p>
+       <div class="pc-actions"><button class="btn sm" type="button">Beli</button></div></div>
+   </article></li></ul>
+   Seluruh kartu bisa diklik lewat tautan judul; tombol di .pc-actions tetap bisa diklik sendiri. Harga wajib asli. */
+.product-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 18px; }
+@media (max-width: 560px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .pc-body { padding: 10px 12px 12px; } .pc-title { font-size: 14.5px; } .harga { font-size: 16px; } .pc-diskon { top: 8px; left: 8px; } }
+.product-card { position: relative; height: 100%; display: flex; flex-direction: column; border: 2px solid var(--edge); border-radius: var(--r-l); background: var(--card); box-shadow: var(--shadow-sticker); overflow: hidden; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
+.product-card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shadow); }
+.product-card:focus-within { outline: 3px solid var(--blue-light); outline-offset: 3px; }
+.pc-media { position: relative; aspect-ratio: 1; background: var(--surface); border-bottom: 2px solid var(--edge); overflow: hidden; }
+.pc-media img { width: 100%; height: 100%; object-fit: cover; }
+.pc-media.contain img { object-fit: contain; padding: 12px; }
+.pc-diskon { position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px; border: 2px solid var(--edge); background: var(--blue); color: #fff; font: 800 13px var(--f-num); box-shadow: 0 2px 0 var(--edge-shadow); }
+.pc-body { flex: 1; display: flex; flex-direction: column; gap: 6px; padding: 14px 16px 16px; }
+.pc-cat { font: 700 11.5px var(--f-num); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.pc-title { font: 700 16px/1.35 var(--f-body); letter-spacing: 0; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pc-title a { color: inherit; text-decoration: none; }
+.pc-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.pc-title a:focus-visible { outline: none; }
+.pc-body .rating { --ukuran: 15px; font-size: 13px; }
+.pc-actions { position: relative; z-index: 2; margin-top: auto; padding-top: 6px; display: flex; gap: 8px; }
+.pc-actions .btn { flex: 1; justify-content: center; }
+.product-card.habis .pc-media img { opacity: 0.45; }
+.product-card.habis .pc-actions .btn { opacity: 0.5; pointer-events: none; }
+
+/* ---------- Hitung mundur (promo, acara) ----------
+   <div class="countdown" data-tenggat="2026-11-11T00:00:00+07:00" role="timer">
+     <span class="cd-unit"><b data-cd="hari">--</b><small>hari</small></span> … jam, menit, detik
+   </div>
+   Selesai: kelas .selesai dan event fy:complete. Tanpa JavaScript angka tetap "--". */
+.countdown { display: inline-flex; flex-wrap: wrap; gap: 8px; }
+.countdown .cd-unit { min-width: 62px; padding: 8px 6px 6px; border: 2px solid var(--edge); border-radius: 14px; background: var(--card); box-shadow: var(--shadow-pop); text-align: center; }
+.countdown b { display: block; font: 800 26px/1.05 var(--f-num); font-variant-numeric: tabular-nums; color: var(--ink); }
+.countdown small { display: block; margin-top: 2px; font: 700 10.5px var(--f-num); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.countdown.selesai .cd-unit { opacity: 0.55; }
+
 ```
 
 ---
@@ -2182,6 +2281,165 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .crop-tools .slider { flex: 1; }
 .crop-tools .icon-btn { flex: none; }
 .crop-hint { font-size: 13px; color: var(--ink-3); text-align: center; }
+
+/* =========================================================
+   KOMPONEN 1.13: navigasi, form, toko, pengumuman
+   ========================================================= */
+
+/* ---------- Breadcrumb ----------
+   <nav class="breadcrumb" aria-label="Lokasi halaman"><ol>
+     <li><a href="/">Beranda</a></li><li><a href="/produk">Produk</a></li><li><span aria-current="page">Netflix Premium</span></li>
+   </ol></nav>
+   Di HP hanya dua tingkat terakhir yang tampil, sisanya diganti "…". */
+.breadcrumb ol { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; list-style: none; margin: 0; padding: 0; font-size: 14.5px; color: var(--ink-3); }
+.breadcrumb li { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
+.breadcrumb li + li::before { content: ""; flex: none; width: 7px; height: 7px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); margin-right: 2px; }
+.breadcrumb a { color: var(--text-blue-deep); font-weight: 700; text-decoration: none; border-radius: 6px; padding: 10px 2px; }
+.breadcrumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.breadcrumb a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 0; }
+.breadcrumb [aria-current="page"] { color: var(--ink); font-weight: 700; max-width: 32ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 560px) {
+  .breadcrumb li:not(:nth-last-child(-n+2)) { display: none; }
+  .breadcrumb li:nth-last-child(2)::before { content: "…"; width: auto; height: auto; border: 0; transform: none; margin-right: 6px; }
+}
+
+/* ---------- Pagination ----------
+   <nav class="pagination" aria-label="Halaman">
+     <a href="?p=1" aria-label="Halaman sebelumnya" rel="prev"><svg class="ikon"><use href="#ikon-chevron-kiri"/></svg></a>
+     <a href="?p=1">1</a><a href="?p=2" aria-current="page">2</a><a href="?p=3">3</a><span class="gap">…</span><a href="?p=12">12</a>
+     <a href="?p=3" aria-label="Halaman berikutnya" rel="next"><svg class="ikon"><use href="#ikon-chevron-kanan"/></svg></a>
+   </nav>
+   Tautan yang tidak bisa dipakai: aria-disabled="true". */
+.pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; }
+.pagination a, .pagination .gap { min-width: 44px; height: 44px; padding: 0 10px; display: inline-grid; place-items: center; border-radius: 14px; font-family: var(--f-num); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; font-variant-numeric: tabular-nums; }
+.pagination a { border: 2px solid transparent; transition: transform 0.25s var(--spring), background 0.2s; }
+.pagination a:hover { background: var(--surface); }
+.pagination a:active { transform: scale(0.94); }
+.pagination a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 1px; }
+.pagination a[aria-current="page"] { background: var(--blue); color: #fff; border-color: var(--edge); box-shadow: var(--shadow-pop); }
+.pagination a[aria-disabled="true"] { opacity: 0.35; pointer-events: none; }
+.pagination .gap { color: var(--ink-3); min-width: 24px; padding: 0; }
+.pagination .ikon { width: 20px; height: 20px; }
+@media (max-width: 420px) { .pagination a:not([rel]):not([aria-current]) { display: none; } .pagination .gap { display: none; } }
+
+/* ---------- Accordion ----------
+   <div class="accordion"><details><summary>Judul</summary><div class="acc-body">Isi</div></details> …</div>
+   Pakai <details name="grup"> supaya hanya satu yang terbuka. Untuk FAQ halaman publik tetap pakai .faq. */
+.accordion { border: 2px solid var(--edge); border-radius: var(--r-m); background: var(--card); box-shadow: var(--shadow-pop); overflow: hidden; }
+.accordion details + details { border-top: 2px solid var(--line); }
+.accordion summary { list-style: none; display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 14px 18px; cursor: pointer; font-weight: 700; color: var(--ink); }
+.accordion summary::-webkit-details-marker { display: none; }
+.accordion summary::after { content: ""; flex: none; margin-left: auto; width: 9px; height: 9px; border-right: 2.4px solid currentColor; border-bottom: 2.4px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.35s var(--spring); }
+.accordion details[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+.accordion summary:hover { background: var(--surface); }
+.accordion summary:focus-visible { outline: 3px solid var(--blue-light); outline-offset: -3px; }
+.accordion summary .ikon { width: 20px; height: 20px; color: var(--text-blue); }
+.accordion .acc-body { padding: 2px 18px 18px; color: var(--ink-2); font-size: 15.5px; }
+
+/* ---------- Input dengan awalan/akhiran ----------
+   <div class="input-group"><span class="addon">Rp</span><input class="input" inputmode="numeric" aria-label="Harga"></div>
+   <div class="input-group"><input class="input" aria-label="Nama email"><span class="addon">@tmail.id</span></div>
+   <div class="input-group"><input class="input" type="search" aria-label="Kode promo"><button class="btn sm" type="button">Pakai</button></div> */
+.input-group { display: flex; align-items: stretch; min-width: 0; border: 2px solid var(--edge); border-radius: var(--r-m); background: var(--card); box-shadow: 0 3px 0 var(--edge-shadow); overflow: hidden; transition: box-shadow 0.25s var(--spring), border-color 0.2s; }
+.input-group:focus-within { border-color: var(--text-blue); box-shadow: 0 3px 0 var(--blue), 0 0 0 4px rgba(83, 157, 233, 0.25); }
+.input-group:has([aria-invalid="true"]) { border-color: var(--danger); box-shadow: 0 3px 0 var(--danger); }
+.input-group > .input { flex: 1; min-width: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
+.input-group > .input:focus { box-shadow: none; }
+.input-group > .addon { flex: none; display: flex; align-items: center; gap: 6px; padding: 0 14px; background: var(--surface); color: var(--ink-2); font-family: var(--f-num); font-weight: 700; font-size: 15px; white-space: nowrap; }
+.input-group > .addon:first-child { border-right: 2px solid var(--line); }
+.input-group > .addon:last-child { border-left: 2px solid var(--line); }
+.input-group > .addon .ikon { width: 18px; height: 18px; }
+.input-group > .btn { flex: none; border: 0; border-left: 2px solid var(--edge); border-radius: 0; box-shadow: none; }
+.input-group > .btn:hover, .input-group > .btn:active { transform: none; box-shadow: none; }
+
+/* ---------- Jumlah (quantity stepper) ----------
+   <div class="qty" data-qty>
+     <button type="button" data-qty-step="-1" aria-label="Kurangi"><svg class="ikon"><use href="#ikon-kurang"/></svg></button>
+     <input type="number" inputmode="numeric" value="1" min="1" max="10" aria-label="Jumlah">
+     <button type="button" data-qty-step="1" aria-label="Tambah"><svg class="ikon"><use href="#ikon-tambah"/></svg></button>
+   </div>
+   Event: fy:change { value } (juga event input/change biasa di <input>). */
+.qty { justify-self: start; align-self: start; display: inline-flex; align-items: center; border: 2px solid var(--edge); border-radius: 999px; background: var(--card); box-shadow: var(--shadow-pop); }
+.qty button { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: none; color: var(--ink); cursor: pointer; transition: transform 0.2s var(--spring), background 0.2s; }
+.qty button:hover { background: var(--surface); }
+.qty button:active { transform: scale(0.9); }
+.qty button:disabled { opacity: 0.35; cursor: default; background: none; }
+.qty button:focus-visible { outline: 3px solid var(--blue-light); outline-offset: -2px; }
+.qty button .ikon { width: 18px; height: 18px; }
+.qty input { width: 3.4ch; min-width: 36px; padding: 0; border: 0; background: none; text-align: center; font: 800 17px var(--f-num); font-variant-numeric: tabular-nums; color: var(--ink); -moz-appearance: textfield; appearance: textfield; }
+.qty input::-webkit-inner-spin-button, .qty input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.qty input:focus-visible { outline: 3px solid var(--blue-light); border-radius: 8px; }
+
+/* ---------- Rating ----------
+   Tampil: <span class="rating" style="--nilai: 4.5" role="img" aria-label="Rating 4,5 dari 5"><span class="stars" aria-hidden="true"></span>4,5 <small>(128 ulasan)</small></span>
+   Isi:    <fieldset class="rating-input"><legend class="sr-only">Beri rating</legend>
+             <input type="radio" name="r" id="r5" value="5"><label for="r5" title="5 bintang"><span class="sr-only">5 bintang</span></label> … sampai 1 (urutan 5 → 1)
+           </fieldset> */
+.rating { --nilai: 0; --ukuran: 18px; display: inline-flex; align-items: center; gap: 8px; font: 700 14.5px var(--f-num); color: var(--ink); }
+.rating small { font-weight: 600; font-size: 13px; color: var(--ink-3); }
+.rating .stars { flex: none; width: calc(var(--ukuran) * 5); height: var(--ukuran); background: linear-gradient(90deg, var(--bintang) calc(var(--nilai) / 5 * 100%), var(--line) 0); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.6L14.35 9.36L20.56 9.82L15.8 13.84L17.29 19.88L12 16.6L6.71 19.88L8.2 13.84L3.44 9.82L9.65 9.36z' stroke='%23000' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 0 0 / var(--ukuran) var(--ukuran) repeat-x; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.6L14.35 9.36L20.56 9.82L15.8 13.84L17.29 19.88L12 16.6L6.71 19.88L8.2 13.84L3.44 9.82L9.65 9.36z' stroke='%23000' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") 0 0 / var(--ukuran) var(--ukuran) repeat-x; }
+.rating.lg { --ukuran: 26px; font-size: 18px; }
+.rating-input { display: inline-flex; flex-direction: row-reverse; justify-content: flex-end; gap: 0; margin: 0; padding: 0; border: 0; min-width: 0; }
+.rating-input input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.rating-input label { width: 44px; height: 44px; display: grid; place-items: center; cursor: pointer; border-radius: 12px; }
+.rating-input label::before { content: ""; width: 30px; height: 30px; background: var(--line); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.6L14.35 9.36L20.56 9.82L15.8 13.84L17.29 19.88L12 16.6L6.71 19.88L8.2 13.84L3.44 9.82L9.65 9.36z' stroke='%23000' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.6L14.35 9.36L20.56 9.82L15.8 13.84L17.29 19.88L12 16.6L6.71 19.88L8.2 13.84L3.44 9.82L9.65 9.36z' stroke='%23000' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; transition: transform 0.25s var(--spring), background 0.15s; }
+.rating-input input:checked ~ label::before, .rating-input label:hover::before, .rating-input label:hover ~ label::before { background: var(--bintang); }
+.rating-input label:hover::before { transform: scale(1.12); }
+.rating-input input:focus-visible + label { outline: 3px solid var(--blue-light); outline-offset: -3px; }
+
+/* ---------- Galeri + lightbox ----------
+   <div class="gallery" data-gallery>
+     <a href="besar-1.webp"><img src="kecil-1.webp" alt="Tampilan depan" width="400" height="400"></a> …
+   </div>
+   Klik → <dialog class="lightbox"> dengan tombol sebelumnya/berikutnya, panah keyboard, geser di layar sentuh, Esc. */
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
+.gallery a { display: block; aspect-ratio: 1; border-radius: 14px; overflow: hidden; border: 2px solid var(--edge); background: var(--surface); transition: transform 0.25s var(--spring); }
+.gallery a:hover { transform: translateY(-3px); }
+.gallery a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
+.gallery img { width: 100%; height: 100%; object-fit: cover; }
+.lightbox { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0; background: rgba(2, 6, 15, 0.92); color: #fff; }
+.lightbox[open] { display: grid; grid-template-rows: auto 1fr auto; }
+.lightbox::backdrop { background: transparent; }
+.lb-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: max(12px, env(safe-area-inset-top)) 16px 8px; font: 700 14px var(--f-num); }
+.lb-stage { position: relative; display: grid; place-items: center; min-height: 0; padding: 0 64px; touch-action: pan-y; }
+.lb-stage img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px; }
+.lb-cap { padding: 10px 16px max(16px, env(safe-area-inset-bottom)); text-align: center; font-size: 14.5px; color: #e8f1ff; }
+.lightbox .icon-btn { background: rgba(255, 255, 255, 0.12); color: #fff; width: 44px; height: 44px; }
+.lightbox .icon-btn:hover { background: rgba(255, 255, 255, 0.22); }
+.lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); }
+.lb-prev { left: 10px; } .lb-next { right: 10px; }
+.lightbox .icon-btn.lb-prev:hover, .lightbox .icon-btn.lb-next:hover { transform: translateY(-50%) scale(1.08); }
+@media (max-width: 600px) { .lb-stage { padding: 0 8px; } .lb-prev, .lb-next { top: auto; bottom: 8px; transform: none; } .lightbox .icon-btn.lb-prev:hover, .lightbox .icon-btn.lb-next:hover { transform: scale(1.08); } }
+
+/* ---------- Pengumuman (announcement bar) ----------
+   <div class="announce" data-announce="promo-11-11">Diskon 11.11 sampai Minggu. <a href="/promo">Lihat promo</a>
+     <button class="announce-close" type="button" data-close aria-label="Tutup pengumuman"><svg class="ikon"><use href="#ikon-tutup"/></svg></button></div>
+   Ditutup = diingat per id di localStorage (fy-tutup-<id>), tidak muncul lagi di kunjungan berikutnya. */
+.announce { position: relative; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 12px; padding: 10px 56px 10px 16px; background: var(--blue); color: #fff; font-size: 14.5px; font-weight: 700; text-align: center; }
+.announce a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.announce .announce-close { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: none; color: #fff; cursor: pointer; }
+.announce .announce-close:hover { background: rgba(255, 255, 255, 0.16); }
+.announce .announce-close:focus-visible { outline: 3px solid #fff; outline-offset: -4px; }
+.announce .announce-close .ikon { width: 18px; height: 18px; --ikon-titik: #fff; }
+.announce[hidden] { display: none; }
+
+/* ---------- Persetujuan cookie ----------
+   <section class="consent" data-consent aria-labelledby="cs-t" hidden>
+     <img src="/fusionify-ui/mascot/head-wink-120.webp" alt="" width="56" height="56">
+     <div><h2 id="cs-t">Boleh pakai cookie?</h2><p>…</p></div>
+     <div class="consent-actions"><button class="btn ghost sm" data-consent-pilih="penting">Hanya yang penting</button><button class="btn sm" data-consent-pilih="semua">Terima semua</button></div>
+   </section>
+   Tampil sekali sampai dipilih. Pilihan disimpan di localStorage (fy-consent) dan dikirim lewat event fy:consent { pilihan } di window.
+   Muat skrip analitik hanya setelah pilihan "semua". Kedua tombol sama menonjolnya (aturan privasi). */
+.consent { position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 90; width: min(560px, calc(100% - 32px)); display: grid; grid-template-columns: auto 1fr; gap: 12px 14px; align-items: start; padding: 18px; border: 2px solid var(--edge); border-radius: var(--r-l); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); }
+.consent[hidden] { display: none; }
+.consent > img { width: 56px; height: auto; }
+.consent h2 { font: 800 20px/1.1 var(--f-head); letter-spacing: -0.02em; margin-bottom: 4px; }
+.consent p { font-size: 14.5px; color: var(--ink-2); }
+.consent p a { color: var(--text-blue-deep); font-weight: 700; }
+.consent .consent-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+.consent.inline { position: static; transform: none; width: auto; max-width: 560px; }
+@media (max-width: 480px) { .consent { grid-template-columns: 1fr; } .consent > img { display: none; } .consent .consent-actions .btn { flex: 1; justify-content: center; } }
 
 ```
 

@@ -45,6 +45,7 @@ class FyColors extends ThemeExtension<FyColors> {
   final Color danger;
   final Color dangerBg;
   final Color placeholder;
+  final Color bintang;
   final Color footerTop;
 
   const FyColors({
@@ -85,6 +86,7 @@ class FyColors extends ThemeExtension<FyColors> {
     required this.danger,
     required this.dangerBg,
     required this.placeholder,
+    required this.bintang,
     required this.footerTop,
   });
 
@@ -126,6 +128,7 @@ class FyColors extends ThemeExtension<FyColors> {
     danger: Color(0xFFB4232C),
     dangerBg: Color(0xFFFDE8EA),
     placeholder: Color(0xFF707A8C),
+    bintang: Color(0xFFF0A800),
     footerTop: Color(0x00000000),
   );
 
@@ -167,6 +170,7 @@ class FyColors extends ThemeExtension<FyColors> {
     danger: Color(0xFFFF9BA1),
     dangerBg: Color(0xFF3D1418),
     placeholder: Color(0xFF8597B3),
+    bintang: Color(0xFFFFC93D),
     footerTop: Color(0xFF1F3459),
   );
 
@@ -214,6 +218,7 @@ class FyColors extends ThemeExtension<FyColors> {
       danger: Color.lerp(danger, other.danger, t)!,
       dangerBg: Color.lerp(dangerBg, other.dangerBg, t)!,
       placeholder: Color.lerp(placeholder, other.placeholder, t)!,
+      bintang: Color.lerp(bintang, other.bintang, t)!,
       footerTop: Color.lerp(footerTop, other.footerTop, t)!,
     );
   }

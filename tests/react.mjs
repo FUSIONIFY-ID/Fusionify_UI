@@ -65,9 +65,23 @@ const bd = html(h(K.BadgeProduk, { bahasa: "en", tema: "light" }));
 cek(bd.includes("produk-fusionify-en-light.png") && bd.includes("A product by FUSIONIFY"), "Badge produk");
 cek(html(h(K.Seksi, { nada: "blue" })) === '<section class="sec blue"></section>', "Seksi biru");
 cek(html(h(K.Kartu, { nada: "tint", href: "/x" }, "a")) === '<a href="/x" class="card tint">a</a>', "Kartu tautan");
+// Komponen 1.13
+const rm = html(h(K.Remah, { item: [{ teks: "Beranda", href: "/" }, { teks: "Produk" }] }));
+cek(rm === '<nav class="breadcrumb" aria-label="Lokasi halaman"><ol><li><a href="/">Beranda</a></li><li><span aria-current="page">Produk</span></li></ol></nav>', "Remah: " + rm);
+const rt = html(h(K.Rating, { nilai: 4.5, ulasan: 1280 }));
+cek(rt.includes('class="rating"') && rt.includes("--nilai:4.5") && rt.includes('aria-label="Rating 4,5 dari 5, 1280 ulasan"') && rt.includes("(1.280)"), "Rating: " + rt);
+const hg = html(h(K.Harga, { harga: 25000, coret: 40000 }));
+cek(hg.startsWith('<p class="harga">Rp25.000<s>') && hg.includes("Rp40.000"), "Harga: " + hg);
+const kpr = html(h(K.KartuProduk, { judul: "A", href: "/a", gambar: { src: "/a.webp", width: 600, height: 600 }, harga: 25000, coret: 40000, nilai: 4.8 }, h(K.Tombol, { kecil: true }, "Beli")));
+cek(kpr.includes('class="product-card"') && kpr.includes('<span class="pc-diskon">-38%</span>') && kpr.includes('width="600"') && kpr.includes('class="pc-actions"'), "KartuProduk: " + kpr.slice(0, 200));
+const lm = html(h(K.Linimasa, { langkah: [{ judul: "Dibuat", status: "done" }, { judul: "Proses", status: "now" }, { judul: "Selesai" }] }));
+cek(lm.startsWith('<ol class="timeline"><li class="done">') && lm.includes('<li class="now" aria-current="step">'), "Linimasa: " + lm);
+const hm = html(h(K.HitungMundur, { tenggat: "2026-11-11T00:00:00+07:00" }));
+cek(hm.includes('data-tenggat="2026-11-11T00:00:00+07:00"') && (hm.match(/data-cd=/g) || []).length === 4, "HitungMundur");
+cek(html(h(K.Kbd, {}, "K")) === '<kbd class="kbd">K</kbd>', "Kbd");
 // Semua kelas yang dipakai komponen harus ada di CSS kit
-const css = ["components", "controls", "base", "app"].map((f) => fs.readFileSync(path.join(ROOT, `css/${f}.css`), "utf8")).join("\n");
-for (const kelas of ["btn", "ghost", "sm", "danger", "block", "chip", "card", "tint", "kicker", "h-hero", "h-sec", "lead", "dot", "wrap", "sec", "mascot-stage", "seal-bg", "seal-ring", "bubble", "state", "actions", "fy-badge", "fx-oversize"]) {
+const css = ["components", "controls", "base", "app", "product"].map((f) => fs.readFileSync(path.join(ROOT, `css/${f}.css`), "utf8")).join("\n");
+for (const kelas of ["btn", "ghost", "sm", "danger", "block", "chip", "card", "tint", "kicker", "h-hero", "h-sec", "lead", "dot", "wrap", "sec", "mascot-stage", "seal-bg", "seal-ring", "bubble", "state", "actions", "fy-badge", "fx-oversize", "breadcrumb", "rating", "stars", "harga", "product-card", "pc-media", "pc-diskon", "pc-body", "pc-title", "pc-actions", "timeline", "countdown", "cd-unit", "kbd"]) {
   cek(new RegExp(`\\.${kelas.replace("-", "\\-")}\\b`).test(css), `kelas .${kelas} tidak ada di CSS kit`);
 }
 

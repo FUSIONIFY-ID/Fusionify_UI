@@ -160,6 +160,21 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Cover karya/produk rasio 1600:848, screenshot asli. Ilustrasi wajib diberi label `.cover-note` "Ilustrasi".
 - Di layar sentuh: magnet, kursor khusus, dan parallax dimatikan.
 
+## Komponen toko dan navigasi web
+
+- **Breadcrumb**: tautan biru tebal dengan pemisah chevron kecil, halaman sekarang tebal warna tinta dan terpotong rapi kalau panjang. Di HP hanya dua tingkat terakhir, diawali "…".
+- **Pagination**: angka Exo 2 dalam kotak 44px; halaman aktif berupa kotak biru bergaya stiker. Di HP sempit hanya panah dan halaman aktif.
+- **Accordion**: satu kartu stiker berisi beberapa `<details>`, chevron berputar dengan pegas. FAQ halaman publik tetap `.faq`.
+- **Input dengan awalan/akhiran**: satu bingkai stiker; awalan (Rp, ikon) dan akhiran (@domain, tombol) berlatar `--surface`.
+- **Jumlah**: kapsul stiker dengan tombol − dan + bulat 44px, angka Exo 2 di tengah.
+- **Rating**: bintang dari bentuk ikon `bintang`, isi warna `--bintang`, kosong warna `--line`. Bisa pecahan (4,5).
+- **Kartu produk**: kartu stiker dengan gambar persegi, label diskon kapsul biru, kategori Exo 2 kapital, judul dua baris, rating, harga biru Exo 2 dengan harga coret abu. Di HP dua kolom. Stok habis: gambar dan tombol meredup.
+- **Linimasa**: titik bergaris tinta; langkah selesai biru dengan garis utuh, langkah sekarang biru muda bercahaya, langkah berikutnya garis putus-putus, gagal merah.
+- **Hitung mundur**: ubin stiker kecil per satuan (hari, jam, menit, detik), angka Exo 2 tabular.
+- **Galeri**: ubin persegi bergaris stiker; lightbox gelap layar penuh dengan tombol bulat tembus pandang, bisa digeser di HP.
+- **Pengumuman**: bilah biru penuh di atas halaman, teks putih tebal, tombol tutup bulat.
+- **Persetujuan cookie**: kartu stiker mengambang di bawah tengah dengan kepala maskot wink, dua tombol yang sama menonjolnya.
+
 ## Dokumen
 
 Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai sistem yang sama dengan web (template di `dokumen/`).

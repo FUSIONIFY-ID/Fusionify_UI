@@ -39,5 +39,6 @@
     <color name="fy_danger">#FF9BA1</color>
     <color name="fy_danger_bg">#3D1418</color>
     <color name="fy_placeholder">#8597B3</color>
+    <color name="fy_bintang">#FFC93D</color>
     <color name="fy_footer_top">#1F3459</color>
 </resources>

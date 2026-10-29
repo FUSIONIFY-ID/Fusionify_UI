@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.13.0 · 29 Oktober 2026
+
+Komponen yang sebelumnya belum ada di kit, terutama untuk web toko (Premiumify), komunitas (StudyDate), dan layanan email (TMail):
+
+- **Navigasi web**: `.breadcrumb` (di HP hanya dua tingkat terakhir), `.pagination` bernomor, `.accordion` serbaguna.
+- **Form**: `.input-group` + `.addon` (awalan Rp/ikon, akhiran @domain atau tombol), `.qty` jumlah dengan batas min/max (`[data-qty]`), `.kbd`.
+- **Toko**: `.product-card` + `.product-grid` (dua kolom di HP, label diskon, stok habis), `.harga` dengan harga coret, `.rating` (bisa pecahan) dan `.rating-input`, `.countdown` hitung mundur ke tanggal (`[data-tenggat]`), `.gallery` + lightbox (panah keyboard, geser di HP, Esc).
+- **Linimasa** `.timeline` untuk riwayat pesanan dan status (selesai, sekarang, gagal).
+- **Pengumuman** `.announce` yang bisa ditutup (diingat per id) dan **persetujuan cookie** `.consent` (pilihan disimpan, event `fy:consent`, `pilihanCookie()`).
+- Token baru `--bintang` (terang dan gelap), ikut ke token native.
+- React: `Remah`, `Rating`, `Harga`, `KartuProduk`, `Linimasa`, `HitungMundur`, `Kbd`, `rupiah()`. Baru `react/lucide.tsx`: nama komponen ala lucide-react yang menggambar Ikon FUSIONIFY, untuk memindahkan produk lama cukup dengan mengganti impor.
+- Contoh hidup di `templates/komponen.html`, uji baru `tests/interaksi-toko-dan-navigasi.mjs` (33 pemeriksaan), uji React mencakup komponen baru.
+
 ## 1.12.0 · 28 Oktober 2026
 
 - **33 ikon baru** untuk kebutuhan web produk dan panel admin (total 136):

@@ -71,6 +71,7 @@
   --seal-tint: #d8eaff;          /* segel di belakang maskot */
   --danger: #b4232c; --danger-bg: #fde8ea;
   --placeholder: #707a8c;
+  --bintang: #f0a800;            /* isi bintang rating */
 
   /* Bayangan */
   --shadow: 0 1px 0 rgba(13, 108, 215, 0.06), 0 12px 32px -14px rgba(11, 15, 26, 0.18);
@@ -99,7 +100,7 @@
   --go: #7fe0a6; --go-bg: #0f3324; --beta: #ffd27a; --beta-bg: #3a2a08;
   --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
   --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
-  --placeholder: #8597b3; --footer-top: #1f3459;
+  --placeholder: #8597b3; --footer-top: #1f3459; --bintang: #ffc93d;
   --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
   color-scheme: dark;
 }
@@ -116,7 +117,7 @@
     --go: #7fe0a6; --go-bg: #0f3324; --beta: #ffd27a; --beta-bg: #3a2a08;
     --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
     --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
-    --placeholder: #8597b3; --footer-top: #1f3459;
+    --placeholder: #8597b3; --footer-top: #1f3459; --bintang: #ffc93d;
     --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
     color-scheme: dark;
   }

@@ -54,6 +54,7 @@ data class FyColors(
     val danger: Color,
     val dangerBg: Color,
     val placeholder: Color,
+    val bintang: Color,
     val footerTop: Color,
 )
 
@@ -95,6 +96,7 @@ val FyLight = FyColors(
     danger = Color(0xFFB4232C),
     dangerBg = Color(0xFFFDE8EA),
     placeholder = Color(0xFF707A8C),
+    bintang = Color(0xFFF0A800),
     footerTop = Color(0x00000000),
 )
 
@@ -136,6 +138,7 @@ val FyDark = FyColors(
     danger = Color(0xFFFF9BA1),
     dangerBg = Color(0xFF3D1418),
     placeholder = Color(0xFF8597B3),
+    bintang = Color(0xFFFFC93D),
     footerTop = Color(0xFF1F3459),
 )
 
