@@ -1,6 +1,6 @@
 # Rencana · situs dokumentasi FUSIONIFY UI (ui.fusionify.id) + aplikasi terlindungi
 
-Status: **rencana, belum dikerjakan** (ditulis 27 Oktober 2026). Dikerjakan setelah pemilik minta.
+Status: **keputusan sudah diambil (29 Oktober 2026), mulai tahap 0 dan 1**. Ditulis 27 Oktober 2026.
 Ide awal: teman bertanya apakah FUSIONIFY UI punya situs seperti m3.material.io. Syarat pemilik: **private penuh**,
 seperti channel private Telegram: tidak bisa di-screenshot, direkam, di-inspect, diambil extension, atau di-copy semua.
 
@@ -137,15 +137,15 @@ Fitur halaman:
 
 ---
 
-## 8. Keputusan yang belum diambil (tanya pemilik dulu)
+## 8. Keputusan pemilik (29 Oktober 2026)
 
-1. Siapa saja pengguna awal, dan apakah partner boleh melihat semua bagian atau hanya sebagian.
-2. Apakah ada halaman publik kecil (etalase tanpa isi rahasia, untuk klien/investor), atau benar-benar semuanya di balik login.
-3. Perlu aplikasi macOS atau cukup Windows dulu.
-4. Perlu aplikasi iPhone (hanya deteksi, tidak bisa blokir screenshot).
-5. Biaya tanda tangan kode: sertifikat code signing Windows (berbayar tahunan) dan Apple Developer Program (US$99 per tahun) untuk macOS. Tanpa itu aplikasi tetap jalan, tapi muncul peringatan keamanan saat dipasang.
-6. Teks lisensi/NDA final dari konsultan hukum (sekalian dengan pemeriksaan `LICENSE.md` yang sudah tercatat sebagai pekerjaan tertunda).
-7. Nama aplikasi: "FUSIONIFY UI" atau nama lain.
+1. **Pengguna awal**: tim FUSIONIFY + partner terbatas. Partner hanya melihat bagian tertentu (peran `partner`); bagian Unduh dan file asli hanya untuk `admin` dan `tim`.
+2. **Akses**: semuanya di balik login. Tidak ada halaman etalase publik; tanpa login hanya terlihat halaman login Cloudflare Access.
+3. **Aplikasi desktop dan HP**: ditunda. Web dulu (tahap 0 sampai 2); tahap 3 dan 4 dikerjakan setelah situsnya jadi.
+4. **iPhone**: ikut ditunda bersama aplikasi lain.
+5. **Biaya tanda tangan kode**: belum perlu sampai aplikasi dikerjakan.
+6. **Teks lisensi/NDA**: masih menunggu konsultan hukum. Selama belum ada, layar persetujuan memakai teks `LICENSE.md` yang sekarang dan diberi label "versi sementara".
+7. **Nama**: tetap "FUSIONIFY UI".
 
 ---
 
