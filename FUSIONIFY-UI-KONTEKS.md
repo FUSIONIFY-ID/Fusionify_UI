@@ -1580,7 +1580,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .pc-body { flex: 1; display: flex; flex-direction: column; gap: 6px; padding: 14px 16px 16px; }
 .pc-cat { font: 700 11.5px var(--f-num); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 .pc-title { font: 700 16px/1.35 var(--f-body); letter-spacing: 0; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.pc-title a { color: inherit; text-decoration: none; }
+.pc-title a { color: inherit; text-decoration: none; padding-block: 4px; }
 .pc-title a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
 .pc-title a:focus-visible { outline: none; }
 .pc-body .rating { --ukuran: 15px; font-size: 13px; }
@@ -2416,7 +2416,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
      <button class="announce-close" type="button" data-close aria-label="Tutup pengumuman"><svg class="ikon"><use href="#ikon-tutup"/></svg></button></div>
    Ditutup = diingat per id di localStorage (fy-tutup-<id>), tidak muncul lagi di kunjungan berikutnya. */
 .announce { position: relative; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 12px; padding: 10px 56px 10px 16px; background: var(--blue); color: #fff; font-size: 14.5px; font-weight: 700; text-align: center; }
-.announce a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.announce a { color: #fff; text-decoration: underline; text-underline-offset: 3px; padding-block: 4px; }
 .announce .announce-close { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: none; color: #fff; cursor: pointer; }
 .announce .announce-close:hover { background: rgba(255, 255, 255, 0.16); }
 .announce .announce-close:focus-visible { outline: 3px solid #fff; outline-offset: -4px; }
