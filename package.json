@@ -1,13 +1,16 @@
 {
   "name": "@fusionify/ui",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "private": true,
   "description": "Sistem desain FUSIONIFY: token, komponen CSS, gerak, segel, font, logo, dan maskot. Sumber: fusionify.id.",
   "type": "module",
   "exports": {
     "./css/*": "./css/*",
     "./js/motion": "./js/motion.js",
-    "./js/seal": "./js/seal.js",
+    "./js/seal": {
+      "types": "./js/seal.d.ts",
+      "default": "./js/seal.js"
+    },
     "./js/app": "./js/app.js",
     "./js/theme": "./js/theme.js",
     "./js/controls": "./js/controls.js",
@@ -25,7 +28,15 @@
     "./email/templates": "./email/templates.js",
     "./grafis/*": "./grafis/*",
     "./dokumen/*": "./dokumen/*",
-    "./ikon/*": "./ikon/*"
+    "./ikon/*": "./ikon/*",
+    "./js/seal.d.ts": "./js/seal.d.ts",
+    "./js/ikon-inline": "./js/ikon-inline.js",
+    "./react/lucide": "./react/lucide.tsx",
+    "./react/ikon-data": "./react/ikon-data.ts",
+    "./react/tailwind-v4.css": "./react/tailwind-v4.css",
+    "./react/*": "./react/*",
+    "./email/*": "./email/*",
+    "./package.json": "./package.json"
   },
   "peerDependencies": {
     "gsap": "^3.12.0",
@@ -44,7 +55,8 @@
     "build:email": "node scripts/build-email.mjs",
     "build:grafis": "node scripts/build-grafis.mjs",
     "build:ikon": "node scripts/build-ikon.mjs",
-    "cek:ikon": "node scripts/cek-orisinal-ikon.mjs"
+    "cek:ikon": "node scripts/cek-orisinal-ikon.mjs",
+    "cek:token": "node tests/token.mjs"
   },
   "devDependencies": {
     "@types/react": "18.3.12",

@@ -34,6 +34,12 @@ Identitasnya dibangun dari aset FUSIONIFY sendiri: segel bergelombang di logo, t
 | `--paper` | #F7FBFF | latar halaman |
 | `--line` | #D3E4F7 | garis pemisah tipis |
 | `--night` | #071022 | footer, area malam |
+| `--on-dark` / `--on-dark-2` | #FFFFFF / #F2F8FF | teks dan ikon di atas biru atau latar malam |
+| `--danger-fill` | #C4323A | tombol bahaya, badge angka (teks putih) |
+| `--warn-fill` | #E8A33D | progres peringatan, meter password sedang |
+| `--online` | #2FBF63 | titik status online |
+| `--bintang` | #F0A800 | isi bintang rating |
+| `--night-*`, `--code-*` | | teks dan garis footer produk, blok kode (selalu gelap) |
 
 Chip status: hijau `go` (aktif/live), kuning `beta`, oranye `wip` (dalam pengembangan), biru `plan` (direncanakan/eksperimen), abu `eos` (layanan berakhir).
 
@@ -112,14 +118,15 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 ## Gerak (`js/motion.js`)
 
 - Smooth scroll Lenis (`lerp 0.1`), khusus mouse/trackpad. Layar sentuh (termasuk HP dalam mode "Situs desktop") memakai scroll bawaan browser.
-- Nav transparan di atas, berubah jadi kapsul putih blur setelah scroll >24px, sembunyi saat scroll turun, muncul saat scroll naik.
-- Menu HP: lingkaran biru membesar dari tombol menu.
+- Nav transparan di atas, berubah jadi kapsul putih blur setelah scroll >24px (lapisan `::before` yang memudar masuk, posisi naik 6px lewat transform), sembunyi saat scroll turun, muncul saat scroll naik.
+- Menu HP: lingkaran biru membesar dari tombol menu sampai menutup layar (pseudo-element yang di-scale, bukan clip-path), lalu isi menu memudar naik.
 - Muncul saat scroll: judul naik per kata (`data-split`), elemen naik dan memudar masuk (`data-reveal`), kartu "dirakit" dari posisi acak (`data-assemble`), angka naik (`data-count-to`).
-- Kursor: titik biru muda + cincin segel; membesar dan berputar di atas tautan; label tulisan tangan lewat `data-cursor-label`. Hanya di perangkat bermouse.
+- Kursor: titik biru muda + cincin segel; membesar (scale) dan berputar di atas tautan, mengecil sedikit saat ditekan; label tulisan tangan lewat `data-cursor-label`. Hanya di perangkat bermouse.
 - Efek magnet pada tautan kontak besar (`data-magnetic`).
 - Tombol salin (`data-copy`) dengan notifikasi maskot (toast, hilang setelah 2,6 detik).
 - Transisi halaman: segel biru membesar menutup layar, kepala mengedip, lalu menyusut di halaman baru.
 - Suara disintesis Web Audio, **mati secara bawaan**, dinyalakan lewat tombol speaker.
+- Tombol dan kartu stiker saat disorot: hanya naik-turun (transform) yang beranimasi; bayangan pejal berubah seketika, seperti stiker yang ditekan.
 
 ## Aplikasi (dashboard, admin, masuk)
 
@@ -136,13 +143,10 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Bottom sheet dengan pegangan di atas, bisa ditarik ke bawah untuk menutup. Picker tanggal/jam muncul dari bawah di HP dan sebagai popover di layar lebar.
 - Loading memakai segel FUSIONIFY yang berputar (`.spinner`), skeleton biru muda untuk isi yang sedang dimuat.
 - Snackbar berlatar gelap (terang di mode gelap) dengan tombol aksi seperti "Batalkan".
-- Kode OTP: kotak-kotak bergaya stiker berhuruf Exo 2, terbagi 3-3, bergetar pelan kalau salah. Upload: area biru muda bergaris putus-putus, file tampil sebagai kartu stiker dengan pratinjau.
-- Chat: gelembung pesan bergaya stiker; pesan sendiri biru di kanan, pesan orang lain kartu di kiri. Indikator mengetik tiga titik.
-- Halaman acara: poster persegi bergaya stiker, tanggal dalam ubin kecil, kartu pendaftaran dengan kuota, bar daftar menempel di bawah layar HP.
-- Kode OTP: kotak per digit bergaya stiker, dibagi 3-3 dengan tanda pisah; salah = garis merah dan getar pendek (mati saat kurangi gerakan).
-- Upload: area bergaris putus-putus biru muda dengan ikon biru; berubah biru saat file diseret di atasnya. Foto tampil sebagai pratinjau kecil.
-- Chat: gelembung stiker, pesan sendiri biru di kanan, pesan orang lain kartu di kiri. Di HP isi obrolan layar penuh dan tombol kembali menutupnya. Stiker maskot boleh dikirim sebagai pesan.
-- Detail acara: poster biru dengan maskot dan segel, tanggal di kotak `.ev-date`, pendaftaran lewat bottom sheet, tiket berkode setelah terdaftar. Di HP tombol daftar menempel di bawah.
+- Kode OTP: kotak per digit bergaya stiker berhuruf Exo 2, dibagi 3-3 dengan tanda pisah; salah = garis merah dan getar pendek (mati saat kurangi gerakan).
+- Upload: area biru muda bergaris putus-putus dengan ikon biru; berubah biru saat file diseret di atasnya. File tampil sebagai kartu stiker dengan pratinjau kecil.
+- Chat: gelembung pesan bergaya stiker; pesan sendiri biru di kanan, pesan orang lain kartu di kiri. Indikator mengetik tiga titik. Di HP isi obrolan layar penuh dan tombol kembali menutupnya. Stiker maskot boleh dikirim sebagai pesan.
+- Halaman/detail acara: poster biru persegi bergaya stiker dengan maskot dan segel, tanggal di kotak `.ev-date`, kartu pendaftaran dengan kuota lewat bottom sheet, tiket berkode setelah terdaftar. Di HP tombol daftar menempel di bawah layar.
 - Stepper: lingkaran bernomor dengan garis putus-putus; langkah aktif biru bergaya stiker, langkah selesai berisi centang dan garisnya jadi utuh.
 - Pusat notifikasi: panel stiker dari lonceng (di HP dari bawah), titik biru untuk yang belum dibaca, maskot happy saat semua sudah dibaca.
 - Tabel urut: panah kecil di judul kolom; kolom yang aktif berwarna biru.

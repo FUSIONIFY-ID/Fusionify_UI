@@ -111,6 +111,14 @@ Atribut `initFusionify()`: `data-split`, `data-reveal`, `data-assemble`, `data-c
 --wip: #8a4a00; --wip-bg: #ffe9d6;    /* dalam pengembangan */
 --plan: #0261cd; --plan-bg: #eef7ff;  /* direncanakan */
 --eos: #5b6475; --eos-bg: #eceff4;    /* layanan berakhir */
+--bintang: #f0a800;                    /* isi bintang rating (gelap #ffc93d) */
+/* sama di kedua tema */
+--on-dark: #ffffff; --on-dark-2: #f2f8ff; /* teks/ikon di atas biru atau malam */
+--danger-fill: #c4323a;                /* tombol bahaya, badge angka */
+--warn-fill: #e8a33d; --online: #2fbf63; /* progres peringatan, titik online (gelap #3fd277) */
+--night-ink, --night-ink-2, --night-ink-3, --night-link, --night-line, --night-line-2  /* footer produk */
+--code-fg, --code-muted, --code-line, --code-edge, --code-btn, --code-btn-hover, --code-str, --code-key, --code-num  /* blok kode */
+--seal-mask: url(...);                 /* segel sebagai mask, di tokens.css */
 --r-s: 10px; --r-m: 18px; --r-l: 28px; --r-pill: 999px;
 --sp-xs: 4px; --sp-s: 8px; --sp-m: 12px; --sp-l: 16px; --sp-xl: 24px; --sp-2xl: 32px;
 --edge-width: 2px; --touch-min: 44px;
@@ -124,7 +132,7 @@ Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis
 
 ## Mode gelap
 
-- Semua komponen memakai token tema: `--card`, `--field`, `--surface`, `--surface-2`, `--edge` (garis stiker), `--edge-shadow` (bayangan pejal), `--ink`/`--ink-2`/`--ink-3`, `--text-blue`/`--text-blue-deep`, `--inverse-bg`/`--inverse-fg`, `--danger`/`--danger-bg`. **Jangan menulis `#fff` atau `var(--ink)` untuk latar, garis, atau bayangan.** `#fff` hanya untuk teks/ikon/isi di atas biru.
+- Semua komponen memakai token tema: `--card`, `--field`, `--surface`, `--surface-2`, `--edge` (garis stiker), `--edge-shadow` (bayangan pejal), `--ink`/`--ink-2`/`--ink-3`, `--text-blue`/`--text-blue-deep`, `--inverse-bg`/`--inverse-fg`, `--danger`/`--danger-bg`. **Jangan menulis `#fff` atau `var(--ink)` untuk latar, garis, atau bayangan.** Teks/ikon di atas biru memakai `var(--on-dark)` / `var(--on-dark-2)`. CSS komponen kit tidak berisi hex sama sekali (dicek `tests/token.mjs`).
 - Gelap: latar `#071022`, kartu `#10203F`, teks `#EAF3FF`, garis `#2E5592`, bayangan `#02060F`, teks biru `#8CC0FF`. Biru isi (`--blue`) tidak berubah.
 - Bawaan ikut sistem; tombol `.theme-btn[data-theme-toggle]` (ikon `.moon`/`.sun`) menyimpan pilihan di `localStorage` (`fy-theme`). Skrip head memasang `data-theme` sebelum halaman tampil. Selalu terang: `<html data-theme="light" data-theme-lock>`.
 - Gambar per tema: `.only-light` / `.only-dark` (mis. `wordmark.svg` vs `wordmark-white.svg`).
@@ -159,7 +167,7 @@ Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis
 
 ## Elemen khas
 
-- **Segel bergelombang**: lingkaran 12 lekukan, `seal(50, 50, 44, 3.2, 12)` di viewBox 100 (`r = R + amp * sin(12a)`). Tersedia juga sebagai CSS mask `var(--seal-mask)` di `product.css`. Dipakai sebagai latar maskot, cincin kursor, bingkai foto, ikon layanan, nomor langkah, bulan, tirai transisi, loader, spinner.
+- **Segel bergelombang**: lingkaran 12 lekukan, `seal(50, 50, 44, 3.2, 12)` di viewBox 100 (`r = R + amp * sin(12a)`). Tersedia juga sebagai CSS mask `var(--seal-mask)` di `tokens.css`. Dipakai sebagai latar maskot, cincin kursor, bingkai foto, ikon layanan, nomor langkah, bulan, tirai transisi, loader, spinner.
 - **Titik i**: bulatan `--blue-light` di akhir judul hero.
 - **Gaya stiker**: garis tepi 2px `--edge`, bayangan pejal ke bawah (`--edge-shadow`), sudut bulat besar. Ini memang meminjam rasa neo-brutalism (aliran, bukan karya siapa pun), tapi identitas FUSIONIFY datang dari segel, maskot, palet biru, dan sudut bulat besar. Jangan menempel komponen dari UI kit neo-brutalism lain.
 - **Logo company**: segel Fi + wordmark resmi (SVG). Jangan pernah mengetik "FUSIONIFY" dengan font sebagai pengganti logo. Versi putih untuk latar gelap, mono putih untuk latar biru.
@@ -178,7 +186,10 @@ Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis
 
 - Stack acuan: Astro + vanilla CSS, Lenis (`lerp 0.1`) + GSAP ScrollTrigger. Suara disintesis Web Audio, mati secara bawaan.
 - Motion (dulu Framer Motion) tidak dipakai di kit. Boleh untuk animasi kecil di web produk React/Astro, dengan aturan yang sama (hanya `transform`/`opacity`, kurva `--ease`/`--spring`, hormati kurangi gerakan) dan tidak menganimasikan elemen yang sudah dipegang `initFusionify()`.
-- Nav transparan di atas, berubah jadi kapsul blur setelah scroll >24px, sembunyi saat scroll turun.
+- Nav transparan di atas, berubah jadi kapsul blur setelah scroll >24px, sembunyi saat scroll turun. Kapsulnya `.nav::before` yang muncul dengan opacity; posisi lewat transform (jangan transisikan padding/top/box-shadow/background).
+- Menu HP: lingkaran biru = `.drawer::before` 300vmax yang di-`scale` 0 ke 1 dari tengah tombol menu (`--menu-cx`, `--menu-cy`), bukan `clip-path`. Isi menu muncul dengan opacity + translateY; `visibility` ditunda sampai lingkaran selesai menyusut.
+- Kursor: cincin 70px tetap, kecil/besar lewat properti `scale` (posisinya di `style.transform`). Kelas `.ring` progres lingkaran tidak berlaku untuk `.cursor .ring` dan `.ph .ring`.
+- Hover tombol/kartu stiker: hanya `transform` yang ditransisikan; bayangan pejal dan latar berubah seketika.
 - Judul naik per kata, kartu "dirakit" saat muncul, transisi halaman pakai segel biru yang membesar.
 - `data-assemble` jangan dipakai pada elemen yang punya transform saat hover (bentrok); pakai `data-reveal` pada pembungkusnya.
 - Hormati `prefers-reduced-motion`. Konten wajib tetap terbaca tanpa JavaScript.
@@ -188,7 +199,7 @@ Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis
 - Hanya animasikan `transform` dan `opacity`.
 - Jangan menganimasikan elemen di dalam SVG satu per satu (memaksa gambar ulang); kedipkan seluruh lapisan `<svg>` dengan `opacity`.
 - Glow pakai gradien statis, bukan `filter: blur`/`drop-shadow` pada elemen bergerak.
-- Animasi `infinite` wajib dijeda di luar layar (kelas `.idle`, otomatis lewat `initFusionify` untuk `main > section`, `main > div`, `footer`, `[data-pause]`).
+- Animasi `infinite` wajib dijeda di luar layar (kelas `.idle`, otomatis lewat `initFusionify` untuk `main > section`, `main > div`, `footer`, `[data-pause]`, dan lewat `initApp` untuk `.spinner`, `.skel`, `.progress.indeterminate`, `.typing`).
 - Jangan menulis `left`/`top`/`width` atau membaca ukuran elemen tiap frame. Ukur sekali, perbarui saat resize.
 - Lenis hanya untuk mouse/trackpad; layar sentuh pakai scroll bawaan. Kunci scroll lewat `lockScroll()`, dan `ScrollTrigger.config({ ignoreMobileResize: true })`.
 - Dengan Lenis: `scrub` sekitar 0.3, tanpa `anticipatePin`.
@@ -227,9 +238,11 @@ Template ada di `dokumen/` (panduan `dokumen/README.md`):
 ## Isi dan bahasa
 
 - Status produk ditulis jujur sebagai chip berwarna. Tidak ada angka, testimoni, atau partner karangan.
-- Kontras teks minimal 4.5:1. Teks terang di atas biru pakai `#f2f8ff` atau putih, jangan pakai `opacity` pada teks di atas biru.
+- Kontras teks minimal 4.5:1. Teks terang di atas biru pakai `var(--on-dark-2)` (#f2f8ff) atau `var(--on-dark)`, jangan pakai `opacity` pada teks di atas biru.
 - Harga di `.plan` wajib harga asli; kalau belum pasti tulis "Hubungi kami". Seksi testimoni dihapus kalau belum ada izin tertulis, jangan diisi contoh.
 - Bilingual ID/EN; Bahasa Indonesia natural, bukan terjemahan kaku.
+- Teks yang dibuat JavaScript kit (snackbar, lightbox, bagikan, hitung mundur, picker) mengikuti `<html lang>` (id/en); timpa per elemen dengan `data-label-*`.
+- Validasi form: kolom wajib yang masih kosong baru ditandai saat kirim; kolom terisi tapi salah ditandai saat ditinggalkan.
 - Gaya santai, jelas, manusiawi. Tanpa em dash di teks yang dibaca pengunjung.
 - Kontak publik hanya hello@fusionify.id dan WhatsApp +62 831-1138-0628.
 

@@ -97,11 +97,11 @@ Kit ini dirilis bernomor versi (`1.5.0`, `1.6.1`, dst.). Web produk **mengunci**
   ```
   git submodule add https://github.com/FUSIONIFY-ID/Fusionify_UI public/fusionify-ui
   cd public/fusionify-ui
-  git checkout v1.6.1
+  git checkout v1.14.0
   ```
-  Naik versi nanti: `git fetch --tags` lalu `git checkout v1.7.0`, cek web-nya, commit.
-- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.6.1`. Karena repo privat, mesin build perlu akses ke repo (token GitHub).
-- **Zip**: unduh `Fusionify_UI-v1.6.1.zip` dari halaman Releases.
+  Naik versi nanti: `git fetch --tags` lalu `git checkout v1.15.0`, cek web-nya, commit.
+- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.14.0`. Karena repo privat, mesin build perlu akses ke repo (token GitHub).
+- **Zip**: unduh `Fusionify_UI-v1.14.0.zip` dari halaman Releases.
 
 Aturan nomor: angka terakhir (1.5.**1**) untuk perbaikan kecil yang aman, angka tengah (1.**6**.0) untuk komponen baru yang tidak merusak, angka depan (**2**.0.0) kalau ada kelas atau markup yang berubah dan web produk perlu disesuaikan. Semua perubahan dicatat di `CHANGELOG.md`.
 
@@ -115,7 +115,9 @@ npx playwright install chromium
 npm test
 ```
 
-Yang dicek: semua template di 8 ukuran layar (375 sampai 1920), tema terang dan gelap, kontras dengan axe, layar sentuh (target sentuh dan scroll samping), tanpa JavaScript, kurangi gerakan, dan semua interaksi komponen. Uji yang sama jalan otomatis di GitHub setiap ada push (`.github/workflows/uji.yml`). Kalau tanda centang di commit jadi merah, buka tab Actions untuk melihat bagian yang rusak.
+Yang dicek: semua template di 8 ukuran layar (375 sampai 1920), tema terang dan gelap, kontras dengan axe, layar sentuh (target sentuh dan scroll samping), tanpa JavaScript, kurangi gerakan, dan semua interaksi komponen. Juga kursor segel, menu HP dan nav (gerak hanya transform/opacity), tema gelap yang dipilih lewat tombol, dan token (`tests/token.mjs`: dua blok gelap identik, tanpa hex di CSS komponen, warna email sama dengan token).
+
+Menjalankan sebagian: `npm test -- kursor` (nama file mengandung kata itu). Pemeriksaan token tanpa browser: `npm run cek:token`. Uji yang sama jalan otomatis di GitHub setiap ada push (`.github/workflows/uji.yml`). Kalau tanda centang di commit jadi merah, buka tab Actions untuk melihat bagian yang rusak.
 
 ## Dipakai di AI agent mana pun
 
@@ -155,7 +157,7 @@ Yang dicek: semua template di 8 ukuran layar (375 sampai 1920), tema terang dan 
 | `react/` | Komponen React (TSX) dan preset Tailwind v3/v4 dari token. Panduan: `react/README.md` |
 | `skills/` | Skill AI agent `fusionify-brand-style` (bisa dipasang dengan `npx skills add`) |
 | `tests/` | Uji otomatis (`npm test`) |
-| `scripts/` | `build-tokens.mjs`, `build-konteks.mjs`, `release.mjs`, `build-dokumen.mjs`, `build-email.mjs`, `build-grafis.mjs`, `build-ikon.mjs`, `mascot-import.py` |
+| `scripts/` | `build-tokens.mjs` (juga mengecek dua blok gelap identik), `build-konteks.mjs`, `release.mjs`, `build-dokumen.mjs`, `build-email.mjs`, `build-grafis.mjs`, `build-ikon.mjs`, `cek-orisinal-ikon.mjs` (`npm run cek:ikon`), `mascot-import.py` (memotong pose maskot baru, butuh Pillow), `dokumen/` (generator Word, PowerPoint, Excel untuk `npm run build:office`) |
 
 ## Atribut data yang dipahami `initFusionify()`
 

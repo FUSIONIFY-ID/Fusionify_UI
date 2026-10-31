@@ -21,20 +21,20 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 
 | Path | Isi |
 | --- | --- |
-| `css/tokens.css` | Warna, huruf (@font-face), radius, kurva gerak, bayangan |
+| `css/tokens.css` | Warna, huruf (@font-face), radius, kurva gerak, bayangan, `--seal-mask` (segel sebagai mask). Dua blok gelap wajib identik (dicek `build-tokens.mjs` dan `tests/token.mjs`) |
 | `css/base.css` | Reset, tipografi, `.wrap`, `.kicker`, `.h-hero`, `.h-sec`, `.lead`, `.prose` |
 | `css/components.css` | Tombol, chip status, nav, menu HP, seksi, kartu stiker, statistik, kartu karya, foto bersegel, gelembung maskot, panggung maskot, marquee partner, FAQ, gelombang, footer, toast, kursor, transisi halaman, status reveal, jeda `.idle`, ikon (`.ikon`, `.ikon-stiker`, `.ikon-segel`, `.sosmed`) |
 | `css/product.css` | Komponen web produk: form (`.field`, `.input`, `.select`, `.textarea`, `.check`, `.form-grid`), kartu layanan `.svc`, daftar fitur `.ticks`, langkah `.steps`, harga `.plans`/`.plan` (`.featured`, `.ribbon`), testimoni `.quote`, ajakan `.cta-band`, catatan `.note` (`ok`, `warn`, `danger`), tabel `.table-wrap`/`.table`, tag `.tags`/`.tag`, keadaan kosong/404 `.empty`, `.prod-head`, tab segmen `.segment`, halaman acara (`.event`, `.event-cover` + `.poster`, `.fact`, `.reg`, `.agenda`, `.hosts`, `.event-bar`), label `.sample-note`, halaman bayar `.pay` (`data-pay-state`, `.qr`, `.pay-timer`, `.pay-result`), status layanan (`.status-banner`, `.uptime`, `.uptime-bars`, `.incidents`), dokumentasi (`.docs`, `.docs-nav`, `.code-block`, `.endpoint`, `.method`, `.docs-pager`), daftar isi `.toc`, halaman legal (`.legal`, `.legal-switch`), katalog ikon (`.ikon-grid`, `.ikon-kartu`), linimasa `.timeline` (`.done`, `.now`, `.fail`), tombol keyboard `.kbd`, harga `.harga` (+ `<s>` harga coret), kartu produk `.product-grid` + `.product-card` (`.pc-media`, `.pc-diskon`, `.pc-body`, `.pc-title`, `.pc-actions`, `.habis`), hitung mundur `.countdown` |
-| `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.progress`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, `.btn.danger`, chat (`.chat`, `.chat-list`, `.convo`, `.thread`, `.msgs`, `.msg.me/.them`, `.typing`, `.composer`), `.ev-date` |
-| `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.tabs`, `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring`, `.skel` (skeleton), `.progress.indeterminate`, `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar), `.otp` (kode OTP) + `.resend`, `.upload` + `.drop` + `.upload-list` (upload file), `.stepper` + `.wizard-step` (form bertahap), `.sort-btn` (tabel bisa diurutkan), `.notif` + `.notif-panel` (pusat notifikasi), `.state` (keadaan kosong/error/offline), `.offline-bar`, `.avatar-crop` + `.crop-modal` (foto profil dengan pemotong bulat), `.breadcrumb`, `.pagination`, `.accordion`, `.input-group` + `.addon` (awalan/akhiran input), `.qty` (jumlah), `.rating` dan `.rating-input`, `.gallery` + `.lightbox`, `.announce` (pengumuman), `.consent` (persetujuan cookie) |
+| `css/app.css` | Komponen aplikasi (muat **tambahan** di halaman aplikasi saja): kerangka `.app` + `.side` + `.topbar`, `.page-head`, `.panel`, `.dash-grid` (`.span-4/5/6/7/8/12`), `.kpis`/`.kpi`, grafik `.bars`/`.linechart`/`.donut` + `.legend`, `.feed`, `.toolbar`, `.pager`, `.row-actions`, `.avatar`, `.user-chip`, `.switch`, `.settings-row`, halaman masuk `.auth`/`.auth-art`/`.auth-card`, `.pw-field`, `.pw-meter`, `.divider`, `.btn.block`, `.btn.social`, chat (`.chat`, `.chat-list`, `.convo`, `.thread`, `.msgs`, `.msg.me/.them`, `.typing`, `.composer`), `.ev-date` |
+| `css/controls.css` | Komponen kontrol untuk web, aplikasi, dan **aplikasi HP**: dropdown/`.menu`, `.modal` (`.full` di HP), `.btn.danger`, `.tabs`, `.progress` (garis; `.go`, `.warn`, `.indeterminate`), `.badge`, `.btn-group`, `.split-btn`, `.fab` + `.fab-dock` + `.fab-menu`, `.appbar`, `.navbar` (navigasi bawah HP) + `.with-navbar`, `.rail` (tablet) + `.with-rail`, `.m-app` (bar bawah otomatis jadi rail mulai 700px), `.sheet` (bottom sheet) dan `.side-sheet`, `.carousel`, `.slider` dan `.range2`, `.tip-wrap` (tooltip), `.list`/`.li`, `.chip-btn` (filter/aksi) dan `.chip-input`, `.spinner` (segel), `.ring` (progres lingkaran; tidak berlaku untuk `.cursor .ring` dan `.ph .ring`), `.skel` (skeleton), `.snackbar`, `.search-bar` + `.suggest`, `.picker` (date/time picker), `.float-bar` (floating toolbar), `.otp` (kode OTP) + `.resend`, `.upload` + `.drop` + `.upload-list` (upload file), `.stepper` + `.wizard-step` (form bertahap), `.sort-btn` (tabel bisa diurutkan), `.notif` + `.notif-panel` (pusat notifikasi), `.state` (keadaan kosong/error/offline), `.offline-bar`, `.avatar-crop` + `.crop-modal` (foto profil dengan pemotong bulat), `.breadcrumb`, `.pagination`, `.accordion`, `.input-group` + `.addon` (awalan/akhiran input), `.qty` (jumlah), `.rating` dan `.rating-input`, `.gallery` + `.lightbox`, `.announce` (pengumuman), `.consent` (persetujuan cookie) |
 | `css/fusionify.css` | Satu file yang mengimpor tokens, base, components, product, controls (tanpa app.css) |
-| `js/motion.js` | `initFusionify()`: smooth scroll, nav, menu HP, kursor, reveal, angka, magnet, salin + toast (`data-copy`; kosong di dalam `.code-block` = salin isi kodenya), transisi halaman, suara, jeda di luar layar |
-| `js/app.js` | `initApp()` untuk halaman aplikasi: tema, sidebar HP, dropdown, modal, tab, tampil/sembunyi password, meter kekuatan password, validasi form (`data-validate`), pilih semua baris, toast, tombol salin `data-copy`. Tanpa GSAP |
-| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. OTP (`[data-otp]`, `otpError()`), hitung mundur kirim ulang (`[data-countdown]`), upload (`[data-upload]`), chat (`[data-chat]`), tambah ke kalender (`[data-ics]`, unduh .ics), bagikan (`[data-share]`). Stepper (`form[data-wizard]`), tabel urut (`table[data-sort]` + `th[data-sort-key]`), notifikasi (`[data-notif]`), bilah offline (`[data-offline-bar]`), pemotong foto profil (`[data-avatar-crop]`), daftar isi yang mengikuti bacaan (`[data-toc]`), jumlah (`[data-qty]`), galeri + lightbox (`[data-gallery]`), pengumuman (`[data-announce]`), persetujuan cookie (`[data-consent]`, `pilihanCookie()`), hitung mundur ke tanggal (`[data-tenggat]`). Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:resend`, `fy:step`, `fy:sort`, `fy:read`, `fy:crop`, `fy:close`, dan `fy:online`/`fy:offline`/`fy:consent` di window |
+| `js/motion.js` | `initFusionify()` (di domain tak terdaftar mengembalikan objek berbentuk sama berisi fungsi kosong): smooth scroll, nav, menu HP, kursor, reveal, angka, magnet, salin + toast (`data-copy`; kosong di dalam `.code-block` = salin isi kodenya), transisi halaman, suara, jeda di luar layar |
+| `js/app.js` | `initApp()` untuk halaman aplikasi: tema, sidebar HP, dropdown, modal, tab, tampil/sembunyi password, meter kekuatan password, validasi form (`data-validate`, pesan sama dengan stepper: required, email, minlength, pattern, min/max, `data-match`), pilih semua baris, toast, tombol salin `data-copy`, jeda animasi tanpa henti di luar layar (`.idle`). Tanpa GSAP |
+| `js/controls.js` | `initControls()` dan `snackbar()`: interaksi semua komponen di `controls.css` (sheet bisa ditarik, picker dengan keyboard, carousel, slider, tooltip, saran pencarian). Dipanggil otomatis oleh `initFusionify()` dan `initApp()`. OTP (`[data-otp]`, `otpError()`), hitung mundur kirim ulang (`[data-countdown]`), upload (`[data-upload]`), chat (`[data-chat]`), tambah ke kalender (`[data-ics]`, unduh .ics), bagikan (`[data-share]`). Stepper (`form[data-wizard]`), tabel urut (`table[data-sort]` + `th[data-sort-key]`), notifikasi (`[data-notif]`), bilah offline (`[data-offline-bar]`), pemotong foto profil (`[data-avatar-crop]`), daftar isi yang mengikuti bacaan (`[data-toc]`), jumlah (`[data-qty]`), galeri + lightbox (`[data-gallery]`), pengumuman (`[data-announce]`), persetujuan cookie (`[data-consent]`, `pilihanCookie()`), hitung mundur ke tanggal (`[data-tenggat]`). Event: `fy:change`, `fy:remove`, `fy:select`, `fy:complete`, `fy:files`, `fy:send`, `fy:thread`, `fy:resend`, `fy:step`, `fy:sort`, `fy:read`, `fy:crop`, `fy:close`, `fy:ics`, `fy:snackbar-action`, dan `fy:online`/`fy:offline`/`fy:consent` di window (`fy:theme` di `<html>` dikirim `theme.js`). Teks antarmuka buatan JS (snackbar, lightbox, bagikan, hitung mundur, picker) mengikuti `<html lang>` id/en dan bisa ditimpa lewat `data-label-*` |
 | `js/ikon-inline.js` | Dibuat `npm run build:ikon`: Ikon FUSIONIFY lengkap (tanpa sprite) untuk elemen yang dibuat JavaScript, `ikon(nama, kelas)`, plus `isi()` dan `svgIkon()` untuk ikon gabungan. Dipakai `controls.js` |
 | `js/lisensi.js` | Kunci domain: kit hanya berjalan di domain di `DOMAIN_RESMI` (fusionify.id, fusionify.biz.id, partner premiumify.my.id dan studydate.id, serta subdomainnya) plus localhost. Dipanggil di awal `initFusionify()`, `initApp()`, `initControls()`. Jangan dihapus atau diakali |
 | `js/theme.js` | Mode terang/gelap (`initTheme`, `setTheme`). Dipanggil otomatis oleh `motion.js` dan `app.js` |
-| `js/seal.js` | `seal()` dan `SEAL_PATH`: bentuk segel 12 lekukan |
+| `js/seal.js`, `js/seal.d.ts` | `seal()` dan `SEAL_PATH`: bentuk segel 12 lekukan, plus tipe TypeScript-nya |
 | `snippets/head-script.html` | Skrip kecil wajib di `<head>` |
 | `snippets/sprite.html` | Sprite SVG (clip-path segel, simbol segel) setelah `<body>` |
 | `snippets/body-parts.html` | Kursor, toast, tirai transisi sebelum `</body>` |
@@ -42,10 +42,10 @@ Baca **`DESIGN.md`** sebelum mengubah tampilan apa pun. Library Figma resminya: 
 | `tokens/` | Token untuk **aplikasi native**: `tokens.json`, Flutter, SwiftUI, Jetpack Compose, React Native, plus resource Android XML (`tokens/android/res/`: warna terang/gelap, ukuran, huruf, drawable stiker, tema) untuk aplikasi Kotlin/Java, dan huruf TTF statis. Dibuat dari `css/tokens.css` dengan `node scripts/build-tokens.mjs`. Panduan di `tokens/README.md` |
 | `fonts/` | Afacad Flux, Sansation, Caveat, Exo 2 (woff2, OFL) |
 | `brand/` | Segel Fi, wordmark (SVG), emblem; `brand/kit/` logo horizontal, vertikal, legacy; `brand/app-icons/` ikon aplikasi (192, 512, maskable, apple-touch-icon) |
-| `mascot/` | Maskot badan penuh, kepala, papan, stiker bot, termasuk pose welcome, loading, empty, paid, pay-failed, offline. `mascot/POSE-BARU.md`: cara membuat dan memasang pose baru |
+| `mascot/` | Maskot badan penuh, kepala, papan, stiker bot, termasuk pose welcome, loading, empty, paid, pay-failed, offline. `mascot/POSE-BARU.md`: cara membuat dan memasang pose baru (`scripts/mascot-import.py`, butuh Pillow) |
 | `badge/` | Badge "Sebuah produk dari FUSIONIFY" (ID/EN, terang/gelap) |
 | `demo/index.html` | Halaman contoh semua komponen |
-| `tests/` | Uji otomatis (`npm test`): tata letak dan kontras, layar sentuh, tanpa JS, dan semua interaksi. Jalan juga di GitHub Actions (`.github/workflows/uji.yml`) |
+| `tests/` | Uji otomatis (`npm test`): tata letak dan kontras, layar sentuh, tanpa JS, semua interaksi, kursor/menu HP/nav/tema gelap lewat tombol (`interaksi-kursor-menu-tema.mjs`), dan token (`token.mjs`, juga `npm run cek:token`). Jalan juga di GitHub Actions (`.github/workflows/uji.yml`) |
 | `.github/workflows/rilis.yml`, `scripts/release.mjs` | Rilis bernomor versi: push tag `vX.Y.Z` untuk menguji, membuat zip, dan menerbitkan GitHub Release |
 | `skills/fusionify-brand-style/SKILL.md` | Skill ringkas untuk AI agent, dipasang lewat `npx skills add FUSIONIFY-ID/Fusionify_UI`. Perbarui setiap ada komponen atau aturan baru |
 | `FUSIONIFY-UI-KONTEKS.md` | Semua aturan + CSS dalam satu file, untuk di-upload ke AI versi chat web. Buat ulang dengan `node scripts/build-konteks.mjs` setiap ada perubahan |
@@ -112,6 +112,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 
 ## Mode gelap (wajib dijaga)
 
+- Warna yang sama di kedua tema: `--on-dark`/`--on-dark-2` (teks di atas biru atau malam), `--danger-fill` (tombol bahaya, badge), `--warn-fill`, `--online`, `--night-*` (footer produk), `--code-*` (blok kode). CSS komponen tidak boleh menulis hex sama sekali; `tests/token.mjs` menolaknya.
 - Semua warna komponen memakai token tema: `--card`, `--field`, `--surface`, `--surface-2`, `--edge` (garis stiker), `--edge-shadow` (bayangan pejal), `--ink`/`--ink-2`/`--ink-3` (teks), `--text-blue`/`--text-blue-deep` (teks biru), `--inverse-bg`/`--inverse-fg`, `--danger`. **Jangan menulis `#fff` atau `var(--ink)` untuk latar, garis, atau bayangan.** `#fff` hanya untuk teks/ikon di atas biru.
 - Bawaan: ikut pengaturan sistem. Pilihan pengguna disimpan (`fy-theme`) lewat tombol `[data-theme-toggle]`. Web yang ingin selalu terang: `<html data-theme="light" data-theme-lock>`.
 - Gambar yang beda per tema (mis. wordmark biru vs putih): kelas `.only-light` dan `.only-dark`.
@@ -123,6 +124,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - Data di template dashboard adalah **contoh** dan diberi label `.sample-note` "Data contoh". Ganti dengan data asli dari sistem, lalu hapus labelnya. Jangan pernah menampilkan angka contoh di aplikasi yang sudah dipakai orang.
 - Tabel lebar wajib di `.table-wrap` (sudah `position: relative`, `tabindex="0" role="region" aria-label`). Teks `.sr-only` di dalam elemen yang bisa digeser butuh pembungkus `position: relative`, kalau tidak halaman ikut melebar di HP.
 - Form: pesan error muncul saat kirim atau saat meninggalkan kolom, dan hilang saat pengguna mengetik perbaikannya. Jangan menghapus pesan error saat blur (tata letak bergeser tepat saat pengguna mengklik).
+- Pengecualian yang disengaja: kolom wajib yang **masih kosong** tidak diberi pesan saat ditinggalkan, baru saat kirim. Orang sering menekan Tab melewati kolom atau mengisi urutan lain; "Wajib diisi" yang muncul saat itu terasa memarahi dan menggeser tata letak. Kolom yang sudah diisi tapi salah tetap ditandai saat ditinggalkan.
 - Form masuk/daftar diletakkan di bagian atas, bukan di tengah vertikal, supaya tidak loncat saat pesan error berubah.
 - Login dengan Google hanya dipasang kalau OAuth-nya benar-benar tersedia.
 
@@ -194,7 +196,12 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 
 ## Performa (wajib, sudah diukur di fusionify.id)
 
-- Hanya animasikan `transform` dan `opacity`. Tidak boleh animasi `box-shadow`, `width`, `top`, `filter`.
+- Hanya animasikan `transform` dan `opacity`. Tidak boleh animasi `box-shadow`, `width`, `top`, `filter`, `clip-path`, `padding`.
+- Pola bersama kit dan fusionify.id:
+  - Menu HP: lingkaran biru adalah `.drawer::before` 300vmax yang di-`scale` dari 0 ke 1, berpusat di tombol menu (`--menu-cx`, `--menu-cy`); isi menu muncul dengan opacity + sedikit translateY; `visibility` ditunda sampai lingkaran selesai menyusut.
+  - Cincin kursor: ukuran tetap 70px, kecil/besar lewat properti `scale` (motion.js memakai `style.transform` untuk posisi). Garis tetap rapi karena `vector-effect: non-scaling-stroke`.
+  - Hover tombol/kartu stiker: hanya `transform` yang ditransisikan; bayangan pejal dan latar berubah instan.
+  - Nav: tampilan kapsul (latar kaca, garis, bayangan, blur) ada di `.nav::before` yang muncul dengan opacity; turun-naik posisi lewat `transform`.
 - Jangan menganimasikan elemen di dalam SVG satu per satu (memaksa gambar ulang seluruh SVG tiap frame). Kalau perlu kedip, kedipkan seluruh lapisan `<svg>` dengan `opacity`.
 - Cahaya dan glow pakai gradien statis, bukan `filter: blur`/`drop-shadow` pada elemen bergerak.
 - Animasi CSS `infinite` harus berada di dalam elemen yang diamati `initFusionify` (`main > section`, `main > div`, `footer`, `[data-pause]`) supaya dijeda saat tidak terlihat.
@@ -281,6 +288,12 @@ Identitasnya dibangun dari aset FUSIONIFY sendiri: segel bergelombang di logo, t
 | `--paper` | #F7FBFF | latar halaman |
 | `--line` | #D3E4F7 | garis pemisah tipis |
 | `--night` | #071022 | footer, area malam |
+| `--on-dark` / `--on-dark-2` | #FFFFFF / #F2F8FF | teks dan ikon di atas biru atau latar malam |
+| `--danger-fill` | #C4323A | tombol bahaya, badge angka (teks putih) |
+| `--warn-fill` | #E8A33D | progres peringatan, meter password sedang |
+| `--online` | #2FBF63 | titik status online |
+| `--bintang` | #F0A800 | isi bintang rating |
+| `--night-*`, `--code-*` | | teks dan garis footer produk, blok kode (selalu gelap) |
 
 Chip status: hijau `go` (aktif/live), kuning `beta`, oranye `wip` (dalam pengembangan), biru `plan` (direncanakan/eksperimen), abu `eos` (layanan berakhir).
 
@@ -359,14 +372,15 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 ## Gerak (`js/motion.js`)
 
 - Smooth scroll Lenis (`lerp 0.1`), khusus mouse/trackpad. Layar sentuh (termasuk HP dalam mode "Situs desktop") memakai scroll bawaan browser.
-- Nav transparan di atas, berubah jadi kapsul putih blur setelah scroll >24px, sembunyi saat scroll turun, muncul saat scroll naik.
-- Menu HP: lingkaran biru membesar dari tombol menu.
+- Nav transparan di atas, berubah jadi kapsul putih blur setelah scroll >24px (lapisan `::before` yang memudar masuk, posisi naik 6px lewat transform), sembunyi saat scroll turun, muncul saat scroll naik.
+- Menu HP: lingkaran biru membesar dari tombol menu sampai menutup layar (pseudo-element yang di-scale, bukan clip-path), lalu isi menu memudar naik.
 - Muncul saat scroll: judul naik per kata (`data-split`), elemen naik dan memudar masuk (`data-reveal`), kartu "dirakit" dari posisi acak (`data-assemble`), angka naik (`data-count-to`).
-- Kursor: titik biru muda + cincin segel; membesar dan berputar di atas tautan; label tulisan tangan lewat `data-cursor-label`. Hanya di perangkat bermouse.
+- Kursor: titik biru muda + cincin segel; membesar (scale) dan berputar di atas tautan, mengecil sedikit saat ditekan; label tulisan tangan lewat `data-cursor-label`. Hanya di perangkat bermouse.
 - Efek magnet pada tautan kontak besar (`data-magnetic`).
 - Tombol salin (`data-copy`) dengan notifikasi maskot (toast, hilang setelah 2,6 detik).
 - Transisi halaman: segel biru membesar menutup layar, kepala mengedip, lalu menyusut di halaman baru.
 - Suara disintesis Web Audio, **mati secara bawaan**, dinyalakan lewat tombol speaker.
+- Tombol dan kartu stiker saat disorot: hanya naik-turun (transform) yang beranimasi; bayangan pejal berubah seketika, seperti stiker yang ditekan.
 
 ## Aplikasi (dashboard, admin, masuk)
 
@@ -383,13 +397,10 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Bottom sheet dengan pegangan di atas, bisa ditarik ke bawah untuk menutup. Picker tanggal/jam muncul dari bawah di HP dan sebagai popover di layar lebar.
 - Loading memakai segel FUSIONIFY yang berputar (`.spinner`), skeleton biru muda untuk isi yang sedang dimuat.
 - Snackbar berlatar gelap (terang di mode gelap) dengan tombol aksi seperti "Batalkan".
-- Kode OTP: kotak-kotak bergaya stiker berhuruf Exo 2, terbagi 3-3, bergetar pelan kalau salah. Upload: area biru muda bergaris putus-putus, file tampil sebagai kartu stiker dengan pratinjau.
-- Chat: gelembung pesan bergaya stiker; pesan sendiri biru di kanan, pesan orang lain kartu di kiri. Indikator mengetik tiga titik.
-- Halaman acara: poster persegi bergaya stiker, tanggal dalam ubin kecil, kartu pendaftaran dengan kuota, bar daftar menempel di bawah layar HP.
-- Kode OTP: kotak per digit bergaya stiker, dibagi 3-3 dengan tanda pisah; salah = garis merah dan getar pendek (mati saat kurangi gerakan).
-- Upload: area bergaris putus-putus biru muda dengan ikon biru; berubah biru saat file diseret di atasnya. Foto tampil sebagai pratinjau kecil.
-- Chat: gelembung stiker, pesan sendiri biru di kanan, pesan orang lain kartu di kiri. Di HP isi obrolan layar penuh dan tombol kembali menutupnya. Stiker maskot boleh dikirim sebagai pesan.
-- Detail acara: poster biru dengan maskot dan segel, tanggal di kotak `.ev-date`, pendaftaran lewat bottom sheet, tiket berkode setelah terdaftar. Di HP tombol daftar menempel di bawah.
+- Kode OTP: kotak per digit bergaya stiker berhuruf Exo 2, dibagi 3-3 dengan tanda pisah; salah = garis merah dan getar pendek (mati saat kurangi gerakan).
+- Upload: area biru muda bergaris putus-putus dengan ikon biru; berubah biru saat file diseret di atasnya. File tampil sebagai kartu stiker dengan pratinjau kecil.
+- Chat: gelembung pesan bergaya stiker; pesan sendiri biru di kanan, pesan orang lain kartu di kiri. Indikator mengetik tiga titik. Di HP isi obrolan layar penuh dan tombol kembali menutupnya. Stiker maskot boleh dikirim sebagai pesan.
+- Halaman/detail acara: poster biru persegi bergaya stiker dengan maskot dan segel, tanggal di kotak `.ev-date`, kartu pendaftaran dengan kuota lewat bottom sheet, tiket berkode setelah terdaftar. Di HP tombol daftar menempel di bawah layar.
 - Stepper: lingkaran bernomor dengan garis putus-putus; langkah aktif biru bergaya stiker, langkah selesai berisi centang dan garisnya jadi utuh.
 - Pusat notifikasi: panel stiker dari lonceng (di HP dari bawah), titik biru untuk yang belum dibaca, maskot happy saat semua sudah dibaca.
 - Tabel urut: panah kecil di judul kolom; kolom yang aktif berwarna biru.
@@ -544,6 +555,30 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
   --placeholder: #707a8c;
   --bintang: #f0a800;            /* isi bintang rating */
 
+  /* Warna isi yang sama di kedua tema (teks di atasnya selalu terang) */
+  --on-dark: #ffffff;            /* teks/ikon di atas biru atau latar malam */
+  --on-dark-2: #f2f8ff;          /* teks sekunder di atas biru (kontras >= 4.5:1, tanpa opacity) */
+  --danger-fill: #c4323a;        /* tombol bahaya, badge angka (teks putih) */
+  --warn-fill: #e8a33d;          /* progres peringatan, meter password "lumayan" */
+  --online: #2fbf63;             /* titik status online */
+
+  /* Permukaan malam yang selalu gelap (footer produk, blok kode, lightbox) */
+  --night-ink: #dbe9fb;          /* teks footer */
+  --night-ink-2: #9fb3cd;        /* paragraf footer */
+  --night-ink-3: #8296b2;        /* teks kecil bilah bawah footer */
+  --night-link: #b9cbe3;         /* tautan bilah bawah footer */
+  --night-line: #1d2b45;         /* garis pemisah footer */
+  --night-line-2: #2a3b5c;       /* garis tombol kembali ke atas */
+  --code-fg: #eaf3ff;            /* teks kode */
+  --code-muted: #9db2cf;         /* komentar, label bahasa */
+  --code-line: #1f3459;          /* garis kepala blok kode */
+  --code-edge: #2e5592;          /* garis tombol salin */
+  --code-btn: #10203f;           /* tombol salin */
+  --code-btn-hover: #17305a;
+  --code-str: #7fe0a6;           /* string, tombol "tersalin" */
+  --code-key: #8cc0ff;           /* kata kunci */
+  --code-num: #ffd27a;           /* angka */
+
   /* Bayangan */
   --shadow: 0 1px 0 rgba(13, 108, 215, 0.06), 0 12px 32px -14px rgba(11, 15, 26, 0.18);
   --shadow-pop: 0 3px 0 var(--edge-shadow);      /* tombol */
@@ -551,6 +586,10 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
 
   color-scheme: light;
 }
+
+/* Segel 12 lekukan sebagai mask (sama dengan js/seal.js). Dipakai .ikon-segel, .spinner, .svc-ico, dll.
+   Ada di sini (bukan product.css) supaya components.css/controls.css bisa dimuat tanpa product.css. */
+:root { --seal-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M94.0 50.0L95.8 52.4L96.8 54.9L96.5 57.4L94.9 59.5L92.5 61.4L90.1 63.0L88.2 64.7L87.4 66.7L87.5 69.1L88.1 72.0L88.5 75.0L88.1 77.7L86.6 79.6L84.1 80.7L81.1 81.1L78.2 81.3L75.8 81.8L74.1 83.1L72.9 85.3L72.0 88.1L70.8 90.9L69.1 93.0L66.9 93.9L64.2 93.6L61.4 92.5L58.8 91.2L56.4 90.5L54.3 90.7L52.2 92.1L50.0 94.0L47.6 95.8L45.1 96.8L42.6 96.5L40.5 94.9L38.6 92.5L37.0 90.1L35.3 88.2L33.3 87.4L30.9 87.5L28.0 88.1L25.0 88.5L22.3 88.1L20.4 86.6L19.3 84.1L18.9 81.1L18.7 78.2L18.2 75.8L16.9 74.1L14.7 72.9L11.9 72.0L9.1 70.8L7.0 69.1L6.1 66.9L6.4 64.2L7.5 61.4L8.8 58.8L9.5 56.4L9.3 54.3L7.9 52.2L6.0 50.0L4.2 47.6L3.2 45.1L3.5 42.6L5.1 40.5L7.5 38.6L9.9 37.0L11.8 35.3L12.6 33.3L12.5 30.9L11.9 28.0L11.5 25.0L11.9 22.3L13.4 20.4L15.9 19.3L18.9 18.9L21.8 18.7L24.2 18.2L25.9 16.9L27.1 14.7L28.0 11.9L29.2 9.1L30.9 7.0L33.1 6.1L35.8 6.4L38.6 7.5L41.2 8.8L43.6 9.5L45.7 9.3L47.8 7.9L50.0 6.0L52.4 4.2L54.9 3.2L57.4 3.5L59.5 5.1L61.4 7.5L63.0 9.9L64.7 11.8L66.7 12.6L69.1 12.5L72.0 11.9L75.0 11.5L77.7 11.9L79.6 13.4L80.7 15.9L81.1 18.9L81.3 21.8L81.8 24.2L83.1 25.9L85.3 27.1L88.1 28.0L90.9 29.2L93.0 30.9L93.9 33.1L93.6 35.8L92.5 38.6L91.2 41.2L90.5 43.6L90.7 45.7L92.1 47.8Z'/%3E%3C/svg%3E"); }
 
 /* =========================================================
    MODE GELAP
@@ -572,6 +611,7 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
   --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
   --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
   --placeholder: #8597b3; --footer-top: #1f3459; --bintang: #ffc93d;
+  --danger-fill: #c4323a; --warn-fill: #e8a33d; --online: #3fd277;
   --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
   color-scheme: dark;
 }
@@ -589,6 +629,7 @@ Surat, invoice, penawaran, kuitansi, proposal, slide, dan spreadsheet memakai si
     --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
     --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
     --placeholder: #8597b3; --footer-top: #1f3459; --bintang: #ffc93d;
+    --danger-fill: #c4323a; --warn-fill: #e8a33d; --online: #3fd277;
     --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
     color-scheme: dark;
   }
@@ -636,7 +677,7 @@ img { height: auto; }
 .fx-oversize, .cursor svg, .veil svg, .loader svg, .wave svg, .person .ph .ring { max-width: none; }
 a { color: inherit; }
 button { font: inherit; color: inherit; }
-::selection { background: var(--blue); color: #fff; }
+::selection { background: var(--blue); color: var(--on-dark); }
 :focus-visible { outline: 3px solid var(--blue-light); outline-offset: 3px; border-radius: 6px; }
 
 h1, h2, h3, h4 { font-family: var(--f-head); font-weight: 800; line-height: 0.98; letter-spacing: -0.02em; margin: 0; }
@@ -728,12 +769,13 @@ a, button, [role="button"], label, summary { touch-action: manipulation; }
    <a class="btn">Konsultasi</a>  <a class="btn ghost">Lihat karya</a>
    ========================================================= */
 .btn {
-  --bg: var(--blue); --fg: #fff;
+  --bg: var(--blue); --fg: var(--on-dark);
   position: relative; display: inline-flex; align-items: center; gap: 10px;
   padding: 14px 22px; border-radius: 999px; border: 2px solid var(--edge);
   background: var(--bg); color: var(--fg); text-decoration: none; font-weight: 700; font-size: 16px;
   box-shadow: var(--shadow-pop); cursor: pointer;
-  transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring), background 0.2s;
+  /* Hanya transform yang beranimasi; bayangan dan latar berubah instan (lebih ringan, tetap terasa seperti stiker ditekan) */
+  transition: transform 0.35s var(--spring);
 }
 .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--edge-shadow); }
 .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
@@ -777,17 +819,20 @@ a, button, [role="button"], label, summary { touch-action: manipulation; }
 .nav {
   position: fixed; inset: 14px var(--gut) auto; z-index: 60;
   display: flex; align-items: center; gap: 10px; justify-content: space-between;
-  padding: 10px 0; border-radius: 999px;
-  background: rgba(255, 255, 255, 0); border: 1px solid transparent; box-shadow: 0 10px 30px -18px rgba(11, 15, 26, 0);
-  transition: transform 0.5s var(--ease), background-color 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease), padding 0.4s var(--ease), top 0.4s var(--ease);
-  max-width: var(--max); margin-inline: auto; top: 20px;
+  padding: 8px 8px 8px 14px; border-radius: 999px; isolation: isolate;
+  /* Posisi atas turun 6px saat transparan, naik ke 14px saat jadi kapsul: lewat transform, bukan top/padding */
+  transform: translateY(6px); transition: transform 0.5s var(--ease);
+  max-width: var(--max); margin-inline: auto;
 }
-.nav.scrolled, html:not(.js) .nav, .fx-off .nav {
-  top: 14px; padding: 8px 8px 8px 14px;
+/* Tampilan kapsul (latar kaca, garis, bayangan) ada di lapisan sendiri dan muncul dengan opacity */
+.nav::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
   background: var(--nav-glass); backdrop-filter: blur(14px) saturate(1.4); -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  border-color: rgba(13, 108, 215, 0.14);
-  box-shadow: 0 10px 30px -18px rgba(11, 15, 26, 0.35);
+  border: 1px solid rgba(13, 108, 215, 0.14); box-shadow: 0 10px 30px -18px rgba(11, 15, 26, 0.35);
+  opacity: 0; transition: opacity 0.4s var(--ease);
 }
+.nav.scrolled, html:not(.js) .nav, .fx-off .nav { transform: none; }
+.nav.scrolled::before, html:not(.js) .nav::before, .fx-off .nav::before { opacity: 1; }
 .nav.hide { transform: translateY(-140%); }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
 .brand-mark { width: 34px; height: 34px; transition: transform 0.7s var(--spring); }
@@ -812,18 +857,31 @@ a, button, [role="button"], label, summary { touch-action: manipulation; }
 .menu-btn path { transition: transform 0.35s var(--ease), opacity 0.2s; transform-origin: 12px 12px; }
 .menu-btn[aria-expanded="true"] .l1 { transform: translateY(4px) rotate(45deg); }
 .menu-btn[aria-expanded="true"] .l2 { transform: translate(-3px, -4px) rotate(-45deg) scaleX(1.6); }
-/* Menu layar penuh di HP: lingkaran biru membesar dari tombol menu */
+/* Menu layar penuh di HP: lingkaran biru membesar dari tombol menu.
+   Lingkarannya pseudo-element 300vmax yang di-scale (transform), bukan clip-path, supaya ringan.
+   Pusatnya di tengah tombol menu: --menu-cx dari kanan, --menu-cy dari atas
+   (gutter nav + padding 8px + setengah tombol 42px; nav top 14px + 8px + 21px). */
 .drawer {
-  position: fixed; inset: 0; z-index: 55; background: var(--blue); color: #fff;
-  clip-path: circle(0% at calc(100% - 46px) 46px); transition: clip-path 0.7s var(--ease);
-  display: grid; align-content: center; padding: 90px var(--gut) 40px; visibility: hidden;
+  --menu-cx: calc(max(var(--gut), (100vw - var(--max)) / 2) + 29px); --menu-cy: 43px;
+  position: fixed; inset: 0; z-index: 55; background: transparent; color: var(--on-dark);
+  isolation: isolate; overflow: hidden;
+  display: grid; align-content: center; padding: 90px var(--gut) 40px;
+  visibility: hidden; transition: visibility 0s linear 0.7s; /* tunggu lingkaran selesai menyusut */
 }
-.drawer.open { clip-path: circle(150% at calc(100% - 46px) 46px); visibility: visible; }
+.drawer::before {
+  content: ""; position: absolute; z-index: -1; width: 300vmax; height: 300vmax; border-radius: 50%; background: var(--blue);
+  right: calc(var(--menu-cx) - 150vmax); top: calc(var(--menu-cy) - 150vmax);
+  transform: scale(0); transition: transform 0.7s var(--ease); pointer-events: none;
+}
+.drawer > * { opacity: 0; transform: translateY(16px); transition: opacity 0.25s, transform 0.5s var(--ease); }
+.drawer.open { visibility: visible; transition-delay: 0s; }
+.drawer.open::before { transform: scale(1); }
+.drawer.open > * { opacity: 1; transform: none; transition-delay: 0.22s; }
 .drawer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .drawer a { font-family: var(--f-head); font-weight: 800; font-size: clamp(40px, 11vw, 64px); text-decoration: none; display: inline-block; }
 .drawer .drawer-mascot { position: absolute; right: 16px; bottom: 16px; width: 120px; }
 @media (max-width: 960px) { .nav-links, .nav .btn { display: none; } .menu-btn { display: grid; } }
-@media (max-width: 420px) { .nav { gap: 6px; padding-left: 10px; } .nav-tools { gap: 4px; } .lang { padding: 0 10px; } .icon-btn { width: 38px; height: 38px; } }
+@media (max-width: 420px) { .drawer { --menu-cx: calc(var(--gut) + 27px); --menu-cy: 41px; } .nav { gap: 6px; padding-left: 10px; } .nav-tools { gap: 4px; } .lang { padding: 0 10px; } .icon-btn { width: 38px; height: 38px; } }
 @media (max-width: 350px) { .brand-word { display: none; } }
 
 /* =========================================================
@@ -832,9 +890,9 @@ a, button, [role="button"], label, summary { touch-action: manipulation; }
 .sec { position: relative; padding: clamp(80px, 11vw, 150px) 0; overflow-x: clip; }
 .sec-head { display: grid; gap: 18px; margin-bottom: clamp(40px, 6vw, 70px); }
 .sec.tint { background: var(--surface); }
-.sec.blue { background: var(--blue); color: #fff; }
-.sec.blue .kicker { color: #fff; }
-.sec.blue .lead { color: #f2f8ff; }
+.sec.blue { background: var(--blue); color: var(--on-dark); }
+.sec.blue .kicker { color: var(--on-dark); }
+.sec.blue .lead { color: var(--on-dark-2); }
 .page-hero { padding: 150px 0 60px; background: radial-gradient(120% 80% at 80% 0%, var(--hero-glow) 0%, var(--paper) 60%); }
 .page-hero h1 { font-size: clamp(48px, 8vw, 110px); margin: 16px 0 20px; }
 .crumbs { display: flex; gap: 8px; font-size: 14px; color: var(--ink-3); }
@@ -844,12 +902,12 @@ a, button, [role="button"], label, summary { touch-action: manipulation; }
    KARTU STIKER · garis 2px tinta, bayangan pejal, sudut besar
    ========================================================= */
 .card { position: relative; padding: 26px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); }
-.card.blue { background: var(--blue); color: #fff; }
+.card.blue { background: var(--blue); color: var(--on-dark); }
 .card.tint { background: var(--surface); }
 .card h3 { font-size: 26px; margin-bottom: 6px; }
 .card p { font-size: 15px; color: var(--ink-2); }
-.card.blue p { color: #f2f8ff; }
-a.card { text-decoration: none; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
+.card.blue p { color: var(--on-dark-2); }
+a.card { text-decoration: none; transition: transform 0.35s var(--spring); }
 a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shadow); }
 .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
@@ -860,9 +918,9 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
 .stat { position: relative; padding: 26px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); min-height: 230px; display: grid; align-content: space-between; gap: 18px; overflow: hidden; }
 .stat:first-child { grid-column: span 2; }
-.stat:nth-child(3n+2) { background: var(--blue); color: #fff; }
+.stat:nth-child(3n+2) { background: var(--blue); color: var(--on-dark); }
 /* Teks terang di atas biru wajib kontras >= 4.5:1, jadi tanpa opacity */
-.stat:nth-child(3n+2) .lab, .stat:nth-child(3n+2) p { opacity: 1; color: #f2f8ff; }
+.stat:nth-child(3n+2) .lab, .stat:nth-child(3n+2) p { opacity: 1; color: var(--on-dark-2); }
 .stat:nth-child(3n+3) { background: var(--surface); }
 .stat .v { font-family: var(--f-num); font-weight: 800; font-size: clamp(54px, 6vw, 76px); line-height: 0.9; letter-spacing: -0.03em; }
 .stat .lab { font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; }
@@ -880,15 +938,16 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .work h3 { font-size: clamp(26px, 2.4vw, 34px); margin-bottom: 4px; }
 .work .cat { color: var(--ink-3); font-size: 14.5px; }
 .work .arrow { width: 40px; height: 40px; flex: none; border-radius: 50%; border: 2px solid var(--edge); display: grid; place-items: center; transition: transform 0.4s var(--spring), background 0.2s; }
-.work:hover .arrow { transform: rotate(-45deg); background: var(--blue); color: #fff; }
-.cover-note { position: absolute; right: 12px; bottom: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(11, 15, 26, 0.72); color: #fff; font-family: var(--f-num); font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.work:hover .arrow { transform: rotate(-45deg); background: var(--blue); color: var(--on-dark); }
+.cover-note { position: absolute; right: 12px; bottom: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(11, 15, 26, 0.72); color: var(--on-dark); font-family: var(--f-num); font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 @media (max-width: 1000px) { .works { grid-template-columns: repeat(2, minmax(0, 1fr)); } .work:last-child:nth-child(odd) { grid-column: 1 / -1; } }
 @media (max-width: 620px) { .works { grid-template-columns: 1fr; } }
 
 /* Foto orang dalam bingkai segel. Butuh <clipPath id="seal-clip"> dari sprite (lihat demo). */
 .person { display: grid; gap: 12px; text-align: center; justify-items: center; }
 .person .ph { position: relative; width: 100%; max-width: 210px; aspect-ratio: 1; }
-.person .ph .ring { position: absolute; inset: -5%; color: var(--blue-light); transition: transform 1.2s var(--ease); }
+.person .ph .ring { position: absolute; inset: -5%; width: 110%; height: 110%; border-radius: 0; background: none; color: var(--blue-light); transition: transform 1.2s var(--ease); }
+.person .ph .ring::before { content: none; }
 .person:hover .ph .ring { transform: rotate(90deg) scale(1.03); }
 .person .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; clip-path: url(#seal-clip); background: var(--surface); transition: transform 0.6s var(--spring); }
 .person:hover .ph img { transform: scale(1.04); }
@@ -934,7 +993,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .faq summary .pm::before, .faq summary .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2.5px; margin: -1.25px 0 0 -7px; background: var(--text-blue-deep); border-radius: 2px; }
 .faq summary .pm::after { transform: rotate(90deg); transition: transform 0.3s var(--ease); }
 .faq details[open] summary .pm { background: var(--blue); transform: rotate(180deg); }
-.faq details[open] summary .pm::before, .faq details[open] summary .pm::after { background: #fff; }
+.faq details[open] summary .pm::before, .faq details[open] summary .pm::after { background: var(--on-dark); }
 .faq details[open] summary .pm::after { transform: rotate(0); }
 .faq .ans { padding: 0 0 24px; color: var(--ink-2); max-width: 70ch; }
 
@@ -947,18 +1006,20 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 /* =========================================================
    FOOTER SEDERHANA (untuk web produk). Footer adegan malam Bogor khusus fusionify.id.
    ========================================================= */
-.footer { background: var(--night); color: #dbe9fb; padding: 56px 0 28px; box-shadow: inset 0 1px 0 var(--footer-top, transparent); }
+.footer { background: var(--night); color: var(--night-ink); padding: 56px 0 28px; box-shadow: inset 0 1px 0 var(--footer-top, transparent); }
 .fcols { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 30px; margin-bottom: 40px; }
 .fcols .fh { font-family: var(--f-num); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue-light); margin-bottom: 14px; }
 .fcols ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-.fcols a { text-decoration: none; color: #dbe9fb; overflow-wrap: anywhere; }
-.fcols a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
-.fcols p { color: #9fb3cd; font-size: 15px; max-width: 34ch; }
-.fbar { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; border-top: 1px solid #1d2b45; padding-top: 22px; font-size: 14px; color: #8296b2; }
-.fbar a { color: #b9cbe3; }
-.to-top { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid #2a3b5c; text-decoration: none; font-weight: 700; transition: background 0.2s, color 0.2s, transform 0.3s var(--spring); }
+.fcols a { text-decoration: none; color: var(--night-ink); overflow-wrap: anywhere; }
+.fcols a:hover { color: var(--on-dark); text-decoration: underline; text-underline-offset: 4px; }
+.fcols p { color: var(--night-ink-2); font-size: 15px; max-width: 34ch; }
+.fbar { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; border-top: 1px solid var(--night-line); padding-top: 22px; font-size: 14px; color: var(--night-ink-3); }
+.fbar a { color: var(--night-link); }
+/* Nama produk di kolom pertama footer: <p class="fname">Nama Produk</p> */
+.fcols .fname { font-family: var(--f-head); font-weight: 800; font-size: 26px; line-height: 1.1; color: var(--on-dark); margin-bottom: 10px; max-width: none; }
+.to-top { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--night-line-2); text-decoration: none; font-weight: 700; transition: background 0.2s, color 0.2s, transform 0.3s var(--spring); }
 .to-top svg { width: 16px; height: 16px; transition: transform 0.3s var(--spring); }
-.to-top:hover { background: var(--blue); border-color: var(--text-blue); color: #fff; }
+.to-top:hover { background: var(--blue); border-color: var(--text-blue); color: var(--on-dark); }
 .to-top:hover svg { transform: translateY(-3px); }
 /* Badge "Sebuah produk dari FUSIONIFY" di footer web produk */
 .fy-badge { display: inline-block; line-height: 0; transition: transform 0.3s var(--spring); }
@@ -986,17 +1047,21 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .has-cursor .cursor { display: block; }
 .has-cursor, .has-cursor a, .has-cursor button, .has-cursor summary { cursor: none; }
 .has-cursor input, .has-cursor textarea { cursor: text; }
-.cursor .dot { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 0 2px #fff; }
-.cursor .ring { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; transition: width 0.35s var(--spring), height 0.35s var(--spring), margin 0.35s var(--spring); }
+.cursor .dot { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 0 2px var(--on-dark); }
+/* Cincin berukuran tetap 70px; kecil/besar lewat properti scale (transform). motion.js menulis
+   posisi di style.transform, jadi skala memakai properti scale terpisah supaya tidak tertimpa.
+   Garis tetap 1,6px karena vector-effect: non-scaling-stroke. Reset .ring progres (controls.css). */
+.cursor .ring { --cs: 0.6286; position: absolute; display: block; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 0; background: none; scale: var(--cs); transition: scale 0.35s var(--spring); }
+.cursor .ring::before { content: none; }
 .cursor .ring svg { width: 100%; height: 100%; overflow: visible; color: var(--text-blue); }
 .cursor .ring svg path { fill: none; stroke: currentColor; stroke-width: 1.6; vector-effect: non-scaling-stroke; transition: fill 0.3s; }
-.cursor.link .ring { width: 70px; height: 70px; margin: -35px 0 0 -35px; }
+.cursor.link .ring { --cs: 1; }
 .cursor.link .ring svg { animation: fy-spin 4s linear infinite; }
 .cursor.link .ring svg path { fill: rgba(83, 157, 233, 0.18); }
 .cursor .label { position: absolute; left: 0; top: 0; will-change: translate; padding: 4px 10px; border-radius: 999px; background: var(--inverse-bg); color: var(--inverse-fg); font-family: var(--f-hand); font-size: 20px; line-height: 1; white-space: nowrap; transform: scale(0); transform-origin: 0 0; transition: transform 0.3s var(--spring); }
 .cursor.labelled .label { transform: scale(1); }
-.cursor.down .ring { transform: scale(0.8); }
-.cursor.dark .ring svg { color: #fff; }
+.cursor.down .ring { scale: calc(var(--cs) * 0.8); }
+.cursor.dark .ring svg { color: var(--on-dark); }
 
 /* =========================================================
    TRANSISI HALAMAN · segel biru menutup layar
@@ -1018,8 +1083,8 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .fx-off [data-reveal] { opacity: 1 !important; transform: none !important; }
 .fx-off .split .w > span { transform: none !important; }
 
-/* Animasi tanpa henti dijeda saat seksinya di luar layar (motion.js memasang .idle) */
-.idle *, .idle *::before, .idle *::after { animation-play-state: paused !important; }
+/* Animasi tanpa henti dijeda saat di luar layar (motion.js memasang .idle di seksi, app.js di spinner/skeleton/progres) */
+.idle, .idle::before, .idle::after, .idle *, .idle *::before, .idle *::after { animation-play-state: paused !important; }
 
 /* =========================================================
    IKON FUSIONIFY · garis 2px, ujung bulat, dengan "titik i" biru muda sebagai ciri khas.
@@ -1037,24 +1102,25 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .ikon-stiker .ikon { width: 26px; height: 26px; }
 .ikon-stiker.kecil { width: 40px; height: 40px; border-radius: 12px; box-shadow: 0 3px 0 var(--edge-shadow); }
 .ikon-stiker.kecil .ikon { width: 20px; height: 20px; }
-.ikon-stiker.biru { background: var(--blue); color: #fff; --ikon-titik: color-mix(in srgb, #fff 55%, var(--blue-light)); }
+.ikon-stiker.biru { background: var(--blue); color: var(--on-dark); --ikon-titik: color-mix(in srgb, var(--on-dark) 55%, var(--blue-light)); }
 .ikon-stiker.tint { background: var(--surface); color: var(--text-blue); }
 
 /* Ikon di atas segel 12 lekukan */
 .ikon-segel { position: relative; display: inline-grid; place-items: center; flex: none; width: 60px; height: 60px; color: var(--ink); isolation: isolate; }
 .ikon-segel::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--seal-tint); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; }
 .ikon-segel .ikon { width: 26px; height: 26px; }
-.ikon-segel.biru { color: #fff; --ikon-titik: color-mix(in srgb, #fff 55%, var(--blue-light)); }
+.ikon-segel.biru { color: var(--on-dark); --ikon-titik: color-mix(in srgb, var(--on-dark) 55%, var(--blue-light)); }
 .ikon-segel.biru::before { background: var(--blue); }
 
 /* Daftar tautan sosmed: <ul class="sosmed"><li><a href="…" aria-label="Instagram FUSIONIFY"><svg class="ikon"><use href="#sosmed-instagram"/></svg></a></li></ul> */
 .sosmed { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; }
 .sosmed a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.2s var(--ease); }
-.sosmed a:hover { transform: translateY(-2px); background: var(--blue); color: #fff; }
+.sosmed a:hover { transform: translateY(-2px); background: var(--blue); color: var(--on-dark); }
 .sosmed a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 3px; }
 .sosmed .ikon { width: 20px; height: 20px; }
-.footer .sosmed a, .sec.blue .sosmed a { background: transparent; color: #f2f8ff; border-color: rgba(255, 255, 255, 0.35); box-shadow: none; }
-.footer .sosmed a:hover, .sec.blue .sosmed a:hover { background: #fff; color: #0b0f1a; }
+.footer .sosmed a, .sec.blue .sosmed a { background: transparent; color: var(--on-dark-2); border-color: rgba(255, 255, 255, 0.35); box-shadow: none; }
+.footer .sosmed a:hover { background: var(--night-ink); color: var(--night); }
+.sec.blue .sosmed a:hover { background: var(--on-dark); color: var(--blue-deep); }
 
 ```
 
@@ -1079,10 +1145,13 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .input, .select, .textarea {
   width: 100%; font: inherit; font-size: 16px; color: var(--ink);
   padding: 13px 16px; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card);
-  box-shadow: 0 3px 0 var(--edge-shadow); transition: box-shadow 0.25s var(--spring), transform 0.25s var(--spring), border-color 0.2s;
+  box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.25s var(--spring);
 }
 .textarea { min-height: 130px; resize: vertical; }
 .select { appearance: none; padding-right: 44px; background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b0f1a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 14px center / 18px no-repeat; }
+/* Panah .select di mode gelap (gambar latar tidak bisa memakai currentColor) */
+:root[data-theme="dark"] .select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23eaf3ff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23eaf3ff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); } }
 .input::placeholder, .textarea::placeholder { color: var(--placeholder); }
 .input:focus, .select:focus, .textarea:focus { outline: none; border-color: var(--text-blue); box-shadow: 0 3px 0 var(--blue), 0 0 0 4px rgba(83, 157, 233, 0.25); }
 .input[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: var(--danger); box-shadow: 0 3px 0 var(--danger); }
@@ -1091,8 +1160,8 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .check input { appearance: none; flex: none; width: 22px; height: 22px; margin: 1px 0 0; border: 2px solid var(--edge); border-radius: 7px; background: var(--card); display: grid; place-items: center; cursor: pointer; transition: background 0.2s; }
 .check input[type="radio"] { border-radius: 50%; }
 .check input:checked { background: var(--blue); }
-.check input:checked::after { content: ""; width: 10px; height: 6px; border: solid #fff; border-width: 0 0 2.5px 2.5px; transform: translateY(-1px) rotate(-45deg); }
-.check input[type="radio"]:checked::after { width: 8px; height: 8px; border: 0; border-radius: 50%; background: #fff; transform: none; }
+.check input:checked::after { content: ""; width: 10px; height: 6px; border: solid var(--on-dark); border-width: 0 0 2.5px 2.5px; transform: translateY(-1px) rotate(-45deg); }
+.check input[type="radio"]:checked::after { width: 8px; height: 8px; border: 0; border-radius: 50%; background: var(--on-dark); transform: none; }
 .check input:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .form-grid .full { grid-column: 1 / -1; }
@@ -1107,15 +1176,15 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .svc p { font-size: 15.5px; color: var(--ink-2); }
 .svc .more { margin-top: 6px; font-weight: 700; color: var(--text-blue-deep); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
 .svc .more:hover { text-decoration: underline; text-underline-offset: 4px; }
-.svc-ico { position: relative; width: 58px; height: 58px; display: grid; place-items: center; color: #fff; }
+.svc-ico { position: relative; width: 58px; height: 58px; display: grid; place-items: center; color: var(--on-dark); }
 .svc-ico::before { content: ""; position: absolute; inset: 0; background: var(--blue); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; }
 .svc-ico svg { position: relative; width: 26px; height: 26px; }
 .svc:nth-child(3n+2) .svc-ico::before { background: var(--blue-light); }
 .svc:nth-child(3n+3) .svc-ico::before { background: var(--blue-deep); }
-a.svc { text-decoration: none; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
+a.svc { text-decoration: none; transition: transform 0.35s var(--spring); }
 a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shadow); }
 /* Segel sebagai mask (12 lekukan, sama dengan seal.js) */
-:root { --seal-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M94.0 50.0L95.8 52.4L96.8 54.9L96.5 57.4L94.9 59.5L92.5 61.4L90.1 63.0L88.2 64.7L87.4 66.7L87.5 69.1L88.1 72.0L88.5 75.0L88.1 77.7L86.6 79.6L84.1 80.7L81.1 81.1L78.2 81.3L75.8 81.8L74.1 83.1L72.9 85.3L72.0 88.1L70.8 90.9L69.1 93.0L66.9 93.9L64.2 93.6L61.4 92.5L58.8 91.2L56.4 90.5L54.3 90.7L52.2 92.1L50.0 94.0L47.6 95.8L45.1 96.8L42.6 96.5L40.5 94.9L38.6 92.5L37.0 90.1L35.3 88.2L33.3 87.4L30.9 87.5L28.0 88.1L25.0 88.5L22.3 88.1L20.4 86.6L19.3 84.1L18.9 81.1L18.7 78.2L18.2 75.8L16.9 74.1L14.7 72.9L11.9 72.0L9.1 70.8L7.0 69.1L6.1 66.9L6.4 64.2L7.5 61.4L8.8 58.8L9.5 56.4L9.3 54.3L7.9 52.2L6.0 50.0L4.2 47.6L3.2 45.1L3.5 42.6L5.1 40.5L7.5 38.6L9.9 37.0L11.8 35.3L12.6 33.3L12.5 30.9L11.9 28.0L11.5 25.0L11.9 22.3L13.4 20.4L15.9 19.3L18.9 18.9L21.8 18.7L24.2 18.2L25.9 16.9L27.1 14.7L28.0 11.9L29.2 9.1L30.9 7.0L33.1 6.1L35.8 6.4L38.6 7.5L41.2 8.8L43.6 9.5L45.7 9.3L47.8 7.9L50.0 6.0L52.4 4.2L54.9 3.2L57.4 3.5L59.5 5.1L61.4 7.5L63.0 9.9L64.7 11.8L66.7 12.6L69.1 12.5L72.0 11.9L75.0 11.5L77.7 11.9L79.6 13.4L80.7 15.9L81.1 18.9L81.3 21.8L81.8 24.2L83.1 25.9L85.3 27.1L88.1 28.0L90.9 29.2L93.0 30.9L93.9 33.1L93.6 35.8L92.5 38.6L91.2 41.2L90.5 43.6L90.7 45.7L92.1 47.8Z'/%3E%3C/svg%3E"); }
+/* --seal-mask pindah ke tokens.css (1.14.0) */
 
 /* =========================================================
    DAFTAR FITUR · centang biru di dalam segel
@@ -1123,7 +1192,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .ticks li { position: relative; padding-left: 34px; color: var(--ink-2); }
 .ticks li::before { content: ""; position: absolute; left: 0; top: 1px; width: 24px; height: 24px; background: var(--blue); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; }
-.ticks li::after { content: ""; position: absolute; left: 8px; top: 8px; width: 8px; height: 5px; border: solid #fff; border-width: 0 0 2px 2px; transform: rotate(-45deg); }
+.ticks li::after { content: ""; position: absolute; left: 8px; top: 8px; width: 8px; height: 5px; border: solid var(--on-dark); border-width: 0 0 2px 2px; transform: rotate(-45deg); }
 .ticks li.no { color: var(--ink-3); text-decoration: line-through; text-decoration-color: rgba(86, 97, 117, 0.5); }
 .ticks li.no::before { background: var(--line); }
 .ticks li.no::after { display: none; }
@@ -1135,13 +1204,13 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
 .steps li { position: relative; display: grid; gap: 8px; align-content: start; padding-top: 72px; }
 .steps li::before { content: ""; position: absolute; left: 0; top: 0; width: 56px; height: 56px; background: var(--blue); -webkit-mask: var(--seal-mask) center / contain no-repeat; mask: var(--seal-mask) center / contain no-repeat; }
-.steps .n { position: absolute; left: 0; top: 0; width: 56px; height: 56px; display: grid; place-items: center; font-family: var(--f-num); font-weight: 800; font-size: 22px; color: #fff; }
+.steps .n { position: absolute; left: 0; top: 0; width: 56px; height: 56px; display: grid; place-items: center; font-family: var(--f-num); font-weight: 800; font-size: 22px; color: var(--on-dark); }
 .steps li:not(:last-child)::after { content: ""; position: absolute; left: 66px; right: -12px; top: 27px; border-top: 2px dashed var(--blue-light); }
 .steps h3 { font-size: 24px; }
 .steps p { color: var(--ink-2); font-size: 15.5px; }
-.sec.blue .steps li::before { background: #fff; } .sec.blue .steps .n { color: #0d6cd7; }
+.sec.blue .steps li::before { background: var(--on-dark); } .sec.blue .steps .n { color: var(--blue); }
 .sec.blue .steps li:not(:last-child)::after { border-color: rgba(255, 255, 255, 0.5); }
-.sec.blue .steps p { color: #f2f8ff; }
+.sec.blue .steps p { color: var(--on-dark-2); }
 @media (max-width: 720px) { .steps li:not(:last-child)::after { display: none; } }
 
 /* =========================================================
@@ -1156,11 +1225,11 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .plans > .plan .price { font-family: var(--f-num); font-weight: 800; font-size: clamp(36px, 4vw, 48px); line-height: 1; letter-spacing: -0.02em; }
 .plans > .plan .price small { font-family: var(--f-body); font-weight: 400; font-size: 15px; color: var(--ink-3); letter-spacing: 0; }
 .plans > .plan .btn { justify-content: center; }
-.plans > .plan.featured { background: var(--blue); color: #fff; transform: translateY(-10px); box-shadow: 0 16px 0 var(--edge-shadow); }
-.plans > .plan.featured .desc, .plans > .plan.featured .price small, .plans > .plan.featured .ticks li { color: #f2f8ff; }
-.plans > .plan.featured .ticks li::before { background: #fff; }
+.plans > .plan.featured { background: var(--blue); color: var(--on-dark); transform: translateY(-10px); box-shadow: 0 16px 0 var(--edge-shadow); }
+.plans > .plan.featured .desc, .plans > .plan.featured .price small, .plans > .plan.featured .ticks li { color: var(--on-dark-2); }
+.plans > .plan.featured .ticks li::before { background: var(--on-dark); }
 .plans > .plan.featured .ticks li::after { border-color: var(--text-blue); }
-.plans > .plan.featured .btn { --bg: #fff; --fg: #0b0f1a; }
+.plans > .plan.featured .btn { --bg: var(--on-dark); --fg: var(--night); }
 .plans > .plan .ribbon { position: absolute; top: -16px; right: 22px; padding: 6px 14px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); font-family: var(--f-hand); font-weight: 700; font-size: 20px; line-height: 1; transform: rotate(4deg); }
 @media (max-width: 1000px) { .plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } .plans > :last-child:nth-child(odd) { grid-column: 1 / -1; } .plans > .plan.featured { transform: none; box-shadow: var(--shadow-sticker); } }
 @media (max-width: 620px) { .plans { grid-template-columns: 1fr; } }
@@ -1179,12 +1248,12 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 /* =========================================================
    CTA BAND · ajakan besar di akhir halaman, maskot di samping
    ========================================================= */
-.cta-band { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; padding: clamp(28px, 5vw, 56px); border-radius: var(--r-l); background: var(--blue); color: #fff; border: 2px solid var(--edge); box-shadow: 0 10px 0 var(--edge-shadow); overflow: hidden; }
+.cta-band { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; padding: clamp(28px, 5vw, 56px); border-radius: var(--r-l); background: var(--blue); color: var(--on-dark); border: 2px solid var(--edge); box-shadow: 0 10px 0 var(--edge-shadow); overflow: hidden; }
 .cta-band h2 { font-size: clamp(34px, 4.6vw, 60px); max-width: 16ch; }
-.cta-band p { color: #f2f8ff; margin-top: 12px; max-width: 46ch; }
+.cta-band p { color: var(--on-dark-2); margin-top: 12px; max-width: 46ch; }
 .cta-band .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-.cta-band .btn { --bg: #fff; --fg: #0b0f1a; }
-.cta-band .btn.ghost { --bg: var(--blue); --fg: #fff; border-color: #fff; box-shadow: 0 3px 0 rgba(255, 255, 255, 0.6); }
+.cta-band .btn { --bg: var(--on-dark); --fg: var(--night); }
+.cta-band .btn.ghost { --bg: var(--blue); --fg: var(--on-dark); border-color: var(--on-dark); box-shadow: 0 3px 0 rgba(255, 255, 255, 0.6); }
 .cta-band .mascot { width: clamp(130px, 18vw, 220px); align-self: end; margin-bottom: calc(clamp(28px, 5vw, 56px) * -1); }
 .cta-band .seal-deco { position: absolute; right: -60px; top: -60px; width: 260px; color: rgba(255, 255, 255, 0.08); max-width: none; pointer-events: none; }
 @media (max-width: 700px) { .cta-band { grid-template-columns: 1fr; } .cta-band .mascot { justify-self: end; width: 140px; margin-top: -10px; } }
@@ -1194,7 +1263,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
    <div class="note warn"><b>Judul</b><p>Isi</p></div>
    ========================================================= */
 .note { --nc: var(--plan); display: grid; gap: 4px; padding: 16px 18px 16px 52px; position: relative; border-radius: var(--r-m); border: 2px solid var(--nc); background: var(--plan-bg); }
-.note::before { content: "i"; position: absolute; left: 16px; top: 15px; width: 24px; height: 24px; border-radius: 50%; background: var(--nc); color: #fff; display: grid; place-items: center; font-family: var(--f-num); font-weight: 800; font-size: 14px; }
+.note::before { content: "i"; position: absolute; left: 16px; top: 15px; width: 24px; height: 24px; border-radius: 50%; background: var(--nc); color: var(--on-dark); display: grid; place-items: center; font-family: var(--f-num); font-weight: 800; font-size: 14px; }
 .note b { color: var(--ink); }
 .note p { color: var(--ink-2); font-size: 15.5px; }
 .note.ok { --nc: var(--go); background: var(--go-bg); } .note.ok::before { content: "✓"; }
@@ -1218,7 +1287,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
    ========================================================= */
 .tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
 .tag { display: inline-block; padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card); font-size: 13.5px; font-weight: 700; color: var(--ink-2); }
-.sec.blue .tag { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); color: #fff; }
+.sec.blue .tag { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.3); color: var(--on-dark); }
 
 /* =========================================================
    KEADAAN KOSONG / 404 · maskot + pesan + aksi
@@ -1242,7 +1311,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .segment label { position: relative; cursor: pointer; }
 .segment input { position: absolute; opacity: 0; pointer-events: none; }
 .segment span { display: block; white-space: nowrap; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 14.5px; color: var(--ink-2); transition: background 0.25s var(--ease), color 0.25s; }
-.segment input:checked + span { background: var(--blue); color: #fff; }
+.segment input:checked + span { background: var(--blue); color: var(--on-dark); }
 .segment input:focus-visible + span { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 
 /* =========================================================
@@ -1262,9 +1331,9 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .event-meta, .event-main { display: grid; align-content: start; gap: 22px; min-width: 0; }
 .event-cover { position: relative; overflow: hidden; aspect-ratio: 1; border-radius: var(--r-l); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); background: var(--blue); }
 .event-cover > img.photo { width: 100%; height: 100%; object-fit: cover; }
-.poster { position: absolute; inset: 0; display: grid; align-content: start; gap: 12px; padding: 22px; color: #fff; }
+.poster { position: absolute; inset: 0; display: grid; align-content: start; gap: 12px; padding: 22px; color: var(--on-dark); }
 .poster .seal-deco { position: absolute; right: -18%; top: -14%; width: 75%; height: auto; color: rgba(255, 255, 255, 0.14); }
-.poster .k { position: relative; font-family: var(--f-num); font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #f2f8ff; }
+.poster .k { position: relative; font-family: var(--f-num); font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--on-dark-2); }
 .poster b { position: relative; max-width: 62%; font-family: var(--f-head); font-weight: 800; font-size: clamp(34px, 9vw, 52px); line-height: 0.95; letter-spacing: -0.03em; }
 .poster img { position: absolute; right: 2%; bottom: 0; width: 44%; height: auto; }
 .event-chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -1421,7 +1490,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .docs-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .docs-nav a { display: block; padding: 7px 12px; border-radius: 10px; color: var(--ink-2); text-decoration: none; font-size: 15px; font-weight: 700; }
 .docs-nav a:hover { background: var(--surface); color: var(--ink); }
-.docs-nav a[aria-current="page"] { background: var(--blue); color: #fff; box-shadow: 0 3px 0 var(--edge-shadow); }
+.docs-nav a[aria-current="page"] { background: var(--blue); color: var(--on-dark); box-shadow: 0 3px 0 var(--edge-shadow); }
 .docs-main { min-width: 0; }
 .docs-main .prose { max-width: 74ch; }
 .docs-main .prose h1 { font-size: clamp(38px, 6vw, 58px); color: var(--ink); margin-bottom: 12px; }
@@ -1434,16 +1503,16 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .docs-main .prose .table code { white-space: nowrap; overflow-wrap: normal; }
 .docs-toc { display: none; }
 .code-block { border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--night); box-shadow: 0 4px 0 var(--edge-shadow); overflow: hidden; }
-.code-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px 8px 16px; border-bottom: 1px solid #1f3459; font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: #9db2cf; }
-.code-head button { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 12px; border-radius: 999px; border: 1.5px solid #2e5592; background: #10203f; color: #eaf3ff; font: inherit; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; }
-.code-head button:hover { background: #17305a; }
-.code-head button.done { border-color: #7fe0a6; color: #7fe0a6; }
-.code-block pre { margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 14px; line-height: 1.65; color: #eaf3ff; tab-size: 2; }
+.code-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px 8px 16px; border-bottom: 1px solid var(--code-line); font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--code-muted); }
+.code-head button { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 4px 12px; border-radius: 999px; border: 1.5px solid var(--code-edge); background: var(--code-btn); color: var(--code-fg); font: inherit; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; }
+.code-head button:hover { background: var(--code-btn-hover); }
+.code-head button.done { border-color: var(--code-str); color: var(--code-str); }
+.code-block pre { margin: 0; padding: 16px; overflow-x: auto; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 14px; line-height: 1.65; color: var(--code-fg); tab-size: 2; }
 .code-block pre:focus-visible { outline: 3px solid var(--blue-light); outline-offset: -3px; }
-.code-block .c { color: #9db2cf; }
-.code-block .s { color: #7fe0a6; }
-.code-block .k { color: #8cc0ff; }
-.code-block .n { color: #ffd27a; }
+.code-block .c { color: var(--code-muted); }
+.code-block .s { color: var(--code-str); }
+.code-block .k { color: var(--code-key); }
+.code-block .n { color: var(--code-num); }
 .endpoint { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 14px; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 15px; overflow-wrap: anywhere; }
 .method { flex: none; padding: 3px 10px; border-radius: 8px; font-family: var(--f-num); font-weight: 800; font-size: 12.5px; letter-spacing: 0.08em; }
 .method.get { background: var(--go-bg); color: var(--go); }
@@ -1483,7 +1552,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .legal-head p { margin: 0; color: var(--ink-2); }
 .legal-switch { display: flex; flex-wrap: wrap; gap: 8px; }
 .legal-switch a { padding: 8px 16px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); font-weight: 700; font-size: 14.5px; text-decoration: none; color: var(--ink-2); }
-.legal-switch a[aria-current="page"] { background: var(--blue); color: #fff; box-shadow: 0 3px 0 var(--edge-shadow); }
+.legal-switch a[aria-current="page"] { background: var(--blue); color: var(--on-dark); box-shadow: 0 3px 0 var(--edge-shadow); }
 .legal .toc { padding: 16px 18px; border-radius: var(--r-m); background: var(--surface); }
 .legal .toc ol { counter-reset: toc; border-left: 0; }
 .legal .toc li { counter-increment: toc; }
@@ -1570,13 +1639,13 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
    Seluruh kartu bisa diklik lewat tautan judul; tombol di .pc-actions tetap bisa diklik sendiri. Harga wajib asli. */
 .product-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 18px; }
 @media (max-width: 560px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .pc-body { padding: 10px 12px 12px; } .pc-title { font-size: 14.5px; } .harga { font-size: 16px; } .pc-diskon { top: 8px; left: 8px; } }
-.product-card { position: relative; height: 100%; display: flex; flex-direction: column; border: 2px solid var(--edge); border-radius: var(--r-l); background: var(--card); box-shadow: var(--shadow-sticker); overflow: hidden; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
+.product-card { position: relative; height: 100%; display: flex; flex-direction: column; border: 2px solid var(--edge); border-radius: var(--r-l); background: var(--card); box-shadow: var(--shadow-sticker); overflow: hidden; transition: transform 0.35s var(--spring); }
 .product-card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shadow); }
 .product-card:focus-within { outline: 3px solid var(--blue-light); outline-offset: 3px; }
 .pc-media { position: relative; aspect-ratio: 1; background: var(--surface); border-bottom: 2px solid var(--edge); overflow: hidden; }
 .pc-media img { width: 100%; height: 100%; object-fit: cover; }
 .pc-media.contain img { object-fit: contain; padding: 12px; }
-.pc-diskon { position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px; border: 2px solid var(--edge); background: var(--blue); color: #fff; font: 800 13px var(--f-num); box-shadow: 0 2px 0 var(--edge-shadow); }
+.pc-diskon { position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px; border: 2px solid var(--edge); background: var(--blue); color: var(--on-dark); font: 800 13px var(--f-num); box-shadow: 0 2px 0 var(--edge-shadow); }
 .pc-body { flex: 1; display: flex; flex-direction: column; gap: 6px; padding: 14px 16px 16px; }
 .pc-cat { font: 700 11.5px var(--f-num); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
 .pc-title { font: 700 16px/1.35 var(--f-body); letter-spacing: 0; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -1645,7 +1714,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .modal p { color: var(--ink-2); }
 .modal .m-foot { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; padding: 16px 26px 22px; }
 .modal .m-close { position: absolute; top: 12px; right: 12px; }
-.btn.danger { --bg: #c4323a; --fg: #fff; }
+.btn.danger { --bg: var(--danger-fill); --fg: var(--on-dark); }
 
 /* =========================================================
    TAB · <div class="tabs" data-tabs><div role="tablist">..</div><div role="tabpanel">..</div></div>
@@ -1660,13 +1729,13 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 /* PROGRES (garis) */
 .progress { height: 12px; border-radius: 999px; background: var(--surface-2); overflow: hidden; border: 1.5px solid var(--line); }
 .progress span { display: block; height: 100%; width: calc(var(--v, 0) * 100%); border-radius: inherit; background: linear-gradient(90deg, var(--blue-light), var(--blue)); }
-.progress.go span { background: var(--go); } .progress.warn span { background: #e8a33d; }
+.progress.go span { background: var(--go); } .progress.warn span { background: var(--warn-fill); }
 
 /* =========================================================
    BADGE · angka atau titik di ikon / item navigasi
    <span class="has-badge"><svg/><span class="badge">3</span></span>
    ========================================================= */
-.badge { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: #c4323a; color: #fff; font-family: var(--f-num); font-size: 11.5px; font-weight: 800; line-height: 1; box-shadow: 0 0 0 2px var(--card); }
+.badge { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--danger-fill); color: var(--on-dark); font-family: var(--f-num); font-size: 11.5px; font-weight: 800; line-height: 1; box-shadow: 0 0 0 2px var(--card); }
 .badge.dot { min-width: 10px; width: 10px; height: 10px; padding: 0; }
 .badge.blue { background: var(--blue); }
 .has-badge { position: relative; display: inline-grid; place-items: center; }
@@ -1683,7 +1752,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .btn-group > button, .btn-group > a { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 0; border-left: 2px solid var(--edge); background: none; font: inherit; font-weight: 700; font-size: 15px; color: var(--ink-2); text-decoration: none; white-space: nowrap; cursor: pointer; transition: background 0.2s, color 0.2s; }
 .btn-group > :first-child { border-left: 0; }
 .btn-group > :hover { background: var(--surface); color: var(--ink); }
-.btn-group > [aria-pressed="true"] { background: var(--blue); color: #fff; }
+.btn-group > [aria-pressed="true"] { background: var(--blue); color: var(--on-dark); }
 .btn-group > [aria-pressed="true"]::before { content: ""; width: 11px; height: 6px; border-left: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: translateY(-2px) rotate(-45deg); }
 .btn-group > :focus-visible { outline: 3px solid var(--blue-light); outline-offset: -5px; border-radius: 999px; }
 .btn-group svg { width: 18px; height: 18px; }
@@ -1706,7 +1775,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
    .fab.ext = dengan label, .sm / .lg ukuran, .soft = versi biru muda
    [data-fab-shrink] = label disembunyikan saat scroll turun
    ========================================================= */
-.fab { --bg: var(--blue); --fg: #fff; position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 60px; height: 60px; padding: 0; border-radius: 22px; border: 2px solid var(--edge); background: var(--bg); color: var(--fg); box-shadow: 0 4px 0 var(--edge-shadow); font: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.35s var(--spring), box-shadow 0.35s var(--spring); }
+.fab { --bg: var(--blue); --fg: var(--on-dark); position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 60px; height: 60px; padding: 0; border-radius: 22px; border: 2px solid var(--edge); background: var(--bg); color: var(--fg); box-shadow: 0 4px 0 var(--edge-shadow); font: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.35s var(--spring); }
 .fab:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--edge-shadow); }
 .fab:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
 .fab svg { width: 24px; height: 24px; flex: none; }
@@ -1737,7 +1806,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
    <header class="appbar" data-appbar><button class="icon-btn">←</button><h1 class="title">Judul</h1><div class="actions">..</div></header>
    .appbar.collapse + <h1 class="appbar-title"> besar di bawahnya: judul kecil baru muncul setelah scroll
    ========================================================= */
-.appbar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 4px; min-height: 64px; padding: env(safe-area-inset-top) max(8px, env(safe-area-inset-right)) 0 max(8px, env(safe-area-inset-left)); background: var(--paper); transition: background 0.25s, box-shadow 0.25s; }
+.appbar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 4px; min-height: 64px; padding: env(safe-area-inset-top) max(8px, env(safe-area-inset-right)) 0 max(8px, env(safe-area-inset-left)); background: var(--paper); }
 .appbar.scrolled { background: var(--card); box-shadow: 0 2px 0 var(--edge); }
 .appbar .title { flex: 1; min-width: 0; padding: 0 8px; font-family: var(--f-head); font-weight: 800; font-size: 22px; line-height: 1.1; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .appbar .actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
@@ -1759,7 +1828,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shado
 .navbar svg, .rail-nav svg { width: 22px; height: 22px; }
 .navbar a:hover .ico, .rail-nav a:hover .ico { background: var(--surface); }
 .navbar [aria-current="page"], .rail-nav [aria-current="page"] { color: var(--ink); }
-.navbar [aria-current="page"] .ico, .rail-nav [aria-current="page"] .ico { background: var(--blue); color: #fff; box-shadow: 0 0 0 2px var(--edge), 0 3px 0 2px var(--edge-shadow); }
+.navbar [aria-current="page"] .ico, .rail-nav [aria-current="page"] .ico { background: var(--blue); color: var(--on-dark); box-shadow: 0 0 0 2px var(--edge), 0 3px 0 2px var(--edge-shadow); }
 .navbar a:active .ico, .rail-nav a:active .ico { transform: scale(0.9); }
 .navbar .badge, .rail-nav .badge { position: absolute; top: -5px; right: 8px; }
 .navbar .badge.dot, .rail-nav .badge.dot { top: 2px; right: 16px; }
@@ -1925,7 +1994,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .chip-btn:hover { border-color: var(--blue-light); color: var(--ink); }
 .chip-btn:active { transform: scale(0.96); }
 .chip-btn svg { width: 18px; height: 18px; }
-.chip-btn[aria-pressed="true"] { background: var(--blue); border-color: var(--edge); color: #fff; box-shadow: 0 2px 0 var(--edge-shadow); }
+.chip-btn[aria-pressed="true"] { background: var(--blue); border-color: var(--edge); color: var(--on-dark); box-shadow: 0 2px 0 var(--edge-shadow); }
 .chip-btn[aria-pressed="true"]::before { content: ""; width: 10px; height: 6px; border-left: 2.4px solid currentColor; border-bottom: 2.4px solid currentColor; transform: translateY(-2px) rotate(-45deg); }
 .chip-input { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 3px 0 13px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font-size: 14.5px; font-weight: 700; white-space: nowrap; }
 .chip-input.with-av { padding-left: 4px; }
@@ -1959,9 +2028,12 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .skel.block { aspect-ratio: 16 / 9; border-radius: var(--r-m); }
 @keyframes fy-shimmer { to { transform: translateX(100%); } }
 
-.ring { --v: 0; --s: 64px; position: relative; display: inline-grid; place-items: center; flex: none; width: var(--s); height: var(--s); border-radius: 50%; background: conic-gradient(var(--blue) calc(var(--v) * 1turn), var(--surface-2) 0); font-family: var(--f-num); font-weight: 800; font-size: calc(var(--s) * 0.24); color: var(--ink); }
-.ring::before { content: ""; position: absolute; inset: calc(var(--s) * 0.14); border-radius: 50%; background: var(--card); }
-.ring > * { position: relative; }
+/* Progres lingkaran: <span class="ring" style="--v:.6" role="progressbar">60%</span>.
+   :where() menjaga spesifisitas tetap rendah dan mengecualikan cincin kursor (.cursor .ring)
+   dan bingkai foto tim (.ph .ring) yang memakai nama kelas yang sama. */
+.ring:where(:not(.cursor .ring, .ph .ring)) { --v: 0; --s: 64px; position: relative; display: inline-grid; place-items: center; flex: none; width: var(--s); height: var(--s); border-radius: 50%; background: conic-gradient(var(--blue) calc(var(--v) * 1turn), var(--surface-2) 0); font-family: var(--f-num); font-weight: 800; font-size: calc(var(--s) * 0.24); color: var(--ink); }
+.ring:where(:not(.cursor .ring, .ph .ring))::before { content: ""; position: absolute; inset: calc(var(--s) * 0.14); border-radius: 50%; background: var(--card); }
+.ring:where(:not(.cursor .ring, .ph .ring)) > * { position: relative; }
 .progress.indeterminate span { width: 40%; animation: fy-indet 1.3s var(--ease) infinite; }
 @keyframes fy-indet { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
 
@@ -2035,7 +2107,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .dp-day.out { color: var(--ink-3); font-weight: 400; }
 .dp-day[aria-current="date"] { box-shadow: inset 0 0 0 2px var(--blue-light); }
 .dp-day.in-range { border-radius: 0; background: var(--surface-2); }
-.dp-day[aria-pressed="true"] { background: var(--blue); color: #fff; box-shadow: inset 0 0 0 2px var(--edge); }
+.dp-day[aria-pressed="true"] { background: var(--blue); color: var(--on-dark); box-shadow: inset 0 0 0 2px var(--edge); }
 .dp-day:disabled { color: var(--ink-3); opacity: 0.35; cursor: not-allowed; background: none; text-decoration: line-through; }
 .dp-day:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 1px; }
 .dp-foot, .tp-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
@@ -2051,7 +2123,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .tp-list:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 .tp-list li { display: grid; place-items: center; height: 44px; scroll-snap-align: center; border-radius: 12px; font-family: var(--f-num); font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--ink-2); cursor: pointer; }
 .tp-list li:hover { background: var(--surface-2); }
-.tp-list li[aria-selected="true"] { background: var(--blue); color: #fff; box-shadow: inset 0 0 0 2px var(--edge); }
+.tp-list li[aria-selected="true"] { background: var(--blue); color: var(--on-dark); box-shadow: inset 0 0 0 2px var(--edge); }
 .tp-list li.active:not([aria-selected="true"]) { outline: 2px solid var(--blue-light); outline-offset: -2px; }
 @media (max-width: 600px) { .tp-list { width: 100%; } }
 
@@ -2137,7 +2209,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .stepper li::before { content: counter(fy-step); display: grid; place-items: center; width: var(--n); height: var(--n); border-radius: 50%; border: 2px solid var(--line); background: var(--card); font-family: var(--f-num); font-weight: 800; font-size: 16px; color: var(--ink-3); position: relative; z-index: 1; transition: background 0.25s, border-color 0.25s, color 0.25s; }
 .stepper li:not(:last-child)::after { content: ""; position: absolute; top: calc(var(--n) / 2 - 1px); left: calc(50% + var(--n) / 2 + 4px); right: calc(-50% + var(--n) / 2 + 4px); border-top: 2px dashed var(--line); }
 .stepper li[aria-current="step"] { color: var(--ink); }
-.stepper li[aria-current="step"]::before { border-color: var(--edge); background: var(--blue); color: #fff; box-shadow: 0 3px 0 var(--edge-shadow); }
+.stepper li[aria-current="step"]::before { border-color: var(--edge); background: var(--blue); color: var(--on-dark); box-shadow: 0 3px 0 var(--edge-shadow); }
 .stepper li.done { color: var(--ink-2); }
 .stepper li.done::before { content: ""; border-color: var(--blue); background: var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 20px no-repeat; }
 .stepper li.done:not(:last-child)::after { border-top-style: solid; border-color: var(--blue); }
@@ -2316,7 +2388,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .pagination a:hover { background: var(--surface); }
 .pagination a:active { transform: scale(0.94); }
 .pagination a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 1px; }
-.pagination a[aria-current="page"] { background: var(--blue); color: #fff; border-color: var(--edge); box-shadow: var(--shadow-pop); }
+.pagination a[aria-current="page"] { background: var(--blue); color: var(--on-dark); border-color: var(--edge); box-shadow: var(--shadow-pop); }
 .pagination a[aria-disabled="true"] { opacity: 0.35; pointer-events: none; }
 .pagination .gap { color: var(--ink-3); min-width: 24px; padding: 0; }
 .pagination .ikon { width: 20px; height: 20px; }
@@ -2340,7 +2412,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    <div class="input-group"><span class="addon">Rp</span><input class="input" inputmode="numeric" aria-label="Harga"></div>
    <div class="input-group"><input class="input" aria-label="Nama email"><span class="addon">@tmail.id</span></div>
    <div class="input-group"><input class="input" type="search" aria-label="Kode promo"><button class="btn sm" type="button">Pakai</button></div> */
-.input-group { display: flex; align-items: stretch; min-width: 0; border: 2px solid var(--edge); border-radius: var(--r-m); background: var(--card); box-shadow: 0 3px 0 var(--edge-shadow); overflow: hidden; transition: box-shadow 0.25s var(--spring), border-color 0.2s; }
+.input-group { display: flex; align-items: stretch; min-width: 0; border: 2px solid var(--edge); border-radius: var(--r-m); background: var(--card); box-shadow: 0 3px 0 var(--edge-shadow); overflow: hidden; }
 .input-group:focus-within { border-color: var(--text-blue); box-shadow: 0 3px 0 var(--blue), 0 0 0 4px rgba(83, 157, 233, 0.25); }
 .input-group:has([aria-invalid="true"]) { border-color: var(--danger); box-shadow: 0 3px 0 var(--danger); }
 .input-group > .input { flex: 1; min-width: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
@@ -2397,14 +2469,14 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .gallery a:hover { transform: translateY(-3px); }
 .gallery a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 .gallery img { width: 100%; height: 100%; object-fit: cover; }
-.lightbox { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0; background: rgba(2, 6, 15, 0.92); color: #fff; }
+.lightbox { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; padding: 0; border: 0; background: rgba(2, 6, 15, 0.92); color: var(--on-dark); }
 .lightbox[open] { display: grid; grid-template-rows: auto 1fr auto; }
 .lightbox::backdrop { background: transparent; }
 .lb-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: max(12px, env(safe-area-inset-top)) 16px 8px; font: 700 14px var(--f-num); }
 .lb-stage { position: relative; display: grid; place-items: center; min-height: 0; padding: 0 64px; touch-action: pan-y; }
 .lb-stage img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px; }
-.lb-cap { padding: 10px 16px max(16px, env(safe-area-inset-bottom)); text-align: center; font-size: 14.5px; color: #e8f1ff; }
-.lightbox .icon-btn { background: rgba(255, 255, 255, 0.12); color: #fff; width: 44px; height: 44px; }
+.lb-cap { padding: 10px 16px max(16px, env(safe-area-inset-bottom)); text-align: center; font-size: 14.5px; color: var(--night-ink); }
+.lightbox .icon-btn { background: rgba(255, 255, 255, 0.12); color: var(--on-dark); width: 44px; height: 44px; }
 .lightbox .icon-btn:hover { background: rgba(255, 255, 255, 0.22); }
 .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); }
 .lb-prev { left: 10px; } .lb-next { right: 10px; }
@@ -2415,12 +2487,12 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    <div class="announce" data-announce="promo-11-11">Diskon 11.11 sampai Minggu. <a href="/promo">Lihat promo</a>
      <button class="announce-close" type="button" data-close aria-label="Tutup pengumuman"><svg class="ikon"><use href="#ikon-tutup"/></svg></button></div>
    Ditutup = diingat per id di localStorage (fy-tutup-<id>), tidak muncul lagi di kunjungan berikutnya. */
-.announce { position: relative; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 12px; padding: 10px 56px 10px 16px; background: var(--blue); color: #fff; font-size: 14.5px; font-weight: 700; text-align: center; }
-.announce a { color: #fff; text-decoration: underline; text-underline-offset: 3px; padding-block: 4px; }
-.announce .announce-close { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: none; color: #fff; cursor: pointer; }
+.announce { position: relative; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 12px; padding: 10px 56px 10px 16px; background: var(--blue); color: var(--on-dark); font-size: 14.5px; font-weight: 700; text-align: center; }
+.announce a { color: var(--on-dark); text-decoration: underline; text-underline-offset: 3px; padding-block: 4px; }
+.announce .announce-close { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: none; color: var(--on-dark); cursor: pointer; }
 .announce .announce-close:hover { background: rgba(255, 255, 255, 0.16); }
-.announce .announce-close:focus-visible { outline: 3px solid #fff; outline-offset: -4px; }
-.announce .announce-close .ikon { width: 18px; height: 18px; --ikon-titik: #fff; }
+.announce .announce-close:focus-visible { outline: 3px solid var(--on-dark); outline-offset: -4px; }
+.announce .announce-close .ikon { width: 18px; height: 18px; --ikon-titik: var(--on-dark); }
 .announce[hidden] { display: none; }
 
 /* ---------- Persetujuan cookie ----------
@@ -2467,9 +2539,9 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .side-nav a { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 15px; color: var(--ink-2); transition: background 0.2s, color 0.2s; }
 .side-nav a svg { width: 20px; height: 20px; flex: none; }
 .side-nav a:hover { background: var(--surface); color: var(--ink); }
-.side-nav a[aria-current="page"] { background: var(--blue); color: #fff; box-shadow: var(--shadow-pop); border: 2px solid var(--edge); padding: 8px 10px; }
+.side-nav a[aria-current="page"] { background: var(--blue); color: var(--on-dark); box-shadow: var(--shadow-pop); border: 2px solid var(--edge); padding: 8px 10px; }
 .side-nav .count { margin-left: auto; min-width: 22px; padding: 1px 7px; border-radius: 999px; background: var(--surface-2); color: var(--text-blue-deep); font-family: var(--f-num); font-size: 12px; font-weight: 800; text-align: center; }
-.side-nav a[aria-current="page"] .count { background: #fff; color: #0261cd; }
+.side-nav a[aria-current="page"] .count { background: var(--on-dark); color: var(--blue-deep); }
 .side-foot { display: grid; gap: 10px; }
 .side-help { position: relative; padding: 16px 16px 16px 84px; border-radius: var(--r-m); background: var(--surface); font-size: 14px; color: var(--ink-2); min-height: 92px; }
 .side-help img { position: absolute; left: 8px; bottom: 0; width: 70px; height: auto; }
@@ -2498,14 +2570,14 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 /* Kolom pencarian di topbar */
 .search { position: relative; flex: 1 1 260px; max-width: 420px; }
 .search svg { position: absolute; left: 14px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--ink-3); pointer-events: none; }
-.search input { width: 100%; font: inherit; font-size: 15px; color: var(--ink); padding: 10px 14px 10px 42px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--field); transition: border-color 0.2s, box-shadow 0.2s; }
+.search input { width: 100%; font: inherit; font-size: 15px; color: var(--ink); padding: 10px 14px 10px 42px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--field); }
 .search input::placeholder { color: var(--placeholder); }
 .search input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.25); }
 @media (max-width: 620px) { .topbar .search { display: none; } }
 
 /* Tombol ikon dengan titik notifikasi */
 .icon-btn { position: relative; color: var(--ink-2); }
-.icon-btn .dot-badge { position: absolute; top: 8px; right: 9px; width: 9px; height: 9px; border-radius: 50%; background: #e5484d; box-shadow: 0 0 0 2px var(--card); }
+.icon-btn .dot-badge { position: absolute; top: 8px; right: 9px; width: 9px; height: 9px; border-radius: 50%; background: var(--danger-fill); box-shadow: 0 0 0 2px var(--card); }
 
 /* =========================================================
    AVATAR
@@ -2548,9 +2620,9 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .kpi .delta.down { color: var(--danger); background: var(--danger-bg); }
 .kpi .delta.flat { color: var(--eos); background: var(--eos-bg); }
 .kpi .spark { position: absolute; right: 14px; bottom: 14px; width: 96px; height: 34px; color: var(--blue-light); }
-.kpi.blue { background: var(--blue); color: #fff; }
-.kpi.blue .lab, .kpi.blue .lab svg { color: #f2f8ff; }
-.kpi.blue .spark { color: #fff; }
+.kpi.blue { background: var(--blue); color: var(--on-dark); }
+.kpi.blue .lab, .kpi.blue .lab svg { color: var(--on-dark-2); }
+.kpi.blue .spark { color: var(--on-dark); }
 @media (max-width: 1100px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px) { .kpis { grid-template-columns: 1fr; } }
 
@@ -2563,7 +2635,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .bars { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); align-items: end; gap: 10px; height: 200px; padding-bottom: 24px; position: relative; }
 .bars::before { content: ""; position: absolute; left: 0; right: 0; bottom: 24px; border-top: 2px solid var(--line); }
 .bars span { position: relative; height: calc(var(--v) * 100%); min-height: 4px; border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, var(--blue-light), var(--blue)); transform-origin: bottom; }
-.bars span.hl { background: linear-gradient(180deg, #7cc0ff, var(--blue-deep)); box-shadow: 0 0 0 2px var(--edge); }
+.bars span.hl { background: linear-gradient(180deg, var(--blue-light), var(--blue-deep)); box-shadow: 0 0 0 2px var(--edge); }
 .bars span::after { content: attr(data-l); position: absolute; left: 50%; top: calc(100% + 6px); transform: translateX(-50%); font-family: var(--f-num); font-size: 12px; color: var(--ink-3); white-space: nowrap; }
 .linechart { width: 100%; height: 220px; color: var(--blue); }
 .linechart .grid line { stroke: var(--line); stroke-width: 1; }
@@ -2578,10 +2650,6 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .legend li { display: flex; align-items: center; gap: 8px; }
 .legend li::before { content: ""; width: 12px; height: 12px; border-radius: 4px; background: var(--c, var(--blue)); }
 .legend b { margin-left: auto; color: var(--ink); font-family: var(--f-num); }
-
-/* =========================================================
-   PROGRESS
-   ========================================================= */
 
 /* =========================================================
    DAFTAR AKTIVITAS / NOTIFIKASI
@@ -2620,7 +2688,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .pager nav { display: flex; gap: 4px; }
 .pager a, .pager span.cur { min-width: 36px; height: 36px; padding: 0 8px; display: grid; place-items: center; border-radius: 10px; text-decoration: none; font-family: var(--f-num); font-weight: 700; color: var(--ink-2); }
 .pager a:hover { background: var(--surface); }
-.pager span.cur { background: var(--blue); color: #fff; }
+.pager span.cur { background: var(--blue); color: var(--on-dark); }
 .pager a[aria-disabled="true"] { opacity: 0.4; pointer-events: none; }
 
 /* =========================================================
@@ -2631,7 +2699,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .switch input + span { position: relative; flex: none; width: 50px; height: 28px; border-radius: 999px; background: var(--surface-2); border: 2px solid var(--edge); transition: background 0.25s; }
 .switch input + span::after { content: ""; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--card); border: 2px solid var(--edge); transition: transform 0.3s var(--spring); }
 .switch input:checked + span { background: var(--blue); }
-.switch input:checked + span::after { transform: translateX(22px); background: #fff; }
+.switch input:checked + span::after { transform: translateX(22px); background: var(--on-dark); }
 .switch input:focus-visible + span { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 .settings-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .settings-row:last-child { border-bottom: 0; }
@@ -2645,12 +2713,12 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    <div class="auth"><aside class="auth-art">..</aside><main class="auth-main"><div class="auth-card">..</div></main></div>
    ========================================================= */
 .auth { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); min-height: 100vh; min-height: 100dvh; background: var(--paper); }
-.auth-art { position: relative; overflow: hidden; display: grid; align-content: space-between; gap: 30px; padding: clamp(28px, 4vw, 48px); background: var(--blue); color: #fff; }
-.auth-art .brand { color: #fff; }
+.auth-art { position: relative; overflow: hidden; display: grid; align-content: space-between; gap: 30px; padding: clamp(28px, 4vw, 48px); background: var(--blue); color: var(--on-dark); }
+.auth-art .brand { color: var(--on-dark); }
 .auth-art .seal-deco { position: absolute; right: -18%; bottom: -14%; width: 80%; color: rgba(255, 255, 255, 0.1); max-width: none; pointer-events: none; }
 .auth-art .copy { position: relative; display: grid; gap: 14px; max-width: 30ch; }
 .auth-art h2 { font-size: clamp(36px, 4vw, 54px); }
-.auth-art p { color: #f2f8ff; }
+.auth-art p { color: var(--on-dark-2); }
 .auth-art .mascot { position: relative; width: min(62%, 300px); height: auto; justify-self: end; margin: 0 -10px calc(clamp(28px, 4vw, 48px) * -1) 0; }
 .auth-art .bubble { position: absolute; right: min(48%, 250px); bottom: min(34%, 260px); z-index: 2; }
 .auth-main { display: grid; justify-items: center; align-items: start; padding: clamp(24px, 8vh, 96px) clamp(16px, 4vw, 48px) clamp(24px, 4vw, 56px); } /* atas, bukan tengah: form tidak loncat saat pesan error muncul/hilang */
@@ -2673,7 +2741,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .pw-meter { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 .pw-meter i { height: 6px; border-radius: 3px; background: var(--line); transition: background 0.25s; }
 .pw-meter[data-level="1"] i:nth-child(-n+1) { background: var(--danger); }
-.pw-meter[data-level="2"] i:nth-child(-n+2) { background: #e8a33d; }
+.pw-meter[data-level="2"] i:nth-child(-n+2) { background: var(--warn-fill); }
 .pw-meter[data-level="3"] i:nth-child(-n+3) { background: var(--blue-light); }
 .pw-meter[data-level="4"] i { background: var(--go); }
 .auth-done { display: grid; justify-items: center; text-align: center; gap: 14px; }
@@ -2713,7 +2781,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .convo-meta { display: grid; justify-items: end; gap: 6px; font-family: var(--f-num); font-size: 12.5px; color: var(--ink-3); }
 .convo.unread .convo-meta time { color: var(--text-blue-deep); font-weight: 700; }
 .av-wrap { position: relative; flex: none; display: inline-grid; }
-.av-wrap .online { position: absolute; right: 0; bottom: 1px; width: 14px; height: 14px; border-radius: 50%; background: #2fbf63; border: 2.5px solid var(--paper); }
+.av-wrap .online { position: absolute; right: 0; bottom: 1px; width: 14px; height: 14px; border-radius: 50%; background: var(--online); border: 2.5px solid var(--paper); }
 
 .thread { display: none; flex-direction: column; min-width: 0; min-height: 0; background: var(--paper); }
 .chat.thread-open .thread { display: flex; position: fixed; inset: 0; z-index: 90; }
@@ -2734,18 +2802,18 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .msg time { justify-self: end; display: inline-flex; align-items: center; gap: 4px; font-family: var(--f-num); font-size: 11.5px; color: var(--ink-3); }
 .msg time svg { width: 16px; height: 16px; }
 .msg.them { align-self: flex-start; border-bottom-left-radius: 6px; }
-.msg.me { align-self: flex-end; background: var(--blue); color: #fff; border-bottom-right-radius: 6px; }
-.msg.me time { color: #f2f8ff; }
-.msg.me time .read { color: #fff; }
+.msg.me { align-self: flex-end; background: var(--blue); color: var(--on-dark); border-bottom-right-radius: 6px; }
+.msg.me time { color: var(--on-dark-2); }
+.msg.me time .read { color: var(--on-dark); }
 .msg + .msg.them, .msg.me + .msg.me { margin-top: -2px; }
 .msg.media { padding: 6px 6px 8px; }
 .msg.media img { width: 100%; max-width: 280px; height: auto; border-radius: 14px; }
 .msg.media time { padding-right: 8px; }
 .msg-card { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: center; padding: 10px; border-radius: 14px; background: var(--surface); color: var(--ink); text-decoration: none; }
-.msg.me .msg-card { background: #fff; color: #0b0f1a; }
+.msg.me .msg-card { background: var(--card); color: var(--ink); }
 .msg-card b { display: block; font-size: 15px; }
 .msg-card small { font-size: 13px; color: var(--ink-2); }
-.msg.me .msg-card small { color: #3a4458; }
+.msg.me .msg-card small { color: var(--ink-2); }
 .typing { align-self: flex-start; display: inline-flex; gap: 5px; padding: 14px 16px; border-radius: 20px 20px 20px 6px; border: 2px solid var(--edge); background: var(--card); box-shadow: 0 3px 0 var(--edge-shadow); }
 .typing[hidden] { display: none; }
 .typing i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); animation: fy-type 1.2s var(--ease) infinite; }
@@ -2756,7 +2824,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .composer textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.25); }
 .composer textarea::placeholder { color: var(--placeholder); }
 .composer .icon-btn { flex: none; width: 48px; height: 48px; }
-.composer .send { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--edge); background: var(--blue); color: #fff; box-shadow: 0 3px 0 var(--edge-shadow); cursor: pointer; transition: transform 0.25s var(--spring); }
+.composer .send { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--edge); background: var(--blue); color: var(--on-dark); box-shadow: 0 3px 0 var(--edge-shadow); cursor: pointer; transition: transform 0.25s var(--spring); }
 .composer .send svg { width: 22px; height: 22px; }
 .composer .send:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
 .composer .send:disabled { background: var(--surface-2); color: var(--ink-3); cursor: default; }
@@ -2873,7 +2941,9 @@ export function initTheme() {
 // - Semua komponen kontrol lewat initControls() (js/controls.js): dropdown, modal, sheet, tab,
 //   button group, chip, FAB, carousel, slider, tooltip, search, date/time picker, snackbar
 // - Tampil/sembunyi password ([data-pw-toggle]) dan meter kekuatan ([data-pw-meter])
-// - Validasi form ([data-validate]): required, email, minlength, [data-match="#id"], tampil pesan .err
+// - Validasi form ([data-validate]): required, email, minlength, pattern, min/max, [data-match="#id"], tampil pesan .err
+//   (pesan sama dengan stepper di controls.js; teks bisa diganti lewat data-msg-required/-type/-short/-pattern/-range/-match)
+// - Jeda animasi tanpa henti (spinner, skeleton, progres, mengetik) saat di luar layar (kelas .idle)
 // - Pilih semua baris tabel ([data-check-all])
 // - Toast (pakai markup .toast dari snippets/body-parts.html)
 
@@ -2940,6 +3010,8 @@ export function initApp() {
       if (f.validity.valueMissing) return d.msgRequired || "Wajib diisi.";
       if (f.validity.typeMismatch) return d.msgType || "Formatnya belum benar.";
       if (f.validity.tooShort) return d.msgShort || `Minimal ${f.minLength} karakter.`;
+      if (f.validity.patternMismatch) return d.msgPattern || "Formatnya belum benar.";
+      if (f.validity.rangeUnderflow || f.validity.rangeOverflow) return d.msgRange || "Di luar batas yang boleh.";
       if (d.match && f.value !== document.querySelector(d.match)?.value) return d.msgMatch || "Belum sama.";
       return "";
     };
@@ -2960,7 +3032,10 @@ export function initApp() {
     };
     const fields = () => $$("input, select, textarea", form).filter((f) => f.willValidate && f.type !== "hidden");
     // Pesan error hilang saat pengguna mengetik perbaikannya (bukan saat blur), supaya tata letak
-    // tidak bergeser tepat ketika pengguna mengklik tombol lain. Error baru hanya ditambah saat blur.
+    // tidak bergeser tepat ketika pengguna mengklik tombol lain. Error baru ditambah saat blur, KECUALI
+    // kolom yang masih kosong: kolom kosong baru ditandai saat kirim. Alasannya: pengguna sering hanya
+    // menekan Tab melewati kolom atau mengklik kolom lain lebih dulu; pesan "Wajib diisi" yang muncul saat
+    // itu terasa memarahi dan menggeser tata letak. Keputusan ini dicatat di AGENTS.md (Halaman aplikasi).
     fields().forEach((f) => {
       f.addEventListener("input", () => { if (f.getAttribute("aria-invalid") === "true") check(f); });
       f.addEventListener("change", () => { if (f.getAttribute("aria-invalid") === "true") check(f); });
@@ -3012,6 +3087,22 @@ export function initApp() {
       b.classList.add("done"); setTimeout(() => b.classList.remove("done"), 2000);
     } catch { toast("Gagal menyalin. Salin manual, ya."); }
   }));
+
+  /* ---------- Jeda animasi tanpa henti di luar layar ----------
+     Sama seperti motion.js: elemen yang punya animasi infinite (spinner, skeleton, progres tanpa angka,
+     indikator mengetik) diamati, dan kelas .idle menjeda animasinya saat tidak terlihat. */
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("idle", !e.isIntersecting)), { rootMargin: "50% 0px" });
+    const seen = new WeakSet();
+    const watch = (r = document) => $$(".spinner, .skel, .progress.indeterminate, .typing, [data-pause]", r).forEach((el) => {
+      if (seen.has(el)) return;
+      seen.add(el);
+      io.observe(el);
+    });
+    watch();
+    let antre = 0; // elemen yang ditambah belakangan (mis. skeleton saat memuat) ikut diamati, dikumpulkan per frame
+    new MutationObserver((ms) => { if (!antre && ms.some((m) => m.addedNodes.length)) antre = requestAnimationFrame(() => { antre = 0; watch(); }); }).observe(document.body, { childList: true, subtree: true });
+  }
 
   return { toast, snackbar, otpError, setSide };
 }

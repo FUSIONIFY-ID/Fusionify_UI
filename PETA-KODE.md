@@ -1,6 +1,6 @@
 # Peta teknis · FUSIONIFY UI (repo `FUSIONIFY-ID/Fusionify_UI`)
 
-Dibuat 1 Nov 2026 dari pembacaan penuh repo ini (commit `85ae4e4`, tag terakhir `v1.13.0`). Peta, bukan aturan: kalau bertentangan dengan AGENTS.md atau DESIGN.md, aturan yang menang.
+Dibuat 1 Nov 2026 dari pembacaan penuh repo ini (commit `85ae4e4`, tag terakhir `v1.13.0`). Peta, bukan aturan: kalau bertentangan dengan AGENTS.md atau DESIGN.md, aturan yang menang. Diperbarui untuk 1.14.0 (31 Okt 2026): lihat 8.0.
 Nomor baris mengacu ke file apa adanya. CSS di repo ini ditulis padat (satu aturan per baris), jadi nomor baris = nomor aturan.
 
 Cara baca cepat: bagian 1 (arsitektur), 4 (JS + atribut), 7 (uji), 8 (temuan). Temuan tingkat **tinggi** ada di 8.1.
@@ -50,7 +50,7 @@ Folder aset biner (hanya dihitung):
 
 ### 1.3 Versi
 
-- `package.json` `version` = **1.13.0**; bagian teratas `CHANGELOG.md` = **1.13.0 · 29 Oktober 2026**. Cocok. Tag git terakhir `v1.13.0`.
+- `package.json` `version` = **1.14.0**; bagian teratas `CHANGELOG.md` = **1.14.0 · 31 Oktober 2026**. Cocok. Tag terakhir `v1.14.0` (lokal; dorong dengan `git push origin v1.14.0`).
 - `name` `@fusionify/ui`, `private: true`, `type: module`. `exports`: `./css/*`, `./js/motion|seal|app|theme|controls|lisensi`, `./tokens/*`, `./snippets/*`, `./fonts/*`, `./brand/*`, `./mascot/*`, `./badge/*`, `./templates/*`, `./react` (index.tsx), `./react/tailwind-preset`, `./email`, `./email/templates`, `./grafis/*`, `./dokumen/*`, `./ikon/*`.
 - devDependencies: playwright 1.56.0, axe-core 4.10.3, docx 9.7.1, pptxgenjs 4.0.1, simple-icons 13.21.0, react/react-dom 18.3.1 (+types), typescript 5.6.3, gsap 3.12.5, lenis 1.1.13.
 
@@ -82,11 +82,11 @@ Status regenerate yang saya cek (di salinan scratchpad, bukan di repo): `build-k
 
 ---
 
-## 2. `css/tokens.css` (132 baris)
+## 2. `css/tokens.css` (162 baris, 1.14.0)
 
 `@font-face` (`:6-10`): "Afacad Flux Variable" (100-1000), "Sansation" 400 dan 700, "Caveat Variable" (400-700), "Exo 2 Variable" (100-900). Semua `font-display: swap`, path `../fonts/*.woff2`.
 
-### 2.1 Terang (`:root`, `:12-82`)
+### 2.1 Terang (`:root`, `:12-106`)
 
 | Kelompok | Token = nilai |
 | --- | --- |
@@ -99,17 +99,19 @@ Status regenerate yang saya cek (di salinan scratchpad, bukan di repo): `build-k
 | Gerak | `--ease` cubic-bezier(0.22, 1, 0.36, 1) · `--spring` cubic-bezier(0.34, 1.56, 0.64, 1) |
 | Tema | `--card` #ffffff · `--field` #ffffff · `--surface-2` #dcecff · `--edge` var(--ink) · `--edge-shadow` var(--ink) · `--text-blue` #0d6cd7 · `--text-blue-deep` #0261cd · `--inverse-bg` #0b0f1a · `--inverse-fg` #ffffff · `--inverse-accent` #8cc0ff · `--nav-glass` rgba(255,255,255,0.82) · `--hero-glow` #dcedff · `--seal-tint` #d8eaff · `--danger` #b4232c / `--danger-bg` #fde8ea · `--placeholder` #707a8c · `--bintang` #f0a800 |
 | Bayangan | `--shadow` 0 1px 0 rgba(13,108,215,.06), 0 12px 32px -14px rgba(11,15,26,.18) · `--shadow-pop` 0 3px 0 var(--edge-shadow) · `--shadow-sticker` 0 6px 0 var(--edge-shadow) |
+| Sama di dua tema (1.14.0) | `--on-dark` #ffffff · `--on-dark-2` #f2f8ff · `--danger-fill` #c4323a · `--warn-fill` #e8a33d · `--online` #2fbf63 (gelap #3fd277) |
+| Permukaan malam (1.14.0) | `--night-ink` #dbe9fb · `--night-ink-2` #9fb3cd · `--night-ink-3` #8296b2 · `--night-link` #b9cbe3 · `--night-line` #1d2b45 · `--night-line-2` #2a3b5c · `--code-fg` #eaf3ff · `--code-muted` #9db2cf · `--code-line` #1f3459 · `--code-edge` #2e5592 · `--code-btn` #10203f · `--code-btn-hover` #17305a · `--code-str` #7fe0a6 · `--code-key` #8cc0ff · `--code-num` #ffd27a |
 | Lain | `color-scheme: light` |
 
-Token di luar tokens.css: `--seal-mask` (data-URI segel, **didefinisikan di `css/product.css:53`**), `--footer-top` (hanya di blok gelap).
+`--seal-mask` (data-URI segel) ada di `:root` tersendiri `:110` (sejak 1.14.0; sebelumnya di product.css). `--footer-top` hanya di blok gelap.
 
-### 2.2 Gelap (`:root[data-theme="dark"]` `:91-106`, disalin identik di `@media (prefers-color-scheme: dark) :root:not([data-theme="light"])` `:107-124`)
+### 2.2 Gelap (`:root[data-theme="dark"]` `:119-134`, disalin identik di `@media (prefers-color-scheme: dark) :root:not([data-theme="light"])` `:136-153`; keduanya dicek identik oleh `build-tokens.mjs` dan `tests/token.mjs`)
 
 `--ink` #eaf3ff · `--ink-2` #c3d4ea · `--ink-3` #9db2cf · `--paper` #071022 · `--surface` #0c1a33 · `--line` #1f3459 · `--white` #0f2040 · `--card` #10203f · `--field` #0b1830 · `--surface-2` #17305a · `--edge` #2e5592 · `--edge-shadow` #02060f · `--text-blue` #8cc0ff · `--text-blue-deep` #a9d0ff · `--inverse-bg` #eaf3ff · `--inverse-fg` #071022 · `--inverse-accent` #0261cd · `--nav-glass` rgba(10,22,44,.82) · `--hero-glow` #0f2a55 · `--seal-tint` #15315c · `--go` #7fe0a6 / #0f3324 · `--beta` #ffd27a / #3a2a08 · `--wip` #ffb98a / #3c220e · `--plan` #a9d0ff / #10264a · `--eos` #b5c0d0 / #1c2638 · `--danger` #ff9ba1 / #3d1418 · `--placeholder` #8597b3 · `--footer-top` #1f3459 · `--bintang` #ffc93d · `--shadow` 0 1px 0 rgba(0,0,0,.2), 0 12px 32px -14px rgba(0,0,0,.6) · `color-scheme: dark`.
 
 Tidak berubah di gelap: `--blue`, `--blue-deep`, `--blue-light`, `--night`, huruf, radius, jarak, gerak.
 
-### 2.3 Utilitas tema (`:126-132`)
+### 2.3 Utilitas tema (`:157-161`)
 
 `.only-light` / `.only-dark` disembunyikan sesuai `data-theme` atau `prefers-color-scheme` (tanpa atribut).
 
@@ -433,23 +435,31 @@ Runner `tests/run.mjs`: server statis di port acak, jalankan tiap `tests/*.mjs` 
 | `dokumen.mjs` | `dokumen.js` (terbilang, Rupiah, total), tidak ada isi keluar halaman, jumlah halaman PDF, huruf/gambar, template Office |
 | `email.mjs` | render semua template, escape, tanpa SVG/WebP, gambar ber-ukuran, < 102 KB, teks polos, tanpa scroll samping di HP |
 | `grafis.mjs` | semua kanvas jadi PNG ukuran platform, `--isi` mengganti teks |
+| `token.mjs` (1.14.0) | tanpa browser: dua blok gelap identik, tanpa hex di CSS komponen, setiap `var()` terdefinisi, warna `email/fy-email.js` sama dengan token |
+| `interaksi-kursor-menu-tema.mjs` (1.14.0) | kursor dengan mouse (demo, landing): cincin garis, scale 0,63 → 1, hanya transisi `scale`; bingkai foto tim 110% tanpa conic; progres `.ring` tetap 64px conic; menu HP 375/390/820 (lingkaran di tengah tombol menu, menutup layar, menunggu animasi saat menutup); nav kapsul `::before`; tema gelap lewat tombol + kontras axe di 8 halaman × 2 lebar |
 
 Ukuran layar: tata-letak dan tanpa-js memakai 375×667, 390×844, 768×1024, 820×1180, 1024×768, 1366×768, 1440×900, 1920×1080 (sesuai AGENTS). Layar sentuh 360×740, 375×667, 390×844, 430×932.
 
 Halaman terdaftar di `tests/tata-letak-dan-kontras.mjs` (23, **semua template + demo sudah masuk**): demo/index, landing-produk, 404, auth/masuk, auth/daftar, auth/lupa-password, auth/atur-ulang-password, dashboard, admin, komponen, app-mobile, chat, acara, auth/verifikasi, 500, offline, maintenance, bayar-qris, status, dokumentasi, legal/privasi, legal/syarat, ikon.
 
-Celah cakupan:
-- **Belum di `tanpa-js-dan-kurangi-gerak.mjs`**: `500.html`, `offline.html`, `maintenance.html`, `auth/daftar.html`, `auth/lupa-password.html`, `auth/atur-ulang-password.html`.
-- **Belum di `layar-sentuh.mjs`**: demo, 404, 500, maintenance, auth/masuk, auth/lupa-password, auth/atur-ulang-password, **bayar-qris** (halaman yang paling sering dibuka di HP), status, dokumentasi, legal/privasi, legal/syarat, ikon.
+Celah cakupan (diperbarui 1.14.0):
+- `tanpa-js-dan-kurangi-gerak.mjs` kini 23 halaman (semua template + demo).
+- `layar-sentuh.mjs` kini 20 halaman; yang belum: demo, legal/syarat, ikon (halaman developer).
 - `grafis/*.html` dan `dokumen/cetak/*.html` hanya diuji oleh uji khususnya (tidak diuji kontras axe).
-- Tidak ada uji tema manual (`data-theme="dark"` lewat tombol); kedua blok gelap di tokens.css disalin manual dan hanya jalur `prefers-color-scheme` yang diuji.
+- Tema manual (tombol) diuji kontras di 8 halaman (`interaksi-kursor-menu-tema.mjs`); kesamaan dua blok gelap diuji `token.mjs`.
 - Tata-letak tidak memeriksa teks bertabrakan (AGENTS mewajibkan); hanya tanpa-js yang memeriksa teks terpotong.
-- Tidak ada uji visual kursor (Playwright tidak menggerakkan mouse di uji tata letak), sehingga temuan 8.1 #1 lolos.
-- `npm test` tidak saya jalankan penuh di sesi ini (memakan waktu lama); yang saya jalankan hanya pemeriksaan Playwright kecil untuk temuan #1.
+- Kursor diuji dengan mouse di `interaksi-kursor-menu-tema.mjs`.
 
 ---
 
 ## 8. Temuan
+
+### 8.0 Status perbaikan (1.14.0, 31 Oktober 2026)
+
+Selesai: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 (dua blok tetap ditulis, tapi dicek identik di `build-tokens.mjs` dan `tests/token.mjs`), 11, 12 (dipertahankan dengan alasan, dicatat di AGENTS bagian Halaman aplikasi), 13, 14, 15, 17, 18, 19, 20, 22 (`tests/token.mjs` membandingkan warna email dengan token), 23, 24, 25.
+Sisa: **16** (komponen hero belum dibuat, menunggu keputusan desain), **21** (PNG ikon email belum dipakai `fy-email.js`; rencana: tambahkan blok `{ ikon: "nama" }` di `renderEmail` saat ada kebutuhan nyata, karena mengubah tata letak email semua produk), **26** (informasi, sengaja dibiarkan). Catatan untuk 4: transisi warna `background`/`color` 0,2 dtk pada tab, tautan nav, chip, dll. masih ada (hanya cat ulang, bukan tata letak), begitu juga `.theme-switching` yang sengaja.
+
+Nomor baris di bawah mengacu ke 1.13.0. Lokasi penting setelah 1.14.0: `components.css` `.nav` `:57`, `.drawer` `:102`, `.person .ph .ring` `:187`, `.fcols .fname` `:257`, `.cursor .ring` `:292`, `.idle` `:325`; `controls.css` `.btn.danger` `:39`, `.progress` `:52`, `.ring:where(...)` `:356`; `motion.js` stub `:117`, `initFusionify` `:119`; `app.js` jeda `.idle` `:164`; `controls.js` `esc` `:53`, `TEKS` `:58`, `icsDate` `:776`, `lightbox(src)` `:1249`.
 
 Lokasi `file:baris`. Tingkat: **tinggi** (rusak terlihat / melanggar aturan inti), **sedang**, **rendah**.
 
@@ -501,7 +511,7 @@ Lokasi `file:baris`. Tingkat: **tinggi** (rusak terlihat / melanggar aturan inti
 
 ### 8.4 Yang sudah selaras (dicek)
 
-- `package.json` 1.13.0 = CHANGELOG teratas = tag `v1.13.0`.
+- `package.json` 1.14.0 = CHANGELOG teratas (tag `v1.14.0` dibuat lokal).
 - `FUSIONIFY-UI-KONTEKS.md` identik dengan hasil `build-konteks` sekarang; `tokens/` identik dengan hasil `build-tokens`.
 - `skills/fusionify-brand-style/SKILL.md` (242 baris) sudah memuat komponen 1.13 (breadcrumb, pagination, accordion, product-card, consent, announce, timeline, countdown, rating, qty, galeri, kbd, harga, lucide), 136 ikon, penomoran `FI`. Tidak menyebut `--bintang`.
 - Semua kelas yang disebut AGENTS untuk tiap file CSS ada di CSS (kecuali penempatan `.progress` dan `.btn.danger`, temuan #6).

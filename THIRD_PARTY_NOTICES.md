@@ -16,3 +16,6 @@ Kode di repo ini ditulis oleh FUSIONIFY. Pihak ketiga yang dipakai:
 | TypeScript (dev dependency, cek tipe `react/index.tsx`) | Apache License 2.0 |
 | simple-icons 13.21.0 (dev dependency): path logo media sosial di `ikon/sosmed/`, `ikon/ikon.svg` (`sosmed-*`), `ikon/png/sosmed-*.png`, `react/ikon-data.ts`, dan `fy_sosmed_*.xml`. Logonya merek dagang milik pemilik masing-masing (Meta, ByteDance, Telegram, X Corp., Google, Microsoft/LinkedIn, GitHub, Discord, Shopee); dipakai hanya untuk menautkan akun resmi, sesuai panduan merek mereka | CC0 1.0 (data ikon); hak merek tetap pada pemiliknya |
 | Ikon FUSIONIFY (`ikon/sumber.mjs` dan semua turunannya) | Digambar sendiri oleh FUSIONIFY |
+| Playwright (dev dependency, menjalankan uji `tests/` dan membuat PDF/PNG di `scripts/build-*.mjs`; tidak ikut dikirim) | Apache License 2.0 |
+| axe-core (dev dependency, disuntik ke halaman hanya saat uji kontras dan aksesibilitas; tidak ikut dikirim) | Mozilla Public License 2.0 |
+| Pillow (Python, dipakai `scripts/mascot-import.py` untuk memotong dan mengecilkan pose maskot; tidak ikut dikirim) | MIT-CMU (HPND) |

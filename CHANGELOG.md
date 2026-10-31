@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.14.0 · 31 Oktober 2026
+
+Perapian besar dari audit `PETA-KODE.md` (bagian 8). Tidak ada kelas publik yang dihapus atau diganti nama.
+
+- **Kursor dan foto tim kembali benar**: progres lingkaran `.ring` tidak lagi mewarnai cincin kursor (`.cursor .ring`) dan bingkai foto tim (`.person .ph .ring`) jadi cakram biru. Aturannya dibatasi dengan `:where()` (spesifisitas tetap rendah) plus reset di kedua komponen.
+- **Gerak hanya transform/opacity** (pola yang sama dengan fusionify.id):
+  - Menu HP: lingkaran biru sekarang `.drawer::before` 300vmax yang di-`scale`, berpusat tepat di tombol menu (`--menu-cx`, `--menu-cy`), bukan transisi `clip-path`. Isi menu memudar naik; `visibility` ditunda sampai lingkaran selesai menutup.
+  - Cincin kursor: ukuran tetap 70px, kecil/besar lewat properti `scale` (tidak lagi transisi `width/height/margin`). Status ditekan (`.down`) kini benar-benar terlihat.
+  - Nav: kapsul kaca pindah ke `.nav::before` yang muncul dengan opacity; turun 6px lewat transform. Tidak ada lagi transisi `padding`, `top`, `box-shadow`, `background`.
+  - Hover `.btn`, `a.card`, `a.svc`, `.product-card`, `.fab`, `.input`/`.select`/`.textarea`, `.input-group`, `.appbar`, kolom cari aplikasi: bayangan dan latar berubah seketika, hanya transform yang beranimasi.
+- **Token baru** (terang dan gelap, ikut token native): `--on-dark`, `--on-dark-2`, `--danger-fill`, `--warn-fill`, `--online`, `--night-ink`, `--night-ink-2`, `--night-ink-3`, `--night-link`, `--night-line`, `--night-line-2`, `--code-fg`, `--code-muted`, `--code-line`, `--code-edge`, `--code-btn`, `--code-btn-hover`, `--code-str`, `--code-key`, `--code-num`. Semua hex di CSS komponen (tombol bahaya, badge, meter password, footer produk, blok kode, lightbox, dll.) kini lewat token. `.msg.me .msg-card` ikut tema.
+- `--seal-mask` pindah ke `tokens.css`, jadi `components.css`/`controls.css` bisa dimuat tanpa `product.css`.
+- Kelas baru `.fcols .fname` untuk nama produk di footer (menggantikan `style="…color:#fff…"` di semua template).
+- Panah `.select` terbaca di mode gelap.
+- `initFusionify()` di domain yang belum terdaftar mengembalikan objek berbentuk sama berisi fungsi kosong (seperti `initApp()`), jadi `fy.toast(…)` tidak melempar error.
+- `initApp()` kini menjeda animasi tanpa henti di luar layar (`.spinner`, `.skel`, `.progress.indeterminate`, `.typing`, `[data-pause]`), termasuk elemen yang ditambah belakangan. `.idle` juga menjeda elemennya sendiri.
+- Validasi `initApp()` mengenal `pattern` dan `min`/`max` (`data-msg-pattern`, `data-msg-range`), sama dengan stepper. Keputusan "kolom kosong baru ditandai saat kirim" dicatat di AGENTS.md.
+- Teks buatan JS bisa dilokalkan: snackbar, lightbox, bagikan, hitung mundur, dan picker mengikuti `<html lang>` (id/en) dan bisa ditimpa `data-label-*`.
+- `[data-ics]` dengan `data-start` kosong/tidak valid tidak lagi melempar `RangeError` (dilewati + `console.warn`).
+- Label dari atribut (picker, titik carousel, tautan notifikasi) di-escape sebelum masuk `innerHTML`.
+- Template: teks Inggris di halaman Indonesia diganti ("Login" jadi "Masuk", judul katalog "Unggah file", "Memuat & progres", "Kolom cari dengan saran"); gradien grafik dashboard memakai token.
+- `package.json` `exports` dilengkapi (`./react/lucide`, `./react/ikon-data`, `./react/tailwind-v4.css`, `./react/*`, `./js/ikon-inline`, `./js/seal.d.ts`, tipe untuk `./js/seal`, `./email/*`). Skrip baru `npm run cek:token`.
+- Preset Tailwind v3/v4 memetakan `--bintang`, `--placeholder`, `--seal-tint`, `--hero-glow`, `--inverse-accent`, dan semua token baru.
+- **Uji**: baru `tests/token.mjs` (dua blok gelap identik, tanpa hex di CSS komponen, setiap `var()` terdefinisi, warna email sama dengan token) dan `tests/interaksi-kursor-menu-tema.mjs` (kursor dengan mouse, bingkai foto tim, progres lingkaran, menu HP 375/390/820, nav, tema gelap lewat tombol + kontras axe di 8 halaman). `tanpa-js-dan-kurangi-gerak` mencakup 500, offline, maintenance, daftar, lupa password, atur ulang password; `layar-sentuh` mencakup bayar QRIS, masuk, lupa/atur ulang password, 404, 500, maintenance, status, dokumentasi, privasi. Uji lisensi mengecek bentuk stub. `build-tokens.mjs` menolak dua blok gelap yang berbeda.
+- Dokumen: AGENTS (letak `.progress`/`.btn.danger` di controls.css, `js/seal.d.ts`, `scripts/mascot-import.py`, daftar event lengkap termasuk `fy:thread`, `fy:ics`, `fy:snackbar-action`, `fy:theme`, pola gerak bersama), DESIGN (token baru, gerak, duplikasi bagian aplikasi HP digabung), README (contoh versi, daftar `scripts/`, uji), THIRD_PARTY_NOTICES (Playwright, axe-core, Pillow), judul seksi kosong di `app.css` dihapus.
+
 ## 1.13.0 · 29 Oktober 2026
 
 Komponen yang sebelumnya belum ada di kit, terutama untuk web toko (Premiumify), komunitas (StudyDate), dan layanan email (TMail):
