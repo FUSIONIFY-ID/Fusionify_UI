@@ -25,7 +25,7 @@ img { height: auto; }
 .fx-oversize, .cursor svg, .veil svg, .loader svg, .wave svg, .person .ph .ring { max-width: none; }
 a { color: inherit; }
 button { font: inherit; color: inherit; }
-::selection { background: var(--blue); color: #fff; }
+::selection { background: var(--blue); color: var(--on-dark); }
 :focus-visible { outline: 3px solid var(--blue-light); outline-offset: 3px; border-radius: 6px; }
 
 h1, h2, h3, h4 { font-family: var(--f-head); font-weight: 800; line-height: 0.98; letter-spacing: -0.02em; margin: 0; }

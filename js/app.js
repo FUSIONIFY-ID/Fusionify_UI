@@ -11,7 +11,9 @@
 // - Semua komponen kontrol lewat initControls() (js/controls.js): dropdown, modal, sheet, tab,
 //   button group, chip, FAB, carousel, slider, tooltip, search, date/time picker, snackbar
 // - Tampil/sembunyi password ([data-pw-toggle]) dan meter kekuatan ([data-pw-meter])
-// - Validasi form ([data-validate]): required, email, minlength, [data-match="#id"], tampil pesan .err
+// - Validasi form ([data-validate]): required, email, minlength, pattern, min/max, [data-match="#id"], tampil pesan .err
+//   (pesan sama dengan stepper di controls.js; teks bisa diganti lewat data-msg-required/-type/-short/-pattern/-range/-match)
+// - Jeda animasi tanpa henti (spinner, skeleton, progres, mengetik) saat di luar layar (kelas .idle)
 // - Pilih semua baris tabel ([data-check-all])
 // - Toast (pakai markup .toast dari snippets/body-parts.html)
 
@@ -78,6 +80,8 @@ export function initApp() {
       if (f.validity.valueMissing) return d.msgRequired || "Wajib diisi.";
       if (f.validity.typeMismatch) return d.msgType || "Formatnya belum benar.";
       if (f.validity.tooShort) return d.msgShort || `Minimal ${f.minLength} karakter.`;
+      if (f.validity.patternMismatch) return d.msgPattern || "Formatnya belum benar.";
+      if (f.validity.rangeUnderflow || f.validity.rangeOverflow) return d.msgRange || "Di luar batas yang boleh.";
       if (d.match && f.value !== document.querySelector(d.match)?.value) return d.msgMatch || "Belum sama.";
       return "";
     };
@@ -98,7 +102,10 @@ export function initApp() {
     };
     const fields = () => $$("input, select, textarea", form).filter((f) => f.willValidate && f.type !== "hidden");
     // Pesan error hilang saat pengguna mengetik perbaikannya (bukan saat blur), supaya tata letak
-    // tidak bergeser tepat ketika pengguna mengklik tombol lain. Error baru hanya ditambah saat blur.
+    // tidak bergeser tepat ketika pengguna mengklik tombol lain. Error baru ditambah saat blur, KECUALI
+    // kolom yang masih kosong: kolom kosong baru ditandai saat kirim. Alasannya: pengguna sering hanya
+    // menekan Tab melewati kolom atau mengklik kolom lain lebih dulu; pesan "Wajib diisi" yang muncul saat
+    // itu terasa memarahi dan menggeser tata letak. Keputusan ini dicatat di AGENTS.md (Halaman aplikasi).
     fields().forEach((f) => {
       f.addEventListener("input", () => { if (f.getAttribute("aria-invalid") === "true") check(f); });
       f.addEventListener("change", () => { if (f.getAttribute("aria-invalid") === "true") check(f); });
@@ -150,6 +157,22 @@ export function initApp() {
       b.classList.add("done"); setTimeout(() => b.classList.remove("done"), 2000);
     } catch { toast("Gagal menyalin. Salin manual, ya."); }
   }));
+
+  /* ---------- Jeda animasi tanpa henti di luar layar ----------
+     Sama seperti motion.js: elemen yang punya animasi infinite (spinner, skeleton, progres tanpa angka,
+     indikator mengetik) diamati, dan kelas .idle menjeda animasinya saat tidak terlihat. */
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("idle", !e.isIntersecting)), { rootMargin: "50% 0px" });
+    const seen = new WeakSet();
+    const watch = (r = document) => $$(".spinner, .skel, .progress.indeterminate, .typing, [data-pause]", r).forEach((el) => {
+      if (seen.has(el)) return;
+      seen.add(el);
+      io.observe(el);
+    });
+    watch();
+    let antre = 0; // elemen yang ditambah belakangan (mis. skeleton saat memuat) ikut diamati, dikumpulkan per frame
+    new MutationObserver((ms) => { if (!antre && ms.some((m) => m.addedNodes.length)) antre = requestAnimationFrame(() => { antre = 0; watch(); }); }).observe(document.body, { childList: true, subtree: true });
+  }
 
   return { toast, snackbar, otpError, setSide };
 }

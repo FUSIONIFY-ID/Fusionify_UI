@@ -23,6 +23,11 @@ const block = (re) => {
 const light = block(/(?:^|\n):root\s*\{([\s\S]*?)\n\}/);
 const darkOver = block(/:root\[data-theme="dark"\]\s*\{([\s\S]*?)\n\}/);
 const dark = { ...light, ...darkOver };
+// Dua blok gelap (tombol tema dan prefers-color-scheme) wajib identik. CSS tidak bisa berbagi isi
+// blok tanpa preprocessor, jadi keduanya ditulis dua kali dan dicek di sini (juga di tests/token.mjs).
+const darkMedia = block(/@media \(prefers-color-scheme: dark\)\s*\{\s*:root:not\(\[data-theme="light"\]\)\s*\{([\s\S]*?)\n\s*\}/);
+const beda = [...new Set([...Object.keys(darkOver), ...Object.keys(darkMedia)])].filter((k) => darkOver[k] !== darkMedia[k]);
+if (beda.length) throw new Error("Blok gelap tokens.css tidak sama: --" + beda.join(", --"));
 
 const resolve = (vars, v, depth = 0) =>
   depth > 8 ? v : v.replace(/var\(--([\w-]+)\)/g, (_, k) => resolve(vars, vars[k] ?? "", depth + 1));

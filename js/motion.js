@@ -111,8 +111,13 @@ function splitWords(el) {
   });
 }
 
+// Nilai kembali di domain yang belum terdaftar: bentuknya sama dengan nilai kembali normal,
+// tapi semua fungsinya tidak melakukan apa-apa (kode seperti fy.toast(...) tidak melempar error).
+const noop = () => {};
+const stub = () => ({ sfx: { on: false, set: noop, play: noop }, toast: noop, snackbar: noop, otpError: noop, lenis: null, lockScroll: noop, scrollTo: noop, gsap, ScrollTrigger });
+
 export function initFusionify(opts = {}) {
-  if (!cekLisensi()) return;
+  if (!cekLisensi()) return stub();
   const o = {
     smooth: true,          // Lenis smooth scroll
     cursor: true,          // kursor segel (hanya mouse)

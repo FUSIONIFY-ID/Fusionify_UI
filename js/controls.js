@@ -27,7 +27,12 @@
 //   persetujuan cookie ([data-consent], event fy:consent di window, pilihanCookie()), hitung mundur ke tanggal ([data-tenggat])
 //
 // Setiap komponen mengirim event: fy:change (button group, chip, slider, picker), fy:remove (chip input),
-// fy:select (saran pencarian), fy:step (stepper), fy:sort (tabel), fy:read (notifikasi). Contoh: el.addEventListener("fy:change", (e) => console.log(e.detail)).
+// fy:select (saran pencarian), fy:step (stepper), fy:sort (tabel), fy:read (notifikasi), fy:complete (OTP, hitung mundur),
+// fy:files (upload), fy:send dan fy:thread (chat), fy:resend (kirim ulang), fy:crop (foto profil), fy:close (pengumuman),
+// fy:ics (file kalender dibuat), fy:snackbar-action (tombol aksi snackbar). Di window: fy:online, fy:offline, fy:consent.
+// theme.js mengirim fy:theme di <html>. Contoh: el.addEventListener("fy:change", (e) => console.log(e.detail)).
+//
+// Teks antarmuka mengikuti <html lang> (id/en) dan bisa ditimpa lewat data-label-* (lihat TEKS di bawah).
 
 import { cekLisensi } from "./lisensi.js";
 
@@ -43,13 +48,40 @@ const id = (p) => `${p}-${++uid}`;
 
 const ICON = { left: ikon("chevron-kiri"), right: ikon("chevron-kanan"), x: ikon("tutup") };
 
+// Nilai atribut yang disisipkan ke template string HTML wajib lewat esc() supaya tanda kutip atau "<"
+// di label penulis tidak merusak markup.
+const esc = (v) => String(v ?? "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/* ---------- Teks antarmuka id/en ----------
+   Bahasa diambil dari atribut lang terdekat (elemen atau <html lang="en">). Setiap teks tetap bisa
+   ditimpa per elemen lewat data-label-* (mis. data-label-close="Tutup galeri"). */
+const TEKS = {
+  id: {
+    close: "Tutup", gallery: "Galeri foto", closeGallery: "Tutup galeri", prevPhoto: "Foto sebelumnya", nextPhoto: "Foto berikutnya",
+    linkCopied: "Tautan disalin", copyThis: "Salin tautan ini: ",
+    remaining: (h, j, m) => `Sisa ${h} hari ${j} jam ${m} menit`, timeUp: "Waktu habis",
+    prevMonth: "Bulan sebelumnya", nextMonth: "Bulan berikutnya", clear: "Hapus", today: "Hari ini",
+    pickStart: "Pilih tanggal mulai", pickEnd: "Pilih tanggal selesai", pickDate: "Pilih tanggal", pickRange: "Pilih rentang tanggal", to: "s.d.",
+    pickTime: "Pilih jam", hour: "Jam", minute: "Menit", cancel: "Batal", ok: "Pilih",
+  },
+  en: {
+    close: "Close", gallery: "Photo gallery", closeGallery: "Close gallery", prevPhoto: "Previous photo", nextPhoto: "Next photo",
+    linkCopied: "Link copied", copyThis: "Copy this link: ",
+    remaining: (h, j, m) => `${h} days ${j} hours ${m} minutes left`, timeUp: "Time is up",
+    prevMonth: "Previous month", nextMonth: "Next month", clear: "Clear", today: "Today",
+    pickStart: "Pick a start date", pickEnd: "Pick an end date", pickDate: "Pick a date", pickRange: "Pick a date range", to: "to",
+    pickTime: "Pick a time", hour: "Hour", minute: "Minute", cancel: "Cancel", ok: "Done",
+  },
+};
+const bahasa = (el) => ((el?.closest?.("[lang]") || document.documentElement).getAttribute("lang") || "id").toLowerCase().startsWith("en") ? "en" : "id";
+const teks = (key, el) => TEKS[bahasa(el)][key];
+
 /* =========================================================
    SNACKBAR
    ========================================================= */
 let sbEl = null;
 const sbQueue = [];
 let sbBusy = false;
-let sbLabels = { close: "Tutup" };
 
 function ensureSnackbar() {
   if (sbEl) return sbEl;
@@ -92,7 +124,7 @@ function nextSnack() {
   }
   if (item.close !== false && (item.action || item.close)) {
     const x = document.createElement("button");
-    x.type = "button"; x.className = "sb-x"; x.setAttribute("aria-label", sbLabels.close); x.innerHTML = ICON.x;
+    x.type = "button"; x.className = "sb-x"; x.setAttribute("aria-label", item.closeLabel || teks("close")); x.innerHTML = ICON.x;
     x.addEventListener("click", () => finish(false));
     el.appendChild(x);
   }
@@ -164,14 +196,14 @@ function initDatepicker(host) {
   const weekStart = +(host.dataset.weekStart ?? 0); // 0 = Minggu, 1 = Senin
   const min = parse(host.dataset.min), max = parse(host.dataset.max);
   const L = {
-    prev: host.dataset.labelPrev || "Bulan sebelumnya",
-    next: host.dataset.labelNext || "Bulan berikutnya",
-    clear: host.dataset.labelClear || "Hapus",
-    today: host.dataset.labelToday || "Hari ini",
-    start: host.dataset.labelStart || "Pilih tanggal mulai",
-    end: host.dataset.labelEnd || "Pilih tanggal selesai",
-    title: host.dataset.labelTitle || (range ? "Pilih rentang tanggal" : "Pilih tanggal"),
-    to: host.dataset.labelTo || "s.d.",
+    prev: host.dataset.labelPrev || teks("prevMonth", host),
+    next: host.dataset.labelNext || teks("nextMonth", host),
+    clear: host.dataset.labelClear || teks("clear", host),
+    today: host.dataset.labelToday || teks("today", host),
+    start: host.dataset.labelStart || teks("pickStart", host),
+    end: host.dataset.labelEnd || teks("pickEnd", host),
+    title: host.dataset.labelTitle || teks(range ? "pickRange" : "pickDate", host),
+    to: host.dataset.labelTo || teks("to", host),
   };
   const fmt = new Intl.DateTimeFormat(loc, { day: "numeric", month: "short", year: "numeric" });
   const fmtLong = new Intl.DateTimeFormat(loc, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
@@ -195,7 +227,7 @@ function initDatepicker(host) {
     const offset = (first.getDay() - weekStart + 7) % 7;
     const start = new Date(y, m, 1 - offset);
     const today = new Date();
-    let html = `<div class="dp-head"><button type="button" data-nav="-1" aria-label="${L.prev}">${ICON.left}</button><div class="dp-title" aria-live="polite">${fmtMonth.format(first)}</div><button type="button" data-nav="1" aria-label="${L.next}">${ICON.right}</button></div><div class="dp-grid" role="group" aria-label="${fmtMonth.format(first)}">`;
+    let html = `<div class="dp-head"><button type="button" data-nav="-1" aria-label="${esc(L.prev)}">${ICON.left}</button><div class="dp-title" aria-live="polite">${fmtMonth.format(first)}</div><button type="button" data-nav="1" aria-label="${esc(L.next)}">${ICON.right}</button></div><div class="dp-grid" role="group" aria-label="${fmtMonth.format(first)}">`;
     for (let i = 0; i < 7; i++) {
       const d = new Date(2023, 0, 1 + ((weekStart + i) % 7)); // 1 Jan 2023 = Minggu
       html += `<span class="dp-wd" aria-hidden="true">${wdName.format(d).replace(".", "").slice(0, 3)}</span>`;
@@ -207,7 +239,7 @@ function initDatepicker(host) {
       const cls = ["dp-day", d.getMonth() !== m ? "out" : "", inR ? "in-range" : ""].filter(Boolean).join(" ");
       html += `<button type="button" class="${cls}" data-d="${iso(d)}" tabindex="${sameDay(d, focusDay) ? 0 : -1}" aria-label="${fmtLong.format(d)}" aria-pressed="${sel}"${sameDay(d, today) ? ' aria-current="date"' : ""}${disabled(d) ? " disabled" : ""}>${d.getDate()}</button>`;
     }
-    html += `</div><div class="dp-foot"><button type="button" class="txt-btn" data-act="clear">${L.clear}</button><span class="hint">${range ? (pickingEnd ? L.end : L.start) : ""}</span><button type="button" class="txt-btn" data-act="today">${L.today}</button></div>`;
+    html += `</div><div class="dp-foot"><button type="button" class="txt-btn" data-act="clear">${esc(L.clear)}</button><span class="hint">${range ? esc(pickingEnd ? L.end : L.start) : ""}</span><button type="button" class="txt-btn" data-act="today">${esc(L.today)}</button></div>`;
     pop.innerHTML = html;
   };
 
@@ -272,11 +304,11 @@ function initTimepicker(host) {
   const step = Math.max(1, +(host.dataset.step || 5));
   const sep = host.dataset.sep ?? ".";
   const L = {
-    title: host.dataset.labelTitle || "Pilih jam",
-    hour: host.dataset.labelHour || "Jam",
-    minute: host.dataset.labelMinute || "Menit",
-    cancel: host.dataset.labelCancel || "Batal",
-    ok: host.dataset.labelOk || "Pilih",
+    title: host.dataset.labelTitle || teks("pickTime", host),
+    hour: host.dataset.labelHour || teks("hour", host),
+    minute: host.dataset.labelMinute || teks("minute", host),
+    cancel: host.dataset.labelCancel || teks("cancel", host),
+    ok: host.dataset.labelOk || teks("ok", host),
   };
   const pad = (n) => String(n).padStart(2, "0");
   let [h, m] = (hidden?.value || "").split(":").map(Number);
@@ -292,10 +324,10 @@ function initTimepicker(host) {
     const list = (name, max, inc, cur, lab) => {
       let li = "";
       for (let v = 0; v < max; v += inc) li += `<li role="option" id="${name}-${v}" data-v="${v}" aria-selected="${v === cur}">${pad(v)}</li>`;
-      return `<div class="tp-col"><span id="${name}-l">${lab}</span><ul class="tp-list" role="listbox" tabindex="0" aria-labelledby="${name}-l" data-k="${name}">${li}</ul></div>`;
+      return `<div class="tp-col"><span id="${name}-l">${esc(lab)}</span><ul class="tp-list" role="listbox" tabindex="0" aria-labelledby="${name}-l" data-k="${name}">${li}</ul></div>`;
     };
     const hid = id("tph"), mid = id("tpm");
-    pop.innerHTML = `<div class="tp-cols">${list(hid, 24, 1, ch, L.hour)}<span class="tp-sep" aria-hidden="true">${sep === "." ? "." : ":"}</span>${list(mid, 60, step, cm, L.minute)}</div><div class="tp-foot"><button type="button" class="txt-btn" data-act="cancel">${L.cancel}</button><button type="button" class="btn sm" data-act="ok">${L.ok}</button></div>`;
+    pop.innerHTML = `<div class="tp-cols">${list(hid, 24, 1, ch, L.hour)}<span class="tp-sep" aria-hidden="true">${sep === "." ? "." : ":"}</span>${list(mid, 60, step, cm, L.minute)}</div><div class="tp-foot"><button type="button" class="txt-btn" data-act="cancel">${esc(L.cancel)}</button><button type="button" class="btn sm" data-act="ok">${esc(L.ok)}</button></div>`;
     showPop(host, btn, pop, L.title);
     const lists = $$(".tp-list", pop);
     const sync = (ul, v) => {
@@ -741,18 +773,20 @@ function initChat(chat) {
      → mengunduh file .ics (bisa dibuka Google Calendar, Kalender iPhone, Outlook)
    <button data-share data-title=".." data-url="..">  → menu bagikan bawaan HP, atau salin tautan di laptop
    ========================================================= */
-const icsDate = (s) => new Date(s).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+const icsDate = (s) => { const d = new Date(s); return isNaN(d) ? "" : d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); };
 const icsText = (s = "") => s.replace(/\\/g, "\\\\").replace(/([,;])/g, "\\$1").replace(/\n/g, "\\n");
 function initIcs(btn) {
   if (!once(btn, "_fyIcs")) return;
   btn.addEventListener("click", () => {
     const d = btn.dataset;
+    // data-start kosong atau bukan tanggal: jangan melempar error, cukup lewati dan beri tahu developer
+    if (!icsDate(d.start)) { console.warn("FUSIONIFY UI: [data-ics] butuh data-start berupa tanggal ISO, mis. 2026-10-25T09:00:00+07:00.", btn); return; }
     const ics = [
       "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//FUSIONIFY UI//ID", "CALSCALE:GREGORIAN", "METHOD:PUBLISH",
       "BEGIN:VEVENT",
       `UID:${Date.now()}-${Math.random().toString(36).slice(2)}@fusionify-ui`,
       `DTSTAMP:${icsDate(new Date().toISOString())}`,
-      `DTSTART:${icsDate(d.start)}`, `DTEND:${icsDate(d.end || d.start)}`,
+      `DTSTART:${icsDate(d.start)}`, `DTEND:${icsDate(d.end) || icsDate(d.start)}`,
       `SUMMARY:${icsText(d.title)}`, d.location ? `LOCATION:${icsText(d.location)}` : "", d.details ? `DESCRIPTION:${icsText(d.details)}` : "",
       d.url ? `URL:${d.url}` : "",
       "END:VEVENT", "END:VCALENDAR",
@@ -773,8 +807,8 @@ function initShare(btn) {
     if (navigator.share && matchMedia("(pointer: coarse)").matches) {
       try { await navigator.share({ title, url }); return; } catch (e) { if (e.name === "AbortError") return; }
     }
-    try { await navigator.clipboard.writeText(url); snackbar(btn.dataset.copied || "Tautan disalin"); }
-    catch (e) { snackbar("Salin tautan ini: " + url); }
+    try { await navigator.clipboard.writeText(url); snackbar(btn.dataset.copied || teks("linkCopied", btn)); }
+    catch (e) { snackbar((btn.dataset.labelCopyThis || teks("copyThis", btn)) + url); }
   });
 }
 
@@ -992,7 +1026,7 @@ function initNotif(wrap) {
   const add = ({ html, href = "#", unread = true, icon = "" }) => {
     const li = document.createElement("li");
     li.className = "notif-item" + (unread ? " unread" : "");
-    li.innerHTML = `<a href="${href}">${unread ? '<span class="sr-only sr-unread">Belum dibaca. </span>' : ""}<span class="notif-ico">${icon}</span><span class="notif-txt">${html}</span><span class="notif-dot" aria-hidden="true"></span></a>`;
+    li.innerHTML = `<a href="${esc(href)}">${unread ? '<span class="sr-only sr-unread">Belum dibaca. </span>' : ""}<span class="notif-ico">${icon}</span><span class="notif-txt">${html}</span><span class="notif-dot" aria-hidden="true"></span></a>`;
     list.prepend(li);
     sync();
     return li;
@@ -1212,13 +1246,15 @@ function initQty(wrap) {
 
 /* Galeri ([data-gallery]): <a href="besar"><img alt></a> → lightbox */
 let lbBox = null;
-function lightbox() {
+function lightbox(src) {
   if (lbBox) return lbBox;
   const d = document.createElement("dialog");
   d.className = "lightbox";
-  d.setAttribute("aria-label", "Galeri foto");
-  d.innerHTML = `<div class="lb-top"><span class="lb-count" aria-live="polite"></span><button class="icon-btn" type="button" data-lb="tutup" aria-label="Tutup galeri">${ICON.x}</button></div>
-    <div class="lb-stage"><img alt=""><button class="icon-btn lb-prev" type="button" data-lb="-1" aria-label="Foto sebelumnya">${ICON.left}</button><button class="icon-btn lb-next" type="button" data-lb="1" aria-label="Foto berikutnya">${ICON.right}</button></div>
+  // Label: data-label-gallery / -close / -prev / -next di [data-gallery], atau bahasa halaman (id/en)
+  const lab = (k, key) => src?.dataset?.[k] || teks(key, src);
+  d.setAttribute("aria-label", lab("labelGallery", "gallery"));
+  d.innerHTML = `<div class="lb-top"><span class="lb-count" aria-live="polite"></span><button class="icon-btn" type="button" data-lb="tutup" aria-label="${esc(lab("labelClose", "closeGallery"))}">${ICON.x}</button></div>
+    <div class="lb-stage"><img alt=""><button class="icon-btn lb-prev" type="button" data-lb="-1" aria-label="${esc(lab("labelPrev", "prevPhoto"))}">${ICON.left}</button><button class="icon-btn lb-next" type="button" data-lb="1" aria-label="${esc(lab("labelNext", "nextPhoto"))}">${ICON.right}</button></div>
     <p class="lb-cap"></p>`;
   document.body.append(d);
   const img = $("img", d), cap = $(".lb-cap", d), count = $(".lb-count", d);
@@ -1255,7 +1291,7 @@ function initGallery(g) {
     if (!a || !g.contains(a) || e.metaKey || e.ctrlKey || e.shiftKey || typeof HTMLDialogElement !== "function") return;
     e.preventDefault();
     const list = items();
-    lightbox().open(list, list.indexOf(a), a);
+    lightbox(g).open(list, list.indexOf(a), a);
   });
 }
 
@@ -1298,7 +1334,7 @@ function initTenggat(box) {
     const v = { hari: Math.floor(sisa / 86400), jam: Math.floor(sisa / 3600) % 24, menit: Math.floor(sisa / 60) % 60, detik: sisa % 60 };
     $$("[data-cd]", box).forEach((el) => { const k = el.dataset.cd; el.textContent = k === "hari" ? String(v[k]) : pad(v[k]); });
     const m = Math.floor(sisa / 60);
-    if (m !== menitLalu) { menitLalu = m; sr.textContent = sisa ? `Sisa ${v.hari} hari ${v.jam} jam ${v.menit} menit` : "Waktu habis"; }
+    if (m !== menitLalu) { menitLalu = m; sr.textContent = sisa ? teks("remaining", box)(v.hari, v.jam, v.menit) : (box.dataset.labelTimeUp || teks("timeUp", box)); }
     if (!sisa) { clearInterval(t); box.classList.add("selesai"); emit(box, "fy:complete", {}); }
   };
   tick();
@@ -1462,7 +1498,7 @@ export function initControls(root = document) {
     });
     let dots = [];
     if (dotsWrap) {
-      dotsWrap.innerHTML = slides.map((s, i) => `<button type="button" aria-label="${s.getAttribute("aria-label")}"></button>`).join("");
+      dotsWrap.innerHTML = slides.map((s) => `<button type="button" aria-label="${esc(s.getAttribute("aria-label"))}"></button>`).join("");
       dots = $$("button", dotsWrap);
       dots.forEach((d, i) => d.addEventListener("click", () => go(i)));
     }

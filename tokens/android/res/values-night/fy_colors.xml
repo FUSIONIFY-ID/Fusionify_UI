@@ -40,5 +40,25 @@
     <color name="fy_danger_bg">#3D1418</color>
     <color name="fy_placeholder">#8597B3</color>
     <color name="fy_bintang">#FFC93D</color>
+    <color name="fy_on_dark">#FFFFFF</color>
+    <color name="fy_on_dark_2">#F2F8FF</color>
+    <color name="fy_danger_fill">#C4323A</color>
+    <color name="fy_warn_fill">#E8A33D</color>
+    <color name="fy_online">#3FD277</color>
+    <color name="fy_night_ink">#DBE9FB</color>
+    <color name="fy_night_ink_2">#9FB3CD</color>
+    <color name="fy_night_ink_3">#8296B2</color>
+    <color name="fy_night_link">#B9CBE3</color>
+    <color name="fy_night_line">#1D2B45</color>
+    <color name="fy_night_line_2">#2A3B5C</color>
+    <color name="fy_code_fg">#EAF3FF</color>
+    <color name="fy_code_muted">#9DB2CF</color>
+    <color name="fy_code_line">#1F3459</color>
+    <color name="fy_code_edge">#2E5592</color>
+    <color name="fy_code_btn">#10203F</color>
+    <color name="fy_code_btn_hover">#17305A</color>
+    <color name="fy_code_str">#7FE0A6</color>
+    <color name="fy_code_key">#8CC0FF</color>
+    <color name="fy_code_num">#FFD27A</color>
     <color name="fy_footer_top">#1F3459</color>
 </resources>

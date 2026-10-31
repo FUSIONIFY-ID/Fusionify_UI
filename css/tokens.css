@@ -73,6 +73,30 @@
   --placeholder: #707a8c;
   --bintang: #f0a800;            /* isi bintang rating */
 
+  /* Warna isi yang sama di kedua tema (teks di atasnya selalu terang) */
+  --on-dark: #ffffff;            /* teks/ikon di atas biru atau latar malam */
+  --on-dark-2: #f2f8ff;          /* teks sekunder di atas biru (kontras >= 4.5:1, tanpa opacity) */
+  --danger-fill: #c4323a;        /* tombol bahaya, badge angka (teks putih) */
+  --warn-fill: #e8a33d;          /* progres peringatan, meter password "lumayan" */
+  --online: #2fbf63;             /* titik status online */
+
+  /* Permukaan malam yang selalu gelap (footer produk, blok kode, lightbox) */
+  --night-ink: #dbe9fb;          /* teks footer */
+  --night-ink-2: #9fb3cd;        /* paragraf footer */
+  --night-ink-3: #8296b2;        /* teks kecil bilah bawah footer */
+  --night-link: #b9cbe3;         /* tautan bilah bawah footer */
+  --night-line: #1d2b45;         /* garis pemisah footer */
+  --night-line-2: #2a3b5c;       /* garis tombol kembali ke atas */
+  --code-fg: #eaf3ff;            /* teks kode */
+  --code-muted: #9db2cf;         /* komentar, label bahasa */
+  --code-line: #1f3459;          /* garis kepala blok kode */
+  --code-edge: #2e5592;          /* garis tombol salin */
+  --code-btn: #10203f;           /* tombol salin */
+  --code-btn-hover: #17305a;
+  --code-str: #7fe0a6;           /* string, tombol "tersalin" */
+  --code-key: #8cc0ff;           /* kata kunci */
+  --code-num: #ffd27a;           /* angka */
+
   /* Bayangan */
   --shadow: 0 1px 0 rgba(13, 108, 215, 0.06), 0 12px 32px -14px rgba(11, 15, 26, 0.18);
   --shadow-pop: 0 3px 0 var(--edge-shadow);      /* tombol */
@@ -80,6 +104,10 @@
 
   color-scheme: light;
 }
+
+/* Segel 12 lekukan sebagai mask (sama dengan js/seal.js). Dipakai .ikon-segel, .spinner, .svc-ico, dll.
+   Ada di sini (bukan product.css) supaya components.css/controls.css bisa dimuat tanpa product.css. */
+:root { --seal-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M94.0 50.0L95.8 52.4L96.8 54.9L96.5 57.4L94.9 59.5L92.5 61.4L90.1 63.0L88.2 64.7L87.4 66.7L87.5 69.1L88.1 72.0L88.5 75.0L88.1 77.7L86.6 79.6L84.1 80.7L81.1 81.1L78.2 81.3L75.8 81.8L74.1 83.1L72.9 85.3L72.0 88.1L70.8 90.9L69.1 93.0L66.9 93.9L64.2 93.6L61.4 92.5L58.8 91.2L56.4 90.5L54.3 90.7L52.2 92.1L50.0 94.0L47.6 95.8L45.1 96.8L42.6 96.5L40.5 94.9L38.6 92.5L37.0 90.1L35.3 88.2L33.3 87.4L30.9 87.5L28.0 88.1L25.0 88.5L22.3 88.1L20.4 86.6L19.3 84.1L18.9 81.1L18.7 78.2L18.2 75.8L16.9 74.1L14.7 72.9L11.9 72.0L9.1 70.8L7.0 69.1L6.1 66.9L6.4 64.2L7.5 61.4L8.8 58.8L9.5 56.4L9.3 54.3L7.9 52.2L6.0 50.0L4.2 47.6L3.2 45.1L3.5 42.6L5.1 40.5L7.5 38.6L9.9 37.0L11.8 35.3L12.6 33.3L12.5 30.9L11.9 28.0L11.5 25.0L11.9 22.3L13.4 20.4L15.9 19.3L18.9 18.9L21.8 18.7L24.2 18.2L25.9 16.9L27.1 14.7L28.0 11.9L29.2 9.1L30.9 7.0L33.1 6.1L35.8 6.4L38.6 7.5L41.2 8.8L43.6 9.5L45.7 9.3L47.8 7.9L50.0 6.0L52.4 4.2L54.9 3.2L57.4 3.5L59.5 5.1L61.4 7.5L63.0 9.9L64.7 11.8L66.7 12.6L69.1 12.5L72.0 11.9L75.0 11.5L77.7 11.9L79.6 13.4L80.7 15.9L81.1 18.9L81.3 21.8L81.8 24.2L83.1 25.9L85.3 27.1L88.1 28.0L90.9 29.2L93.0 30.9L93.9 33.1L93.6 35.8L92.5 38.6L91.2 41.2L90.5 43.6L90.7 45.7L92.1 47.8Z'/%3E%3C/svg%3E"); }
 
 /* =========================================================
    MODE GELAP
@@ -101,6 +129,7 @@
   --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
   --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
   --placeholder: #8597b3; --footer-top: #1f3459; --bintang: #ffc93d;
+  --danger-fill: #c4323a; --warn-fill: #e8a33d; --online: #3fd277;
   --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
   color-scheme: dark;
 }
@@ -118,6 +147,7 @@
     --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
     --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
     --placeholder: #8597b3; --footer-top: #1f3459; --bintang: #ffc93d;
+    --danger-fill: #c4323a; --warn-fill: #e8a33d; --online: #3fd277;
     --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
     color-scheme: dark;
   }

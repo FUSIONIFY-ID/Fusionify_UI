@@ -46,6 +46,26 @@ class FyColors extends ThemeExtension<FyColors> {
   final Color dangerBg;
   final Color placeholder;
   final Color bintang;
+  final Color onDark;
+  final Color onDark2;
+  final Color dangerFill;
+  final Color warnFill;
+  final Color online;
+  final Color nightInk;
+  final Color nightInk2;
+  final Color nightInk3;
+  final Color nightLink;
+  final Color nightLine;
+  final Color nightLine2;
+  final Color codeFg;
+  final Color codeMuted;
+  final Color codeLine;
+  final Color codeEdge;
+  final Color codeBtn;
+  final Color codeBtnHover;
+  final Color codeStr;
+  final Color codeKey;
+  final Color codeNum;
   final Color footerTop;
 
   const FyColors({
@@ -87,6 +107,26 @@ class FyColors extends ThemeExtension<FyColors> {
     required this.dangerBg,
     required this.placeholder,
     required this.bintang,
+    required this.onDark,
+    required this.onDark2,
+    required this.dangerFill,
+    required this.warnFill,
+    required this.online,
+    required this.nightInk,
+    required this.nightInk2,
+    required this.nightInk3,
+    required this.nightLink,
+    required this.nightLine,
+    required this.nightLine2,
+    required this.codeFg,
+    required this.codeMuted,
+    required this.codeLine,
+    required this.codeEdge,
+    required this.codeBtn,
+    required this.codeBtnHover,
+    required this.codeStr,
+    required this.codeKey,
+    required this.codeNum,
     required this.footerTop,
   });
 
@@ -129,6 +169,26 @@ class FyColors extends ThemeExtension<FyColors> {
     dangerBg: Color(0xFFFDE8EA),
     placeholder: Color(0xFF707A8C),
     bintang: Color(0xFFF0A800),
+    onDark: Color(0xFFFFFFFF),
+    onDark2: Color(0xFFF2F8FF),
+    dangerFill: Color(0xFFC4323A),
+    warnFill: Color(0xFFE8A33D),
+    online: Color(0xFF2FBF63),
+    nightInk: Color(0xFFDBE9FB),
+    nightInk2: Color(0xFF9FB3CD),
+    nightInk3: Color(0xFF8296B2),
+    nightLink: Color(0xFFB9CBE3),
+    nightLine: Color(0xFF1D2B45),
+    nightLine2: Color(0xFF2A3B5C),
+    codeFg: Color(0xFFEAF3FF),
+    codeMuted: Color(0xFF9DB2CF),
+    codeLine: Color(0xFF1F3459),
+    codeEdge: Color(0xFF2E5592),
+    codeBtn: Color(0xFF10203F),
+    codeBtnHover: Color(0xFF17305A),
+    codeStr: Color(0xFF7FE0A6),
+    codeKey: Color(0xFF8CC0FF),
+    codeNum: Color(0xFFFFD27A),
     footerTop: Color(0x00000000),
   );
 
@@ -171,6 +231,26 @@ class FyColors extends ThemeExtension<FyColors> {
     dangerBg: Color(0xFF3D1418),
     placeholder: Color(0xFF8597B3),
     bintang: Color(0xFFFFC93D),
+    onDark: Color(0xFFFFFFFF),
+    onDark2: Color(0xFFF2F8FF),
+    dangerFill: Color(0xFFC4323A),
+    warnFill: Color(0xFFE8A33D),
+    online: Color(0xFF3FD277),
+    nightInk: Color(0xFFDBE9FB),
+    nightInk2: Color(0xFF9FB3CD),
+    nightInk3: Color(0xFF8296B2),
+    nightLink: Color(0xFFB9CBE3),
+    nightLine: Color(0xFF1D2B45),
+    nightLine2: Color(0xFF2A3B5C),
+    codeFg: Color(0xFFEAF3FF),
+    codeMuted: Color(0xFF9DB2CF),
+    codeLine: Color(0xFF1F3459),
+    codeEdge: Color(0xFF2E5592),
+    codeBtn: Color(0xFF10203F),
+    codeBtnHover: Color(0xFF17305A),
+    codeStr: Color(0xFF7FE0A6),
+    codeKey: Color(0xFF8CC0FF),
+    codeNum: Color(0xFFFFD27A),
     footerTop: Color(0xFF1F3459),
   );
 
@@ -219,6 +299,26 @@ class FyColors extends ThemeExtension<FyColors> {
       dangerBg: Color.lerp(dangerBg, other.dangerBg, t)!,
       placeholder: Color.lerp(placeholder, other.placeholder, t)!,
       bintang: Color.lerp(bintang, other.bintang, t)!,
+      onDark: Color.lerp(onDark, other.onDark, t)!,
+      onDark2: Color.lerp(onDark2, other.onDark2, t)!,
+      dangerFill: Color.lerp(dangerFill, other.dangerFill, t)!,
+      warnFill: Color.lerp(warnFill, other.warnFill, t)!,
+      online: Color.lerp(online, other.online, t)!,
+      nightInk: Color.lerp(nightInk, other.nightInk, t)!,
+      nightInk2: Color.lerp(nightInk2, other.nightInk2, t)!,
+      nightInk3: Color.lerp(nightInk3, other.nightInk3, t)!,
+      nightLink: Color.lerp(nightLink, other.nightLink, t)!,
+      nightLine: Color.lerp(nightLine, other.nightLine, t)!,
+      nightLine2: Color.lerp(nightLine2, other.nightLine2, t)!,
+      codeFg: Color.lerp(codeFg, other.codeFg, t)!,
+      codeMuted: Color.lerp(codeMuted, other.codeMuted, t)!,
+      codeLine: Color.lerp(codeLine, other.codeLine, t)!,
+      codeEdge: Color.lerp(codeEdge, other.codeEdge, t)!,
+      codeBtn: Color.lerp(codeBtn, other.codeBtn, t)!,
+      codeBtnHover: Color.lerp(codeBtnHover, other.codeBtnHover, t)!,
+      codeStr: Color.lerp(codeStr, other.codeStr, t)!,
+      codeKey: Color.lerp(codeKey, other.codeKey, t)!,
+      codeNum: Color.lerp(codeNum, other.codeNum, t)!,
       footerTop: Color.lerp(footerTop, other.footerTop, t)!,
     );
   }
