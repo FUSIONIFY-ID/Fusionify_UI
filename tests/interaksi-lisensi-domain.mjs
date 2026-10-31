@@ -3,7 +3,7 @@
 import { chromium } from 'playwright';
 import fs from 'node:fs';
 import path from 'node:path';
-import { ROOT } from './_env.mjs';
+import { ROOT, NM } from './_env.mjs';
 const b = await chromium.launch(); let ok = 0, bad = 0; const T = (n, c) => { c ? ok++ : (bad++, console.log('FAIL', n)); };
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.png': 'image/png', '.woff2': 'font/woff2', '.svg': 'image/svg+xml' };
 const visit = async (host, page) => {
@@ -14,6 +14,7 @@ const visit = async (host, page) => {
     if (!fs.existsSync(f)) return r.fulfill({ status: 404, body: '' });
     r.fulfill({ path: f, contentType: types[path.extname(f)] || 'application/octet-stream' });
   });
+  await p.route(/cdn\.jsdelivr\.net\/npm\/(gsap|lenis)@[^/]+\/(.*)$/, (r) => { const m = r.request().url().match(/npm\/(gsap|lenis)@[^/]+\/(.*)$/); r.fulfill({ path: NM + m[1] + '/' + m[2], contentType: 'text/javascript' }); });
   await p.goto(`https://${host}/templates/${page}`, { waitUntil: 'load' }); await p.waitForTimeout(400);
   return { c, p, warns };
 };
@@ -28,6 +29,19 @@ for (const host of ['tirufusionify.id.evil.com', 'contoh.test', 'fusionify.id.co
   T(host + ' dikunci (tidak ada tombol urut)', (await p.$$('.sort-btn')).length === 0);
   T(host + ' ada peringatan', warns.some((w) => w.includes('belum terdaftar')));
   T(host + ' konten tetap tampil', await p.isVisible('#tabel table'));
+  await c.close();
+}
+// initFusionify() dan initApp() di domain lain mengembalikan objek dengan bentuk yang sama (fungsi kosong),
+// supaya kode seperti fy.toast("...") tidak melempar error.
+{
+  const { c, p } = await visit('contoh.test', 'landing-produk.html');
+  const bentuk = await p.evaluate(async () => {
+    const { initFusionify } = await import('/js/motion.js'); const { initApp } = await import('/js/app.js');
+    const fy = initFusionify(), app = initApp();
+    try { fy.toast('x'); fy.lockScroll(true); fy.scrollTo(0); fy.sfx.play('tick'); app.toast('x'); } catch (e) { return 'error ' + e.message; }
+    return ['toast', 'snackbar', 'otpError', 'lockScroll', 'scrollTo'].every((k) => typeof fy[k] === 'function') && typeof app.setSide === 'function' ? 'ok' : 'bentuk beda';
+  });
+  T('stub initFusionify/initApp di domain lain: ' + bentuk, bentuk === 'ok');
   await c.close();
 }
 console.log(ok, 'OK', bad, 'FAIL'); await b.close();

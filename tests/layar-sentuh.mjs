@@ -3,7 +3,7 @@ import { chromium } from 'playwright';
 import { BASE, AXE, NM, FIX } from './_env.mjs';
 // Target sentuh minimal 24x24 (WCAG 2.2 AA). Tautan di dalam kalimat dan input yang dibungkus <label> dikecualikan, sesuai aturan WCAG.
 const b=await chromium.launch(); const out=[];
-for (const sc of ['light','dark']) for (const pg of ['app-mobile','komponen','dashboard','admin','auth/daftar','landing-produk','chat','acara','auth/verifikasi','offline']) for (const [w,h] of [[360,740],[375,667],[390,844],[430,932]]) {
+for (const sc of ['light','dark']) for (const pg of ['app-mobile','komponen','dashboard','admin','auth/daftar','landing-produk','chat','acara','auth/verifikasi','offline','bayar-qris','auth/masuk','auth/lupa-password','auth/atur-ulang-password','404','500','maintenance','status','dokumentasi','legal/privasi']) for (const [w,h] of [[360,740],[375,667],[390,844],[430,932]]) {
  const c=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:true,deviceScaleFactor:2,colorScheme:sc}); const p=await c.newPage(); const errs=[]; p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE+'templates/'+pg+'.html',{waitUntil:'networkidle'}); await p.waitForTimeout(300);
  for (let y=0;y<9000;y+=800){ await p.evaluate(y=>scrollTo(0,y),y); await p.waitForTimeout(30);}
