@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.14.1 · 2 November 2026
+
+Aturan maskot dirapikan setelah dibandingkan langsung dengan gambar asli di folder Drive MASCOT. Tidak ada kelas, file, atau gambar yang berubah.
+
+- **Pipi tidak merah**: aturan "pipi merah" diganti. Gambar asli hanya punya semburat pink sangat tipis; rona merah hanya untuk emosi malu atau marah (pose `shy`, `angry`).
+- **Alis wajib ikut emosi**: naik saat kaget atau penasaran, ujung dalam naik saat memelas, menukik saat fokus atau marah.
+- **Proporsi chibi**: pose baru wajib mengikuti proporsi pose badan penuh lama (kepala besar, kaki pendek, celana longgar, lutut ditekuk).
+- Diperbarui di DESIGN.md, AGENTS.md, `mascot/POSE-BARU.md`, `skills/fusionify-brand-style/SKILL.md`, dan FUSIONIFY-UI-KONTEKS.md.
+
 ## 1.14.0 · 31 Oktober 2026
 
 Perapian besar dari audit `PETA-KODE.md` (bagian 8). Tidak ada kelas publik yang dihapus atau diganti nama.

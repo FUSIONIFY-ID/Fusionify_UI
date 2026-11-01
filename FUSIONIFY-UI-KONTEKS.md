@@ -97,7 +97,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 
 - Pakai token di `css/tokens.css`. Jangan menulis warna hex, font, atau radius baru.
 - **Logo**: pakai file di `brand/`. Jangan mengetik "FUSIONIFY" dengan font sebagai pengganti logo. Web produk memakai logonya sendiri, sistem desainnya tetap kit ini.
-- **Maskot**: ganti ekspresi dengan menukar gambar badan penuh. Jangan menempel kepala di badan lain. Pose baru boleh bebas dan ekspresif, tapi wajah, mata abu tua, rambut putih ujung biru dengan helai mencuat, dan garis tebalnya wajib sama. Baju bawaan jaket hitam terbuka dengan kaus putih; boleh ganti kalau situasinya butuh.
+- **Maskot**: ganti ekspresi dengan menukar gambar badan penuh. Jangan menempel kepala di badan lain. Pose baru boleh bebas dan ekspresif, tapi wajah, mata abu tua, alis, rambut putih ujung biru dengan helai mencuat, garis tebal, dan proporsi chibinya wajib sama. Pipi tidak merah (rona hanya untuk malu atau marah) dan alis wajib ikut emosi; detail di `mascot/POSE-BARU.md`. Baju bawaan jaket hitam terbuka dengan kaus putih; boleh ganti kalau situasinya butuh.
 - Hiasan SVG yang sengaja lebih besar dari wadahnya wajib kelas `.fx-oversize` (atau `max-width: none`).
 - Gaya stiker: garis 2px `--edge`, bayangan pejal ke bawah (`--edge-shadow`), sudut besar.
 - Jangan menyalin momen khas fusionify.id (segel menutup hero, footer malam Bogor) apa adanya ke web produk. Rakit momen sendiri dari bagian yang sama.
@@ -364,7 +364,7 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 | offline | tidak ada internet (halaman offline, `.state.offline`) |
 
 - Ganti ekspresi dengan **menukar gambar badan penuh**. Jangan menempel kepala di atas badan lain karena wajah lama ikut terlihat.
-- **Pose baru**: bebas dan hidup (berlari, melompat, jinjit, lebay), jangan kaku. Yang wajib sama: wajah, mata abu tua, rambut putih ujung biru dengan helai mencuat, pipi merah, garis tebal merah tua. Baju bawaan jaket hitam terbuka (kerah dan ujung lengan abu) dengan kaus putih; boleh ganti kalau situasinya butuh. Cara membuat dan memasang pose ada di `mascot/POSE-BARU.md`.
+- **Pose baru**: bebas dan hidup (berlari, melompat, jinjit, lebay), jangan kaku. Yang wajib sama: wajah (mata abu tua setengah terpejam dengan kelopak atas tebal, alis tipis panjang), rambut putih ujung biru dengan helai mencuat, garis tebal merah tua, dan proporsi chibi pose badan penuh lama (kepala besar, kaki pendek, celana longgar, lutut ditekuk). **Pipi tidak merah**: paling jauh semburat pink sangat tipis; rona merah hanya untuk emosi malu atau marah, ikuti pose `shy` dan `angry`. **Alis wajib ikut emosi** (naik saat kaget atau penasaran, ujung dalam naik saat memelas, menukik saat fokus atau marah), jangan datar. Baju bawaan jaket hitam terbuka (kerah dan ujung lengan abu) dengan kaus putih; boleh ganti kalau situasinya butuh. Cara membuat dan memasang pose ada di `mascot/POSE-BARU.md`.
 - Gelembung bicara (`.bubble`, Caveat) tidak boleh menutupi wajah, rambut, atau judul.
 - Stiker (order, proses, done, batal) hanya untuk obrolan bot.
 - Tampil kecil: pakai `-420.webp` / `-120.webp` dengan `srcset`. Semua `<img>` wajib `width` dan `height`.

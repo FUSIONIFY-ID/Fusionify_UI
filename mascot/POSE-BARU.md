@@ -23,7 +23,10 @@ Ukuran `-420.webp` (tinggi 420px) dipakai di halaman. Tulis `width`/`height` ses
 
 ## Aturan
 
-- Yang wajib sama: wajah, mata abu tua, rambut putih ujung biru dengan satu helai mencuat, pipi merah, garis tebal merah tua.
+- Yang wajib sama: wajah (mata abu tua setengah terpejam dengan kelopak atas tebal, alis tipis panjang), rambut putih ujung biru dengan satu helai mencuat, garis tebal merah tua.
+- Proporsi chibi seperti pose badan penuh lama (`welcome`, `loading`, `paid`): kepala besar, kaki pendek, celana longgar, lutut ditekuk. Pose yang kakinya panjang dan lurus terlihat terlalu jangkung, jangan dipasang.
+- Pipi tidak merah: paling jauh semburat pink sangat tipis. Rona merah hanya untuk emosi malu atau marah, ikuti pose `shy` dan `angry`. Bulatan blush pink tegas (ciri umum gambar AI) wajib dibuang.
+- Alis wajib ikut emosi: naik saat kaget atau penasaran, ujung dalam naik saat memelas, menukik ke tengah saat fokus atau marah. Alis datar di semua pose bikin maskot terasa kaku.
 - Baju bawaan: jaket hitam terbuka (kerah dan ujung lengan abu) dengan kaus putih, celana hitam. Boleh ganti kalau situasinya butuh (jas hujan, jaket tebal, kostum acara).
 - Pose dan ekspresi bebas, yang penting hidup dan tidak kaku.
 - Kalau ada pose yang wajah atau bajunya meleset dari aslinya, jangan dipasang. Buat ulang atau minta ilustrator.
