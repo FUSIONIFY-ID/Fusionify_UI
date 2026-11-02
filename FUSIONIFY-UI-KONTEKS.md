@@ -423,7 +423,7 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - **Breadcrumb**: tautan biru tebal dengan pemisah chevron kecil, halaman sekarang tebal warna tinta dan terpotong rapi kalau panjang. Di HP hanya dua tingkat terakhir, diawali "…".
 - **Pagination**: angka Exo 2 dalam kotak 44px; halaman aktif berupa kotak biru bergaya stiker. Di HP sempit hanya panah dan halaman aktif.
 - **Accordion**: satu kartu stiker berisi beberapa `<details>`, chevron berputar dengan pegas. FAQ halaman publik tetap `.faq`.
-- **Input dengan awalan/akhiran**: satu bingkai stiker; awalan (Rp, ikon) dan akhiran (@domain, tombol) berlatar `--surface`.
+- **Input dengan awalan/akhiran**: satu bingkai stiker; awalan (Rp, ikon) dan akhiran (`@domain`, tombol) berlatar `--surface`.
 - **Jumlah**: kapsul stiker dengan tombol − dan + bulat 44px, angka Exo 2 di tengah.
 - **Rating**: bintang dari bentuk ikon `bintang`, isi warna `--bintang`, kosong warna `--line`. Bisa pecahan (4,5).
 - **Kartu produk**: kartu stiker dengan gambar persegi, label diskon kapsul biru, kategori Exo 2 kapital, judul dua baris, rating, harga biru Exo 2 dengan harga coret abu. Di HP dua kolom. Stok habis: gambar dan tombol meredup.

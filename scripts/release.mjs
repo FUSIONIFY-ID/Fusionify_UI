@@ -27,6 +27,10 @@ const problems = [];
 if (top !== version) problems.push(`Versi teratas di CHANGELOG.md (${top}) tidak sama dengan package.json (${version}).`);
 if (flag === "--check" && (tagArg || "").replace(/^v/, "") !== version) problems.push(`Tag ${tagArg} tidak sama dengan versi package.json (${version}).`);
 if (!/^\d+\.\d+\.\d+$/.test(version)) problems.push(`Versi "${version}" bukan format x.y.z.`);
+// GitHub membaca @kata di catatan rilis sebagai mention akun, lalu memasang akun itu di daftar Contributors.
+// Tulis @kata di dalam backtick (`@domain`) kalau bukan menyebut akun GitHub.
+const mentions = (section(version).replace(/`[^`]*`/g, "").match(/(?:^|[^\w`/.@-])@[A-Za-z0-9][\w-]*/g) || []).map((m) => m.trim().replace(/^[^@]*/, ""));
+if (mentions.length) problems.push(`Catatan rilis ${version} di CHANGELOG.md berisi ${mentions.join(", ")} yang akan dibaca GitHub sebagai mention akun. Bungkus dengan backtick, mis. \`@domain\`.`);
 if (problems.length) { console.error(problems.join("\n")); process.exit(1); }
 if (flag === "--check") { console.log(`Versi ${version} cocok.`); process.exit(0); }
 
