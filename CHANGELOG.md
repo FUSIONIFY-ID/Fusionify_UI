@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.14.2 · 2 November 2026
+
+Perbaikan dokumen. Tidak ada kelas, file, atau gambar yang berubah.
+
+- Contoh akhiran input `@domain` sekarang ditulis di dalam backtick di CHANGELOG.md, DESIGN.md, `skills/fusionify-brand-style/SKILL.md`, dan FUSIONIFY-UI-KONTEKS.md. Sebelumnya GitHub membacanya sebagai mention akun GitHub bernama "domain", sehingga akun asing itu muncul di daftar Contributors rilis v1.13.0.
+- `npm run release` dan cek rilis di GitHub Actions sekarang menolak catatan rilis yang berisi `@kata` di luar backtick.
+
 ## 1.14.1 · 2 November 2026
 
 Aturan maskot dirapikan setelah dibandingkan langsung dengan gambar asli di folder Drive MASCOT. Tidak ada kelas, file, atau gambar yang berubah.
@@ -40,7 +47,7 @@ Perapian besar dari audit `PETA-KODE.md` (bagian 8). Tidak ada kelas publik yang
 Komponen yang sebelumnya belum ada di kit, terutama untuk web toko (Premiumify), komunitas (StudyDate), dan layanan email (TMail):
 
 - **Navigasi web**: `.breadcrumb` (di HP hanya dua tingkat terakhir), `.pagination` bernomor, `.accordion` serbaguna.
-- **Form**: `.input-group` + `.addon` (awalan Rp/ikon, akhiran @domain atau tombol), `.qty` jumlah dengan batas min/max (`[data-qty]`), `.kbd`.
+- **Form**: `.input-group` + `.addon` (awalan Rp/ikon, akhiran `@domain` atau tombol), `.qty` jumlah dengan batas min/max (`[data-qty]`), `.kbd`.
 - **Toko**: `.product-card` + `.product-grid` (dua kolom di HP, label diskon, stok habis), `.harga` dengan harga coret, `.rating` (bisa pecahan) dan `.rating-input`, `.countdown` hitung mundur ke tanggal (`[data-tenggat]`), `.gallery` + lightbox (panah keyboard, geser di HP, Esc).
 - **Linimasa** `.timeline` untuk riwayat pesanan dan status (selesai, sekarang, gagal).
 - **Pengumuman** `.announce` yang bisa ditutup (diingat per id) dan **persetujuan cookie** `.consent` (pilihan disimpan, event `fy:consent`, `pilihanCookie()`).

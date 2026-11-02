@@ -80,7 +80,7 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 - Keadaan: `.state` (`.error`, `.offline`, `.sm`) dengan maskot, satu kalimat, satu tombol; `.offline-bar[data-offline-bar]` muncul otomatis saat koneksi putus; halaman `templates/500.html`, `offline.html`, `maintenance.html`
 - Lain: `[data-chat]` (obrolan; di HP tombol back Android menutup isi obrolan), `[data-ics]` (unduh .ics, tambah ke kalender), `[data-share]`
 - Navigasi web: `.breadcrumb` (nav > ol > li, halaman sekarang `aria-current="page"`), `.pagination` (aktif `aria-current="page"`, panah `rel="prev|next"`), `.accordion` (details/summary + `.acc-body`)
-- Form tambahan: `.input-group` + `.addon` (awalan Rp/ikon, akhiran @domain/tombol), `.qty[data-qty]` (tombol `data-qty-step`, batas dari min/max input), `.kbd`
+- Form tambahan: `.input-group` + `.addon` (awalan Rp/ikon, akhiran `@domain`/tombol), `.qty[data-qty]` (tombol `data-qty-step`, batas dari min/max input), `.kbd`
 - Toko: `.product-grid` + `.product-card` (`.pc-media[.contain]`, `.pc-diskon`, `.pc-body`, `.pc-cat`, `.pc-title a`, `.pc-actions`, `.habis`), `.harga` (+ `<s>`), `.rating` (`style="--nilai:4.5"`, `role="img"` + aria-label) dan `.rating-input` (radio 5→1), `.countdown[data-tenggat="ISO"]` (`[data-cd]`), `.gallery[data-gallery]` → lightbox. Harga, rating, ulasan wajib asli
 - Linimasa: `ol.timeline` > `li.done|now|fail` (`.tl-time`, `.tl-title`, `p`)
 - Pengumuman `.announce[data-announce="id"]` (tutup diingat), persetujuan cookie `.consent[data-consent]` (dua tombol `data-consent-pilih="penting|semua"` sama menonjol; `pilihanCookie()`, event `fy:consent`)
