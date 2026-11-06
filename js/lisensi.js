@@ -12,6 +12,8 @@ const DOMAIN_RESMI = [
   // Partner yang diizinkan
   "premiumify.my.id",
   "studydate.id",
+  "trustarystore.id",
+  "trustary.store",
 ];
 
 // Untuk pengembangan dan uji otomatis
