@@ -241,7 +241,7 @@ export function initFusionify(opts = {}) {
         if (label) label.style.translate = `${x + 18}px ${y + 16}px`;
         px = x; py = y;
       }
-      ring.style.transform = `translate3d(${rx}px,${ry}px,0)`;
+      ring.style.translate = `${rx}px ${ry}px`; // properti translate (bukan transform): posisi tidak ikut diperkecil oleh scale
     });
     // data-cursor="view" / "poke" + data-cursor-label="lihat" memunculkan label tulisan tangan
     document.addEventListener("pointerover", (e) => {

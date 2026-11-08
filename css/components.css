@@ -289,7 +289,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 /* Cincin berukuran tetap 70px; kecil/besar lewat properti scale (transform). motion.js menulis
    posisi di style.transform, jadi skala memakai properti scale terpisah supaya tidak tertimpa.
    Garis tetap 1,6px karena vector-effect: non-scaling-stroke. Reset .ring progres (controls.css). */
-.cursor .ring { --cs: 0.6286; position: absolute; display: block; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 0; background: none; scale: var(--cs); transition: scale 0.35s var(--spring); }
+.cursor .ring { --cs: 0.6286; position: absolute; display: block; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 0; background: none; will-change: translate; scale: var(--cs); transition: scale 0.35s var(--spring); }
 .cursor .ring::before { content: none; }
 .cursor .ring svg { width: 100%; height: 100%; overflow: visible; color: var(--text-blue); }
 .cursor .ring svg path { fill: none; stroke: currentColor; stroke-width: 1.6; vector-effect: non-scaling-stroke; transition: fill 0.3s; }

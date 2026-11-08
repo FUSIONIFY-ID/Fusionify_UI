@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.14.2 · 9 November 2026
+
+Perbaikan kursor segel. Tidak ada kelas atau markup yang berubah.
+
+- Cincin kursor tidak lagi tertinggal jauh dari titik. Posisinya dulu ditulis lewat `transform`, padahal ukurannya diatur properti `scale`; translate di dalam `transform` ikut diperkecil 0,63 sehingga cincin melayang di arah pojok kiri atas (paling kentara di Safari macOS). `js/motion.js` sekarang memakai properti `translate`.
+- `.cursor .ring` mendapat `will-change: translate`.
+- Uji baru di `tests/interaksi-kursor-menu-tema.mjs`: pusat cincin harus sama dengan titik kursor.
+
 ## 1.14.1 · 2 November 2026
 
 Aturan maskot dirapikan setelah dibandingkan langsung dengan gambar asli di folder Drive MASCOT. Tidak ada kelas, file, atau gambar yang berubah.

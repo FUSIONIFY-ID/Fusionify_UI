@@ -188,7 +188,7 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
 - Hanya animasikan `transform` dan `opacity`. Tidak boleh animasi `box-shadow`, `width`, `top`, `filter`, `clip-path`, `padding`.
 - Pola bersama kit dan fusionify.id:
   - Menu HP: lingkaran biru adalah `.drawer::before` 300vmax yang di-`scale` dari 0 ke 1, berpusat di tombol menu (`--menu-cx`, `--menu-cy`); isi menu muncul dengan opacity + sedikit translateY; `visibility` ditunda sampai lingkaran selesai menyusut.
-  - Cincin kursor: ukuran tetap 70px, kecil/besar lewat properti `scale` (motion.js memakai `style.transform` untuk posisi). Garis tetap rapi karena `vector-effect: non-scaling-stroke`.
+  - Cincin kursor: ukuran tetap 70px, kecil/besar lewat properti `scale` (posisi lewat properti `translate`, bukan `transform`: translate di dalam `transform` ikut diperkecil oleh `scale`, sehingga cincin tertinggal jauh dari titik). Garis tetap rapi karena `vector-effect: non-scaling-stroke`.
   - Hover tombol/kartu stiker: hanya `transform` yang ditransisikan; bayangan pejal dan latar berubah instan.
   - Nav: tampilan kapsul (latar kaca, garis, bayangan, blur) ada di `.nav::before` yang muncul dengan opacity; turun-naik posisi lewat `transform`.
 - Jangan menganimasikan elemen di dalam SVG satu per satu (memaksa gambar ulang seluruh SVG tiap frame). Kalau perlu kedip, kedipkan seluruh lapisan `<svg>` dengan `opacity`.

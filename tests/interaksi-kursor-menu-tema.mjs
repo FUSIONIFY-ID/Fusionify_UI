@@ -28,6 +28,10 @@ for (const pg of ['demo/index.html', 'templates/landing-produk.html']) {
   await p.mouse.move(box.x + box.width / 2, box.y + box.height / 2, { steps: 5 }); await p.waitForTimeout(600);
   const bsr = await st();
   T(pg + ' cincin membesar di atas tautan (scale 1)', parseFloat(bsr.scale) === 1, bsr.scale);
+  // Pusat cincin harus sama dengan titik. Dulu posisi lewat transform ikut diperkecil scale, cincin tertinggal jauh (terlihat di Safari).
+  await p.mouse.move(700, 500, { steps: 6 }); await p.waitForTimeout(900);
+  const pos = await p.evaluate(() => { const c = (s) => { const r = document.querySelector(s).getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; }; return { d: c('.cursor .dot'), r: c('.cursor .ring') }; });
+  T(pg + ' cincin berpusat di titik kursor', Math.hypot(pos.d[0] - pos.r[0], pos.d[1] - pos.r[1]) < 3, JSON.stringify(pos));
   const trans = await p.evaluate(() => getComputedStyle(document.querySelector('.cursor .ring')).transitionProperty);
   T(pg + ' cincin hanya mentransisikan scale', trans === 'scale', trans);
   if (pg === 'demo/index.html') {
