@@ -44,7 +44,8 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 - Aksi: `.btn` (`.ghost`, `.sm`), `.icon-btn`, `.theme-btn`, `.chip` (`go`, `beta`, `wip`, `plan`, `eos`)
 - Navigasi: `.nav` (+ `.brand`, `.brand-mark`, `.brand-word`, `.nav-links`, `.nav-tools`, `.lang`, `.sound-btn`, `.menu-btn`), `.drawer`
 - Kartu: `.card` (`.blue`, `.tint`), `.stats`/`.stat`, `.works`/`.work` (+ `.cover`, `.meta`, `.arrow`, `.cover-note`), `.person` (foto bingkai segel)
-- Maskot: `.bubble` (`.left`), `.mascot-stage` (+ `.seal-bg`, `.seal-ring`, `.body`)
+- Maskot: `.bubble` (`.left`), `.mascot-stage` (+ `.seal-bg`, `.seal-ring`, `.body`) untuk maskot diam; hero memakai `.stage` + `[data-mascot]` interaktif seperti fusionify.id (salin dari `templates/landing-produk.html`)
+- Hero: `.hero.pola-maskot` = hero fusionify.id (`h1 > .l1 + .l2 + .dot` kosong, `.hero-cta`, `.hero-meta` angka asli, `.scroll-hint`); pola lain lihat `templates/gaya.html`
 - Lain: `.marquee`, `.faq`, `.wave`, `.footer` (+ `.fcols`, `.fbar`, `.to-top`, `.fy-badge`), `.toast`, `.cursor`, `.veil`
 - Utilitas: `.fx-oversize` untuk hiasan SVG yang sengaja lebih besar dari wadahnya (setara `max-width: none`)
 

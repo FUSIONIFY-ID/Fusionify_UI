@@ -117,5 +117,26 @@ for (const g of ['tenang', 'teknis']) {
   await c.close();
 }
 
+// 6. Hero sama dengan fusionify.id: judul dua baris, angka, maskot papan yang bereaksi
+{
+  const { c, p, err } = await buka('demo/index.html', 1440);
+  const r = await p.evaluate(() => {
+    const l2 = document.querySelector('.hero h1 .l2');
+    return { l2: l2 && getComputedStyle(l2).display === 'block', meta: document.querySelectorAll('.hero-meta > div').length, hint: getComputedStyle(document.querySelector('.scroll-hint')).display !== 'none', sign: document.querySelector('[data-sign] span')?.textContent };
+  });
+  cek(r.l2 && r.meta === 3 && r.hint, `hero demo: judul dua baris, 3 angka, ajakan gulir (${JSON.stringify(r)})`);
+  const m = p.locator('[data-mascot]');
+  await m.hover(); await p.waitForTimeout(700);
+  cek(await p.evaluate(() => document.querySelector('.pose[data-pose="shy"]').classList.contains('on')), 'maskot: malu saat didekati kursor');
+  for (let i = 0; i < 4; i++) { await m.click(); await p.waitForTimeout(520); }
+  await p.waitForTimeout(400);
+  const marah = await p.evaluate(() => ({ on: document.querySelector('.pose[data-pose="angry"]').classList.contains('on'), say: document.querySelector('[data-bubble]').textContent }));
+  cek(marah.on && /geli/.test(marah.say), `maskot: ngambek setelah dicolek 4 kali (${JSON.stringify(marah)})`);
+  await p.waitForTimeout(3000);
+  cek((await p.evaluate(() => document.querySelector('[data-sign] span:last-child')?.textContent)) !== r.sign, 'maskot: papan berganti tulisan');
+  cek(err.length === 0, 'hero demo: error JS ' + err.join('; '));
+  await c.close();
+}
+
 console.log(`${ok} OK ${fail} FAIL`);
 await b.close();

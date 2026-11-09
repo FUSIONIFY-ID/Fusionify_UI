@@ -365,7 +365,7 @@ Semua template: `<html lang="id" class="no-js">`, skrip head (tema + `.js`), spr
 
 | File | Tujuan | Komponen utama | CSS / JS |
 | --- | --- | --- | --- |
-| `demo/index.html` (305) | Contoh semua komponen web publik | nav, drawer, hero (`.hero-demo` inline), `.mascot-stage`, swatch token, `.btn`, `.chip`, `.card`, `.stats` (`data-count-to`), `.works`, `.person`, `.marquee`, `.faq`, `.wave`, `.footer`, toast, kursor, tirai | fusionify.css · `initFusionify()` |
+| `demo/index.html` (305) | Contoh semua komponen web publik | nav, drawer, hero `.hero.pola-maskot` (sejak 1.15), `.mascot-stage`, swatch token, `.btn`, `.chip`, `.card`, `.stats` (`data-count-to`), `.works`, `.person`, `.marquee`, `.faq`, `.wave`, `.footer`, toast, kursor, tirai | fusionify.css · `initFusionify()` |
 | `templates/landing-produk.html` (223) | Landing web produk (bagian `GANTI`) | `.p-hero` (inline), `.svc`, `.steps`, `.segment` + `.plans`, `.quote`, `.faq`, `.cta-band`, form, `.footer` + badge | fusionify.css · `initFusionify()` |
 | `404.html`, `500.html`, `maintenance.html`, `offline.html` (121-123) | Halaman error/perawatan/offline (maskot confused/cry/glasses/offline) | `.empty`, `.footer` | fusionify.css · `initFusionify()` |
 | `auth/masuk`, `daftar`, `lupa-password`, `atur-ulang-password` (79-89) | Auth | `.auth`, `.auth-art`, `.auth-card`, `.field`, `.pw-field`, `.pw-meter`, `.auth-done` | +app.css · `initApp()` (`data-validate`, `data-pw-*`, `data-done`) |
@@ -550,8 +550,8 @@ Lokasi `file:baris`. Tingkat: **tinggi** (rusak terlihat / melanggar aturan inti
 - `js/motion.js`: `cursor` dan `magnet` (opsi baru) bawaan `false` kalau `data-gaya` tenang/teknis.
 
 ### 10.3 Hero (`css/product.css`, akhir file)
-`.hero` + `.hero-grid` (dua kolom mulai 840px) + `.hero-copy` + `.hero-ctas` + `.hero-media` + `dl.hero-fakta`.
-Pola: `.pola-maskot` (memakai `.mascot-stage`, maskot di atas teks di bawah 840px), `.pola-pratinjau` (`.hero-bingkai` > `.hero-bingkai-kepala` + `.hero-bingkai-isi`, `.hero-lapis` bertumpuk, biasanya berisi `.code-block`), `.pola-demo` (`.hero-hp` > `.hero-hp-layar` > `.hero-hp-kepala` + `ol.hero-alur` dengan `li` / `li.saya` / `li.stiker`, `--i` urutan, `.tombol`; animasi `fy-alur` 12 dtk, mati saat kurangi gerakan), `.pola-tengah` (`.hero-deret` kartu karya), `.pola-cari` (`.search-bar` besar + `ul.hero-topik`).
+`.hero` (min-height 100svh, padding 130/80, sama dengan fusionify.id) + `.hero-grid` (1.15fr/0.85fr mulai 840px; pola maskot 1.2fr/0.8fr di 600-1199) + `.hero-copy` + `h1 .l1/.l2` + `.dot:empty` (titik bulat) + `.hero-cta` + `.hero-meta` + `.hero-media` + `.scroll-hint` (hanya >=1200px).
+Pola: `.pola-maskot` (`.stage` aspect 0.82 > `.seal-bg`, `.seal-ring`, `.bubble[data-bubble]`, `.mascot[data-mascot]` > `.body` > `img.base` papan + `img.pose[data-pose]` shy/wink/happy/angry/tired + `.sign-text[data-sign]`; JS `maskotHero()` di akhir `motion.js`, diporting dari `heroMascot()` fusionify.id; maskot di atas teks di bawah 600px), `.pola-pratinjau` (`.hero-bingkai` > `.hero-bingkai-kepala` + `.hero-bingkai-isi`, `.hero-lapis` bertumpuk, biasanya berisi `.code-block`), `.pola-demo` (`.hero-hp` > `.hero-hp-layar` > `.hero-hp-kepala` + `ol.hero-alur` dengan `li` / `li.saya` / `li.stiker`, `--i` urutan, `.tombol`; animasi `fy-alur` 12 dtk, mati saat kurangi gerakan), `.pola-tengah` (`.hero-deret` kartu karya), `.pola-cari` (`.search-bar` besar + `ul.hero-topik`).
 `templates/landing-produk.html` kini memakai `.hero.pola-maskot` (CSS `.p-hero` inline dihapus). Katalog semua pola: `templates/gaya.html` (`?gaya=`).
 
 ### 10.4 Kelas ukuran layar dan HP lipat

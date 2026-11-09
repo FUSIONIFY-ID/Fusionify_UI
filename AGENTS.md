@@ -106,7 +106,8 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
   | `teknis` | dokumentasi, pusat bantuan, ui.fusionify.id | `.hero.pola-cari` |
 - **Jangan menyalin hero fusionify.id (maskot melambai di kanan) ke semua produk.** Pakai komponen `.hero` dan pola yang menjawab pertanyaan pertama pengunjung. Contoh lengkap: `templates/gaya.html`.
 - Gaya `tenang` dan `teknis`: tanpa maskot di hero, tanpa kursor segel dan efek magnet (dimatikan otomatis). Maskot tetap dipakai di keadaan kosong, sukses, dan error di dalam aplikasi.
-- Angka di `.hero-fakta` (biaya, harga, waktu cair) wajib angka asli produk. Selama masih contoh, beri `.sample-note`.
+- `.hero.pola-maskot` = hero fusionify.id persis: judul dua baris (`.l1` tinta, `.l2` biru, titik bulat `<span class="dot" aria-hidden="true"></span>`), `.hero-cta`, angka `.hero-meta`, maskot papan interaktif `.stage` + `[data-mascot]` (malu didekati, kedip/senang dicolek, ngambek dicolek 4 kali, ngantuk 9 detik, papan berganti tulisan; dijalankan `initFusionify()`), dan `.scroll-hint` di layar besar. Jangan menggambar ulang hero sendiri.
+- Angka di `.hero-meta` (tahun, jumlah produk, biaya, waktu cair) wajib angka asli produk. Selama masih contoh, beri `.sample-note`.
 - Gaya hanya mengubah token. Jangan menimpa warna, huruf, atau ikon per produk.
 
 ## Kelas ukuran layar dan HP lipat (wajib)

@@ -117,7 +117,8 @@ Stack acuan fusionify.id: Astro + vanilla CSS. Kit ini tidak terikat framework: 
   | `teknis` | dokumentasi, pusat bantuan, ui.fusionify.id | `.hero.pola-cari` |
 - **Jangan menyalin hero fusionify.id (maskot melambai di kanan) ke semua produk.** Pakai komponen `.hero` dan pola yang menjawab pertanyaan pertama pengunjung. Contoh lengkap: `templates/gaya.html`.
 - Gaya `tenang` dan `teknis`: tanpa maskot di hero, tanpa kursor segel dan efek magnet (dimatikan otomatis). Maskot tetap dipakai di keadaan kosong, sukses, dan error di dalam aplikasi.
-- Angka di `.hero-fakta` (biaya, harga, waktu cair) wajib angka asli produk. Selama masih contoh, beri `.sample-note`.
+- `.hero.pola-maskot` = hero fusionify.id persis: judul dua baris (`.l1` tinta, `.l2` biru, titik bulat `<span class="dot" aria-hidden="true"></span>`), `.hero-cta`, angka `.hero-meta`, maskot papan interaktif `.stage` + `[data-mascot]` (malu didekati, kedip/senang dicolek, ngambek dicolek 4 kali, ngantuk 9 detik, papan berganti tulisan; dijalankan `initFusionify()`), dan `.scroll-hint` di layar besar. Jangan menggambar ulang hero sendiri.
+- Angka di `.hero-meta` (tahun, jumlah produk, biaya, waktu cair) wajib angka asli produk. Selama masih contoh, beri `.sample-note`.
 - Gaya hanya mengubah token. Jangan menimpa warna, huruf, atau ikon per produk.
 
 ## Kelas ukuran layar dan HP lipat (wajib)
@@ -457,7 +458,7 @@ Satu sistem, lima rasa. Warna, huruf, ikon, logo, dan komponen sama; yang beruba
 
 - Lebar konten maksimal 1240px (`.wrap`) dengan gutter `clamp(16px, 4vw, 48px)`.
 - Grid tanpa kartu yatim: 3 kolom di desktop, 2 di tablet (kartu terakhir yang sendirian dibuat lebar penuh), 1 di HP.
-- Hero (`.hero`) dua kolom mulai 840px (kelas lebar); di bawahnya bertumpuk, pada pola maskot maskot di atas teks.
+- Hero (`.hero`) sama persis dengan fusionify.id: setinggi layar, judul dua baris (tinta lalu biru) dengan titik bulat biru muda, angka di bawah tombol, maskot papan interaktif di kanan, ajakan "Gulir pelan-pelan" di layar besar. Pola maskot dua kolom mulai 600px (1.2fr/0.8fr sampai 1199px, 1.15fr/0.85fr setelahnya); di bawah 600px maskot di atas teks dan angka tiga sejajar. Pola lain dua kolom mulai 840px.
 - Nav lengkap mulai 961px; di bawahnya tombol menu (satu-satunya batas di luar kelas ukuran layar, karena tergantung jumlah tautan).
 - Cover karya/produk rasio 1600:848, screenshot asli. Ilustrasi wajib diberi label `.cover-note` "Ilustrasi".
 - Di layar sentuh: magnet, kursor khusus, dan parallax dimatikan.
@@ -1740,42 +1741,106 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
 .countdown.selesai .cd-unit { opacity: 0.55; }
 
 /* =========================================================
-   HERO · pembuka halaman produk, dengan lima pola
-   Tiap kategori produk punya pembuka yang berbeda; jangan menyalin hero fusionify.id.
-   Pilih pola yang menjawab pertanyaan pertama pengunjung:
-     .pola-maskot    "ini apa?"            company, konten, acara (gaya stiker)
+   HERO · pembuka halaman, sama persis dengan hero fusionify.id (pola maskot)
+   Pola lain untuk kategori produk yang berbeda; jangan memaksa semua produk memakai maskot.
+     .pola-maskot    "ini apa?"            company, konten, acara (gaya stiker) = hero fusionify.id
      .pola-pratinjau "produknya kayak apa, aman nggak?"   uang, email, alat kerja (gaya tenang)
      .pola-demo      "kalau dipakai gimana?"   bot, aplikasi chat, toko (gaya toko)
      .pola-tengah    "pernah ngerjain apa?"   jasa, agensi (gaya jasa)
      .pola-cari      "di mana jawabannya?"   dokumentasi, pusat bantuan (gaya teknis)
-   <section class="hero pola-pratinjau">
+   <section class="hero pola-maskot">
      <div class="wrap hero-grid">
-       <div class="hero-copy"> kicker + chip, h1.h-hero, p.lead, .hero-ctas, dl.hero-fakta (opsional) </div>
-       <div class="hero-media"> isi sesuai pola </div>
+       <div class="hero-copy">
+         <span class="kicker">..</span>
+         <h1><span class="l1">Baris hitam</span><span class="l2">Baris biru<span class="dot" aria-hidden="true"></span></span></h1>
+         <p class="lead">..</p>
+         <div class="hero-cta"> tombol </div>
+         <div class="hero-meta"><div><b>2022</b><span>keterangan</span></div> ...</div>   (angka asli saja)
+       </div>
+       <div class="hero-media"> .stage (pola maskot) atau isi pola lain </div>
      </div>
+     <div class="scroll-hint" aria-hidden="true"><i></i>Gulir pelan-pelan</div>   (opsional, layar besar)
    </section>
-   Dua kolom mulai kelas lebar (840px); di bawahnya bertumpuk.
+   Kelas ukuran layar: ringkas bertumpuk (maskot di atas), sedang dan lebar dua kolom ringkas (pola maskot),
+   besar ke atas dua kolom penuh. Pola selain maskot dua kolom mulai 840px.
    ========================================================= */
-.hero { position: relative; overflow-x: hidden; overflow-x: clip; padding: clamp(112px, 13vw, 150px) 0 clamp(56px, 8vw, 96px); background: radial-gradient(120% 80% at 80% 10%, var(--hero-glow) 0%, var(--paper) 60%); }
-.hero-grid { display: grid; gap: clamp(32px, 4vw, 48px); align-items: center; }
-.hero-copy { display: grid; gap: 22px; justify-items: start; min-width: 0; }
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.hero { position: relative; min-height: 100vh; min-height: 100svh; padding: 130px 0 80px; display: grid; align-items: center; overflow: hidden; overflow: clip; background: radial-gradient(120% 80% at 80% 10%, var(--hero-glow) 0%, var(--paper) 60%); }
+.hero-grid { display: grid; gap: 40px; align-items: center; }
+.hero-copy { min-width: 0; }
+.hero h1 { font-size: var(--h-hero, clamp(54px, 8.2vw, 124px)); line-height: 0.9; letter-spacing: -0.035em; margin: 18px 0 26px; overflow-wrap: anywhere; }
+.hero h1 .l1, .hero h1 .l2 { display: block; }
+.hero h1 .l2 { color: var(--text-blue); }
+.hero h1 .dot { color: var(--blue-light); }
+.hero h1 .dot:empty { display: inline-block; width: 0.2em; height: 0.2em; border-radius: 50%; background: var(--blue-light); margin-left: 0.04em; vertical-align: baseline; }
+.hero .lead { margin-bottom: 30px; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
 .hero-media { position: relative; min-width: 0; }
-@media (min-width: 840px) { .hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); } }
+@media (min-width: 840px) { .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); } }
 
-/* Baris fakta di bawah tombol: angka asli saja (biaya, harga, waktu cair). */
-.hero-fakta { display: flex; flex-wrap: wrap; gap: 14px 32px; margin: 4px 0 0; padding-top: 18px; border-top: 1px solid var(--line); }
-.hero-fakta > div { display: grid; gap: 2px; }
-.hero-fakta dt { font: 700 12px var(--f-num); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
-.hero-fakta dd { margin: 0; font: 800 22px/1.1 var(--f-num); font-variant-numeric: tabular-nums; color: var(--ink); }
+/* Angka di bawah tombol: wajib angka asli (tahun, jumlah produk, biaya, waktu cair). */
+.hero-meta { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 44px; }
+.hero-meta > div { display: grid; }
+.hero-meta b { font-family: var(--f-num); font-size: 28px; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+.hero-meta span { font-size: 13.5px; color: var(--ink-3); }
 
-/* ---------- Pola maskot: maskot + segel, gelembung bicara ---------- */
-.hero.pola-maskot .hero-media { display: grid; place-items: center; }
-.hero.pola-maskot .say { position: absolute; left: 0; top: 6%; z-index: 2; }
-@media (max-width: 839px) {
-  .hero.pola-maskot .hero-media { order: -1; }
-  .hero.pola-maskot .mascot-stage { width: min(78%, 320px); }
+/* ---------- Pola maskot: maskot papan interaktif (malu, kedip, ngambek, ngantuk) + segel ----------
+   <div class="stage" data-stage>
+     <svg class="seal-bg">…</svg> <svg class="seal-ring">…</svg>
+     <div class="bubble" role="status" aria-live="polite" data-bubble>Colek aku kalau berani</div>
+     <div class="mascot" data-mascot data-cursor="poke" role="button" tabindex="0" aria-label="Maskot, colek untuk menyapa" data-lines='{"idle":{"id":"…","en":"…"},…}'>
+       <div class="body"><img class="base" src="mascot/sign-420.webp" …> <img class="pose" data-pose="shy" src="(gif 1px)" data-src="…" style="left;top;width"> … <div class="sign-text" data-sign='["Halo!","…"]'><span>Halo!</span></div></div>
+     </div>
+   </div>
+   Interaksinya dijalankan initFusionify() (js/motion.js). Contoh lengkap: templates/landing-produk.html. */
+.stage { position: relative; aspect-ratio: 0.82; width: min(100%, 470px); justify-self: center; }
+.stage .seal-bg { position: absolute; inset: 2% -6% 8%; color: var(--seal-tint); animation: fy-spin 40s linear infinite; max-width: none; }
+.stage .seal-ring { position: absolute; inset: -4% -12% 2%; color: transparent; stroke: var(--blue-light); opacity: 0.5; animation: fy-spin 60s linear infinite reverse; max-width: none; }
+.stage .mascot { position: absolute; left: 50%; bottom: 0; width: 86%; transform: translateX(-50%); cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
+.stage .mascot .body { position: relative; animation: fy-bob 4.2s ease-in-out infinite; transform-origin: 50% 100%; }
+.stage .mascot img { width: 100%; height: auto; pointer-events: none; }
+.stage .mascot .pose { position: absolute; max-width: none; opacity: 0; transition: opacity 0.1s; }
+.stage .mascot .pose.on { opacity: 1; }
+.stage .mascot .base, .stage .mascot .sign-text { transition: opacity 0.1s; }
+.stage .mascot.posing .base, .stage .mascot.posing .sign-text { opacity: 0; }
+.stage .mascot:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 6px; border-radius: 24px; }
+.stage .mascot.shake .body { animation: fy-shake 0.42s linear; }
+.stage .mascot.squish .body { animation: fy-squish 0.5s var(--spring); }
+@keyframes fy-shake { 20% { transform: translateX(-8px) rotate(-3deg); } 40% { transform: translateX(7px) rotate(3deg); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
+@keyframes fy-squish { 30% { transform: scale(1.06, 0.92); } 60% { transform: scale(0.96, 1.05); } }
+.sign-text { position: absolute; left: 18.5%; width: 63.5%; top: 80.5%; height: 17%; display: grid; place-items: center; overflow: hidden; font-family: var(--f-hand); font-weight: 700; color: var(--blue-deep); font-size: clamp(22px, 3vw, 36px); line-height: 1; }
+.sign-text span { position: absolute; inset: 0; display: grid; place-items: center; transition: transform 0.45s var(--ease), opacity 0.3s; }
+.sign-text span.out { transform: translateY(-120%) rotate(-6deg); opacity: 0; }
+.sign-text span.in { transform: translateY(120%) rotate(6deg); opacity: 0; }
+.stage .bubble { position: absolute; right: 61%; bottom: 93%; z-index: 3; white-space: nowrap; transform-origin: 90% 100%; }
+
+/* Ajakan gulir di bawah hero (hanya layar besar) */
+.scroll-hint { position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); display: grid; justify-items: center; gap: 8px; font-size: 13px; color: var(--ink-3); font-family: var(--f-num); letter-spacing: 0.1em; text-transform: uppercase; }
+.scroll-hint i { width: 24px; height: 38px; border: 2px solid var(--ink-3); border-radius: 14px; position: relative; }
+.scroll-hint i::after { content: ""; position: absolute; left: 50%; top: 7px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--blue); animation: fy-wheel 1.6s var(--ease) infinite; }
+@keyframes fy-wheel { 0% { opacity: 0; transform: translateY(-3px); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(12px); } }
+
+/* Sedang dan lebar (tablet, layar dalam HP lipat, laptop kecil): pola maskot tetap dua kolom, judul lebih kecil */
+@media (min-width: 600px) and (max-width: 1199px) {
+  .hero { min-height: auto; padding: 130px 0 90px; }
+  .hero h1 { font-size: var(--h-hero, clamp(50px, 8.4vw, 80px)); }
+  .hero-meta { gap: 22px; }
+  .hero.pola-maskot .hero-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: 20px; }
+  .stage .bubble { font-size: 18px; padding: 7px 12px 9px; right: 40%; bottom: 97%; }
+  .scroll-hint { display: none; }
 }
+@media (min-width: 840px) and (max-width: 1199px) { .stage .bubble { right: 52%; bottom: 99%; font-size: 21px; } }
+/* Ringkas (HP): bertumpuk, maskot di atas, angka tiga sejajar */
+@media (max-width: 599px) {
+  .hero { padding-top: 110px; }
+  .hero.pola-maskot .hero-media { order: -1; }
+  .stage { width: min(78%, 360px); margin-bottom: -10px; }
+  .stage .bubble { font-size: 19px; padding: 8px 13px 10px; right: 52%; }
+  .scroll-hint { display: none; }
+  .hero-meta { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 22px; margin-top: 32px; }
+  .hero-meta b { font-size: 24px; }
+  .hero-meta span { font-size: 12.5px; line-height: 1.35; max-width: 11ch; }
+}
+@media (prefers-reduced-motion: reduce) { .stage .seal-bg, .stage .seal-ring, .stage .mascot .body, .scroll-hint i::after { animation: none; } }
 
 /* ---------- Pola pratinjau: tampilan produk sungguhan dalam bingkai, boleh bertumpuk ---------- */
 .hero-bingkai { position: relative; overflow: hidden; border: var(--edge-width) solid var(--edge); border-radius: var(--r-l); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); }
@@ -1803,16 +1868,18 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
 
 /* ---------- Pola tengah: judul di tengah, bukti karya di bawahnya ---------- */
 .hero.pola-tengah .hero-grid { grid-template-columns: minmax(0, 1fr); }
-.hero.pola-tengah .hero-copy { justify-items: center; max-width: 960px; margin-inline: auto; text-align: center; }
+.hero.pola-tengah .hero-copy { max-width: 960px; margin-inline: auto; text-align: center; }
 .hero.pola-tengah .lead { margin-inline: auto; }
-.hero.pola-tengah .hero-ctas, .hero.pola-tengah .hero-fakta { justify-content: center; }
+.hero.pola-tengah .hero-cta, .hero.pola-tengah .hero-meta { justify-content: center; }
+.hero.pola-tengah .hero-copy .prod-head, .hero.pola-cari .hero-copy .prod-head { justify-content: center; }
 .hero-deret { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; } /* 1 kolom di bawah 840px supaya tidak ada kartu yatim */
 @media (min-width: 840px) { .hero-deret { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); } }
 
 /* ---------- Pola cari: satu kolom cari besar dan topik ---------- */
 .hero.pola-cari { background: var(--paper); }
 .hero.pola-cari .hero-grid { grid-template-columns: minmax(0, 1fr); }
-.hero.pola-cari .hero-copy { justify-items: center; max-width: 760px; margin-inline: auto; text-align: center; }
+.hero.pola-cari .hero-copy { max-width: 760px; margin-inline: auto; text-align: center; }
+.hero.pola-cari .search-bar { margin-bottom: 18px; text-align: left; }
 .hero.pola-cari .search-bar { width: 100%; min-height: 60px; }
 .hero-topik { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
 
@@ -1822,6 +1889,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
 @media (horizontal-viewport-segments: 2) {
   .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: calc(env(viewport-segment-left 1 0, 0px) - env(viewport-segment-right 0 0, 0px) + 2 * var(--gut)); }
   .hero.pola-maskot .hero-media { order: 0; }
+  .hero.pola-maskot .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .hero.pola-tengah .hero-grid, .hero.pola-cari .hero-grid { grid-template-columns: minmax(0, 1fr); }
 }
 

@@ -176,7 +176,7 @@ Satu sistem, lima rasa. Warna, huruf, ikon, logo, dan komponen sama; yang beruba
 
 - Lebar konten maksimal 1240px (`.wrap`) dengan gutter `clamp(16px, 4vw, 48px)`.
 - Grid tanpa kartu yatim: 3 kolom di desktop, 2 di tablet (kartu terakhir yang sendirian dibuat lebar penuh), 1 di HP.
-- Hero (`.hero`) dua kolom mulai 840px (kelas lebar); di bawahnya bertumpuk, pada pola maskot maskot di atas teks.
+- Hero (`.hero`) sama persis dengan fusionify.id: setinggi layar, judul dua baris (tinta lalu biru) dengan titik bulat biru muda, angka di bawah tombol, maskot papan interaktif di kanan, ajakan "Gulir pelan-pelan" di layar besar. Pola maskot dua kolom mulai 600px (1.2fr/0.8fr sampai 1199px, 1.15fr/0.85fr setelahnya); di bawah 600px maskot di atas teks dan angka tiga sejajar. Pola lain dua kolom mulai 840px.
 - Nav lengkap mulai 961px; di bawahnya tombol menu (satu-satunya batas di luar kelas ukuran layar, karena tergantung jumlah tautan).
 - Cover karya/produk rasio 1600:848, screenshot asli. Ilustrasi wajib diberi label `.cover-note` "Ilustrasi".
 - Di layar sentuh: magnet, kursor khusus, dan parallax dimatikan.
