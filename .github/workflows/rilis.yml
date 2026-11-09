@@ -15,7 +15,7 @@ permissions:
 jobs:
   rilis:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90 # semua uji berurutan (~60 menit sejak 1.15); uji per PR dibagi paralel di uji.yml
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

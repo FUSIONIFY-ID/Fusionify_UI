@@ -14,6 +14,7 @@ Kit sekarang bisa tampil beda per kategori produk, rapi di semua ukuran layar te
 - **Mode padat** `data-kepadatan="padat"` untuk dashboard dan admin: teks 15px, sidebar 232px, panel dan tabel datar 1px, KPI berbayangan tipis, tabel rapat. Dipasang di template dashboard dan admin.
 - Token `--angkat` (pengali bayangan pejal) dan `--edge-width` kini dipakai di semua garis dan bayangan stiker komponen; `--h-hero`, `--h-sec`, `--sec-y` bisa diatur gaya.
 - Uji: `tests/kelas-lipat-gaya.mjs` (kelas, sidebar, padat, gaya, emulasi engsel HP lipat). Ukuran uji tata letak bertambah 344×882, 600×960, 673×841, 841×673; layar sentuh 344×882 dan 673×841.
+- CI: uji per PR dibagi ke 5 job paralel (tata letak terang, tata letak gelap, tanpa JS, sentuh dan interaksi, generator); `npm test -- a,b` menerima beberapa saringan dan `FY_SKEMA` membatasi tema di uji tata letak. Batas waktu rilis dinaikkan ke 90 menit.
 - README: contoh kunci versi diperbarui (tag `v1.14.0` tidak pernah di-push).
 
 ## 1.14.2 · 9 November 2026
