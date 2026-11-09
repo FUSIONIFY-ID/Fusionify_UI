@@ -9,7 +9,7 @@
    <div class="app" data-app> <aside class="side" data-side>..</aside> <div class="app-main">..</div> </div>
    ========================================================= */
 .app { display: grid; grid-template-columns: 264px minmax(0, 1fr); min-height: 100vh; min-height: 100dvh; background: var(--paper); }
-.side { position: sticky; top: 0; height: 100vh; height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; gap: 18px; padding: 18px 14px; background: var(--card); border-right: 2px solid var(--edge); overflow-y: auto; z-index: 40; }
+.side { position: sticky; top: 0; height: 100vh; height: 100dvh; display: grid; grid-template-rows: auto 1fr auto; gap: 18px; padding: 18px 14px; background: var(--card); border-right: var(--edge-width) solid var(--edge); overflow-y: auto; z-index: 40; }
 .side-brand { display: flex; align-items: center; gap: 10px; padding: 6px 8px; text-decoration: none; font-family: var(--f-head); font-weight: 800; font-size: 21px; }
 .side-brand img { width: 34px; height: 34px; }
 .side-nav { display: grid; gap: 4px; align-content: start; }
@@ -17,7 +17,7 @@
 .side-nav a { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; text-decoration: none; font-weight: 700; font-size: 15px; color: var(--ink-2); transition: background 0.2s, color 0.2s; }
 .side-nav a svg { width: 20px; height: 20px; flex: none; }
 .side-nav a:hover { background: var(--surface); color: var(--ink); }
-.side-nav a[aria-current="page"] { background: var(--blue); color: var(--on-dark); box-shadow: var(--shadow-pop); border: 2px solid var(--edge); padding: 8px 10px; }
+.side-nav a[aria-current="page"] { background: var(--blue); color: var(--on-dark); box-shadow: var(--shadow-pop); border: var(--edge-width) solid var(--edge); padding: 8px 10px; }
 .side-nav .count { margin-left: auto; min-width: 22px; padding: 1px 7px; border-radius: 999px; background: var(--surface-2); color: var(--text-blue-deep); font-family: var(--f-num); font-size: 12px; font-weight: 800; text-align: center; }
 .side-nav a[aria-current="page"] .count { background: var(--on-dark); color: var(--blue-deep); }
 .side-foot { display: grid; gap: 10px; }
@@ -37,9 +37,9 @@
 .page-head p { color: var(--ink-2); margin-top: 6px; }
 .page-head .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .scrim { position: fixed; inset: 0; z-index: 39; background: rgba(2, 6, 15, 0.5); opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-@media (max-width: 960px) {
+@media (max-width: 599px) {
   .app { grid-template-columns: 1fr; }
-  .side { position: fixed; left: 0; top: 0; bottom: 0; width: min(300px, 86vw); transform: translateX(-105%); transition: transform 0.4s var(--ease); box-shadow: 6px 0 0 var(--edge-shadow); }
+  .side { position: fixed; left: 0; top: 0; bottom: 0; width: min(300px, 86vw); transform: translateX(-105%); transition: transform 0.4s var(--ease); box-shadow: calc(6px * var(--angkat)) 0 0 var(--edge-shadow); }
   .app.side-open .side { transform: none; }
   .app.side-open .scrim { opacity: 1; pointer-events: auto; }
   .side-toggle { display: grid; }
@@ -51,7 +51,7 @@
 .search input { width: 100%; font: inherit; font-size: 15px; color: var(--ink); padding: 10px 14px 10px 42px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--field); }
 .search input::placeholder { color: var(--placeholder); }
 .search input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.25); }
-@media (max-width: 620px) { .topbar .search { display: none; } }
+@media (max-width: 599px) { .topbar .search { display: none; } }
 
 /* Tombol ikon dengan titik notifikasi */
 .icon-btn { position: relative; color: var(--ink-2); }
@@ -60,19 +60,19 @@
 /* =========================================================
    AVATAR
    ========================================================= */
-.avatar { --s: 40px; flex: none; width: var(--s); height: var(--s); border-radius: 50%; display: inline-grid; place-items: center; overflow: hidden; background: var(--surface-2); color: var(--text-blue-deep); font-family: var(--f-num); font-weight: 800; font-size: calc(var(--s) * 0.38); border: 2px solid var(--edge); }
+.avatar { --s: 40px; flex: none; width: var(--s); height: var(--s); border-radius: 50%; display: inline-grid; place-items: center; overflow: hidden; background: var(--surface-2); color: var(--text-blue-deep); font-family: var(--f-num); font-weight: 800; font-size: calc(var(--s) * 0.38); border: var(--edge-width) solid var(--edge); }
 .avatar img { width: 100%; height: 100%; object-fit: cover; }
 .avatar.sm { --s: 32px; } .avatar.lg { --s: 56px; }
 .avatar-stack { display: flex; } .avatar-stack .avatar { margin-left: -10px; } .avatar-stack .avatar:first-child { margin-left: 0; }
 .user-chip { display: flex; align-items: center; gap: 10px; padding: 4px 10px 4px 4px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card); font-weight: 700; font-size: 14.5px; color: var(--ink); cursor: pointer; }
 .user-chip small { display: block; font-weight: 400; color: var(--ink-3); font-size: 12.5px; line-height: 1.1; }
 .user-chip svg { width: 16px; height: 16px; color: var(--ink-3); }
-@media (max-width: 620px) { .user-chip .who { display: none; } .user-chip { padding: 3px; } .user-chip > svg { display: none; } }
+@media (max-width: 599px) { .user-chip .who { display: none; } .user-chip { padding: 3px; } .user-chip > svg { display: none; } }
 
 /* =========================================================
    PANEL · kartu aplikasi dengan kepala
    ========================================================= */
-.panel { position: relative; min-width: 0; padding: 22px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); }
+.panel { position: relative; min-width: 0; padding: 22px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: var(--edge-width) solid var(--edge); box-shadow: var(--shadow-sticker); }
 .panel-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
 .panel-head h2 { font-size: 22px; }
 .panel-head p { font-size: 14px; color: var(--ink-3); }
@@ -80,7 +80,7 @@
 .panel.flush .panel-head { padding: 20px 22px 0; }
 .dash-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 22px; }
 .span-12 { grid-column: span 12; } .span-8 { grid-column: span 8; } .span-7 { grid-column: span 7; } .span-6 { grid-column: span 6; } .span-5 { grid-column: span 5; } .span-4 { grid-column: span 4; }
-@media (max-width: 1100px) { .span-8, .span-7, .span-6, .span-5, .span-4 { grid-column: span 12; } }
+@media (max-width: 1199px) { .span-8, .span-7, .span-6, .span-5, .span-4 { grid-column: span 12; } }
 
 /* Label data contoh: WAJIB di template selama datanya belum dari sistem asli */
 /* .sample-note dipindah ke product.css (dipakai juga di halaman status) */
@@ -89,7 +89,7 @@
    KPI · angka ringkas dengan perubahan
    ========================================================= */
 .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.kpi { position: relative; display: grid; gap: 10px; padding: 20px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); overflow: hidden; }
+.kpi { position: relative; display: grid; gap: 10px; padding: 20px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: var(--edge-width) solid var(--edge); box-shadow: var(--shadow-sticker); overflow: hidden; }
 .kpi .lab { display: flex; align-items: center; gap: 8px; font-family: var(--f-num); font-size: 12.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); }
 .kpi .lab svg { width: 18px; height: 18px; color: var(--text-blue); }
 .kpi .v { font-family: var(--f-num); font-weight: 800; font-size: clamp(30px, 3vw, 40px); line-height: 1; letter-spacing: -0.02em; }
@@ -101,8 +101,8 @@
 .kpi.blue { background: var(--blue); color: var(--on-dark); }
 .kpi.blue .lab, .kpi.blue .lab svg { color: var(--on-dark-2); }
 .kpi.blue .spark { color: var(--on-dark); }
-@media (max-width: 1100px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 520px) { .kpis { grid-template-columns: 1fr; } }
+@media (max-width: 1199px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 599px) { .kpis { grid-template-columns: 1fr; } }
 
 /* =========================================================
    GRAFIK SEDERHANA (tanpa library)
@@ -174,8 +174,8 @@
    ========================================================= */
 .switch { display: inline-flex; align-items: center; gap: 12px; cursor: pointer; font-size: 15px; }
 .switch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.switch input + span { position: relative; flex: none; width: 50px; height: 28px; border-radius: 999px; background: var(--surface-2); border: 2px solid var(--edge); transition: background 0.25s; }
-.switch input + span::after { content: ""; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--card); border: 2px solid var(--edge); transition: transform 0.3s var(--spring); }
+.switch input + span { position: relative; flex: none; width: 50px; height: 28px; border-radius: 999px; background: var(--surface-2); border: var(--edge-width) solid var(--edge); transition: background 0.25s; }
+.switch input + span::after { content: ""; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--card); border: var(--edge-width) solid var(--edge); transition: transform 0.3s var(--spring); }
 .switch input:checked + span { background: var(--blue); }
 .switch input:checked + span::after { transform: translateX(22px); background: var(--on-dark); }
 .switch input:focus-visible + span { outline: 3px solid var(--blue-light); outline-offset: 2px; }
@@ -225,7 +225,7 @@
 .auth-done { display: grid; justify-items: center; text-align: center; gap: 14px; }
 .auth-done img { width: 150px; height: auto; }
 .auth-done[hidden] { display: none; }
-@media (max-width: 900px) {
+@media (max-width: 839px) {
   .auth { grid-template-columns: 1fr; }
   .auth-art { min-height: 0; grid-template-columns: 1fr auto; align-items: end; padding: 22px 20px 0; }
   .auth-art .copy { display: none; }
@@ -264,7 +264,7 @@
 .thread { display: none; flex-direction: column; min-width: 0; min-height: 0; background: var(--paper); }
 .chat.thread-open .thread { display: flex; position: fixed; inset: 0; z-index: 90; }
 .chat.thread-open ~ .navbar, .chat.thread-open ~ .fab-dock { display: none; }
-.thread-head { flex: none; display: flex; align-items: center; gap: 10px; min-height: 64px; padding: max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 8px max(6px, env(safe-area-inset-left)); background: var(--card); border-bottom: 2px solid var(--edge); }
+.thread-head { flex: none; display: flex; align-items: center; gap: 10px; min-height: 64px; padding: max(8px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 8px max(6px, env(safe-area-inset-left)); background: var(--card); border-bottom: var(--edge-width) solid var(--edge); }
 .thread-head .who { flex: 1; min-width: 0; display: grid; }
 .thread-head .who b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 17px; }
 .thread-head .who small { font-size: 13px; color: var(--ink-3); }
@@ -274,7 +274,7 @@
 .msgs:focus-visible { outline: 3px solid var(--blue-light); outline-offset: -3px; }
 .msgs > :first-child { margin-top: auto; }
 .day { align-self: center; margin: 10px 0 6px; padding: 4px 12px; border-radius: 999px; background: var(--surface); font-family: var(--f-num); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
-.msg { position: relative; max-width: min(78%, 520px); display: grid; gap: 4px; padding: 10px 14px 8px; border-radius: 20px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 3px 0 var(--edge-shadow); overflow-wrap: anywhere; animation: fy-msg 0.3s var(--spring); }
+.msg { position: relative; max-width: min(78%, 520px); display: grid; gap: 4px; padding: 10px 14px 8px; border-radius: 20px; border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); overflow-wrap: anywhere; animation: fy-msg 0.3s var(--spring); }
 @keyframes fy-msg { from { opacity: 0; transform: translateY(8px) scale(0.97); } }
 .msg p { margin: 0; font-size: 16px; line-height: 1.45; white-space: pre-wrap; }
 .msg time { justify-self: end; display: inline-flex; align-items: center; gap: 4px; font-family: var(--f-num); font-size: 11.5px; color: var(--ink-3); }
@@ -292,26 +292,26 @@
 .msg-card b { display: block; font-size: 15px; }
 .msg-card small { font-size: 13px; color: var(--ink-2); }
 .msg.me .msg-card small { color: var(--ink-2); }
-.typing { align-self: flex-start; display: inline-flex; gap: 5px; padding: 14px 16px; border-radius: 20px 20px 20px 6px; border: 2px solid var(--edge); background: var(--card); box-shadow: 0 3px 0 var(--edge-shadow); }
+.typing { align-self: flex-start; display: inline-flex; gap: 5px; padding: 14px 16px; border-radius: 20px 20px 20px 6px; border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); }
 .typing[hidden] { display: none; }
 .typing i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-3); animation: fy-type 1.2s var(--ease) infinite; }
 .typing i:nth-child(2) { animation-delay: 0.15s; } .typing i:nth-child(3) { animation-delay: 0.3s; }
 @keyframes fy-type { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-5px); opacity: 1; } }
-.composer { flex: none; display: flex; align-items: flex-end; gap: 8px; padding: 10px max(10px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); background: var(--card); border-top: 2px solid var(--edge); }
+.composer { flex: none; display: flex; align-items: flex-end; gap: 8px; padding: 10px max(10px, env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); background: var(--card); border-top: var(--edge-width) solid var(--edge); }
 .composer textarea { flex: 1; min-width: 0; min-height: 48px; max-height: 140px; resize: none; padding: 12px 16px; border-radius: 24px; border: 2px solid var(--line); background: var(--field); color: var(--ink); font: inherit; font-size: 16px; line-height: 1.35; }
 .composer textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.25); }
 .composer textarea::placeholder { color: var(--placeholder); }
 .composer .icon-btn { flex: none; width: 48px; height: 48px; }
-.composer .send { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--edge); background: var(--blue); color: var(--on-dark); box-shadow: 0 3px 0 var(--edge-shadow); cursor: pointer; transition: transform 0.25s var(--spring); }
+.composer .send { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; border: var(--edge-width) solid var(--edge); background: var(--blue); color: var(--on-dark); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); cursor: pointer; transition: transform 0.25s var(--spring); }
 .composer .send svg { width: 22px; height: 22px; }
-.composer .send:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
+.composer .send:active { transform: translateY(2px); box-shadow: 0 calc(1px * var(--angkat)) 0 var(--edge-shadow); }
 .composer .send:disabled { background: var(--surface-2); color: var(--ink-3); cursor: default; }
 .thread[hidden] { display: none !important; }
 .thread-empty { display: none; }
-@media (min-width: 700px) { .m-app .chat.thread-open .thread { left: calc(92px + env(safe-area-inset-left)); } .m-app .chat-top .theme-btn { display: none; } }
-@media (min-width: 900px) {
+@media (min-width: 600px) { .m-app .chat.thread-open .thread { left: calc(92px + env(safe-area-inset-left)); } .m-app .chat-top .theme-btn { display: none; } }
+@media (min-width: 840px) {
   .chat { grid-template-columns: 360px minmax(0, 1fr); height: 100vh; height: 100dvh; }
-  .chat-list { overflow-y: auto; border-right: 2px solid var(--edge); background: var(--card); padding-bottom: 24px; }
+  .chat-list { overflow-y: auto; border-right: var(--edge-width) solid var(--edge); background: var(--card); padding-bottom: 24px; }
   .thread, .chat.thread-open .thread { display: flex; position: static; height: 100%; }
   .thread .back { display: none; }
   .with-navbar.chat-page { padding-bottom: 0; }
@@ -319,6 +319,67 @@
 }
 @media (prefers-reduced-motion: reduce) { .msg { animation: none; } .typing i { animation: none; opacity: 0.8; } }
 /* Tanggal kecil bergaya stiker (daftar acara, kartu acara di chat) */
-.ev-date { flex: none; display: grid; place-items: center; align-content: center; width: 52px; height: 56px; border-radius: 14px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 3px 0 var(--edge-shadow); font-family: var(--f-num); line-height: 1; }
+.ev-date { flex: none; display: grid; place-items: center; align-content: center; width: 52px; height: 56px; border-radius: 14px; border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); font-family: var(--f-num); line-height: 1; }
 .ev-date b { font-size: 20px; font-weight: 800; }
 .ev-date small { margin-top: 3px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-blue-deep); }
+
+/* =========================================================
+   KEPADATAN PADAT · untuk dashboard dan admin yang dilihat lama
+   <html data-kepadatan="padat"> atau <div class="app" data-kepadatan="padat">
+   Teks 15px, sidebar 232px, panel datar bergaris 1px (stiker hanya untuk KPI dan tombol),
+   tabel lebih rapat. Target sentuh tetap 44px di layar sentuh.
+   ========================================================= */
+:is(.app[data-kepadatan="padat"], [data-kepadatan="padat"] .app) { --garis-tipis: color-mix(in srgb, var(--ink) 18%, var(--card)); font-size: 15px; }
+@media (min-width: 840px) { :is(.app[data-kepadatan="padat"], [data-kepadatan="padat"] .app) { grid-template-columns: 232px minmax(0, 1fr); } }
+[data-kepadatan="padat"] .side { padding: 14px 10px; gap: 12px; }
+[data-kepadatan="padat"] .side-brand { font-size: 18px; }
+[data-kepadatan="padat"] .side-brand img { width: 30px; height: 30px; }
+[data-kepadatan="padat"] .side-nav { gap: 2px; }
+[data-kepadatan="padat"] .side-nav a { padding: 8px 10px; gap: 10px; font-size: 14px; border-radius: 12px; }
+[data-kepadatan="padat"] .side-nav a svg { width: 18px; height: 18px; }
+[data-kepadatan="padat"] .side-help { padding: 12px 12px 12px 64px; min-height: 76px; font-size: 13px; }
+[data-kepadatan="padat"] .side-help img { width: 54px; }
+[data-kepadatan="padat"] .side-help b { font-size: 14px; }
+[data-kepadatan="padat"] .topbar { padding: 8px clamp(14px, 2.4vw, 24px); }
+[data-kepadatan="padat"] .app-body { padding: clamp(14px, 2.2vw, 24px) clamp(14px, 2.4vw, 24px) 48px; gap: 16px; }
+[data-kepadatan="padat"] .page-head h1 { font-size: clamp(26px, 2.8vw, 34px); }
+[data-kepadatan="padat"] .page-head p { font-size: 14.5px; margin-top: 2px; }
+[data-kepadatan="padat"] .dash-grid { gap: 16px; }
+[data-kepadatan="padat"] .kpis { gap: 14px; }
+[data-kepadatan="padat"] .panel { padding: 16px; border-width: 1px; border-color: var(--garis-tipis); box-shadow: none; }
+[data-kepadatan="padat"] .panel.flush { padding: 0; }
+[data-kepadatan="padat"] .panel.flush .panel-head { padding: 14px 16px 0; }
+[data-kepadatan="padat"] .panel-head { margin-bottom: 12px; gap: 8px; }
+[data-kepadatan="padat"] .panel-head h2 { font-size: 18px; }
+[data-kepadatan="padat"] .panel-head p { font-size: 13px; }
+[data-kepadatan="padat"] .kpi { padding: 14px 16px; gap: 6px; box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); }
+[data-kepadatan="padat"] .kpi .v { font-size: clamp(24px, 2.2vw, 30px); }
+[data-kepadatan="padat"] .kpi .lab { font-size: 11.5px; }
+[data-kepadatan="padat"] .kpi .spark { width: 78px; height: 28px; right: 12px; bottom: 12px; }
+[data-kepadatan="padat"] .table-wrap { border-width: 1px; border-color: var(--garis-tipis); box-shadow: none; }
+[data-kepadatan="padat"] .table { font-size: 14px; }
+[data-kepadatan="padat"] .table th, [data-kepadatan="padat"] .table td { padding: 9px 14px; }
+[data-kepadatan="padat"] .bars { height: 168px; }
+[data-kepadatan="padat"] .linechart { height: 184px; }
+@media (pointer: coarse) { [data-kepadatan="padat"] .side-nav a { min-height: 44px; } }
+
+/* Kelas sedang (600-839px: tablet tegak, layar dalam HP lipat): sidebar jadi rel ikon dengan label kecil.
+   Ditaruh setelah blok padat supaya menang dari ukuran padat.
+   Kelas lebar ke atas (840px+): sidebar penuh. Ringkas (<600px): laci dari kiri. */
+@media (min-width: 600px) and (max-width: 839px) {
+  .app { grid-template-columns: var(--rail-w, 88px) minmax(0, 1fr); }
+  .app .side { padding: 14px 8px; gap: 14px; }
+  .app .side-brand { justify-content: center; padding: 6px 0; font-size: 0; }
+  .app .side-nav .group { height: 1px; margin: 8px 14px; overflow: hidden; font-size: 0; background: var(--line); }
+  .app .side-nav a { position: relative; flex-direction: column; justify-content: center; gap: 4px; padding: 10px 4px; font-size: 11.5px; line-height: 1.15; text-align: center; }
+  .app .side-nav a svg { width: 22px; height: 22px; }
+  .app .side-nav .count { position: absolute; top: 4px; right: 8px; margin: 0; min-width: 18px; padding: 0 5px; font-size: 11px; }
+  .app .side-help { display: none; }
+}
+
+/* HP lipat dengan layar terbagi engsel kiri-kanan (data-lipat="kiri-kanan"): daftar obrolan di layar kiri,
+   isi obrolan di layar kanan, tidak ada isi yang jatuh tepat di engsel. Perangkat biasa tidak terpengaruh. */
+@media (horizontal-viewport-segments: 2) {
+  .chat { grid-template-columns: calc(env(viewport-segment-right 0 0, 360px) - var(--chat-x, 0px)) minmax(0, 1fr); column-gap: calc(env(viewport-segment-left 1 0, 0px) - env(viewport-segment-right 0 0, 0px)); }
+  .m-app .chat { --chat-x: calc(92px + env(safe-area-inset-left)); } /* rel di kiri ikut memakan layar kiri */
+}

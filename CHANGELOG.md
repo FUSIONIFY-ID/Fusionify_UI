@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.15.0 · 9 November 2026
+
+Kit sekarang bisa tampil beda per kategori produk, rapi di semua ukuran layar termasuk HP lipat, dan dashboard tidak lagi kebesaran. Tidak ada kelas atau markup yang dihapus atau diganti nama. Yang terasa tanpa mengubah apa pun: titik pindah tata letak bergeser ke kelas ukuran layar (lihat di bawah) dan sidebar aplikasi jadi rel ikon di 600-839px.
+
+- **Gaya per kategori** (`css/gaya.css`, ikut dimuat `fusionify.css`): `<html data-gaya="toko|tenang|jasa|teknis">`, tanpa atribut tetap `stiker`. Hanya mengubah token: tebal garis, kedalaman bayangan pejal, sudut, besar judul, jarak antarseksi. Gaya `tenang` dan `teknis` otomatis tanpa kursor segel dan efek magnet (opsi baru `cursor`/`magnet` di `initFusionify`).
+- **Komponen hero** (`.hero`, product.css) dengan lima pola: `pola-maskot`, `pola-pratinjau` (bingkai produk + lapisan bertumpuk), `pola-demo` (layar HP dengan alur percakapan yang berjalan sendiri), `pola-tengah` (judul di tengah + deret karya), `pola-cari` (kolom cari besar + topik), plus baris fakta `dl.hero-fakta`. Menutup temuan 16. `templates/landing-produk.html` kini memakai `.hero.pola-maskot`.
+- **Template baru `templates/gaya.html`**: katalog lima gaya dan pola hero (`?gaya=...`).
+- **Kelas ukuran layar ala Material 3**: ringkas < 600, sedang 600-839, lebar 840-1199, besar 1200-1599, sangat besar >= 1600. Token `--kelas-*`, `kelasLayar` di token native (Flutter `FyKelas`, Swift `Fy.Kelas`, Compose `FyKelas`, RN, dimen Android `fy_kelas_*`), `screens` Tailwind v3 dan `--breakpoint-*` v4. Semua breakpoint CSS dan JS dipetakan ke kelas ini (sebelumnya 12 angka berbeda); tersisa `420px`/`350px` untuk layar sangat sempit dan nav web 961px.
+- **`js/kelas.js`**: `html[data-kelas]`, `html[data-lipat]` (kiri-kanan/atas-bawah saat layar HP lipat terbagi engsel), event `fy:kelas`. Dipanggil otomatis.
+- **HP lipat**: dengan `@media (horizontal-viewport-segments: 2)` hero menaruh teks dan media di kedua sisi engsel, chat menaruh daftar di kiri dan isi di kanan.
+- **Sidebar aplikasi**: laci di ringkas, rel ikon berlabel di sedang (baru), penuh mulai lebar (sebelumnya laci sampai 960px). Rail `.m-app` mulai 600px (sebelumnya 700px), chat berdampingan mulai 840px (sebelumnya 900px).
+- **Mode padat** `data-kepadatan="padat"` untuk dashboard dan admin: teks 15px, sidebar 232px, panel dan tabel datar 1px, KPI berbayangan tipis, tabel rapat. Dipasang di template dashboard dan admin.
+- Token `--angkat` (pengali bayangan pejal) dan `--edge-width` kini dipakai di semua garis dan bayangan stiker komponen; `--h-hero`, `--h-sec`, `--sec-y` bisa diatur gaya.
+- Uji: `tests/kelas-lipat-gaya.mjs` (kelas, sidebar, padat, gaya, emulasi engsel HP lipat). Ukuran uji tata letak bertambah 344×882, 600×960, 673×841, 841×673; layar sentuh 344×882 dan 673×841.
+- README: contoh kunci versi diperbarui (tag `v1.14.0` tidak pernah di-push).
+
 ## 1.14.2 · 9 November 2026
 
 Perbaikan kursor segel. Tidak ada kelas atau markup yang berubah.

@@ -147,6 +147,14 @@ public enum Fy {
         public static let gutter: CGFloat = 16
     }
 
+    /// Kelas ukuran layar (sama dengan web): batas bawah tiap kelas.
+    public enum Kelas {
+        public static let sedang: CGFloat = 600
+        public static let lebar: CGFloat = 840
+        public static let besar: CGFloat = 1200
+        public static let sangatBesar: CGFloat = 1600
+    }
+
     public enum Font {
         public static func head(_ size: CGFloat) -> SwiftUI.Font { .custom("AfacadFlux-ExtraBold", size: size) }
         public static func body(_ size: CGFloat = 17, bold: Bool = false) -> SwiftUI.Font { .custom(bold ? "Sansation-Bold" : "Sansation-Regular", size: size) }

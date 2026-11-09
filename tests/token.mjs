@@ -1,7 +1,7 @@
 // FUSIONIFY UI · uji token (tanpa browser). Dijalankan oleh tests/run.mjs, juga `npm run cek:token`.
 // Cek:
 // 1. Dua blok gelap di css/tokens.css (tombol tema dan prefers-color-scheme) identik.
-// 2. Tidak ada warna hex di CSS komponen (base, components, product, controls, app): semua lewat token.
+// 2. Tidak ada warna hex di CSS komponen (base, components, product, controls, app, gaya): semua lewat token.
 // 3. Setiap var(--x) tanpa nilai cadangan di CSS kit didefinisikan di suatu tempat.
 // 4. Warna email (email/fy-email.js) sama dengan token terang di tokens.css.
 import fs from "node:fs";
@@ -32,7 +32,7 @@ if (gelapTombol && gelapSistem) {
 }
 
 // 2 dan 3
-const fileCss = ["css/base.css", "css/components.css", "css/product.css", "css/controls.css", "css/app.css"];
+const fileCss = ["css/base.css", "css/components.css", "css/product.css", "css/controls.css", "css/app.css", "css/gaya.css"];
 const semua = fileCss.map((f) => [f, tanpaKomentar(baca(f))]);
 const didefinisikan = new Set([...tokens.matchAll(/--([\w-]+)\s*:/g)].map((m) => m[1]));
 for (const [, s] of semua) for (const m of s.matchAll(/--([\w-]+)\s*:/g)) didefinisikan.add(m[1]);

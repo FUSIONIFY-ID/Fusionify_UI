@@ -11,7 +11,7 @@
    DROPDOWN · <div class="dropdown"><button aria-expanded="false" aria-haspopup="menu" data-dropdown>..</button><div class="menu" role="menu" hidden>..</div></div>
    ========================================================= */
 .dropdown { position: relative; }
-.menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 50; min-width: 220px; padding: 6px; border-radius: var(--r-m); background: var(--card); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); display: grid; gap: 2px; }
+.menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 50; min-width: 220px; padding: 6px; border-radius: var(--r-m); background: var(--card); border: var(--edge-width) solid var(--edge); box-shadow: var(--shadow-sticker); display: grid; gap: 2px; }
 .menu[hidden] { display: none; }
 .menu.up { top: auto; bottom: calc(100% + 8px); }
 .menu.start { right: auto; left: 0; }
@@ -26,7 +26,7 @@
 /* =========================================================
    MODAL · <dialog class="modal" id="..."> dibuka lewat [data-open-modal="id"]
    ========================================================= */
-.modal { width: min(520px, calc(100vw - 32px)); padding: 0; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 10px 0 var(--edge-shadow); }
+.modal { width: min(520px, calc(100vw - 32px)); padding: 0; border-radius: var(--r-l); border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 calc(10px * var(--angkat)) 0 var(--edge-shadow); }
 .modal::backdrop { background: rgba(2, 6, 15, 0.55); }
 .modal[open] { animation: fy-modal 0.35s var(--spring); }
 @keyframes fy-modal { from { opacity: 0; transform: translateY(16px) scale(0.96); } }
@@ -43,7 +43,7 @@
    ========================================================= */
 .tabs [role="tablist"] { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--surface); width: max-content; max-width: 100%; overflow-x: auto; }
 .tabs [role="tab"] { flex: none; padding: 9px 16px; border: 0; border-radius: 999px; background: none; font: inherit; font-weight: 700; font-size: 14.5px; color: var(--ink-2); cursor: pointer; transition: background 0.2s, color 0.2s; }
-.tabs [role="tab"][aria-selected="true"] { background: var(--card); color: var(--ink); box-shadow: 0 0 0 2px var(--edge), 0 3px 0 2px var(--edge-shadow); }
+.tabs [role="tab"][aria-selected="true"] { background: var(--card); color: var(--ink); box-shadow: 0 0 0 2px var(--edge), 0 calc(3px * var(--angkat)) 0 2px var(--edge-shadow); }
 .tabs [role="tabpanel"] { padding-top: 18px; }
 .tabs [role="tabpanel"][hidden] { display: none; }
 
@@ -69,9 +69,9 @@
    <div class="btn-group" role="group" aria-label=".." data-btn-group="single|multi">
      <button type="button" aria-pressed="true">Hari</button> ...
    ========================================================= */
-.btn-group { display: inline-flex; max-width: 100%; overflow-x: auto; border: 2px solid var(--edge); border-radius: 999px; background: var(--card); box-shadow: var(--shadow-pop); scrollbar-width: none; }
+.btn-group { display: inline-flex; max-width: 100%; overflow-x: auto; border: var(--edge-width) solid var(--edge); border-radius: 999px; background: var(--card); box-shadow: var(--shadow-pop); scrollbar-width: none; }
 .btn-group::-webkit-scrollbar { display: none; }
-.btn-group > button, .btn-group > a { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 0; border-left: 2px solid var(--edge); background: none; font: inherit; font-weight: 700; font-size: 15px; color: var(--ink-2); text-decoration: none; white-space: nowrap; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.btn-group > button, .btn-group > a { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 0; border-left: var(--edge-width) solid var(--edge); background: none; font: inherit; font-weight: 700; font-size: 15px; color: var(--ink-2); text-decoration: none; white-space: nowrap; cursor: pointer; transition: background 0.2s, color 0.2s; }
 .btn-group > :first-child { border-left: 0; }
 .btn-group > :hover { background: var(--surface); color: var(--ink); }
 .btn-group > [aria-pressed="true"] { background: var(--blue); color: var(--on-dark); }
@@ -97,9 +97,9 @@
    .fab.ext = dengan label, .sm / .lg ukuran, .soft = versi biru muda
    [data-fab-shrink] = label disembunyikan saat scroll turun
    ========================================================= */
-.fab { --bg: var(--blue); --fg: var(--on-dark); position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 60px; height: 60px; padding: 0; border-radius: 22px; border: 2px solid var(--edge); background: var(--bg); color: var(--fg); box-shadow: 0 4px 0 var(--edge-shadow); font: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.35s var(--spring); }
-.fab:hover { transform: translateY(-3px); box-shadow: 0 7px 0 var(--edge-shadow); }
-.fab:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
+.fab { --bg: var(--blue); --fg: var(--on-dark); position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 60px; height: 60px; padding: 0; border-radius: 22px; border: var(--edge-width) solid var(--edge); background: var(--bg); color: var(--fg); box-shadow: 0 calc(4px * var(--angkat)) 0 var(--edge-shadow); font: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.35s var(--spring); }
+.fab:hover { transform: translateY(-3px); box-shadow: 0 calc(7px * var(--angkat)) 0 var(--edge-shadow); }
+.fab:active { transform: translateY(2px); box-shadow: 0 calc(1px * var(--angkat)) 0 var(--edge-shadow); }
 .fab svg { width: 24px; height: 24px; flex: none; }
 .fab.sm { width: 46px; height: 46px; border-radius: 16px; } .fab.sm svg { width: 20px; height: 20px; }
 .fab.lg { width: 88px; height: 88px; border-radius: 30px; } .fab.lg svg { width: 34px; height: 34px; }
@@ -114,7 +114,7 @@
 .fab-menu { display: grid; justify-items: end; gap: 12px; }
 .fab-actions { list-style: none; margin: 0; padding: 0; display: grid; justify-items: end; gap: 10px; }
 .fab-actions[hidden] { display: none; }
-.fab-action { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px 0 18px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-pop); font: inherit; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap; cursor: pointer; animation: fy-rise 0.35s var(--spring) both; animation-delay: calc(var(--i, 0) * 45ms); }
+.fab-action { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px 0 18px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-pop); font: inherit; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap; cursor: pointer; animation: fy-rise 0.35s var(--spring) both; animation-delay: calc(var(--i, 0) * 45ms); }
 .fab-action:hover { background: var(--surface); }
 .fab-action svg { width: 20px; height: 20px; color: var(--text-blue); }
 .fab-menu > .fab svg { transition: transform 0.35s var(--spring); }
@@ -144,13 +144,13 @@
    Tambahkan .with-navbar di <body> supaya isi tidak tertutup.
    ========================================================= */
 .with-navbar { --navbar-h: 76px; padding-bottom: calc(var(--navbar-h) + env(safe-area-inset-bottom)); }
-.navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); padding: 6px max(6px, env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-left)); background: var(--card); border-top: 2px solid var(--edge); }
+.navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); padding: 6px max(6px, env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-left)); background: var(--card); border-top: var(--edge-width) solid var(--edge); }
 .navbar a, .navbar button, .rail-nav a, .rail-nav button { display: grid; justify-items: center; align-content: center; gap: 4px; min-height: 60px; min-width: 0; padding: 4px 2px; border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 700; line-height: 1.2; color: var(--ink-3); text-align: center; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .navbar .ico, .rail-nav .ico { position: relative; display: grid; place-items: center; width: 60px; height: 32px; border-radius: 999px; transition: background 0.25s, transform 0.35s var(--spring); }
 .navbar svg, .rail-nav svg { width: 22px; height: 22px; }
 .navbar a:hover .ico, .rail-nav a:hover .ico { background: var(--surface); }
 .navbar [aria-current="page"], .rail-nav [aria-current="page"] { color: var(--ink); }
-.navbar [aria-current="page"] .ico, .rail-nav [aria-current="page"] .ico { background: var(--blue); color: var(--on-dark); box-shadow: 0 0 0 2px var(--edge), 0 3px 0 2px var(--edge-shadow); }
+.navbar [aria-current="page"] .ico, .rail-nav [aria-current="page"] .ico { background: var(--blue); color: var(--on-dark); box-shadow: 0 0 0 2px var(--edge), 0 calc(3px * var(--angkat)) 0 2px var(--edge-shadow); }
 .navbar a:active .ico, .rail-nav a:active .ico { transform: scale(0.9); }
 .navbar .badge, .rail-nav .badge { position: absolute; top: -5px; right: 8px; }
 .navbar .badge.dot, .rail-nav .badge.dot { top: 2px; right: 16px; }
@@ -159,17 +159,17 @@
 /* =========================================================
    NAVIGATION RAIL · menu samping ramping untuk tablet
    <nav class="rail" aria-label="Menu utama"><div class="rail-top">(FAB)</div><div class="rail-nav"><a ..><span class="ico">..</span>Beranda</a></div></nav>
-   Tambahkan .with-rail di <body>. Pola responsif: .m-app (navbar di HP, rail mulai 700px)
+   Tambahkan .with-rail di <body>. Pola responsif: .m-app (navbar di HP, rail mulai 600px, kelas sedang)
    ========================================================= */
 .with-rail { padding-left: calc(92px + env(safe-area-inset-left)); }
-.rail { position: fixed; left: 0; top: 0; bottom: 0; z-index: 60; width: calc(92px + env(safe-area-inset-left)); display: flex; flex-direction: column; align-items: center; gap: 18px; padding: max(18px, env(safe-area-inset-top)) 0 max(18px, env(safe-area-inset-bottom)) env(safe-area-inset-left); background: var(--card); border-right: 2px solid var(--edge); overflow-y: auto; }
+.rail { position: fixed; left: 0; top: 0; bottom: 0; z-index: 60; width: calc(92px + env(safe-area-inset-left)); display: flex; flex-direction: column; align-items: center; gap: 18px; padding: max(18px, env(safe-area-inset-top)) 0 max(18px, env(safe-area-inset-bottom)) env(safe-area-inset-left); background: var(--card); border-right: var(--edge-width) solid var(--edge); overflow-y: auto; }
 .rail-top { display: grid; justify-items: center; gap: 14px; }
 .rail-top .brand-mark { width: 40px; height: 40px; }
 .rail-nav { display: grid; gap: 6px; width: 100%; }
 .rail-nav a, .rail-nav button { min-height: 64px; }
 .rail .rail-foot { margin-top: auto; }
 .m-app .rail { display: none; }
-@media (min-width: 700px) {
+@media (min-width: 600px) {
   .m-app { --navbar-h: 0px; padding-bottom: env(safe-area-inset-bottom); padding-left: calc(92px + env(safe-area-inset-left)); }
   .m-app .navbar { display: none; }
   .m-app .rail { display: flex; }
@@ -180,9 +180,9 @@
    <dialog class="sheet" id="s1" aria-labelledby="s1-t"><button class="sheet-handle" data-close aria-label="Tutup"></button><div class="sheet-head"><h2 id="s1-t">..</h2></div><div class="sheet-body">..</div><div class="sheet-foot">..</div></dialog>
    Buka: [data-open-sheet="s1"]. Tutup: [data-close], klik di luar, Esc, atau tarik pegangannya ke bawah.
    ========================================================= */
-.sheet, .side-sheet { padding: 0; border: 2px solid var(--edge); background: var(--card); color: var(--ink); overflow: hidden; }
+.sheet, .side-sheet { padding: 0; border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); overflow: hidden; }
 .sheet::backdrop, .side-sheet::backdrop { background: rgba(2, 6, 15, 0.5); animation: fy-fade 0.3s; }
-.sheet { position: fixed; inset: auto 0 0 0; margin: 0 auto; width: 100%; max-width: min(640px, 100%); max-height: calc(100dvh - 40px); border-bottom: 0; border-radius: var(--r-l) var(--r-l) 0 0; box-shadow: 0 -4px 0 var(--edge-shadow); }
+.sheet { position: fixed; inset: auto 0 0 0; margin: 0 auto; width: 100%; max-width: min(640px, 100%); max-height: calc(100dvh - 40px); border-bottom: 0; border-radius: var(--r-l) var(--r-l) 0 0; box-shadow: 0 calc(-4px * var(--angkat)) 0 var(--edge-shadow); }
 .sheet[open], .side-sheet[open] { display: flex; flex-direction: column; }
 .sheet[open] { animation: fy-sheet-up 0.42s var(--ease); }
 .sheet.closing { transform: translateY(105%) !important; transition: transform 0.26s cubic-bezier(0.4, 0, 1, 1); }
@@ -195,8 +195,8 @@
 .sheet-body { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px 22px 18px; }
 .sheet-foot { flex: none; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; padding: 14px 22px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); }
 .sheet-foot .btn { justify-content: center; }
-@media (max-width: 520px) { .sheet-foot .btn { flex: 1; } }
-.side-sheet { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(420px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; border-right: 0; border-radius: var(--r-l) 0 0 var(--r-l); box-shadow: -6px 0 0 var(--edge-shadow); }
+@media (max-width: 599px) { .sheet-foot .btn { flex: 1; } }
+.side-sheet { position: fixed; inset: 0 0 0 auto; margin: 0; width: min(420px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; border-right: 0; border-radius: var(--r-l) 0 0 var(--r-l); box-shadow: calc(-6px * var(--angkat)) 0 0 var(--edge-shadow); }
 .side-sheet[open] { animation: fy-side-in 0.42s var(--ease); }
 .side-sheet.closing { transform: translateX(105%) !important; transition: transform 0.26s cubic-bezier(0.4, 0, 1, 1); }
 .side-sheet .sheet-head { padding: max(18px, env(safe-area-inset-top)) 16px 12px 22px; border-bottom: 1px solid var(--line); }
@@ -207,7 +207,7 @@
 html.sheet-open { overflow: hidden; }
 
 /* Modal layar penuh di HP: <dialog class="modal full"> */
-@media (max-width: 600px) {
+@media (max-width: 599px) {
   .modal.full { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; border: 0; border-radius: 0; box-shadow: none; }
   .modal.full .m-body { padding-top: max(28px, env(safe-area-inset-top)); }
 }
@@ -226,7 +226,7 @@ html.sheet-open { overflow: hidden; }
 .carousel-track:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 .carousel.full .carousel-track { --slide: 100%; padding-inline: 4px; }
 .carousel.wide .carousel-track { --slide: min(86%, 520px); }
-.slide { position: relative; min-width: 0; scroll-snap-align: start; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); overflow: hidden; }
+.slide { position: relative; min-width: 0; scroll-snap-align: start; border-radius: var(--r-l); border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); overflow: hidden; }
 .slide > img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; background: var(--surface); }
 .slide .slide-body { display: grid; gap: 4px; padding: 14px 16px 16px; }
 .slide .slide-body b { font-size: 17px; }
@@ -245,21 +245,21 @@ html.sheet-open { overflow: hidden; }
    ========================================================= */
 .slider { --p: 50%; -webkit-appearance: none; appearance: none; display: block; width: 100%; height: 44px; margin: 0; background: transparent; cursor: pointer; touch-action: pan-y; }
 .slider:focus-visible { outline: none; }
-.slider::-webkit-slider-runnable-track { height: 10px; border-radius: 999px; border: 2px solid var(--edge); background: linear-gradient(90deg, var(--blue) var(--p), var(--surface-2) var(--p)); }
-.slider::-moz-range-track { height: 10px; border-radius: 999px; border: 2px solid var(--edge); background: linear-gradient(90deg, var(--blue) var(--p), var(--surface-2) var(--p)); }
-.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; margin-top: -10px; border-radius: 50%; background: var(--card); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.25s var(--spring); }
-.slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--card); border: 2px solid var(--edge); box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.25s var(--spring); }
+.slider::-webkit-slider-runnable-track { height: 10px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: linear-gradient(90deg, var(--blue) var(--p), var(--surface-2) var(--p)); }
+.slider::-moz-range-track { height: 10px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: linear-gradient(90deg, var(--blue) var(--p), var(--surface-2) var(--p)); }
+.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; margin-top: -10px; border-radius: 50%; background: var(--card); border: var(--edge-width) solid var(--edge); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); transition: transform 0.25s var(--spring); }
+.slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--card); border: var(--edge-width) solid var(--edge); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); transition: transform 0.25s var(--spring); }
 .slider:active::-webkit-slider-thumb { transform: scale(1.15); }
 .slider:active::-moz-range-thumb { transform: scale(1.15); }
-.slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 5px rgba(83, 157, 233, 0.45), 0 3px 0 var(--edge-shadow); }
-.slider:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 5px rgba(83, 157, 233, 0.45), 0 3px 0 var(--edge-shadow); }
+.slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 5px rgba(83, 157, 233, 0.45), 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); }
+.slider:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 5px rgba(83, 157, 233, 0.45), 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); }
 .slider:disabled { opacity: 0.45; cursor: not-allowed; }
 .slider-field { display: grid; gap: 2px; }
 .slider-field .top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-weight: 700; }
 .slider-field output { font-family: var(--f-num); font-weight: 800; color: var(--text-blue-deep); font-variant-numeric: tabular-nums; }
 .slider-field .ends { display: flex; justify-content: space-between; font-size: 13px; color: var(--ink-3); font-family: var(--f-num); }
 .range2 { --a: 20%; --b: 80%; position: relative; height: 44px; }
-.range2::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 14px; transform: translateY(-50%); border-radius: 999px; border: 2px solid var(--edge); background: linear-gradient(90deg, var(--surface-2) var(--a), var(--blue) var(--a), var(--blue) var(--b), var(--surface-2) var(--b)); }
+.range2::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 14px; transform: translateY(-50%); border-radius: 999px; border: var(--edge-width) solid var(--edge); background: linear-gradient(90deg, var(--surface-2) var(--a), var(--blue) var(--a), var(--blue) var(--b), var(--surface-2) var(--b)); }
 .range2 .slider { position: absolute; inset: 0; pointer-events: none; }
 .range2 .slider::-webkit-slider-runnable-track { background: none; border-color: transparent; }
 .range2 .slider::-moz-range-track { background: none; border-color: transparent; }
@@ -316,7 +316,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .chip-btn:hover { border-color: var(--blue-light); color: var(--ink); }
 .chip-btn:active { transform: scale(0.96); }
 .chip-btn svg { width: 18px; height: 18px; }
-.chip-btn[aria-pressed="true"] { background: var(--blue); border-color: var(--edge); color: var(--on-dark); box-shadow: 0 2px 0 var(--edge-shadow); }
+.chip-btn[aria-pressed="true"] { background: var(--blue); border-color: var(--edge); color: var(--on-dark); box-shadow: 0 calc(2px * var(--angkat)) 0 var(--edge-shadow); }
 .chip-btn[aria-pressed="true"]::before { content: ""; width: 10px; height: 6px; border-left: 2.4px solid currentColor; border-bottom: 2.4px solid currentColor; transform: translateY(-2px) rotate(-45deg); }
 .chip-input { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 3px 0 13px; border-radius: 12px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font-size: 14.5px; font-weight: 700; white-space: nowrap; }
 .chip-input.with-av { padding-left: 4px; }
@@ -364,7 +364,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
    JS: snackbar("Pesan diarsipkan", { action: "Batalkan", onAction() {} })
    Deklaratif: <button data-snackbar="Tersimpan" data-snackbar-action="Lihat">
    ========================================================= */
-.snackbar { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); z-index: 330; display: flex; align-items: center; gap: 4px 10px; width: max-content; max-width: min(560px, calc(100vw - 32px)); min-height: 52px; padding: 6px 6px 6px 18px; border-radius: 16px; border: 2px solid var(--edge); background: var(--inverse-bg); color: var(--inverse-fg); box-shadow: 0 4px 0 var(--edge-shadow); font-size: 15px; font-weight: 700; opacity: 0; visibility: hidden; transform: translate(-50%, 24px); transition: transform 0.45s var(--spring), opacity 0.2s, visibility 0s 0.45s; }
+.snackbar { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); z-index: 330; display: flex; align-items: center; gap: 4px 10px; width: max-content; max-width: min(560px, calc(100vw - 32px)); min-height: 52px; padding: 6px 6px 6px 18px; border-radius: 16px; border: var(--edge-width) solid var(--edge); background: var(--inverse-bg); color: var(--inverse-fg); box-shadow: 0 calc(4px * var(--angkat)) 0 var(--edge-shadow); font-size: 15px; font-weight: 700; opacity: 0; visibility: hidden; transform: translate(-50%, 24px); transition: transform 0.45s var(--spring), opacity 0.2s, visibility 0s 0.45s; }
 .snackbar.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
 .snackbar .sb-text { flex: 1; min-width: 0; padding: 8px 0; }
 .snackbar .sb-act { flex: none; min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: none; color: var(--inverse-accent); font: inherit; font-weight: 800; cursor: pointer; }
@@ -373,13 +373,13 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .snackbar .sb-x:hover { background: rgba(127, 127, 127, 0.18); }
 .snackbar .sb-x svg { width: 18px; height: 18px; }
 .snackbar :focus-visible { outline-color: var(--inverse-accent); outline-offset: 1px; }
-@media (max-width: 520px) { .snackbar { left: 16px; right: 16px; width: auto; max-width: none; transform: translateY(24px); } .snackbar.show { transform: none; } }
+@media (max-width: 599px) { .snackbar { left: 16px; right: 16px; width: auto; max-width: none; transform: translateY(24px); } .snackbar.show { transform: none; } }
 
 /* =========================================================
    SEARCH BAR + SARAN
    <div class="search-bar" data-suggest><svg/><input type="search" role="combobox" aria-expanded="false" aria-controls="sg" aria-autocomplete="list" aria-label=".."><ul class="suggest" id="sg" role="listbox" hidden><li role="option">..</li></ul></div>
    ========================================================= */
-.search-bar { position: relative; display: flex; align-items: center; gap: 4px; min-height: 54px; padding: 0 6px 0 16px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-pop); }
+.search-bar { position: relative; display: flex; align-items: center; gap: 4px; min-height: 54px; padding: 0 6px 0 16px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: var(--shadow-pop); }
 .search-bar > svg { flex: none; width: 20px; height: 20px; color: var(--ink-3); }
 .search-bar input { flex: 1; min-width: 0; height: 50px; padding: 0 8px; border: 0; background: none; color: var(--ink); font: inherit; font-size: 16px; }
 .search-bar input::placeholder { color: var(--placeholder); }
@@ -388,7 +388,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .search-bar input::-webkit-search-cancel-button { -webkit-appearance: none; }
 .search-bar .icon-btn { flex: none; background: none; }
 .search-bar .avatar { --s: 38px; }
-.suggest { position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 55; list-style: none; margin: 0; padding: 6px; max-height: min(320px, 60vh); overflow-y: auto; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); }
+.suggest { position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 55; list-style: none; margin: 0; padding: 6px; max-height: min(320px, 60vh); overflow-y: auto; border-radius: var(--r-m); border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); }
 .suggest[hidden] { display: none; }
 .suggest [role="option"] { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 12px; border-radius: 10px; color: var(--ink-2); font-weight: 700; cursor: pointer; }
 .suggest [role="option"] svg { width: 18px; height: 18px; color: var(--ink-3); flex: none; }
@@ -409,10 +409,10 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .picker-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 42px; height: 42px; border: 0; border-radius: 12px; background: none; color: var(--text-blue-deep); cursor: pointer; }
 .picker-btn:hover { background: var(--surface); }
 .picker-btn svg { width: 21px; height: 21px; }
-.pop { position: absolute; left: 0; top: calc(100% + 8px); z-index: 90; width: max-content; max-width: min(340px, calc(100vw - 24px)); padding: 14px; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); animation: fy-rise 0.3s var(--spring); }
+.pop { position: absolute; left: 0; top: calc(100% + 8px); z-index: 90; width: max-content; max-width: min(340px, calc(100vw - 24px)); padding: 14px; border-radius: var(--r-l); border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); animation: fy-rise 0.3s var(--spring); }
 .pop.end { left: auto; right: 0; }
 .pop-scrim { display: none; }
-@media (max-width: 600px) {
+@media (max-width: 599px) {
   .pop { position: fixed; left: 12px !important; right: 12px !important; top: auto; bottom: calc(12px + env(safe-area-inset-bottom)); width: auto; max-width: none; margin-inline: auto; max-height: calc(100dvh - 24px); overflow-y: auto; }
   .pop-scrim { display: block; position: fixed; inset: 0; z-index: 89; background: rgba(2, 6, 15, 0.45); animation: fy-fade 0.25s; }
 }
@@ -422,7 +422,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .dp-head button:hover { background: var(--surface); }
 .dp-head svg { width: 20px; height: 20px; }
 .dp-grid { display: grid; grid-template-columns: repeat(7, 44px); gap: 2px; justify-content: center; }
-@media (max-width: 600px) { .dp-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); } }
+@media (max-width: 599px) { .dp-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); } }
 .dp-wd { display: grid; place-items: center; height: 30px; font-family: var(--f-num); font-size: 12px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; }
 .dp-day { position: relative; height: 44px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--ink); font: inherit; font-family: var(--f-num); font-size: 15px; font-weight: 700; font-variant-numeric: tabular-nums; cursor: pointer; }
 .dp-day:hover { background: var(--surface); }
@@ -447,13 +447,13 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .tp-list li:hover { background: var(--surface-2); }
 .tp-list li[aria-selected="true"] { background: var(--blue); color: var(--on-dark); box-shadow: inset 0 0 0 2px var(--edge); }
 .tp-list li.active:not([aria-selected="true"]) { outline: 2px solid var(--blue-light); outline-offset: -2px; }
-@media (max-width: 600px) { .tp-list { width: 100%; } }
+@media (max-width: 599px) { .tp-list { width: 100%; } }
 
 /* =========================================================
    FLOATING TOOLBAR · bilah aksi melayang (mis. saat memilih item)
    <div class="float-bar" role="toolbar" aria-label=".."><span class="fb-count">3 dipilih</span><button class="icon-btn">..</button></div>
    ========================================================= */
-.float-bar { display: inline-flex; align-items: center; gap: 4px; max-width: calc(100vw - 32px); padding: 6px; border-radius: 999px; border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); overflow-x: auto; scrollbar-width: none; }
+.float-bar { display: inline-flex; align-items: center; gap: 4px; max-width: calc(100vw - 32px); padding: 6px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); overflow-x: auto; scrollbar-width: none; }
 .float-bar .icon-btn { flex: none; background: none; width: 44px; height: 44px; }
 .float-bar .icon-btn:hover { background: var(--surface); }
 .float-bar .fb-count { flex: none; padding: 0 12px 0 10px; font-family: var(--f-num); font-weight: 800; font-size: 14.5px; white-space: nowrap; }
@@ -469,8 +469,8 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
    Tanpa JS tetap satu kolom biasa. Dengan JS jadi 6 kotak; tempel kode atau isi otomatis dari SMS tetap jalan.
    ========================================================= */
 .otp { position: relative; display: flex; gap: clamp(6px, 2vw, 10px); min-width: 0; max-width: 100%; }
-.otp > input:only-child { width: 100%; max-width: 260px; height: 56px; padding: 0 16px; border-radius: 14px; border: 2px solid var(--edge); background: var(--field); color: var(--ink); font: 700 24px var(--f-num); letter-spacing: 0.3em; }
-.otp-box { flex: 1 1 0; min-width: 0; max-width: 54px; height: 60px; padding: 0; text-align: center; border-radius: 14px; border: 2px solid var(--edge); background: var(--field); color: var(--ink); font: 700 26px var(--f-num); font-variant-numeric: tabular-nums; box-shadow: var(--shadow-pop); caret-color: var(--blue); transition: transform 0.2s var(--spring), border-color 0.2s; }
+.otp > input:only-child { width: 100%; max-width: 260px; height: 56px; padding: 0 16px; border-radius: 14px; border: var(--edge-width) solid var(--edge); background: var(--field); color: var(--ink); font: 700 24px var(--f-num); letter-spacing: 0.3em; }
+.otp-box { flex: 1 1 0; min-width: 0; max-width: 54px; height: 60px; padding: 0; text-align: center; border-radius: 14px; border: var(--edge-width) solid var(--edge); background: var(--field); color: var(--ink); font: 700 26px var(--f-num); font-variant-numeric: tabular-nums; box-shadow: var(--shadow-pop); caret-color: var(--blue); transition: transform 0.2s var(--spring), border-color 0.2s; }
 .otp-box:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.3), var(--shadow-pop); }
 .otp-box.filled { background: var(--surface); }
 .otp .otp-sep { flex: none; align-self: center; width: 10px; height: 2px; border-radius: 2px; background: var(--line); }
@@ -504,7 +504,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .upload.single .drop.has { display: none; }
 .upload-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .upload-list:empty { display: none; }
-.up-item { position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 8px 10px 10px; border-radius: var(--r-m); border: 2px solid var(--edge); background: var(--card); box-shadow: var(--shadow-pop); }
+.up-item { position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 8px 10px 10px; border-radius: var(--r-m); border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: var(--shadow-pop); }
 .up-thumb { width: 52px; height: 52px; border-radius: 12px; object-fit: cover; background: var(--surface); display: grid; place-items: center; color: var(--text-blue); font: 700 12px var(--f-num); letter-spacing: 0.06em; text-transform: uppercase; }
 .up-thumb.round { border-radius: 50%; }
 .up-meta { min-width: 0; display: grid; gap: 2px; }
@@ -531,7 +531,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .stepper li::before { content: counter(fy-step); display: grid; place-items: center; width: var(--n); height: var(--n); border-radius: 50%; border: 2px solid var(--line); background: var(--card); font-family: var(--f-num); font-weight: 800; font-size: 16px; color: var(--ink-3); position: relative; z-index: 1; transition: background 0.25s, border-color 0.25s, color 0.25s; }
 .stepper li:not(:last-child)::after { content: ""; position: absolute; top: calc(var(--n) / 2 - 1px); left: calc(50% + var(--n) / 2 + 4px); right: calc(-50% + var(--n) / 2 + 4px); border-top: 2px dashed var(--line); }
 .stepper li[aria-current="step"] { color: var(--ink); }
-.stepper li[aria-current="step"]::before { border-color: var(--edge); background: var(--blue); color: var(--on-dark); box-shadow: 0 3px 0 var(--edge-shadow); }
+.stepper li[aria-current="step"]::before { border-color: var(--edge); background: var(--blue); color: var(--on-dark); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); }
 .stepper li.done { color: var(--ink-2); }
 .stepper li.done::before { content: ""; border-color: var(--blue); background: var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 20px no-repeat; }
 .stepper li.done:not(:last-child)::after { border-top-style: solid; border-color: var(--blue); }
@@ -543,7 +543,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .wizard-foot [data-wizard-prev][hidden] { display: inline-flex; visibility: hidden; }
 .wizard-count { display: none; font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
 /* HP: lingkaran saja, judul langkah aktif ditulis di bawah */
-@media (max-width: 560px) {
+@media (max-width: 599px) {
   .stepper { --n: 34px; margin-bottom: 8px; }
   .stepper li { font-size: 0; gap: 0; }
   .stepper li .step-sub { display: none; }
@@ -583,7 +583,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    Di HP panel muncul dari bawah layar. Event: fy:read { item | all }.
    ========================================================= */
 .notif { position: relative; display: inline-flex; }
-.notif-panel { position: absolute; right: -8px; top: calc(100% + 10px); z-index: 80; width: min(400px, calc(100vw - 24px)); max-height: min(560px, calc(100dvh - 120px)); display: flex; flex-direction: column; border-radius: var(--r-l); border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); overflow: hidden; text-align: left; }
+.notif-panel { position: absolute; right: -8px; top: calc(100% + 10px); z-index: 80; width: min(400px, calc(100vw - 24px)); max-height: min(560px, calc(100dvh - 120px)); display: flex; flex-direction: column; border-radius: var(--r-l); border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); overflow: hidden; text-align: left; }
 .notif-panel[hidden] { display: none; }
 .notif-panel.open { animation: fy-pop-in 0.3s var(--spring); }
 @keyframes fy-pop-in { from { opacity: 0; transform: translateY(-8px) scale(0.98); } }
@@ -614,14 +614,14 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .notif-all { display: block; padding: 14px 18px; border-top: 1px solid var(--line); font-size: 14.5px; font-weight: 700; text-align: center; text-decoration: none; color: var(--text-blue-deep); }
 .notif-all:hover { background: var(--surface); }
 .notif-scrim { display: none; }
-@media (max-width: 600px) {
-  .notif-panel { position: fixed; left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 82dvh; border-radius: var(--r-l) var(--r-l) 0 0; border-bottom: 0; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -6px 0 var(--edge-shadow); }
+@media (max-width: 599px) {
+  .notif-panel { position: fixed; left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 82dvh; border-radius: var(--r-l) var(--r-l) 0 0; border-bottom: 0; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 calc(-6px * var(--angkat)) 0 var(--edge-shadow); }
   .notif-panel.open { animation: fy-sheet-in 0.35s var(--ease); }
   .notif-scrim { position: fixed; inset: 0; z-index: 79; background: rgba(2, 6, 15, 0.5); }
   .notif.open .notif-scrim { display: block; }
 }
 @keyframes fy-sheet-in { from { transform: translateY(100%); } }
-@media (min-width: 601px) { .notif-panel.start { right: auto; left: -8px; } }
+@media (min-width: 600px) { .notif-panel.start { right: auto; left: -8px; } }
 .notif-empty[hidden], .notif-list[hidden], .empty[hidden] { display: none; }
 /* Panel notifikasi harus di atas navigation bar dan FAB walau loncengnya di dalam app bar yang sticky */
 :is(.appbar, .topbar, .nav, header):has(.notif.open) { z-index: 90; }
@@ -644,7 +644,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .state.offline { border: 2px dashed var(--line); border-radius: var(--r-l); }
 
 /* Bilah offline otomatis: <div class="offline-bar" data-offline-bar hidden role="status">..</div> */
-.offline-bar { position: fixed; left: 50%; top: calc(10px + env(safe-area-inset-top)); z-index: 340; display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 24px); padding: 8px 16px 8px 8px; border-radius: 999px; border: 2px solid var(--edge); background: var(--beta-bg); color: var(--beta); box-shadow: var(--shadow-pop); font-size: 14.5px; font-weight: 700; transform: translateX(-50%); animation: fy-drop-in 0.4s var(--spring); }
+.offline-bar { position: fixed; left: 50%; top: calc(10px + env(safe-area-inset-top)); z-index: 340; display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 24px); padding: 8px 16px 8px 8px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: var(--beta-bg); color: var(--beta); box-shadow: var(--shadow-pop); font-size: 14.5px; font-weight: 700; transform: translateX(-50%); animation: fy-drop-in 0.4s var(--spring); }
 .offline-bar[hidden] { display: none; }
 .offline-bar img { width: 32px; height: auto; flex: none; }
 @keyframes fy-drop-in { from { opacity: 0; transform: translate(-50%, -16px); } }
@@ -662,7 +662,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    ========================================================= */
 .avatar-crop { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .avatar-crop small { display: block; margin-top: 6px; font-size: 13px; color: var(--ink-3); }
-.ac-preview { position: relative; flex: none; width: 88px; height: 88px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; border: 2px solid var(--edge); background: var(--surface-2); box-shadow: var(--shadow-pop); color: var(--text-blue); font-family: var(--f-num); font-weight: 800; font-size: 28px; }
+.ac-preview { position: relative; flex: none; width: 88px; height: 88px; border-radius: 50%; overflow: hidden; display: grid; place-items: center; border: var(--edge-width) solid var(--edge); background: var(--surface-2); box-shadow: var(--shadow-pop); color: var(--text-blue); font-family: var(--f-num); font-weight: 800; font-size: 28px; }
 .ac-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .ac-preview img[hidden] { display: none; }
 .crop-modal .m-body { gap: 14px; }
@@ -692,7 +692,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .breadcrumb a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .breadcrumb a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 0; }
 .breadcrumb [aria-current="page"] { color: var(--ink); font-weight: 700; max-width: 32ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-@media (max-width: 560px) {
+@media (max-width: 599px) {
   .breadcrumb li:not(:nth-last-child(-n+2)) { display: none; }
   .breadcrumb li:nth-last-child(2)::before { content: "…"; width: auto; height: auto; border: 0; transform: none; margin-right: 6px; }
 }
@@ -719,7 +719,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 /* ---------- Accordion ----------
    <div class="accordion"><details><summary>Judul</summary><div class="acc-body">Isi</div></details> …</div>
    Pakai <details name="grup"> supaya hanya satu yang terbuka. Untuk FAQ halaman publik tetap pakai .faq. */
-.accordion { border: 2px solid var(--edge); border-radius: var(--r-m); background: var(--card); box-shadow: var(--shadow-pop); overflow: hidden; }
+.accordion { border: var(--edge-width) solid var(--edge); border-radius: var(--r-m); background: var(--card); box-shadow: var(--shadow-pop); overflow: hidden; }
 .accordion details + details { border-top: 2px solid var(--line); }
 .accordion summary { list-style: none; display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 14px 18px; cursor: pointer; font-weight: 700; color: var(--ink); }
 .accordion summary::-webkit-details-marker { display: none; }
@@ -734,7 +734,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    <div class="input-group"><span class="addon">Rp</span><input class="input" inputmode="numeric" aria-label="Harga"></div>
    <div class="input-group"><input class="input" aria-label="Nama email"><span class="addon">@tmail.id</span></div>
    <div class="input-group"><input class="input" type="search" aria-label="Kode promo"><button class="btn sm" type="button">Pakai</button></div> */
-.input-group { display: flex; align-items: stretch; min-width: 0; border: 2px solid var(--edge); border-radius: var(--r-m); background: var(--card); box-shadow: 0 3px 0 var(--edge-shadow); overflow: hidden; }
+.input-group { display: flex; align-items: stretch; min-width: 0; border: var(--edge-width) solid var(--edge); border-radius: var(--r-m); background: var(--card); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); overflow: hidden; }
 .input-group:focus-within { border-color: var(--text-blue); box-shadow: 0 3px 0 var(--blue), 0 0 0 4px rgba(83, 157, 233, 0.25); }
 .input-group:has([aria-invalid="true"]) { border-color: var(--danger); box-shadow: 0 3px 0 var(--danger); }
 .input-group > .input { flex: 1; min-width: 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
@@ -743,7 +743,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .input-group > .addon:first-child { border-right: 2px solid var(--line); }
 .input-group > .addon:last-child { border-left: 2px solid var(--line); }
 .input-group > .addon .ikon { width: 18px; height: 18px; }
-.input-group > .btn { flex: none; border: 0; border-left: 2px solid var(--edge); border-radius: 0; box-shadow: none; }
+.input-group > .btn { flex: none; border: 0; border-left: var(--edge-width) solid var(--edge); border-radius: 0; box-shadow: none; }
 .input-group > .btn:hover, .input-group > .btn:active { transform: none; box-shadow: none; }
 
 /* ---------- Jumlah (quantity stepper) ----------
@@ -753,7 +753,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
      <button type="button" data-qty-step="1" aria-label="Tambah"><svg class="ikon"><use href="#ikon-tambah"/></svg></button>
    </div>
    Event: fy:change { value } (juga event input/change biasa di <input>). */
-.qty { justify-self: start; align-self: start; display: inline-flex; align-items: center; border: 2px solid var(--edge); border-radius: 999px; background: var(--card); box-shadow: var(--shadow-pop); }
+.qty { justify-self: start; align-self: start; display: inline-flex; align-items: center; border: var(--edge-width) solid var(--edge); border-radius: 999px; background: var(--card); box-shadow: var(--shadow-pop); }
 .qty button { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: none; color: var(--ink); cursor: pointer; transition: transform 0.2s var(--spring), background 0.2s; }
 .qty button:hover { background: var(--surface); }
 .qty button:active { transform: scale(0.9); }
@@ -787,7 +787,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    </div>
    Klik → <dialog class="lightbox"> dengan tombol sebelumnya/berikutnya, panah keyboard, geser di layar sentuh, Esc. */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
-.gallery a { display: block; aspect-ratio: 1; border-radius: 14px; overflow: hidden; border: 2px solid var(--edge); background: var(--surface); transition: transform 0.25s var(--spring); }
+.gallery a { display: block; aspect-ratio: 1; border-radius: 14px; overflow: hidden; border: var(--edge-width) solid var(--edge); background: var(--surface); transition: transform 0.25s var(--spring); }
 .gallery a:hover { transform: translateY(-3px); }
 .gallery a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 .gallery img { width: 100%; height: 100%; object-fit: cover; }
@@ -803,7 +803,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); }
 .lb-prev { left: 10px; } .lb-next { right: 10px; }
 .lightbox .icon-btn.lb-prev:hover, .lightbox .icon-btn.lb-next:hover { transform: translateY(-50%) scale(1.08); }
-@media (max-width: 600px) { .lb-stage { padding: 0 8px; } .lb-prev, .lb-next { top: auto; bottom: 8px; transform: none; } .lightbox .icon-btn.lb-prev:hover, .lightbox .icon-btn.lb-next:hover { transform: scale(1.08); } }
+@media (max-width: 599px) { .lb-stage { padding: 0 8px; } .lb-prev, .lb-next { top: auto; bottom: 8px; transform: none; } .lightbox .icon-btn.lb-prev:hover, .lightbox .icon-btn.lb-next:hover { transform: scale(1.08); } }
 
 /* ---------- Pengumuman (announcement bar) ----------
    <div class="announce" data-announce="promo-11-11">Diskon 11.11 sampai Minggu. <a href="/promo">Lihat promo</a>
@@ -825,7 +825,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    </section>
    Tampil sekali sampai dipilih. Pilihan disimpan di localStorage (fy-consent) dan dikirim lewat event fy:consent { pilihan } di window.
    Muat skrip analitik hanya setelah pilihan "semua". Kedua tombol sama menonjolnya (aturan privasi). */
-.consent { position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 90; width: min(560px, calc(100% - 32px)); display: grid; grid-template-columns: auto 1fr; gap: 12px 14px; align-items: start; padding: 18px; border: 2px solid var(--edge); border-radius: var(--r-l); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); }
+.consent { position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 90; width: min(560px, calc(100% - 32px)); display: grid; grid-template-columns: auto 1fr; gap: 12px 14px; align-items: start; padding: 18px; border: var(--edge-width) solid var(--edge); border-radius: var(--r-l); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); }
 .consent[hidden] { display: none; }
 .consent > img { width: 56px; height: auto; }
 .consent h2 { font: 800 20px/1.1 var(--f-head); letter-spacing: -0.02em; margin-bottom: 4px; }
@@ -833,4 +833,4 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .consent p a { color: var(--text-blue-deep); font-weight: 700; }
 .consent .consent-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
 .consent.inline { position: static; transform: none; width: auto; max-width: 560px; }
-@media (max-width: 480px) { .consent { grid-template-columns: 1fr; } .consent > img { display: none; } .consent .consent-actions .btn { flex: 1; justify-content: center; } }
+@media (max-width: 599px) { .consent { grid-template-columns: 1fr; } .consent > img { display: none; } .consent .consent-actions .btn { flex: 1; justify-content: center; } }

@@ -1,6 +1,6 @@
 # Peta teknis · FUSIONIFY UI (repo `FUSIONIFY-ID/Fusionify_UI`)
 
-Dibuat 1 Nov 2026 dari pembacaan penuh repo ini (commit `85ae4e4`, tag terakhir `v1.13.0`). Peta, bukan aturan: kalau bertentangan dengan AGENTS.md atau DESIGN.md, aturan yang menang. Diperbarui untuk 1.14.0 (31 Okt 2026): lihat 8.0.
+Dibuat 1 Nov 2026 dari pembacaan penuh repo ini (commit `85ae4e4`, tag terakhir `v1.13.0`). Peta, bukan aturan: kalau bertentangan dengan AGENTS.md atau DESIGN.md, aturan yang menang. Diperbarui untuk 1.14.0 (31 Okt 2026): lihat 8.0. Tambahan 1.15.0 (9 Nov 2026: gaya per kategori, hero, kelas ukuran layar, HP lipat, mode padat): lihat bagian 10.
 Nomor baris mengacu ke file apa adanya. CSS di repo ini ditulis padat (satu aturan per baris), jadi nomor baris = nomor aturan.
 
 Cara baca cepat: bagian 1 (arsitektur), 4 (JS + atribut), 7 (uji), 8 (temuan). Temuan tingkat **tinggi** ada di 8.1.
@@ -14,12 +14,12 @@ Cara baca cepat: bagian 1 (arsitektur), 4 (JS + atribut), 7 (uji), 8 (temuan). T
 Kit sistem desain semua web FUSIONIFY, diturunkan dari fusionify.id (sumber kebenaran: repo `FUSIONIFY-ID/FUSIONIFY`). Tanpa framework, tanpa build saat runtime. Lapisannya:
 
 ```
-css/tokens.css ─► css/base.css ─► css/components.css ─► css/product.css ─► css/controls.css   (= css/fusionify.css lewat @import)
+css/tokens.css ─► css/base.css ─► css/components.css ─► css/product.css ─► css/controls.css ─► css/gaya.css   (= css/fusionify.css lewat @import)
                                                                                 └─► css/app.css   (tambahan, hanya halaman aplikasi)
 js/lisensi.js  ◄── dipanggil di awal ── js/motion.js (initFusionify, web publik, butuh gsap + lenis)
                                        js/app.js    (initApp, aplikasi, tanpa GSAP)
                                        js/controls.js (initControls, dipanggil otomatis oleh keduanya)
-js/theme.js (dipanggil oleh motion.js & app.js) · js/seal.js (bentuk segel) · js/ikon-inline.js (hasil generate)
+js/theme.js + js/kelas.js (dipanggil oleh motion.js & app.js) · js/seal.js (bentuk segel) · js/ikon-inline.js (hasil generate)
 snippets/ (head-script, sprite, body-parts, pwa-head, manifest) · fonts/ brand/ mascot/ badge/ (aset)
 Generator: tokens/ (native), ikon/ (SVG/sprite/PNG/React/Android), dokumen/ (PDF + Office), grafis/ (PNG), email/, FUSIONIFY-UI-KONTEKS.md
 ```
@@ -532,3 +532,39 @@ Lokasi `file:baris`. Tingkat: **tinggi** (rusak terlihat / melanggar aturan inti
 - **Tahapan**: 0 persiapan → 1 situs inti → 2 isi lengkap → 3 desktop → 4 Android → 5 peluncuran; uji perlindungan wajib sebelum rilis aplikasi.
 - **Status keputusan (29 Okt 2026)**: sudah diputuskan, **mulai tahap 0 dan 1**. Pengguna awal tim + partner terbatas (partner sebagian, Unduh hanya admin/tim); semua di balik login, tanpa etalase publik; aplikasi desktop, Android, dan iPhone **ditunda** sampai situs jadi; biaya code signing belum perlu; teks lisensi/NDA menunggu konsultan hukum (sementara pakai `LICENSE.md` berlabel "versi sementara"); nama tetap "FUSIONIFY UI".
 - Belum ada kode untuk rencana ini di repo kit (repo situs terpisah belum terlihat di sini).
+
+---
+
+## 10. Tambahan 1.15.0 (9 Nov 2026)
+
+### 10.1 Token baru (`css/tokens.css`, `:root`)
+- `--angkat: 1`: pengali tebal bayangan pejal. Semua `0 Npx 0 var(--edge-shadow)` di CSS komponen sekarang `0 calc(Npx * var(--angkat)) 0 var(--edge-shadow)`; 0 = datar.
+- `--edge-width` (sudah ada sejak lama, dulu tidak dipakai) kini dipakai di 88 garis stiker (`var(--edge-width) solid var(--edge)`).
+- `--kelas-sedang: 600px`, `--kelas-lebar: 840px`, `--kelas-besar: 1200px`, `--kelas-sangat-besar: 1600px` (dokumentasi + token native `kelasLayar`; `@media` menulis angkanya langsung).
+- Variabel dengan nilai cadangan (didefinisikan oleh gaya): `--h-hero` (`.h-hero`), `--h-sec` (`.h-sec`), `--sec-y` (padding `.sec`).
+
+### 10.2 `css/gaya.css`
+- `[data-gaya]` menulis ulang `--shadow-pop`/`--shadow-sticker` dengan `--angkat` milik elemen itu (berlaku juga kalau atribut dipasang di satu bagian).
+- `toko`: `--angkat .5`, `--r-l 22px`, judul lebih kecil. `tenang`: garis 1px, `--edge` campuran tinta 26% (`color-mix`), datar, `--shadow-sticker: var(--shadow)`, `--sec-y` lebih rapat. `jasa`: garis 1px, datar, judul besar. `teknis`: garis 1px, datar, sudut 14/10px, judul kecil, seksi rapat.
+- Gaya datar mematikan `transform` saat hover kartu/tombol, garis kartu tautan jadi biru.
+- `js/motion.js`: `cursor` dan `magnet` (opsi baru) bawaan `false` kalau `data-gaya` tenang/teknis.
+
+### 10.3 Hero (`css/product.css`, akhir file)
+`.hero` + `.hero-grid` (dua kolom mulai 840px) + `.hero-copy` + `.hero-ctas` + `.hero-media` + `dl.hero-fakta`.
+Pola: `.pola-maskot` (memakai `.mascot-stage`, maskot di atas teks di bawah 840px), `.pola-pratinjau` (`.hero-bingkai` > `.hero-bingkai-kepala` + `.hero-bingkai-isi`, `.hero-lapis` bertumpuk, biasanya berisi `.code-block`), `.pola-demo` (`.hero-hp` > `.hero-hp-layar` > `.hero-hp-kepala` + `ol.hero-alur` dengan `li` / `li.saya` / `li.stiker`, `--i` urutan, `.tombol`; animasi `fy-alur` 12 dtk, mati saat kurangi gerakan), `.pola-tengah` (`.hero-deret` kartu karya), `.pola-cari` (`.search-bar` besar + `ul.hero-topik`).
+`templates/landing-produk.html` kini memakai `.hero.pola-maskot` (CSS `.p-hero` inline dihapus). Katalog semua pola: `templates/gaya.html` (`?gaya=`).
+
+### 10.4 Kelas ukuran layar dan HP lipat
+- `js/kelas.js`: `KELAS`, `kelasDari(lebar)`, `posisiLipat()`, `initKelas()` → `html[data-kelas]`, `html[data-lipat]`, event `fy:kelas` di `<html>`. Dipanggil `initFusionify()` dan `initApp()` setelah `initTheme()`.
+- Breakpoint CSS dipetakan ke kelas: 520/560/600/620/700 (max) → 599, 700 (min) → 600, 720/860/900/960/1000 (max) → 839, 900/960 (min) → 840, 1100 → 1199, 1280 → 1200. Tersisa di luar kelas: `(max-width: 420px)`, `(max-width: 350px)`, dan nav web 960/961 (`.nav-links`, `motion.js`).
+- JS: sidebar `app.js` memakai `(max-width: 599px)`; chat `controls.js` `(min-width: 840px)`; rail `.m-app` 600px.
+- `@media (horizontal-viewport-segments: 2)`: `.hero-grid` dua kolom dengan celah selebar engsel + 2 gutter; `.chat` kolom daftar = `env(viewport-segment-right 0 0)` dikurangi `--chat-x` (rel `.m-app`), celah = lebar engsel.
+- Preset Tailwind: `screens` v3 `sedang/lebar/besar/sangat-besar`, v4 `--breakpoint-*`.
+
+### 10.5 Aplikasi
+- Sidebar `.app`: laci < 600, rel 600-839 (blok di akhir `app.css`, setelah blok padat; label 11.5px di bawah ikon, `.count` jadi lencana, `.side-help` disembunyikan, `--rail-w` 88px), penuh mulai 840.
+- `data-kepadatan="padat"` (di `<html>` atau `.app`): blok "KEPADATAN PADAT" di `app.css`; `--garis-tipis` untuk panel/tabel. Dipasang di `templates/dashboard.html` dan `admin.html`.
+
+### 10.6 Uji
+- `tests/kelas-lipat-gaya.mjs` (baru): `data-kelas` di 5 lebar dan event `fy:kelas`, sidebar laci/rel/penuh, mode padat, garis dan bayangan per gaya, kursor mati di gaya tenang/teknis, HP lipat lewat emulasi engsel CDP (`Emulation.setDeviceMetricsOverride` + `displayFeature`): hero dan chat tidak menyeberangi engsel.
+- `tata-letak-dan-kontras.mjs`: ukuran tambahan 344×882, 600×960, 673×841, 841×673; halaman `gaya.html` + 4 varian `?gaya=`. `layar-sentuh.mjs`: 344×882 dan 673×841, halaman `gaya`. `tanpa-js-dan-kurangi-gerak.mjs`: `gaya.html` dan `?gaya=tenang`.

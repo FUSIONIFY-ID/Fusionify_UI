@@ -92,6 +92,9 @@ const motion = {
   note: "Hormati pengaturan kurangi gerakan di HP (iOS Reduce Motion, Android Remove animations).",
 };
 const touch = { minTarget: 44, navBarHeight: 76, railWidth: 92, appBarHeight: 64, gutter: 16 };
+// Kelas ukuran layar (window size class Material 3): batas bawah tiap kelas, dalam dp/pt/px.
+const kelasLayar = { sedang: px(light["kelas-sedang"]), lebar: px(light["kelas-lebar"]), besar: px(light["kelas-besar"]), sangatBesar: px(light["kelas-sangat-besar"]),
+  note: "Di bawah sedang = ringkas. Navigasi: bar bawah di ringkas, rel di sedang, laci/sidebar penuh mulai lebar. Android: values-w600dp, values-w840dp." };
 
 fs.mkdirSync(path.join(root, "tokens/flutter"), { recursive: true });
 fs.mkdirSync(path.join(root, "tokens/swift"), { recursive: true });
@@ -104,7 +107,7 @@ const header = "Dibuat otomatis dari css/tokens.css oleh scripts/build-tokens.mj
 const json = {
   $description: "Token FUSIONIFY UI. " + header,
   color: { light: Object.fromEntries(keys.map((k) => [camel(k), hex(colors.light[k])])), dark: Object.fromEntries(keys.map((k) => [camel(k), hex(colors.dark[k])])) },
-  radius, font: fonts, sticker, motion, touch,
+  radius, font: fonts, sticker, motion, touch, kelasLayar,
 };
 fs.writeFileSync(path.join(root, "tokens/tokens.json"), JSON.stringify(json, null, 2) + "\n");
 
@@ -169,6 +172,15 @@ class FyTouch {
   static const double railWidth = ${touch.railWidth};
   static const double appBarHeight = ${touch.appBarHeight};
   static const double gutter = ${touch.gutter};
+}
+
+/// Kelas ukuran layar (sama dengan web). Contoh: final k = FyKelas.dari(MediaQuery.sizeOf(context).width);
+class FyKelas {
+  static const double sedang = ${kelasLayar.sedang};
+  static const double lebar = ${kelasLayar.lebar};
+  static const double besar = ${kelasLayar.besar};
+  static const double sangatBesar = ${kelasLayar.sangatBesar};
+  static String dari(double w) => w >= sangatBesar ? 'sangat-besar' : w >= besar ? 'besar' : w >= lebar ? 'lebar' : w >= sedang ? 'sedang' : 'ringkas';
 }
 
 /// Gaya stiker FUSIONIFY: garis 2px warna edge + bayangan pejal ke bawah tanpa blur.
@@ -241,6 +253,14 @@ ${keys.map((k) => `        public static let ${camel(k)} = SwiftUI.Color(uiColor
         public static let gutter: CGFloat = ${touch.gutter}
     }
 
+    /// Kelas ukuran layar (sama dengan web): batas bawah tiap kelas.
+    public enum Kelas {
+        public static let sedang: CGFloat = ${kelasLayar.sedang}
+        public static let lebar: CGFloat = ${kelasLayar.lebar}
+        public static let besar: CGFloat = ${kelasLayar.besar}
+        public static let sangatBesar: CGFloat = ${kelasLayar.sangatBesar}
+    }
+
     public enum Font {
         public static func head(_ size: CGFloat) -> SwiftUI.Font { .custom("AfacadFlux-ExtraBold", size: size) }
         public static func body(_ size: CGFloat = 17, bold: Bool = false) -> SwiftUI.Font { .custom(bold ? "Sansation-Bold" : "Sansation-Regular", size: size) }
@@ -310,6 +330,7 @@ val LocalFyColors = staticCompositionLocalOf { FyLight }
 
 object FyRadius { val s = ${radius.s}.dp; val m = ${radius.m}.dp; val l = ${radius.l}.dp }
 object FyTouch { val minTarget = ${touch.minTarget}.dp; val navBarHeight = ${touch.navBarHeight}.dp; val gutter = ${touch.gutter}.dp }
+object FyKelas { val sedang = ${kelasLayar.sedang}.dp; val lebar = ${kelasLayar.lebar}.dp; val besar = ${kelasLayar.besar}.dp; val sangatBesar = ${kelasLayar.sangatBesar}.dp } // sama dengan WindowWidthSizeClass
 object FySticker { val border = 2.dp; val dropButton = 3.dp; val dropCard = 6.dp } // bayangan pejal: offset ke bawah tanpa blur
 
 @Composable
@@ -334,7 +355,7 @@ fs.writeFileSync(path.join(root, "tokens/react-native/fusionify-tokens.ts"), `//
 //   <View style={[sticker(c), { padding: 18 }]} />
 //
 // Font (Expo): useFonts({ "AfacadFlux-ExtraBold": require("./fonts/AfacadFlux-ExtraBold.ttf"), ... }) dari tokens/fonts-ttf/.
-export const fy = ${JSON.stringify({ color: json.color, radius, touch, motion }, null, 2)} as const;
+export const fy = ${JSON.stringify({ color: json.color, radius, touch, motion, kelasLayar }, null, 2)} as const;
 
 export type FyPalette = typeof fy.color.light;
 
@@ -388,6 +409,9 @@ fs.writeFileSync(path.join(resDir, "values/fy_dimens.xml"), `<?xml version="1.0"
     <dimen name="fy_drop_card">6dp</dimen>
     <dimen name="fy_touch_min">48dp</dimen>
     <dimen name="fy_gutter">${touch.gutter}dp</dimen>
+    <dimen name="fy_kelas_sedang">${kelasLayar.sedang}dp</dimen>
+    <dimen name="fy_kelas_lebar">${kelasLayar.lebar}dp</dimen>
+    <dimen name="fy_kelas_besar">${kelasLayar.besar}dp</dimen>
     <dimen name="fy_text_body">17sp</dimen>
 </resources>
 `);

@@ -17,7 +17,7 @@ File ini dibuat dari repo \`FUSIONIFY-ID/Fusionify_UI\`. Kalau repo-nya tersedia
 `);
 out.push(rd("AGENTS.md"));
 out.push("\n---\n\n" + rd("DESIGN.md"));
-for (const f of ["css/tokens.css", "css/base.css", "css/components.css", "css/product.css", "css/controls.css", "css/app.css"]) out.push(`\n---\n\n## Kode: \`${f}\`\n\n\`\`\`css\n${rd(f)}\n\`\`\`\n`);
+for (const f of ["css/tokens.css", "css/base.css", "css/components.css", "css/product.css", "css/controls.css", "css/gaya.css", "css/app.css"]) out.push(`\n---\n\n## Kode: \`${f}\`\n\n\`\`\`css\n${rd(f)}\n\`\`\`\n`);
 out.push("\n---\n\n## Kode: `js/seal.js`\n\n```js\n" + rd("js/seal.js") + "\n```\n");
 out.push("\n## Kode: `js/theme.js`\n\n```js\n" + rd("js/theme.js") + "\n```\n");
 out.push("\n## Kode: `js/app.js`\n\n```js\n" + rd("js/app.js") + "\n```\n");

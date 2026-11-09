@@ -49,8 +49,8 @@ p { margin: 0; }
 .kicker::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.22); }
 
 /* Judul besar. Tambahkan <span class="dot">.</span> di akhir untuk titik biru muda khas FUSIONIFY. */
-.h-hero { font-size: clamp(54px, 9vw, 128px); letter-spacing: -0.035em; }
-.h-sec { font-size: clamp(40px, 6.4vw, 84px); margin-top: 14px; max-width: 18ch; text-wrap: balance; }
+.h-hero { font-size: var(--h-hero, clamp(54px, 9vw, 128px)); letter-spacing: -0.035em; }
+.h-sec { font-size: var(--h-sec, clamp(40px, 6.4vw, 84px)); margin-top: 14px; max-width: 18ch; text-wrap: balance; }
 .h-hero .dot, .h-sec .dot { color: var(--blue-light); }
 .lead { font-size: clamp(17px, 1.4vw, 20px); color: var(--ink-2); max-width: 56ch; }
 

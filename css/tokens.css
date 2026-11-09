@@ -47,9 +47,20 @@
   /* Jarak (sama dengan library Figma: jarak/xs sampai jarak/2xl) */
   --sp-xs: 4px; --sp-s: 8px; --sp-m: 12px; --sp-l: 16px; --sp-xl: 24px; --sp-2xl: 32px;
   --edge-width: 2px;   /* tebal garis stiker */
+  --angkat: 1;         /* pengali tebal bayangan pejal: 1 stiker, 0.5 tipis, 0 datar. Diatur data-gaya */
   --touch-min: 44px;   /* target sentuh minimal */
   --gut: clamp(16px, 4vw, 48px);
   --max: 1240px;
+
+  /* Kelas ukuran layar, sama dengan window size class Material 3 (batas bawah tiap kelas).
+     ringkas < 600 · sedang 600-839 · lebar 840-1199 · besar 1200-1599 · sangat besar >= 1600.
+     @media tidak bisa membaca variabel, jadi tulis angkanya langsung:
+     (max-width: 599px) ringkas, (min-width: 600px) sedang ke atas, (min-width: 840px), (min-width: 1200px), (min-width: 1600px).
+     Satu-satunya batas tambahan yang boleh: (max-width: 420px) untuk HP kecil dan layar luar HP lipat. */
+  --kelas-sedang: 600px;
+  --kelas-lebar: 840px;
+  --kelas-besar: 1200px;
+  --kelas-sangat-besar: 1600px;
 
   /* Gerak */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);

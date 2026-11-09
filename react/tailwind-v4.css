@@ -5,6 +5,11 @@
    Kelas yang tersedia sama dengan preset v3: bg-blue, text-ink-2, border-edge, shadow-sticker,
    font-head, rounded-l, bg-go-bg text-go, dan seterusnya. Warna ikut mode gelap kit. */
 @theme inline {
+  /* Kelas ukuran layar kit: sedang:, lebar:, besar:, sangat-besar: (bawaan sm/md/lg tetap ada) */
+  --breakpoint-sedang: 600px;
+  --breakpoint-lebar: 840px;
+  --breakpoint-besar: 1200px;
+  --breakpoint-sangat-besar: 1600px;
   --color-blue: var(--blue);
   --color-blue-deep: var(--blue-deep);
   --color-blue-light: var(--blue-light);

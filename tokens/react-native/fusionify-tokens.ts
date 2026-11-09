@@ -163,6 +163,13 @@ export const fy = {
       "slow": 450
     },
     "note": "Hormati pengaturan kurangi gerakan di HP (iOS Reduce Motion, Android Remove animations)."
+  },
+  "kelasLayar": {
+    "sedang": 600,
+    "lebar": 840,
+    "besar": 1200,
+    "sangatBesar": 1600,
+    "note": "Di bawah sedang = ringkas. Navigasi: bar bawah di ringkas, rel di sedang, laci/sidebar penuh mulai lebar. Android: values-w600dp, values-w840dp."
   }
 } as const;
 

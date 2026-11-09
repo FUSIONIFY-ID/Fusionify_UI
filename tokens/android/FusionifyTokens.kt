@@ -206,6 +206,7 @@ val LocalFyColors = staticCompositionLocalOf { FyLight }
 
 object FyRadius { val s = 10.dp; val m = 18.dp; val l = 28.dp }
 object FyTouch { val minTarget = 44.dp; val navBarHeight = 76.dp; val gutter = 16.dp }
+object FyKelas { val sedang = 600.dp; val lebar = 840.dp; val besar = 1200.dp; val sangatBesar = 1600.dp } // sama dengan WindowWidthSizeClass
 object FySticker { val border = 2.dp; val dropButton = 3.dp; val dropCard = 6.dp } // bayangan pejal: offset ke bawah tanpa blur
 
 @Composable

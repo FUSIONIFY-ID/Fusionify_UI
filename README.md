@@ -97,11 +97,11 @@ Kit ini dirilis bernomor versi (`1.5.0`, `1.6.1`, dst.). Web produk **mengunci**
   ```
   git submodule add https://github.com/FUSIONIFY-ID/Fusionify_UI public/fusionify-ui
   cd public/fusionify-ui
-  git checkout v1.14.0
+  git checkout v1.15.0
   ```
   Naik versi nanti: `git fetch --tags` lalu `git checkout v1.15.0`, cek web-nya, commit.
-- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.14.0`. Karena repo privat, mesin build perlu akses ke repo (token GitHub).
-- **Zip**: unduh `Fusionify_UI-v1.14.0.zip` dari halaman Releases.
+- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.15.0`. Karena repo privat, mesin build perlu akses ke repo (token GitHub).
+- **Zip**: unduh `Fusionify_UI-v1.15.0.zip` dari halaman Releases.
 
 Aturan nomor: angka terakhir (1.5.**1**) untuk perbaikan kecil yang aman, angka tengah (1.**6**.0) untuk komponen baru yang tidak merusak, angka depan (**2**.0.0) kalau ada kelas atau markup yang berubah dan web produk perlu disesuaikan. Semua perubahan dicatat di `CHANGELOG.md`.
 

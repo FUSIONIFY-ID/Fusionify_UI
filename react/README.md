@@ -52,6 +52,11 @@ import { Seksi, Wrap, Kicker, Judul, Lead, Tombol, Chip, Kartu, PanggungMaskot, 
 
 Kelas Tailwind dari preset: `bg-blue`, `text-ink-2`, `border-edge`, `shadow-sticker`, `font-head`, `rounded-l`, `bg-go-bg text-go`, `max-w-wrap`, `ease-spring`. Warna berbasis variabel CSS sehingga mode gelap kit ikut berlaku; modifier opasitas (`bg-blue/50`) tidak berlaku untuk warna kit.
 
+## Kelas ukuran layar dan gaya
+
+- Preset menambah breakpoint kit: `sedang:` (600px), `lebar:` (840px), `besar:` (1200px), `sangat-besar:` (1600px). Pakai ini, bukan `md:`/`lg:` bawaan, supaya titik pindah tata letak sama dengan kit.
+- Gaya per kategori cukup `<html data-gaya="tenang">` (atau `toko`, `jasa`, `teknis`); kelas `shadow-sticker`, `rounded-l`, dan `border-edge` ikut berubah.
+
 ## Aturan
 
 - Jangan menulis warna hex sendiri di komponen atau config Tailwind. Kalau butuh warna baru, tambahkan dulu ke `css/tokens.css`.

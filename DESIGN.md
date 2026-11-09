@@ -128,17 +128,34 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 - Suara disintesis Web Audio, **mati secara bawaan**, dinyalakan lewat tombol speaker.
 - Tombol dan kartu stiker saat disorot: hanya naik-turun (transform) yang beranimasi; bayangan pejal berubah seketika, seperti stiker yang ditekan.
 
+## Gaya per kategori
+
+Satu sistem, lima rasa. Warna, huruf, ikon, logo, dan komponen sama; yang berubah tebal garis, kedalaman bayangan pejal, sudut, besar judul, jarak antarseksi, dan pola pembuka. Pasang `data-gaya` di `<html>` (`css/gaya.css`). Contoh hidup: `templates/gaya.html`.
+
+| Gaya | Rasa | Garis / bayangan | Judul hero | Hero | Untuk |
+| --- | --- | --- | --- | --- | --- |
+| stiker (bawaan) | ramai, hidup, ramah | 2px / pejal 6px | sangat besar | maskot + segel + gelembung | fusionify.id, konten, acara |
+| toko | cepat, meyakinkan | 2px / pejal setengah | besar | demo layar HP yang berjalan sendiri, stiker bot | Premiumify, FUSIONIFY BOT |
+| tenang | aman, serius | 1px / datar, bayangan lembut | sedang | pratinjau produk asli bertumpuk (halaman bayar + webhook), baris fakta biaya | FTVPay, TMail |
+| jasa | lega, percaya diri | 1px / datar | besar, di tengah | judul di tengah, deret karya di bawahnya | Fusionify Solutions |
+| teknis | rapat, fokus | 1px / datar, sudut kecil | kecil | kolom cari besar + topik | dokumentasi, ui.fusionify.id |
+
+- Gaya tenang dan teknis tidak memakai kursor segel dan efek magnet. Maskot tidak tampil di hero, tapi tetap memandu di keadaan kosong, sukses, dan error.
+- Gaya datar (tenang, jasa, teknis): kartu tidak melompat saat disorot, garisnya berubah biru.
+
 ## Aplikasi (dashboard, admin, masuk)
 
 - Sidebar putih/biru tua bergaris stiker; menu aktif berupa kapsul biru dengan bayangan pejal. Di HP sidebar menjadi laci yang meluncur dari kiri.
 - Kartu KPI bergaya stiker; satu KPI utama boleh biru penuh. Grafik sederhana dengan gradasi biru muda ke biru.
+- **Mode padat** (`data-kepadatan="padat"`, bawaan di template dashboard dan admin): teks 15px, sidebar 232px, panel dan tabel datar bergaris 1px, KPI dengan bayangan pejal tipis 3px, tabel rapat. Layar kerja yang dilihat berjam-jam tidak boleh "berteriak".
+- Sidebar mengikuti kelas ukuran layar: laci di ringkas, rel ikon di sedang, penuh mulai lebar.
 - Halaman masuk/daftar: panel biru dengan segel besar dan maskot di kiri (wink untuk masuk, happy untuk daftar, confused untuk lupa password, glasses untuk atur ulang), form di kanan. Di HP panel biru menyusut jadi kepala kecil.
 - Modal konfirmasi berbahaya memakai maskot confused dan tombol `.btn.danger`.
 - Gerak di aplikasi tenang: tanpa smooth scroll, kursor segel, atau reveal. Interaksi cukup transisi pendek.
 
 ## Aplikasi HP
 
-- App bar di atas dengan judul besar (Afacad Flux) yang mengecil saat digulir. Navigation bar bawah bergaris stiker di atasnya; tujuan aktif berupa kapsul biru. Mulai 700px berganti jadi rail di kiri.
+- App bar di atas dengan judul besar (Afacad Flux) yang mengecil saat digulir. Navigation bar bawah bergaris stiker di atasnya; tujuan aktif berupa kapsul biru. Mulai 600px (kelas sedang) berganti jadi rail di kiri.
 - FAB biru bergaya stiker (sudut 22px, bayangan pejal), satu per layar, melayang di atas navigation bar dan mengecil jadi ikon saat digulir.
 - Bottom sheet dengan pegangan di atas, bisa ditarik ke bawah untuk menutup. Picker tanggal/jam muncul dari bawah di HP dan sebagai popover di layar lebar.
 - Loading memakai segel FUSIONIFY yang berputar (`.spinner`), skeleton biru muda untuk isi yang sedang dimuat.
@@ -159,10 +176,25 @@ Karakter chibi rambut putih-biru, hoodie hitam. File di `mascot/`: badan penuh `
 
 - Lebar konten maksimal 1240px (`.wrap`) dengan gutter `clamp(16px, 4vw, 48px)`.
 - Grid tanpa kartu yatim: 3 kolom di desktop, 2 di tablet (kartu terakhir yang sendirian dibuat lebar penuh), 1 di HP.
-- Hero dua kolom mulai 700px; di bawahnya maskot di atas teks.
-- Nav lengkap mulai 961px; di bawahnya tombol menu.
+- Hero (`.hero`) dua kolom mulai 840px (kelas lebar); di bawahnya bertumpuk, pada pola maskot maskot di atas teks.
+- Nav lengkap mulai 961px; di bawahnya tombol menu (satu-satunya batas di luar kelas ukuran layar, karena tergantung jumlah tautan).
 - Cover karya/produk rasio 1600:848, screenshot asli. Ilustrasi wajib diberi label `.cover-note` "Ilustrasi".
 - Di layar sentuh: magnet, kursor khusus, dan parallax dimatikan.
+
+### Kelas ukuran layar
+
+Sama dengan window size class Material 3, dipakai web, aplikasi HP, dan token native:
+
+| Kelas | Lebar | Perangkat | Navigasi aplikasi |
+| --- | --- | --- | --- |
+| ringkas | < 600px | HP, layar luar HP lipat | laci atau bar bawah |
+| sedang | 600-839px | tablet tegak, layar dalam HP lipat | rel ikon dengan label kecil |
+| lebar | 840-1199px | tablet mendatar, laptop kecil | sidebar penuh |
+| besar | 1200-1599px | laptop, desktop | sidebar penuh |
+| sangat besar | >= 1600px | monitor lebar | sidebar penuh, konten tetap dibatasi `--max` |
+
+- **HP lipat setengah terbuka** (engsel tegak, layar terbagi kiri-kanan): hero menaruh teks di layar kiri dan media di layar kanan; chat menaruh daftar obrolan di kiri dan isi obrolan di kanan. Tidak ada teks atau tombol yang jatuh tepat di engsel.
+- Layar luar HP lipat bisa lebih sempit dari 360px: judul memakai `overflow-wrap: anywhere`, tombol boleh turun baris, tidak ada lebar tetap di atas 320px.
 
 ## Komponen toko dan navigasi web
 

@@ -14,6 +14,8 @@ const v = (name) => `var(--${name})`;
 export default {
   theme: {
     extend: {
+      // Kelas ukuran layar kit (sama dengan css/tokens.css): sedang:grid-cols-2 lebar:grid-cols-3
+      screens: { sedang: "600px", lebar: "840px", besar: "1200px", "sangat-besar": "1600px" },
       colors: {
         blue: { DEFAULT: v("blue"), deep: v("blue-deep"), light: v("blue-light") },
         ink: { DEFAULT: v("ink"), 2: v("ink-2"), 3: v("ink-3") },

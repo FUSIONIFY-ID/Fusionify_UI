@@ -18,6 +18,7 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initTheme } from "./theme.js";
+import { initKelas } from "./kelas.js";
 import { initControls, snackbar, otpError } from "./controls.js";
 import { cekLisensi } from "./lisensi.js";
 
@@ -118,9 +119,12 @@ const stub = () => ({ sfx: { on: false, set: noop, play: noop }, toast: noop, sn
 
 export function initFusionify(opts = {}) {
   if (!cekLisensi()) return stub();
+  // Gaya tenang dan teknis (gaya.css) tidak memakai kursor segel dan efek magnet: harus terasa serius.
+  const datar = ["tenang", "teknis"].includes(document.documentElement.dataset.gaya);
   const o = {
     smooth: true,          // Lenis smooth scroll
-    cursor: true,          // kursor segel (hanya mouse)
+    cursor: !datar,        // kursor segel (hanya mouse)
+    magnet: !datar,        // efek magnet data-magnetic
     transitions: true,     // transisi halaman segel biru
     darkAreas: ".sec.blue, .footer, .drawer, [data-dark]", // kursor jadi putih di area ini
     pauseSelector: "main > section, main > div, footer, [data-pause]",
@@ -128,6 +132,7 @@ export function initFusionify(opts = {}) {
   };
   window.__fx = true; // menandai JS berjalan (dipakai fallback .fx-off di <head>)
   initTheme();
+  initKelas(); // data-kelas dan data-lipat di <html> (js/kelas.js)
   initControls(); // komponen kontrol (js/controls.js)
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -294,7 +299,7 @@ export function initFusionify(opts = {}) {
   }
 
   /* Efek magnet (mouse saja): <a data-magnetic> */
-  if (fine && !reduce) {
+  if (o.magnet && fine && !reduce) {
     $$("[data-magnetic]").forEach((el) => {
       const qx = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3" });
       const qy = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3" });
