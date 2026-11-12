@@ -359,3 +359,21 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .footer .sosmed a, .sec.blue .sosmed a { background: transparent; color: var(--on-dark-2); border-color: rgba(255, 255, 255, 0.35); box-shadow: none; }
 .footer .sosmed a:hover { background: var(--night-ink); color: var(--night); }
 .sec.blue .sosmed a:hover { background: var(--on-dark); color: var(--blue-deep); }
+
+/* =========================================================
+   TOPLES STIKER (.jar) · kepala maskot dengan fisika (js/stiker.js)
+   Posisi stiker hanya lewat transform; tanpa JS tiga stiker diam di dasar.
+   ========================================================= */
+.jar { border: 2px solid var(--edge); border-radius: var(--r-l); background: var(--card); box-shadow: 0 8px 0 var(--edge-shadow); overflow: hidden; }
+.jar-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px; padding: 14px 20px; border-bottom: 2px dashed var(--line); }
+.jar-hint { margin: 0; font-size: 22px; line-height: 1.2; color: var(--ink-2); }
+.jar-add { padding: 9px 16px; font-size: 15px; }
+.jar:not(.on) .jar-head { visibility: hidden; }
+.jar-box { position: relative; height: 230px; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: copy; background: linear-gradient(to top, var(--surface) 0 12px, var(--line) 12px 14px, transparent 14px); }
+.jar-box img { position: absolute; left: 0; top: 0; width: 68px; height: 68px; object-fit: contain; cursor: grab; touch-action: none; will-change: transform; transition: opacity 0.3s; -webkit-user-drag: none; }
+.jar-box img.held { cursor: grabbing; }
+.jar:not(.on) .jar-box img { top: auto; bottom: 12px; }
+.jar:not(.on) .jar-box img:nth-child(1) { left: 22%; }
+.jar:not(.on) .jar-box img:nth-child(2) { left: 46%; }
+.jar:not(.on) .jar-box img:nth-child(3) { left: 70%; }
+@media (max-width: 600px) { .jar-box { height: 200px; } .jar-box img { width: 56px; height: 56px; } .jar-hint { font-size: 20px; } }

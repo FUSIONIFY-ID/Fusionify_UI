@@ -20,6 +20,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initTheme } from "./theme.js";
 import { initControls, snackbar, otpError } from "./controls.js";
 import { cekLisensi } from "./lisensi.js";
+import { stickerJar } from "./stiker.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,6 +73,7 @@ function createSfx() {
     ting: () => { tone(1320, 1320, 0.25, "sine", 0.08); tone(1760, 1760, 0.35, "sine", 0.06, 0.09); },
     bloop: () => tone(300, 760, 0.14, "sine", 0.12),
     whoosh: () => noise(0.45, 0.25, 400, 2600),
+    grr: () => tone(140, 90, 0.25, "sawtooth", 0.05),
   };
   return {
     get on() { return on; },
@@ -362,6 +364,12 @@ export function initFusionify(opts = {}) {
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("idle", !e.isIntersecting)), { rootMargin: "50% 0px" });
     $$(o.pauseSelector).forEach((el) => io.observe(el));
+  }
+
+  /* Toples stiker [data-jar]: fisika kecil, dijalankan saat browser senggang */
+  if (document.querySelector("[data-jar]")) {
+    const run = () => stickerJar(document, { reduce, play: (n) => sfx.play(n) });
+    if ("requestIdleCallback" in window) requestIdleCallback(run, { timeout: 2500 }); else setTimeout(run, 600);
   }
 
   addEventListener("load", () => ScrollTrigger.refresh());
