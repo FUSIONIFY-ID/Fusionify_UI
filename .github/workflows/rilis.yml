@@ -113,4 +113,7 @@ jobs:
         run: |
           TAG="${{ steps.v.outputs.tag }}"
           node scripts/release.mjs --notes "$TAG" > dist/catatan.md
-          gh release create "$TAG" "dist/Fusionify_UI-$TAG.zip" --title "Fusionify UI $TAG" --notes-file dist/catatan.md --verify-tag
+          # Rilis versi lama lewat Run workflow tidak boleh merebut label "Latest" dari versi terbaru.
+          LATEST="--latest"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then LATEST="--latest=false"; fi
+          gh release create "$TAG" "dist/Fusionify_UI-$TAG.zip" --title "Fusionify UI $TAG" --notes-file dist/catatan.md --verify-tag $LATEST
