@@ -37,12 +37,11 @@ jobs:
             saring: layar-sentuh,interaksi,kelas
           - bagian: generator dan SEO
             saring: dokumen,email,grafis,ikon,react,token,seo,ssr
-          # Mesin Safari (WebKit) dan Firefox. Sementara belum memblokir merge (boleh_gagal) sampai hasil
-          # pertamanya hijau; setelah itu hapus baris boleh_gagal.
+          # Mesin Safari (WebKit) dan Firefox. Wajib lulus sejak 1.16.0 (hasil pertama: 112 cek hijau).
+          # Kalau suatu saat perlu dilonggarkan sementara, tambahkan boleh_gagal: true di sini.
           - bagian: safari dan firefox
             saring: peramban-lain
             peramban: webkit firefox
-            boleh_gagal: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

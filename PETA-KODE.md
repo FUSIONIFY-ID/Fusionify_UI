@@ -550,7 +550,7 @@ Audit menyeluruh repo, CI, branch, dan PR. Laporan lengkap: `claude/audit-fusion
 | R2 | Email pribadi di 7 commit awal | Informasi; tidak menulis ulang riwayat |
 | R3 | Hasil build (PDF, PNG, pptx) ikut di git | Ditunda |
 | R4 | Belum ada paket npm privat | Ditunda ke 2.0.0 |
-| R5 | Uji hanya Chromium | Selesai sebagian: job CI WebKit + Firefox (`peramban-lain.mjs`), belum memblokir merge |
+| R5 | Uji hanya Chromium | Selesai sebagian: job CI WebKit + Firefox (`peramban-lain.mjs`), wajib lulus |
 
 ## 9. Rencana `ui.fusionify.id` (`rencana/ui-fusionify-id.md`)
 
@@ -608,4 +608,4 @@ Pola: `.pola-maskot` (`.stage` aspect 0.82 > `.seal-bg`, `.seal-ring`, `.bubble[
 - **CSS**: `.form-stack` (`product.css`), `@media (forced-colors: active)` dan `@media (prefers-contrast: more)` (`base.css`).
 - **SEO**: blok `<!-- SEO: ... -->` di semua template (publik: robots/canonical/hreflang/OG/JSON-LD; lainnya: `noindex`), `snippets/seo-head.html`, `seo/robots.txt`, `seo/sitemap.xml`, `seo/llms.txt`, `seo/README.md`.
 - **Uji**: `tests/seo.mjs`, `tests/ssr.mjs`, `tests/peramban-lain.mjs` (WebKit + Firefox, dilewati kalau browser belum terpasang), `cdnLokal()` di `tests/_env.mjs`. `npm run cek:seo`, `npm run cek:ssr`.
-- **CI/rilis**: `uji.yml` job "safari dan firefox" (`continue-on-error` sementara), generator + `seo,ssr`; `rilis.yml` berjalan di push `main`, tag, dan `workflow_dispatch` (versi, commit, lewati uji), tag dibuat oleh `github-actions[bot]`.
+- **CI/rilis**: `uji.yml` job "safari dan firefox" (wajib lulus), generator + `seo,ssr`; `rilis.yml` berjalan di push `main`, tag, dan `workflow_dispatch` (versi, commit, lewati uji), tag dibuat oleh `github-actions[bot]`.
