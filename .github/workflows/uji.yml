@@ -18,7 +18,7 @@ jobs:
     # Uji dibagi ke beberapa job paralel supaya tiap job jauh di bawah batas waktu
     # (sejak 1.15 ada 12 ukuran layar termasuk HP lipat dan 29 halaman).
     name: uji (${{ matrix.bagian }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 # dikunci: Playwright 1.56 belum mendukung ubuntu-latest (26.04)
     timeout-minutes: 40
     continue-on-error: ${{ matrix.boleh_gagal == true }}
     strategy:
