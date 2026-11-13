@@ -9,6 +9,14 @@
 @font-face { font-family: "Caveat Variable"; font-style: normal; font-display: swap; font-weight: 400 700; src: url(../fonts/caveat-latin-wght-normal.woff2) format("woff2-variations"); }
 @font-face { font-family: "Exo 2 Variable"; font-style: normal; font-display: swap; font-weight: 100 900; src: url(../fonts/exo-2-latin-wght-normal.woff2) format("woff2-variations"); }
 
+/* Huruf cadangan berukuran setara (dihitung dari metrik huruf asli terhadap Arial/Liberation Sans, sampel teks
+   Indonesia). Selama huruf asli belum termuat, teks memakai Arial yang disesuaikan ukurannya, jadi judul dan
+   paragraf tidak meloncat saat huruf asli masuk (CLS). Hitung ulang kalau file huruf diganti. */
+@font-face { font-family: "Afacad Flux Fallback"; font-weight: 100 1000; src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("Arimo Bold"); size-adjust: 83.76%; ascent-override: 119.39%; descent-override: 39.8%; line-gap-override: 0%; }
+@font-face { font-family: "Sansation Fallback"; font-weight: 400; src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"); size-adjust: 102.53%; ascent-override: 88.29%; descent-override: 20.86%; line-gap-override: 0%; }
+@font-face { font-family: "Sansation Fallback"; font-weight: 700; src: local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("Arimo Bold"); size-adjust: 93.86%; ascent-override: 96.45%; descent-override: 22.79%; line-gap-override: 0%; }
+@font-face { font-family: "Exo 2 Fallback"; font-weight: 100 900; src: local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"); size-adjust: 103.93%; ascent-override: 96.12%; descent-override: 19.34%; line-gap-override: 0%; }
+
 :root {
   /* Biru FUSIONIFY */
   --blue: #0d6cd7;        /* warna utama, tombol, seksi biru */
@@ -33,10 +41,10 @@
   --eos: #5b6475;  --eos-bg: #eceff4;   /* layanan berakhir */
 
   /* Huruf */
-  --f-head: "Afacad Flux Variable", "Afacad Flux", system-ui, sans-serif; /* judul, tebal 800 */
-  --f-body: "Sansation", system-ui, sans-serif;                          /* teks dan UI */
+  --f-head: "Afacad Flux Variable", "Afacad Flux", "Afacad Flux Fallback", system-ui, sans-serif; /* judul, tebal 800 */
+  --f-body: "Sansation", "Sansation Fallback", system-ui, sans-serif;                         /* teks dan UI */
   --f-hand: "Caveat Variable", "Caveat", cursive;                         /* suara maskot */
-  --f-num: "Exo 2 Variable", "Exo 2", system-ui, sans-serif;              /* angka dan label */
+  --f-num: "Exo 2 Variable", "Exo 2", "Exo 2 Fallback", system-ui, sans-serif;             /* angka dan label */
 
   /* Bentuk dan ukuran */
   --r-s: 10px;
@@ -61,6 +69,41 @@
   --kelas-lebar: 840px;
   --kelas-besar: 1200px;
   --kelas-sangat-besar: 1600px;
+
+  /* Lapisan (z-index). Komponen memakai token ini, bukan angka; angka kecil (-1 sampai 3) hanya untuk
+     tumpukan di dalam satu komponen. Urutan: konten < sticky < laci < menu < nav < FAB < popover < dialog. */
+  --z-sticky: 30;     /* topbar aplikasi */
+  --z-laci: 40;       /* sidebar HP (scrim = laci - 1) */
+  --z-menu: 50;       /* dropdown, app bar, kepala acara */
+  --z-nav: 60;        /* nav web, navigation bar, rail, bilah acara (menu HP = nav - 5) */
+  --z-fab: 70;        /* FAB dan menunya */
+  --z-popover: 80;    /* tooltip, panel notifikasi */
+  --z-dialog: 90;     /* picker, persetujuan cookie, obrolan layar penuh */
+  --z-skip: 200;      /* tautan "lewati ke konten" */
+  --z-kursor: 300;    /* kursor segel */
+  --z-toast: 320;
+  --z-snackbar: 330;
+  --z-offline: 340;   /* bilah offline */
+  --z-tirai: 350;     /* tirai transisi halaman, paling atas */
+
+  /* Durasi gerak. Transisi komponen memakai token ini supaya produk bisa memperlambat/mempercepat sekaligus.
+     Kurva tetap --ease (masuk-keluar) dan --spring (pegas). */
+  --dur-1: 0.2s;      /* warna, garis, hover kecil */
+  --dur-2: 0.25s;     /* latar, isi kecil */
+  --dur-3: 0.3s;      /* tombol, kartu, panel kecil */
+  --dur-4: 0.35s;     /* pegas kursor, sheet kecil */
+  --dur-5: 0.5s;      /* panel besar, reveal */
+  --dur-6: 0.7s;      /* menu HP, tirai */
+
+  /* Skala huruf (px, sama dengan kit lain: teks dasar 17px di body). Untuk komponen dan produk baru;
+     komponen lama dipindah bertahap. Judul besar tetap clamp di --h-hero dan --h-sec. */
+  --fs-label: 13px;      /* kicker, label Exo 2 kapital */
+  --fs-kecil: 14px;      /* keterangan, chip, meta */
+  --fs-teks: 17px;       /* teks dasar */
+  --fs-lead: 20px;       /* paragraf pembuka */
+  --fs-judul-s: 24px;    /* judul kartu */
+  --fs-judul-m: 32px;    /* judul panel */
+  --fs-judul-l: 44px;    /* judul halaman aplikasi */
 
   /* Gerak */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);

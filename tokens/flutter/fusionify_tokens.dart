@@ -355,6 +355,17 @@ class FyKelas {
   static String dari(double w) => w >= sangatBesar ? 'sangat-besar' : w >= besar ? 'besar' : w >= lebar ? 'lebar' : w >= sedang ? 'sedang' : 'ringkas';
 }
 
+/// Skala huruf (sama dengan --fs-* di web).
+class FyTextSize {
+  static const double label = 13;
+  static const double kecil = 14;
+  static const double teks = 17;
+  static const double lead = 20;
+  static const double judulS = 24;
+  static const double judulM = 32;
+  static const double judulL = 44;
+}
+
 /// Gaya stiker FUSIONIFY: garis 2px warna edge + bayangan pejal ke bawah tanpa blur.
 BoxDecoration fySticker(FyColors c, {Color? fill, double radius = FyRadius.l, double drop = 6}) => BoxDecoration(
       color: fill ?? c.card,

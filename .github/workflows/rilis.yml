@@ -1,42 +1,116 @@
-# FUSIONIFY UI · rilis bernomor versi.
-# Cara rilis: perbarui "version" di package.json dan tambah bagian baru di CHANGELOG.md, commit, lalu:
-#   git tag v1.5.0
-#   git push origin v1.5.0
-# Workflow ini menjalankan uji, membuat Fusionify_UI-v1.5.0.zip, dan menerbitkan GitHub Release berisi catatan dari CHANGELOG.
+# FUSIONIFY UI · rilis bernomor versi, otomatis.
+#
+# Cara rilis (cukup ini): naikkan "version" di package.json, tambah bagian baru di CHANGELOG.md, lalu merge ke main.
+# Setiap push ke main yang versinya belum punya tag: workflow menguji, membuat tag vX.Y.Z, zip, dan GitHub Release.
+#
+# Masih bisa manual:
+#   - push tag sendiri: git tag v1.16.0 && git push origin v1.16.0
+#   - rilis versi lama yang tag-nya terlewat: tab Actions > Rilis > Run workflow, isi versi (mis. 1.14.2) dan
+#     commit-nya (mis. fe6b246). Centang "lewati uji" untuk commit lama yang ujinya sudah tidak jalan.
 name: Rilis
 
 on:
   push:
+    branches: [main]
     tags: ["v*.*.*"]
+  workflow_dispatch:
+    inputs:
+      versi:
+        description: "Versi yang dirilis, tanpa v (mis. 1.14.2)"
+        required: true
+      commit:
+        description: "Commit untuk versi itu (kosong = ujung main)"
+        required: false
+      lewati_uji:
+        description: "Lewati uji (hanya untuk menandai rilis lama)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
+concurrency:
+  group: rilis
+  cancel-in-progress: false
+
 jobs:
   rilis:
     runs-on: ubuntu-latest
-    timeout-minutes: 90 # semua uji berurutan (~60 menit sejak 1.15); uji per PR dibagi paralel di uji.yml
+    timeout-minutes: 90 # semua uji berurutan; uji per PR dibagi paralel di uji.yml
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.commit || github.sha }}
+
+      - name: Tentukan versi dan tag
+        id: v
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSI="${{ inputs.versi }}"
+          elif [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            VERSI="${GITHUB_REF_NAME#v}"
+          else
+            VERSI="$(node -p "require('./package.json').version")"
+          fi
+          TAG="v${VERSI#v}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Rilis $TAG sudah ada, tidak ada yang dikerjakan."
+            echo "lanjut=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "lanjut=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - uses: actions/setup-node@v4
+        if: steps.v.outputs.lanjut == 'true'
         with:
           node-version: 22
-      - name: Cek nomor versi cocok
-        run: node scripts/release.mjs --check "${GITHUB_REF_NAME}"
+
+      - name: Cek nomor versi cocok dengan package.json dan CHANGELOG
+        if: steps.v.outputs.lanjut == 'true'
+        run: node scripts/release.mjs --check "${{ steps.v.outputs.tag }}"
+
       - name: Pasang dependensi uji
+        if: steps.v.outputs.lanjut == 'true' && !inputs.lewati_uji
         run: npm ci --no-audit --no-fund
+
       - name: Pasang Chromium
+        if: steps.v.outputs.lanjut == 'true' && !inputs.lewati_uji
         run: npx playwright install --with-deps chromium
+
       - name: Jalankan semua uji
+        if: steps.v.outputs.lanjut == 'true' && !inputs.lewati_uji
         run: npm test
-      - name: Buat zip
+
+      - name: Buat tag
+        if: steps.v.outputs.lanjut == 'true' && github.ref_type != 'tag'
         run: |
+          TAG="${{ steps.v.outputs.tag }}"
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null; then
+            echo "Tag $TAG sudah ada di GitHub, dipakai apa adanya."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git tag -a "$TAG" -m "Fusionify UI $TAG"
+            git push origin "$TAG"
+          fi
+
+      - name: Buat zip
+        if: steps.v.outputs.lanjut == 'true'
+        run: |
+          TAG="${{ steps.v.outputs.tag }}"
           mkdir -p dist/Fusionify_UI
           git archive HEAD | tar -x -C dist/Fusionify_UI
-          cd dist && zip -qr "Fusionify_UI-${GITHUB_REF_NAME}.zip" Fusionify_UI
+          cd dist && zip -qr "Fusionify_UI-$TAG.zip" Fusionify_UI
+
       - name: Terbitkan rilis
+        if: steps.v.outputs.lanjut == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          node scripts/release.mjs --notes "${GITHUB_REF_NAME}" > dist/catatan.md
-          gh release create "${GITHUB_REF_NAME}" "dist/Fusionify_UI-${GITHUB_REF_NAME}.zip" --title "Fusionify UI ${GITHUB_REF_NAME}" --notes-file dist/catatan.md
+          TAG="${{ steps.v.outputs.tag }}"
+          node scripts/release.mjs --notes "$TAG" > dist/catatan.md
+          gh release create "$TAG" "dist/Fusionify_UI-$TAG.zip" --title "Fusionify UI $TAG" --notes-file dist/catatan.md --verify-tag

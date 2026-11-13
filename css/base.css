@@ -33,7 +33,7 @@ p { margin: 0; }
 
 .wrap { width: min(100% - var(--gut) * 2, var(--max)); margin-inline: auto; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.skip { position: fixed; left: 12px; top: -60px; z-index: 200; background: var(--inverse-bg); color: var(--inverse-fg); padding: 10px 14px; border-radius: 10px; text-decoration: none; }
+.skip { position: fixed; left: 12px; top: -60px; z-index: var(--z-skip); background: var(--inverse-bg); color: var(--inverse-fg); padding: 10px 14px; border-radius: 10px; text-decoration: none; }
 .skip:focus { top: 12px; }
 .nowrap { white-space: nowrap; }
 
@@ -63,7 +63,7 @@ p { margin: 0; }
 .prose a { color: var(--text-blue-deep); overflow-wrap: anywhere; }
 
 /* Pergantian tema: warna berpindah halus sebentar, hanya saat tombol ditekan */
-.theme-switching, .theme-switching *, .theme-switching *::before, .theme-switching *::after { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important; }
+.theme-switching, .theme-switching *, .theme-switching *::before, .theme-switching *::after { transition: background-color var(--dur-3) ease, color var(--dur-3) ease, border-color var(--dur-3) ease, box-shadow var(--dur-3) ease !important; }
 
 /* Gerak dimatikan: hormati pilihan pengguna. Konten yang biasanya muncul lewat animasi WAJIB langsung tampil. */
 @media (prefers-reduced-motion: reduce) {
@@ -99,4 +99,19 @@ p { margin: 0; }
 a, button, [role="button"], label, summary { touch-action: manipulation; }
 @media (hover: none) and (pointer: coarse) {
   input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea { font-size: 16px !important; }
+}
+
+/* Mode kontras tinggi Windows (forced-colors): browser mengganti semua warna dengan warna sistem dan
+   menghapus bayangan. Komponen yang hanya dibedakan lewat latar (chip status, isi progres, kenop switch,
+   titik i, menu yang disorot) diberi garis atau warna sistem supaya tetap terlihat. Tanpa hex. */
+@media (forced-colors: active) {
+  .chip, .tag, .badge, .kpi, .skel { border: 1px solid CanvasText; }
+  .chip::before, .dot, .switch input + span::after { background: CanvasText; forced-color-adjust: none; }
+  .progress span, .switch input:checked + span { background: Highlight; forced-color-adjust: none; }
+  .menu a:focus-visible, .menu button:focus-visible, :focus-visible { outline: 3px solid Highlight; outline-offset: 2px; }
+  .ikon { --ikon-titik: CanvasText; }
+}
+@media (prefers-contrast: more) {
+  /* :root tiga kali supaya menang atas blok tema gelap (:root[data-theme]) */
+  :root:root:root { --ink-2: var(--ink); --ink-3: var(--ink); --line: var(--edge); }
 }

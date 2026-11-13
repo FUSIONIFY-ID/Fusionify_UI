@@ -1,0 +1,21 @@
+# Nama Produk
+
+> GANTI: satu kalimat yang menjawab "ini apa dan untuk siapa". Tulis apa adanya, sama dengan halaman utama.
+
+Nama Produk adalah produk dari FUSIONIFY (PT Fusionify Digital Store, Bogor). Status: GANTI (aktif, beta, dalam pengembangan, direncanakan, atau layanan berakhir). Kontak: hello@fusionify.id, WhatsApp +62 831-1138-0628.
+
+## Halaman utama
+
+- [Beranda](https://nama-produk.id/): GANTI ringkasan satu kalimat
+- [Harga](https://nama-produk.id/#harga): harga asli atau "Hubungi kami"
+- [Status layanan](https://nama-produk.id/status/): kondisi layanan dan riwayat gangguan
+- [Dokumentasi](https://nama-produk.id/docs/): panduan dan referensi API
+
+## Legal
+
+- [Kebijakan Privasi](https://nama-produk.id/privasi/)
+- [Syarat dan Ketentuan](https://nama-produk.id/syarat/)
+
+## English
+
+- [Home](https://nama-produk.id/en/)

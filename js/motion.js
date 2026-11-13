@@ -119,8 +119,12 @@ function splitWords(el) {
 const noop = () => {};
 const stub = () => ({ sfx: { on: false, set: noop, play: noop }, toast: noop, snackbar: noop, otpError: noop, lenis: null, lockScroll: noop, scrollTo: noop, gsap, ScrollTrigger });
 
+// Hasil initFusionify() disimpan: pemanggilan kedua (navigasi SPA, Astro View Transitions, HMR) mengembalikan
+// objek yang sama, bukan memasang ulang listener scroll, kursor, suara, dan toast sehingga semuanya dobel.
+let hasilFy = null;
 export function initFusionify(opts = {}) {
   if (!cekLisensi()) return stub();
+  if (hasilFy) { initControls(document.body); return hasilFy; } // elemen baru tetap diberi interaksi
   // Gaya tenang dan teknis (gaya.css) tidak memakai kursor segel dan efek magnet: harus terasa serius.
   const datar = ["tenang", "teknis"].includes(document.documentElement.dataset.gaya);
   const o = {
@@ -376,7 +380,8 @@ export function initFusionify(opts = {}) {
   }
 
   addEventListener("load", () => ScrollTrigger.refresh());
-  return { sfx, toast, snackbar, otpError, lenis, lockScroll, scrollTo: scrollToEl, gsap, ScrollTrigger };
+  hasilFy = { sfx, toast, snackbar, otpError, lenis, lockScroll, scrollTo: scrollToEl, gsap, ScrollTrigger };
+  return hasilFy;
 }
 
 /* ================= MASKOT HERO =================

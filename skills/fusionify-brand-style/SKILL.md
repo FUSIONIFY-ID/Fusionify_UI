@@ -71,7 +71,7 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 `controls.css` (web, aplikasi, dan aplikasi HP; termasuk di `fusionify.css`; interaksi di `js/controls.js`, otomatis dipanggil `initFusionify()`/`initApp()`):
 - Menu dan dialog: `.dropdown` + `[data-dropdown]` + `.menu`, `dialog.modal` (`.full` di HP) + `[data-open-modal]`/`[data-close]`, `dialog.sheet` (bottom sheet, bisa ditarik) dan `dialog.side-sheet` + `[data-open-sheet]`, `.tabs` (`data-tabs`)
 - Tombol: `.btn-group` (`data-btn-group="single|multi"`), `.split-btn`, `.fab` (+ extended), `.fab-dock`, `.fab-menu` (`data-fab-menu`), `[data-fab-shrink]`
-- Navigasi HP: `.appbar` (`data-appbar`, `.appbar-title`), `.navbar` + `.with-navbar`, `.rail` + `.with-rail`, `.m-app` (bar bawah jadi rail mulai 700px)
+- Navigasi HP: `.appbar` (`data-appbar`, `.appbar-title`), `.navbar` + `.with-navbar`, `.rail` + `.with-rail`, `.m-app` (bar bawah jadi rail mulai 600px, kelas sedang)
 - Isi: `.carousel` (`data-carousel`, tidak berputar sendiri), `.list`/`.li`, `.chip-btn` (filter/aksi, `aria-pressed`), `.chip-input`, `.badge`/`.has-badge`, `.tip-wrap` + `.tip` (tooltip)
 - Input: `.slider`, `.range2` (`data-range2`), `.search-bar` + `[data-suggest]`, `.picker` (`data-datepicker`, `data-timepicker`)
 - Status: `.spinner` (segel), `.ring`, `.progress.indeterminate`, `.skel`, `.snackbar` (`snackbar(teks, { action, onAction })`), `.float-bar`
@@ -83,7 +83,7 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 - Keadaan: `.state` (`.error`, `.offline`, `.sm`) dengan maskot, satu kalimat, satu tombol; `.offline-bar[data-offline-bar]` muncul otomatis saat koneksi putus; halaman `templates/500.html`, `offline.html`, `maintenance.html`
 - Lain: `[data-chat]` (obrolan; di HP tombol back Android menutup isi obrolan), `[data-ics]` (unduh .ics, tambah ke kalender), `[data-share]`
 - Navigasi web: `.breadcrumb` (nav > ol > li, halaman sekarang `aria-current="page"`), `.pagination` (aktif `aria-current="page"`, panah `rel="prev|next"`), `.accordion` (details/summary + `.acc-body`)
-- Form tambahan: `.input-group` + `.addon` (awalan Rp/ikon, akhiran @domain/tombol), `.qty[data-qty]` (tombol `data-qty-step`, batas dari min/max input), `.kbd`
+- Form tambahan: `.input-group` + `.addon` (awalan Rp/ikon, akhiran `@domain`/tombol), `.qty[data-qty]` (tombol `data-qty-step`, batas dari min/max input), `.kbd`
 - Toko: `.product-grid` + `.product-card` (`.pc-media[.contain]`, `.pc-diskon`, `.pc-body`, `.pc-cat`, `.pc-title a`, `.pc-actions`, `.habis`), `.harga` (+ `<s>`), `.rating` (`style="--nilai:4.5"`, `role="img"` + aria-label) dan `.rating-input` (radio 5→1), `.countdown[data-tenggat="ISO"]` (`[data-cd]`), `.gallery[data-gallery]` → lightbox. Harga, rating, ulasan wajib asli
 - Linimasa: `ol.timeline` > `li.done|now|fail` (`.tl-time`, `.tl-title`, `p`)
 - Pengumuman `.announce[data-announce="id"]` (tutup diingat), persetujuan cookie `.consent[data-consent]` (dua tombol `data-consent-pilih="penting|semua"` sama menonjol; `pilihanCookie()`, event `fy:consent`)
@@ -93,7 +93,7 @@ Atribut `initFusionify()`: `data-split`, `data-reveal`, `data-assemble`, `data-c
 
 ## Domain resmi
 
-- `js/lisensi.js`: kit hanya berjalan di `fusionify.id`, `fusionify.biz.id`, partner `premiumify.my.id` dan `studydate.id`, serta subdomainnya (plus localhost, `*.local`, file lokal). Di domain lain interaksi dan animasi mati, konten tetap terbaca, dan konsol memberi peringatan. Jangan dihapus atau diakali.
+- `js/lisensi.js`: kit hanya berjalan di `fusionify.id`, `fusionify.biz.id`, dan domain partner di `DOMAIN_RESMI`, serta subdomainnya (plus localhost, `*.local`, file lokal). Di domain lain interaksi dan animasi mati, konten tetap terbaca, dan konsol memberi peringatan. Jangan dihapus atau diakali.
 - Domain partner baru ditambah di `DOMAIN_RESMI` atas izin pemilik, dicatat di CHANGELOG, lalu rilis versi baru dan naikkan versi kit di web produk tersebut.
 
 ## Token warna
@@ -132,6 +132,14 @@ Atribut `initFusionify()`: `data-split`, `data-reveal`, `data-assemble`, `data-c
 ```
 
 Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis/`, `bayangan/`, `status/`), ukuran di koleksi `Ukuran` (`radius/`, `jarak/`, `garis/stiker`, `sentuh/minimal`). Kalau token berubah, ubah di `tokens.css` dan Figma sekaligus.
+
+## Token fondasi dan SEO (1.16)
+
+- Lapisan global `--z-sticky`, `--z-laci`, `--z-menu`, `--z-nav`, `--z-fab`, `--z-popover`, `--z-dialog`, `--z-skip`, `--z-kursor`, `--z-toast`, `--z-snackbar`, `--z-offline`, `--z-tirai`. Jangan menulis angka z-index sendiri di atas 3.
+- Durasi `--dur-1` (0,2 dtk) sampai `--dur-6` (0,7 dtk) dengan kurva `--ease`/`--spring`. Skala huruf `--fs-label` 13, `--fs-kecil` 14, `--fs-teks` 17, `--fs-lead` 20, `--fs-judul-s` 24, `--fs-judul-m` 32, `--fs-judul-l` 44 (px).
+- Token standar W3C (DTCG 2025.10): `tokens/fusionify.tokens.json`.
+- Halaman publik: blok SEO dari `snippets/seo-head.html` (robots, canonical, hreflang, OG 1200x630, JSON-LD `@graph` dengan Organization FUSIONIFY). Halaman masuk, dashboard, admin, error: `noindex`. Root domain: `seo/robots.txt`, `seo/sitemap.xml`, `seo/llms.txt`. Uji `tests/seo.mjs`.
+- Modul `js/` aman diimpor di server (Next.js, Astro); `initFusionify()`/`initApp()` aman dipanggil ulang saat navigasi SPA.
 
 ## Mode gelap
 

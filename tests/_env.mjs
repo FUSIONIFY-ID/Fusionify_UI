@@ -11,3 +11,9 @@ export const AXE = fs.readFileSync(require.resolve("axe-core/axe.min.js"), "utf8
 // GSAP dan Lenis disajikan dari node_modules supaya hasil uji tidak tergantung CDN
 export const NM = path.join(ROOT, "node_modules") + "/";
 export const FIX = fs.mkdtempSync(path.join(os.tmpdir(), "fy-ui-")) + "/";
+// GSAP dan Lenis dari CDN (importmap di template) dialihkan ke node_modules, supaya uji tidak gagal
+// saat CDN lambat atau terblokir. Bisa dipasang di page atau context.
+export const cdnLokal = (target) => target.route(/cdn\.jsdelivr\.net\/npm\/(gsap|lenis)@[^/]+\/(.*)$/, (r) => {
+  const m = r.request().url().match(/npm\/(gsap|lenis)@[^/]+\/(.*)$/);
+  r.fulfill({ path: NM + m[1] + "/" + m[2], contentType: "text/javascript" });
+});

@@ -14,7 +14,7 @@
 .input, .select, .textarea {
   width: 100%; font: inherit; font-size: 16px; color: var(--ink);
   padding: 13px 16px; border-radius: var(--r-m); border: var(--edge-width) solid var(--edge); background: var(--card);
-  box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); transition: transform 0.25s var(--spring);
+  box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); transition: transform var(--dur-2) var(--spring);
 }
 .textarea { min-height: 130px; resize: vertical; }
 .select { appearance: none; padding-right: 44px; background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230b0f1a' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 14px center / 18px no-repeat; }
@@ -26,7 +26,7 @@
 .input[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: var(--danger); box-shadow: 0 3px 0 var(--danger); }
 .input:disabled, .select:disabled, .textarea:disabled { background: var(--surface); color: var(--ink-3); box-shadow: none; }
 .check { display: inline-flex; align-items: flex-start; gap: 10px; cursor: pointer; font-size: 15.5px; }
-.check input { appearance: none; flex: none; width: 22px; height: 22px; margin: 1px 0 0; border: var(--edge-width) solid var(--edge); border-radius: 7px; background: var(--card); display: grid; place-items: center; cursor: pointer; transition: background 0.2s; }
+.check input { appearance: none; flex: none; width: 22px; height: 22px; margin: 1px 0 0; border: var(--edge-width) solid var(--edge); border-radius: 7px; background: var(--card); display: grid; place-items: center; cursor: pointer; transition: background var(--dur-1); }
 .check input[type="radio"] { border-radius: 50%; }
 .check input:checked { background: var(--blue); }
 .check input:checked::after { content: ""; width: 10px; height: 6px; border: solid var(--on-dark); border-width: 0 0 2.5px 2.5px; transform: translateY(-1px) rotate(-45deg); }
@@ -35,6 +35,8 @@
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .form-grid .full { grid-column: 1 / -1; }
 @media (max-width: 599px) { .form-grid { grid-template-columns: 1fr; } }
+/* Form satu kolom (sheet, modal, kartu sempit): kolom bertumpuk dengan jarak yang sama dengan .form-grid */
+.form-stack { display: grid; gap: 18px; }
 
 /* =========================================================
    KARTU LAYANAN · ikon di dalam segel kecil
@@ -50,7 +52,7 @@
 .svc-ico svg { position: relative; width: 26px; height: 26px; }
 .svc:nth-child(3n+2) .svc-ico::before { background: var(--blue-light); }
 .svc:nth-child(3n+3) .svc-ico::before { background: var(--blue-deep); }
-a.svc { text-decoration: none; transition: transform 0.35s var(--spring); }
+a.svc { text-decoration: none; transition: transform var(--dur-4) var(--spring); }
 a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angkat)) 0 var(--edge-shadow); }
 /* Segel sebagai mask (12 lekukan, sama dengan seal.js) */
 /* --seal-mask pindah ke tokens.css (1.14.0) */
@@ -179,7 +181,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
 .segment { display: inline-flex; padding: 4px; gap: 4px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); }
 .segment label { position: relative; cursor: pointer; }
 .segment input { position: absolute; opacity: 0; pointer-events: none; }
-.segment span { display: block; white-space: nowrap; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 14.5px; color: var(--ink-2); transition: background 0.25s var(--ease), color 0.25s; }
+.segment span { display: block; white-space: nowrap; padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 14.5px; color: var(--ink-2); transition: background var(--dur-2) var(--ease), color var(--dur-2); }
 .segment input:checked + span { background: var(--blue); color: var(--on-dark); }
 .segment input:focus-visible + span { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 
@@ -187,7 +189,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
    HALAMAN ACARA (templates/acara.html) · ala halaman acara publik
    HP: satu kolom + bar daftar menempel di bawah. Mulai 900px: poster dan penyelenggara di kiri, detail di kanan.
    ========================================================= */
-.event-top { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 10px; min-height: 64px; padding: env(safe-area-inset-top) max(var(--gut), env(safe-area-inset-right)) 0 max(var(--gut), env(safe-area-inset-left)); background: var(--nav-glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+.event-top { position: sticky; top: 0; z-index: var(--z-menu); display: flex; align-items: center; gap: 10px; min-height: 64px; padding: env(safe-area-inset-top) max(var(--gut), env(safe-area-inset-right)) 0 max(var(--gut), env(safe-area-inset-left)); background: var(--nav-glass); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
 .event-top .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-family: var(--f-head); font-weight: 800; font-size: 20px; }
 .event-top .spacer { flex: 1; }
 .event-top .lnk { display: none; padding: 10px 6px; color: var(--ink-2); font-weight: 700; font-size: 15px; text-decoration: none; }
@@ -240,7 +242,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
 .going .avatar { --s: 40px; font-size: 13px; }
 .going .avatar-stack .avatar { margin-left: -6px; }
 .going .avatar-stack .avatar:first-child { margin-left: 0; }
-.event-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: flex; align-items: center; gap: 12px; padding: 12px max(16px, env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background: var(--card); border-top: var(--edge-width) solid var(--edge); }
+.event-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-nav); display: flex; align-items: center; gap: 12px; padding: 12px max(16px, env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); background: var(--card); border-top: var(--edge-width) solid var(--edge); }
 .event-bar .info { flex: 1; min-width: 0; display: grid; line-height: 1.25; }
 .event-bar .info b { font-size: 16px; }
 .event-bar .info span { font-size: 13.5px; color: var(--ink-3); }
@@ -352,7 +354,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
 .docs-nav { align-self: start; }
 .docs-nav > summary { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; border-radius: var(--r-m); border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); font-weight: 700; cursor: pointer; list-style: none; }
 .docs-nav > summary::-webkit-details-marker { display: none; }
-.docs-nav > summary::after { content: ""; width: 10px; height: 10px; border-right: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: rotate(45deg) translateY(-3px); transition: transform 0.2s var(--ease); }
+.docs-nav > summary::after { content: ""; width: 10px; height: 10px; border-right: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: rotate(45deg) translateY(-3px); transition: transform var(--dur-1) var(--ease); }
 .docs-nav[open] > summary::after { transform: rotate(-135deg) translateY(-1px); }
 .docs-nav nav { display: grid; gap: 18px; padding: 16px 4px 4px; }
 .docs-nav h2 { margin: 0 0 6px; font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
@@ -390,7 +392,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
 .method.delete { background: var(--danger-bg); color: var(--danger); }
 .req { font-family: var(--f-num); font-size: 11.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--danger); }
 .docs-pager { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 40px; }
-.docs-pager a { display: grid; gap: 2px; padding: 14px 18px; border-radius: var(--r-m); border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); text-decoration: none; transition: transform 0.2s var(--ease); }
+.docs-pager a { display: grid; gap: 2px; padding: 14px 18px; border-radius: var(--r-m); border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); text-decoration: none; transition: transform var(--dur-1) var(--ease); }
 .docs-pager a:hover { transform: translateY(-2px); }
 .docs-pager small { font-family: var(--f-num); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
 .docs-pager b { color: var(--text-blue-deep); }
@@ -447,7 +449,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
 .ikon-daftar { display: grid; gap: 32px; }
 .ikon-grup h2 { margin: 0 0 12px; font-family: var(--f-num); font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
 .ikon-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 12px; }
-.ikon-kartu { width: 100%; display: grid; justify-items: center; gap: 10px; padding: 16px 8px 12px; border-radius: var(--r-m); border: 2px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; transition: transform 0.2s var(--ease); }
+.ikon-kartu { width: 100%; display: grid; justify-items: center; gap: 10px; padding: 16px 8px 12px; border-radius: var(--r-m); border: 2px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; transition: transform var(--dur-1) var(--ease); }
 .ikon-kartu:hover { transform: translateY(-2px); border-color: var(--edge); }
 .ikon-kartu:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 .ikon-kartu > span:last-child { max-width: 100%; overflow-wrap: anywhere; color: var(--ink-2); }
@@ -508,7 +510,7 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
    Seluruh kartu bisa diklik lewat tautan judul; tombol di .pc-actions tetap bisa diklik sendiri. Harga wajib asli. */
 .product-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 18px; }
 @media (max-width: 599px) { .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .pc-body { padding: 10px 12px 12px; } .pc-title { font-size: 14.5px; } .harga { font-size: 16px; } .pc-diskon { top: 8px; left: 8px; } }
-.product-card { position: relative; height: 100%; display: flex; flex-direction: column; border: var(--edge-width) solid var(--edge); border-radius: var(--r-l); background: var(--card); box-shadow: var(--shadow-sticker); overflow: hidden; transition: transform 0.35s var(--spring); }
+.product-card { position: relative; height: 100%; display: flex; flex-direction: column; border: var(--edge-width) solid var(--edge); border-radius: var(--r-l); background: var(--card); box-shadow: var(--shadow-sticker); overflow: hidden; transition: transform var(--dur-4) var(--spring); }
 .product-card:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angkat)) 0 var(--edge-shadow); }
 .product-card:focus-within { outline: 3px solid var(--blue-light); outline-offset: 3px; }
 .pc-media { position: relative; aspect-ratio: 1; background: var(--surface); border-bottom: var(--edge-width) solid var(--edge); overflow: hidden; }
@@ -602,11 +604,11 @@ a.svc:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angka
 .stage .mascot.posing .base, .stage .mascot.posing .sign-text { opacity: 0; }
 .stage .mascot:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 6px; border-radius: 24px; }
 .stage .mascot.shake .body { animation: fy-shake 0.42s linear; }
-.stage .mascot.squish .body { animation: fy-squish 0.5s var(--spring); }
+.stage .mascot.squish .body { animation: fy-squish var(--dur-5) var(--spring); }
 @keyframes fy-shake { 20% { transform: translateX(-8px) rotate(-3deg); } 40% { transform: translateX(7px) rotate(3deg); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
 @keyframes fy-squish { 30% { transform: scale(1.06, 0.92); } 60% { transform: scale(0.96, 1.05); } }
 .sign-text { position: absolute; left: 18.5%; width: 63.5%; top: 80.5%; height: 17%; display: grid; place-items: center; overflow: hidden; font-family: var(--f-hand); font-weight: 700; color: var(--blue-deep); font-size: clamp(22px, 3vw, 36px); line-height: 1; }
-.sign-text span { position: absolute; inset: 0; display: grid; place-items: center; transition: transform 0.45s var(--ease), opacity 0.3s; }
+.sign-text span { position: absolute; inset: 0; display: grid; place-items: center; transition: transform 0.45s var(--ease), opacity var(--dur-3); }
 .sign-text span.out { transform: translateY(-120%) rotate(-6deg); opacity: 0; }
 .sign-text span.in { transform: translateY(120%) rotate(6deg); opacity: 0; }
 .stage .bubble { position: absolute; right: 61%; bottom: 93%; z-index: 3; white-space: nowrap; transform-origin: 90% 100%; }

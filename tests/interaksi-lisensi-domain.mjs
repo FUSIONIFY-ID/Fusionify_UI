@@ -9,7 +9,7 @@ const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascrip
 const visit = async (host, page) => {
   const c = await b.newContext({ viewport: { width: 1280, height: 900 } }); const p = await c.newPage();
   const warns = []; p.on('console', (m) => { if (m.type() === 'warning') warns.push(m.text()); });
-  await p.route(/^https?:\/\/[^/]+\.(id|test|com)\//, (r) => {
+  await p.route(/^https?:\/\/[^/]+\.(id|test|com|store)\//, (r) => {
     const u = new URL(r.request().url()); const f = path.join(ROOT, decodeURIComponent(u.pathname));
     if (!fs.existsSync(f)) return r.fulfill({ status: 404, body: '' });
     r.fulfill({ path: f, contentType: types[path.extname(f)] || 'application/octet-stream' });
@@ -18,13 +18,13 @@ const visit = async (host, page) => {
   await p.goto(`https://${host}/templates/${page}`, { waitUntil: 'load' }); await p.waitForTimeout(400);
   return { c, p, warns };
 };
-for (const host of ['fusionify.id', 'studio.fusionify.id', 'fusionify.biz.id', 'app.fusionify.biz.id', 'premiumify.my.id', 'www.premiumify.my.id', 'studydate.id', 'app.studydate.id']) {
+for (const host of ['fusionify.id', 'studio.fusionify.id', 'fusionify.biz.id', 'app.fusionify.biz.id', 'premiumify.my.id', 'www.premiumify.my.id', 'studydate.id', 'app.studydate.id', 'trustarystore.id', 'www.trustarystore.id', 'trustary.store']) {
   const { c, p, warns } = await visit(host, 'komponen.html');
   await p.click('#tabel th:nth-child(3) .sort-btn');
   T(host + ' jalan', (await p.getAttribute('#tabel th:nth-child(3)', 'aria-sort')) === 'ascending' && warns.length === 0);
   await c.close();
 }
-for (const host of ['tirufusionify.id.evil.com', 'contoh.test', 'fusionify.id.contoh.com', 'palsustudydate.id', 'premiumify.my.id.contoh.com']) {
+for (const host of ['tirufusionify.id.evil.com', 'contoh.test', 'fusionify.id.contoh.com', 'palsustudydate.id', 'premiumify.my.id.contoh.com', 'palsutrustary.store']) {
   const { c, p, warns } = await visit(host, 'komponen.html');
   T(host + ' dikunci (tidak ada tombol urut)', (await p.$$('.sort-btn')).length === 0);
   T(host + ' ada peringatan', warns.some((w) => w.includes('belum terdaftar')));

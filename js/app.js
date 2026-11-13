@@ -25,8 +25,11 @@ import { initControls, snackbar, otpError } from "./controls.js";
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
+// Sama dengan initFusionify(): pemanggilan kedua mengembalikan objek yang sama tanpa memasang ulang listener.
+let hasilApp = null;
 export function initApp() {
   if (!cekLisensi()) return { toast() {}, snackbar() {}, otpError() {}, setSide() {} };
+  if (hasilApp) { initControls(document.body); return hasilApp; } // elemen baru tetap diberi interaksi
   window.__fx = true; // supaya fallback .fx-off di <head> tidak aktif
   initTheme();
   initKelas(); // data-kelas dan data-lipat di <html> (js/kelas.js)
@@ -176,5 +179,6 @@ export function initApp() {
     new MutationObserver((ms) => { if (!antre && ms.some((m) => m.addedNodes.length)) antre = requestAnimationFrame(() => { antre = 0; watch(); }); }).observe(document.body, { childList: true, subtree: true });
   }
 
-  return { toast, snackbar, otpError, setSide };
+  hasilApp = { toast, snackbar, otpError, setSide };
+  return hasilApp;
 }

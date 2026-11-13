@@ -95,6 +95,12 @@ Android: salin isi `tokens/android/res/` ke `app/src/main/res/` (sudah termasuk 
 - Hormati pengaturan kurangi gerakan (iOS Reduce Motion, Android Remove animations).
 - Maskot dan logo dari `mascot/` dan `brand/` (WebP bisa dipakai langsung di Android, iOS 14+, dan Flutter).
 
+## Skala huruf, jarak, durasi, dan format standar
+
+- `tokens.json` memuat `spacing` (`--sp-*`), `fontSize` (`--fs-*`: label 13, kecil 14, teks 17, lead 20, judulS 24, judulM 32, judulL 44), dan `motion.durationMs.d1`-`d6` (`--dur-*`).
+- Native: `FyTextSize` (Flutter, Compose dalam `sp`), `Fy.TextSize` (SwiftUI), `fy.fontSize` dan `fy.spacing` (React Native), `@dimen/fy_text_*` (Android XML).
+- `fusionify.tokens.json`: semua token dalam format W3C Design Tokens 2025.10 (warna `srgb` terang/gelap, dimensi `{ value, unit }`, durasi, kurva, keluarga huruf). Impor ke Figma Variables lewat plugin yang membaca DTCG, Tokens Studio, atau Style Dictionary, supaya Figma dan kode tidak diselaraskan manual.
+
 ## Kelas ukuran layar dan HP lipat
 
 Sama dengan web (dan window size class Material 3): **ringkas** < 600, **sedang** 600-839, **lebar** 840-1199, **besar** 1200-1599, **sangat besar** >= 1600 (dp/pt).

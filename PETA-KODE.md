@@ -521,6 +521,37 @@ Lokasi `file:baris`. Tingkat: **tinggi** (rusak terlihat / melanggar aturan inti
 
 ---
 
+### 8.5 Audit 13 November 2026 dan status di 1.16.0
+
+Audit menyeluruh repo, CI, branch, dan PR. Laporan lengkap: `claude/audit-fusionify-ui-2026-11.md` di Project FUSIONIFY.ID.
+
+| Kode | Temuan | Status |
+| --- | --- | --- |
+| K1 | Repo GitHub berstatus public, padahal README dan rencana menyebut privat | Keputusan pemilik. README dibuat netral |
+| K2 | CI main merah sejak 8 Nov: `FUSIONIFY-UI-KONTEKS.md` tidak dibuat ulang di 1.14.2 | Selesai (dibuat ulang bersama 1.15/1.16) |
+| K3 | Tag `v1.14.2`, `v1.14.0`, `v1.8.0`, `v1.7.0` tidak pernah dibuat; tag `v1.11.1` menunjuk commit 1.12.0 | Workflow Rilis kini otomatis + Run workflow untuk versi lama |
+| K4 | PR #3 (1.15.0) belum merge, PR #2 memakai nomor 1.14.2 yang sama dengan main | Selesai: 1.15.0 masuk, isi PR #2 masuk 1.16.0 |
+| K5 | `trustarystore.id`, `trustary.store` ditambah lewat web tanpa CHANGELOG/uji | Uji dan dokumen disamakan; status partner dikonfirmasi pemilik |
+| T1 | Template publik tanpa canonical, hreflang, OG, JSON-LD | Selesai (`seo/`, `snippets/seo-head.html`, `tests/seo.mjs`) |
+| T2 | `theme.js`, `controls.js`, `app.js` error saat diimpor di server | Selesai (`tests/ssr.mjs`) |
+| T3 | Belum ada token skala huruf, durasi, z-index | Selesai untuk z-index dan durasi (dipakai semua komponen); skala huruf tersedia, komponen lama dipindah bertahap |
+| T4 | `color-scheme: dark` belum ada; `theme-color` tidak ikut tombol tema | Selesai (1.15.0 dan 1.16.0) |
+| T5 | `initFusionify()`/`initApp()` menumpuk listener kalau dipanggil ulang | Selesai |
+| S1 | Tanpa `forced-colors` dan `prefers-contrast` | Selesai (`base.css`) |
+| S2 | Tanpa `@layer` | Ditunda ke 2.0.0: mengubah urutan cascade di semua produk |
+| S3 | Komponen ikut viewport, bukan wadah (container queries) | Ditunda ke 2.0.0 bersama S2 |
+| S4 | Tanpa huruf cadangan berukuran setara (CLS) | Selesai (`* Fallback` di `tokens.css`) |
+| S5 | `tokens.json` bukan format standar DTCG | Selesai (`tokens/fusionify.tokens.json`, `tokens.json` tetap) |
+| S6 | `FUSIONIFY-UI-KONTEKS.md` sangat besar | Ditunda: pecah jadi versi ringkas dan lengkap |
+| S7 | `.form-stack` dipakai `acara.html` tapi hanya ada di `app-mobile.html` | Selesai (pindah ke `product.css`) |
+| S8 | Kunci domain hanya di klien | Informasi (sama dengan temuan 26) |
+| S9 | `layar-sentuh.mjs` bergantung pada CDN langsung | Selesai (`cdnLokal()` di `_env.mjs`) |
+| R1 | Branch main tanpa proteksi | Pemilik: aktifkan aturan wajib PR + CI hijau |
+| R2 | Email pribadi di 7 commit awal | Informasi; tidak menulis ulang riwayat |
+| R3 | Hasil build (PDF, PNG, pptx) ikut di git | Ditunda |
+| R4 | Belum ada paket npm privat | Ditunda ke 2.0.0 |
+| R5 | Uji hanya Chromium | Selesai sebagian: job CI WebKit + Firefox (`peramban-lain.mjs`), belum memblokir merge |
+
 ## 9. Rencana `ui.fusionify.id` (`rencana/ui-fusionify-id.md`)
 
 - **Apa**: situs dokumentasi FUSIONIFY UI ala m3.material.io, sepenuhnya privat, plus (nanti) aplikasi desktop Electron dan Android Capacitor yang anti-screenshot.
@@ -568,3 +599,13 @@ Pola: `.pola-maskot` (`.stage` aspect 0.82 > `.seal-bg`, `.seal-ring`, `.bubble[
 ### 10.6 Uji
 - `tests/kelas-lipat-gaya.mjs` (baru): `data-kelas` di 5 lebar dan event `fy:kelas`, sidebar laci/rel/penuh, mode padat, garis dan bayangan per gaya, kursor mati di gaya tenang/teknis, HP lipat lewat emulasi engsel CDP (`Emulation.setDeviceMetricsOverride` + `displayFeature`): hero dan chat tidak menyeberangi engsel.
 - `tata-letak-dan-kontras.mjs`: ukuran tambahan 344×882, 600×960, 673×841, 841×673; halaman `gaya.html` + 4 varian `?gaya=`. `layar-sentuh.mjs`: 344×882 dan 673×841, halaman `gaya`. `tanpa-js-dan-kurangi-gerak.mjs`: `gaya.html` dan `?gaya=tenang`.
+
+## 11. Tambahan 1.16.0 (13 Nov 2026)
+
+- **Token** (`css/tokens.css`): `--z-*` (13 lapisan), `--dur-1`-`--dur-6`, `--fs-*` (7 ukuran), `@font-face` cadangan `Afacad Flux Fallback`, `Sansation Fallback` (400/700), `Exo 2 Fallback` dengan `size-adjust`/`ascent-override`/`descent-override`.
+- **`scripts/build-tokens.mjs`**: `tokens.json` + `spacing`, `fontSize`, `motion.durationMs.d1-d6`; `FyTextSize`/`Fy.TextSize`/`fy_text_*`; keluaran baru `tokens/fusionify.tokens.json` (DTCG 2025.10).
+- **JS**: `theme.js` (akses `document` hanya di fungsi, `sinkronBilah()` untuk `meta theme-color`, `initTheme()` sekali pasang), `controls.js` (`tutupPopDiLuar` dipasang di `initControls`), `motion.js` (`hasilFy`), `app.js` (`hasilApp`): pemanggilan ulang memanggil `initControls(document.body)` untuk elemen baru.
+- **CSS**: `.form-stack` (`product.css`), `@media (forced-colors: active)` dan `@media (prefers-contrast: more)` (`base.css`).
+- **SEO**: blok `<!-- SEO: ... -->` di semua template (publik: robots/canonical/hreflang/OG/JSON-LD; lainnya: `noindex`), `snippets/seo-head.html`, `seo/robots.txt`, `seo/sitemap.xml`, `seo/llms.txt`, `seo/README.md`.
+- **Uji**: `tests/seo.mjs`, `tests/ssr.mjs`, `tests/peramban-lain.mjs` (WebKit + Firefox, dilewati kalau browser belum terpasang), `cdnLokal()` di `tests/_env.mjs`. `npm run cek:seo`, `npm run cek:ssr`.
+- **CI/rilis**: `uji.yml` job "safari dan firefox" (`continue-on-error` sementara), generator + `seo,ssr`; `rilis.yml` berjalan di push `main`, tag, dan `workflow_dispatch` (versi, commit, lewati uji), tag dibuat oleh `github-actions[bot]`.

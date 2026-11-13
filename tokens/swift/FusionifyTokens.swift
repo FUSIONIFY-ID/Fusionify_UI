@@ -155,6 +155,17 @@ public enum Fy {
         public static let sangatBesar: CGFloat = 1600
     }
 
+    /// Skala huruf (sama dengan --fs-* di web).
+    public enum TextSize {
+        public static let label: CGFloat = 13
+        public static let kecil: CGFloat = 14
+        public static let teks: CGFloat = 17
+        public static let lead: CGFloat = 20
+        public static let judulS: CGFloat = 24
+        public static let judulM: CGFloat = 32
+        public static let judulL: CGFloat = 44
+    }
+
     public enum Font {
         public static func head(_ size: CGFloat) -> SwiftUI.Font { .custom("AfacadFlux-ExtraBold", size: size) }
         public static func body(_ size: CGFloat = 17, bold: Bool = false) -> SwiftUI.Font { .custom(bold ? "Sansation-Bold" : "Sansation-Regular", size: size) }

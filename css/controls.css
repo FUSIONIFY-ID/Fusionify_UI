@@ -11,7 +11,7 @@
    DROPDOWN · <div class="dropdown"><button aria-expanded="false" aria-haspopup="menu" data-dropdown>..</button><div class="menu" role="menu" hidden>..</div></div>
    ========================================================= */
 .dropdown { position: relative; }
-.menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: 50; min-width: 220px; padding: 6px; border-radius: var(--r-m); background: var(--card); border: var(--edge-width) solid var(--edge); box-shadow: var(--shadow-sticker); display: grid; gap: 2px; }
+.menu { position: absolute; right: 0; top: calc(100% + 8px); z-index: var(--z-menu); min-width: 220px; padding: 6px; border-radius: var(--r-m); background: var(--card); border: var(--edge-width) solid var(--edge); box-shadow: var(--shadow-sticker); display: grid; gap: 2px; }
 .menu[hidden] { display: none; }
 .menu.up { top: auto; bottom: calc(100% + 8px); }
 .menu.start { right: auto; left: 0; }
@@ -28,7 +28,7 @@
    ========================================================= */
 .modal { width: min(520px, calc(100vw - 32px)); padding: 0; border-radius: var(--r-l); border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 calc(10px * var(--angkat)) 0 var(--edge-shadow); }
 .modal::backdrop { background: rgba(2, 6, 15, 0.55); }
-.modal[open] { animation: fy-modal 0.35s var(--spring); }
+.modal[open] { animation: fy-modal var(--dur-4) var(--spring); }
 @keyframes fy-modal { from { opacity: 0; transform: translateY(16px) scale(0.96); } }
 .modal .m-body { position: relative; display: grid; gap: 12px; padding: 28px 26px 22px; }
 .modal .m-body > img { width: 96px; height: auto; justify-self: center; }
@@ -42,7 +42,7 @@
    TAB · <div class="tabs" data-tabs><div role="tablist">..</div><div role="tabpanel">..</div></div>
    ========================================================= */
 .tabs [role="tablist"] { display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--surface); width: max-content; max-width: 100%; overflow-x: auto; }
-.tabs [role="tab"] { flex: none; padding: 9px 16px; border: 0; border-radius: 999px; background: none; font: inherit; font-weight: 700; font-size: 14.5px; color: var(--ink-2); cursor: pointer; transition: background 0.2s, color 0.2s; }
+.tabs [role="tab"] { flex: none; padding: 9px 16px; border: 0; border-radius: 999px; background: none; font: inherit; font-weight: 700; font-size: 14.5px; color: var(--ink-2); cursor: pointer; transition: background var(--dur-1), color var(--dur-1); }
 .tabs [role="tab"][aria-selected="true"] { background: var(--card); color: var(--ink); box-shadow: 0 0 0 2px var(--edge), 0 calc(3px * var(--angkat)) 0 2px var(--edge-shadow); }
 .tabs [role="tabpanel"] { padding-top: 18px; }
 .tabs [role="tabpanel"][hidden] { display: none; }
@@ -71,7 +71,7 @@
    ========================================================= */
 .btn-group { display: inline-flex; max-width: 100%; overflow-x: auto; border: var(--edge-width) solid var(--edge); border-radius: 999px; background: var(--card); box-shadow: var(--shadow-pop); scrollbar-width: none; }
 .btn-group::-webkit-scrollbar { display: none; }
-.btn-group > button, .btn-group > a { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 0; border-left: var(--edge-width) solid var(--edge); background: none; font: inherit; font-weight: 700; font-size: 15px; color: var(--ink-2); text-decoration: none; white-space: nowrap; cursor: pointer; transition: background 0.2s, color 0.2s; }
+.btn-group > button, .btn-group > a { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 18px; border: 0; border-left: var(--edge-width) solid var(--edge); background: none; font: inherit; font-weight: 700; font-size: 15px; color: var(--ink-2); text-decoration: none; white-space: nowrap; cursor: pointer; transition: background var(--dur-1), color var(--dur-1); }
 .btn-group > :first-child { border-left: 0; }
 .btn-group > :hover { background: var(--surface); color: var(--ink); }
 .btn-group > [aria-pressed="true"] { background: var(--blue); color: var(--on-dark); }
@@ -87,7 +87,7 @@
 .split-btn { position: relative; display: inline-flex; gap: 3px; }
 .split-btn > .btn:first-child { border-radius: 999px 8px 8px 999px; }
 .split-btn > .btn.caret { border-radius: 8px 999px 999px 8px; padding: 0 14px 0 12px; }
-.split-btn > .btn.caret svg { width: 20px; height: 20px; transition: transform 0.35s var(--spring); }
+.split-btn > .btn.caret svg { width: 20px; height: 20px; transition: transform var(--dur-4) var(--spring); }
 .split-btn > .btn.caret[aria-expanded="true"] svg { transform: rotate(180deg); }
 .split-btn > .btn.sm.caret { padding: 0 10px; }
 
@@ -97,7 +97,7 @@
    .fab.ext = dengan label, .sm / .lg ukuran, .soft = versi biru muda
    [data-fab-shrink] = label disembunyikan saat scroll turun
    ========================================================= */
-.fab { --bg: var(--blue); --fg: var(--on-dark); position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 60px; height: 60px; padding: 0; border-radius: 22px; border: var(--edge-width) solid var(--edge); background: var(--bg); color: var(--fg); box-shadow: 0 calc(4px * var(--angkat)) 0 var(--edge-shadow); font: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform 0.35s var(--spring); }
+.fab { --bg: var(--blue); --fg: var(--on-dark); position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 60px; height: 60px; padding: 0; border-radius: 22px; border: var(--edge-width) solid var(--edge); background: var(--bg); color: var(--fg); box-shadow: 0 calc(4px * var(--angkat)) 0 var(--edge-shadow); font: inherit; font-weight: 700; font-size: 16px; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform var(--dur-4) var(--spring); }
 .fab:hover { transform: translateY(-3px); box-shadow: 0 calc(7px * var(--angkat)) 0 var(--edge-shadow); }
 .fab:active { transform: translateY(2px); box-shadow: 0 calc(1px * var(--angkat)) 0 var(--edge-shadow); }
 .fab svg { width: 24px; height: 24px; flex: none; }
@@ -107,19 +107,19 @@
 .fab.ext { width: auto; padding: 0 24px 0 18px; border-radius: 20px; }
 .fab.ext.shrink { width: 60px; padding: 0; }
 .fab.ext.shrink .label { display: none; }
-.fab.ext.shrink svg { animation: fy-pop 0.35s var(--spring); }
-.fab-dock { position: fixed; z-index: 70; right: max(16px, env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); display: grid; justify-items: end; gap: 12px; }
+.fab.ext.shrink svg { animation: fy-pop var(--dur-4) var(--spring); }
+.fab-dock { position: fixed; z-index: var(--z-fab); right: max(16px, env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); display: grid; justify-items: end; gap: 12px; }
 
 /* FAB menu: <div class="fab-menu" data-fab-menu><ul class="fab-actions" id="x" hidden>..</ul><button class="fab" aria-expanded="false" aria-controls="x">..</button></div> */
 .fab-menu { display: grid; justify-items: end; gap: 12px; }
 .fab-actions { list-style: none; margin: 0; padding: 0; display: grid; justify-items: end; gap: 10px; }
 .fab-actions[hidden] { display: none; }
-.fab-action { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px 0 18px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-pop); font: inherit; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap; cursor: pointer; animation: fy-rise 0.35s var(--spring) both; animation-delay: calc(var(--i, 0) * 45ms); }
+.fab-action { display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px 0 18px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-pop); font: inherit; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap; cursor: pointer; animation: fy-rise var(--dur-4) var(--spring) both; animation-delay: calc(var(--i, 0) * 45ms); }
 .fab-action:hover { background: var(--surface); }
 .fab-action svg { width: 20px; height: 20px; color: var(--text-blue); }
-.fab-menu > .fab svg { transition: transform 0.35s var(--spring); }
+.fab-menu > .fab svg { transition: transform var(--dur-4) var(--spring); }
 .fab-menu > .fab[aria-expanded="true"] svg { transform: rotate(45deg); }
-.fab-scrim { position: fixed; inset: 0; z-index: 69; background: rgba(2, 6, 15, 0.35); opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+.fab-scrim { position: fixed; inset: 0; z-index: calc(var(--z-fab) - 1); background: rgba(2, 6, 15, 0.35); opacity: 0; pointer-events: none; transition: opacity var(--dur-2); }
 .fab-scrim.on { opacity: 1; pointer-events: auto; }
 @keyframes fy-rise { from { opacity: 0; transform: translateY(14px) scale(0.92); } }
 
@@ -128,13 +128,13 @@
    <header class="appbar" data-appbar><button class="icon-btn">←</button><h1 class="title">Judul</h1><div class="actions">..</div></header>
    .appbar.collapse + <h1 class="appbar-title"> besar di bawahnya: judul kecil baru muncul setelah scroll
    ========================================================= */
-.appbar { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 4px; min-height: 64px; padding: env(safe-area-inset-top) max(8px, env(safe-area-inset-right)) 0 max(8px, env(safe-area-inset-left)); background: var(--paper); }
+.appbar { position: sticky; top: 0; z-index: var(--z-menu); display: flex; align-items: center; gap: 4px; min-height: 64px; padding: env(safe-area-inset-top) max(8px, env(safe-area-inset-right)) 0 max(8px, env(safe-area-inset-left)); background: var(--paper); }
 .appbar.scrolled { background: var(--card); box-shadow: 0 2px 0 var(--edge); }
 .appbar .title { flex: 1; min-width: 0; padding: 0 8px; font-family: var(--f-head); font-weight: 800; font-size: 22px; line-height: 1.1; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .appbar .actions { display: flex; align-items: center; gap: 4px; margin-left: auto; }
 .appbar .icon-btn { background: none; width: 44px; height: 44px; }
 .appbar .icon-btn:hover { background: var(--surface); }
-.appbar.collapse .title { opacity: 0; transform: translateY(6px); transition: opacity 0.2s, transform 0.3s var(--ease); }
+.appbar.collapse .title { opacity: 0; transform: translateY(6px); transition: opacity var(--dur-1), transform var(--dur-3) var(--ease); }
 .appbar.collapse.scrolled .title { opacity: 1; transform: none; }
 .appbar-title { padding: 6px max(16px, env(safe-area-inset-left)) 14px; font-size: clamp(34px, 9vw, 48px); }
 
@@ -144,9 +144,9 @@
    Tambahkan .with-navbar di <body> supaya isi tidak tertutup.
    ========================================================= */
 .with-navbar { --navbar-h: 76px; padding-bottom: calc(var(--navbar-h) + env(safe-area-inset-bottom)); }
-.navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); padding: 6px max(6px, env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-left)); background: var(--card); border-top: var(--edge-width) solid var(--edge); }
+.navbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-nav); display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); padding: 6px max(6px, env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px, env(safe-area-inset-left)); background: var(--card); border-top: var(--edge-width) solid var(--edge); }
 .navbar a, .navbar button, .rail-nav a, .rail-nav button { display: grid; justify-items: center; align-content: center; gap: 4px; min-height: 60px; min-width: 0; padding: 4px 2px; border: 0; background: none; font: inherit; font-size: 12.5px; font-weight: 700; line-height: 1.2; color: var(--ink-3); text-align: center; text-decoration: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-.navbar .ico, .rail-nav .ico { position: relative; display: grid; place-items: center; width: 60px; height: 32px; border-radius: 999px; transition: background 0.25s, transform 0.35s var(--spring); }
+.navbar .ico, .rail-nav .ico { position: relative; display: grid; place-items: center; width: 60px; height: 32px; border-radius: 999px; transition: background var(--dur-2), transform var(--dur-4) var(--spring); }
 .navbar svg, .rail-nav svg { width: 22px; height: 22px; }
 .navbar a:hover .ico, .rail-nav a:hover .ico { background: var(--surface); }
 .navbar [aria-current="page"], .rail-nav [aria-current="page"] { color: var(--ink); }
@@ -162,7 +162,7 @@
    Tambahkan .with-rail di <body>. Pola responsif: .m-app (navbar di HP, rail mulai 600px, kelas sedang)
    ========================================================= */
 .with-rail { padding-left: calc(92px + env(safe-area-inset-left)); }
-.rail { position: fixed; left: 0; top: 0; bottom: 0; z-index: 60; width: calc(92px + env(safe-area-inset-left)); display: flex; flex-direction: column; align-items: center; gap: 18px; padding: max(18px, env(safe-area-inset-top)) 0 max(18px, env(safe-area-inset-bottom)) env(safe-area-inset-left); background: var(--card); border-right: var(--edge-width) solid var(--edge); overflow-y: auto; }
+.rail { position: fixed; left: 0; top: 0; bottom: 0; z-index: var(--z-nav); width: calc(92px + env(safe-area-inset-left)); display: flex; flex-direction: column; align-items: center; gap: 18px; padding: max(18px, env(safe-area-inset-top)) 0 max(18px, env(safe-area-inset-bottom)) env(safe-area-inset-left); background: var(--card); border-right: var(--edge-width) solid var(--edge); overflow-y: auto; }
 .rail-top { display: grid; justify-items: center; gap: 14px; }
 .rail-top .brand-mark { width: 40px; height: 40px; }
 .rail-nav { display: grid; gap: 6px; width: 100%; }
@@ -181,7 +181,7 @@
    Buka: [data-open-sheet="s1"]. Tutup: [data-close], klik di luar, Esc, atau tarik pegangannya ke bawah.
    ========================================================= */
 .sheet, .side-sheet { padding: 0; border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); overflow: hidden; }
-.sheet::backdrop, .side-sheet::backdrop { background: rgba(2, 6, 15, 0.5); animation: fy-fade 0.3s; }
+.sheet::backdrop, .side-sheet::backdrop { background: rgba(2, 6, 15, 0.5); animation: fy-fade var(--dur-3); }
 .sheet { position: fixed; inset: auto 0 0 0; margin: 0 auto; width: 100%; max-width: min(640px, 100%); max-height: calc(100dvh - 40px); border-bottom: 0; border-radius: var(--r-l) var(--r-l) 0 0; box-shadow: 0 calc(-4px * var(--angkat)) 0 var(--edge-shadow); }
 .sheet[open], .side-sheet[open] { display: flex; flex-direction: column; }
 .sheet[open] { animation: fy-sheet-up 0.42s var(--ease); }
@@ -235,7 +235,7 @@ html.sheet-open { overflow: hidden; }
 .carousel-nav .icon-btn[disabled] { opacity: 0.4; cursor: default; transform: none; }
 .carousel-dots { display: flex; gap: 2px; margin-right: auto; }
 .carousel-dots button { width: 28px; height: 28px; padding: 0; border: 0; background: none; display: grid; place-items: center; cursor: pointer; }
-.carousel-dots button::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--line); transition: background 0.2s, transform 0.3s var(--spring); }
+.carousel-dots button::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: var(--line); transition: background var(--dur-1), transform var(--dur-3) var(--spring); }
 .carousel-dots button[aria-current="true"]::before { background: var(--blue); transform: scale(1.35); }
 @media (prefers-reduced-motion: reduce) { .carousel-track { scroll-behavior: auto; } }
 
@@ -247,8 +247,8 @@ html.sheet-open { overflow: hidden; }
 .slider:focus-visible { outline: none; }
 .slider::-webkit-slider-runnable-track { height: 10px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: linear-gradient(90deg, var(--blue) var(--p), var(--surface-2) var(--p)); }
 .slider::-moz-range-track { height: 10px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: linear-gradient(90deg, var(--blue) var(--p), var(--surface-2) var(--p)); }
-.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; margin-top: -10px; border-radius: 50%; background: var(--card); border: var(--edge-width) solid var(--edge); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); transition: transform 0.25s var(--spring); }
-.slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--card); border: var(--edge-width) solid var(--edge); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); transition: transform 0.25s var(--spring); }
+.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; margin-top: -10px; border-radius: 50%; background: var(--card); border: var(--edge-width) solid var(--edge); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); transition: transform var(--dur-2) var(--spring); }
+.slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--card); border: var(--edge-width) solid var(--edge); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); transition: transform var(--dur-2) var(--spring); }
 .slider:active::-webkit-slider-thumb { transform: scale(1.15); }
 .slider:active::-moz-range-thumb { transform: scale(1.15); }
 .slider:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 5px rgba(83, 157, 233, 0.45), 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); }
@@ -272,11 +272,11 @@ html.sheet-open { overflow: hidden; }
    .tip.below = muncul di bawah
    ========================================================= */
 .tip-wrap { position: relative; display: inline-flex; }
-.tip { --dx: 0px; position: absolute; left: 50%; bottom: calc(100% + 10px); z-index: 80; width: max-content; max-width: min(240px, 70vw); padding: 7px 12px; border-radius: 10px; background: var(--inverse-bg); color: var(--inverse-fg); font-size: 13.5px; font-weight: 700; line-height: 1.35; text-align: center; pointer-events: none; opacity: 0; visibility: hidden; transform: translate(calc(-50% + var(--dx)), 6px); transition: opacity 0.15s, transform 0.25s var(--spring), visibility 0s 0.25s; }
+.tip { --dx: 0px; position: absolute; left: 50%; bottom: calc(100% + 10px); z-index: var(--z-popover); width: max-content; max-width: min(240px, 70vw); padding: 7px 12px; border-radius: 10px; background: var(--inverse-bg); color: var(--inverse-fg); font-size: 13.5px; font-weight: 700; line-height: 1.35; text-align: center; pointer-events: none; opacity: 0; visibility: hidden; transform: translate(calc(-50% + var(--dx)), 6px); transition: opacity 0.15s, transform var(--dur-2) var(--spring), visibility 0s var(--dur-2); }
 .tip::after { content: ""; position: absolute; left: calc(50% - var(--dx)); top: 100%; width: 10px; height: 10px; background: inherit; transform: translate(-50%, -6px) rotate(45deg); border-radius: 2px; }
 .tip.below { bottom: auto; top: calc(100% + 10px); transform: translate(calc(-50% + var(--dx)), -6px); }
 .tip.below::after { top: auto; bottom: 100%; transform: translate(-50%, 6px) rotate(45deg); }
-@media (hover: hover) { .tip-wrap:hover .tip { opacity: 1; visibility: visible; transform: translate(calc(-50% + var(--dx)), 0); transition-delay: 0.35s, 0.35s, 0s; } }
+@media (hover: hover) { .tip-wrap:hover .tip { opacity: 1; visibility: visible; transform: translate(calc(-50% + var(--dx)), 0); transition-delay: var(--dur-4), var(--dur-4), 0s; } }
 .tip-wrap:has(:focus-visible) .tip, .tip-wrap.tip-on .tip { opacity: 1; visibility: visible; transform: translate(calc(-50% + var(--dx)), 0); transition-delay: 0s; }
 .tip-wrap.tip-off .tip { opacity: 0 !important; visibility: hidden !important; }
 
@@ -289,7 +289,7 @@ html.sheet-open { overflow: hidden; }
 .list .sub { padding: 16px 16px 6px; font-family: var(--f-num); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
 .list.divided > li + li:not(.sub) { border-top: 1px solid var(--line); }
 .li { display: flex; align-items: center; gap: 14px; min-height: 60px; width: 100%; padding: 10px 16px; border: 0; border-radius: var(--r-m); background: none; color: var(--ink); font: inherit; text-align: left; text-decoration: none; }
-a.li, button.li, label.li { cursor: pointer; transition: background 0.2s; }
+a.li, button.li, label.li { cursor: pointer; transition: background var(--dur-1); }
 a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .list.divided .li { border-radius: 0; }
 .li-lead { flex: none; }
@@ -312,7 +312,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .chip-set { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
 .chip-set.scroll { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: 2px 2px 6px; margin: -2px -2px 0; }
 .chip-set.scroll::-webkit-scrollbar { display: none; }
-.chip-btn { flex: none; display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 0 15px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); color: var(--ink-2); font: inherit; font-size: 14.5px; font-weight: 700; white-space: nowrap; text-decoration: none; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.3s var(--spring); }
+.chip-btn { flex: none; display: inline-flex; align-items: center; gap: 7px; min-height: 38px; padding: 0 15px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); color: var(--ink-2); font: inherit; font-size: 14.5px; font-weight: 700; white-space: nowrap; text-decoration: none; cursor: pointer; transition: background var(--dur-1), color var(--dur-1), border-color var(--dur-1), transform var(--dur-3) var(--spring); }
 .chip-btn:hover { border-color: var(--blue-light); color: var(--ink); }
 .chip-btn:active { transform: scale(0.96); }
 .chip-btn svg { width: 18px; height: 18px; }
@@ -364,7 +364,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
    JS: snackbar("Pesan diarsipkan", { action: "Batalkan", onAction() {} })
    Deklaratif: <button data-snackbar="Tersimpan" data-snackbar-action="Lihat">
    ========================================================= */
-.snackbar { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); z-index: 330; display: flex; align-items: center; gap: 4px 10px; width: max-content; max-width: min(560px, calc(100vw - 32px)); min-height: 52px; padding: 6px 6px 6px 18px; border-radius: 16px; border: var(--edge-width) solid var(--edge); background: var(--inverse-bg); color: var(--inverse-fg); box-shadow: 0 calc(4px * var(--angkat)) 0 var(--edge-shadow); font-size: 15px; font-weight: 700; opacity: 0; visibility: hidden; transform: translate(-50%, 24px); transition: transform 0.45s var(--spring), opacity 0.2s, visibility 0s 0.45s; }
+.snackbar { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); z-index: var(--z-snackbar); display: flex; align-items: center; gap: 4px 10px; width: max-content; max-width: min(560px, calc(100vw - 32px)); min-height: 52px; padding: 6px 6px 6px 18px; border-radius: 16px; border: var(--edge-width) solid var(--edge); background: var(--inverse-bg); color: var(--inverse-fg); box-shadow: 0 calc(4px * var(--angkat)) 0 var(--edge-shadow); font-size: 15px; font-weight: 700; opacity: 0; visibility: hidden; transform: translate(-50%, 24px); transition: transform 0.45s var(--spring), opacity var(--dur-1), visibility 0s 0.45s; }
 .snackbar.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
 .snackbar .sb-text { flex: 1; min-width: 0; padding: 8px 0; }
 .snackbar .sb-act { flex: none; min-height: 40px; padding: 0 14px; border: 0; border-radius: 10px; background: none; color: var(--inverse-accent); font: inherit; font-weight: 800; cursor: pointer; }
@@ -388,7 +388,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .search-bar input::-webkit-search-cancel-button { -webkit-appearance: none; }
 .search-bar .icon-btn { flex: none; background: none; }
 .search-bar .avatar { --s: 38px; }
-.suggest { position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 55; list-style: none; margin: 0; padding: 6px; max-height: min(320px, 60vh); overflow-y: auto; border-radius: var(--r-m); border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); }
+.suggest { position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: calc(var(--z-nav) - 5); list-style: none; margin: 0; padding: 6px; max-height: min(320px, 60vh); overflow-y: auto; border-radius: var(--r-m); border: var(--edge-width) solid var(--edge); background: var(--card); box-shadow: var(--shadow-sticker); }
 .suggest[hidden] { display: none; }
 .suggest [role="option"] { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 12px; border-radius: 10px; color: var(--ink-2); font-weight: 700; cursor: pointer; }
 .suggest [role="option"] svg { width: 18px; height: 18px; color: var(--ink-3); flex: none; }
@@ -409,12 +409,12 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .picker-btn { position: absolute; right: 5px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 42px; height: 42px; border: 0; border-radius: 12px; background: none; color: var(--text-blue-deep); cursor: pointer; }
 .picker-btn:hover { background: var(--surface); }
 .picker-btn svg { width: 21px; height: 21px; }
-.pop { position: absolute; left: 0; top: calc(100% + 8px); z-index: 90; width: max-content; max-width: min(340px, calc(100vw - 24px)); padding: 14px; border-radius: var(--r-l); border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); animation: fy-rise 0.3s var(--spring); }
+.pop { position: absolute; left: 0; top: calc(100% + 8px); z-index: var(--z-dialog); width: max-content; max-width: min(340px, calc(100vw - 24px)); padding: 14px; border-radius: var(--r-l); border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); animation: fy-rise var(--dur-3) var(--spring); }
 .pop.end { left: auto; right: 0; }
 .pop-scrim { display: none; }
 @media (max-width: 599px) {
   .pop { position: fixed; left: 12px !important; right: 12px !important; top: auto; bottom: calc(12px + env(safe-area-inset-bottom)); width: auto; max-width: none; margin-inline: auto; max-height: calc(100dvh - 24px); overflow-y: auto; }
-  .pop-scrim { display: block; position: fixed; inset: 0; z-index: 89; background: rgba(2, 6, 15, 0.45); animation: fy-fade 0.25s; }
+  .pop-scrim { display: block; position: fixed; inset: 0; z-index: calc(var(--z-dialog) - 1); background: rgba(2, 6, 15, 0.45); animation: fy-fade var(--dur-2); }
 }
 .dp-head { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
 .dp-title { flex: 1; text-align: center; font-family: var(--f-head); font-weight: 800; font-size: 20px; }
@@ -458,7 +458,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .float-bar .icon-btn:hover { background: var(--surface); }
 .float-bar .fb-count { flex: none; padding: 0 12px 0 10px; font-family: var(--f-num); font-weight: 800; font-size: 14.5px; white-space: nowrap; }
 .float-bar .sep { flex: none; width: 2px; height: 24px; margin: 0 4px; background: var(--line); }
-.float-bar.dock { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); z-index: 65; transform: translateX(-50%); }
+.float-bar.dock { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom) + var(--navbar-h, 0px)); z-index: calc(var(--z-fab) - 5); transform: translateX(-50%); }
 
 /* Label kolom yang memakai <label for> (mis. picker), selaras dengan .field > span */
 .field > label:not(.check):first-child { font-weight: 700; font-size: 15px; }
@@ -470,7 +470,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
    ========================================================= */
 .otp { position: relative; display: flex; gap: clamp(6px, 2vw, 10px); min-width: 0; max-width: 100%; }
 .otp > input:only-child { width: 100%; max-width: 260px; height: 56px; padding: 0 16px; border-radius: 14px; border: var(--edge-width) solid var(--edge); background: var(--field); color: var(--ink); font: 700 24px var(--f-num); letter-spacing: 0.3em; }
-.otp-box { flex: 1 1 0; min-width: 0; max-width: 54px; height: 60px; padding: 0; text-align: center; border-radius: 14px; border: var(--edge-width) solid var(--edge); background: var(--field); color: var(--ink); font: 700 26px var(--f-num); font-variant-numeric: tabular-nums; box-shadow: var(--shadow-pop); caret-color: var(--blue); transition: transform 0.2s var(--spring), border-color 0.2s; }
+.otp-box { flex: 1 1 0; min-width: 0; max-width: 54px; height: 60px; padding: 0; text-align: center; border-radius: 14px; border: var(--edge-width) solid var(--edge); background: var(--field); color: var(--ink); font: 700 26px var(--f-num); font-variant-numeric: tabular-nums; box-shadow: var(--shadow-pop); caret-color: var(--blue); transition: transform var(--dur-1) var(--spring), border-color var(--dur-1); }
 .otp-box:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px rgba(83, 157, 233, 0.3), var(--shadow-pop); }
 .otp-box.filled { background: var(--surface); }
 .otp .otp-sep { flex: none; align-self: center; width: 10px; height: 2px; border-radius: 2px; background: var(--line); }
@@ -493,7 +493,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
    ========================================================= */
 .upload { position: relative; display: grid; gap: 12px; }
 .upload > input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
-.drop { display: grid; justify-items: center; gap: 6px; padding: 26px 18px; border-radius: var(--r-l); border: 2px dashed var(--blue-light); background: var(--surface); color: var(--ink-2); text-align: center; cursor: pointer; transition: background 0.2s, border-color 0.2s, transform 0.25s var(--spring); }
+.drop { display: grid; justify-items: center; gap: 6px; padding: 26px 18px; border-radius: var(--r-l); border: 2px dashed var(--blue-light); background: var(--surface); color: var(--ink-2); text-align: center; cursor: pointer; transition: background var(--dur-1), border-color var(--dur-1), transform var(--dur-2) var(--spring); }
 .drop svg { width: 34px; height: 34px; color: var(--text-blue); }
 .drop b { color: var(--text-blue-deep); text-decoration: underline; text-underline-offset: 3px; }
 .drop small { font-size: 13.5px; color: var(--ink-3); }
@@ -528,7 +528,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
    ========================================================= */
 .stepper { --n: 40px; list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 8px; counter-reset: fy-step; }
 .stepper li { position: relative; display: grid; justify-items: center; gap: 8px; text-align: center; font-size: 14px; font-weight: 700; color: var(--ink-3); counter-increment: fy-step; }
-.stepper li::before { content: counter(fy-step); display: grid; place-items: center; width: var(--n); height: var(--n); border-radius: 50%; border: 2px solid var(--line); background: var(--card); font-family: var(--f-num); font-weight: 800; font-size: 16px; color: var(--ink-3); position: relative; z-index: 1; transition: background 0.25s, border-color 0.25s, color 0.25s; }
+.stepper li::before { content: counter(fy-step); display: grid; place-items: center; width: var(--n); height: var(--n); border-radius: 50%; border: 2px solid var(--line); background: var(--card); font-family: var(--f-num); font-weight: 800; font-size: 16px; color: var(--ink-3); position: relative; z-index: 1; transition: background var(--dur-2), border-color var(--dur-2), color var(--dur-2); }
 .stepper li:not(:last-child)::after { content: ""; position: absolute; top: calc(var(--n) / 2 - 1px); left: calc(50% + var(--n) / 2 + 4px); right: calc(-50% + var(--n) / 2 + 4px); border-top: 2px dashed var(--line); }
 .stepper li[aria-current="step"] { color: var(--ink); }
 .stepper li[aria-current="step"]::before { border-color: var(--edge); background: var(--blue); color: var(--on-dark); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); }
@@ -560,7 +560,7 @@ a.li:hover, button.li:hover, label.li:hover { background: var(--surface); }
 .sort-btn { display: flex; align-items: center; gap: 6px; width: 100%; min-height: 44px; padding: 10px 18px; border: 0; background: none; font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; text-align: left; cursor: pointer; }
 .sort-btn:hover { color: var(--ink); }
 .sort-btn:focus-visible { outline: 3px solid var(--blue-light); outline-offset: -3px; border-radius: 8px; }
-.sort-btn svg { flex: none; width: 15px; height: 15px; opacity: 0.45; transition: transform 0.25s var(--ease), opacity 0.2s; }
+.sort-btn svg { flex: none; width: 15px; height: 15px; opacity: 0.45; transition: transform var(--dur-2) var(--ease), opacity var(--dur-1); }
 .table th.num .sort-btn { justify-content: flex-end; }
 th[aria-sort="ascending"] .sort-btn, th[aria-sort="descending"] .sort-btn { color: var(--text-blue); }
 th[aria-sort="ascending"] .sort-btn svg, th[aria-sort="descending"] .sort-btn svg { opacity: 1; }
@@ -583,9 +583,9 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    Di HP panel muncul dari bawah layar. Event: fy:read { item | all }.
    ========================================================= */
 .notif { position: relative; display: inline-flex; }
-.notif-panel { position: absolute; right: -8px; top: calc(100% + 10px); z-index: 80; width: min(400px, calc(100vw - 24px)); max-height: min(560px, calc(100dvh - 120px)); display: flex; flex-direction: column; border-radius: var(--r-l); border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); overflow: hidden; text-align: left; }
+.notif-panel { position: absolute; right: -8px; top: calc(100% + 10px); z-index: var(--z-popover); width: min(400px, calc(100vw - 24px)); max-height: min(560px, calc(100dvh - 120px)); display: flex; flex-direction: column; border-radius: var(--r-l); border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); overflow: hidden; text-align: left; }
 .notif-panel[hidden] { display: none; }
-.notif-panel.open { animation: fy-pop-in 0.3s var(--spring); }
+.notif-panel.open { animation: fy-pop-in var(--dur-3) var(--spring); }
 @keyframes fy-pop-in { from { opacity: 0; transform: translateY(-8px) scale(0.98); } }
 .notif-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px 18px 10px; }
 .notif-head h2 { font-size: 22px; }
@@ -616,15 +616,15 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .notif-scrim { display: none; }
 @media (max-width: 599px) {
   .notif-panel { position: fixed; left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 82dvh; border-radius: var(--r-l) var(--r-l) 0 0; border-bottom: 0; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 calc(-6px * var(--angkat)) 0 var(--edge-shadow); }
-  .notif-panel.open { animation: fy-sheet-in 0.35s var(--ease); }
-  .notif-scrim { position: fixed; inset: 0; z-index: 79; background: rgba(2, 6, 15, 0.5); }
+  .notif-panel.open { animation: fy-sheet-in var(--dur-4) var(--ease); }
+  .notif-scrim { position: fixed; inset: 0; z-index: calc(var(--z-popover) - 1); background: rgba(2, 6, 15, 0.5); }
   .notif.open .notif-scrim { display: block; }
 }
 @keyframes fy-sheet-in { from { transform: translateY(100%); } }
 @media (min-width: 600px) { .notif-panel.start { right: auto; left: -8px; } }
 .notif-empty[hidden], .notif-list[hidden], .empty[hidden] { display: none; }
 /* Panel notifikasi harus di atas navigation bar dan FAB walau loncengnya di dalam app bar yang sticky */
-:is(.appbar, .topbar, .nav, header):has(.notif.open) { z-index: 90; }
+:is(.appbar, .topbar, .nav, header):has(.notif.open) { z-index: var(--z-dialog); }
 
 /* =========================================================
    KEADAAN KOSONG / ERROR / OFFLINE di dalam panel atau daftar
@@ -644,7 +644,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .state.offline { border: 2px dashed var(--line); border-radius: var(--r-l); }
 
 /* Bilah offline otomatis: <div class="offline-bar" data-offline-bar hidden role="status">..</div> */
-.offline-bar { position: fixed; left: 50%; top: calc(10px + env(safe-area-inset-top)); z-index: 340; display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 24px); padding: 8px 16px 8px 8px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: var(--beta-bg); color: var(--beta); box-shadow: var(--shadow-pop); font-size: 14.5px; font-weight: 700; transform: translateX(-50%); animation: fy-drop-in 0.4s var(--spring); }
+.offline-bar { position: fixed; left: 50%; top: calc(10px + env(safe-area-inset-top)); z-index: var(--z-offline); display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 24px); padding: 8px 16px 8px 8px; border-radius: 999px; border: var(--edge-width) solid var(--edge); background: var(--beta-bg); color: var(--beta); box-shadow: var(--shadow-pop); font-size: 14.5px; font-weight: 700; transform: translateX(-50%); animation: fy-drop-in 0.4s var(--spring); }
 .offline-bar[hidden] { display: none; }
 .offline-bar img { width: 32px; height: auto; flex: none; }
 @keyframes fy-drop-in { from { opacity: 0; transform: translate(-50%, -16px); } }
@@ -706,7 +706,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    Tautan yang tidak bisa dipakai: aria-disabled="true". */
 .pagination { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; }
 .pagination a, .pagination .gap { min-width: 44px; height: 44px; padding: 0 10px; display: inline-grid; place-items: center; border-radius: 14px; font-family: var(--f-num); font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none; font-variant-numeric: tabular-nums; }
-.pagination a { border: 2px solid transparent; transition: transform 0.25s var(--spring), background 0.2s; }
+.pagination a { border: 2px solid transparent; transition: transform var(--dur-2) var(--spring), background var(--dur-1); }
 .pagination a:hover { background: var(--surface); }
 .pagination a:active { transform: scale(0.94); }
 .pagination a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 1px; }
@@ -723,7 +723,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .accordion details + details { border-top: 2px solid var(--line); }
 .accordion summary { list-style: none; display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 14px 18px; cursor: pointer; font-weight: 700; color: var(--ink); }
 .accordion summary::-webkit-details-marker { display: none; }
-.accordion summary::after { content: ""; flex: none; margin-left: auto; width: 9px; height: 9px; border-right: 2.4px solid currentColor; border-bottom: 2.4px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform 0.35s var(--spring); }
+.accordion summary::after { content: ""; flex: none; margin-left: auto; width: 9px; height: 9px; border-right: 2.4px solid currentColor; border-bottom: 2.4px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform var(--dur-4) var(--spring); }
 .accordion details[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
 .accordion summary:hover { background: var(--surface); }
 .accordion summary:focus-visible { outline: 3px solid var(--blue-light); outline-offset: -3px; }
@@ -754,7 +754,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    </div>
    Event: fy:change { value } (juga event input/change biasa di <input>). */
 .qty { justify-self: start; align-self: start; display: inline-flex; align-items: center; border: var(--edge-width) solid var(--edge); border-radius: 999px; background: var(--card); box-shadow: var(--shadow-pop); }
-.qty button { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: none; color: var(--ink); cursor: pointer; transition: transform 0.2s var(--spring), background 0.2s; }
+.qty button { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: none; color: var(--ink); cursor: pointer; transition: transform var(--dur-1) var(--spring), background var(--dur-1); }
 .qty button:hover { background: var(--surface); }
 .qty button:active { transform: scale(0.9); }
 .qty button:disabled { opacity: 0.35; cursor: default; background: none; }
@@ -776,7 +776,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
 .rating-input { display: inline-flex; flex-direction: row-reverse; justify-content: flex-end; gap: 0; margin: 0; padding: 0; border: 0; min-width: 0; }
 .rating-input input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .rating-input label { width: 44px; height: 44px; display: grid; place-items: center; cursor: pointer; border-radius: 12px; }
-.rating-input label::before { content: ""; width: 30px; height: 30px; background: var(--line); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.6L14.35 9.36L20.56 9.82L15.8 13.84L17.29 19.88L12 16.6L6.71 19.88L8.2 13.84L3.44 9.82L9.65 9.36z' stroke='%23000' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.6L14.35 9.36L20.56 9.82L15.8 13.84L17.29 19.88L12 16.6L6.71 19.88L8.2 13.84L3.44 9.82L9.65 9.36z' stroke='%23000' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; transition: transform 0.25s var(--spring), background 0.15s; }
+.rating-input label::before { content: ""; width: 30px; height: 30px; background: var(--line); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.6L14.35 9.36L20.56 9.82L15.8 13.84L17.29 19.88L12 16.6L6.71 19.88L8.2 13.84L3.44 9.82L9.65 9.36z' stroke='%23000' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3.6L14.35 9.36L20.56 9.82L15.8 13.84L17.29 19.88L12 16.6L6.71 19.88L8.2 13.84L3.44 9.82L9.65 9.36z' stroke='%23000' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; transition: transform var(--dur-2) var(--spring), background 0.15s; }
 .rating-input input:checked ~ label::before, .rating-input label:hover::before, .rating-input label:hover ~ label::before { background: var(--bintang); }
 .rating-input label:hover::before { transform: scale(1.12); }
 .rating-input input:focus-visible + label { outline: 3px solid var(--blue-light); outline-offset: -3px; }
@@ -787,7 +787,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    </div>
    Klik → <dialog class="lightbox"> dengan tombol sebelumnya/berikutnya, panah keyboard, geser di layar sentuh, Esc. */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 10px; }
-.gallery a { display: block; aspect-ratio: 1; border-radius: 14px; overflow: hidden; border: var(--edge-width) solid var(--edge); background: var(--surface); transition: transform 0.25s var(--spring); }
+.gallery a { display: block; aspect-ratio: 1; border-radius: 14px; overflow: hidden; border: var(--edge-width) solid var(--edge); background: var(--surface); transition: transform var(--dur-2) var(--spring); }
 .gallery a:hover { transform: translateY(-3px); }
 .gallery a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 2px; }
 .gallery img { width: 100%; height: 100%; object-fit: cover; }
@@ -825,7 +825,7 @@ th:not([aria-sort="none"]) .sort-btn .sort-both { display: none; }
    </section>
    Tampil sekali sampai dipilih. Pilihan disimpan di localStorage (fy-consent) dan dikirim lewat event fy:consent { pilihan } di window.
    Muat skrip analitik hanya setelah pilihan "semua". Kedua tombol sama menonjolnya (aturan privasi). */
-.consent { position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 90; width: min(560px, calc(100% - 32px)); display: grid; grid-template-columns: auto 1fr; gap: 12px 14px; align-items: start; padding: 18px; border: var(--edge-width) solid var(--edge); border-radius: var(--r-l); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); }
+.consent { position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: var(--z-dialog); width: min(560px, calc(100% - 32px)); display: grid; grid-template-columns: auto 1fr; gap: 12px 14px; align-items: start; padding: 18px; border: var(--edge-width) solid var(--edge); border-radius: var(--r-l); background: var(--card); color: var(--ink); box-shadow: var(--shadow-sticker); }
 .consent[hidden] { display: none; }
 .consent > img { width: 56px; height: auto; }
 .consent h2 { font: 800 20px/1.1 var(--f-head); letter-spacing: -0.02em; margin-bottom: 4px; }
