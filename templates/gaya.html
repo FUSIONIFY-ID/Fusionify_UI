@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="id" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gaya per kategori · FUSIONIFY UI</title>
+<meta name="description" content="Katalog gaya FUSIONIFY UI: stiker, toko, tenang, jasa, dan teknis, masing-masing dengan pola hero sendiri.">
+<!-- SEO: halaman ini bukan untuk mesin pencari (lihat seo/README.md) -->
+<meta name="robots" content="noindex, follow">
+<!-- /SEO -->
+<meta name="robots" content="noindex">
+<script>
+  (function () {
+    var d = document.documentElement;
+    /* Hanya untuk katalog ini: ?gaya=toko|tenang|jasa|teknis. Di produk, tulis langsung <html data-gaya="..."> */
+    var g = new URLSearchParams(location.search).get("gaya");
+    if (["toko", "tenang", "jasa", "teknis"].indexOf(g) > -1) d.setAttribute("data-gaya", g);
+    d.classList.remove("no-js");
+    d.classList.add("js");
+    try { if (sessionStorage.getItem("fx-nav") === "1") d.classList.add("arriving"); } catch (e) {}
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) d.classList.remove("arriving");
+    setTimeout(function () { if (!window.__fx) { d.classList.add("fx-off"); d.classList.remove("arriving"); } }, 4000);
+  })();
+</script>
+
+<link rel="preload" href="../fonts/afacad-flux-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/sansation-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../css/fusionify.css">
+<link rel="icon" href="../brand/mark-128.webp">
+<style>
+  /* Hanya untuk katalog ini: tampilkan hero yang cocok dengan gaya aktif */
+  .contoh { display: none; }
+  html:not([data-gaya]) .contoh[data-untuk="stiker"], html[data-gaya="toko"] .contoh[data-untuk="toko"], html[data-gaya="tenang"] .contoh[data-untuk="tenang"], html[data-gaya="jasa"] .contoh[data-untuk="jasa"], html[data-gaya="teknis"] .contoh[data-untuk="teknis"] { display: block; }
+  html:not([data-gaya]) .gaya-pilih [data-g="stiker"], html[data-gaya="toko"] .gaya-pilih [data-g="toko"], html[data-gaya="tenang"] .gaya-pilih [data-g="tenang"], html[data-gaya="jasa"] .gaya-pilih [data-g="jasa"], html[data-gaya="teknis"] .gaya-pilih [data-g="teknis"] { border-color: var(--blue); outline: 3px solid var(--blue-light); outline-offset: 3px; }
+  .gaya-pilih .card { text-decoration: none; display: grid; gap: 6px; justify-items: start; }
+  .gaya-contoh { display: grid; gap: 28px; margin-top: 40px; }
+  .gaya-contoh .form-grid { max-width: 720px; }
+</style>
+</head>
+<body>
+<!-- IKON-SPRITE:MULAI -->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="ikon-cari" viewBox="0 0 24 24"><path d="M4 10.5a6.5 6.5 0 1 0 13 0a6.5 6.5 0 1 0 -13 0z"/><path d="M15.4 15.4 20 20"/><path class="t" d="M7 8.4a1.4 1.4 0 1 0 2.8 0a1.4 1.4 0 1 0 -2.8 0z" style="fill:var(--ikon-titik,#539DE9);stroke:none"/></symbol><symbol id="ikon-gelap" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/><path class="t" d="M16.1 5.5a1.4 1.4 0 1 0 2.8 0a1.4 1.4 0 1 0 -2.8 0z" style="fill:var(--ikon-titik,#539DE9);stroke:none"/></symbol><symbol id="ikon-ide" viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.1V16h5v-.1c0-.8.4-1.6 1.1-2.1A6 6 0 0 0 12 3z"/><path class="t" d="M10.4 9a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0z" style="fill:var(--ikon-titik,#539DE9);stroke:none"/></symbol><symbol id="ikon-naik" viewBox="0 0 24 24"><path d="M12 16.5V5"/><path d="M6 10.5C8.6 9.4 10.6 7.6 12 5c1.4 2.6 3.4 4.4 6 5.5"/><path class="t" d="M10.4 20.2a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0 -3.2 0z" style="fill:var(--ikon-titik,#539DE9);stroke:none"/></symbol><symbol id="ikon-perisai" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.6-3.4 8.3-8 9-4.6-.7-8-4.4-8-9V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></symbol><symbol id="ikon-pesan" viewBox="0 0 24 24"><path d="M5 4.5h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8l-5 4v-4H5a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z"/><path d="M8 11h.01"/><path d="M12 11h.01"/><path class="t" d="M14.8 11a1.2 1.2 0 1 0 2.4 0a1.2 1.2 0 1 0 -2.4 0z" style="fill:var(--ikon-titik,#539DE9);stroke:none"/></symbol><symbol id="ikon-terang" viewBox="0 0 24 24"><path d="M18.16 12L17.92 12.39L17.35 12.7L16.77 12.95L16.49 13.2L16.61 13.56L16.99 14.07L17.32 14.62L17.33 15.08L16.93 15.3L16.28 15.29L15.66 15.21L15.28 15.28L15.21 15.66L15.29 16.28L15.3 16.93L15.08 17.33L14.62 17.32L14.07 16.99L13.56 16.61L13.2 16.49L12.95 16.77L12.7 17.35L12.39 17.92L12 18.16L11.61 17.92L11.3 17.35L11.05 16.77L10.8 16.49L10.44 16.61L9.93 16.99L9.38 17.32L8.92 17.33L8.7 16.93L8.71 16.28L8.79 15.66L8.72 15.28L8.34 15.21L7.72 15.29L7.07 15.3L6.67 15.08L6.68 14.62L7.01 14.07L7.39 13.56L7.51 13.2L7.23 12.95L6.65 12.7L6.08 12.39L5.84 12L6.08 11.61L6.65 11.3L7.23 11.05L7.51 10.8L7.39 10.44L7.01 9.93L6.68 9.38L6.67 8.92L7.07 8.7L7.72 8.71L8.34 8.79L8.72 8.72L8.79 8.34L8.71 7.72L8.7 7.07L8.92 6.67L9.38 6.68L9.93 7.01L10.44 7.39L10.8 7.51L11.05 7.23L11.3 6.65L11.61 6.08L12 5.84L12.39 6.08L12.7 6.65L12.95 7.23L13.2 7.51L13.56 7.39L14.07 7.01L14.62 6.68L15.08 6.67L15.3 7.07L15.29 7.72L15.21 8.34L15.28 8.72L15.66 8.79L16.28 8.71L16.93 8.7L17.33 8.92L17.32 9.38L16.99 9.93L16.61 10.44L16.49 10.8L16.77 11.05L17.35 11.3L17.92 11.61L18.16 12z"/><path d="M12 2.6h.01"/><path d="M21.4 12h.01"/><path d="M12 21.4h.01"/><path d="M2.6 12h.01"/><path d="M5.4 5.4h.01"/><path d="M18.6 18.6h.01"/><path d="M5.4 18.6h.01"/><path class="t" d="M17.3 5.4a1.3 1.3 0 1 0 2.6 0a1.3 1.3 0 1 0 -2.6 0z" style="fill:var(--ikon-titik,#539DE9);stroke:none"/></symbol></svg>
+<!-- IKON-SPRITE:SELESAI -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <clipPath id="seal-clip" clipPathUnits="objectBoundingBox"><path d="M0.960 0.500L0.972 0.519L0.981 0.538L0.984 0.557L0.981 0.576L0.971 0.594L0.956 0.609L0.939 0.624L0.922 0.637L0.908 0.651L0.899 0.665L0.895 0.682L0.895 0.701L0.898 0.723L0.900 0.745L0.899 0.767L0.894 0.786L0.883 0.802L0.867 0.813L0.847 0.821L0.825 0.825L0.804 0.828L0.784 0.833L0.768 0.840L0.755 0.851L0.745 0.866L0.736 0.885L0.727 0.905L0.716 0.925L0.703 0.940L0.687 0.951L0.668 0.955L0.647 0.953L0.626 0.947L0.605 0.939L0.586 0.932L0.568 0.928L0.551 0.929L0.534 0.936L0.518 0.947L0.500 0.960L0.481 0.972L0.462 0.981L0.443 0.984L0.424 0.981L0.406 0.971L0.391 0.956L0.376 0.939L0.363 0.922L0.349 0.908L0.335 0.899L0.318 0.895L0.299 0.895L0.277 0.898L0.255 0.900L0.233 0.899L0.214 0.894L0.198 0.883L0.187 0.867L0.179 0.847L0.175 0.825L0.172 0.804L0.167 0.784L0.160 0.768L0.149 0.755L0.134 0.745L0.115 0.736L0.095 0.727L0.075 0.716L0.060 0.703L0.049 0.687L0.045 0.668L0.047 0.647L0.053 0.626L0.061 0.605L0.068 0.586L0.072 0.568L0.071 0.551L0.064 0.534L0.053 0.518L0.040 0.500L0.028 0.481L0.019 0.462L0.016 0.443L0.019 0.424L0.029 0.406L0.044 0.391L0.061 0.376L0.078 0.363L0.092 0.349L0.101 0.335L0.105 0.318L0.105 0.299L0.102 0.277L0.100 0.255L0.101 0.233L0.106 0.214L0.117 0.198L0.133 0.187L0.153 0.179L0.175 0.175L0.196 0.172L0.216 0.167L0.232 0.160L0.245 0.149L0.255 0.134L0.264 0.115L0.273 0.095L0.284 0.075L0.297 0.060L0.313 0.049L0.332 0.045L0.353 0.047L0.374 0.053L0.395 0.061L0.414 0.068L0.432 0.072L0.449 0.071L0.466 0.064L0.482 0.053L0.500 0.040L0.519 0.028L0.538 0.019L0.557 0.016L0.576 0.019L0.594 0.029L0.609 0.044L0.624 0.061L0.637 0.078L0.651 0.092L0.665 0.101L0.682 0.105L0.701 0.105L0.723 0.102L0.745 0.100L0.767 0.101L0.786 0.106L0.802 0.117L0.813 0.133L0.821 0.153L0.825 0.175L0.828 0.196L0.833 0.216L0.840 0.232L0.851 0.245L0.866 0.255L0.885 0.264L0.905 0.273L0.925 0.284L0.940 0.297L0.951 0.313L0.955 0.332L0.953 0.353L0.947 0.374L0.939 0.395L0.932 0.414L0.928 0.432L0.929 0.449L0.936 0.466L0.947 0.482L0.960 0.500Z" /></clipPath>
+    <symbol id="seal" viewBox="0 0 100 100"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" fill="currentColor" /></symbol>
+    <symbol id="seal-line" viewBox="0 0 100 100"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" fill="none" stroke="currentColor" stroke-width="1.2" /></symbol>
+  </defs>
+</svg>
+<a class="skip" href="#main">Lewati ke konten</a>
+<div id="top" aria-hidden="true"></div>
+<!-- GANTI: logo produk (web produk memakai logonya sendiri, bukan wordmark FUSIONIFY) -->
+<nav class="nav" data-nav aria-label="Utama">
+  <a class="brand" href="#top" aria-label="Nama Produk">
+    <img class="brand-mark" src="../brand/mark-128.webp" alt="" width="34" height="34">
+    <span style="font-family:var(--f-head);font-weight:800;font-size:22px">Nama Produk</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#pilih">Gaya</a></li>
+    <li><a href="#komponen">Komponen</a></li>
+  </ul>
+  <div class="nav-tools">
+    <button class="icon-btn theme-btn" type="button" data-theme-toggle aria-label="Ganti tema terang atau gelap"><svg class="ikon moon" aria-hidden="true"><use href="#ikon-gelap"/></svg><svg class="ikon sun" aria-hidden="true"><use href="#ikon-terang"/></svg></button>
+    <button class="icon-btn sound-btn" type="button" data-sound aria-pressed="false" aria-label="Suara">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" /><path class="x" d="M17 9l4 6M21 9l-4 6" /><path class="w1" d="M16.5 9.5a3.5 3.5 0 0 1 0 5" /><path class="w2" d="M19 7a7 7 0 0 1 0 10" /></svg>
+    </button>
+    <a class="btn" href="#pilih" data-sfx="plop">Pilih gaya</a>
+    <button class="icon-btn menu-btn" type="button" data-menu aria-expanded="false" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path class="l1" d="M5 8h14" /><path class="l2" d="M9 16h10" /></svg>
+    </button>
+  </div>
+</nav>
+<div class="drawer" data-drawer aria-hidden="true">
+  <ul><li><a href="#pilih">Gaya</a></li><li><a href="#komponen">Komponen</a></li></ul>
+  <img class="drawer-mascot" src="../mascot/wink-420.webp" alt="" width="325" height="420" loading="lazy">
+</div>
+<main id="main">
+  <!-- ============ 1. STIKER · pola maskot (company, konten, acara) ============ -->
+  <section class="hero pola-maskot contoh" data-untuk="stiker">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="prod-head"><span class="kicker">Gaya stiker</span><span class="chip go">Aktif</span></div>
+        <h1 class="split" data-split><span class="l1">Kenalan dulu</span><span class="l2">sama kami<span class="dot" aria-hidden="true"></span></span></h1>
+        <p class="lead">Untuk web company, konten, dan acara. Maskot memandu, judul besar, bayangan pejal. Ini rasa fusionify.id.</p>
+        <div class="hero-cta"><a class="btn" href="#pilih" data-magnetic>Lihat gaya lain</a><a class="btn ghost" href="#komponen">Lihat komponen</a></div>
+      </div>
+      <div class="hero-media">
+        <div class="stage" data-stage>
+          <svg class="seal-bg" viewBox="0 0 100 100" aria-hidden="true"><use href="#seal" /></svg>
+          <svg class="seal-ring" viewBox="0 0 100 100" aria-hidden="true"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" fill="none" stroke-width="0.4" stroke-dasharray="1.5 2.5" /></svg>
+          <div class="bubble" role="status" aria-live="polite" data-bubble>Colek aku kalau berani</div>
+          <!-- GANTI kalimat gelembung (id/en) dan tulisan papan sesuai produk; maskot bereaksi sendiri (malu, kedip, ngambek, ngantuk) -->
+          <div class="mascot" data-mascot data-cursor="poke" data-cursor-label="colek!" role="button" tabindex="0" aria-label="Maskot FUSIONIFY, colek untuk menyapa" data-lines="{&quot;idle&quot;: {&quot;id&quot;: &quot;Colek aku kalau berani&quot;, &quot;en&quot;: &quot;Poke me if you dare&quot;}, &quot;hover&quot;: {&quot;id&quot;: &quot;Eh, ketahuan…&quot;, &quot;en&quot;: &quot;Oh, you found me…&quot;}, &quot;poke1&quot;: {&quot;id&quot;: &quot;Hehe, halo!&quot;, &quot;en&quot;: &quot;Hehe, hi!&quot;}, &quot;poke2&quot;: {&quot;id&quot;: &quot;Iya iya, aku di sini&quot;, &quot;en&quot;: &quot;Yes yes, I&#x27;m here&quot;}, &quot;angry&quot;: {&quot;id&quot;: &quot;Udah dong, geli!&quot;, &quot;en&quot;: &quot;Okay, that tickles!&quot;}, &quot;tired&quot;: {&quot;id&quot;: &quot;zzz… scroll dong&quot;, &quot;en&quot;: &quot;zzz… try scrolling&quot;}, &quot;back&quot;: {&quot;id&quot;: &quot;Eh, udah balik!&quot;, &quot;en&quot;: &quot;Oh, you&#x27;re back!&quot;}}">
+            <div class="body">
+              <img class="base" src="../mascot/sign-420.webp" srcset="../mascot/sign-420.webp 306w, ../mascot/sign.webp 525w" sizes="(max-width: 599px) 160px, 400px" alt="" width="525" height="720" fetchpriority="high">
+              <img class="pose" data-pose="shy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="../mascot/shy-420.webp" data-srcset="../mascot/shy-420.webp 341w, ../mascot/shy.webp 585w" sizes="(max-width: 599px) 160px, 400px" alt="" width="585" height="720" style="left:-0.42%;top:2.90%;width:105.07%" decoding="async">
+              <img class="pose" data-pose="wink" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="../mascot/wink-420.webp" data-srcset="../mascot/wink-420.webp 325w, ../mascot/wink.webp 557w" sizes="(max-width: 599px) 160px, 400px" alt="" width="557" height="720" style="left:-1.86%;top:-0.37%;width:103.47%" decoding="async">
+              <img class="pose" data-pose="happy" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="../mascot/happy-420.webp" data-srcset="../mascot/happy-420.webp 337w, ../mascot/happy.webp 577w" sizes="(max-width: 599px) 160px, 400px" alt="" width="577" height="720" style="left:4.31%;top:1.23%;width:105.75%" decoding="async">
+              <img class="pose" data-pose="angry" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="../mascot/angry-420.webp" data-srcset="../mascot/angry-420.webp 366w, ../mascot/angry.webp 627w" sizes="(max-width: 599px) 160px, 400px" alt="" width="627" height="720" style="left:-11.92%;top:-9.19%;width:127.64%" decoding="async">
+              <img class="pose" data-pose="tired" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="../mascot/tired-420.webp" data-srcset="../mascot/tired-420.webp 327w, ../mascot/tired.webp 560w" sizes="(max-width: 599px) 160px, 400px" alt="" width="560" height="720" style="left:-0.42%;top:2.90%;width:105.07%" decoding="async">
+              <div class="sign-text" data-sign="[&quot;Halo!&quot;, &quot;Gaya stiker&quot;, &quot;Ini fusionify.id&quot;]"><span>Halo!</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. TOKO · pola demo (bot, toko, aplikasi chat) ============ -->
+  <section class="hero pola-demo contoh" data-untuk="toko">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="prod-head"><span class="kicker">Gaya toko</span><span class="chip beta">Beta</span></div>
+        <h1 class="split" data-split>Pembeli pesan, kamu tinggal pantau<span class="dot">.</span></h1>
+        <p class="lead">Untuk bot jualan dan toko digital. Yang paling meyakinkan adalah melihat produknya dipakai, jadi layar HP jadi bintangnya.</p>
+        <div class="hero-cta"><a class="btn" href="#pilih">Lihat gaya lain</a><a class="btn ghost" href="#komponen">Coba demo</a></div>
+      </div>
+      <div class="hero-media">
+        <div class="hero-hp" role="img" aria-label="Contoh percakapan: pembeli memilih produk, membayar lewat QRIS, lalu produk terkirim otomatis.">
+          <div class="hero-hp-layar">
+            <div class="hero-hp-kepala"><img src="../brand/mark-128.webp" alt="" width="32" height="32"><div>Nama Toko<small>bot</small></div></div>
+            <ol class="hero-alur" aria-hidden="true">
+              <li style="--i:0">Halo! Mau beli apa hari ini?<div class="tombol"><span>Lihat produk</span><span>Cek pesanan</span><span>Saldo</span><span>Bantuan</span></div></li>
+              <li class="saya" style="--i:1">Paket premium 1 bulan</li>
+              <li style="--i:2">Totalnya Rp25.000. Scan QRIS yang muncul, ya.</li>
+              <li class="stiker" style="--i:3"><img src="../mascot/sticker-proses.webp" alt="" width="104" height="104" loading="lazy"></li>
+              <li style="--i:4">Pembayaran masuk. Produknya sudah dikirim!</li>
+            </ol>
+          </div>
+        </div>
+        <p class="sample-note" style="display:block;width:fit-content;margin:14px auto 0">Data contoh</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. TENANG · pola pratinjau (uang, email, alat kerja) ============ -->
+  <section class="hero pola-pratinjau contoh" data-untuk="tenang">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="prod-head"><span class="kicker">Gaya tenang</span><span class="chip wip">Dalam pengembangan</span></div>
+        <h1 class="split" data-split>Terima pembayaran tanpa drama<span class="dot">.</span></h1>
+        <p class="lead">Untuk produk yang memegang uang atau data orang. Tanpa maskot di depan: yang ditunjukkan tampilan asli, biaya, dan cara kerjanya.</p>
+        <div class="hero-cta"><a class="btn" href="#pilih">Lihat gaya lain</a><a class="btn ghost" href="#komponen">Baca dokumentasi</a></div>
+        <div class="hero-meta"><div><b>1%</b><span>potongan per transaksi</span></div><div><b>Rp3.000</b><span>biaya tarik</span></div><div><b>H+1</b><span>dana cair</span></div></div>
+        <span class="sample-note" style="margin-top:16px">Data contoh. Ganti dengan angka asli produkmu.</span>
+      </div>
+      <div class="hero-media">
+        <div class="hero-bingkai">
+          <div class="hero-bingkai-kepala">bayar.nama-produk.id/INV-0142</div>
+          <div class="hero-bingkai-isi">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span class="kicker">Tagihan</span><span class="chip beta">Menunggu bayar</span></div>
+            <p style="font:800 clamp(30px,5vw,40px)/1 var(--f-num);font-variant-numeric:tabular-nums;margin:0">Rp150.000</p>
+            <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center">
+              <img src="aset/qr-contoh.svg" alt="Kode QR contoh" width="112" height="112" style="border:var(--edge-width) solid var(--edge);border-radius:var(--r-m);background:var(--white);padding:6px">
+              <p style="margin:0;font-size:14.5px;color:var(--ink-2)">Scan dengan aplikasi bank atau dompet digital apa pun. Berlaku 15 menit.</p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-lapis">
+          <div class="code-block"><div class="code-head"><span>Webhook</span><button type="button" data-copy="" data-copied="Kode disalin">Salin</button></div><pre tabindex="0"><code>{ <span class="k">"event"</span>: <span class="s">"payment.paid"</span>,
+  <span class="k">"invoice"</span>: <span class="s">"INV-0142"</span>,
+  <span class="k">"amount"</span>: <span class="n">150000</span> }</code></pre></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. JASA · pola tengah (jasa, agensi) ============ -->
+  <section class="hero pola-tengah contoh" data-untuk="jasa">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="prod-head"><span class="kicker">Gaya jasa</span></div>
+        <h1 class="split" data-split>Ceritain masalahnya, kami bangun jalannya<span class="dot">.</span></h1>
+        <p class="lead">Untuk layanan dan agensi. Calon klien ingin tahu apa yang pernah dikerjakan, jadi bukti karya langsung di bawah judul.</p>
+        <div class="hero-cta"><a class="btn" href="#pilih">Lihat gaya lain</a><a class="btn ghost" href="#komponen">Lihat karya</a></div>
+      </div>
+      <div class="hero-media">
+        <div class="hero-deret">
+          <article class="card"><span class="tag">Web</span><h3>Nama proyek</h3><p>Masalah klien dalam satu kalimat, lalu hasil yang benar-benar terjadi.</p></article>
+          <article class="card"><span class="tag">Aplikasi</span><h3>Nama proyek</h3><p>Pakai screenshot asli di halaman detailnya.</p></article>
+          <article class="card"><span class="tag">Otomasi</span><h3>Nama proyek</h3><p>Hanya proyek yang boleh ditampilkan publik.</p></article>
+        </div>
+        <p class="sample-note" style="display:block;width:fit-content;margin:16px auto 0">Contoh karya. Ganti dengan proyek asli.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. TEKNIS · pola cari (dokumentasi, pusat bantuan) ============ -->
+  <section class="hero pola-cari contoh" data-untuk="teknis">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="prod-head"><span class="kicker">Gaya teknis</span></div>
+        <h1 class="split" data-split>Mau cari apa hari ini<span class="dot">?</span></h1>
+        <p class="lead">Untuk dokumentasi dan pusat bantuan. Orang datang membawa pertanyaan, jadi kolom cari ada paling depan.</p>
+        <label class="search-bar"><svg class="ikon" aria-hidden="true"><use href="#ikon-cari"/></svg><input type="search" aria-label="Cari dokumentasi" placeholder="Cari endpoint, panduan, atau kode error"></label>
+        <ul class="hero-topik">
+          <li><a class="chip-btn" href="#komponen">Mulai cepat</a></li>
+          <li><a class="chip-btn" href="#komponen">Autentikasi</a></li>
+          <li><a class="chip-btn" href="#komponen">Webhook</a></li>
+          <li><a class="chip-btn" href="#komponen">Kode error</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec tint" id="pilih">
+    <div class="wrap">
+      <div class="sec-head"><span class="kicker">Satu kit, lima gaya</span><h2 class="h-sec">Pilih sesuai kategori produk<span class="dot">.</span></h2><p class="lead">Warna, huruf, ikon, dan logo tetap sama. Yang berubah tebal garis, bayangan, sudut, besar judul, dan pola pembuka. Pasang lewat <code>&lt;html data-gaya="…"&gt;</code>.</p></div>
+      <div class="grid-3 gaya-pilih">
+        <a class="card" href="?" data-g="stiker"><span class="tag">bawaan</span><h3>Stiker</h3><p>Company, konten, acara. Pola maskot.</p></a>
+        <a class="card" href="?gaya=toko" data-g="toko"><span class="tag">data-gaya="toko"</span><h3>Toko</h3><p>Bot jualan, toko digital. Pola demo.</p></a>
+        <a class="card" href="?gaya=tenang" data-g="tenang"><span class="tag">data-gaya="tenang"</span><h3>Tenang</h3><p>Pembayaran, email, alat kerja. Pola pratinjau.</p></a>
+        <a class="card" href="?gaya=jasa" data-g="jasa"><span class="tag">data-gaya="jasa"</span><h3>Jasa</h3><p>Layanan dan agensi. Pola tengah.</p></a>
+        <a class="card" href="?gaya=teknis" data-g="teknis"><span class="tag">data-gaya="teknis"</span><h3>Teknis</h3><p>Dokumentasi, pusat bantuan. Pola cari.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="komponen">
+    <div class="wrap">
+      <div class="sec-head"><span class="kicker">Komponen yang sama</span><h2 class="h-sec">Markup tidak berubah<span class="dot">.</span></h2></div>
+      <div class="grid-3" data-reveal>
+        <article class="svc"><span class="svc-ico"><svg class="ikon" aria-hidden="true"><use href="#ikon-ide"/></svg></span><h3>Kartu layanan</h3><p>Garis dan bayangannya ikut gaya.</p></article>
+        <article class="svc"><span class="svc-ico"><svg class="ikon" aria-hidden="true"><use href="#ikon-perisai"/></svg></span><h3>Tetap FUSIONIFY</h3><p>Biru, huruf, dan ikon tidak berubah.</p></article>
+        <article class="svc"><span class="svc-ico"><svg class="ikon" aria-hidden="true"><use href="#ikon-pesan"/></svg></span><h3>Tanpa kelas baru</h3><p>Cukup satu atribut di &lt;html&gt;.</p></article>
+      </div>
+      <div class="gaya-contoh">
+        <div class="hero-cta"><a class="btn" href="#pilih">Tombol utama</a><a class="btn ghost" href="#pilih">Tombol kedua</a><span class="chip go">Aktif</span><span class="chip beta">Beta</span></div>
+        <form class="form-grid" onsubmit="event.preventDefault()">
+          <label class="field"><span>Email</span><input class="input" type="email" autocomplete="email" placeholder="nama@email.com"></label>
+          <label class="field"><span>Paket</span><select class="select"><option>Dasar</option><option>Pro</option></select></label>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="fcols">
+      <div><p class="fname">Nama Produk</p><p>Satu kalimat tentang produk ini.</p></div>
+      <div><h2 class="fh">Produk</h2><ul><li><a href="#pilih">Gaya</a></li><li><a href="#komponen">Komponen</a></li></ul></div>
+      <div><h2 class="fh">Legal</h2><ul><li><a href="https://fusionify.id/privasi/">Kebijakan Privasi</a></li><li><a href="https://fusionify.id/syarat-ketentuan/">Syarat &amp; Ketentuan</a></li></ul></div>
+      <div><h2 class="fh">Kontak</h2><ul><li><a href="mailto:hello@fusionify.id">hello@fusionify.id</a></li><li><a href="https://wa.me/6283111380628" rel="noopener" target="_blank">WhatsApp <span class="nowrap">+62 831-1138-0628</span></a></li></ul></div>
+    </div>
+    <div class="fbar">
+      <a class="fy-badge" href="https://fusionify.id" rel="noopener"><img src="../badge/produk-fusionify-id-dark.png" alt="Sebuah produk dari FUSIONIFY" width="340" height="100"></a>
+      <span>© 2026 PT FUSIONIFY DIGITAL STORE</span>
+      <a class="to-top" href="#top">Naik ke atas <svg class="ikon" aria-hidden="true"><use href="#ikon-naik"/></svg></a>
+    </div>
+  </div>
+</footer>
+<div class="cursor" aria-hidden="true" data-cursor-el>
+  <div class="ring"><svg viewBox="0 0 100 100"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" /></svg></div>
+  <div class="dot"></div>
+  <div class="label"></div>
+</div>
+
+<!-- Notifikasi kecil (dipanggil lewat fy.toast("...") atau tombol data-copy) -->
+<div class="toast" role="status" aria-live="polite" data-toast>
+  <img src="../mascot/head-happy-120.webp" alt="" width="40" height="39" />
+  <span data-toast-text></span>
+</div>
+
+<!-- Tirai transisi halaman -->
+<div class="veil" aria-hidden="true" data-veil>
+  <svg class="blob" viewBox="0 0 100 100"><path d="M94.000 50.000L95.418 51.784L96.445 53.655L96.834 55.543L96.464 57.359L95.374 59.025L93.746 60.502L91.866 61.807L90.058 63.016L88.605 64.242L87.694 65.613L87.369 67.227L87.528 69.122L87.953 71.255L88.359 73.507L88.466 75.702L88.059 77.651L87.036 79.197L85.426 80.257L83.377 80.853L81.113 81.113L78.881 81.243L76.894 81.489L75.283 82.072L74.074 83.135L73.188 84.703L72.473 86.673L71.744 88.827L70.829 90.880L69.615 92.548L68.063 93.607L66.216 93.955L64.178 93.635L62.079 92.830L60.041 91.823L58.143 90.935L56.407 90.452L54.800 90.556L53.249 91.283L51.670 92.514L50.000 94.000L48.216 95.418L46.345 96.445L44.457 96.834L42.641 96.464L40.975 95.374L39.498 93.746L38.193 91.866L36.984 90.058L35.758 88.605L34.387 87.694L32.773 87.369L30.878 87.528L28.745 87.953L26.493 88.359L24.298 88.466L22.349 88.059L20.803 87.036L19.743 85.426L19.147 83.377L18.887 81.113L18.757 78.881L18.511 76.894L17.928 75.283L16.865 74.074L15.297 73.188L13.327 72.473L11.173 71.744L9.120 70.829L7.452 69.615L6.393 68.063L6.045 66.216L6.365 64.178L7.170 62.079L8.177 60.041L9.065 58.143L9.548 56.407L9.444 54.800L8.717 53.249L7.486 51.670L6.000 50.000L4.582 48.216L3.555 46.345L3.166 44.457L3.536 42.641L4.626 40.975L6.254 39.498L8.134 38.193L9.942 36.984L11.395 35.758L12.306 34.387L12.631 32.773L12.472 30.878L12.047 28.745L11.641 26.493L11.534 24.298L11.941 22.349L12.964 20.803L14.574 19.743L16.623 19.147L18.887 18.887L21.119 18.757L23.106 18.511L24.717 17.928L25.926 16.865L26.812 15.297L27.527 13.327L28.256 11.173L29.171 9.120L30.385 7.452L31.937 6.393L33.784 6.045L35.822 6.365L37.921 7.170L39.959 8.177L41.857 9.065L43.593 9.548L45.200 9.444L46.751 8.717L48.330 7.486L50.000 6.000L51.784 4.582L53.655 3.555L55.543 3.166L57.359 3.536L59.025 4.626L60.502 6.254L61.807 8.134L63.016 9.942L64.242 11.395L65.613 12.306L67.227 12.631L69.122 12.472L71.255 12.047L73.507 11.641L75.702 11.534L77.651 11.941L79.197 12.964L80.257 14.574L80.853 16.623L81.113 18.887L81.243 21.119L81.489 23.106L82.072 24.717L83.135 25.926L84.703 26.812L86.673 27.527L88.827 28.256L90.880 29.171L92.548 30.385L93.607 31.937L93.955 33.784L93.635 35.822L92.830 37.921L91.823 39.959L90.935 41.857L90.452 43.593L90.556 45.200L91.283 46.751L92.514 48.330L94.000 50.000Z" /></svg>
+  <img src="../mascot/head-wink-120.webp" alt="" width="114" height="120" />
+</div>
+
+<!-- Tanpa bundler: importmap ke CDN. Dengan bundler cukup: npm i gsap lenis -->
+<script type="importmap">
+{ "imports": {
+  "gsap": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/index.js",
+  "gsap/ScrollTrigger": "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger.js",
+  "lenis": "https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.mjs"
+} }
+</script>
+<script type="module">
+  import { initFusionify } from "../js/motion.js";
+  initFusionify();
+</script>
+</body>
+</html>

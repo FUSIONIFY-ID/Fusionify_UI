@@ -94,3 +94,23 @@ Android: salin isi `tokens/android/res/` ke `app/src/main/res/` (sudah termasuk 
 - Target sentuh minimal 44pt/48dp, hormati area aman (notch, home indicator).
 - Hormati pengaturan kurangi gerakan (iOS Reduce Motion, Android Remove animations).
 - Maskot dan logo dari `mascot/` dan `brand/` (WebP bisa dipakai langsung di Android, iOS 14+, dan Flutter).
+
+## Skala huruf, jarak, durasi, dan format standar
+
+- `tokens.json` memuat `spacing` (`--sp-*`), `fontSize` (`--fs-*`: label 13, kecil 14, teks 17, lead 20, judulS 24, judulM 32, judulL 44), dan `motion.durationMs.d1`-`d6` (`--dur-*`).
+- Native: `FyTextSize` (Flutter, Compose dalam `sp`), `Fy.TextSize` (SwiftUI), `fy.fontSize` dan `fy.spacing` (React Native), `@dimen/fy_text_*` (Android XML).
+- `fusionify.tokens.json`: semua token dalam format W3C Design Tokens 2025.10 (warna `srgb` terang/gelap, dimensi `{ value, unit }`, durasi, kurva, keluarga huruf). Impor ke Figma Variables lewat plugin yang membaca DTCG, Tokens Studio, atau Style Dictionary, supaya Figma dan kode tidak diselaraskan manual.
+
+## Kelas ukuran layar dan HP lipat
+
+Sama dengan web (dan window size class Material 3): **ringkas** < 600, **sedang** 600-839, **lebar** 840-1199, **besar** 1200-1599, **sangat besar** >= 1600 (dp/pt).
+
+| Platform | Token |
+| --- | --- |
+| Flutter | `FyKelas.sedang`, `FyKelas.dari(MediaQuery.sizeOf(context).width)` |
+| SwiftUI | `Fy.Kelas.sedang`, `.lebar`, `.besar`, `.sangatBesar` |
+| Compose | `FyKelas.sedang` (`.dp`), sejalan dengan `WindowWidthSizeClass` |
+| Android XML | `@dimen/fy_kelas_sedang`, `fy_kelas_lebar`, `fy_kelas_besar`; tata letak lewat folder `layout-w600dp/`, `layout-w840dp/` |
+| React Native | `fy.kelasLayar` |
+
+Navigasi: bar bawah di ringkas, rel di sedang, laci atau sidebar penuh mulai lebar. HP lipat setengah terbuka (Galaxy Z Fold/Flip, perangkat dua layar): baca posisi engsel lewat Jetpack WindowManager (`FoldingFeature`) atau paket `dual_screen`/`MediaQuery.displayFeatures` di Flutter, lalu taruh daftar dan isi di kedua sisi engsel. Jangan ada tombol atau teks tepat di engsel.

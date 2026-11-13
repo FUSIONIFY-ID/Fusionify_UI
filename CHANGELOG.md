@@ -1,5 +1,45 @@
 # Changelog
 
+## 1.16.0 · 13 November 2026
+
+Perbaikan dari audit 13 November 2026 (`PETA-KODE.md` bagian 8.5). Tidak ada kelas atau markup yang dihapus atau diganti nama; produk yang naik dari 1.15 tidak perlu mengubah apa pun.
+
+- **Aman untuk SSR**: `js/theme.js`, `js/controls.js`, dan `js/app.js` tidak lagi menyentuh `document`/`matchMedia` saat diimpor, jadi bisa diimpor di Next.js (server component, SSR) dan frontmatter Astro tanpa error `document is not defined`. Uji baru `tests/ssr.mjs` mengimpor semua modul di Node.
+- **`initFusionify()` dan `initApp()` tahan dipanggil berkali-kali** (Astro View Transitions, navigasi SPA, HMR): pemanggilan kedua mengembalikan objek yang sama dan hanya memasang interaksi ke elemen baru, bukan menumpuk listener scroll, kursor, suara, dan toast. `initTheme()` juga.
+- **Bilah browser HP ikut tema**: saat tombol tema ditekan, semua `<meta name="theme-color">` disamakan dengan tema yang dipilih (sebelumnya tetap mengikuti tema sistem).
+- **Paket SEO, GEO, AIO, AEO di template**: `landing-produk`, `acara`, `status`, `dokumentasi`, `legal/privasi`, `legal/syarat` kini membawa `meta robots` (max-snippet, max-image-preview), `canonical`, `hreflang` id/en/x-default, Open Graph 1200x630, `twitter:card`, dan JSON-LD `@graph` (WebSite, WebPage/Event/TechArticle, Organization FUSIONIFY dengan kontak publik, BreadcrumbList, FAQPage yang sama persis dengan FAQ yang tampil). Halaman masuk, dashboard, admin, chat, error, dan katalog diberi `noindex`. Baru: `snippets/seo-head.html`, folder `seo/` (`robots.txt` yang mengizinkan bot AI tanpa Content-Signal, `sitemap.xml` dengan hreflang dan lastmod, `llms.txt`, panduan langkah di luar kode), dan uji `tests/seo.mjs`.
+- **Token fondasi baru** (ikut ke `tokens.json` dan semua platform native):
+  - Lapisan `--z-sticky`, `--z-laci`, `--z-menu`, `--z-nav`, `--z-fab`, `--z-popover`, `--z-dialog`, `--z-skip`, `--z-kursor`, `--z-toast`, `--z-snackbar`, `--z-offline`, `--z-tirai`. Semua z-index global di CSS kit kini memakai token (nilainya sama, tampilan tidak berubah).
+  - Durasi `--dur-1` sampai `--dur-6` (0,2 sampai 0,7 detik). 106 durasi transisi di CSS kit kini memakai token.
+  - Skala huruf `--fs-label`, `--fs-kecil`, `--fs-teks`, `--fs-lead`, `--fs-judul-s`, `--fs-judul-m`, `--fs-judul-l` untuk komponen dan produk baru (komponen lama dipindah bertahap). Native: `FyTextSize` (Flutter, Compose), `Fy.TextSize` (SwiftUI), `fy.fontSize` (React Native), `fy_text_*` (Android XML). `tokens.json` juga mendapat `spacing` dan `fontSize`.
+- **Format standar W3C Design Tokens 2025.10**: `tokens/fusionify.tokens.json` (warna srgb terang/gelap, dimensi, durasi, kurva, huruf) untuk Figma Variables lewat plugin, Tokens Studio, dan Style Dictionary.
+- **Huruf cadangan berukuran setara**: `Afacad Flux Fallback`, `Sansation Fallback`, `Exo 2 Fallback` (Arial dengan `size-adjust` dan `ascent/descent-override` yang dihitung dari metrik huruf asli) masuk ke `--f-head`, `--f-body`, `--f-num`, jadi judul dan paragraf tidak meloncat saat huruf asli selesai dimuat.
+- **Mode kontras tinggi**: dukungan `forced-colors` (chip status, isi progres, switch, titik i, fokus tetap terlihat di mode kontras tinggi Windows) dan `prefers-contrast: more` (teks sekunder dan garis dipertegas).
+- `.form-stack` (form satu kolom di sheet dan modal) pindah ke kit (`product.css`). Sebelumnya hanya ada di `app-mobile.html`, jadi form daftar di `acara.html` kehilangan jarak antarkolom.
+- Contoh akhiran input `@domain` ditulis di dalam backtick (GitHub membacanya sebagai mention akun dan memasang akun asing di daftar Contributors rilis), dan `npm run release` menolak catatan rilis berisi `@kata` di luar backtick. Dari PR #2.
+- **Rilis otomatis**: workflow Rilis kini berjalan setiap push ke `main`. Kalau versi di `package.json` belum punya rilis, workflow menguji, membuat tag `vX.Y.Z`, zip, dan GitHub Release sendiri. Versi lama yang tag-nya terlewat dirilis dari tab Actions > Rilis > Run workflow (versi + commit, opsi lewati uji).
+- **CI**: job baru "safari dan firefox" (`tests/peramban-lain.mjs`, mesin WebKit dan Firefox: tanpa error JS, tanpa scroll horizontal, tombol tema, menu HP), wajib lulus; hasil pertamanya 112 cek hijau. Job generator ikut menjalankan `seo` dan `ssr`.
+- **CI dikunci ke `ubuntu-24.04`**: `ubuntu-latest` di GitHub Actions sudah pindah ke Ubuntu 26.04 yang belum didukung Playwright 1.56, sehingga semua uji gagal di langkah pasang browser. Naikkan bersamaan dengan Playwright nanti.
+- **Uji lebih tahan**: `tests/layar-sentuh.mjs` mengalihkan GSAP dan Lenis dari CDN ke `node_modules` (helper baru `cdnLokal()` di `tests/_env.mjs`), jadi tidak gagal saat CDN lambat atau terblokir. Uji lisensi mencakup domain partner `trustarystore.id` dan `trustary.store` yang sudah ada di `js/lisensi.js` sejak 6 November.
+- Dokumen: komentar basi soal posisi kursor di `components.css`, README tidak lagi menyebut repo privat (visibilitas repo diputuskan pemilik), daftar domain di AGENTS/README/SKILL merujuk ke `js/lisensi.js` sebagai satu-satunya sumber.
+
+## 1.15.0 · 9 November 2026
+
+Kit sekarang bisa tampil beda per kategori produk, rapi di semua ukuran layar termasuk HP lipat, dan dashboard tidak lagi kebesaran. Tidak ada kelas atau markup yang dihapus atau diganti nama. Yang terasa tanpa mengubah apa pun: titik pindah tata letak bergeser ke kelas ukuran layar (lihat di bawah) dan sidebar aplikasi jadi rel ikon di 600-839px.
+
+- **Gaya per kategori** (`css/gaya.css`, ikut dimuat `fusionify.css`): `<html data-gaya="toko|tenang|jasa|teknis">`, tanpa atribut tetap `stiker`. Hanya mengubah token: tebal garis, kedalaman bayangan pejal, sudut, besar judul, jarak antarseksi. Gaya `tenang` dan `teknis` otomatis tanpa kursor segel dan efek magnet (opsi baru `cursor`/`magnet` di `initFusionify`).
+- **Komponen hero** (`.hero`, product.css) dengan lima pola. `pola-maskot` sama persis dengan hero fusionify.id (judul dua baris tinta dan biru dengan titik bulat, `.hero-cta`, angka `.hero-meta`, `.scroll-hint`, dan maskot papan interaktif `.stage` yang malu, kedip, ngambek, dan ngantuk; perilakunya diporting dari fusionify.id ke `initFusionify()`), lalu `pola-pratinjau` (bingkai produk + lapisan bertumpuk), `pola-demo` (layar HP dengan alur percakapan yang berjalan sendiri), `pola-tengah` (judul di tengah + deret karya), `pola-cari` (kolom cari besar + topik), plus suara `grr`/`snore`. Menutup temuan 16. `demo/index.html`, `templates/landing-produk.html`, dan `templates/gaya.html` kini memakai hero ini.
+- **Template baru `templates/gaya.html`**: katalog lima gaya dan pola hero (`?gaya=...`).
+- **Kelas ukuran layar ala Material 3**: ringkas < 600, sedang 600-839, lebar 840-1199, besar 1200-1599, sangat besar >= 1600. Token `--kelas-*`, `kelasLayar` di token native (Flutter `FyKelas`, Swift `Fy.Kelas`, Compose `FyKelas`, RN, dimen Android `fy_kelas_*`), `screens` Tailwind v3 dan `--breakpoint-*` v4. Semua breakpoint CSS dan JS dipetakan ke kelas ini (sebelumnya 12 angka berbeda); tersisa `420px`/`350px` untuk layar sangat sempit dan nav web 961px.
+- **`js/kelas.js`**: `html[data-kelas]`, `html[data-lipat]` (kiri-kanan/atas-bawah saat layar HP lipat terbagi engsel), event `fy:kelas`. Dipanggil otomatis.
+- **HP lipat**: dengan `@media (horizontal-viewport-segments: 2)` hero menaruh teks dan media di kedua sisi engsel, chat menaruh daftar di kiri dan isi di kanan.
+- **Sidebar aplikasi**: laci di ringkas, rel ikon berlabel di sedang (baru), penuh mulai lebar (sebelumnya laci sampai 960px). Rail `.m-app` mulai 600px (sebelumnya 700px), chat berdampingan mulai 840px (sebelumnya 900px).
+- **Mode padat** `data-kepadatan="padat"` untuk dashboard dan admin: teks 15px, sidebar 232px, panel dan tabel datar 1px, KPI berbayangan tipis, tabel rapat. Dipasang di template dashboard dan admin.
+- Token `--angkat` (pengali bayangan pejal) dan `--edge-width` kini dipakai di semua garis dan bayangan stiker komponen; `--h-hero`, `--h-sec`, `--sec-y` bisa diatur gaya.
+- Uji: `tests/kelas-lipat-gaya.mjs` (kelas, sidebar, padat, gaya, emulasi engsel HP lipat). Ukuran uji tata letak bertambah 344×882, 600×960, 673×841, 841×673; layar sentuh 344×882 dan 673×841.
+- CI: uji per PR dibagi ke 5 job paralel (tata letak terang, tata letak gelap, tanpa JS, sentuh dan interaksi, generator); `npm test -- a,b` menerima beberapa saringan dan `FY_SKEMA` membatasi tema di uji tata letak. Batas waktu rilis dinaikkan ke 90 menit.
+- README: contoh kunci versi diperbarui (tag `v1.14.0` tidak pernah di-push).
+
 ## 1.14.2 · 9 November 2026
 
 Perbaikan kursor segel. Tidak ada kelas atau markup yang berubah.
@@ -48,7 +88,7 @@ Perapian besar dari audit `PETA-KODE.md` (bagian 8). Tidak ada kelas publik yang
 Komponen yang sebelumnya belum ada di kit, terutama untuk web toko (Premiumify), komunitas (StudyDate), dan layanan email (TMail):
 
 - **Navigasi web**: `.breadcrumb` (di HP hanya dua tingkat terakhir), `.pagination` bernomor, `.accordion` serbaguna.
-- **Form**: `.input-group` + `.addon` (awalan Rp/ikon, akhiran @domain atau tombol), `.qty` jumlah dengan batas min/max (`[data-qty]`), `.kbd`.
+- **Form**: `.input-group` + `.addon` (awalan Rp/ikon, akhiran `@domain` atau tombol), `.qty` jumlah dengan batas min/max (`[data-qty]`), `.kbd`.
 - **Toko**: `.product-card` + `.product-grid` (dua kolom di HP, label diskon, stok habis), `.harga` dengan harga coret, `.rating` (bisa pecahan) dan `.rating-input`, `.countdown` hitung mundur ke tanggal (`[data-tenggat]`), `.gallery` + lightbox (panah keyboard, geser di HP, Esc).
 - **Linimasa** `.timeline` untuk riwayat pesanan dan status (selesai, sekarang, gagal).
 - **Pengumuman** `.announce` yang bisa ditutup (diingat per id) dan **persetujuan cookie** `.consent` (pilihan disimpan, event `fy:consent`, `pilihanCookie()`).

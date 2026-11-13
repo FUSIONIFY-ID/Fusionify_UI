@@ -1,7 +1,7 @@
 // FUSIONIFY UI · motion.js
 // Mesin gerak inti fusionify.id dalam satu modul: smooth scroll, nav, menu HP, kursor segel,
 // judul naik per kata, kartu muncul/dirakit, angka naik, magnet, tombol salin + toast,
-// transisi halaman segel biru, suara sintesis, dan jeda animasi di luar layar.
+// transisi halaman segel biru, suara sintesis, maskot hero interaktif, dan jeda animasi di luar layar.
 //
 // Pemakaian (dengan bundler: npm i gsap lenis):
 //   import { initFusionify } from "./fusionify-ui/js/motion.js";
@@ -18,6 +18,7 @@ import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { initTheme } from "./theme.js";
+import { initKelas } from "./kelas.js";
 import { initControls, snackbar, otpError } from "./controls.js";
 import { cekLisensi } from "./lisensi.js";
 
@@ -71,6 +72,8 @@ function createSfx() {
     poke: () => { tone(700, 1200, 0.09, "triangle", 0.12); tone(1200, 900, 0.08, "sine", 0.06, 0.07); },
     ting: () => { tone(1320, 1320, 0.25, "sine", 0.08); tone(1760, 1760, 0.35, "sine", 0.06, 0.09); },
     bloop: () => tone(300, 760, 0.14, "sine", 0.12),
+    grr: () => tone(140, 90, 0.25, "sawtooth", 0.05),
+    snore: () => tone(180, 120, 0.6, "sine", 0.05),
     whoosh: () => noise(0.45, 0.25, 400, 2600),
   };
   return {
@@ -116,11 +119,18 @@ function splitWords(el) {
 const noop = () => {};
 const stub = () => ({ sfx: { on: false, set: noop, play: noop }, toast: noop, snackbar: noop, otpError: noop, lenis: null, lockScroll: noop, scrollTo: noop, gsap, ScrollTrigger });
 
+// Hasil initFusionify() disimpan: pemanggilan kedua (navigasi SPA, Astro View Transitions, HMR) mengembalikan
+// objek yang sama, bukan memasang ulang listener scroll, kursor, suara, dan toast sehingga semuanya dobel.
+let hasilFy = null;
 export function initFusionify(opts = {}) {
   if (!cekLisensi()) return stub();
+  if (hasilFy) { initControls(document.body); return hasilFy; } // elemen baru tetap diberi interaksi
+  // Gaya tenang dan teknis (gaya.css) tidak memakai kursor segel dan efek magnet: harus terasa serius.
+  const datar = ["tenang", "teknis"].includes(document.documentElement.dataset.gaya);
   const o = {
     smooth: true,          // Lenis smooth scroll
-    cursor: true,          // kursor segel (hanya mouse)
+    cursor: !datar,        // kursor segel (hanya mouse)
+    magnet: !datar,        // efek magnet data-magnetic
     transitions: true,     // transisi halaman segel biru
     darkAreas: ".sec.blue, .footer, .drawer, [data-dark]", // kursor jadi putih di area ini
     pauseSelector: "main > section, main > div, footer, [data-pause]",
@@ -128,6 +138,7 @@ export function initFusionify(opts = {}) {
   };
   window.__fx = true; // menandai JS berjalan (dipakai fallback .fx-off di <head>)
   initTheme();
+  initKelas(); // data-kelas dan data-lipat di <html> (js/kelas.js)
   initControls(); // komponen kontrol (js/controls.js)
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -294,7 +305,7 @@ export function initFusionify(opts = {}) {
   }
 
   /* Efek magnet (mouse saja): <a data-magnetic> */
-  if (fine && !reduce) {
+  if (o.magnet && fine && !reduce) {
     $$("[data-magnetic]").forEach((el) => {
       const qx = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3" });
       const qy = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3" });
@@ -358,6 +369,10 @@ export function initFusionify(opts = {}) {
     });
   }
 
+  /* Maskot hero (sama dengan fusionify.id): papan berganti tulisan, malu saat didekati,
+     kedip/senang saat dicolek, ngambek dicolek 4 kali, ngantuk 9 detik tanpa gerakan. Markup: .stage di product.css */
+  maskotHero({ sfx, reduce, fine });
+
   /* Jeda animasi CSS tanpa henti saat seksinya di luar layar */
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle("idle", !e.isIntersecting)), { rootMargin: "50% 0px" });
@@ -365,5 +380,128 @@ export function initFusionify(opts = {}) {
   }
 
   addEventListener("load", () => ScrollTrigger.refresh());
-  return { sfx, toast, snackbar, otpError, lenis, lockScroll, scrollTo: scrollToEl, gsap, ScrollTrigger };
+  hasilFy = { sfx, toast, snackbar, otpError, lenis, lockScroll, scrollTo: scrollToEl, gsap, ScrollTrigger };
+  return hasilFy;
+}
+
+/* ================= MASKOT HERO =================
+   Disalin dari perilaku fusionify.id (src/scripts/motion.ts, heroMascot). Ganti ekspresi dengan menukar
+   gambar badan penuh (.pose), bukan menempel kepala. Pose baru diunduh saat interaksi pertama atau saat dibutuhkan. */
+function maskotHero({ sfx, reduce, fine }) {
+  const m = $("[data-mascot]");
+  if (!m) return;
+  const bubble = $("[data-bubble]");
+  let lines = {};
+  try { lines = JSON.parse(m.dataset.lines || "{}"); } catch {}
+  const lang = (document.documentElement.lang || "id").toLowerCase().startsWith("en") ? "en" : "id";
+  const say = (k) => {
+    const v = lines[k]?.[lang];
+    if (!bubble || !v || bubble.textContent === v) return;
+    bubble.textContent = v;
+    bubble.classList.remove("pop");
+    void bubble.offsetWidth;
+    bubble.classList.add("pop");
+  };
+  let posesLoaded = false;
+  const loadPoses = () => {
+    if (posesLoaded) return;
+    posesLoaded = true;
+    $$(".pose", m).forEach((i) => { if (i.dataset.srcset) i.srcset = i.dataset.srcset; if (i.dataset.src) i.src = i.dataset.src; });
+  };
+  ["pointerenter", "touchstart", "focus"].forEach((ev) => m.addEventListener(ev, loadPoses, { once: true, passive: true }));
+  addEventListener("pointermove", loadPoses, { once: true, passive: true });
+  let mood = null;
+  const face = (k) => {
+    if (k) {
+      loadPoses();
+      const img = $(`.pose[data-pose="${k}"]`, m);
+      if (img && !(img.complete && img.naturalWidth)) {
+        // Gambar pose belum siap: maskot papan tetap tampil, lalu ganti begitu selesai dimuat
+        img.addEventListener("load", () => { if (mood === k) face(k); }, { once: true });
+        return;
+      }
+    }
+    let found = false;
+    $$(".pose", m).forEach((h) => { const on = h.dataset.pose === k; h.classList.toggle("on", on); found ||= on; });
+    m.classList.toggle("posing", found);
+  };
+  let pokes = 0, pokeTimer = 0, idleTimer = 0, asleep = false, heroVisible = true;
+  if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => (heroVisible = e.isIntersecting), { threshold: 0.3 }).observe(m);
+  const setMood = (k, line) => { mood = k; face(k); if (line) say(line); };
+  const idle = () => {
+    clearTimeout(idleTimer);
+    if (asleep) { asleep = false; setMood("happy", "back"); setTimeout(() => mood === "happy" && setMood(null), 1600); }
+    idleTimer = setTimeout(() => {
+      if (!heroVisible || pokes > 0) return idle();
+      loadPoses();
+      asleep = true; setMood("tired", "tired"); sfx.play("snore");
+    }, 9000);
+  };
+  // pointermove/scroll datang puluhan kali per detik; cukup reset timer paling sering sekali per detik.
+  let lastIdle = 0;
+  const idleSoon = () => { const now = performance.now(); if (asleep || now - lastIdle > 1000) { lastIdle = now; idle(); } };
+  ["pointermove", "scroll", "keydown", "touchstart"].forEach((ev) => addEventListener(ev, idleSoon, { passive: true }));
+  idle();
+  m.addEventListener("pointerenter", () => { if (!asleep && pokes === 0) setMood("shy", "hover"); });
+  m.addEventListener("pointerleave", () => { if (mood === "shy") setMood(null, "idle"); });
+  // Jeda antar colekan: tiap ekspresi + gelembung sempat tampil dulu, tidak berkedip saat dicolek beruntun.
+  let lastPoke = -Infinity;
+  const poke = () => {
+    const now = performance.now();
+    if (now - lastPoke < 450) return;
+    lastPoke = now;
+    pokes++;
+    clearTimeout(pokeTimer);
+    pokeTimer = setTimeout(() => { pokes = 0; setMood(null, "idle"); }, 2200);
+    m.classList.remove("shake", "squish");
+    void m.offsetWidth;
+    if (pokes >= 4) { setMood("angry", "angry"); m.classList.add("shake"); sfx.play("grr"); }
+    else { setMood(pokes % 2 ? "wink" : "happy", pokes % 2 ? "poke1" : "poke2"); m.classList.add("squish"); sfx.play("poke"); }
+  };
+  m.addEventListener("click", poke);
+  m.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); poke(); } });
+
+  // Papan tulisan berganti tiap 2,6 detik
+  const sign = $("[data-sign]", m);
+  if (sign) {
+    let words = [];
+    try { words = JSON.parse(sign.dataset.sign || "[]"); } catch {}
+    let i = 0;
+    if (words.length > 1) setInterval(() => {
+      if (document.hidden || reduce) return;
+      const old = $("span", sign);
+      i = (i + 1) % words.length;
+      const nu = document.createElement("span");
+      nu.textContent = words[i];
+      nu.className = "in";
+      sign.appendChild(nu);
+      old?.classList.add("out");
+      requestAnimationFrame(() => requestAnimationFrame(() => nu.classList.remove("in")));
+      setTimeout(() => old?.remove(), 500);
+    }, 2600);
+  }
+
+  // Maskot sedikit mengikuti kursor (parallax, mouse saja)
+  const stage = $("[data-stage]");
+  if (fine && !reduce && stage) {
+    gsap.set(m, { xPercent: -50, x: 0 });
+    const qx = gsap.quickTo(m, "x", { duration: 0.8, ease: "power3" });
+    const qy = gsap.quickTo(m, "y", { duration: 0.8, ease: "power3" });
+    // Ukur panggung sekali (koordinat halaman), perbarui saat resize/refresh; jangan getBoundingClientRect tiap gerak.
+    let sx = 0, sy = 0, sh = 0;
+    const measure = () => { const r = stage.getBoundingClientRect(); sx = r.left + r.width / 2; sy = r.top + scrollY + r.height / 2; sh = r.height; };
+    measure();
+    ScrollTrigger.addEventListener("refresh", measure);
+    addEventListener("pointermove", (e) => {
+      const cy = sy - scrollY;
+      if (cy + sh / 2 < 0) return;
+      const k = (v) => Math.max(-1, Math.min(1, v));
+      qx(k((e.clientX - sx) / innerWidth) * 26);
+      qy(k((e.clientY - cy) / innerHeight) * 16);
+    }, { passive: true });
+  } else if (!reduce && stage) {
+    // Layar sentuh tidak punya kursor: maskot ikut bergerak pelan saat hero discroll (pengganti parallax kursor).
+    gsap.set(m, { xPercent: -50, x: 0 });
+    gsap.fromTo(m, { y: 0, rotate: 0 }, { y: 26, rotate: -4, ease: "none", scrollTrigger: { trigger: stage, start: "top 35%", end: "bottom top", scrub: 0.6 } });
+  }
 }

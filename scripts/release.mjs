@@ -1,5 +1,5 @@
 // FUSIONIFY UI · bantuan rilis bernomor versi.
-//   npm run release            → cek versi, lalu tampilkan perintah git untuk membuat tag
+//   npm run release            → cek versi, lalu tampilkan langkah rilis (tag dibuat otomatis oleh workflow Rilis)
 //   node scripts/release.mjs --check v1.5.0   → gagal kalau tag tidak sama dengan package.json dan CHANGELOG (dipakai GitHub Actions)
 //   node scripts/release.mjs --notes v1.5.0   → cetak catatan rilis versi itu dari CHANGELOG.md
 import fs from "node:fs";
@@ -27,13 +27,16 @@ const problems = [];
 if (top !== version) problems.push(`Versi teratas di CHANGELOG.md (${top}) tidak sama dengan package.json (${version}).`);
 if (flag === "--check" && (tagArg || "").replace(/^v/, "") !== version) problems.push(`Tag ${tagArg} tidak sama dengan versi package.json (${version}).`);
 if (!/^\d+\.\d+\.\d+$/.test(version)) problems.push(`Versi "${version}" bukan format x.y.z.`);
+// GitHub membaca @kata di catatan rilis sebagai mention akun, lalu memasang akun itu di daftar Contributors.
+// Tulis @kata di dalam backtick (`@domain`) kalau bukan menyebut akun GitHub.
+const mentions = (section(version).replace(/`[^`]*`/g, "").match(/(?:^|[^\w`/.@-])@[A-Za-z0-9][\w-]*/g) || []).map((m) => m.trim().replace(/^[^@]*/, ""));
+if (mentions.length) problems.push(`Catatan rilis ${version} di CHANGELOG.md berisi ${mentions.join(", ")} yang akan dibaca GitHub sebagai mention akun. Bungkus dengan backtick, mis. \`@domain\`.`);
 if (problems.length) { console.error(problems.join("\n")); process.exit(1); }
 if (flag === "--check") { console.log(`Versi ${version} cocok.`); process.exit(0); }
 
-console.log(`Siap rilis v${version}. Jalankan satu per satu (PowerShell juga bisa):\n`);
+console.log(`Siap rilis v${version}. Commit dan push (atau merge PR) ke main:\n`);
 console.log(`git add .`);
 console.log(`git commit -m "Fusionify UI ${version}"`);
 console.log(`git push`);
-console.log(`git tag v${version}`);
-console.log(`git push origin v${version}`);
-console.log(`\nGitHub Actions akan menguji, membuat zip, dan menerbitkan rilis v${version}.`);
+console.log(`\nWorkflow Rilis di GitHub Actions menguji, membuat tag v${version}, zip, dan menerbitkan rilisnya sendiri.`);
+console.log(`Tag manual tetap bisa: git tag v${version} && git push origin v${version}`);

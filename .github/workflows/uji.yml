@@ -15,8 +15,33 @@ concurrency:
 
 jobs:
   uji:
-    runs-on: ubuntu-latest
+    # Uji dibagi ke beberapa job paralel supaya tiap job jauh di bawah batas waktu
+    # (sejak 1.15 ada 12 ukuran layar termasuk HP lipat dan 29 halaman).
+    name: uji (${{ matrix.bagian }})
+    runs-on: ubuntu-24.04 # dikunci: Playwright 1.56 belum mendukung ubuntu-latest (26.04)
     timeout-minutes: 40
+    continue-on-error: ${{ matrix.boleh_gagal == true }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - bagian: tata letak terang
+            saring: tata-letak
+            skema: light
+          - bagian: tata letak gelap
+            saring: tata-letak
+            skema: dark
+          - bagian: tanpa JS
+            saring: tanpa-js
+          - bagian: sentuh dan interaksi
+            saring: layar-sentuh,interaksi,kelas
+          - bagian: generator dan SEO
+            saring: dokumen,email,grafis,ikon,react,token,seo,ssr
+          # Mesin Safari (WebKit) dan Firefox. Wajib lulus sejak 1.16.0 (hasil pertama: 112 cek hijau).
+          # Kalau suatu saat perlu dilonggarkan sementara, tambahkan boleh_gagal: true di sini.
+          - bagian: safari dan firefox
+            saring: peramban-lain
+            peramban: webkit firefox
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,12 +49,14 @@ jobs:
           node-version: 22
       - name: Pasang dependensi uji
         run: npm ci --no-audit --no-fund
-      - name: Pasang Chromium
-        run: npx playwright install --with-deps chromium
+      - name: Pasang browser
+        run: npx playwright install --with-deps ${{ matrix.peramban || 'chromium' }}
       - name: Cek token dan file konteks sudah dibuat ulang
         run: |
           node scripts/build-tokens.mjs
           node scripts/build-konteks.mjs
           git diff --exit-code -- tokens FUSIONIFY-UI-KONTEKS.md || (echo "::error::Jalankan npm run build:tokens dan npm run build:konteks lalu commit hasilnya" && exit 1)
-      - name: Jalankan semua uji
-        run: npm test
+      - name: Jalankan uji (${{ matrix.bagian }})
+        run: npm test -- ${{ matrix.saring }}
+        env:
+          FY_SKEMA: ${{ matrix.skema }}

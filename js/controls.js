@@ -175,9 +175,10 @@ function showPop(host, btn, pop, label) {
   });
   openPop = { pop, scrim, btn, host };
 }
-document.addEventListener("pointerdown", (e) => {
+// Dipasang di initControls(), bukan saat modul diimpor, supaya aman di-render di server (SSR).
+const tutupPopDiLuar = (e) => {
   if (openPop && !openPop.host.contains(e.target)) closePop(false);
-});
+};
 
 /* =========================================================
    DATE PICKER
@@ -685,7 +686,7 @@ function initUpload(wrap) {
 const CHECKS = ikon("dibaca", "read");
 function initChat(chat) {
   if (!once(chat, "_fyChat")) return;
-  const wide = matchMedia("(min-width: 900px)");
+  const wide = matchMedia("(min-width: 840px)");
   const convos = $$(".convo[data-thread]", chat);
   const threads = $$(".thread", chat);
   const scrollEnd = (t) => { const m = $(".msgs", t); if (m) m.scrollTop = m.scrollHeight; };
@@ -1344,6 +1345,7 @@ function initTenggat(box) {
 export function initControls(root = document) {
   if (!cekLisensi()) return api;
   if (root === document && !once(document, "_fyControls")) return api;
+  if (root === document) document.addEventListener("pointerdown", tutupPopDiLuar);
 
   /* ---------- Dropdown / split button ---------- */
   const closeMenus = (except) => $$("[data-dropdown][aria-expanded='true']").forEach((b) => {

@@ -20,19 +20,21 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 ## Langkah kerja untuk web produk
 
 1. Cek dulu: ini web company atau web produk? Produk boleh punya logo sendiri, tapi sistem desainnya sama. Jangan menciptakan palet baru.
+   Lalu pilih **gaya sesuai kategori** di `<html data-gaya="...">` (`css/gaya.css`) dan **pola hero** (`.hero`): stiker/tanpa atribut + `pola-maskot` (company, konten, acara), `toko` + `pola-demo` (Premiumify, FUSIONIFY BOT), `tenang` + `pola-pratinjau` (FTVPay, TMail, produk uang/data; tanpa maskot di hero), `jasa` + `pola-tengah` (Solutions), `teknis` + `pola-cari` (dokumentasi). Jangan menyalin hero fusionify.id (maskot melambai di kanan) ke semua produk. Contoh semua: `templates/gaya.html?gaya=...`.
 2. Cek domainnya terdaftar di `js/lisensi.js` (`DOMAIN_RESMI`). Kalau belum, kit tidak menjalankan interaksi di sana; minta pemilik menambahkannya dan merilis versi baru.
 3. Pasang kit dan kunci versinya: `git submodule add https://github.com/FUSIONIFY-ID/Fusionify_UI public/fusionify-ui` lalu `git checkout vX.Y.Z` di dalamnya (atau `npm i github:FUSIONIFY-ID/Fusionify_UI#vX.Y.Z`), lalu `npm i gsap lenis`.
-4. Untuk halaman baru, mulai dari template: `templates/landing-produk.html` (hero maskot, fitur, cara kerja, harga, testimoni, FAQ, CTA, form, footer + badge), `templates/404.html`, `500.html`, `offline.html`, `maintenance.html`, `templates/auth/masuk.html` / `daftar.html` / `lupa-password.html` / `atur-ulang-password.html` / `verifikasi.html` (kode OTP), `templates/dashboard.html` (pengguna), `templates/admin.html` (admin), `templates/app-mobile.html` (aplikasi HP), `templates/chat.html` (pesan), `templates/acara.html` (detail acara ala Luma), `templates/komponen.html` (katalog kontrol). Ganti semua bagian bertanda `GANTI`.
+4. Untuk halaman baru, mulai dari template: `templates/gaya.html` (lima gaya dan pola hero), `templates/landing-produk.html` (hero maskot, fitur, cara kerja, harga, testimoni, FAQ, CTA, form, footer + badge), `templates/404.html`, `500.html`, `offline.html`, `maintenance.html`, `templates/auth/masuk.html` / `daftar.html` / `lupa-password.html` / `atur-ulang-password.html` / `verifikasi.html` (kode OTP), `templates/dashboard.html` (pengguna), `templates/admin.html` (admin), `templates/app-mobile.html` (aplikasi HP), `templates/chat.html` (pesan), `templates/acara.html` (detail acara ala Luma), `templates/komponen.html` (katalog kontrol). Ganti semua bagian bertanda `GANTI`.
 5. `<head>`: isi `snippets/head-script.html`, preload Afacad Flux dan Sansation 400 (jangan impor paket font penuh), muat `css/fusionify.css` (atau impor file CSS lewat bundler supaya bisa di-inline).
 6. Setelah `<body>`: `snippets/sprite.html`. Sebelum `</body>`: `snippets/body-parts.html` (kursor, toast, tirai transisi), lalu `import { initFusionify } from ".../js/motion.js"; initFusionify();`.
 7. Bangun halaman dari komponen kit (daftar di bawah, contoh markup di `demo/index.html` dan `templates/komponen.html`). Jangan menambahkan Tailwind/Bootstrap di atasnya. Untuk desain, pakai komponen dan variabel di library Figma.
 8. Pasang badge di footer web produk:
    `<a class="fy-badge" href="https://fusionify.id" rel="noopener"><img src=".../badge/produk-fusionify-id-dark.png" alt="Sebuah produk dari FUSIONIFY" width="340" height="100"></a>` (tersedia `{id,en}-{light,dark}`).
 9. Jangan menyalin momen khas fusionify.id (segel menutup hero, footer malam Bogor, orbit ekosistem) apa adanya. Rakit momen khas produk dari bagian yang sama: segel, maskot, gelombang.
-10. QA di **tema terang dan gelap**, ukuran 375, 390, 768, 820, 1024, 1366, 1440, 1920 px: tanpa scroll horizontal, tanpa teks bertabrakan, tanpa kartu yatim di grid. Cek reduced motion (semua konten harus langsung tampil) dan tanpa JavaScript. Periksa kontras dengan axe **setelah** semua elemen `data-reveal` tampil. Semua `<img>` wajib `width`/`height`; jangan ada `<img>` tanpa `src` di HTML.
-11. Ukur performa scroll sebelum dan sesudah menambah animasi.
-12. Di repo kit: jalankan `npm test` (tata letak, kontras, layar sentuh, tanpa JS, lisensi domain, semua interaksi; juga jalan di GitHub Actions). Komponen atau template baru wajib ditambah ujinya di `tests/`.
-13. Web produk mengunci satu versi kit. Jangan mengubah file kit di dalam proyek produk; ubah di repo kit, catat di CHANGELOG, samakan `version` di `package.json`, rilis dengan tag `vX.Y.Z` (`npm run release`), lalu naikkan versinya di produk. Nomor: Z perbaikan aman, Y komponen baru yang tidak merusak, X kalau kelas atau markup berubah.
+10. Breakpoint hanya kelas ukuran layar ala Material 3: ringkas < 600, sedang 600-839, lebar 840-1199, besar 1200-1599, sangat besar >= 1600 (plus `max-width: 420px` untuk layar sangat sempit). HP lipat setengah terbuka: pakai `@media (horizontal-viewport-segments: 2)` dan `env(viewport-segment-*)` supaya isi tidak jatuh di engsel. JS membaca `html[data-kelas]`/`html[data-lipat]` (`js/kelas.js`).
+11. QA di **tema terang dan gelap**, ukuran 344 (layar luar HP lipat), 375, 390, 600, 673×841 dan 841×673 (layar dalam HP lipat), 768, 820, 1024, 1366, 1440, 1920 px: tanpa scroll horizontal, tanpa teks bertabrakan, tanpa kartu yatim di grid. Cek reduced motion (semua konten harus langsung tampil) dan tanpa JavaScript. Periksa kontras dengan axe **setelah** semua elemen `data-reveal` tampil. Semua `<img>` wajib `width`/`height`; jangan ada `<img>` tanpa `src` di HTML.
+12. Ukur performa scroll sebelum dan sesudah menambah animasi.
+13. Di repo kit: jalankan `npm test` (tata letak, kontras, layar sentuh, tanpa JS, lisensi domain, semua interaksi; juga jalan di GitHub Actions). Komponen atau template baru wajib ditambah ujinya di `tests/`.
+14. Web produk mengunci satu versi kit. Jangan mengubah file kit di dalam proyek produk; ubah di repo kit, catat di CHANGELOG, samakan `version` di `package.json`, rilis dengan tag `vX.Y.Z` (`npm run release`), lalu naikkan versinya di produk. Nomor: Z perbaikan aman, Y komponen baru yang tidak merusak, X kalau kelas atau markup berubah.
 
 ## Komponen kit (kelas CSS)
 
@@ -42,7 +44,8 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 - Aksi: `.btn` (`.ghost`, `.sm`), `.icon-btn`, `.theme-btn`, `.chip` (`go`, `beta`, `wip`, `plan`, `eos`)
 - Navigasi: `.nav` (+ `.brand`, `.brand-mark`, `.brand-word`, `.nav-links`, `.nav-tools`, `.lang`, `.sound-btn`, `.menu-btn`), `.drawer`
 - Kartu: `.card` (`.blue`, `.tint`), `.stats`/`.stat`, `.works`/`.work` (+ `.cover`, `.meta`, `.arrow`, `.cover-note`), `.person` (foto bingkai segel)
-- Maskot: `.bubble` (`.left`), `.mascot-stage` (+ `.seal-bg`, `.seal-ring`, `.body`)
+- Maskot: `.bubble` (`.left`), `.mascot-stage` (+ `.seal-bg`, `.seal-ring`, `.body`) untuk maskot diam; hero memakai `.stage` + `[data-mascot]` interaktif seperti fusionify.id (salin dari `templates/landing-produk.html`)
+- Hero: `.hero.pola-maskot` = hero fusionify.id (`h1 > .l1 + .l2 + .dot` kosong, `.hero-cta`, `.hero-meta` angka asli, `.scroll-hint`); pola lain lihat `templates/gaya.html`
 - Lain: `.marquee`, `.faq`, `.wave`, `.footer` (+ `.fcols`, `.fbar`, `.to-top`, `.fy-badge`), `.toast`, `.cursor`, `.veil`
 - Utilitas: `.fx-oversize` untuk hiasan SVG yang sengaja lebih besar dari wadahnya (setara `max-width: none`)
 
@@ -68,7 +71,7 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 `controls.css` (web, aplikasi, dan aplikasi HP; termasuk di `fusionify.css`; interaksi di `js/controls.js`, otomatis dipanggil `initFusionify()`/`initApp()`):
 - Menu dan dialog: `.dropdown` + `[data-dropdown]` + `.menu`, `dialog.modal` (`.full` di HP) + `[data-open-modal]`/`[data-close]`, `dialog.sheet` (bottom sheet, bisa ditarik) dan `dialog.side-sheet` + `[data-open-sheet]`, `.tabs` (`data-tabs`)
 - Tombol: `.btn-group` (`data-btn-group="single|multi"`), `.split-btn`, `.fab` (+ extended), `.fab-dock`, `.fab-menu` (`data-fab-menu`), `[data-fab-shrink]`
-- Navigasi HP: `.appbar` (`data-appbar`, `.appbar-title`), `.navbar` + `.with-navbar`, `.rail` + `.with-rail`, `.m-app` (bar bawah jadi rail mulai 700px)
+- Navigasi HP: `.appbar` (`data-appbar`, `.appbar-title`), `.navbar` + `.with-navbar`, `.rail` + `.with-rail`, `.m-app` (bar bawah jadi rail mulai 600px, kelas sedang)
 - Isi: `.carousel` (`data-carousel`, tidak berputar sendiri), `.list`/`.li`, `.chip-btn` (filter/aksi, `aria-pressed`), `.chip-input`, `.badge`/`.has-badge`, `.tip-wrap` + `.tip` (tooltip)
 - Input: `.slider`, `.range2` (`data-range2`), `.search-bar` + `[data-suggest]`, `.picker` (`data-datepicker`, `data-timepicker`)
 - Status: `.spinner` (segel), `.ring`, `.progress.indeterminate`, `.skel`, `.snackbar` (`snackbar(teks, { action, onAction })`), `.float-bar`
@@ -80,7 +83,7 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 - Keadaan: `.state` (`.error`, `.offline`, `.sm`) dengan maskot, satu kalimat, satu tombol; `.offline-bar[data-offline-bar]` muncul otomatis saat koneksi putus; halaman `templates/500.html`, `offline.html`, `maintenance.html`
 - Lain: `[data-chat]` (obrolan; di HP tombol back Android menutup isi obrolan), `[data-ics]` (unduh .ics, tambah ke kalender), `[data-share]`
 - Navigasi web: `.breadcrumb` (nav > ol > li, halaman sekarang `aria-current="page"`), `.pagination` (aktif `aria-current="page"`, panah `rel="prev|next"`), `.accordion` (details/summary + `.acc-body`)
-- Form tambahan: `.input-group` + `.addon` (awalan Rp/ikon, akhiran @domain/tombol), `.qty[data-qty]` (tombol `data-qty-step`, batas dari min/max input), `.kbd`
+- Form tambahan: `.input-group` + `.addon` (awalan Rp/ikon, akhiran `@domain`/tombol), `.qty[data-qty]` (tombol `data-qty-step`, batas dari min/max input), `.kbd`
 - Toko: `.product-grid` + `.product-card` (`.pc-media[.contain]`, `.pc-diskon`, `.pc-body`, `.pc-cat`, `.pc-title a`, `.pc-actions`, `.habis`), `.harga` (+ `<s>`), `.rating` (`style="--nilai:4.5"`, `role="img"` + aria-label) dan `.rating-input` (radio 5→1), `.countdown[data-tenggat="ISO"]` (`[data-cd]`), `.gallery[data-gallery]` → lightbox. Harga, rating, ulasan wajib asli
 - Linimasa: `ol.timeline` > `li.done|now|fail` (`.tl-time`, `.tl-title`, `p`)
 - Pengumuman `.announce[data-announce="id"]` (tutup diingat), persetujuan cookie `.consent[data-consent]` (dua tombol `data-consent-pilih="penting|semua"` sama menonjol; `pilihanCookie()`, event `fy:consent`)
@@ -90,7 +93,7 @@ Atribut `initFusionify()`: `data-split`, `data-reveal`, `data-assemble`, `data-c
 
 ## Domain resmi
 
-- `js/lisensi.js`: kit hanya berjalan di `fusionify.id`, `fusionify.biz.id`, partner `premiumify.my.id` dan `studydate.id`, serta subdomainnya (plus localhost, `*.local`, file lokal). Di domain lain interaksi dan animasi mati, konten tetap terbaca, dan konsol memberi peringatan. Jangan dihapus atau diakali.
+- `js/lisensi.js`: kit hanya berjalan di `fusionify.id`, `fusionify.biz.id`, dan domain partner di `DOMAIN_RESMI`, serta subdomainnya (plus localhost, `*.local`, file lokal). Di domain lain interaksi dan animasi mati, konten tetap terbaca, dan konsol memberi peringatan. Jangan dihapus atau diakali.
 - Domain partner baru ditambah di `DOMAIN_RESMI` atas izin pemilik, dicatat di CHANGELOG, lalu rilis versi baru dan naikkan versi kit di web produk tersebut.
 
 ## Token warna
@@ -130,6 +133,14 @@ Atribut `initFusionify()`: `data-split`, `data-reveal`, `data-assemble`, `data-c
 
 Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis/`, `bayangan/`, `status/`), ukuran di koleksi `Ukuran` (`radius/`, `jarak/`, `garis/stiker`, `sentuh/minimal`). Kalau token berubah, ubah di `tokens.css` dan Figma sekaligus.
 
+## Token fondasi dan SEO (1.16)
+
+- Lapisan global `--z-sticky`, `--z-laci`, `--z-menu`, `--z-nav`, `--z-fab`, `--z-popover`, `--z-dialog`, `--z-skip`, `--z-kursor`, `--z-toast`, `--z-snackbar`, `--z-offline`, `--z-tirai`. Jangan menulis angka z-index sendiri di atas 3.
+- Durasi `--dur-1` (0,2 dtk) sampai `--dur-6` (0,7 dtk) dengan kurva `--ease`/`--spring`. Skala huruf `--fs-label` 13, `--fs-kecil` 14, `--fs-teks` 17, `--fs-lead` 20, `--fs-judul-s` 24, `--fs-judul-m` 32, `--fs-judul-l` 44 (px).
+- Token standar W3C (DTCG 2025.10): `tokens/fusionify.tokens.json`.
+- Halaman publik: blok SEO dari `snippets/seo-head.html` (robots, canonical, hreflang, OG 1200x630, JSON-LD `@graph` dengan Organization FUSIONIFY). Halaman masuk, dashboard, admin, error: `noindex`. Root domain: `seo/robots.txt`, `seo/sitemap.xml`, `seo/llms.txt`. Uji `tests/seo.mjs`.
+- Modul `js/` aman diimpor di server (Next.js, Astro); `initFusionify()`/`initApp()` aman dipanggil ulang saat navigasi SPA.
+
 ## Mode gelap
 
 - Semua komponen memakai token tema: `--card`, `--field`, `--surface`, `--surface-2`, `--edge` (garis stiker), `--edge-shadow` (bayangan pejal), `--ink`/`--ink-2`/`--ink-3`, `--text-blue`/`--text-blue-deep`, `--inverse-bg`/`--inverse-fg`, `--danger`/`--danger-bg`. **Jangan menulis `#fff` atau `var(--ink)` untuk latar, garis, atau bayangan.** Teks/ikon di atas biru memakai `var(--on-dark)` / `var(--on-dark-2)`. CSS komponen kit tidak berisi hex sama sekali (dicek `tests/token.mjs`).
@@ -147,6 +158,7 @@ Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis
 - Setiap daftar atau panel yang bisa kosong punya `.state` dengan maskot dan satu langkah berikutnya; error selalu ada tombol "Coba lagi".
 - Login Google hanya dipasang kalau OAuth benar-benar tersedia.
 - Aplikasi tanpa smooth scroll, kursor segel, atau reveal.
+- Dashboard dan admin memakai `data-kepadatan="padat"` (teks 15px, sidebar 232px, panel datar 1px, tabel rapat). Sidebar: laci < 600px, rel ikon 600-839px, penuh mulai 840px.
 
 ## Aplikasi HP
 
@@ -156,7 +168,8 @@ Di Figma, warna ada di koleksi `Warna` (grup `brand/`, `teks/`, `latar/`, `garis
 - Target sentuh minimal 44px, area aman notch lewat `env(safe-area-inset-*)`, input 16px di layar sentuh (anti zoom iOS, sudah di `base.css`).
 - Satu FAB per layar; navigation bar 3 sampai 5 tujuan; bottom sheet bisa ditutup dengan tarik, tombol, dan Esc/kembali.
 - Bayangan stiker di native: offset ke bawah tanpa blur, bukan `elevation`.
-- QA HP pakai emulasi layar sentuh (360, 375, 390, 430 px) di kedua tema.
+- QA HP pakai emulasi layar sentuh (344, 360, 375, 390, 430, 673 px) di kedua tema. Ukuran HP lipat kira-kira; cek juga di perangkat asli.
+- Native: kelas ukuran layar ada di token (`FyKelas` Flutter/Compose, `Fy.Kelas` Swift, `kelasLayar` JSON/RN, `fy_kelas_*` dimen Android). Android XML: pakai qualifier `values-w600dp` / `values-w840dp`.
 
 ## Huruf (semua OFL, di-host sendiri, subset latin, `font-display: swap`)
 

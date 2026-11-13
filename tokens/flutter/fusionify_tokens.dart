@@ -346,6 +346,26 @@ class FyTouch {
   static const double gutter = 16;
 }
 
+/// Kelas ukuran layar (sama dengan web). Contoh: final k = FyKelas.dari(MediaQuery.sizeOf(context).width);
+class FyKelas {
+  static const double sedang = 600;
+  static const double lebar = 840;
+  static const double besar = 1200;
+  static const double sangatBesar = 1600;
+  static String dari(double w) => w >= sangatBesar ? 'sangat-besar' : w >= besar ? 'besar' : w >= lebar ? 'lebar' : w >= sedang ? 'sedang' : 'ringkas';
+}
+
+/// Skala huruf (sama dengan --fs-* di web).
+class FyTextSize {
+  static const double label = 13;
+  static const double kecil = 14;
+  static const double teks = 17;
+  static const double lead = 20;
+  static const double judulS = 24;
+  static const double judulM = 32;
+  static const double judulL = 44;
+}
+
 /// Gaya stiker FUSIONIFY: garis 2px warna edge + bayangan pejal ke bawah tanpa blur.
 BoxDecoration fySticker(FyColors c, {Color? fill, double radius = FyRadius.l, double drop = 6}) => BoxDecoration(
       color: fill ?? c.card,

@@ -1,0 +1,42 @@
+# FUSIONIFY UI · contoh robots.txt untuk web produk (lihat seo/README.md).
+# Salin ke root domain produk dan GANTI nama-produk.id. Tanpa baris Content-Signal.
+
+User-agent: *
+Allow: /
+Disallow: /akun/
+Disallow: /admin/
+Disallow: /api/
+
+# Mesin pencari
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Asisten dan mesin jawaban AI (supaya produk bisa dikutip ChatGPT, Claude, Perplexity, Gemini, Apple)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://nama-produk.id/sitemap.xml

@@ -3,6 +3,7 @@
 //   npx playwright install chromium
 //   npm test                 (semua)
 //   npm test -- interaksi    (hanya file yang namanya mengandung "interaksi")
+//   npm test -- dokumen,email (beberapa saringan dipisah koma)
 // Keluar dengan kode 1 kalau ada yang gagal, jadi bisa dipakai di GitHub Actions.
 import http from "node:http";
 import fs from "node:fs";
@@ -28,8 +29,8 @@ const server = http.createServer((req, res) => {
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
 const base = `http://127.0.0.1:${server.address().port}`;
 
-const filter = process.argv[2] || "";
-const files = fs.readdirSync(here).filter((f) => f.endsWith(".mjs") && !f.startsWith("_") && f !== "run.mjs" && f.includes(filter)).sort();
+const filters = (process.argv[2] || "").split(",").map((s) => s.trim());
+const files = fs.readdirSync(here).filter((f) => f.endsWith(".mjs") && !f.startsWith("_") && f !== "run.mjs" && filters.some((x) => f.includes(x))).sort();
 const results = [];
 for (const f of files) {
   const t0 = Date.now();

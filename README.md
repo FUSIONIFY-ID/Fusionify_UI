@@ -87,7 +87,7 @@ Kalau token di `css/tokens.css` berubah, samakan juga variabel di Figma (dan seb
 
 ## Domain resmi
 
-Kit ini hanya berjalan di `fusionify.id`, `fusionify.biz.id`, domain partner `premiumify.my.id` dan `studydate.id`, serta subdomain semuanya (lihat `js/lisensi.js`). Untuk pengembangan, `localhost`, `127.0.0.1`, `*.local`, dan file yang dibuka langsung tetap jalan. Menambah domain partner: tulis di `DOMAIN_RESMI`, catat di CHANGELOG, lalu rilis versi baru.
+Kit ini hanya berjalan di `fusionify.id`, `fusionify.biz.id`, dan domain partner yang diizinkan, serta subdomain semuanya. Daftar lengkapnya hanya di `js/lisensi.js` (`DOMAIN_RESMI`). Untuk pengembangan, `localhost`, `127.0.0.1`, `*.local`, dan file yang dibuka langsung tetap jalan. Menambah domain partner: tulis di `DOMAIN_RESMI`, catat di CHANGELOG, lalu rilis versi baru.
 
 ## Versi
 
@@ -97,15 +97,15 @@ Kit ini dirilis bernomor versi (`1.5.0`, `1.6.1`, dst.). Web produk **mengunci**
   ```
   git submodule add https://github.com/FUSIONIFY-ID/Fusionify_UI public/fusionify-ui
   cd public/fusionify-ui
-  git checkout v1.14.0
+  git checkout v1.16.0
   ```
-  Naik versi nanti: `git fetch --tags` lalu `git checkout v1.15.0`, cek web-nya, commit.
-- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.14.0`. Karena repo privat, mesin build perlu akses ke repo (token GitHub).
-- **Zip**: unduh `Fusionify_UI-v1.14.0.zip` dari halaman Releases.
+  Naik versi nanti: `git fetch --tags` lalu `git checkout v1.16.0`, cek web-nya, commit.
+- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.16.0`. Kalau repo dijadikan privat, mesin build perlu akses ke repo (token GitHub).
+- **Zip**: unduh `Fusionify_UI-v1.16.0.zip` dari halaman Releases.
 
 Aturan nomor: angka terakhir (1.5.**1**) untuk perbaikan kecil yang aman, angka tengah (1.**6**.0) untuk komponen baru yang tidak merusak, angka depan (**2**.0.0) kalau ada kelas atau markup yang berubah dan web produk perlu disesuaikan. Semua perubahan dicatat di `CHANGELOG.md`.
 
-Cara merilis: ubah `version` di `package.json`, tambah bagian baru di `CHANGELOG.md`, lalu jalankan `npm run release` dan ikuti perintahnya. GitHub Actions akan menguji, membuat zip, dan menerbitkan rilisnya.
+Cara merilis: ubah `version` di `package.json`, tambah bagian baru di `CHANGELOG.md` (`npm run release` mengecek keduanya), lalu merge ke `main`. Workflow Rilis di GitHub Actions menguji, membuat tag `vX.Y.Z`, zip, dan menerbitkan rilisnya sendiri. Versi lama yang tag-nya terlewat dirilis lewat tab Actions > Rilis > Run workflow (isi versi dan commit-nya).
 
 ## Uji otomatis
 
@@ -131,7 +131,7 @@ Menjalankan sebagian: `npm test -- kursor` (nama file mengandung kata itu). Peme
 | Copilot di editor | `.github/copilot-instructions.md` |
 | Cursor (aturan lama) | `.cursor/rules/*.mdc` |
 | Aider | `.aider.conf.yml` membaca `AGENTS.md` dan `DESIGN.md` |
-| Agent yang mendukung skill (Claude Code, Codex, Cursor, Copilot, Gemini CLI, dan 70+ lainnya) | Pasang skill: `npx skills add FUSIONIFY-ID/Fusionify_UI` (repo privat, jadi perlu login GitHub atau `GITHUB_TOKEN`) |
+| Agent yang mendukung skill (Claude Code, Codex, Cursor, Copilot, Gemini CLI, dan 70+ lainnya) | Pasang skill: `npx skills add FUSIONIFY-ID/Fusionify_UI` (kalau repo privat, perlu login GitHub atau `GITHUB_TOKEN`) |
 | **AI versi chat web** (ChatGPT, Gemini, Grok, Qwen, Claude di browser) | Tidak bisa membaca repo. **Upload `FUSIONIFY-UI-KONTEKS.md`** ke chat, lalu tulis permintaan |
 
 `FUSIONIFY-UI-KONTEKS.md` dibuat otomatis dari `AGENTS.md`, `DESIGN.md`, semua CSS, dan snippet. Setiap kali salah satunya berubah, jalankan `node scripts/build-konteks.mjs`.
@@ -142,7 +142,8 @@ Menjalankan sebagian: `npm test -- kursor` (nama file mengandung kata itu). Peme
 | --- | --- |
 | `css/` | `tokens.css` (termasuk mode gelap), `base.css`, `components.css`, `product.css` (komponen web produk), `controls.css` (kontrol web dan aplikasi HP), `app.css` (dashboard, admin, masuk), `fusionify.css` (semua kecuali app.css) |
 | `js/` | `motion.js` (`initFusionify`, web publik), `app.js` (`initApp`, aplikasi), `controls.js` (`initControls`, `snackbar`), `lisensi.js` (kunci domain), `theme.js` (terang/gelap), `seal.js` (`seal`, `SEAL_PATH`) |
-| `snippets/` | Potongan HTML wajib: head, sprite SVG, kursor/toast/tirai, plus `pwa-head.html` dan `manifest.webmanifest` untuk aplikasi HP |
+| `snippets/` | Potongan HTML wajib: head, sprite SVG, kursor/toast/tirai, plus `pwa-head.html` dan `manifest.webmanifest` untuk aplikasi HP, dan `seo-head.html` (blok SEO halaman publik) |
+| `seo/` | Paket SEO, GEO, AIO, AEO: contoh `robots.txt` (bot AI diizinkan), `sitemap.xml` dengan hreflang, `llms.txt`, dan panduan langkah di luar kode |
 | `tokens/` | Token dan huruf untuk aplikasi native (Flutter, SwiftUI, Compose, React Native, Android XML untuk Kotlin/Java) |
 | `fonts/` | Afacad Flux, Sansation, Caveat, Exo 2 (woff2, OFL) |
 | `brand/` | Segel Fi, wordmark, emblem, logo horizontal/vertikal/legacy, ikon aplikasi (`app-icons/`) |

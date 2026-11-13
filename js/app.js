@@ -18,16 +18,21 @@
 // - Toast (pakai markup .toast dari snippets/body-parts.html)
 
 import { initTheme } from "./theme.js";
+import { initKelas } from "./kelas.js";
 import { cekLisensi } from "./lisensi.js";
 import { initControls, snackbar, otpError } from "./controls.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
+// Sama dengan initFusionify(): pemanggilan kedua mengembalikan objek yang sama tanpa memasang ulang listener.
+let hasilApp = null;
 export function initApp() {
   if (!cekLisensi()) return { toast() {}, snackbar() {}, otpError() {}, setSide() {} };
+  if (hasilApp) { initControls(document.body); return hasilApp; } // elemen baru tetap diberi interaksi
   window.__fx = true; // supaya fallback .fx-off di <head> tidak aktif
   initTheme();
+  initKelas(); // data-kelas dan data-lipat di <html> (js/kelas.js)
   initControls(); // dropdown, modal, sheet, tab, chip, picker, snackbar, dll. (js/controls.js)
 
   /* ---------- Sidebar HP ---------- */
@@ -38,13 +43,13 @@ export function initApp() {
     if (!app) return;
     app.classList.toggle("side-open", open);
     sideBtns.forEach((b) => b.setAttribute("aria-expanded", String(open)));
-    if (side && matchMedia("(max-width: 960px)").matches) side.inert = !open;
+    if (side && matchMedia("(max-width: 599px)").matches) side.inert = !open;
     if (open) $("a", side)?.focus({ preventScroll: true });
   };
-  const syncSide = () => { if (side) side.inert = matchMedia("(max-width: 960px)").matches && !app?.classList.contains("side-open"); };
+  const syncSide = () => { if (side) side.inert = matchMedia("(max-width: 599px)").matches && !app?.classList.contains("side-open"); };
   sideBtns.forEach((b) => b.addEventListener("click", () => setSide(!app.classList.contains("side-open"))));
   $(".scrim", app || document)?.addEventListener("click", () => setSide(false));
-  matchMedia("(max-width: 960px)").addEventListener("change", () => { setSide(false); syncSide(); });
+  matchMedia("(max-width: 599px)").addEventListener("change", () => { setSide(false); syncSide(); });
   syncSide();
 
   /* ---------- Password ---------- */
@@ -174,5 +179,6 @@ export function initApp() {
     new MutationObserver((ms) => { if (!antre && ms.some((m) => m.addedNodes.length)) antre = requestAnimationFrame(() => { antre = 0; watch(); }); }).observe(document.body, { childList: true, subtree: true });
   }
 
-  return { toast, snackbar, otpError, setSide };
+  hasilApp = { toast, snackbar, otpError, setSide };
+  return hasilApp;
 }

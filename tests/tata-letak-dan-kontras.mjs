@@ -2,11 +2,15 @@
 import { chromium } from 'playwright';
 import { BASE, AXE, NM, FIX } from './_env.mjs';
 import fs from 'fs';
-const pages=['demo/index.html','templates/landing-produk.html','templates/404.html','templates/auth/masuk.html','templates/auth/daftar.html','templates/auth/lupa-password.html','templates/auth/atur-ulang-password.html','templates/dashboard.html','templates/admin.html','templates/komponen.html','templates/app-mobile.html','templates/chat.html','templates/acara.html','templates/auth/verifikasi.html','templates/500.html','templates/offline.html','templates/maintenance.html','templates/bayar-qris.html','templates/status.html','templates/dokumentasi.html','templates/legal/privasi.html','templates/legal/syarat.html','templates/ikon.html'];
-const sizes=[[375,667],[390,844],[768,1024],[820,1180],[1024,768],[1366,768],[1440,900],[1920,1080]];
+const pages=['demo/index.html','templates/landing-produk.html','templates/404.html','templates/auth/masuk.html','templates/auth/daftar.html','templates/auth/lupa-password.html','templates/auth/atur-ulang-password.html','templates/dashboard.html','templates/admin.html','templates/komponen.html','templates/app-mobile.html','templates/chat.html','templates/acara.html','templates/auth/verifikasi.html','templates/500.html','templates/offline.html','templates/maintenance.html','templates/bayar-qris.html','templates/status.html','templates/dokumentasi.html','templates/legal/privasi.html','templates/legal/syarat.html','templates/ikon.html','templates/gaya.html','templates/gaya.html?gaya=toko','templates/gaya.html?gaya=tenang','templates/gaya.html?gaya=jasa','templates/gaya.html?gaya=teknis'];
+// HP, layar luar HP lipat (sempit), batas kelas sedang, layar dalam HP lipat (hampir persegi, tegak dan mendatar), tablet, laptop, desktop.
+// Ukuran HP lipat kira-kira dan berbeda tiap generasi; tetap cek di perangkat asli.
+const sizes=[[344,882],[375,667],[390,844],[600,960],[673,841],[841,673],[768,1024],[820,1180],[1024,768],[1366,768],[1440,900],[1920,1080]];
 const b = await chromium.launch(); const issues=[];
 const route = (p)=>p.route(/cdn\.jsdelivr\.net\/npm\/(gsap|lenis)@[^/]+\/(.*)$/, r=>{ const m=r.request().url().match(/npm\/(gsap|lenis)@[^/]+\/(.*)$/); r.fulfill({path: NM+m[1]+'/'+m[2], contentType:'text/javascript'}); });
-for (const scheme of ['light','dark']) for (const pg of pages) {
+// FY_SKEMA=light|dark menjalankan satu tema saja (dipakai CI untuk membagi uji ke dua job paralel)
+const skema = process.env.FY_SKEMA ? [process.env.FY_SKEMA] : ['light','dark'];
+for (const scheme of skema) for (const pg of pages) {
   for (const [w,h] of sizes) {
     const c = await b.newContext({viewport:{width:w,height:h}, colorScheme:scheme}); const p = await c.newPage(); await route(p);
     const bad=[]; p.on('response', r=>{ if(r.status()>=400) bad.push(r.status()+' '+r.url()); }); p.on('pageerror',e=>bad.push('JS '+e.message));

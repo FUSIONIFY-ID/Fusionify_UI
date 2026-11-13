@@ -9,20 +9,20 @@
 .btn {
   --bg: var(--blue); --fg: var(--on-dark);
   position: relative; display: inline-flex; align-items: center; gap: 10px;
-  padding: 14px 22px; border-radius: 999px; border: 2px solid var(--edge);
+  padding: 14px 22px; border-radius: 999px; border: var(--edge-width) solid var(--edge);
   background: var(--bg); color: var(--fg); text-decoration: none; font-weight: 700; font-size: 16px;
   box-shadow: var(--shadow-pop); cursor: pointer;
   /* Hanya transform yang beranimasi; bayangan dan latar berubah instan (lebih ringan, tetap terasa seperti stiker ditekan) */
-  transition: transform 0.35s var(--spring);
+  transition: transform var(--dur-4) var(--spring);
 }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 6px 0 var(--edge-shadow); }
-.btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge-shadow); }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 calc(6px * var(--angkat)) 0 var(--edge-shadow); }
+.btn:active { transform: translateY(2px); box-shadow: 0 calc(1px * var(--angkat)) 0 var(--edge-shadow); }
 .btn.ghost { --bg: var(--card); --fg: var(--ink); }
 .btn.sm { padding: 10px 18px; font-size: 15px; }
 .btn svg { width: 18px; height: 18px; }
 
 /* Tombol ikon bulat (suara, menu) */
-.icon-btn { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 0; cursor: pointer; transition: transform 0.3s var(--spring), background 0.2s; }
+.icon-btn { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 0; cursor: pointer; transition: transform var(--dur-3) var(--spring), background var(--dur-1); }
 .icon-btn:hover { transform: scale(1.08); background: var(--surface-2); }
 .icon-btn svg { width: 20px; height: 20px; }
 
@@ -55,11 +55,11 @@
    motion.js memasang .scrolled (>24px) dan .hide (scroll turun)
    ========================================================= */
 .nav {
-  position: fixed; inset: 14px var(--gut) auto; z-index: 60;
+  position: fixed; inset: 14px var(--gut) auto; z-index: var(--z-nav);
   display: flex; align-items: center; gap: 10px; justify-content: space-between;
   padding: 8px 8px 8px 14px; border-radius: 999px; isolation: isolate;
   /* Posisi atas turun 6px saat transparan, naik ke 14px saat jadi kapsul: lewat transform, bukan top/padding */
-  transform: translateY(6px); transition: transform 0.5s var(--ease);
+  transform: translateY(6px); transition: transform var(--dur-5) var(--ease);
   max-width: var(--max); margin-inline: auto;
 }
 /* Tampilan kapsul (latar kaca, garis, bayangan) ada di lapisan sendiri dan muncul dengan opacity */
@@ -73,26 +73,26 @@
 .nav.scrolled::before, html:not(.js) .nav::before, .fx-off .nav::before { opacity: 1; }
 .nav.hide { transform: translateY(-140%); }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.brand-mark { width: 34px; height: 34px; transition: transform 0.7s var(--spring); }
+.brand-mark { width: 34px; height: 34px; transition: transform var(--dur-6) var(--spring); }
 .brand:hover .brand-mark { transform: rotate(-200deg) scale(1.06); }
 .brand-word { width: auto; height: 19px; }
 .nav-links { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
-.nav-links a { display: block; padding: 8px 14px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 15px; color: var(--ink-2); transition: background 0.2s, color 0.2s; }
+.nav-links a { display: block; padding: 8px 14px; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 15px; color: var(--ink-2); transition: background var(--dur-1), color var(--dur-1); }
 .nav-links a:hover, .nav-links a[aria-current="true"], .nav-links a[aria-current="page"] { background: var(--surface); color: var(--text-blue-deep); }
 .nav-tools { display: flex; align-items: center; gap: 6px; }
 .nav .btn { padding: 10px 18px; font-size: 15px; }
-.lang { display: inline-flex; align-items: center; gap: 4px; height: 42px; font-family: var(--f-num); font-size: 13px; text-decoration: none; padding: 0 14px; border-radius: 999px; background: var(--surface); color: var(--ink-3); transition: background 0.2s; }
+.lang { display: inline-flex; align-items: center; gap: 4px; height: 42px; font-family: var(--f-num); font-size: 13px; text-decoration: none; padding: 0 14px; border-radius: 999px; background: var(--surface); color: var(--ink-3); transition: background var(--dur-1); }
 .lang:hover { background: var(--surface-2); }
 .lang b { font-weight: 600; } .lang b.on { color: var(--text-blue-deep); font-weight: 800; } .lang i { font-style: normal; opacity: 0.4; }
 .sound-btn { color: var(--ink-3); }
-.sound-btn .w1, .sound-btn .w2 { opacity: 0; transition: opacity 0.2s; }
+.sound-btn .w1, .sound-btn .w2 { opacity: 0; transition: opacity var(--dur-1); }
 .sound-btn[aria-pressed="true"] { color: var(--text-blue); }
 .sound-btn[aria-pressed="true"] .x { opacity: 0; }
 .sound-btn[aria-pressed="true"] .w1 { opacity: 1; animation: fy-wave 1.2s ease-in-out infinite; }
 .sound-btn[aria-pressed="true"] .w2 { opacity: 1; animation: fy-wave 1.2s ease-in-out -0.4s infinite; }
 @keyframes fy-wave { 50% { opacity: 0.35; } }
 .menu-btn { display: none; }
-.menu-btn path { transition: transform 0.35s var(--ease), opacity 0.2s; transform-origin: 12px 12px; }
+.menu-btn path { transition: transform var(--dur-4) var(--ease), opacity var(--dur-1); transform-origin: 12px 12px; }
 .menu-btn[aria-expanded="true"] .l1 { transform: translateY(4px) rotate(45deg); }
 .menu-btn[aria-expanded="true"] .l2 { transform: translate(-3px, -4px) rotate(-45deg) scaleX(1.6); }
 /* Menu layar penuh di HP: lingkaran biru membesar dari tombol menu.
@@ -101,17 +101,17 @@
    (gutter nav + padding 8px + setengah tombol 42px; nav top 14px + 8px + 21px). */
 .drawer {
   --menu-cx: calc(max(var(--gut), (100vw - var(--max)) / 2) + 29px); --menu-cy: 43px;
-  position: fixed; inset: 0; z-index: 55; background: transparent; color: var(--on-dark);
+  position: fixed; inset: 0; z-index: calc(var(--z-nav) - 5); background: transparent; color: var(--on-dark);
   isolation: isolate; overflow: hidden;
   display: grid; align-content: center; padding: 90px var(--gut) 40px;
-  visibility: hidden; transition: visibility 0s linear 0.7s; /* tunggu lingkaran selesai menyusut */
+  visibility: hidden; transition: visibility 0s linear var(--dur-6); /* tunggu lingkaran selesai menyusut */
 }
 .drawer::before {
   content: ""; position: absolute; z-index: -1; width: 300vmax; height: 300vmax; border-radius: 50%; background: var(--blue);
   right: calc(var(--menu-cx) - 150vmax); top: calc(var(--menu-cy) - 150vmax);
-  transform: scale(0); transition: transform 0.7s var(--ease); pointer-events: none;
+  transform: scale(0); transition: transform var(--dur-6) var(--ease); pointer-events: none;
 }
-.drawer > * { opacity: 0; transform: translateY(16px); transition: opacity 0.25s, transform 0.5s var(--ease); }
+.drawer > * { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-2), transform var(--dur-5) var(--ease); }
 .drawer.open { visibility: visible; transition-delay: 0s; }
 .drawer.open::before { transform: scale(1); }
 .drawer.open > * { opacity: 1; transform: none; transition-delay: 0.22s; }
@@ -125,7 +125,7 @@
 /* =========================================================
    SEKSI · putih (bawaan), .tint (biru sangat muda), .blue (biru penuh)
    ========================================================= */
-.sec { position: relative; padding: clamp(80px, 11vw, 150px) 0; overflow-x: clip; }
+.sec { position: relative; padding: var(--sec-y, clamp(80px, 11vw, 150px)) 0; overflow-x: clip; }
 .sec-head { display: grid; gap: 18px; margin-bottom: clamp(40px, 6vw, 70px); }
 .sec.tint { background: var(--surface); }
 .sec.blue { background: var(--blue); color: var(--on-dark); }
@@ -139,22 +139,22 @@
 /* =========================================================
    KARTU STIKER · garis 2px tinta, bayangan pejal, sudut besar
    ========================================================= */
-.card { position: relative; padding: 26px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); }
+.card { position: relative; padding: 26px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: var(--edge-width) solid var(--edge); box-shadow: var(--shadow-sticker); }
 .card.blue { background: var(--blue); color: var(--on-dark); }
 .card.tint { background: var(--surface); }
 .card h3 { font-size: 26px; margin-bottom: 6px; }
 .card p { font-size: 15px; color: var(--ink-2); }
 .card.blue p { color: var(--on-dark-2); }
-a.card { text-decoration: none; transition: transform 0.35s var(--spring); }
-a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shadow); }
+a.card { text-decoration: none; transition: transform var(--dur-4) var(--spring); }
+a.card:hover { transform: translateY(-4px); box-shadow: 0 calc(10px * var(--angkat)) 0 var(--edge-shadow); }
 .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-@media (max-width: 1000px) { .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .grid-3 > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
-@media (max-width: 620px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+@media (max-width: 839px) { .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .grid-3 > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
+@media (max-width: 599px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
 
 /* Angka besar (hanya angka yang bisa dibuktikan) */
 .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.stat { position: relative; padding: 26px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: 2px solid var(--edge); box-shadow: var(--shadow-sticker); min-height: 230px; display: grid; align-content: space-between; gap: 18px; overflow: hidden; }
+.stat { position: relative; padding: 26px; border-radius: var(--r-l); background: var(--card); color: var(--ink); border: var(--edge-width) solid var(--edge); box-shadow: var(--shadow-sticker); min-height: 230px; display: grid; align-content: space-between; gap: 18px; overflow: hidden; }
 .stat:first-child { grid-column: span 2; }
 .stat:nth-child(3n+2) { background: var(--blue); color: var(--on-dark); }
 /* Teks terang di atas biru wajib kontras >= 4.5:1, jadi tanpa opacity */
@@ -162,24 +162,24 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .stat:nth-child(3n+3) { background: var(--surface); }
 .stat .v { font-family: var(--f-num); font-weight: 800; font-size: clamp(54px, 6vw, 76px); line-height: 0.9; letter-spacing: -0.03em; }
 .stat .lab { font-family: var(--f-num); font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.75; }
-@media (max-width: 1000px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 560px) { .stats { grid-template-columns: 1fr; } .stat:first-child { grid-column: auto; } .stat { min-height: 0; } }
+@media (max-width: 839px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 599px) { .stats { grid-template-columns: 1fr; } .stat:first-child { grid-column: auto; } .stat { min-height: 0; } }
 
 /* Kartu karya / produk dengan cover 1600:848 (screenshot asli; ilustrasi wajib diberi label) */
 .works { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 24px; }
 .work { text-decoration: none; display: grid; gap: 14px; align-content: start; }
-.work .cover { position: relative; border-radius: var(--r-l); overflow: hidden; border: 2px solid var(--edge); aspect-ratio: 1600 / 848; background: var(--surface); }
+.work .cover { position: relative; border-radius: var(--r-l); overflow: hidden; border: var(--edge-width) solid var(--edge); aspect-ratio: 1600 / 848; background: var(--surface); }
 .work .cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease); }
 .work:hover .cover img { transform: scale(1.06); }
 .work .meta { display: flex; justify-content: space-between; gap: 12px; align-items: flex-end; }
 .work .meta .chip { margin-bottom: 8px; }
 .work h3 { font-size: clamp(26px, 2.4vw, 34px); margin-bottom: 4px; }
 .work .cat { color: var(--ink-3); font-size: 14.5px; }
-.work .arrow { width: 40px; height: 40px; flex: none; border-radius: 50%; border: 2px solid var(--edge); display: grid; place-items: center; transition: transform 0.4s var(--spring), background 0.2s; }
+.work .arrow { width: 40px; height: 40px; flex: none; border-radius: 50%; border: var(--edge-width) solid var(--edge); display: grid; place-items: center; transition: transform 0.4s var(--spring), background var(--dur-1); }
 .work:hover .arrow { transform: rotate(-45deg); background: var(--blue); color: var(--on-dark); }
 .cover-note { position: absolute; right: 12px; bottom: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(11, 15, 26, 0.72); color: var(--on-dark); font-family: var(--f-num); font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-@media (max-width: 1000px) { .works { grid-template-columns: repeat(2, minmax(0, 1fr)); } .work:last-child:nth-child(odd) { grid-column: 1 / -1; } }
-@media (max-width: 620px) { .works { grid-template-columns: 1fr; } }
+@media (max-width: 839px) { .works { grid-template-columns: repeat(2, minmax(0, 1fr)); } .work:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+@media (max-width: 599px) { .works { grid-template-columns: 1fr; } }
 
 /* Foto orang dalam bingkai segel. Butuh <clipPath id="seal-clip"> dari sprite (lihat demo). */
 .person { display: grid; gap: 12px; text-align: center; justify-items: center; }
@@ -198,11 +198,11 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
    ========================================================= */
 .bubble {
   position: relative; display: inline-block; white-space: nowrap;
-  background: var(--card); border: 2px solid var(--edge); border-radius: 22px; padding: 10px 16px 12px;
+  background: var(--card); border: var(--edge-width) solid var(--edge); border-radius: 22px; padding: 10px 16px 12px;
   font-family: var(--f-hand); font-weight: 600; font-size: 25px; line-height: 1.05; color: var(--ink); box-shadow: var(--shadow-pop);
   transform-origin: 90% 100%;
 }
-.bubble::after { content: ""; position: absolute; right: 26px; bottom: -11px; width: 18px; height: 18px; background: var(--card); border-right: 2px solid var(--edge); border-bottom: 2px solid var(--edge); transform: rotate(45deg) skew(8deg, 8deg); }
+.bubble::after { content: ""; position: absolute; right: 26px; bottom: -11px; width: 18px; height: 18px; background: var(--card); border-right: var(--edge-width) solid var(--edge); border-bottom: var(--edge-width) solid var(--edge); transform: rotate(45deg) skew(8deg, 8deg); }
 .bubble.left::after { right: auto; left: 22px; }
 .bubble.pop { animation: fy-pop 0.45s var(--spring); }
 @keyframes fy-pop { 0% { transform: scale(0.6) rotate(-6deg); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
@@ -216,7 +216,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 /* =========================================================
    PARTNER BERJALAN, FAQ
    ========================================================= */
-.marquee { overflow: hidden; border-block: 2px solid var(--edge); background: var(--card); padding: 22px 0; }
+.marquee { overflow: hidden; border-block: var(--edge-width) solid var(--edge); background: var(--card); padding: 22px 0; }
 .marquee .row { display: flex; width: max-content; gap: 56px; animation: fy-slide 30s linear infinite; }
 .marquee:hover .row { animation-play-state: paused; }
 .marquee .item { display: flex; align-items: center; gap: 14px; font-family: var(--f-head); font-weight: 800; font-size: clamp(28px, 4vw, 48px); white-space: nowrap; }
@@ -227,9 +227,9 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .faq details { border-bottom: 2px solid var(--line); }
 .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 20px; align-items: center; padding: 22px 0; font-family: var(--f-head); font-weight: 800; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.15; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary .pm { flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--surface); position: relative; transition: transform 0.4s var(--spring), background 0.2s; }
+.faq summary .pm { flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--surface); position: relative; transition: transform 0.4s var(--spring), background var(--dur-1); }
 .faq summary .pm::before, .faq summary .pm::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2.5px; margin: -1.25px 0 0 -7px; background: var(--text-blue-deep); border-radius: 2px; }
-.faq summary .pm::after { transform: rotate(90deg); transition: transform 0.3s var(--ease); }
+.faq summary .pm::after { transform: rotate(90deg); transition: transform var(--dur-3) var(--ease); }
 .faq details[open] summary .pm { background: var(--blue); transform: rotate(180deg); }
 .faq details[open] summary .pm::before, .faq details[open] summary .pm::after { background: var(--on-dark); }
 .faq details[open] summary .pm::after { transform: rotate(0); }
@@ -255,24 +255,24 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .fbar a { color: var(--night-link); }
 /* Nama produk di kolom pertama footer: <p class="fname">Nama Produk</p> */
 .fcols .fname { font-family: var(--f-head); font-weight: 800; font-size: 26px; line-height: 1.1; color: var(--on-dark); margin-bottom: 10px; max-width: none; }
-.to-top { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--night-line-2); text-decoration: none; font-weight: 700; transition: background 0.2s, color 0.2s, transform 0.3s var(--spring); }
-.to-top svg { width: 16px; height: 16px; transition: transform 0.3s var(--spring); }
+.to-top { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--night-line-2); text-decoration: none; font-weight: 700; transition: background var(--dur-1), color var(--dur-1), transform var(--dur-3) var(--spring); }
+.to-top svg { width: 16px; height: 16px; transition: transform var(--dur-3) var(--spring); }
 .to-top:hover { background: var(--blue); border-color: var(--text-blue); color: var(--on-dark); }
 .to-top:hover svg { transform: translateY(-3px); }
 /* Badge "Sebuah produk dari FUSIONIFY" di footer web produk */
-.fy-badge { display: inline-block; line-height: 0; transition: transform 0.3s var(--spring); }
+.fy-badge { display: inline-block; line-height: 0; transition: transform var(--dur-3) var(--spring); }
 .fy-badge img { height: 44px; width: auto; }
 .fy-badge:hover { transform: translateY(-2px); }
-@media (max-width: 860px) { .fcols { grid-template-columns: 1fr 1fr; } .fcols > div:first-child { grid-column: 1 / -1; } }
+@media (max-width: 839px) { .fcols { grid-template-columns: 1fr 1fr; } .fcols > div:first-child { grid-column: 1 / -1; } }
 
 /* =========================================================
    NOTIFIKASI (toast) · kapsul putih dengan kepala maskot
    ========================================================= */
 .toast {
-  position: fixed; left: 50%; bottom: 24px; z-index: 320; display: flex; align-items: center; gap: 10px;
-  padding: 8px 18px 8px 8px; border-radius: 999px; background: var(--card); border: 2px solid var(--edge); box-shadow: 0 4px 0 var(--edge-shadow);
+  position: fixed; left: 50%; bottom: 24px; z-index: var(--z-toast); display: flex; align-items: center; gap: 10px;
+  padding: 8px 18px 8px 8px; border-radius: 999px; background: var(--card); border: var(--edge-width) solid var(--edge); box-shadow: 0 calc(4px * var(--angkat)) 0 var(--edge-shadow);
   font-weight: 700; font-size: 15px; transform: translate(-50%, 160%); opacity: 0; pointer-events: none;
-  transition: transform 0.5s var(--spring), opacity 0.25s;
+  transition: transform var(--dur-5) var(--spring), opacity var(--dur-2);
 }
 .toast img { width: 40px; height: auto; border-radius: 50%; background: var(--surface); }
 .toast.show { transform: translate(-50%, 0); opacity: 1; }
@@ -280,23 +280,23 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 /* =========================================================
    KURSOR SEGEL (hanya perangkat dengan mouse; motion.js memasang .has-cursor)
    ========================================================= */
-.cursor { position: fixed; left: 0; top: 0; z-index: 300; pointer-events: none; display: none; opacity: 0; transition: opacity 0.25s; }
+.cursor { position: fixed; left: 0; top: 0; z-index: var(--z-kursor); pointer-events: none; display: none; opacity: 0; transition: opacity var(--dur-2); }
 .cursor.ready { opacity: 1; }
 .has-cursor .cursor { display: block; }
 .has-cursor, .has-cursor a, .has-cursor button, .has-cursor summary { cursor: none; }
 .has-cursor input, .has-cursor textarea { cursor: text; }
 .cursor .dot { position: absolute; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--blue-light); box-shadow: 0 0 0 2px var(--on-dark); }
-/* Cincin berukuran tetap 70px; kecil/besar lewat properti scale (transform). motion.js menulis
-   posisi di style.transform, jadi skala memakai properti scale terpisah supaya tidak tertimpa.
+/* Cincin berukuran tetap 70px; kecil/besar lewat properti scale. motion.js menulis posisi lewat properti
+   translate (bukan transform): translate di dalam transform ikut diperkecil scale, cincin jadi tertinggal.
    Garis tetap 1,6px karena vector-effect: non-scaling-stroke. Reset .ring progres (controls.css). */
-.cursor .ring { --cs: 0.6286; position: absolute; display: block; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 0; background: none; will-change: translate; scale: var(--cs); transition: scale 0.35s var(--spring); }
+.cursor .ring { --cs: 0.6286; position: absolute; display: block; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 0; background: none; will-change: translate; scale: var(--cs); transition: scale var(--dur-4) var(--spring); }
 .cursor .ring::before { content: none; }
 .cursor .ring svg { width: 100%; height: 100%; overflow: visible; color: var(--text-blue); }
-.cursor .ring svg path { fill: none; stroke: currentColor; stroke-width: 1.6; vector-effect: non-scaling-stroke; transition: fill 0.3s; }
+.cursor .ring svg path { fill: none; stroke: currentColor; stroke-width: 1.6; vector-effect: non-scaling-stroke; transition: fill var(--dur-3); }
 .cursor.link .ring { --cs: 1; }
 .cursor.link .ring svg { animation: fy-spin 4s linear infinite; }
 .cursor.link .ring svg path { fill: rgba(83, 157, 233, 0.18); }
-.cursor .label { position: absolute; left: 0; top: 0; will-change: translate; padding: 4px 10px; border-radius: 999px; background: var(--inverse-bg); color: var(--inverse-fg); font-family: var(--f-hand); font-size: 20px; line-height: 1; white-space: nowrap; transform: scale(0); transform-origin: 0 0; transition: transform 0.3s var(--spring); }
+.cursor .label { position: absolute; left: 0; top: 0; will-change: translate; padding: 4px 10px; border-radius: 999px; background: var(--inverse-bg); color: var(--inverse-fg); font-family: var(--f-hand); font-size: 20px; line-height: 1; white-space: nowrap; transform: scale(0); transform-origin: 0 0; transition: transform var(--dur-3) var(--spring); }
 .cursor.labelled .label { transform: scale(1); }
 .cursor.down .ring { scale: calc(var(--cs) * 0.8); }
 .cursor.dark .ring svg { color: var(--on-dark); }
@@ -305,7 +305,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
    TRANSISI HALAMAN · segel biru menutup layar
    Elemen <svg> persegi 180vmax yang dianimasikan, supaya layar ultra-lebar tetap tertutup.
    ========================================================= */
-.veil { position: fixed; inset: 0; z-index: 350; pointer-events: none; overflow: hidden; }
+.veil { position: fixed; inset: 0; z-index: var(--z-tirai); pointer-events: none; overflow: hidden; }
 .veil svg { position: absolute; left: 50%; top: 50%; width: 180vmax; height: 180vmax; margin: -90vmax 0 0 -90vmax; transform: scale(0); will-change: transform; }
 .veil .blob path { fill: var(--blue); }
 .veil img { position: absolute; left: 50%; top: 50%; width: 120px; margin: -60px 0 0 -60px; opacity: 0; }
@@ -336,9 +336,9 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 .ikon-16 { width: 16px; height: 16px; } .ikon-20 { width: 20px; height: 20px; } .ikon-24 { width: 24px; height: 24px; } .ikon-32 { width: 32px; height: 32px; }
 
 /* Ikon dalam ubin stiker (kartu fitur, KPI dasbor) */
-.ikon-stiker { display: inline-grid; place-items: center; flex: none; width: 52px; height: 52px; border-radius: 16px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 4px 0 var(--edge-shadow); }
+.ikon-stiker { display: inline-grid; place-items: center; flex: none; width: 52px; height: 52px; border-radius: 16px; border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 calc(4px * var(--angkat)) 0 var(--edge-shadow); }
 .ikon-stiker .ikon { width: 26px; height: 26px; }
-.ikon-stiker.kecil { width: 40px; height: 40px; border-radius: 12px; box-shadow: 0 3px 0 var(--edge-shadow); }
+.ikon-stiker.kecil { width: 40px; height: 40px; border-radius: 12px; box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); }
 .ikon-stiker.kecil .ikon { width: 20px; height: 20px; }
 .ikon-stiker.biru { background: var(--blue); color: var(--on-dark); --ikon-titik: color-mix(in srgb, var(--on-dark) 55%, var(--blue-light)); }
 .ikon-stiker.tint { background: var(--surface); color: var(--text-blue); }
@@ -352,7 +352,7 @@ a.card:hover { transform: translateY(-4px); box-shadow: 0 10px 0 var(--edge-shad
 
 /* Daftar tautan sosmed: <ul class="sosmed"><li><a href="…" aria-label="Instagram FUSIONIFY"><svg class="ikon"><use href="#sosmed-instagram"/></svg></a></li></ul> */
 .sosmed { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; }
-.sosmed a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; border: 2px solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 3px 0 var(--edge-shadow); transition: transform 0.2s var(--ease); }
+.sosmed a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 14px; border: var(--edge-width) solid var(--edge); background: var(--card); color: var(--ink); box-shadow: 0 calc(3px * var(--angkat)) 0 var(--edge-shadow); transition: transform var(--dur-1) var(--ease); }
 .sosmed a:hover { transform: translateY(-2px); background: var(--blue); color: var(--on-dark); }
 .sosmed a:focus-visible { outline: 3px solid var(--blue-light); outline-offset: 3px; }
 .sosmed .ikon { width: 20px; height: 20px; }

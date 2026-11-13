@@ -137,6 +137,23 @@ export const fy = {
     "l": 28,
     "pill": 999
   },
+  "spacing": {
+    "xs": 4,
+    "s": 8,
+    "m": 12,
+    "l": 16,
+    "xl": 24,
+    "2xl": 32
+  },
+  "fontSize": {
+    "label": 13,
+    "kecil": 14,
+    "teks": 17,
+    "lead": 20,
+    "judulS": 24,
+    "judulM": 32,
+    "judulL": 44
+  },
   "touch": {
     "minTarget": 44,
     "navBarHeight": 76,
@@ -160,9 +177,22 @@ export const fy = {
     "durationMs": {
       "fast": 200,
       "base": 350,
-      "slow": 450
+      "slow": 450,
+      "d1": 200,
+      "d2": 250,
+      "d3": 300,
+      "d4": 350,
+      "d5": 500,
+      "d6": 700
     },
     "note": "Hormati pengaturan kurangi gerakan di HP (iOS Reduce Motion, Android Remove animations)."
+  },
+  "kelasLayar": {
+    "sedang": 600,
+    "lebar": 840,
+    "besar": 1200,
+    "sangatBesar": 1600,
+    "note": "Di bawah sedang = ringkas. Navigasi: bar bawah di ringkas, rel di sedang, laci/sidebar penuh mulai lebar. Android: values-w600dp, values-w840dp."
   }
 } as const;
 

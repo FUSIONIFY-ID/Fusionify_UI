@@ -9,5 +9,15 @@
     <dimen name="fy_drop_card">6dp</dimen>
     <dimen name="fy_touch_min">48dp</dimen>
     <dimen name="fy_gutter">16dp</dimen>
+    <dimen name="fy_kelas_sedang">600dp</dimen>
+    <dimen name="fy_kelas_lebar">840dp</dimen>
+    <dimen name="fy_kelas_besar">1200dp</dimen>
     <dimen name="fy_text_body">17sp</dimen>
+    <dimen name="fy_text_label">13sp</dimen>
+    <dimen name="fy_text_kecil">14sp</dimen>
+    <dimen name="fy_text_teks">17sp</dimen>
+    <dimen name="fy_text_lead">20sp</dimen>
+    <dimen name="fy_text_judul_s">24sp</dimen>
+    <dimen name="fy_text_judul_m">32sp</dimen>
+    <dimen name="fy_text_judul_l">44sp</dimen>
 </resources>

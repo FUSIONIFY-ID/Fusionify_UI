@@ -86,12 +86,21 @@ const sticker = {
   shadowCard: { x: 0, y: 6, blur: 0, color: "edgeShadow" },
   note: "Bayangan pejal: offset ke bawah tanpa blur. Garis 2px warna edge. Jangan pakai elevation/blur bawaan platform.",
 };
+// Skala dari --dur-1 sampai --dur-6 (css/tokens.css), dalam milidetik.
+const durasi = Object.fromEntries(Object.keys(light).filter((k) => /^dur-\d$/.test(k)).map((k) => [k.replace("dur-", "d"), Math.round(parseFloat(light[k]) * 1000)]));
+// Skala huruf dari --fs-* (px di web = sp/pt/dp di native)
+const ukuranHuruf = Object.fromEntries(Object.keys(light).filter((k) => k.startsWith("fs-")).map((k) => [camel(k.replace("fs-", "")), px(light[k])]));
+// Jarak dari --sp-*
+const jarak = Object.fromEntries(Object.keys(light).filter((k) => k.startsWith("sp-")).map((k) => [k.replace("sp-", ""), px(light[k])]));
 const motion = {
   ease: [0.22, 1, 0.36, 1], spring: [0.34, 1.56, 0.64, 1],
-  durationMs: { fast: 200, base: 350, slow: 450 },
+  durationMs: { fast: 200, base: 350, slow: 450, ...durasi },
   note: "Hormati pengaturan kurangi gerakan di HP (iOS Reduce Motion, Android Remove animations).",
 };
 const touch = { minTarget: 44, navBarHeight: 76, railWidth: 92, appBarHeight: 64, gutter: 16 };
+// Kelas ukuran layar (window size class Material 3): batas bawah tiap kelas, dalam dp/pt/px.
+const kelasLayar = { sedang: px(light["kelas-sedang"]), lebar: px(light["kelas-lebar"]), besar: px(light["kelas-besar"]), sangatBesar: px(light["kelas-sangat-besar"]),
+  note: "Di bawah sedang = ringkas. Navigasi: bar bawah di ringkas, rel di sedang, laci/sidebar penuh mulai lebar. Android: values-w600dp, values-w840dp." };
 
 fs.mkdirSync(path.join(root, "tokens/flutter"), { recursive: true });
 fs.mkdirSync(path.join(root, "tokens/swift"), { recursive: true });
@@ -104,7 +113,7 @@ const header = "Dibuat otomatis dari css/tokens.css oleh scripts/build-tokens.mj
 const json = {
   $description: "Token FUSIONIFY UI. " + header,
   color: { light: Object.fromEntries(keys.map((k) => [camel(k), hex(colors.light[k])])), dark: Object.fromEntries(keys.map((k) => [camel(k), hex(colors.dark[k])])) },
-  radius, font: fonts, sticker, motion, touch,
+  radius, spacing: jarak, fontSize: ukuranHuruf, font: fonts, sticker, motion, touch, kelasLayar,
 };
 fs.writeFileSync(path.join(root, "tokens/tokens.json"), JSON.stringify(json, null, 2) + "\n");
 
@@ -169,6 +178,20 @@ class FyTouch {
   static const double railWidth = ${touch.railWidth};
   static const double appBarHeight = ${touch.appBarHeight};
   static const double gutter = ${touch.gutter};
+}
+
+/// Kelas ukuran layar (sama dengan web). Contoh: final k = FyKelas.dari(MediaQuery.sizeOf(context).width);
+class FyKelas {
+  static const double sedang = ${kelasLayar.sedang};
+  static const double lebar = ${kelasLayar.lebar};
+  static const double besar = ${kelasLayar.besar};
+  static const double sangatBesar = ${kelasLayar.sangatBesar};
+  static String dari(double w) => w >= sangatBesar ? 'sangat-besar' : w >= besar ? 'besar' : w >= lebar ? 'lebar' : w >= sedang ? 'sedang' : 'ringkas';
+}
+
+/// Skala huruf (sama dengan --fs-* di web).
+class FyTextSize {
+${Object.entries(ukuranHuruf).map(([k, v]) => `  static const double ${k} = ${v};`).join("\n")}
 }
 
 /// Gaya stiker FUSIONIFY: garis 2px warna edge + bayangan pejal ke bawah tanpa blur.
@@ -241,6 +264,19 @@ ${keys.map((k) => `        public static let ${camel(k)} = SwiftUI.Color(uiColor
         public static let gutter: CGFloat = ${touch.gutter}
     }
 
+    /// Kelas ukuran layar (sama dengan web): batas bawah tiap kelas.
+    public enum Kelas {
+        public static let sedang: CGFloat = ${kelasLayar.sedang}
+        public static let lebar: CGFloat = ${kelasLayar.lebar}
+        public static let besar: CGFloat = ${kelasLayar.besar}
+        public static let sangatBesar: CGFloat = ${kelasLayar.sangatBesar}
+    }
+
+    /// Skala huruf (sama dengan --fs-* di web).
+    public enum TextSize {
+${Object.entries(ukuranHuruf).map(([k, v]) => `        public static let ${k}: CGFloat = ${v}`).join("\n")}
+    }
+
     public enum Font {
         public static func head(_ size: CGFloat) -> SwiftUI.Font { .custom("AfacadFlux-ExtraBold", size: size) }
         public static func body(_ size: CGFloat = 17, bold: Bool = false) -> SwiftUI.Font { .custom(bold ? "Sansation-Bold" : "Sansation-Regular", size: size) }
@@ -292,6 +328,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Immutable
 data class FyColors(
@@ -310,6 +347,8 @@ val LocalFyColors = staticCompositionLocalOf { FyLight }
 
 object FyRadius { val s = ${radius.s}.dp; val m = ${radius.m}.dp; val l = ${radius.l}.dp }
 object FyTouch { val minTarget = ${touch.minTarget}.dp; val navBarHeight = ${touch.navBarHeight}.dp; val gutter = ${touch.gutter}.dp }
+object FyKelas { val sedang = ${kelasLayar.sedang}.dp; val lebar = ${kelasLayar.lebar}.dp; val besar = ${kelasLayar.besar}.dp; val sangatBesar = ${kelasLayar.sangatBesar}.dp } // sama dengan WindowWidthSizeClass
+object FyTextSize { ${Object.entries(ukuranHuruf).map(([k, v]) => `val ${k} = ${v}.sp`).join("; ")} }
 object FySticker { val border = 2.dp; val dropButton = 3.dp; val dropCard = 6.dp } // bayangan pejal: offset ke bawah tanpa blur
 
 @Composable
@@ -334,7 +373,7 @@ fs.writeFileSync(path.join(root, "tokens/react-native/fusionify-tokens.ts"), `//
 //   <View style={[sticker(c), { padding: 18 }]} />
 //
 // Font (Expo): useFonts({ "AfacadFlux-ExtraBold": require("./fonts/AfacadFlux-ExtraBold.ttf"), ... }) dari tokens/fonts-ttf/.
-export const fy = ${JSON.stringify({ color: json.color, radius, touch, motion }, null, 2)} as const;
+export const fy = ${JSON.stringify({ color: json.color, radius, spacing: jarak, fontSize: ukuranHuruf, touch, motion, kelasLayar }, null, 2)} as const;
 
 export type FyPalette = typeof fy.color.light;
 
@@ -388,7 +427,11 @@ fs.writeFileSync(path.join(resDir, "values/fy_dimens.xml"), `<?xml version="1.0"
     <dimen name="fy_drop_card">6dp</dimen>
     <dimen name="fy_touch_min">48dp</dimen>
     <dimen name="fy_gutter">${touch.gutter}dp</dimen>
+    <dimen name="fy_kelas_sedang">${kelasLayar.sedang}dp</dimen>
+    <dimen name="fy_kelas_lebar">${kelasLayar.lebar}dp</dimen>
+    <dimen name="fy_kelas_besar">${kelasLayar.besar}dp</dimen>
     <dimen name="fy_text_body">17sp</dimen>
+${Object.entries(ukuranHuruf).map(([k, v]) => `    <dimen name="fy_text_${k.replace(/[A-Z]/g, (c) => "_" + c.toLowerCase())}">${v}sp</dimen>`).join("\n")}
 </resources>
 `);
 // Huruf: nama file Android wajib huruf kecil + garis bawah
@@ -487,3 +530,38 @@ fs.writeFileSync(path.join(resDir, "values/fy_themes.xml"), `<?xml version="1.0"
 `);
 
 console.log("Token dibuat:", keys.length, "warna x 2 tema");
+
+/* ---------- Format standar W3C Design Tokens (DTCG 2025.10) ----------
+   Untuk Figma Variables (lewat plugin), Tokens Studio, Style Dictionary, dan alat lain yang membaca format standar.
+   Warna: objek srgb (components 0-1, hex, alpha), dimensi { value, unit }, durasi { value, unit: "ms" }. */
+const dtcgWarna = ([r, g, b, a]) => {
+  const v = { colorSpace: "srgb", components: [r, g, b].map((x) => +(x / 255).toFixed(4)), hex: hex([r, g, b, 1]).slice(0, 7) };
+  if (a < 1) v.alpha = +a.toFixed(3);
+  return v;
+};
+const dtcgDim = (n) => ({ value: n, unit: "px" });
+const tema = (t) => Object.fromEntries(keys.map((k) => [k, { $value: dtcgWarna(colors[t][k]) }]));
+const dtcg = {
+  $description: "Token FUSIONIFY UI dalam format W3C Design Tokens 2025.10. " + header,
+  warna: { $type: "color", terang: tema("light"), gelap: tema("dark") },
+  radius: { $type: "dimension", s: { $value: dtcgDim(radius.s) }, m: { $value: dtcgDim(radius.m) }, l: { $value: dtcgDim(radius.l) }, pill: { $value: dtcgDim(radius.pill) } },
+  jarak: { $type: "dimension", ...Object.fromEntries(Object.entries(jarak).map(([k, v]) => [k, { $value: dtcgDim(v) }])) },
+  ukuranHuruf: { $type: "dimension", ...Object.fromEntries(Object.entries(ukuranHuruf).map(([k, v]) => [k, { $value: dtcgDim(v) }])) },
+  kelasLayar: { $type: "dimension", ...Object.fromEntries(Object.entries(kelasLayar).filter(([k]) => k !== "note").map(([k, v]) => [k, { $value: dtcgDim(v) }])) },
+  durasi: { $type: "duration", ...Object.fromEntries(Object.entries(durasi).map(([k, v]) => [k, { $value: { value: v, unit: "ms" } }])) },
+  kurva: { $type: "cubicBezier", ease: { $value: motion.ease }, spring: { $value: motion.spring } },
+  huruf: {
+    $type: "fontFamily",
+    judul: { $value: ["Afacad Flux", "system-ui", "sans-serif"] },
+    teks: { $value: ["Sansation", "system-ui", "sans-serif"] },
+    tangan: { $value: ["Caveat", "cursive"] },
+    angka: { $value: ["Exo 2", "system-ui", "sans-serif"] },
+  },
+  stiker: {
+    garis: { $type: "dimension", $value: dtcgDim(sticker.borderWidth) },
+    bayanganTombol: { $type: "dimension", $value: dtcgDim(sticker.shadowButton.y) },
+    bayanganKartu: { $type: "dimension", $value: dtcgDim(sticker.shadowCard.y) },
+  },
+  sentuh: { minimal: { $type: "dimension", $value: dtcgDim(touch.minTarget) } },
+};
+fs.writeFileSync(path.join(root, "tokens/fusionify.tokens.json"), JSON.stringify(dtcg, null, 2) + "\n");
