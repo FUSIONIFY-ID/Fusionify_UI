@@ -8,7 +8,7 @@ import { BASE, cdnLokal } from "./_env.mjs";
 
 let ok = 0, fail = 0;
 const cek = (benar, pesan) => { if (benar) ok++; else { fail++; console.log("FAIL:", pesan); } };
-const HALAMAN = ["templates/landing-produk.html", "templates/gaya.html", "templates/dashboard.html", "templates/komponen.html", "templates/auth/masuk.html", "templates/bayar-qris.html", "templates/acara.html", "templates/chat.html", "demo/index.html"];
+const HALAMAN = ["templates/landing-produk.html", "templates/gaya.html", "templates/halaman-perusahaan.html", "templates/halaman-karya.html", "templates/dashboard.html", "templates/komponen.html", "templates/auth/masuk.html", "templates/bayar-qris.html", "templates/acara.html", "templates/chat.html", "demo/index.html"];
 const UKURAN = [[390, 844, true], [820, 1180, true], [1366, 768, false]];
 
 for (const nama of ["webkit", "firefox"]) {

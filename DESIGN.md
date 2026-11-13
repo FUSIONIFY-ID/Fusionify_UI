@@ -176,8 +176,8 @@ Satu sistem, lima rasa. Warna, huruf, ikon, logo, dan komponen sama; yang beruba
 
 - Lebar konten maksimal 1240px (`.wrap`) dengan gutter `clamp(16px, 4vw, 48px)`.
 - Grid tanpa kartu yatim: 3 kolom di desktop, 2 di tablet (kartu terakhir yang sendirian dibuat lebar penuh), 1 di HP.
-- Hero (`.hero`) sama persis dengan fusionify.id: setinggi layar, judul dua baris (tinta lalu biru) dengan titik bulat biru muda, angka di bawah tombol, maskot papan interaktif di kanan, ajakan "Gulir pelan-pelan" di layar besar. Pola maskot dua kolom mulai 600px (1.2fr/0.8fr sampai 1199px, 1.15fr/0.85fr setelahnya); di bawah 600px maskot di atas teks dan angka tiga sejajar. Pola lain dua kolom mulai 840px.
-- Nav lengkap mulai 961px; di bawahnya tombol menu (satu-satunya batas di luar kelas ukuran layar, karena tergantung jumlah tautan).
+- Hero (`.hero`) sama persis dengan fusionify.id: setinggi layar, judul dua baris (tinta lalu biru) dengan titik bulat biru muda, angka di bawah tombol, maskot papan interaktif di kanan, ajakan "Gulir pelan-pelan" di layar besar. Pola maskot dua kolom mulai 600px (1.2fr/0.8fr dan lebih ringkas sampai 839px, 1.15fr/0.85fr penuh mulai 840px); di bawah 600px maskot di atas teks dan angka tiga sejajar. Pola lain dua kolom mulai 840px.
+- Nav lengkap mulai 1024px (sama dengan fusionify.id), tautannya merapat di 1024-1239px; di bawahnya tombol menu (satu-satunya batas di luar kelas ukuran layar, karena tergantung jumlah tautan).
 - Cover karya/produk rasio 1600:848, screenshot asli. Ilustrasi wajib diberi label `.cover-note` "Ilustrasi".
 - Di layar sentuh: magnet, kursor khusus, dan parallax dimatikan.
 
@@ -195,6 +195,21 @@ Sama dengan window size class Material 3, dipakai web, aplikasi HP, dan token na
 
 - **HP lipat setengah terbuka** (engsel tegak, layar terbagi kiri-kanan): hero menaruh teks di layar kiri dan media di layar kanan; chat menaruh daftar obrolan di kiri dan isi obrolan di kanan. Tidak ada teks atau tombol yang jatuh tepat di engsel.
 - Layar luar HP lipat bisa lebih sempit dari 360px: judul memakai `overflow-wrap: anywhere`, tombol boleh turun baris, tidak ada lebar tetap di atas 320px.
+
+## Bagian halaman perusahaan dan karya
+
+Nilainya disalin dari fusionify.id, jadi web lain yang memakainya tampil sama persis. Contoh: `templates/halaman-perusahaan.html` dan `templates/halaman-karya.html`.
+
+- **Nav di atas halaman**: transparan, turun 8px, logo rata dengan konten (bergeser 14px ke kiri) dan tombol rata kanan; setelah digulir jadi kapsul dan kembali ke posisinya.
+- **Angka**: kartu stiker berselang putih, biru, dan `--surface`; kartu pertama lebar dua kolom; label Exo 2 kapital, angka besar, judul 26px, satu kalimat konteks.
+- **Perjalanan**: tahun besar biru Exo 2 di kiri, cerita di kanan, garis tegak yang terisi biru dan kepala maskot yang ikut turun saat digulir.
+- **Visi dan misi**: di atas seksi biru; visi berupa kalimat besar Afacad putih, misi berupa empat kartu stiker bernomor segel biru.
+- **Tim**: foto bersegel (atau inisial di segel biru kalau belum ada izin foto), tersusun 4 + 3, dua kolom di HP.
+- **FAQ dengan maskot**: judul dan maskot confused menempel di kiri dengan catatan tulisan tangan; di bawah 840px maskot mengecil di samping catatan.
+- **Kontak langsung**: ikon bulat bergaris stiker (WhatsApp hijau `--wa`), tautan besar Afacad dengan garis bawah biru yang tersapu, tombol Salin kapsul, jam setempat dengan titik berdenyut.
+- **Footer dengan wordmark**: wordmark putih besar, kolom, baris sosmed bulat bergaris tipis, lalu baris hak cipta.
+- **Halaman karya**: judul sangat besar, chip status, cover bergaris stiker 1600:848, fakta singkat menempel di kiri, cerita di kanan, angka dalam ubin `--surface`, tautan besar ke karya berikutnya.
+- **Catatan kosong** (`.empty.catatan`): maskot dan satu kalimat tulisan tangan biru, untuk 404 dan daftar kabar yang masih kosong.
 
 ## Komponen toko dan navigasi web
 

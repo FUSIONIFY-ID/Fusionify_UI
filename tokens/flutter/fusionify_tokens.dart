@@ -44,6 +44,7 @@ class FyColors extends ThemeExtension<FyColors> {
   final Color sealTint;
   final Color danger;
   final Color dangerBg;
+  final Color wa;
   final Color placeholder;
   final Color bintang;
   final Color onDark;
@@ -105,6 +106,7 @@ class FyColors extends ThemeExtension<FyColors> {
     required this.sealTint,
     required this.danger,
     required this.dangerBg,
+    required this.wa,
     required this.placeholder,
     required this.bintang,
     required this.onDark,
@@ -165,8 +167,9 @@ class FyColors extends ThemeExtension<FyColors> {
     navGlass: Color(0xD1FFFFFF),
     heroGlow: Color(0xFFDCEDFF),
     sealTint: Color(0xFFD8EAFF),
-    danger: Color(0xFFB4232C),
-    dangerBg: Color(0xFFFDE8EA),
+    danger: Color(0xFFB42318),
+    dangerBg: Color(0xFFFFE8E6),
+    wa: Color(0xFF128C4A),
     placeholder: Color(0xFF707A8C),
     bintang: Color(0xFFF0A800),
     onDark: Color(0xFFFFFFFF),
@@ -229,6 +232,7 @@ class FyColors extends ThemeExtension<FyColors> {
     sealTint: Color(0xFF15315C),
     danger: Color(0xFFFF9BA1),
     dangerBg: Color(0xFF3D1418),
+    wa: Color(0xFF5FDC93),
     placeholder: Color(0xFF8597B3),
     bintang: Color(0xFFFFC93D),
     onDark: Color(0xFFFFFFFF),
@@ -297,6 +301,7 @@ class FyColors extends ThemeExtension<FyColors> {
       sealTint: Color.lerp(sealTint, other.sealTint, t)!,
       danger: Color.lerp(danger, other.danger, t)!,
       dangerBg: Color.lerp(dangerBg, other.dangerBg, t)!,
+      wa: Color.lerp(wa, other.wa, t)!,
       placeholder: Color.lerp(placeholder, other.placeholder, t)!,
       bintang: Color.lerp(bintang, other.bintang, t)!,
       onDark: Color.lerp(onDark, other.onDark, t)!,

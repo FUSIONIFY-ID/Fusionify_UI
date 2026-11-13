@@ -97,11 +97,11 @@ Kit ini dirilis bernomor versi (`1.5.0`, `1.6.1`, dst.). Web produk **mengunci**
   ```
   git submodule add https://github.com/FUSIONIFY-ID/Fusionify_UI public/fusionify-ui
   cd public/fusionify-ui
-  git checkout v1.16.0
+  git checkout v1.17.0
   ```
-  Naik versi nanti: `git fetch --tags` lalu `git checkout v1.16.0`, cek web-nya, commit.
-- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.16.0`. Kalau repo dijadikan privat, mesin build perlu akses ke repo (token GitHub).
-- **Zip**: unduh `Fusionify_UI-v1.16.0.zip` dari halaman Releases.
+  Naik versi nanti: `git fetch --tags` lalu `git checkout v1.17.0`, cek web-nya, commit.
+- **npm dari GitHub**: `npm i github:FUSIONIFY-ID/Fusionify_UI#v1.17.0`. Kalau repo dijadikan privat, mesin build perlu akses ke repo (token GitHub).
+- **Zip**: unduh `Fusionify_UI-v1.17.0.zip` dari halaman Releases.
 
 Aturan nomor: angka terakhir (1.5.**1**) untuk perbaikan kecil yang aman, angka tengah (1.**6**.0) untuk komponen baru yang tidak merusak, angka depan (**2**.0.0) kalau ada kelas atau markup yang berubah dan web produk perlu disesuaikan. Semua perubahan dicatat di `CHANGELOG.md`.
 
@@ -150,7 +150,7 @@ Menjalankan sebagian: `npm test -- kursor` (nama file mengandung kata itu). Peme
 | `mascot/` | Maskot badan penuh, kepala, papan, stiker bot; pose welcome, loading, empty, paid, pay-failed, offline; `POSE-BARU.md` untuk cara menambah pose |
 | `badge/` | "Sebuah produk dari FUSIONIFY" ID/EN, terang/gelap |
 | `demo/` | Halaman contoh semua komponen |
-| `templates/` | Halaman siap pakai: `landing-produk.html`, `404.html`, `500.html`, `offline.html`, `maintenance.html`, `auth/` (masuk, daftar, lupa password, atur ulang, verifikasi OTP), `dashboard.html`, `admin.html`, `app-mobile.html`, `chat.html`, `acara.html`, `komponen.html` (katalog kontrol), `bayar-qris.html`, `status.html`, `dokumentasi.html`, `legal/` (privasi, syarat), `ikon.html` (katalog ikon) |
+| `templates/` | Halaman siap pakai: `landing-produk.html`, `halaman-perusahaan.html`, `halaman-karya.html`, `404.html`, `500.html`, `offline.html`, `maintenance.html`, `auth/` (masuk, daftar, lupa password, atur ulang, verifikasi OTP), `dashboard.html`, `admin.html`, `app-mobile.html`, `chat.html`, `acara.html`, `komponen.html` (katalog kontrol), `bayar-qris.html`, `status.html`, `dokumentasi.html`, `legal/` (privasi, syarat), `ikon.html` (katalog ikon) |
 | `dokumen/` | Template dokumen resmi: surat, invoice, penawaran, kuitansi, perjanjian, proposal, slide, sertifikat, e-tiket, kartu nama (HTML → PDF di `cetak/`), Word, PowerPoint, Excel (`office/`), pratinjau PDF (`contoh/`). Panduan: `dokumen/README.md` |
 | `email/` | Template email transaksional (HTML aman Gmail/Outlook + teks polos), tanda tangan email, PNG maskot, pratinjau. Panduan: `email/README.md` |
 | `ikon/` | Ikon FUSIONIFY (136 ikon garis dengan titik i biru muda) dan logo sosmed: SVG, sprite, PNG email, React, Android. Katalog `templates/ikon.html`, panduan `ikon/README.md` |

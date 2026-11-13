@@ -10,7 +10,7 @@ import { ROOT } from "./_env.mjs";
 let ok = 0, fail = 0;
 const cek = (benar, pesan) => { if (benar) ok++; else { fail++; console.log("FAIL:", pesan); } };
 
-const PUBLIK = ["landing-produk", "acara", "status", "dokumentasi", "legal/privasi", "legal/syarat"];
+const PUBLIK = ["landing-produk", "acara", "status", "dokumentasi", "legal/privasi", "legal/syarat", "halaman-perusahaan", "halaman-karya"];
 const KONTAK = { email: "hello@fusionify.id", telephone: "+62-831-1138-0628" };
 const baca = (f) => fs.readFileSync(path.join(ROOT, f), "utf8");
 const meta = (s, attr, nama) => (s.match(new RegExp(`<meta ${attr}="${nama}" content="([^"]*)"`)) || [])[1];

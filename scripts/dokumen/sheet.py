@@ -31,7 +31,7 @@ STATUS = [  # (teks, warna teks, latar) = chip go, beta, wip, plan, eos
     ("Layanan berakhir", "5B6475", "ECEFF4"),
 ]
 ISIAN = "FFF2D8"     # --beta-bg: sel yang diisi pengguna
-DANGER, DANGER_BG = "B4232C", "FDE8EA"
+DANGER, DANGER_BG = "B42318", "FFE8E6"
 
 BODY, HEAD, NUM = "Sansation", "Afacad Flux ExtraBold", "Exo 2"
 RUPIAH = '"Rp"#,##0;-"Rp"#,##0;"-"'

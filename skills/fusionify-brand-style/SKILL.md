@@ -45,7 +45,8 @@ Kalau salah satu repo tersedia di sesi, baca `AGENTS.md` dan `DESIGN.md`-nya dul
 - Navigasi: `.nav` (+ `.brand`, `.brand-mark`, `.brand-word`, `.nav-links`, `.nav-tools`, `.lang`, `.sound-btn`, `.menu-btn`), `.drawer`
 - Kartu: `.card` (`.blue`, `.tint`), `.stats`/`.stat`, `.works`/`.work` (+ `.cover`, `.meta`, `.arrow`, `.cover-note`), `.person` (foto bingkai segel)
 - Maskot: `.bubble` (`.left`), `.mascot-stage` (+ `.seal-bg`, `.seal-ring`, `.body`) untuk maskot diam; hero memakai `.stage` + `[data-mascot]` interaktif seperti fusionify.id (salin dari `templates/landing-produk.html`)
-- Hero: `.hero.pola-maskot` = hero fusionify.id (`h1 > .l1 + .l2 + .dot` kosong, `.hero-cta`, `.hero-meta` angka asli, `.scroll-hint`); pola lain lihat `templates/gaya.html`
+- Bagian halaman yang sama persis dengan fusionify.id (salin dari `templates/halaman-perusahaan.html` dan `templates/halaman-karya.html`): `.stats`/`.stat`, `.journey[data-journey]`, `.purpose` + `.missions`, `.team`, `.faq-grid`, `.contact-direct` (`.cd-row`, `.cd-copy[data-copy]`, `[data-clock-time]`), footer `.big` + `.fsocial`, `.case-cover`/`.case-grid`/`.metrics`/`.next-case`, `.posts`/`.post-card`, `.empty.catatan`
+- Hero: `.hero.pola-maskot` = hero fusionify.id (`.stage` anak langsung `.hero-grid`) (`h1 > .l1 + .l2 + .dot` kosong, `.hero-cta`, `.hero-meta` angka asli, `.scroll-hint`); pola lain lihat `templates/gaya.html`
 - Lain: `.marquee`, `.faq`, `.wave`, `.footer` (+ `.fcols`, `.fbar`, `.to-top`, `.fy-badge`), `.toast`, `.cursor`, `.veil`
 - Utilitas: `.fx-oversize` untuk hiasan SVG yang sengaja lebih besar dari wadahnya (setara `max-width: none`)
 
