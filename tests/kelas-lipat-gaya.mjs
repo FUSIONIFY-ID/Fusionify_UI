@@ -98,7 +98,7 @@ for (const g of ['tenang', 'teknis']) {
   if (didukung && (await p.evaluate(() => matchMedia('(horizontal-viewport-segments: 2)').matches))) {
     const r = await p.evaluate(() => {
       const kiri = document.querySelector('.hero.contoh[data-untuk="stiker"] .hero-copy').getBoundingClientRect();
-      const kanan = document.querySelector('.hero.contoh[data-untuk="stiker"] .hero-media').getBoundingClientRect();
+      const kanan = document.querySelector('.hero.contoh[data-untuk="stiker"] .stage').getBoundingClientRect();
       return { lipat: document.documentElement.dataset.lipat, kiriKanan: kiri.right, kananKiri: kanan.left, sw: document.documentElement.scrollWidth };
     });
     cek(r.lipat === 'kiri-kanan', `lipat: data-lipat harus kiri-kanan (${r.lipat})`);

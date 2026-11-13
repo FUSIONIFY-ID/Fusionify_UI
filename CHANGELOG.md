@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.17.0 · 13 November 2026
+
+Kit disamakan dengan fusionify.id yang live. Cara ceknya: halaman situs dirender dua kali (CSS situs dan CSS kit), lalu gaya terhitung setiap elemen dibandingkan di 12 lebar layar, tanpa JS dan dengan JS. Tidak ada kelas yang dihapus atau diganti nama.
+
+- **Warna merah disamakan**: `--danger` dan `--danger-bg` kini sama dengan fusionify.id (ikut ke email dan spreadsheet). Token baru `--wa` (hijau WhatsApp, terang dan gelap).
+- **Nav sama dengan situs**: di atas halaman turun 8px dengan logo rata konten dan tombol rata kanan, lalu kembali saat jadi kapsul. Tombol menu sekarang sampai 1023px (sebelumnya 960px) dan tautan merapat di 1024-1239px. Lingkaran menu HP berpusat tepat di tombol menu (`placeDrawer()`).
+- **Hero**: tata letak maskot jadi bawaan dan `.stage` kini anak langsung `.hero-grid`, persis markup situs (markup 1.15 dengan `.hero-media` tetap jalan). Hero penuh mulai 840px, ringkas di 600-839px.
+- **Bagian halaman baru, nilainya disalin dari situs**: judul dan keterangan di `.stat`, visi dan misi (`.purpose`, `.missions`), perjalanan `.journey` dengan garis terisi dan kepala maskot yang ikut scroll, tim 4 + 3 (`.team`, inisial `.initials`), FAQ dengan maskot (`.faq-grid`), kontak langsung (`.contact-direct`, tombol salin, jam `[data-clock-time]`), footer dengan wordmark besar dan baris sosmed (`.big`, `.fsocial`), halaman karya (`.case-cover`, `.case-grid`, `.case-facts`, `.metrics`, `.next-case`), daftar kabar (`.posts`, `.post-card`), dan catatan kosong tulisan tangan (`.empty.catatan`).
+- **Template baru**: `templates/halaman-perusahaan.html` dan `templates/halaman-karya.html`, lengkap dengan paket SEO, GEO, AIO, AEO. Semua isinya contoh dan berlabel.
+- **`initFusionify()`**: Lenis hanya untuk `pointer: fine`, tombol salin punya cadangan kalau clipboard diblokir, jam setempat, garis perjalanan, magnet yang kembali elastis dan memantul saat disentuh.
+- `-webkit-backdrop-filter` ditulis sebelum `backdrop-filter` di nav, topbar, dan label cover, supaya minifier tidak membuang baris tanpa awalan.
+- **Yang masih berbeda dari situs, dan sengaja**: titik pindah tata letak di 600-699px dan 840-1023px (kit memakai kelas ukuran layar, situs belum), serta momen khas company yang memang tidak dibagikan (segel menutup hero, orbit ekosistem, obrolan bot, footer malam Bogor, loader).
+- Uji: dua template baru masuk uji tata letak dan kontras, tanpa JS, layar sentuh, Safari dan Firefox, dan SEO. Uji HP lipat membaca `.stage` langsung.
+
 ## 1.16.0 · 13 November 2026
 
 Perbaikan dari audit 13 November 2026 (`PETA-KODE.md` bagian 8.5). Tidak ada kelas atau markup yang dihapus atau diganti nama; produk yang naik dari 1.15 tidak perlu mengubah apa pun.

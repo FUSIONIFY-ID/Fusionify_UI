@@ -162,9 +162,9 @@ export function initFusionify(opts = {}) {
   /* Smooth scroll: Lenis hanya untuk mouse/trackpad. Di layar sentuh (termasuk HP dalam mode
      "Situs desktop") Lenis tidak menghaluskan apa pun, tapi tetap menambah kerja tiap event scroll
      dan membuat ScrollTrigger di-update dua kali. Layar sentuh memakai scroll bawaan browser. */
-  const touchFirst = matchMedia("(pointer: coarse)").matches;
+  const finePointer = matchMedia("(pointer: fine)").matches;
   let lenis = null;
-  if (o.smooth && !reduce && !touchFirst) {
+  if (o.smooth && !reduce && finePointer) {
     lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1, smoothWheel: true });
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
@@ -201,8 +201,24 @@ export function initFusionify(opts = {}) {
   onScroll();
 
   /* Menu HP: <button data-menu aria-expanded="false"> + <div class="drawer" data-drawer> */
+  // Pusat lingkaran menu = tengah tombol menu di posisi akhirnya (nav sudah jadi kapsul, tanpa transform).
+  // Posisi tombol sekarang dikurangi geseran transform nav dan .nav-tools yang sedang berlaku. Dibaca sekali per buka.
+  const placeDrawer = () => {
+    if (!drawer || !menuBtn || !nav) return;
+    const shift = (el) => {
+      if (!el) return { x: 0, y: 0 };
+      const t = getComputedStyle(el).transform;
+      const m = new DOMMatrixReadOnly(t === "none" ? undefined : t);
+      return { x: m.e, y: m.f };
+    };
+    const a = shift(nav), b = shift(menuBtn.closest(".nav-tools"));
+    const r = menuBtn.getBoundingClientRect();
+    drawer.style.setProperty("--menu-cx", `${Math.round(document.documentElement.clientWidth - (r.left - a.x - b.x + r.width / 2))}px`);
+    drawer.style.setProperty("--menu-cy", `${Math.round(r.top - a.y - b.y + r.height / 2)}px`);
+  };
   const setDrawer = (open) => {
     if (!drawer) return;
+    if (open) placeDrawer();
     drawer.classList.toggle("open", open);
     drawer.setAttribute("aria-hidden", String(!open));
     drawer.inert = !open;
@@ -217,7 +233,7 @@ export function initFusionify(opts = {}) {
   menuBtn?.addEventListener("click", () => setDrawer(!drawer?.classList.contains("open")));
   drawer?.addEventListener("click", (e) => { if (e.target.closest("a")) setDrawer(false); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && drawer?.classList.contains("open")) setDrawer(false); });
-  matchMedia("(min-width: 961px)").addEventListener("change", (e) => { if (e.matches) setDrawer(false); });
+  matchMedia("(min-width: 1024px)").addEventListener("change", (e) => { if (e.matches && drawer?.classList.contains("open")) setDrawer(false); });
 
   /* Tautan #jangkar di halaman yang sama: scroll halus + fokus untuk aksesibilitas */
   document.addEventListener("click", (e) => {
@@ -304,17 +320,26 @@ export function initFusionify(opts = {}) {
     });
   }
 
-  /* Efek magnet (mouse saja): <a data-magnetic> */
+  /* Efek magnet: <a data-magnetic>. Mouse: elemen tertarik ke kursor. Layar sentuh: membal saat ditekan. */
   if (o.magnet && fine && !reduce) {
     $$("[data-magnetic]").forEach((el) => {
       const qx = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3" });
       const qy = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3" });
-      el.addEventListener("pointermove", (e) => {
+      // Pusat elemen diukur sekali saat kursor masuk (dikurangi geseran magnet yang masih tersisa), bukan tiap gerak.
+      let cx = 0, cy = 0;
+      el.addEventListener("pointerenter", () => {
         const r = el.getBoundingClientRect();
-        qx((e.clientX - (r.left + r.width / 2)) * 0.22);
-        qy((e.clientY - (r.top + r.height / 2)) * 0.35);
+        cx = r.left + r.width / 2 - gsap.getProperty(el, "x");
+        cy = r.top + r.height / 2 - gsap.getProperty(el, "y");
       });
-      el.addEventListener("pointerleave", () => { qx(0); qy(0); });
+      el.addEventListener("pointermove", (e) => { qx((e.clientX - cx) * 0.22); qy((e.clientY - cy) * 0.35); });
+      el.addEventListener("pointerleave", () => gsap.to(el, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" }));
+    });
+  } else if (o.magnet && !reduce) {
+    $$("[data-magnetic]").forEach((el) => {
+      const up = () => gsap.to(el, { scale: 1, duration: 0.7, ease: "elastic.out(1, 0.4)", overwrite: "auto" });
+      el.addEventListener("pointerdown", () => gsap.to(el, { scale: 0.94, duration: 0.12, ease: "power2.out", overwrite: "auto" }), { passive: true });
+      ["pointerup", "pointercancel", "pointerleave"].forEach((ev) => el.addEventListener(ev, up, { passive: true }));
     });
   }
 
@@ -334,8 +359,46 @@ export function initFusionify(opts = {}) {
       await navigator.clipboard.writeText(b.dataset.copy || b.closest(".code-block")?.querySelector("pre")?.innerText || "");
       toast(b.dataset.copied || "OK"); sfx.play("ting");
       b.classList.add("done"); setTimeout(() => b.classList.remove("done"), 2000);
-    } catch {}
+    } catch {
+      // Clipboard API ditolak (HTTP, iframe, izin): coba cara lama; kalau tetap gagal, email dibuka di aplikasi
+      // email, selain email cukup diberi tahu.
+      const v = b.dataset.copy || b.closest(".code-block")?.querySelector("pre")?.innerText || "";
+      const ta = document.createElement("textarea");
+      ta.value = v; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0;pointer-events:none";
+      document.body.appendChild(ta); ta.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch { ok = false; }
+      ta.remove();
+      if (ok) toast(b.dataset.copied || "OK");
+      else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) location.href = `mailto:${v}`;
+      else toast(document.documentElement.lang === "en" ? "Couldn't copy. Select the text and copy it manually." : "Gagal menyalin. Pilih teksnya lalu salin manual.");
+    }
   }));
+
+  /* Jam langsung: <b data-clock-time>09.00</b> (zona lewat data-clock-zone, bawaan Asia/Jakarta) */
+  $$("[data-clock-time]").forEach((clock) => {
+    const fmt = new Intl.DateTimeFormat("id-ID", { timeZone: clock.dataset.clockZone || "Asia/Jakarta", hour: "2-digit", minute: "2-digit", hour12: false });
+    const tick = () => (clock.textContent = fmt.format(new Date()).replace(":", "."));
+    tick();
+    setInterval(tick, 15000);
+  });
+
+  /* Perjalanan: garis terisi dan kepala maskot menggelinding mengikuti scroll. <div class="journey" data-journey> */
+  const journey = $("[data-journey]");
+  if (journey && !reduce) {
+    const fill = $("[data-fill]", journey), rider = $("[data-rider]", journey), track = $(".track", journey);
+    if (fill && track) {
+      let h = track.offsetHeight; // diukur sekali, diperbarui saat refresh (bukan tiap update scroll)
+      ScrollTrigger.addEventListener("refresh", () => { h = track.offsetHeight; });
+      ScrollTrigger.create({
+        trigger: journey, start: "top 60%", end: "bottom 60%", scrub: 0.4,
+        onUpdate: (st) => {
+          fill.style.transform = `scaleY(${st.progress})`;
+          if (rider) rider.style.transform = `translateY(${8 + st.progress * h}px) rotate(${st.progress * 720}deg)`;
+        },
+      });
+    }
+  }
 
   /* Transisi halaman segel biru. Markup .veil di <body>, skrip kecil di <head> (lihat README). */
   const veil = $("[data-veil]");

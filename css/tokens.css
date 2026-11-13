@@ -123,7 +123,8 @@
   --nav-glass: rgba(255, 255, 255, 0.82);
   --hero-glow: #dcedff;          /* cahaya radial di hero */
   --seal-tint: #d8eaff;          /* segel di belakang maskot */
-  --danger: #b4232c; --danger-bg: #fde8ea;
+  --danger: #b42318; --danger-bg: #ffe8e6;  /* sama dengan fusionify.id */
+  --wa: #128c4a;                 /* ikon WhatsApp di kontak langsung */
   --placeholder: #707a8c;
   --bintang: #f0a800;            /* isi bintang rating */
 
@@ -183,7 +184,7 @@
   --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
   --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
   --placeholder: #8597b3; --footer-top: #1f3459; --bintang: #ffc93d;
-  --danger-fill: #c4323a; --warn-fill: #e8a33d; --online: #3fd277;
+  --danger-fill: #c4323a; --warn-fill: #e8a33d; --online: #3fd277; --wa: #5fdc93;
   --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
   color-scheme: dark;
 }
@@ -201,7 +202,7 @@
     --wip: #ffb98a; --wip-bg: #3c220e; --plan: #a9d0ff; --plan-bg: #10264a;
     --eos: #b5c0d0; --eos-bg: #1c2638; --danger: #ff9ba1; --danger-bg: #3d1418;
     --placeholder: #8597b3; --footer-top: #1f3459; --bintang: #ffc93d;
-    --danger-fill: #c4323a; --warn-fill: #e8a33d; --online: #3fd277;
+    --danger-fill: #c4323a; --warn-fill: #e8a33d; --online: #3fd277; --wa: #5fdc93;
     --shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 12px 32px -14px rgba(0, 0, 0, 0.6);
     color-scheme: dark;
   }

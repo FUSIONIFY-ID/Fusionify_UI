@@ -36,8 +36,9 @@
     <color name="fy_nav_glass">#D1FFFFFF</color>
     <color name="fy_hero_glow">#DCEDFF</color>
     <color name="fy_seal_tint">#D8EAFF</color>
-    <color name="fy_danger">#B4232C</color>
-    <color name="fy_danger_bg">#FDE8EA</color>
+    <color name="fy_danger">#B42318</color>
+    <color name="fy_danger_bg">#FFE8E6</color>
+    <color name="fy_wa">#128C4A</color>
     <color name="fy_placeholder">#707A8C</color>
     <color name="fy_bintang">#F0A800</color>
     <color name="fy_on_dark">#FFFFFF</color>

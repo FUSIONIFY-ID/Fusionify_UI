@@ -30,7 +30,7 @@ const T = {
   ink: "#0B0F1A", ink2: "#3A4458", ink3: "#566175",
   surface: "#EAF4FF", paper: "#F7FBFF", line: "#D3E4F7", night: "#071022", white: "#FFFFFF",
   go: ["#157F3B", "#E3F6E9"], beta: ["#9A5B00", "#FFF2D8"], wip: ["#8A4A00", "#FFE9D6"], plan: ["#0261CD", "#EEF7FF"], eos: ["#5B6475", "#ECEFF4"],
-  danger: ["#B4232C", "#FDE8EA"],
+  danger: ["#B42318", "#FFE8E6"],
 };
 const F = {
   head: "'Afacad Flux', 'Arial Black', Arial, Helvetica, sans-serif",
