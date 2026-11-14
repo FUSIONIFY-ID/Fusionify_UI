@@ -9,11 +9,11 @@
 const DOMAIN_RESMI = [
   "fusionify.id",
   "fusionify.biz.id",
-  // Partner yang diizinkan
+  // Partner yang diizinkan (sama dengan daftar di LICENSE.md)
   "premiumify.my.id",
   "studydate.id",
-  "trustarystore.id",
-  "trustary.store",
+  "trustarystore.id", // Trustary, disetujui pemilik 14 Nov 2026
+  "trustary.store",   // Trustary, disetujui pemilik 14 Nov 2026
 ];
 
 // Untuk pengembangan dan uji otomatis
