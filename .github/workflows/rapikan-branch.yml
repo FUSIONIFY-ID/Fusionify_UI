@@ -1,0 +1,43 @@
+# FUSIONIFY UI · merapikan branch.
+# 1. Otomatis: begitu PR dari repo ini di-merge atau ditutup, branch-nya dihapus (kecuali main).
+# 2. Manual: Actions > Rapikan branch > Run workflow, isi nama branch dipisah spasi. Sebuah branch hanya dihapus
+#    kalau sudah masuk main ATAU semua PR-nya sudah ditutup, dan tidak punya PR yang masih terbuka.
+name: Rapikan branch
+
+on:
+  pull_request:
+    types: [closed]
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Nama branch yang dihapus, dipisah spasi"
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  rapikan:
+    runs-on: ubuntu-24.04
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Hapus branch yang sudah selesai
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DAFTAR: ${{ github.event_name == 'workflow_dispatch' && inputs.branch || github.event.pull_request.head.ref }}
+        run: |
+          for B in $DAFTAR; do
+            case "$B" in main|master|"") echo "Lewati $B"; continue ;; esac
+            if ! git ls-remote --exit-code --heads origin "$B" >/dev/null; then echo "$B sudah tidak ada"; continue; fi
+            TERBUKA=$(gh pr list --head "$B" --state open --json number --jq 'length')
+            if [ "$TERBUKA" != "0" ]; then echo "Lewati $B: masih punya PR terbuka"; continue; fi
+            git fetch -q origin "$B"
+            if git merge-base --is-ancestor "origin/$B" origin/main; then ALASAN="sudah masuk main"
+            elif [ "$(gh pr list --head "$B" --state closed --json number --jq 'length')" != "0" ]; then ALASAN="PR-nya sudah ditutup"
+            else echo "Lewati $B: belum masuk main dan tidak punya PR yang ditutup"; continue; fi
+            git push origin --delete "$B" && echo "Dihapus $B ($ALASAN)"
+          done
